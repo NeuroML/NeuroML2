@@ -1,0 +1,213 @@
+<Lems xmlns="http://www.neuroml.org/lems/0.6"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.6 ../Schemas/LEMS/LEMS_v0.6.xsd">
+
+    <!-- A number of network elements for use in NeuroML 2 documents  -->
+    
+    <Include file="NeuroMLCoreDimensions.xml"/>
+    <Include file="Synapses.xml"/>
+
+
+    <ComponentType name="network" description="Network containing _population_s, _projection_s and lists of _explicitConnection_s (either directly between components of the populations or via synapses)">
+        
+        <Child name="extracellularProperties" type="extracellularProperties"/>
+        <Children name="regions" type="region"/>
+        <Children name="populations" type="basePopulation"/>
+        <Children name="projections" type="projection"/>
+
+        <Children name="synapticConnections" type="explicitConnection"/>  <!-- Connection either directly between cells or to synapse attachment on post cell-->
+
+        <Children name="explicitInputs" type="explicitInput"/>
+
+        <Exposure name="temperature" dimension="temperature" description="Temperature will be taken from extracellularProperties child"/>
+        
+        <Dynamics>
+            <DerivedVariable name="temperature" exposure="temperature" select="extracellularProperties/temperature" dimension="temperature" onAbsent="273.15"/>
+        </Dynamics>
+
+    </ComponentType>
+
+
+    <ComponentType name="extracellularProperties" description="A ComponentType holding information about the environment outside specific cells, e.g. the ambient temperature">
+        <Parameter name="temperature" dimension="temperature"/>
+        <Exposure name="temperature" dimension="temperature"/>
+        <Dynamics>
+            <DerivedVariable name="temperature" dimension="temperature" exposure="temperature" value="temperature"/>   <!-- TODO: Remove the need for this... -->
+        </Dynamics>
+    </ComponentType>
+
+    <ComponentType name="basePopulation" description="A population of cells (anything which extends _baseCell_)">
+        <ComponentReference name="component" type="baseCell"/>
+        <Requirement name="temperature" dimension="temperature" description="Normally comes from the extracellularProperties in the network"/>
+
+    </ComponentType>
+
+
+    <ComponentType name="population" extends="basePopulation" description="A population of components, with just one parameter for the _size">
+        <Parameter name="size" dimension="none" description="Number of instances of this Component to create when the population is instantiated"/>
+        <ComponentReference name="component" type="Component"/>
+        <Structure>
+            <MultiInstantiate number="size" component="component"/>
+        </Structure>
+    </ComponentType>
+
+
+    <ComponentType name="populationList" extends="basePopulation" description="An explicit list of the cells in the population. Not yet stable...">
+
+        <Children name="networkElementInstance" type="networkElementInstance"/>
+    
+        <ComponentReference name="component" type="baseCell"/>
+        <Structure>
+            <!-- Not yet working!! -->
+            <ForEach instances="networkElementInstances" as="inst">
+                <MultiInstantiate number="1" component="component"/>
+            </ForEach>
+        </Structure>
+    </ComponentType>
+
+
+    <ComponentType name="region" description="Initial attempt to specify 3D region for placing cells. Work in progress...">
+        <Child name="rectangularExtent" type="rectangularExtent"/>
+    </ComponentType>
+
+
+    <ComponentType name="rectangularExtent" description="For defining a 3D rectangular box">
+        <Parameter name="xStart" dimension="none"/>
+        <Parameter name="yStart" dimension="none"/>
+        <Parameter name="zStart" dimension="none"/>
+        <Parameter name="xLength" dimension="none"/>
+        <Parameter name="yLength" dimension="none"/>
+        <Parameter name="zLength" dimension="none"/>
+    </ComponentType>
+
+
+
+    <ComponentType name="networkElementInstance"
+        description="Initial attempt to specify instances in populations. Work in progress...">
+        <Parameter name="index" dimension="none"/>
+    </ComponentType>
+
+    <ComponentType name="networkElementInstance1D" 
+        extends="networkElementInstance"
+        description="Initial attempt to specify instances in 1D populations. Work in progress...">
+        <Parameter name="x" dimension="none"/>
+    </ComponentType>
+
+
+
+    <ComponentType name="projection"
+        description="Projection from one population to another. Currently it's better to define an explicit list of connections, using _explicitConnection_. Work in progress...">
+        <Children name="synapticConnections" type="synapticConnection"/>
+        <Children name="connections" type="connection"/>
+        <Path name="from"/>
+        <Path name="to"/>
+    </ComponentType>
+
+
+
+    <ComponentType name="explicitConnection"
+        description="Explicit event connection between components">
+        <Path name="from"/>
+        <Path name="to"/>
+        <Text name="targetPort"/>
+    </ComponentType>
+
+
+    <ComponentType name="connection"
+        extends="explicitConnection"
+        description="Explicit event connection directly between named components">
+
+        <Path name="from"/> <!-- TODO check if these really need to be here if in explicitConnection... -->
+        <Path name="to"/>
+
+        <Structure>
+            <With instance="from" as="a"/>
+            <With instance="to" as="b"/>
+            <EventConnection from="a" to="b" targetPort="targetPort"/>
+        </Structure>
+
+    </ComponentType>
+
+
+    <ComponentType name="synapticConnection"
+        description="Explicit event connection between named components, which gets processed via a new instance of a _synapse component which is created on the target component"
+        extends="explicitConnection">
+
+        <ComponentReference name="synapse" type="baseSynapse"/>
+        <Path name="from"/>
+        <Path name="to"/>
+
+        <Structure>
+            <With instance="from" as="a"/>
+            <With instance="to" as="b"/>
+            <!--<EventConnection from="a" to="b" receiver="synapse" receiverContainer="destination" sourcePort="sourcePort" targetPort="targetPort"/>-->
+            <EventConnection from="a" to="b" receiver="synapse"/>
+        </Structure>
+    </ComponentType>
+
+
+    <ComponentType name="synapticConnectionWD"
+    description="Explicit event connection between named components, which gets processed via a new instance of a _synapse component which is created on the target component, includes setting of _weight and _delay for the synaptic connection"
+    extends="synapticConnection">
+
+        <Parameter name="weight" dimension="none"/>
+        <Parameter name="delay" dimension="time"/>
+        <Path name="from"/>
+        <Path name="to"/>
+
+
+        <Structure>
+            <With instance="from" as="a"/>
+            <With instance="to" as="b"/>
+            <!--<EventConnection from="a" to="b" receiver="synapse" receiverContainer="destination" sourcePort="sourcePort" targetPort="targetPort" delay="delay">-->
+            <EventConnection from="a" to="b" receiver="synapse" delay="delay">
+                <Assign property="weight" value="weight"/>
+            </EventConnection>
+        </Structure>
+
+    </ComponentType>
+
+
+    <!--   Not yet stable...
+
+    <ComponentType name="EventConnectivity">
+        <Child name="Connections" type="ConnectionPattern"/>
+        <Link name="source" type="population"/>
+        <Link name="target" type="population"/>
+    </ComponentType>
+
+    <ComponentType name="ConnectionPattern">
+    </ComponentType>
+    <ComponentType name="AllAll" extends="ConnectionPattern">
+        <Dynamics>
+            <Build>
+                <ForEach instances="../source" as="a">
+                     <ForEach instances="../target" as="b">
+                          <EventConnection from="a" to="b"/>
+                     </ForEach>
+                </ForEach>
+            </Build>
+        </Dynamics>
+    </ComponentType>-->
+
+
+    <ComponentType name="explicitInput" description="An explicit input (anything which extends _basePointCurrent_) to a target cell in a population">
+
+        <ComponentReference name="input" type="basePointCurrent"/>
+
+        <Path name="target"/>
+
+        <Text name="destination"/>
+        <Text name="sourcePort"/>
+        <Text name="targetPort"/>
+
+        <Structure>
+            <With instance="target" as="a"/>
+            <With instance="target" as="b"/>
+
+            <!--<EventConnection from="a" to="b" receiver="input" receiverContainer="destination" sourcePort="sourcePort" targetPort="targetPort"/>-->
+            <EventConnection from="a" to="b" receiver="input"/>
+        </Structure>
+    </ComponentType>
+
+</Lems>

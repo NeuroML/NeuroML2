@@ -1,0 +1,393 @@
+<Lems xmlns="http://www.neuroml.org/lems/0.6"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.6 ../Schemas/LEMS/LEMS_v0.6.xsd"
+      description="A number of ComponentTypes for providing spiking and current inputs to other ComponentTypes">
+
+
+    <Include file="NeuroMLCoreDimensions.xml"/>
+
+    <ComponentType name="basePointCurrent"
+        description="Base type for all ComponentTypes which produce a current _i (with dimension current)">
+
+        <Exposure name="i" dimension="current" description="The total (time varying) current produced by this ComponentType"/>
+
+    </ComponentType>
+
+    
+    <ComponentType name="baseVoltageDepPointCurrent"
+        extends="basePointCurrent"
+        description="Base type for all ComponentTypes which produce a current _i (with dimension current) and require a membrane potential _v exposed on the parent Component">
+
+        <Requirement name="v" dimension="voltage" description="The current may vary with the voltage exposed by the ComponentType on which this is placed"/>
+
+    </ComponentType>
+
+
+    <ComponentType name="basePointCurrentDL"
+        description="Base type for all ComponentTypes which produce a dimensionless current _I. There will eventually be dimensionless equivalents of all the core current producing ComponentTypes such as _pulseGenerator_, _sineGenerator_ and _rampGenerator_">
+
+        <Exposure name="I" dimension="none" description="The total (time varying) current produced by this ComponentType"/>
+
+    </ComponentType>
+
+
+    <ComponentType name="baseVoltageDepPointCurrentDL"
+        extends="basePointCurrentDL"
+        description="Base type for all ComponentTypes which produce a dimensionless current _I and require a dimensionless membrane potential _V exposed on the parent Component">
+
+        <Requirement name="V" dimension="none" description="The current may vary with the voltage exposed by the ComponentType on which this is placed"/>
+
+    </ComponentType>
+    
+
+    <ComponentType name="baseSpikeSource"
+        description="Base for any ComponentType whose main purpose is to emit spikes. The exposed variable _tsince can be used for plotting the time since the Component has spiked last">
+
+        <EventPort name="spike" 
+            direction="out"
+            description="Port on which spikes are emitted"/>
+
+        <Exposure name="tsince" 
+            dimension="time"
+            description="Time since the last spike was emitted"/>
+    
+    </ComponentType>
+
+
+    <ComponentType name="spikeGenerator"
+        extends="baseSpikeSource"
+        description="Simple generator of spikes at a regular interval set by _period.">
+
+        <Parameter name="period" dimension="time" description="Time between spikes. First spike will be emitted after this time."/>
+        <Dynamics>
+            <StateVariable name="tsince" dimension="time" exposure="tsince"/>
+            
+            <TimeDerivative variable="tsince" value="1"/>
+
+            <OnStart>
+                <StateAssignment variable="tsince" value="0"/>
+            </OnStart>
+
+            <OnCondition test="tsince .gt. period">
+                <StateAssignment variable="tsince" value="0"/>
+                <EventOut port="spike"/>
+            </OnCondition>
+
+        </Dynamics>
+
+    </ComponentType>
+
+
+
+    <ComponentType name="spikeGeneratorRandom" extends="baseSpikeSource"
+        description="Generator of spikes with a random interspike interval of at least _minISI and at most _maxISI">
+
+        <Parameter name="maxISI" dimension="time" description="Maximum interspike interval"/>
+        <Parameter name="minISI" dimension="time" description="Minimum interspike interval"/>
+
+        <Constant name="MSEC" dimension="time" value="1ms"/>
+
+        <Exposure name="isi" dimension="time" description="The interval until the next spike"/>
+
+        <Dynamics>
+            <StateVariable name="tsince" dimension="time" exposure="tsince"/>
+
+            <StateVariable name="isi" dimension="time" exposure="isi"/>
+
+            <TimeDerivative variable="tsince" value="1"/>
+        
+            <OnStart>
+                <StateAssignment variable="tsince" value="0"/>
+                <StateAssignment variable="isi" value="minISI + MSEC * random((maxISI - minISI) / MSEC)"/>
+            </OnStart>
+
+
+            <OnCondition test="tsince .geq. isi">
+                <StateAssignment variable="isi" value="minISI + MSEC * random((maxISI - minISI) / MSEC)"/>
+                <StateAssignment variable="tsince" value="0"/>
+                <EventOut port="spike"/>
+            </OnCondition>
+
+        </Dynamics>
+    </ComponentType>
+
+
+
+    <ComponentType name="pulseGenerator" extends="basePointCurrent"
+        description="Generates a constant current pulse of a certain _amplitude for a specified _duration after a _delay"> <!-- Note: a synpase also extends basePointCurrent -->
+
+        <Parameter name="delay" dimension="time" description="Delay before change in current. Current is zero  prior to this."/>
+        <Parameter name="duration" dimension="time" description="Duration for holding current at amplitude. Current is zero after delay + duration."/>
+        <Parameter name="amplitude" dimension="current" description="Amplitude of current pulse"/>
+
+    <!--TODO: remove! Only required as EventConnection is used in explicitInput to
+    connect inputs to cells. Events aren't passed! ... -->
+        <EventPort name="in" direction="in" description="Note this is not used here. Will be removed in future"/>
+
+        <Dynamics>
+
+            <StateVariable name="i" exposure="i" dimension="current"/>
+
+            <OnEvent port="in"><!--TODO: remove, see above...
+            <StateAssignment variable="i" value="0"/>-->
+            </OnEvent>
+
+            <OnCondition test="t .lt. delay">
+                <StateAssignment variable="i" value="0"/>
+            </OnCondition>
+
+            <OnCondition test="t .geq. delay .and. t .lt. duration + delay">
+                <StateAssignment variable="i" value="amplitude"/>
+            </OnCondition>
+
+            <OnCondition test="t .geq. duration + delay">
+                <StateAssignment variable="i" value="0"/>
+            </OnCondition>
+
+        </Dynamics>
+    </ComponentType>
+
+
+    <ComponentType name="pulseGeneratorDL" extends="basePointCurrentDL"
+        description="Dimensionless equivalent of _pulseGenerator_. Generates a constant current pulse of a certain _amplitude for a specified _duration after a _delay"> <!-- Note: a synpase also extends basePointCurrent -->
+
+        <Parameter name="delay" dimension="time" description="Delay before change in current. Current is zero  prior to this."/>
+        <Parameter name="duration" dimension="time" description="Duration for holding current at amplitude. Current is zero after delay + duration."/>
+        <Parameter name="amplitude" dimension="none" description="Amplitude of current pulse"/>
+
+    <!--TODO: remove! Only required as EventConnection is used in explicitInput to
+    connect inputs to cells. Events aren't passed! ... -->
+        <EventPort name="in" direction="in" description="Note this is not used here. Will be removed in future"/>
+
+        <Dynamics>
+
+            <StateVariable name="I" exposure="I" dimension="none"/>
+
+            <OnEvent port="in"><!--TODO: remove, see above...
+            <StateAssignment variable="i" value="0"/>-->
+            </OnEvent>
+
+            <OnCondition test="t .lt. delay">
+                <StateAssignment variable="I" value="0"/>
+            </OnCondition>
+
+            <OnCondition test="t .geq. delay .and. t .lt. duration + delay">
+                <StateAssignment variable="I" value="amplitude"/>
+            </OnCondition>
+
+            <OnCondition test="t .geq. duration + delay">
+                <StateAssignment variable="I" value="0"/>
+            </OnCondition>
+
+        </Dynamics>
+    </ComponentType>
+
+
+
+    <ComponentType name="sineGenerator" extends="basePointCurrent"
+        description="Generates a sinusoidally varying current after a time _delay, for a fixed _duration. The _period and maximum _amplitude of the current can be set as well as the _phase at which to start.">
+
+        <Parameter name="phase" dimension="none"/>
+        <Parameter name="delay" dimension="time"/>
+        <Parameter name="duration" dimension="time"/>
+        <Parameter name="amplitude" dimension="current"/>
+        <Parameter name="period" dimension="time"/>
+
+        <EventPort name="in" direction="in"/>
+
+        <Dynamics>
+
+            <StateVariable name="i" exposure="i" dimension="current"/>
+
+            <OnEvent port="in"><!--TODO: remove-->
+            </OnEvent>
+
+            <OnCondition test="t .lt. delay">
+                <StateAssignment variable="i" value="0"/>
+            </OnCondition>
+
+            <OnCondition test="t .geq. delay .and. t .lt. duration+delay">
+                <StateAssignment variable="i" value="amplitude * sin(phase + (2 * 3.14159265 * (t-delay)/period) )"/>
+            </OnCondition>
+
+            <OnCondition test="t .geq. duration+delay">
+                <StateAssignment variable="i" value="0"/>
+            </OnCondition>
+
+        </Dynamics>
+    </ComponentType>
+
+
+
+    <ComponentType name="rampGenerator" extends="basePointCurrent"
+        description="Generates a ramping current after a time _delay, for a fixed _duration. During this time the current steadily changes from _startAmplitude to _finishAmplitude.">
+
+        <Parameter name="delay" dimension="time"/>
+        <Parameter name="duration" dimension="time"/>
+        <Parameter name="startAmplitude" dimension="current"/>
+        <Parameter name="finishAmplitude" dimension="current"/>
+        <Parameter name="baselineAmplitude" dimension="current"/>
+
+        <EventPort name="in" direction="in"/>
+
+        <Dynamics>
+
+            <StateVariable name="i" exposure="i" dimension="current"/>
+
+            <OnStart>
+                <StateAssignment variable="i" value="baselineAmplitude"/>
+            </OnStart>
+            
+            <OnEvent port="in"><!--TODO: remove-->
+            </OnEvent>
+
+
+            <OnCondition test="t .lt. delay">
+                <StateAssignment variable="i" value="baselineAmplitude"/>
+            </OnCondition>
+
+            <OnCondition test="t .geq. delay .and. t .lt. duration+delay">
+                <StateAssignment variable="i" value="startAmplitude + (finishAmplitude - startAmplitude) * (t - delay) / (duration)"/>
+            </OnCondition>
+
+            <OnCondition test="t .geq. duration+delay">
+                <StateAssignment variable="i" value="baselineAmplitude"/>
+            </OnCondition>
+
+        </Dynamics>
+    </ComponentType>
+
+
+    <ComponentType name="rampGeneratorDL" extends="basePointCurrentDL"
+        description="Generates a ramping current after a time _delay, for a fixed _duration. During this time the dimensionless current steadily changes from _startAmplitude to _finishAmplitude.">
+
+        <Parameter name="delay" dimension="time"/>
+        <Parameter name="duration" dimension="time"/>
+        <Parameter name="startAmplitude" dimension="none"/>
+        <Parameter name="finishAmplitude" dimension="none"/>
+        <Parameter name="baselineAmplitude" dimension="none"/>
+
+        <EventPort name="in" direction="in"/>
+
+        <Dynamics>
+
+            <StateVariable name="I" exposure="I" dimension="none"/>
+
+            <OnStart>
+                <StateAssignment variable="I" value="baselineAmplitude"/>
+            </OnStart>
+
+            <OnEvent port="in"><!--TODO: remove-->
+            </OnEvent>
+
+            <OnCondition test="t .lt. delay">
+                <StateAssignment variable="I" value="baselineAmplitude"/>
+            </OnCondition>
+
+            <OnCondition test="t .geq. delay .and. t .lt. duration+delay">
+                <StateAssignment variable="I" value="startAmplitude + (finishAmplitude - startAmplitude) * (t - delay) / (duration)"/>
+            </OnCondition>
+
+            <OnCondition test="t .geq. duration+delay">
+                <StateAssignment variable="I" value="baselineAmplitude"/>
+            </OnCondition>
+
+        </Dynamics>
+    </ComponentType>
+
+
+    <ComponentType name="voltageClamp" extends="baseVoltageDepPointCurrent"
+        description="Voltage clamp. Applies a variable current _i to try to keep parent at _targetVoltage. Not yet fully tested!!!">
+
+        <Parameter name="delay" dimension="time" description="Delay before change in current. Current is zero  prior to this."/>
+        <Parameter name="duration" dimension="time" description="Duration for attempting to keep parent at targetVoltage. Current is zero after delay + duration."/>
+        <Parameter name="targetVoltage" dimension="voltage" description="Current will be applied to try to get parent to this target voltage"/>
+        <Parameter name="seriesResistance" dimension="resistance" description="Current will be calculated by the difference in voltage between the target and parent, divided by this value"/>
+
+    <!--TODO: remove! Only required as EventConnection is used in explicitInput to
+    connect inputs to cells. Events aren't passed! ... -->
+        <EventPort name="in" direction="in" description="Note this is not used here. Will be removed in future"/>
+
+        <Dynamics>
+
+            <StateVariable name="i" exposure="i" dimension="current"/>
+
+            <OnEvent port="in"><!--TODO: remove, see above...
+            <StateAssignment variable="i" value="0"/>-->
+            </OnEvent>
+
+            <OnCondition test="t .lt. delay">
+                <StateAssignment variable="i" value="0"/>
+            </OnCondition>
+
+            <OnCondition test="t .geq. delay">
+                <StateAssignment variable="i" value="1e-5 * (targetVoltage - v) / seriesResistance"/>
+            </OnCondition>
+
+            <OnCondition test="t .gt. duration + delay">
+                <StateAssignment variable="i" value="0"/>
+            </OnCondition>
+
+        </Dynamics>
+
+    </ComponentType>
+
+
+
+    <ComponentType name="spikeArray" extends="baseSpikeSource"
+        description="Set of spike ComponentTypes, each emitting one spike at a certain time. Can be used to feed a predetermined spike train into a cell">
+
+        <Children name="spike" type="spike"/>
+        <EventPort name="in" direction="in" description="This will receive events from the children"/>
+
+        <Dynamics>
+            <StateVariable name="tsince" dimension="time" exposure="tsince"/>
+            
+            <TimeDerivative variable="tsince" value="1"/>
+
+            <OnStart>
+                <StateAssignment variable="tsince" value="0"/>
+            </OnStart>
+
+            <OnEvent port="in">
+                <StateAssignment variable="tsince" value="0"/>
+                <EventOut port="spike"/>
+            </OnEvent>
+
+        </Dynamics>
+
+    </ComponentType>
+
+
+    <ComponentType name="spike" extends="baseSpikeSource"
+         description="Emits a single spike at the specified time">
+
+        <Parameter name="time" dimension="time" description="Time at which to emit one spike event"/>
+        <Exposure name="spiked" dimension="none" description="0 signals not yet spiked, 1 signals has spiked"/>
+
+        <Dynamics>
+            <Build>
+                <With instance="this" as="a"/>
+                <With instance="parent" as="b"/>
+                <EventConnection from="a" to="b"/>
+            </Build>
+
+            <StateVariable name="tsince" dimension="time" exposure="tsince"/>
+            <StateVariable name="spiked" dimension="none" exposure="spiked"/>
+
+            <TimeDerivative variable="tsince" value="1"/>
+            
+            <OnStart>
+                <StateAssignment variable="tsince" value="0"/>
+            </OnStart>
+
+            <OnCondition test="(t .geq. time) .and. (spiked .eq. 0)">
+                <StateAssignment variable="spiked" value="1"/>
+                <StateAssignment variable="tsince" value="0"/>
+                <EventOut port="spike"/>
+            </OnCondition>
+        </Dynamics>
+
+    </ComponentType>
+
+</Lems>

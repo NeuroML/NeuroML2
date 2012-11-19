@@ -1,0 +1,44 @@
+<Lems xmlns="http://www.neuroml.org/lems/0.6"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.6 ../Schemas/LEMS/LEMS_v0.6.xsd">
+
+    <!-- A number of common component types for use in NeuroML 2 documents  -->
+
+
+    <!-- Including standard unit definitions for NeuroML v2.0 -->
+    <Include file="NeuroMLCoreDimensions.xml"/>
+
+
+    <!-- Potentially needed for any NeuroMl 2 file...-->
+
+
+    <ComponentType name="notes" description="Human readable notes on the Component">
+    </ComponentType>
+
+    <ComponentType name="pointDiam"
+        description="Base type for ComponentTypes which specify an ( _x, _y, _z ) coordinate along with a _diameter. Note: no dimension used in the attributes for these coordinates! These are assumed to have dimension micrometer (10^-6 m). This is due to micrometers being the default option for the majority of neuronal morphology formats, and dimensions are omitted here to facilitate reading and writing of morphologies in NeuroML.">
+        <Parameter name="x" dimension="none" description="x coordinate of point. Note: no dimension used, see note above!"/>
+        <Parameter name="y" dimension="none" description="y coordinate of point. Note: no dimension used, see note above!"/>
+        <Parameter name="z" dimension="none" description="z coordinate of point. Note: no dimension used, see note above!"/>
+
+        <Parameter name="diameter" dimension="none" description="Diameter at point. Note: no dimension used, see note above!"/> <!-- TODO decide whether this or radius should be default input field!!! -->
+
+    <!--<DerivedParameter name="radius" dimension="length" value="0.000001 * diameter / 2"/>-->
+        <Exposure name="radius" dimension="length"/>
+
+        <Exposure name="x" dimension="length"/>
+        <Exposure name="y" dimension="length"/>
+        <Exposure name="z" dimension="length"/>
+
+        <Dynamics>
+            <DerivedVariable name="radius" dimension="length" exposure="radius" value="0.000001 * diameter / 2"/>  <!-- conversion to SI units... -->
+            <DerivedVariable name="x" dimension="length" exposure="x" value="0.000001 * x"/>  <!-- conversion to SI units... -->
+            <DerivedVariable name="y" dimension="length" exposure="y" value="0.000001 * y"/>  <!-- conversion to SI units... -->
+            <DerivedVariable name="z" dimension="length" exposure="z" value="0.000001 * z"/>  <!-- conversion to SI units... -->
+        </Dynamics>
+
+    </ComponentType>
+
+
+</Lems>
+

@@ -1,0 +1,549 @@
+<Lems xmlns="http://www.neuroml.org/lems/0.6"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.6 ../Schemas/LEMS/LEMS_v0.6.xsd"
+      description="Defines voltage (and concentration) gated ion channel models. Ion channels will generally extend _baseIonChannel_. The most commonly used voltage dependent gate will extend _baseGate_.">
+
+    <!-- A number of channel types for use in NeuroML 2 documents  -->
+
+
+    <!-- Including standard unit comp types & units for NeuroML v2.0 -->
+    <Include file="NeuroMLCoreCompTypes.xml"/>
+
+
+    <ComponentType name="baseVoltageDepRate"
+               description="Base ComponentType for voltage dependent rate. Produces a time varying rate _r which depends on _v.">
+        <Exposure name="r" dimension="per_time"/>
+        <Requirement name="v" dimension="voltage"/>
+    </ComponentType>
+
+    <ComponentType name="baseVoltageConcDepRate"
+               description="Base ComponentType for voltage and concentration dependent rate. Produces a time varying rate _r which depends on _v and _caConc."
+               extends="baseVoltageDepRate">
+        <Requirement name="caConc" dimension="concentration"/>
+    </ComponentType>
+
+
+    <ComponentType name="baseHHRate"
+               description="Base ComponentType for rate which follow one of the typical forms for rate equations in the standard HH formalism, using the parameters _rate, _midpoint and _scale"
+               extends="baseVoltageDepRate">
+        <Parameter name="rate" dimension="per_time"/>
+        <Parameter name="midpoint" dimension="voltage"/>
+        <Parameter name="scale" dimension="voltage"/>
+    </ComponentType>
+
+
+    <ComponentType name="HHExpRate" 
+        extends="baseHHRate"
+        description="Exponential form for rate equation (Q: Should these be renamed hhExpRate, etc?)">
+        <Dynamics>
+            <DerivedVariable name="r" exposure="r" value="rate * exp((v - midpoint)/scale)" dimension="per_time"/>
+        </Dynamics>
+    </ComponentType>
+
+
+    <ComponentType name="HHSigmoidRate"
+        extends="baseHHRate"
+        description="Sigmoidal form for rate equation">
+        <Dynamics>
+            <DerivedVariable name="r" exposure="r" value="rate / (1 + exp(0 - (v - midpoint)/scale))" dimension="per_time"/>
+        </Dynamics>
+    </ComponentType>
+
+
+    <ComponentType name="HHExpLinearRate"
+        extends="baseHHRate"
+        description="Exponential linear form for rate equation. Linear for large positive _v, exponentially decays for large negative _v.">
+        <Dynamics>
+            <DerivedVariable name="x" value="(v - midpoint) / scale" dimension="none"/>
+            <DerivedVariable name="r" exposure="r" value="rate * x / (1 - exp(0 - x))" dimension="per_time"/>
+        </Dynamics>
+    </ComponentType>
+
+
+    <ComponentType name="baseVoltageDepVariable"
+               description="Base ComponentType for voltage dependent variable  _x, which depends on _v. Can be used for inf/steady state of rate variable.">
+        <Exposure name="x" dimension="none"/>
+        <Requirement name="v" dimension="voltage"/>
+    </ComponentType>
+
+    <ComponentType name="baseVoltageConcDepVariable"
+               description="Base ComponentType for voltage and calcium concentration dependent variable _x, which depends on _v and _caConc."
+               extends="baseVoltageDepVariable">
+        <Requirement name="caConc" dimension="concentration"/>
+    </ComponentType>
+
+    <ComponentType name="baseHHVariable"
+               description="Base ComponentType for voltage dependent dimensionless variable which follow one of the typical forms for variable equations in the standard HH formalism, using the parameters _rate, _midpoint, _scale"
+               extends="baseVoltageDepVariable">
+        <Parameter name="rate" dimension="none"/>
+        <Parameter name="midpoint" dimension="voltage"/>
+        <Parameter name="scale" dimension="voltage"/>
+    </ComponentType>
+
+
+    <ComponentType name="HHExpVariable" 
+        extends="baseHHVariable"
+        description="Exponential form for variable equation">
+        <Dynamics>
+            <DerivedVariable name="x" dimension="none" exposure="x" value="rate * exp((v - midpoint)/scale)"/>
+        </Dynamics>
+    </ComponentType>
+
+
+    <ComponentType name="HHSigmoidVariable" 
+        extends="baseHHVariable"
+        description="Sigmoidal form for variable equation">
+        <Dynamics>
+            <DerivedVariable name="x" dimension="none" exposure="x" value="rate / (1 + exp(0 - (v - midpoint)/scale))"/>
+        </Dynamics>
+    </ComponentType>
+
+
+    <ComponentType name="HHExpLinearVariable" 
+        extends="baseHHVariable"
+        description="Exponential linear form for variable equation. Linear for large positive _v, exponentially decays for large negative _v.">
+        <Dynamics>
+            <DerivedVariable name="a" dimension="none" value="(v - midpoint) / scale"/>
+            <DerivedVariable name="x" dimension="none" exposure="x" value="rate * a / (1 - exp(0 - a))"/>
+        </Dynamics>
+    </ComponentType>
+
+
+    <ComponentType name="baseVoltageDepTime"
+               description="Base type for voltage dependent ComponentType producing value _t with dimension time (e.g. for time course of rate variable). Note: time course would not normally be fit to exp/sigmoid etc.">
+        <Exposure name="t" dimension="time"/>
+        <Requirement name="v" dimension="voltage"/>
+    </ComponentType>
+
+    <ComponentType name="fixedTimeCourse"
+        extends="baseVoltageDepTime"
+        description="Time course of a fixed magnitude _tau which can be used for the time course in _gateHH_">
+            
+        <Parameter name="tau" dimension="time"/>
+        <Dynamics>
+            <DerivedVariable name="t" dimension="time" exposure="t" value="tau"/>
+        </Dynamics>
+    </ComponentType>
+
+
+
+    <ComponentType name="baseQ10Settings"
+        description="Base ComponentType for a scaling to apply to gating variable time course, usually temperature dependent">
+
+        <Exposure name="q10" dimension="none"/>
+        <Requirement name="temperature" dimension="temperature"/>
+
+    </ComponentType>
+
+
+    <ComponentType name="q10Fixed" 
+        extends="baseQ10Settings"
+        description="A fixed value, _fixedQ10, for the scaling of the time course of the gating variable">
+        <Parameter name="fixedQ10" dimension="none"/>
+        <Dynamics>
+            <DerivedVariable name="q10" exposure="q10" dimension="none" value="fixedQ10"/>
+        </Dynamics>
+    </ComponentType>
+
+
+    <ComponentType name="q10ExpTemp" 
+        extends="baseQ10Settings"
+        description="A value for the Q10 scaling which varies as a standard function of the difference between the current temperature, _temperature, and the temperature at which the gating variable equations were determined, _experimentalTemp">
+
+        <Parameter name="q10Factor" dimension="none"/>
+        <Parameter name="experimentalTemp" dimension="temperature"/>
+
+        <Dynamics>
+            <DerivedVariable name="q10" exposure="q10" dimension="none" value="q10Factor^((temperature - experimentalTemp)/10)"/>
+        </Dynamics>
+    </ComponentType>
+
+    <ComponentType name="baseConductanceScaling"
+        description="Base ComponentType for a scaling to apply to a gate's conductance, e.g. temperature dependent scaling">
+
+        <Exposure name="factor" dimension="none"/>
+        <Requirement name="temperature" dimension="temperature"/>
+
+    </ComponentType>
+
+
+    <ComponentType name="q10ConductanceScaling"
+        extends="baseConductanceScaling"
+        description="A value for the conductance scaling which varies as a standard function of the difference between the current temperature, _temperature, and the temperature at which the conductance was originally determined, _experimentalTemp">
+
+        <Parameter name="q10Factor" dimension="none"/>
+        <Parameter name="experimentalTemp" dimension="temperature"/>
+
+        <Dynamics>
+            <DerivedVariable name="factor" exposure="factor" dimension="none" value="q10Factor^((temperature - experimentalTemp)/10)"/>
+        </Dynamics>
+    </ComponentType>
+
+    <ComponentType name="baseGate"
+        description="Base ComponentType for a voltage and/or concentration dependent gate">
+        <Parameter name="instances" dimension="none"/>
+        <Exposure name="fcond" dimension="none"/>
+        <Exposure name="q" dimension="none"/>
+        
+    </ComponentType>
+
+    <ComponentType name="gateHH" 
+        extends="baseGate"
+        description="Gate which follows the general Hodgkin Huxley formalism">
+
+        <Child name="notes" type="notes"/>
+        <Child name="q10Settings" type="baseQ10Settings"/>
+
+        <Child name="forwardRate" type="baseVoltageDepRate"/>
+        <Child name="reverseRate" type="baseVoltageDepRate"/>
+
+        <Child name="timeCourse" type="baseVoltageDepTime" />
+
+        <Child name="steadyState" type="baseVoltageDepVariable" />
+
+        <Exposure name="alpha" dimension="per_time"/>
+        <Exposure name="beta" dimension="per_time"/>
+    
+        <Exposure name="tau" dimension="time"/>
+        <Exposure name="inf" dimension="none"/>
+
+        <Exposure name="rateScale" dimension="none"/>
+    
+        <Dynamics>
+            <StateVariable name="q" exposure="q" dimension="none"/>
+
+            <DerivedVariable name="rateScale" exposure="rateScale" dimension="none" select="q10Settings/q10" onAbsent="1"/>
+
+            <DerivedVariable name="alpha" dimension="per_time" exposure="alpha" select="forwardRate/r" onAbsent="-1"/>
+            <DerivedVariable name="beta" dimension="per_time" exposure="beta" select="reverseRate/r" onAbsent="-1"/>
+
+            <DerivedVariable name="fcond" exposure="fcond" dimension="none" value="q^instances"/>
+
+            <!-- Perhaps not the neatest solution... -->
+            <DerivedVariable name="tauExplicit" dimension="time" select="timeCourse/t" onAbsent="-1"/>
+            <DerivedVariable name="infExplicit" dimension="none" select="steadyState/x" onAbsent="-1"/>
+
+            <DerivedVariable name="inf" dimension="none" exposure="inf" value="infExplicit" valueCondition="infExplicit .geq. 0" valueIfFalse="alpha/(alpha+beta)"/>
+        
+            <DerivedVariable name="tau" dimension="time" exposure="tau" value="tauExplicit / rateScale" valueCondition="tauExplicit .geq. 0" valueIfFalse="1/((alpha+beta) * rateScale)"/>
+
+            <TimeDerivative variable="q" value="(inf - q) / tau"/>
+
+            <OnStart>
+                <StateAssignment variable="q" value="inf"/>
+            </OnStart>
+
+        </Dynamics>
+    </ComponentType>
+
+
+
+    <!--
+    <ComponentType name="gateHHTauInf" extends="gate">
+
+
+        <Child name="notes" type="notes"/>
+        <Child name="q10Settings" type="q10Settings"/>
+
+         <Child name="alpha" type="HHRate"/> may be absent..
+         <Child name="beta" type="HHRate"/>  may be absent...
+
+
+         <Child type="timeCourse" name="timeCourse"/>
+
+        <Exposure name="tau" dimension="time"/>
+        <Exposure name="inf" dimension="none"/>
+
+
+        <Dynamics>
+            <StateVariable name="q" exposure="q" dimension="none"/>
+
+            <DerivedVariable name="rateScale" dimension="none" select="q10Settings/q10" onAbsent="1"/>
+
+            <DerivedVariable name="inf" dimension="none" exposure="inf" value="1"/>
+            <DerivedVariable name="tau" dimension="time" exposure="tau" value="1"/>
+
+            <DerivedVariable name="fcond" exposure="fcond" dimension="none" value="q^instances"/>
+            <OnStart>
+                 <StateAssignment variable="q" value="inf"/>
+            </OnStart>
+
+
+        </Dynamics>
+    </ComponentType>
+
+
+
+    <ComponentType name="gateTauInfComplex" extends="gate">
+        <Parameter name="threshold" dimension="voltage"/>
+        <Parameter name="vscale" dimension="voltage"/>
+        <Parameter name="C" dimension="time"/>
+        <Parameter name="a" dimension="none"/>
+        <Parameter name="b" dimension="none"/>
+        <Parameter name="vs1" dimension="voltage"/>
+        <Parameter name="vs2" dimension="voltage"/>
+
+        <Requirement name="v" dimension="voltage"/>
+
+        <Dynamics>
+            <StateVariable name="q" exposure="q" dimension="none"/>
+            <DerivedVariable name="tau" dimension="time" value="C / (exp(a + v/vs1) + exp(b + v/vs2))"/>
+            <DerivedVariable name="qinf" dimension="none" value="1 / (1 + exp((v - threshold)/vscale))"/>
+            <TimeDerivative variable="q" value="(qinf - q) / tau"/>
+            <DerivedVariable name="fcond" exposure="fcond" dimension="none" value="q^instances"/>
+        </Dynamics>
+    </ComponentType>-->
+
+
+    <!--<Component id="gtic" type="gateTauInfComplex" instances="1" C="1ms"
+        threshold="-75mV" vscale="5.5mV" a="-14.59" vs1="16mV" b="-1.87" vs2="17mV"/>-->
+
+
+
+    <!-- neater way of expressing same thing
+
+    <ComponentType name="Tau_t">
+            <Exposure name="tau" dimension="time"/>
+
+    </ComponentType>
+
+    <ComponentType name="Inf_t">
+              <Exposure name="minf" dimension="none"/>
+
+    </ComponentType>
+
+    <ComponentType name="gateTauInf" extends="gate">
+
+         <Child type="Tau_t" name="Tau"/>
+         <Child type="Inf_t" name="Inf"/>
+
+         <Exposure name="minf" dimension="none"/>
+         <Exposure name="tau" dimension="time"/>
+         <Requirement name="v" dimension="voltage"/>-->
+
+
+     <!-- likely need for inner types here, so the Tau and Inf type definitions could be nested in here
+          <Dynamics>
+            <StateVariable name="m" exposure="q" dimension="none"/>
+            <DerivedVariable name="minf" exposure="minf" dimension="none" select="Inf/minf"/>
+            <DerivedVariable name="tau" exposure="tau" dimension="time" select="Tau/tau"/>
+
+            <DerivedVariable name="fcond" exposure="fcond" dimension="none" value="m^instances"/>
+
+            <TimeDerivative variable="m" value="(minf - m) / tau"/> -->
+
+
+             <!--  note that '/' is part of a path, or a division operator depending on context
+
+          </Dynamics>
+    </ComponentType>-->
+
+    <!--
+    <ComponentType name="hillTau" extends="Tau_t">
+        <Parameter name="C" dimension="time"/>
+        <Parameter name="a" dimension="none"/>
+        <Parameter name="b" dimension="none"/>
+        <Parameter name="vs1" dimension="voltage"/>
+        <Parameter name="vs2" dimension="voltage"/>
+        <Requirement name="v" dimension="voltage"/>
+        <Dynamics>
+            <DerivedVariable name="tau" exposure="tau" dimension="time" value="C / (exp(a + v/vs1) + exp(b + v/vs2))"/>
+        </Dynamics>
+    </ComponentType>
+
+    <ComponentType name="hillInf" extends="Inf_t">
+        <Parameter name="threshold" dimension="voltage"/>
+        <Parameter name="vscale" dimension="voltage"/>
+         <Requirement name="v" dimension="voltage"/>
+
+        <Dynamics>
+            <DerivedVariable name="inf" exposure="minf" dimension="none" value="1 / (1 + exp((v - threshold)/vscale))"/>
+        </Dynamics>
+    </ComponentType>-->
+
+
+
+
+    <ComponentType name="baseIonChannel"
+        description="Base for all ion channel ComponentTypes">
+        <Parameter name="conductance" dimension="conductance"/>
+        <Exposure name="g" dimension="conductance"/>
+        <Exposure name="fopen" dimension="none"/>
+        <Requirement name="v" dimension="voltage"/>
+
+    </ComponentType>
+
+    <ComponentType name="ionChannel"
+        extends="baseIonChannel"
+        description="Temporary ComponentTypes extending _baseIonChannel_. This is needed since many existing examples use the name ionChannel. Should be removed.">
+
+    </ComponentType>
+
+    <ComponentType name="ionChannelPassive" 
+        extends="ionChannel"
+        description="Simple passive ion channel where the constant conductance through the channel is equal to _conductance">
+        <Child name="notes" type="notes"/>
+        <Text name="neuroLexId"/>
+
+        <Dynamics>
+            <DerivedVariable name="fopen" exposure="fopen" value="1" dimension="none"/>
+            <DerivedVariable name="g" exposure="g" value="conductance" dimension="conductance"/>
+        </Dynamics>
+    </ComponentType>
+
+    <!--<ComponentType name="parameter">
+        <Parameter name="value" dimension="none"/>
+    </ComponentType>-->
+
+    <ComponentType name="ionChannelHH" 
+        extends="ionChannel"
+        description="Ion channel according to the Hodgkin Huxley formalism, with a number of gates (of type _gateHH_)">
+        <Child name="notes" type="notes"/>
+        <Child name="conductanceScaling" type="baseConductanceScaling"/>
+        <!--<Children name="parameters" type="parameter"/>-->
+        <Children name="gates" type="gateHH"/>
+        <Requirement name="temperature" dimension="temperature"/>
+        <Text name="neuroLexId"/>
+        <Text name="species"/>
+    
+        <Dynamics>
+            <DerivedVariable name="conductanceScale" dimension="none" select="conductanceScaling/factor" onAbsent="1"/>
+            <DerivedVariable name="fopenUnscaled" dimension="none" select="gates[*]/fcond" reduce="multiply"/>
+            <DerivedVariable name="fopen" exposure="fopen" dimension="none" value="conductanceScale * fopenUnscaled"/>
+            <DerivedVariable name="g" exposure="g" value="conductance * fopen" dimension="conductance"/>
+        </Dynamics>
+    </ComponentType>
+
+ 
+
+    <ComponentType name="KSState"
+        description="One of the states in which a _gateKS_ can be. The rates of transitions between these states are given by _KSTransition_s">
+        <Parameter name="relativeConductance" dimension="none"/>
+        <Child name="notes" type="notes"/>
+        <Exposure name="occupancy" dimension="none"/>
+        <Exposure name="q" dimension="none"/>
+
+        <Dynamics>
+            <StateVariable name="occupancy" exposure="occupancy" dimension="none"/>
+            <DerivedVariable name="q" dimension="none" exposure="q" value="relativeConductance * occupancy"/>
+        </Dynamics>
+    </ComponentType>
+
+    <ComponentType name="closedState" 
+        extends="KSState"
+        description="A _KSState_ with _relativeConductance of 0">
+        <Fixed parameter="relativeConductance" value="0"/>
+    </ComponentType>
+
+
+    <ComponentType name="openState" 
+        extends="KSState"
+        description="A _KSState_ with _relativeConductance of 1">
+        <Fixed parameter="relativeConductance" value="1"/>
+    </ComponentType>
+
+
+    <ComponentType name="ionChannelKS" 
+        extends="ionChannel"
+        description="A kinetic scheme based ion channel with multiple _gateKS_s, each of which consists of multiple _KSState_s and _KSTransition_s giving the rates of transition between them">
+        <Parameter name="conductance" dimension="conductance"/>
+        <Children name="gates" type="gateKS"/>
+    
+        <Text name="species"/>
+    
+        <Dynamics>
+            <DerivedVariable name="fopen" exposure="fopen" dimension="none" select="gates[*]/fcond" reduce="multiply"/>
+            <DerivedVariable name="g" exposure="g" dimension="conductance" value="fopen * conductance"/>
+
+        </Dynamics>
+    </ComponentType>
+
+ 
+
+    <ComponentType name="KSTransition" description="Specified the forward and reverse rates of transition between two _KSState_s in a _gateKS_">
+        <Link name="from" type="KSState"/>
+        <Link name="to" type="KSState"/>
+        <Exposure name="rf" dimension="per_time"/>
+        <Exposure name="rr" dimension="per_time"/>
+     
+    </ComponentType>
+
+ 
+    <ComponentType name="forwardTransition"
+        extends="KSTransition"
+        description="A forward only _KSTransition_ for a _gateKS_ which specifies a _rate (type _baseHHRate_) which follows one of the standard Hodgkin Huxley forms (e.g. _HHExpRate_, _HHSigmoidRate_, _HHExpLinearRate_">
+
+        <Child name="rate" type="baseHHRate"/>
+   
+        <Dynamics>
+            <DerivedVariable name="rf0" dimension="per_time" select="rate/r"/>
+            <DerivedVariable name="rf" exposure="rf" dimension="per_time" value="rf0"/>
+            <DerivedVariable name="rr" exposure="rr" dimension="per_time" value="0"/>
+        </Dynamics>
+
+    </ComponentType>
+
+    <ComponentType name="reverseTransition" 
+        extends="KSTransition"
+        description="A reverse only _KSTransition_ for a _gateKS_ which specifies a _rate (type _baseHHRate_) which follows one of the standard Hodgkin Huxley forms (e.g. _HHExpRate_, _HHSigmoidRate_, _HHExpLinearRate_">
+
+        <Child name="rate" type="baseHHRate"/>
+
+        <Dynamics>
+            <DerivedVariable name="rr0" dimension="per_time" select="rate/r"/>
+            <DerivedVariable name="rr" exposure="rr" dimension="per_time" value="rr0"/>
+            <DerivedVariable name="rf" exposure="rf" dimension="per_time" value="0"/>
+        </Dynamics>
+    </ComponentType>
+ 
+
+    <ComponentType name="vHalfTransition"
+        extends="KSTransition"
+        description="Transition which specifies both the forward and reverse rates of transition">
+        <Parameter name="vHalf" dimension="voltage"/>
+        <Parameter name="z" dimension="none"/>
+        <Parameter name="gamma" dimension="none"/>
+        <Parameter name="tau" dimension="time"/>
+        <Parameter name="tauMin" dimension="time"/>
+        <Constant name="kte" dimension="voltage" value="25.3mV"/>
+        <Requirement name="v" dimension="voltage"/>
+
+        <Dynamics>
+        
+            <DerivedVariable name="rf0" dimension="per_time" value="exp(z * gamma * (v - vHalf) / kte) / tau"/>
+            <DerivedVariable name="rr0" dimension="per_time" value="exp(-z * (1 - gamma) * (v - vHalf) / kte) / tau"/>
+            <DerivedVariable name="rf" exposure="rf" dimension="per_time" value="1 / (1/rf0 + tauMin)"/>
+            <DerivedVariable name="rr" exposure="rr" dimension="per_time" value="1 / (1/rr0 + tauMin)"/>
+        </Dynamics>
+    </ComponentType>
+
+
+
+    <ComponentType name="gateKS" 
+        extends="baseGate"
+        description="A gate which consists of multiple _KSState_s and _KSTransition_s giving the rates of transition between them">
+        <Parameter name="deltaV" dimension="voltage"/>
+        <Children name="states" type="KSState"/>
+        <Children name="transitions" type="KSTransition"/>
+        <Exposure name="qq" dimension="none"/>
+
+        <Dynamics>
+
+            <DerivedVariable name="q" exposure="q" dimension="none" select="states[*]/q" reduce="add"/>
+            <DerivedVariable name="fopen" exposure="fcond" dimension="none" value="q^instances"/>
+            <DerivedVariable name="qq" exposure="qq" dimension="none" value="q"/>
+
+            <KineticScheme name="ks">
+                <Nodes children="states" variable="occupancy"/>
+                <Edges children="transitions" sourceNodeName="from" targetNodeName="to" forwardRate="rf" reverseRate="rr"/>
+                <Tabulable variable="v" increment="deltaV"/>
+            </KineticScheme>
+
+        </Dynamics>
+    
+    </ComponentType>
+
+
+
+</Lems>
+

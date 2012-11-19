@@ -1,0 +1,126 @@
+<Lems xmlns="http://www.neuroml.org/lems/0.6"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.6 ../Schemas/LEMS/LEMS_v0.6.xsd">
+
+    <!-- A number of Simulation types for use in NeuroML 2 documents  -->
+
+    <!-- Including standard unit definitions for NeuroML v2.0 -->
+    
+    <Include file="NeuroMLCoreDimensions.xml"/>
+
+    <ComponentType name="Display">
+        <Parameter name="timeScale" dimension="time"/>
+        <Children name="lines" type="Line"/>
+
+        <Text name="title"/>  <!-- attribute to hold title of window -->
+
+        <Dynamics>
+             <Show src="lines" scale="timeScale"/>
+        </Dynamics>
+    </ComponentType>
+
+
+    <ComponentType name="Line">
+        <Parameter name="scale" dimension="*"/>
+        <Path name="quantity"/>
+        <Text name="color"/>
+        <Text name="save"/>
+        <Simulation>
+            <Record quantity="quantity" scale="scale" color="color"/>
+        </Simulation>
+    </ComponentType>
+
+
+    <ComponentType name="Simulation">
+        <Parameter name="length" dimension="time"/>
+        <Parameter name="step" dimension="time"/>
+        <Children name="displays" type="Display"/>
+        <ComponentRef name="target" type="Component"/>
+        <Text name="report"/>
+        <Text name="timesFile"/>
+
+        <Dynamics>
+            <StateVariable name="t" dimension="time"/>
+            <Show src="displays"/>
+            <Run component="target" variable="t" increment="step" total="length"/>
+        </Dynamics>
+    </ComponentType>
+
+<!-- In development...
+    <ComponentType name="listOfSimulations">
+        <Children name="uniformTimeCourse" type="uniformTimeCourse"/>
+    </ComponentType>
+
+    <ComponentType name="uniformTimeCourse">
+        <Parameter name="initialTime" dimension="time"/>
+        <Parameter name="outputStartTime" dimension="time"/>
+        <Parameter name="outputEndTime" dimension="time"/>
+        <Parameter name="numberOfPoints" dimension="none"/>
+
+        <Dynamics>
+             <DerivedVariable name="length" dimension="time" value="outputEndTime - initialTime"/>
+             <DerivedVariable name="step" dimension="time" value="length/numberOfPoints"/>
+        </Dynamics>
+
+
+    </ComponentType>
+
+    <ComponentType name="Simulation2">
+
+        <Parameter name="length" dimension="time"/>
+        <Parameter name="step" dimension="time"/>
+
+        <Constant name="l2" dimension="time" value="400ms"/>
+        
+        <ComponentRef name="target" type="network"/>
+        <Children name="displays" type="Display"/>
+
+
+        <Child name="uniformTimeCourse" type="uniformTimeCourse"/>
+
+        <Dynamics>
+            <StateVariable name="t" dimension="time"/>
+
+            <DerivedVariable name="length2" dimension="time" select="uniformTimeCourse/outputEndTime"/>
+
+
+
+       <Run component="target" variable="t" increment="step" total="length"/>
+            <Show src="displays"/>
+        </Dynamics>
+    </ComponentType>
+
+
+
+
+
+    <ComponentType name="sedML">
+
+        <Child name="listOfSimulations" type="listOfSimulations"/>
+        <Children name="uniformTimeCourse" type="uniformTimeCourse"/>
+        <Children name="displays" type="Display"/>
+
+        <ComponentRef name="target" type="network"/>
+        
+        <Text name="version"/>
+        <Text name="level"/>
+
+        
+        <Parameter name="length" dimension="time"/>
+        <Parameter name="step" dimension="time"/>
+        
+        
+        <Dynamics>
+            <StateVariable name="t" dimension="time"/>-->
+
+            <!--<ExternalVariable name="length" dimension="time" select="uniformTimeCourse/outputEndTime"/>-->
+            <!--<ExternalVariable name="length" dimension="time" select="listOfSimulations/uniformTimeCourse/outputEndTime"/>-->
+            <!--<DerivedVariable name="length" value="listOfSimulations/uniformTimeCourse/outputEndTime"/>-->
+
+            <!--<Run component="target" variable="t" increment="step" total="length"/>-->
+            <!--<Run component="target" variable="t" increment="0.01" total="300"/>
+            <Show src="displays"/>
+        </Dynamics>
+    </ComponentType>-->
+
+</Lems>

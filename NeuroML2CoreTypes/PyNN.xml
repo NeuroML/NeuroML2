@@ -1,0 +1,607 @@
+<Lems xmlns="http://www.neuroml.org/lems/0.6"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.6 ../Schemas/LEMS/LEMS_v0.6.xsd"
+      description="A number of ComponentType description of PyNN standard cells. All of the cells extend _basePyNNCell_, and the synapses extend _basePynnSynapse_.">
+
+    <!-- Set of definitions in LEMS for PyNN standard cell types & synapses  -->
+
+    <!-- See NeuroML2/exportImportUtils/PyNN/neuroml2.py for more details on current status-->
+
+    <!-- WORK IN PROGRESS! Contact p.gleeson@ucl.ac.uk for more details -->
+
+    <Include file="Cells.xml"/>
+    <Include file="Synapses.xml"/>
+
+
+    <ComponentType name="basePyNNCell"
+        description="Base type of any PyNN standard cell model. Note: membrane potential _v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels" extends="baseCellMembPot">
+
+        <Parameter name="cm" dimension="none"/>
+        <Parameter name="i_offset" dimension="none"/>
+        <Parameter name="tau_syn_E" dimension="none"/>
+        <Parameter name="tau_syn_I" dimension="none"/>
+        
+    <!-- Temp parameter for initial value while LEMS support for setting these is updated -->
+        <Parameter name="v_init" dimension="none"/>
+        
+        <EventPort name="spike_in_E" direction="in"/>
+        <EventPort name="spike_in_I" direction="in"/>
+
+        <Exposure name="ISyn" dimension="none"/> <!-- No dimension, unlike iSyn in baseCellMembPotCap -->
+
+    </ComponentType>
+
+
+    <ComponentType name="basePyNNIaFCell" extends="basePyNNCell"
+        description="Base type of any PyNN standard integrate and fire model">
+
+        <Parameter name="tau_refrac" dimension="none"/>
+        <Parameter name="v_thresh" dimension="none"/>
+        <Parameter name="tau_m" dimension="none"/>
+        <Parameter name="v_rest" dimension="none"/>
+        <Parameter name="v_reset" dimension="none"/>
+
+    </ComponentType>
+
+
+    <ComponentType name="basePyNNIaFCondCell" extends="basePyNNIaFCell"
+        description="Base type of conductance based PyNN IaF cell models">
+
+        <Parameter name="e_rev_E" dimension="none"/>
+        <Parameter name="e_rev_I" dimension="none"/>
+
+    </ComponentType>
+
+
+
+    <ComponentType name="IF_curr_alpha" extends="basePyNNIaFCell"
+        description="Leaky integrate and fire model with fixed threshold and alpha-function-shaped post-synaptic current">
+
+        <Constant name="SEC" dimension="time" value="1s"/>
+        <Constant name="MSEC" dimension="time" value="1ms"/>
+        <Constant name="MVOLT" dimension="voltage" value="1mV"/>
+
+        <Child name="notes" type="notes"/>
+
+        <Attachments name="synapses" type="alphaCurrSynapse"/>
+
+        <Dynamics>
+            <StateVariable name="v" exposure="v" dimension="voltage"/>
+            <StateVariable name="lastSpikeTime" dimension="time"/>
+
+            <DerivedVariable name="ISyn" dimension="none" exposure="ISyn" select="synapses[*]/I" reduce="add" />
+
+            <OnStart>
+                <StateAssignment variable="v" value="v_init * MVOLT"/>
+            </OnStart>
+
+            <Regime name="refractory">
+                <OnEntry>
+                    <StateAssignment variable="lastSpikeTime" value="t" />
+                    <StateAssignment variable="v" value="v_reset * MVOLT" />
+                </OnEntry>
+                <OnCondition test="t .gt. lastSpikeTime + (tau_refrac*MSEC)">
+                    <Transition regime="integrating" />
+                </OnCondition>
+            </Regime>
+
+            <Regime name="integrating" initial="true">
+                <TimeDerivative variable="v" value="MVOLT * (((i_offset + ISyn)/cm) +  ((v_rest - (v/MVOLT)) / tau_m))/MSEC" />
+                <OnCondition test="v .gt. v_thresh * MVOLT">
+                    <EventOut port="spike"/>
+                    <Transition regime="refractory" />
+                </OnCondition>
+            </Regime>
+
+        </Dynamics>
+
+    </ComponentType>
+
+
+    <ComponentType name="IF_curr_exp" extends="basePyNNIaFCell"
+        description="Leaky integrate and fire model with fixed threshold and decaying-exponential post-synaptic current">
+
+        <Constant name="SEC" dimension="time" value="1s"/>
+        <Constant name="MSEC" dimension="time" value="1ms"/>
+        <Constant name="MVOLT" dimension="voltage" value="1mV"/>
+        
+        <Child name="notes" type="notes"/>
+
+        <Attachments name="synapses" type="expCurrSynapse"/>
+
+        <Dynamics>
+            <StateVariable name="v" exposure="v" dimension="voltage"/>
+            <StateVariable name="lastSpikeTime" dimension="time"/>
+
+            <DerivedVariable name="ISyn" dimension="none" exposure="ISyn" select="synapses[*]/I" reduce="add" />
+
+            <OnStart>
+                <StateAssignment variable="v" value="v_init * MVOLT"/>
+            </OnStart>
+
+            <Regime name="refractory">
+                <OnEntry>
+                    <StateAssignment variable="lastSpikeTime" value="t" />
+                    <StateAssignment variable="v" value="v_reset * MVOLT" />
+                </OnEntry>
+                <OnCondition test="t .gt. lastSpikeTime + (tau_refrac*MSEC)">
+                    <Transition regime="integrating" />
+                </OnCondition>
+            </Regime>
+
+            <Regime name="integrating" initial="true">
+                <TimeDerivative variable="v" value="MVOLT * (((i_offset + ISyn)/cm) +  ((v_rest - (v/MVOLT)) / tau_m))/MSEC" />
+                <OnCondition test="v .gt. v_thresh * MVOLT">
+                    <EventOut port="spike"/>
+                    <Transition regime="refractory" />
+                </OnCondition>
+            </Regime>
+
+        </Dynamics>
+
+    </ComponentType>
+
+
+    <ComponentType name="IF_cond_alpha" extends="basePyNNIaFCondCell"
+        description="Leaky integrate and fire model with fixed threshold and alpha-function-shaped post-synaptic conductance">
+
+        <Constant name="SEC" dimension="time" value="1s"/>
+        <Constant name="MSEC" dimension="time" value="1ms"/>
+        <Constant name="MVOLT" dimension="voltage" value="1mV"/>
+        
+        <Child name="notes" type="notes"/>
+
+        <Attachments name="synapses" type="alphaCondSynapse"/>
+
+        <Dynamics>
+            <StateVariable name="v" exposure="v" dimension="voltage"/>
+            <StateVariable name="lastSpikeTime" dimension="time"/>
+
+            <DerivedVariable name="ISyn" dimension="none" exposure="ISyn" select="synapses[*]/I" reduce="add" />
+
+            <OnStart>
+                <StateAssignment variable="v" value="v_init * MVOLT"/>
+            </OnStart>
+
+            <Regime name="refractory">
+                <OnEntry>
+                    <StateAssignment variable="lastSpikeTime" value="t" />
+                    <StateAssignment variable="v" value="v_reset * MVOLT" />
+                </OnEntry>
+                <OnCondition test="t .gt. lastSpikeTime + (tau_refrac*MSEC)">
+                    <Transition regime="integrating" />
+                </OnCondition>
+            </Regime>
+
+            <Regime name="integrating" initial="true">
+                <TimeDerivative variable="v" value="MVOLT * (((i_offset + ISyn) / cm) +  ((v_rest - (v / MVOLT)) / tau_m)) / MSEC" />
+                <OnCondition test="v .gt. v_thresh * MVOLT">
+                    <EventOut port="spike"/>
+                    <Transition regime="refractory" />
+                </OnCondition>
+            </Regime>
+
+        </Dynamics>
+
+    </ComponentType>
+    
+    
+
+
+    <ComponentType name="IF_cond_exp" extends="basePyNNIaFCondCell"
+        description="Leaky integrate and fire model with fixed threshold and exponentially-decaying post-synaptic conductance">
+
+        <Constant name="SEC" dimension="time" value="1s"/>
+        <Constant name="MSEC" dimension="time" value="1ms"/>
+        <Constant name="MVOLT" dimension="voltage" value="1mV"/>
+
+        <Child name="notes" type="notes"/>
+
+        <Attachments name="synapses" type="expCondSynapse"/>
+
+        <Dynamics>
+            <StateVariable name="v" exposure="v" dimension="voltage"/>
+            <StateVariable name="lastSpikeTime" dimension="time"/>
+
+            <DerivedVariable name="ISyn" dimension="none" exposure="ISyn" select="synapses[*]/I" reduce="add" />
+
+            <OnStart>
+                <StateAssignment variable="v" value="v_init * MVOLT"/>
+            </OnStart>
+
+            <Regime name="refractory">
+                <OnEntry>
+                    <StateAssignment variable="lastSpikeTime" value="t" />
+                    <StateAssignment variable="v" value="v_reset * MVOLT" />
+                </OnEntry>
+                <OnCondition test="t .gt. lastSpikeTime + (tau_refrac*MSEC)">
+                    <Transition regime="integrating" />
+                </OnCondition>
+            </Regime>
+
+            <Regime name="integrating" initial="true">
+                <TimeDerivative variable="v" value="MVOLT * (((i_offset + ISyn)/cm) +  ((v_rest - (v / MVOLT)) / tau_m)) / MSEC" />
+                <OnCondition test="v .gt. v_thresh * MVOLT">
+                    <EventOut port="spike"/>
+                    <Transition regime="refractory" />
+                </OnCondition>
+            </Regime>
+
+        </Dynamics>
+
+    </ComponentType>
+
+
+
+    <ComponentType name="EIF_cond_exp_isfa_ista" extends="basePyNNIaFCondCell"
+        description="Adaptive exponential integrate and fire neuron according to Brette R and Gerstner W (2005) with exponentially-decaying post-synaptic conductance">
+
+        <Parameter name="v_rest" dimension="none"/>
+        <Parameter name="v_spike" dimension="none"/>
+        <Parameter name="delta_T" dimension="none"/>
+        <Parameter name="tau_w" dimension="none"/>
+
+        <Parameter name="a" dimension="none"/>
+        <Parameter name="b" dimension="none"/>
+
+        <Parameter name="i_offset" dimension="none"/>
+
+        <Parameter name="tau_refrac" dimension="none"/>
+
+        <Constant name="SEC" dimension="time" value="1s"/>
+        <Constant name="MSEC" dimension="time" value="1ms"/>
+        <Constant name="MVOLT" dimension="voltage" value="1mV"/>
+
+        <Child name="notes" type="notes"/>
+
+        <Attachments name="synapses" type="expCondSynapse"/>
+
+        <Exposure name="w" dimension="none"/>
+
+        <Dynamics>
+
+            <StateVariable name="v" dimension="voltage" exposure="v"/>
+            <StateVariable name="w" dimension="none" exposure="w"/>
+            <StateVariable name="lastSpikeTime" dimension="time"/>
+
+            <DerivedVariable name="ISyn" dimension="none" exposure="ISyn" select="synapses[*]/I" reduce="add" />
+
+            <OnStart>
+                <StateAssignment variable="v" value="v_init * MVOLT"/>
+                <StateAssignment variable="w" value="0"/>
+            </OnStart>
+
+            <Regime name="refractory">
+
+                <TimeDerivative variable="w" value="(1 / tau_w) * (a * ((v / MVOLT) - v_rest) - w) / MSEC"/>
+                
+                <OnEntry>
+                    <StateAssignment variable="lastSpikeTime" value="t" />
+                    <StateAssignment variable="v" value="v_reset * MVOLT" />
+                    <StateAssignment variable="w" value="w+b"/>
+                </OnEntry>
+
+                <OnCondition test="t .gt. lastSpikeTime + (tau_refrac*MSEC)">
+                    <Transition regime="integrating" />
+                </OnCondition>
+            </Regime>
+
+
+            <Regime name="integrating" initial="true">
+
+                <TimeDerivative variable="v" value="MVOLT * ((-1 * ((v / MVOLT) - v_rest) + delta_T * exp(((v / MVOLT) - v_thresh) / delta_T)) / tau_m + (i_offset + ISyn - w) / cm) / MSEC"/>
+                <TimeDerivative variable="w" value="(1 / tau_w) * (a * ((v / MVOLT) - v_rest) - w) / MSEC"/>
+
+                <OnCondition test="v .gt. v_spike * MVOLT">
+                    <EventOut port="spike"/>
+                    <Transition regime="refractory" />
+                </OnCondition>
+
+            </Regime>
+
+        </Dynamics>
+
+    </ComponentType>
+
+    <ComponentType name="EIF_cond_alpha_isfa_ista" extends="basePyNNIaFCondCell"
+        description="Adaptive exponential integrate and fire neuron according to Brette R and Gerstner W (2005) with alpha-function-shaped post-synaptic conductance">
+
+        <Parameter name="v_rest" dimension="none"/>
+        <Parameter name="v_spike" dimension="none"/>
+        <Parameter name="delta_T" dimension="none"/>
+        <Parameter name="tau_w" dimension="none"/>
+
+        <Parameter name="a" dimension="none"/>
+        <Parameter name="b" dimension="none"/>
+
+        <Parameter name="i_offset" dimension="none"/>
+
+        <Parameter name="tau_refrac" dimension="none"/>
+
+        <Constant name="SEC" dimension="time" value="1s"/>
+        <Constant name="MSEC" dimension="time" value="1ms"/>
+        <Constant name="MVOLT" dimension="voltage" value="1mV"/>
+
+        <Child name="notes" type="notes"/>
+
+        <Attachments name="synapses" type="alphaCondSynapse"/>
+
+        <Exposure name="w" dimension="none"/>
+
+        <Dynamics>
+
+            <StateVariable name="v" dimension="voltage" exposure="v"/>
+            <StateVariable name="w" dimension="none" exposure="w"/>
+            <StateVariable name="lastSpikeTime" dimension="time"/>
+
+            <DerivedVariable name="ISyn" dimension="none" exposure="ISyn" select="synapses[*]/I" reduce="add" />
+
+            <OnStart>
+                <StateAssignment variable="v" value="v_init * MVOLT"/>
+                <StateAssignment variable="w" value="0"/>
+            </OnStart>
+
+            <Regime name="refractory">
+
+                <TimeDerivative variable="w" value="(1 / tau_w) * (a * ((v / MVOLT) - v_rest) - w) / MSEC"/>
+
+                <OnEntry>
+                    <StateAssignment variable="lastSpikeTime" value="t" />
+                    <StateAssignment variable="v" value="v_reset * MVOLT" />
+                    <StateAssignment variable="w" value="w + b"/>
+                </OnEntry>
+
+                <OnCondition test="t .gt. lastSpikeTime + (tau_refrac * MSEC)">
+                    <Transition regime="integrating" />
+                </OnCondition>
+            </Regime>
+
+
+            <Regime name="integrating" initial="true">
+
+                <TimeDerivative variable="v" value="MVOLT * ((-1 * ( (v / MVOLT) - v_rest) + delta_T * exp(((v / MVOLT) - v_thresh) / delta_T)) / tau_m + (i_offset + ISyn - w) / cm) / MSEC"/>
+                <TimeDerivative variable="w" value="(1/ tau_w) * (a*((v/MVOLT)-v_rest) - w) /MSEC"/>
+
+                <OnCondition test="v .gt. v_spike * MVOLT">
+                    <EventOut port="spike"/>
+                    <Transition regime="refractory" />
+                </OnCondition>
+
+            </Regime>
+
+        </Dynamics>
+
+    </ComponentType>
+
+
+    <!-- Based on equations used for specifying cell behaviour for Brian in PyNN -->
+    <ComponentType name="HH_cond_exp" extends="basePyNNCell"
+        description="Single-compartment Hodgkin-Huxley-type neuron with transient sodium and delayed-rectifier potassium currents using the ion channel models from Traub.">
+      
+        <Parameter name="gbar_K" dimension="none"/>
+        <Parameter name="gbar_Na" dimension="none"/>
+        <Parameter name="g_leak" dimension="none"/>
+
+        <Parameter name="e_rev_K" dimension="none"/>
+        <Parameter name="e_rev_Na" dimension="none"/>
+        <Parameter name="e_rev_leak" dimension="none"/>
+
+        <Parameter name="v_offset" dimension="none"/>
+        
+        <Parameter name="e_rev_E" dimension="none"/>
+        <Parameter name="e_rev_I" dimension="none"/>
+
+        <Constant name="SEC" dimension="time" value="1s"/>
+        <Constant name="MSEC" dimension="time" value="1ms"/>
+        <Constant name="MVOLT" dimension="voltage" value="1mV"/>
+
+        <Child name="notes" type="notes"/>
+
+        <Attachments name="synapses" type="alphaCondSynapse"/>
+
+        <Exposure name="m" dimension="none"/>
+        <Exposure name="h" dimension="none"/>
+        <Exposure name="n" dimension="none"/>
+
+        <Dynamics>
+            <StateVariable name="v" dimension="voltage" exposure="v"/>
+            <StateVariable name="m" dimension="none" exposure="m"/>
+            <StateVariable name="h" dimension="none" exposure="h"/>
+            <StateVariable name="n" dimension="none" exposure="n"/>
+            <DerivedVariable name="ISyn" dimension="none" exposure="ISyn" select="synapses[*]/I" reduce="add" />
+
+            <DerivedVariable name="iLeak" dimension="none" value="g_leak * (e_rev_leak - (v / MVOLT))"/>
+            <DerivedVariable name="iNa" dimension="none" value="gbar_Na * (m * m * m) * h * (e_rev_Na - (v / MVOLT))"/>
+            <DerivedVariable name="iK" dimension="none" value="gbar_K * (n * n * n * n) * (e_rev_K - (v / MVOLT))"/>
+            <DerivedVariable name="iMemb" dimension="none" value="iLeak + iNa + iK + i_offset + ISyn"/>
+
+            <DerivedVariable name="alpham" dimension="none" value="0.32 * (13 - (v / MVOLT) + v_offset) / (exp((13 - (v / MVOLT) + v_offset) / 4.0) - 1)"/>
+            <DerivedVariable name="betam" dimension="none"  value="0.28 * ((v / MVOLT) - v_offset - 40) / (exp(((v / MVOLT) - v_offset - 40) / 5.0) - 1)"/>
+            <DerivedVariable name="alphah" dimension="none" value="0.128 * exp((17 - (v / MVOLT) + v_offset) / 18.0)"/>
+            <DerivedVariable name="betah" dimension="none" value="4.0 / (1 + exp((40 - (v / MVOLT) + v_offset) / 5))"/>
+            <DerivedVariable name="alphan" dimension="none" value="0.032 * (15 - (v / MVOLT) + v_offset) / (exp((15 - (v / MVOLT) + v_offset) / 5) - 1)"/>
+            <DerivedVariable name="betan" dimension="none" value="0.5 * exp((10 - (v / MVOLT) + v_offset) / 40)"/>
+
+            <TimeDerivative variable="v" value="MVOLT * (iMemb / cm) / MSEC"/>
+
+            <TimeDerivative variable="m" value="(alpham * (1 - m) - betam * m) / MSEC"/>
+            <TimeDerivative variable="h" value="(alphah * (1 - h) - betah * h) / MSEC"/>
+            <TimeDerivative variable="n" value="(alphan * (1 - n) - betan * n) / MSEC"/>
+
+            <OnStart>
+                <StateAssignment variable="v" value="v_init * MVOLT"/>
+            </OnStart>
+
+
+        </Dynamics>
+
+    </ComponentType>
+
+
+
+    <!--   
+        Synapses
+    -->
+
+    <ComponentType name="basePynnSynapse"
+        description="Base type for all PyNN synapses. Note, the current _I produced is dimensionless, but it requires a membrane potential _v with dimension voltage">
+
+        <Parameter name="tau_syn" dimension="none"/>
+
+        <EventPort name="in" direction="in"/>
+        <Exposure name="I" dimension="none"/>
+        <Requirement name="v" dimension="voltage"/>
+
+    </ComponentType>
+
+
+    <ComponentType name="expCondSynapse" extends="basePynnSynapse" description="Conductance based synapse with instantaneous rise and single exponential decay (with time constant tau_syn)">
+
+        <Property name="weight" dimension="none" />
+
+        <Parameter name="e_rev" dimension="none"/>
+        <Constant name="MSEC" dimension="time" value="1ms"/>
+        <Constant name="MVOLT" dimension="voltage" value="1mV"/>
+
+        <Exposure name="g" dimension="none"/>
+
+
+        <Dynamics>
+            <StateVariable name="g" dimension="none" exposure="g"/>
+
+            <DerivedVariable name="I" exposure="I" dimension="none" value="g * (e_rev - (v/MVOLT))" />
+
+            <TimeDerivative variable="g" value="-g / (tau_syn*MSEC)" />
+
+            <OnEvent port="in">
+                <StateAssignment variable="g" value="g+weight" />
+            </OnEvent>
+
+        </Dynamics>
+
+    </ComponentType>
+
+    <ComponentType name="expCurrSynapse" extends="basePynnSynapse" description="Current based synapse with instantaneous rise and single exponential decay (with time constant tau_syn)">
+
+        <Property name="weight" dimension="none" />
+
+        <Constant name="MSEC" dimension="time" value="1ms"/>
+        <Constant name="MVOLT" dimension="voltage" value="1mV"/>
+
+        <Dynamics>
+            <StateVariable name="I" dimension="none" exposure="I"/>
+
+            <TimeDerivative variable="I" value="-I / (tau_syn*MSEC)" />
+
+            <OnEvent port="in">
+                <StateAssignment variable="I" value="I+weight" />
+            </OnEvent>
+
+        </Dynamics>
+
+    </ComponentType>
+
+
+    <ComponentType name="alphaCondSynapse" extends="basePynnSynapse" description="Alpha synapse: rise time and decay time are both tau_syn. Conductance based synapse.">
+
+        <Property name="weight" dimension="none" />
+
+        <Parameter name="e_rev" dimension="none"/>
+        <Constant name="MSEC" dimension="time" value="1ms"/>
+        <Constant name="MVOLT" dimension="voltage" value="1mV"/>
+
+        <Exposure name="g" dimension="none"/>
+        <Exposure name="y" dimension="none"/>
+
+        <Dynamics>
+            <StateVariable name="g" exposure="g" dimension="none"/>
+            <StateVariable name="y" exposure="y" dimension="none"/>
+            <!--
+            Inspired by Brian impl in PyNN...
+            g(t) = e/tau * t * e^(-t/tau)   // after syn input
+            define y(t) = e^(-t/tau)
+            dy/dt = -1/tau * e^(-t/tau) = -1/tau * y
+                  = -y / tau
+            dg/dt = e/tau * e^(-t/tau) + (-1/tau) * e/tau * t * e^(-t/tau)
+                  = e/tau * y          + (-1/tau) * g
+                  = (e*y - g) / tau
+            -->
+
+            <DerivedVariable name="I" exposure="I" dimension="none" value="g * (e_rev - (v/MVOLT))" />
+
+            <TimeDerivative variable="g" value="(2.7182818*y - g)/(tau_syn*MSEC)" />
+            <TimeDerivative variable="y" value="-y /(tau_syn*MSEC)" />
+
+            <OnEvent port="in">
+                <StateAssignment variable="y" value="y + weight" />
+            </OnEvent>
+
+        </Dynamics>
+
+    </ComponentType>
+
+    <ComponentType name="alphaCurrSynapse" extends="basePynnSynapse" description="Alpha synapse: rise time and decay time are both tau_syn. Current based synapse.">
+
+        <Property name="weight" dimension="none" />
+
+        <Constant name="MSEC" dimension="time" value="1ms"/>
+        <Constant name="MVOLT" dimension="voltage" value="1mV"/>
+
+        <Exposure name="y" dimension="none"/>
+
+        <Dynamics>
+            <StateVariable name="I" exposure="I" dimension="none"/>
+            <StateVariable name="y" exposure="y" dimension="none"/>
+
+            <TimeDerivative variable="I" value="(2.7182818*y - I)/(tau_syn*MSEC)" />
+            <TimeDerivative variable="y" value="-y /(tau_syn*MSEC)" />
+
+            <OnEvent port="in">
+                <StateAssignment variable="y" value="y + weight" />
+            </OnEvent>
+
+        </Dynamics>
+
+    </ComponentType>
+
+
+
+    <!--
+        Spike sources
+    -->
+
+    <ComponentType name="SpikeSourcePoisson" extends="baseSpikeSource"
+        description="Spike source, generating spikes according to a Poisson process.">
+
+        <Parameter name="start" dimension="time"/>
+        <Parameter name="duration" dimension="time"/>
+        <Parameter name="rate" dimension="per_time"/>
+
+        <Child name="notes" type="notes"/>
+
+        <!--TODO: remove! Only required as EventConnection is used in explicitInput to
+        connect inputs to cells. Events aren't passed! ... -->
+        <EventPort name="in" direction="in"/>
+
+        <Dynamics>
+            <StateVariable name="tsince" dimension="time" exposure="tsince"/>
+            <StateVariable name="nextSpike" dimension="time"/>
+
+            <TimeDerivative variable="tsince" value="1"/>
+
+            <OnStart>
+                <StateAssignment variable="nextSpike" value="start + exp(-1*random(1))/rate"/>
+                <StateAssignment variable="tsince" value="0"/>
+            </OnStart>
+
+
+            <OnCondition test="tsince .gt. nextSpike .and. t .leq. (start + duration)">
+                <StateAssignment variable="nextSpike" value="exp(-1*random(1))/rate"/>
+                <StateAssignment variable="tsince" value="0"/>
+                <EventOut port="spike"/>
+            </OnCondition>
+
+        </Dynamics>
+    </ComponentType>
+
+</Lems>
