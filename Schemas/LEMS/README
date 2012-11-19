@@ -1,0 +1,5 @@
+This is an attempt to make a Schema file to validate the structure of a LEMS document.
+
+Currently it is limited to a subset of LEMS as used to define the NeuroML 2 elements, and so NeuroML2CoreTypes/Cells.xml etc. can be validated against this.
+
+Try running "ant testValidity" to use this file

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+    NOTE: This will only at present validate LEMS description files containing Dimension, Unit, Include, ComponentClass
+    ComponentType elements in that order! This is a restriction which seems adequate for defining the NeuroML 2 core ComponentClasses
+
+    v0.3 updated to separate out CoMoDL elements, which are those that will be shared with NineML
+-->
+
+<xs:schema targetNamespace="http://www.neuroml.org/lems/0.3"
+    xmlns="http://www.neuroml.org/lems/0.3"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:comodl="CoMoDL"
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified">
+
+    <xs:import namespace="CoMoDL" schemaLocation="../CoMoDL/CoMoDL_v0.2_LEMS.xsd"/>
+
+    <xs:element name="Lems" type="Lems">
+        <xs:annotation>
+            <xs:documentation>The root Lems element.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:complexType name="Lems">
+
+        <xs:complexContent>
+            <xs:extension base="comodl:ComponentClassDefinitions">
+                <xs:sequence>
+                    <xs:element name="ComponentType" type="ComponentType" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+
+    </xs:complexType>
+
+
+    <!-- ComponentType is used for component definitions containing parts which are currently specific to LEMS, e.g. Build/MultiInstantiate -->
+    <xs:complexType name="ComponentType">
+        <xs:sequence>
+            <xs:element name="Property" type="comodl:NamedDimensionalType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Parameter" type="comodl:NamedDimensionalType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="DerivedParameter" type="comodl:DerivedParameter" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Constant" type="comodl:Constant" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Child" type="comodl:Child" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Children" type="comodl:Children" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Fixed" type="comodl:Fixed" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="ComponentRef" type="comodl:ComponentRef" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Attachments" type="comodl:Attachments" minOccurs="0" maxOccurs="unbounded"/>
+
+            <xs:element name="EventPort" type="comodl:EventPort" minOccurs="0" maxOccurs="unbounded"/>
+
+            <xs:element name="Exposure" type="comodl:NamedDimensionalType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Requirement" type="comodl:NamedDimensionalType" minOccurs="0" maxOccurs="unbounded"/>
+
+            <xs:element name="Path" type="comodl:Path" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Text" type="comodl:Text" minOccurs="0" maxOccurs="unbounded"/>
+
+            <xs:element name="Behavior" type="Behavior" minOccurs="0" maxOccurs="unbounded"/>  <!-- Note: Behaviour in LEMS is different from Dynamics in CoMoDL -->
+        </xs:sequence>
+
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="extends" type="xs:string" use="optional"/>
+        <xs:attribute name="description" type="xs:string" use="optional"/>
+
+    </xs:complexType>
+
+
+    <xs:complexType name="Behavior">
+
+        <xs:sequence>
+            <xs:element name="Build" type="Build" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="StateVariable" type="comodl:StateVariable" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="DerivedVariable" type="comodl:DerivedVariable" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="TimeDerivative" type="comodl:TimeDerivative" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="OnStart" type="comodl:OnStart" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="OnEvent" type="comodl:OnEvent" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="OnCondition" type="OnCondition" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Regime" type="comodl:Regime" minOccurs="0" maxOccurs="unbounded"/>
+
+            <xs:element name="KineticScheme" type="KineticScheme" minOccurs="0" maxOccurs="1"/>
+
+            <xs:element name="Show" type="Show" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Record" type="Record" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Run" type="Run" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+
+    </xs:complexType>
+
+    <xs:complexType name="Build">
+
+        <xs:sequence>
+            <xs:element name="ChildInstance" type="ChildInstance" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="MultiInstantiate" type="MultiInstantiate" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="ForEach" type="ForEach" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="With" type="With" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="EventConnection" type="EventConnection" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+
+    </xs:complexType>
+
+    <xs:complexType name="ChildInstance">
+
+        <xs:attribute name="component" type="xs:string" use="required"/>
+
+    </xs:complexType>
+
+    <xs:complexType name="MultiInstantiate">
+
+        <xs:attribute name="component" type="xs:string" use="required"/>
+        <xs:attribute name="number" type="xs:string" use="required"/>
+
+    </xs:complexType>
+
+
+    <xs:complexType name="ForEach">
+
+        <xs:sequence>
+            <xs:element name="MultiInstantiate" type="MultiInstantiate" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+
+        <xs:attribute name="instances" type="xs:string" use="required"/>
+        <xs:attribute name="as" type="xs:string" use="required"/>
+
+    </xs:complexType>
+
+    <xs:complexType name="With">
+
+        <xs:attribute name="instance" type="xs:string" use="required"/>
+        <xs:attribute name="as" type="xs:string" use="required"/>
+
+    </xs:complexType>
+
+    <xs:complexType name="EventConnection">
+
+        <xs:sequence>
+            <xs:element name="Assign" type="Assign" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+        
+        <xs:attribute name="from" type="xs:string" use="required"/>
+        <xs:attribute name="to" type="xs:string" use="required"/>
+        <xs:attribute name="targetPort" type="xs:string" use="optional"/>
+        <xs:attribute name="receiver" type="xs:string" use="optional"/>
+        <xs:attribute name="delay" type="xs:string" use="optional"/>
+
+    </xs:complexType>
+
+
+    <xs:complexType name="Assign">
+
+        <xs:attribute name="property" type="xs:string" use="required"/>
+        <xs:attribute name="value" type="xs:string" use="required"/>
+
+    </xs:complexType>
+
+
+
+    <xs:complexType name="OnCondition">
+
+        <xs:sequence>
+            <xs:element name="StateAssignment" type="comodl:StateAssignment" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="EventOut" type="comodl:EventOut" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Transition" type="comodl:Transition" minOccurs="0" maxOccurs="1"/>   <!-- only on OnCondition inside Regime... -->
+        </xs:sequence>
+
+        <xs:attribute name="test" type="xs:string" use="required"/>
+
+    </xs:complexType>
+
+
+    <xs:complexType name="KineticScheme">
+
+        <xs:sequence>
+            <xs:element name="Nodes" type="Nodes" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="Edges" type="Edges" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="Tabulable" type="Tabulable" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+
+        <xs:attribute name="name" type="xs:string" use="required"/>
+
+    </xs:complexType>
+    
+    <xs:complexType name="Nodes">
+
+        <xs:attribute name="children" type="xs:string" use="required"/>
+        <xs:attribute name="variable" type="xs:string" use="required"/>
+
+    </xs:complexType>
+
+    <xs:complexType name="Edges">
+
+        <xs:attribute name="children" type="xs:string" use="required"/>
+        <xs:attribute name="sourceNodeName" type="xs:string" use="required"/>
+        <xs:attribute name="targetNodeName" type="xs:string" use="required"/>
+        <xs:attribute name="forwardRate" type="xs:string" use="required"/>
+        <xs:attribute name="reverseRate" type="xs:string" use="required"/>
+
+    </xs:complexType>
+
+    <xs:complexType name="Tabulable">
+
+        <xs:attribute name="variable" type="xs:string" use="required"/>
+        <xs:attribute name="increment" type="xs:string" use="required"/>
+
+    </xs:complexType>
+
+
+    <xs:complexType name="Show">
+
+        <xs:attribute name="src" type="xs:string" use="required"/>
+        <xs:attribute name="scale" type="xs:string" use="optional"/>
+
+    </xs:complexType>
+
+    <xs:complexType name="Record">
+
+        <xs:attribute name="quantity" type="xs:string" use="required"/>
+        <xs:attribute name="scale" type="xs:string" use="required"/>
+        <xs:attribute name="color" type="xs:string" use="required"/>
+
+    </xs:complexType>
+
+    <xs:complexType name="Run">
+
+        <xs:attribute name="component" type="xs:string" use="required"/>
+        <xs:attribute name="variable" type="xs:string" use="required"/>
+        <xs:attribute name="increment" type="xs:string" use="required"/>
+        <xs:attribute name="total" type="xs:string" use="required"/>
+
+    </xs:complexType>
+
+
+</xs:schema>
+
+
+

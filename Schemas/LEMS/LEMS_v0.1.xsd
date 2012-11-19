@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Test XSD for LEMS  -->
+
+<!--
+
+        NOTE: This will only at present validate LEMS description files containing Dimension, Unit, Include, ComponentType
+        elements in that order! This is a restriction which seems adequate for defining the NeuroML 2 core ComponentTypes
+        
+-->
+
+<xs:schema targetNamespace="http://www.neuroml.org/lems/0.1"
+    xmlns="http://www.neuroml.org/lems/0.1"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified">
+
+
+    <xs:element name="Lems" type="Lems">
+        <xs:annotation>
+            <xs:documentation>The root Lems element.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:complexType name="Lems">
+
+        <xs:sequence>
+            <xs:element name="Dimension" type="Dimension" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Unit" type="Unit" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Include" type="Include" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="ComponentType" type="ComponentType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+
+
+    </xs:complexType>
+
+
+    <xs:complexType name="Dimension">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="m" type="xs:integer" use="optional" default="0"/>
+        <xs:attribute name="l" type="xs:integer" use="optional" default="0"/>
+        <xs:attribute name="t" type="xs:integer" use="optional" default="0"/>
+        <xs:attribute name="i" type="xs:integer" use="optional" default="0"/>
+        <xs:attribute name="k" type="xs:integer" use="optional" default="0"/>
+        <xs:attribute name="c" type="xs:integer" use="optional" default="0"/>
+    </xs:complexType>
+
+
+    <xs:complexType name="Unit">
+        <xs:attribute name="symbol" type="xs:string" use="required"/>
+        <xs:attribute name="dimension" type="xs:string" use="required"/>
+        <xs:attribute name="powTen" type="xs:integer" use="optional" default="0">
+                <xs:annotation>
+                        <xs:documentation>Some have asked whether fractional dimensions should be allowed. Disallowing it until needed...</xs:documentation>
+                </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="scale" type="xs:float" use="optional" default="1"/>
+        <xs:attribute name="offset" type="xs:float" use="optional" default="0"/>
+
+    </xs:complexType>
+
+
+    <xs:simpleType name="Nml2Quantity">
+        <xs:annotation>
+            <xs:documentation>A value for a physical quantity in NeuroML 2, e.g. 20, -60.0mV, .05 per_ms or 5nA</xs:documentation>
+        </xs:annotation>
+
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]*[.]*[0-9]*[a-zA-Z]*[_]*[a-zA-Z]*"/>
+        </xs:restriction>
+
+    </xs:simpleType>
+
+
+    <xs:complexType name="Include">
+        <xs:attribute name="file" type="xs:string" use="required"/>
+    </xs:complexType>
+
+
+    <xs:complexType name="ComponentType">
+        <xs:sequence>
+            <xs:element name="Parameter" type="ParameterInfo" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Constant" type="Constant" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Child" type="Child" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Children" type="Children" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Fixed" type="Fixed" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Link" type="Link" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="ComponentRef" type="ComponentRef" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Attachments" type="Attachments" minOccurs="0" maxOccurs="unbounded"/>
+
+            <xs:element name="EventPort" type="EventPort" minOccurs="0" maxOccurs="unbounded"/>
+
+            <xs:element name="Exposure" type="ParameterInfo" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Requirement" type="ParameterInfo" minOccurs="0" maxOccurs="unbounded"/>
+
+            <xs:element name="Path" type="Path" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Text" type="Text" minOccurs="0" maxOccurs="unbounded"/>
+
+            <xs:element name="Behavior" type="Behavior" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="extends" type="xs:string" use="optional"/>
+        <xs:attribute name="description" type="xs:string" use="optional"/>
+
+    </xs:complexType>
+
+    <xs:complexType name="ParameterInfo">
+
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="dimension" type="xs:string" use="required"/>
+
+    </xs:complexType>
+
+    <xs:complexType name="Constant">
+
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="dimension" type="xs:string" use="required"/>
+        <xs:attribute name="value" type="Nml2Quantity" use="required"/>
+
+    </xs:complexType>
+
+    <xs:complexType name="ComponentRef">
+
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="type" type="xs:string" use="required"/>
+
+    </xs:complexType>
+
+    <xs:complexType name="Child">
+
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="type" type="xs:string" use="required"/>
+
+    </xs:complexType>
+
+    <xs:complexType name="Attachments">
+
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="type" type="xs:string" use="required"/>
+
+    </xs:complexType>
+
+    <xs:complexType name="EventPort">
+
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="direction" type="xs:string" use="required"/> <!-- Should be enumeration... -->
+
+    </xs:complexType>
+
+    <xs:complexType name="Link">
+
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="type" type="xs:string" use="required"/>
+
+    </xs:complexType>
+
+    <xs:complexType name="Fixed">
+
+        <xs:attribute name="parameter" type="xs:string" use="required"/>
+        <xs:attribute name="value" type="Nml2Quantity" use="required"/>
+
+    </xs:complexType>
+
+    <xs:complexType name="Children">
+
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="type" type="xs:string" use="optional"/>
+        <xs:attribute name="min" type="xs:integer" use="optional"/>
+        <xs:attribute name="max" type="xs:integer" use="optional"/>
+
+    </xs:complexType>
+
+    <xs:complexType name="Path">
+
+        <xs:attribute name="name" type="xs:string" use="required"/>
+
+    </xs:complexType>
+
+    <xs:complexType name="Text">
+
+        <xs:attribute name="name" type="xs:string" use="required"/>
+
+    </xs:complexType>
+
+
+    <xs:complexType name="Behavior">
+
+        <xs:sequence>
+                <xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/> <!-- Further elements will be specified!! -->
+        </xs:sequence>
+
+    </xs:complexType>
+
+
+</xs:schema>
+
+
+
