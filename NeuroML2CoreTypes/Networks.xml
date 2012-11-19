@@ -22,7 +22,7 @@
         <Exposure name="temperature" dimension="temperature" description="Temperature will be taken from extracellularProperties child"/>
         
         <Dynamics>
-            <DerivedVariable name="temperature" exposure="temperature" select="extracellularProperties/temperature" dimension="temperature" onAbsent="273.15"/>
+            <DerivedVariable name="temperature" exposure="temperature" dimension="temperature" value="273.15"/>  <!-- TODO check if absent-->
         </Dynamics>
 
     </ComponentType>
@@ -161,7 +161,7 @@
             <With instance="to" as="b"/>
             <!--<EventConnection from="a" to="b" receiver="synapse" receiverContainer="destination" sourcePort="sourcePort" targetPort="targetPort" delay="delay">-->
             <EventConnection from="a" to="b" receiver="synapse" delay="delay">
-                <Assign property="weight" value="weight"/>
+                <!--TODO: put back in! <Assign property="weight" value="weight"/>-->
             </EventConnection>
         </Structure>
 

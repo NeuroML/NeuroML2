@@ -366,11 +366,6 @@
         <Exposure name="spiked" dimension="none" description="0 signals not yet spiked, 1 signals has spiked"/>
 
         <Dynamics>
-            <Build>
-                <With instance="this" as="a"/>
-                <With instance="parent" as="b"/>
-                <EventConnection from="a" to="b"/>
-            </Build>
 
             <StateVariable name="tsince" dimension="time" exposure="tsince"/>
             <StateVariable name="spiked" dimension="none" exposure="spiked"/>
@@ -387,6 +382,12 @@
                 <EventOut port="spike"/>
             </OnCondition>
         </Dynamics>
+
+        <Structure>
+            <With instance="this" as="a"/>
+            <With instance="parent" as="b"/>
+            <EventConnection from="a" to="b"/>
+        </Structure>
 
     </ComponentType>
 
