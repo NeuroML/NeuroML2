@@ -206,7 +206,7 @@
             <With instance="target" as="b"/>
 
             <!--<EventConnection from="a" to="b" receiver="input" receiverContainer="destination" sourcePort="sourcePort" targetPort="targetPort"/>-->
-            <EventConnection from="a" to="b" receiver="input"/>
+            <EventConnection from="a" to="b" receiver="input" receiverContainer="destination"/>
         </Structure>
     </ComponentType>
 

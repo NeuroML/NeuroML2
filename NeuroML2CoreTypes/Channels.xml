@@ -440,7 +440,8 @@
         <Text name="species"/>
     
         <Dynamics>
-            <DerivedVariable name="conductanceScale" dimension="none" select="conductanceScaling/factor" onAbsent="1"/>
+            <!--TODO: put this back in!! <DerivedVariable name="conductanceScale" dimension="none" select="conductanceScaling/factor" reduce="multiply" required="false"/>-->
+            <DerivedVariable name="conductanceScale" dimension="none" value="1"/>
             <DerivedVariable name="fopenUnscaled" dimension="none" select="gates[*]/fcond" reduce="multiply"/>
             <DerivedVariable name="fopen" exposure="fopen" dimension="none" value="conductanceScale * fopenUnscaled"/>
             <DerivedVariable name="g" exposure="g" value="conductance * fopen" dimension="conductance"/>
