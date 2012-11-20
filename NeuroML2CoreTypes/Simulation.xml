@@ -1,3 +1,4 @@
+
 <Lems xmlns="http://www.neuroml.org/lems/0.6"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.neuroml.org/lems/0.6 ../Schemas/LEMS/LEMS_v0.6.xsd">
@@ -8,30 +9,64 @@
     
     <Include file="NeuroMLCoreDimensions.xml"/>
 
-    <ComponentType name="Display">
+    <ComponentType name="DisplayList">
         <Parameter name="timeScale" dimension="time"/>
         <Children name="lines" type="Line"/>
 
-        <Text name="title"/>  <!-- attribute to hold title of window -->
-
-        <Dynamics>
-             <Show src="lines" scale="timeScale"/>
-        </Dynamics>
+        <Text name="title"/>
+        <Text name="display"/>
     </ComponentType>
+
+
+
+    <ComponentType name="Display">
+        <Parameter name="xmin" dimension="none"/>
+        <Parameter name="xmax" dimension="none"/>
+        <Parameter name="ymin" dimension="none"/>
+        <Parameter name="ymax" dimension="none"/>
+        <Text name="title"/>
+
+        <Simulation>
+            <DataDisplay title="title" dataRegion="xmin,xmax,ymin,ymax"/>
+        </Simulation>
+    </ComponentType>
+
 
 
     <ComponentType name="Line">
         <Parameter name="scale" dimension="*"/>
-        <Path name="quantity"/>
+        <Parameter name="timeScale" dimension="*"/>
         <Text name="color"/>
         <Text name="save"/>
+        <Path name="quantity"/>
         <Simulation>
-            <Record quantity="quantity" scale="scale" color="color"/>
+            <Record quantity="quantity" timeScale="timeScale" scale="scale" color="color" display="display"/>
         </Simulation>
     </ComponentType>
 
 
     <ComponentType name="Simulation">
+        <Parameter name="length" dimension="time"/>
+        <Parameter name="step" dimension="time"/>
+        <ComponentReference name="target" type="Component"/>
+        <Link name="display" type="Display"/>
+        <Children name="outputs" type="DisplayList"/>
+        <Dynamics>
+            <StateVariable name="t" dimension="time"/>
+        </Dynamics>
+
+        <Simulation>
+            <Run component="target" variable="t" increment="step" total="length"/>
+        </Simulation>
+    </ComponentType>
+
+
+    <ComponentType name="SimulationSet">
+        <Children name="simulations" type="Simulation"/>
+        <Children name="displays" type="Display"/>
+    </ComponentType>
+
+    <ComponentType name="SingleSimulation">
         <Parameter name="length" dimension="time"/>
         <Parameter name="step" dimension="time"/>
         <Children name="displays" type="Display"/>
@@ -41,9 +76,11 @@
 
         <Dynamics>
             <StateVariable name="t" dimension="time"/>
-            <Show src="displays"/>
-            <Run component="target" variable="t" increment="step" total="length"/>
         </Dynamics>
+
+        <Simulation>
+            <Run component="target" variable="t" increment="step" total="length"/>
+        </Simulation>
     </ComponentType>
 
 <!-- In development...

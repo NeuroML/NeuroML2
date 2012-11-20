@@ -1,0 +1,58 @@
+
+<Lems>
+
+        <!-- Example with Simple Integrate and Fire cell -->
+
+        <!-- This is a file which can be read and executed by the LEMS Interpreter.
+             It imports the LEMS definitions of the core NeuroML 2 Components, creates 
+             a model in "pure" NeuroML 2 and contains some LEMS elements for running 
+             a simulation -->
+
+    <!-- Specify which component to run -->
+    <Target component="sim1"/>
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+
+    <Include file="NeuroML2CoreTypes/Cells.xml"/>
+    <!-- The above file includes NeuroMLCoreDimensions.xml, Channels.xml, Synapses.xml and Inputs.xml-->
+    <Include file="NeuroML2CoreTypes/Networks.xml"/>
+    <Include file="NeuroML2CoreTypes/Simulation.xml"/>
+
+
+
+    <!-- Main NeuroML2 content -->
+
+    <iafTauCell id="iafTau" leakReversal="-50mV" thresh="-55mV" reset="-70mV" tau="30ms"/>
+
+    <network id="net1">
+        <population id="iafTauPop" component="iafTau" size="1"/>
+    </network>
+
+    <!-- End of NeuroML2 content -->
+
+    <!--
+    <SingleSimulation id="sim1" length="300ms" step="0.01ms" target="net1">
+
+        <Display id="d0" title="Ex0: Simple Integrate and Fire cell in LEMS" timeScale="1ms">
+            <Line id ="iaf1" quantity="iafTauPop[0]/v" scale="1mV"  color="#000000" save="examples/testResults/iaf_tau_v.dat"/>
+        </Display>
+
+    </SingleSimulation>-->
+
+
+
+    <SimulationSet id="sim1">
+        <Display id="disp1" title="Ex0: Simple Integrate and Fire cell in LEMS" xmin="0" xmax="300" ymin="-75" ymax="-50"/>
+
+        <Simulation id="sim1" length="300ms" step="0.01ms" target="net1" display="disp1">
+
+            <DisplayList timeScale="1ms" title="Ex0: Simple Integrate and Fire cell in LEMS">
+
+                <Line id ="iaf1" quantity="iafTauPop[0]/v" scale="1mV"  color="#000000"  timeScale="1ms" save="examples/testResults/iaf_tau_v.dat"/>
+            </DisplayList>
+
+        </Simulation>
+    </SimulationSet>
+
+
+</Lems>
