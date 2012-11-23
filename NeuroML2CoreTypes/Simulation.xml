@@ -70,7 +70,7 @@
         <Parameter name="length" dimension="time"/>
         <Parameter name="step" dimension="time"/>
         <Children name="displays" type="Display"/>
-        <ComponentRef name="target" type="Component"/>
+        <ComponentReference name="target" type="Component"/>
         <Text name="report"/>
         <Text name="timesFile"/>
 
@@ -109,7 +109,7 @@
 
         <Constant name="l2" dimension="time" value="400ms"/>
         
-        <ComponentRef name="target" type="network"/>
+        <ComponentReference name="target" type="network"/>
         <Children name="displays" type="Display"/>
 
 
@@ -137,7 +137,7 @@
         <Children name="uniformTimeCourse" type="uniformTimeCourse"/>
         <Children name="displays" type="Display"/>
 
-        <ComponentRef name="target" type="network"/>
+        <ComponentReference name="target" type="network"/>
         
         <Text name="version"/>
         <Text name="level"/>

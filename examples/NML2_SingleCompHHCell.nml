@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2alpha.xsd"
+      id="NML2_SingleCompHHCell">
+
+<!-- Single compartment cell with HH channels -->
+     
+<!-- This is a "pure" NeuroML 2 file. It can be included in a LEMS file for use in a simulaton 
+     by the LEMS interpreter, see LEMS_NML2_Ex5_DetCell.xml -->     
+
+        <ionChannel id="passive" type="ionChannelPassive" conductance="10pS">
+           <notes>Leak conductance</notes>
+        </ionChannel>
+
+
+        <ionChannel id="na" type="ionChannelHH" conductance="10pS" species="na">
+           <notes>Na channel</notes>
+
+           <gateHH id="m" instances="3">
+                <forwardRate type="HHExpLinearRate" rate="1per_ms" midpoint="-40mV" scale="10mV"/>
+                <reverseRate type="HHExpRate" rate="4per_ms" midpoint="-65mV" scale="-18mV"/>
+           </gateHH>
+
+           <gateHH id="h" instances="1">
+               <forwardRate type="HHExpRate" rate="0.07per_ms" midpoint="-65mV" scale="-20mV"/>
+               <reverseRate type="HHSigmoidRate" rate="1per_ms" midpoint="-35mV" scale="10mV"/>
+           </gateHH>
+
+        </ionChannel>
+
+
+        <ionChannel id="k" type="ionChannelHH" conductance="10pS" species="k">
+
+            <gateHH id="n" instances="4">
+                <forwardRate type="HHExpLinearRate" rate="0.1per_ms" midpoint="-55mV" scale="10mV"/>
+                <reverseRate type="HHExpRate" rate="0.125per_ms" midpoint="-65mV" scale="-80mV"/>
+            </gateHH>
+            
+        </ionChannel>
+
+
+
+        <cell id="hhcell">
+
+            <morphology id="morph1">
+                <segment id="0" name="soma">
+                        <proximal x="0" y="0" z="0" diameter="17.841242"/> <!--Gives a convenient surface area of 1000.0 ?m�-->
+                        <distal x="0" y="0" z="0" diameter="17.841242"/>
+                </segment>
+
+                <segmentGroup id="soma_group">
+                    <member segment="0"/>
+                </segmentGroup>
+
+            </morphology>
+
+            <biophysicalProperties id="bioPhys1">
+
+                <membraneProperties>
+                        
+                    <channelDensity id="leak" ionChannel="passive" condDensity="3.0 S_per_m2" erev="-54.3mV"/>
+                    <channelDensity id="naChans" ionChannel="na" condDensity="120.0 mS_per_cm2" erev="50.0 mV"/>
+                    <channelDensity id="kChans" ionChannel="k" condDensity="360 S_per_m2" erev="-77mV"/>
+
+                    <spikeThresh value="-20mV"/>
+                    <specificCapacitance value="1.0 uF_per_cm2"/>
+                    <initMembPotential value="-65mV"/>
+
+                </membraneProperties>
+
+                <intracellularProperties>
+                    <resistivity value="0.03 kohm_cm"/>   <!-- Note: not used in single compartment simulations -->
+                </intracellularProperties>
+
+            </biophysicalProperties>
+
+        </cell>
+
+        <pulseGenerator id="pulseGen1" delay="100ms" duration="100ms" amplitude="0.08nA"/>
+
+
+        <network id="net1">
+            <population id="hhpop" component="hhcell" size="1"/>
+            <explicitInput target="hhpop[0]" input="pulseGen1"/>
+        </network>
+
+</neuroml>
+
