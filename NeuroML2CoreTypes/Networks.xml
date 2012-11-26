@@ -140,8 +140,8 @@
         <Structure>
             <With instance="from" as="a"/>
             <With instance="to" as="b"/>
-            <!--<EventConnection from="a" to="b" receiver="synapse" receiverContainer="destination" sourcePort="sourcePort" targetPort="targetPort"/>-->
-            <EventConnection from="a" to="b" receiver="synapse"/>
+            <EventConnection from="a" to="b" receiver="synapse" receiverContainer="destination" sourcePort="sourcePort" targetPort="targetPort"/>
+            <!--<EventConnection from="a" to="b" receiver="synapse"/>-->
         </Structure>
     </ComponentType>
 

@@ -13,10 +13,10 @@
 
     <!-- Include core NeuroML2 ComponentType definitions -->
 
-    <Include file="NeuroML2CoreTypes/Cells.xml"/>
+    <Include file="Cells.xml"/>
     <!-- The above file includes NeuroMLCoreDimensions.xml, Channels.xml, Synapses.xml and Inputs.xml-->
-    <Include file="NeuroML2CoreTypes/Networks.xml"/>
-    <Include file="NeuroML2CoreTypes/Simulation.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
 
 
 

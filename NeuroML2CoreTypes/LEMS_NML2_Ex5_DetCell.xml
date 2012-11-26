@@ -10,10 +10,9 @@
 
         <Target component="sim1"/>
 
-        <Include file="NeuroML2CoreTypes/NeuroMLCoreDimensions.xml"/>
-        <Include file="NeuroML2CoreTypes/Cells.xml"/>
-        <Include file="NeuroML2CoreTypes/Networks.xml"/>
-        <Include file="NeuroML2CoreTypes/Simulation.xml"/>
+        <Include file="Cells.xml"/>
+        <Include file="Networks.xml"/>
+        <Include file="Simulation.xml"/>
 
 
 
@@ -98,7 +97,7 @@
 
 
     <SimulationSet id="sim1">
-        <Display id="disp1" title="Ex5: HH cell with simple morphology: voltage" xmin="0" xmax="300" ymin="-75" ymax="-50"/>
+        <Display id="disp1" title="Ex5: HH cell with simple morphology: voltage" xmin="0" xmax="300" ymin="-90" ymax="50"/>
 
         <Simulation id="sim1" length="300ms" step="0.01ms" target="net1" display="disp1">
 

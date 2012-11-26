@@ -1,0 +1,136 @@
+<Lems>
+
+        <!-- Network connection between HH cells -->
+
+        <!-- This is a file which can be read and executed by the LEMS Interpreter.
+             It imports the LEMS definitions of the core NeuroML 2 Components, creates 
+             a model in "pure" NeuroML 2 and contains some LEMS elements for running 
+             a simulation -->
+
+
+<!-- Specify which component to run -->
+<Target component="sim1"/>
+
+<!-- Include core NeuroML2 ComponentType definitions -->
+<Include file="Cells.xml"/>
+<Include file="Networks.xml"/>
+<Include file="Simulation.xml"/>
+
+
+        <!-- Main NeuroML2 content -->
+
+
+<ionChannel id="passive" type="ionChannelPassive" conductance="10pS"/>
+
+<ionChannel id="na" type="ionChannelHH" conductance="10pS">
+
+   <gateHHrates id="m" instances="3">
+        <forwardRate type="HHExpLinearRate" rate="1per_ms" midpoint="-40mV" scale="10mV"/>
+        <reverseRate type="HHExpRate" rate="4per_ms" midpoint="-65mV" scale="-18mV"/>
+   </gateHHrates>
+
+   <gateHHrates id="h" instances="1">
+       <forwardRate type="HHExpRate" rate="0.07per_ms" midpoint="-65mV" scale="-20mV"/>
+       <reverseRate type="HHSigmoidRate" rate="1per_ms" midpoint="-35mV" scale="10mV"/>
+   </gateHHrates>
+
+</ionChannel>
+
+
+
+<ionChannel id="k" type="ionChannelHH" conductance="10pS">
+    <gateHHrates id="n" instances="4">
+        <forwardRate type="HHExpLinearRate" rate="0.1per_ms" midpoint="-55mV" scale="10mV"/>
+        <reverseRate type="HHExpRate" rate="0.125per_ms" midpoint="-65mV" scale="-80mV"/>
+    </gateHHrates>
+</ionChannel>
+
+
+<abstractCell id="hhcell_1" type="pointCellCondBased" C="10pF"  v0="-65mV" thresh="20mV">
+
+    <channelPopulation id="leak" ionChannel="passive" number="300" erev="-54.3mV"/>
+    <channelPopulation id="naChans" ionChannel="na" number="120000" erev="50mV"/>
+    <channelPopulation id="kChans" ionChannel="k" number="36000" erev="-77mV"/>
+
+</abstractCell>
+
+<abstractCell id="hhcell_2" type="pointCellCondBased" C="10pF"  v0="-55mV" thresh="20mV">
+
+    <channelPopulation id="leak" ionChannel="passive" number="300" erev="-54.3mV"/>
+
+</abstractCell>
+
+
+<pulseGenerator id="pulseGen1" delay="25ms" duration="50ms" amplitude="0.065 nA" />
+
+
+<expOneSynapse id="sy1" gbase="0.5nS" erev="0mV" tauDecay="3ms" />
+
+<synapse type="expTwoSynapse" id="sy2" gbase="0.5nS" erev="0mV" tauRise="1ms" tauDecay="2ms" />
+
+
+        <!-- End of NeuroML2 content -->
+
+<!-- This is LEMS specific... -->
+
+
+<network id="net1">
+    <population id="hh1pop" component="hhcell_1" size="1"/>
+    <population id="hh2pop" component="hhcell_2" size="2"/>
+
+    <!-- NOTE: Only explicit connections allowed at the moment!
+         Templates for connectivity patterns are being worked on... -->
+    <synapticConnection from="hh1pop[0]" to="hh2pop[0]" synapse="sy1" destination="synapses"/>
+    <synapticConnection from="hh1pop[0]" to="hh2pop[1]" synapse="sy2" destination="synapses"/>
+
+    <explicitInput target="hh1pop[0]" input="pulseGen1" destination="synapses"/>
+
+</network>
+
+<!--
+<Simulation id="sim1" length="100ms" step="0.01ms" target="net1">
+
+    <Display id="d1" title="Ex3: Network connection between HH cells: voltage traces" timeScale="1ms">
+        <Line id ="l1" quantity="hh1pop[0]/v" scale="1mV"  color="#ee40FF" save="examples/testResults/hh1.dat"/>
+        <Line id ="l2" quantity="hh2pop[0]/v" scale="1mV"  color="#BBA0AA" save="examples/testResults/hh2.dat"/>
+        <Line id ="l3" quantity="hh2pop[1]/v" scale="1mV"  color="#BBFFAA" save="examples/testResults/hh3.dat"/>
+    </Display>
+
+    <Display id="d2" title="Ex3: Network connection between HH cells: synaptic conductance" timeScale="1ms">
+        <Line id ="l1" quantity="hh2pop[0]/sy1/g" scale="1nS"  color="#1111FF" save="examples/testResults/hh2_syn.dat"/>
+        <Line id ="l2" quantity="hh2pop[1]/sy2/g" scale="1nS"  color="#aaaaFF" save="examples/testResults/hh3_syn.dat"/>
+    </Display>
+
+
+</Simulation>-->
+
+    <SimulationSet id="sim1">
+        <Display id="disp1" title="Ex3: Network connection between HH cells: voltage traces" xmin="0" xmax="100" ymin="-90" ymax="60"/>
+
+        <Simulation id="sim1" length="100ms" step="0.01ms" target="net1" display="disp1">
+
+            <DisplayList timeScale="1ms" title="Ex3: Network connection between HH cells: voltage traces">
+
+                <Line id ="l1" quantity="hh1pop[0]/v" scale="1mV"  color="#f33fff" timeScale="1ms"/>
+                <Line id ="l2" quantity="hh2pop[0]/v" scale="1mV"  color="#BBA0AA" timeScale="1ms"/>
+                <Line id ="l3" quantity="hh2pop[1]/v" scale="1mV"  color="#BBFFAA" timeScale="1ms"/>
+        <!--<Line id="l2" quantity="pop[0]/U" scale="1"  color="#f3aaaf" timeScale="1ms"/>-->
+            </DisplayList>
+
+
+         <!--<DisplayList id="d2" title="Ex1: Simple HH example: rate variables" timeScale="1ms">
+
+
+
+            <Line id="l2" quantity="pop[0]/naChans/na/m/q" scale="1"  color="#000000" save="examples/testResults/hh_m.dat" timeScale="1ms"/>
+            <Line id="l3" quantity="pop[0]/naChans/na/h/q" scale="1"  color="#ff0000" save="examples/testResults/hh_h.dat" timeScale="1ms"/>
+            <Line id="l4" quantity="pop[0]/kChans/k/n/q" scale="1"  color="#0000ff" save="examples/testResults/hh_n.dat" timeScale="1ms"/>
+        </DisplayList>-->
+
+        </Simulation>
+    </SimulationSet>
+
+
+
+
+</Lems>
