@@ -912,9 +912,6 @@
         <Parameter name="c" dimension="none"/>
         <Parameter name="d" dimension="none"/>
         <Parameter name="thresh" dimension="voltage"/>
-        <Parameter name="Iamp" dimension="none"/>
-        <Parameter name="Idel" dimension="time"/>
-        <Parameter name="Idur" dimension="time"/>
 
     <!-- These are needed to ensure a, b, c, d, U & I remain dimensionless... -->
         <Constant name="MSEC" dimension="time" value="1ms"/>
@@ -923,38 +920,27 @@
         <Attachments name="synapses" type="basePointCurrentDL"/>
 
         <Exposure name="U" dimension="none"/>
-        <Exposure name="I" dimension="none"/>
 
         <Dynamics>
 
             <StateVariable name="v" dimension="voltage" exposure="v"/>
             <StateVariable name="U" dimension="none" exposure="U"/>
-            <StateVariable name="I" dimension="none" exposure="I"/>
 
             <DerivedVariable name="ISyn" dimension="none" select="synapses[*]/I" reduce="add" />
             
-            <TimeDerivative variable="v" value="(0.04 * v^2 / MVOLT + 5 * v + (140.0 - U + I + ISyn) * MVOLT)/MSEC"/>
+            <TimeDerivative variable="v" value="(0.04 * v^2 / MVOLT + 5 * v + (140.0 - U + ISyn) * MVOLT)/MSEC"/>
             <TimeDerivative variable="U" value="a * (b * v / MVOLT - U) / MSEC"/>
 
 
             <OnStart>
                 <StateAssignment variable="v" value="v0"/>
                 <StateAssignment variable="U" value="v0 * b / MVOLT"/>
-                <StateAssignment variable="I" value="0"/>
             </OnStart>
 
             <OnCondition test="v .gt. thresh">
                 <StateAssignment variable="v" value="c * MVOLT"/>
                 <StateAssignment variable="U" value="U + d"/>
                 <EventOut port="spike"/>
-            </OnCondition>
-
-            <OnCondition test="t .gt. Idel .and. t .lt. Idel + Idur">
-                <StateAssignment variable="I" value="Iamp"/>
-            </OnCondition>
-
-            <OnCondition test="t .gt. Idel + Idur">
-                <StateAssignment variable="I" value="0"/>
             </OnCondition>
 
         </Dynamics>
