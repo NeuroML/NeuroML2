@@ -1,0 +1,80 @@
+<Lems>
+
+        <!-- Example showing NMDA synapse -->
+
+        <!-- This is a file which can be read and executed by the LEMS Interpreter.
+             It imports the LEMS definitions of the core NeuroML 2 Components, creates 
+             a model in "pure" NeuroML 2 and contains some LEMS elements for running 
+             a simulation -->
+
+
+        <Target component="sim1"/>
+
+        <Include file="Cells.xml"/>
+        <Include file="Networks.xml"/>
+        <Include file="Simulation.xml"/>
+
+
+        <!-- Including file with a <neuroml> root, a "real" NeuroML 2 file -->
+        <!-- Note: components defined in this can be reused, but we don't use the network here (net1) for simulation,
+             We use the one defined below! -->
+        <Include file="NML2_SingleCompHHCell.nml"/>
+
+
+    <!-- NeuroML 2 elements... -->
+
+        <spikeGenerator id="spikeGen55ms" period="75ms" />
+
+        <abstractCell id="passiveCell" type="pointCellCondBased" C="10pF"  v0="-55mV" thresh="20mV">
+            <channelPopulation id="leak" ionChannel="passive" number="300" erev="-54.3mV"/>
+        </abstractCell>
+
+        <nmdaSynapse id="nmdaSyn1" gbase="0.5nS" erev="0mV" tauRise="2ms" tauDecay="8ms">
+            <voltageConcDepBlock species="mg" blockConcentration="1.2 mM" scalingConc="1.920544 mM" scalingVolt="16.129 mV"/>
+        </nmdaSynapse>
+
+        <pulseGenerator id="pulseGen2" delay="200ms" duration="10000ms" amplitude="0.065nA"/>
+
+        <network id="net2">
+            <population id="srcPop" component="spikeGen55ms" size="1"/>
+            <population id="pasPop" component="passiveCell" size="1"/>
+            <synapticConnection from="srcPop[0]" to="pasPop[0]" synapse="nmdaSyn1" destination="synapses"/>
+            <explicitInput target="pasPop[0]" input="pulseGen2" destination="synapses"/>
+            <!--<explicitInput target="srcPop[0]" input="pulseGen2"/>-->
+        </network>
+
+   <!-- End of NeuroML 2 elements... -->
+
+
+<!--
+        <Simulation id="sim1" length="400ms" step="0.01ms" target="net2">
+                <Display id="d1" title="Ex6: Cells with NMDA mediated synapse: voltage" timeScale="1ms">
+                        <Line id="l2" quantity="pasPop[0]/v" scale="1mV" color="#00ffff" save="examples/testResults/pas6_v.dat"/>
+                </Display>
+
+                <Display id="d2" title="Ex6: Cells with NMDA mediated synapse: synaptic conductance" timeScale="1ms">
+                        <Line id ="l1" quantity="pasPop[0]/nmdaSyn1/g" scale="1nS"  color="#1111FF" save="examples/testResults/ex6_syn.dat"/>
+                </Display>
+
+                <Display id="db" title="Ex6: Cells with NMDA mediated synapse: synaptic block factor" timeScale="1ms">
+                        <Line id ="l1" quantity="pasPop[0]/nmdaSyn1/voltageConcDepBlock/scaling" scale="1"  color="#11FF33" save="examples/testResults/ex6_synblock.dat"/>
+                </Display>
+
+                <Display id="d3" title="Ex6: Cells with NMDA mediated synapse: spike generator" timeScale="1ms">
+                        <Line id ="l1" quantity="srcPop[0]/tsince" scale="1ms"  color="#aaaaaa" save="examples/testResults/ex6_sp.dat"/>
+                </Display>
+        </Simulation>-->
+
+    <SimulationSet id="sim1">
+        <Display id="disp1" title="Ex6: Cells with NMDA mediated synapse: voltage" xmin="0" xmax="400" ymin="-60" ymax="-25"/>
+
+        <Simulation id="sim1" length="400ms" step="0.01ms" target="net2" display="disp1">
+
+            <DisplayList timeScale="1ms" title="Ex6: Cells with NMDA mediated synapse: voltage">
+                <Line id="l1" quantity="pasPop[0]/v" scale="1mV"  color="#00ffff" timeScale="1ms"/>
+            </DisplayList>
+
+        </Simulation>
+    </SimulationSet>
+
+</Lems>

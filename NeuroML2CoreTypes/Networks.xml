@@ -19,10 +19,10 @@
 
         <Children name="explicitInputs" type="explicitInput"/>
 
-        <Exposure name="temperature" dimension="temperature" description="Temperature will be taken from extracellularProperties child"/>
+        <Exposure name="temperature" dimension="temperature" description="Temperature will be taken from extracellularProperties child. NOTE: temperature will be absolute zero if absent!!"/>
         
         <Dynamics>
-            <DerivedVariable name="temperature" exposure="temperature" dimension="temperature" value="273.15"/>  <!-- TODO check if absent-->
+            <DerivedVariable name="temperature" exposure="temperature" dimension="temperature" select="extracellularProperties/temperature" reduce="add" required="false"/>
         </Dynamics>
 
     </ComponentType>

@@ -1,0 +1,94 @@
+<Lems>
+
+        <!-- Example showing Short Term Plasticity synapse -->
+
+        <!-- This is a file which can be read and executed by the LEMS Interpreter.
+             It imports the LEMS definitions of the core NeuroML 2 Components, creates 
+             a model in "pure" NeuroML 2 and contains some LEMS elements for running 
+             a simulation -->
+
+
+        <Target component="sim1"/>
+
+        <Include file="NeuroMLCoreDimensions.xml"/>
+        <Include file="Cells.xml"/>
+        <Include file="Networks.xml"/>
+        <Include file="Simulation.xml"/>
+
+
+        <!-- Including file with a <neuroml> root, a "real" NeuroML 2 file -->
+        <!-- Note: components defined in this can be reused, but we don't use the network here (net1) for simulation,
+             We use the one defined below! -->
+        <Include file="NML2_SingleCompHHCell.nml"/>
+
+
+    <!-- NeuroML 2 elements... -->
+
+        <spikeGenerator id="spikeGen55ms" period="30ms" />
+
+        <abstractCell id="passiveCell" type="pointCellCondBased" C="10pF"  v0="-55mV" thresh="20mV">
+            <channelPopulation id="leak" ionChannel="passive" number="300" erev="-55mV"/>
+        </abstractCell>
+
+
+        <expTwoSynapse id="noStpSyn" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="2ms"/>
+
+        <stpSynapse id="stpSynDep" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="2ms">
+                <stpMechanism initReleaseProb = "0.5" tauFac = "0 ms" tauRec = "120 ms"/>
+        </stpSynapse>
+
+        <stpSynapse id="stpSynFac" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="2ms">
+                <stpMechanism initReleaseProb = "0.5" tauFac = "300 ms" tauRec = "0 ms"/>
+        </stpSynapse>
+
+
+        <network id="net2">
+            <population id="srcPop" component="spikeGen55ms" size="1"/>
+            <population id="pasPop" component="passiveCell" size="3"/>
+            <synapticConnection from="srcPop[0]" to="pasPop[0]" synapse="noStpSyn" destination="synapses"/>
+            <synapticConnection from="srcPop[0]" to="pasPop[1]" synapse="stpSynDep" destination="synapses"/>
+            <synapticConnection from="srcPop[0]" to="pasPop[2]" synapse="stpSynFac" destination="synapses"/>
+        </network>
+
+   <!-- End of NeuroML 2 elements... -->
+
+
+   <!--
+        <Simulation id="sim1" length="300ms" step="0.01ms" target="net2">
+                <Display id="d1" title="Ex7: Cells with STP synapse: voltage" timeScale="1ms">
+                        <Line id="l0" quantity="pasPop[0]/v" scale="1mV" color="#000000" save="examples/testResults/pas7_v0.dat"/>
+                        <Line id="l1" quantity="pasPop[1]/v" scale="1mV" color="#0000FF" save="examples/testResults/pas7_v1.dat"/>
+                        <Line id="l2" quantity="pasPop[2]/v" scale="1mV" color="#ff0000" save="examples/testResults/pas7_v2.dat"/>
+                </Display>
+
+                <Display id="d2" title="Ex7: Cells with STP synapse: synaptic conductances" timeScale="1ms">
+                        <Line id ="l1" quantity="pasPop[0]/noStpSyn/g" scale="1nS"  color="#000000" save="examples/testResults/ex7_syn0.dat"/>
+                        <Line id ="l3" quantity="pasPop[2]/stpSynFac/g" scale="1nS"  color="#ff0000" save="examples/testResults/ex7_syn2.dat"/>
+                        <Line id ="l2" quantity="pasPop[1]/stpSynDep/g" scale="1nS"  color="#0000FF" save="examples/testResults/ex7_syn1.dat"/>
+                </Display>
+
+                <Display id="d4" title="Ex7: Cells with STP synapse: scaling variables" timeScale="1ms">
+                        <Line id ="l1" quantity="pasPop[1]/stpSynDep/R" scale="1"  color="#00ffff" save="examples/testResults/ex7_R1.dat"/>
+                        <Line id ="l2" quantity="pasPop[1]/stpSynDep/U" scale="1"  color="#0000ff" save="examples/testResults/ex7_U1.dat"/>
+                        <Line id ="l3" quantity="pasPop[2]/stpSynFac/R" scale="1"  color="#ffffff" save="examples/testResults/ex7_R2.dat"/>
+                        <Line id ="l4" quantity="pasPop[2]/stpSynFac/U" scale="1"  color="#0055ff" save="examples/testResults/ex7_U2.dat"/>
+                </Display>
+        </Simulation>-->
+
+
+    <SimulationSet id="sim1">
+        <Display id="disp1" title="Ex7: Cells with STP synapse: voltage" xmin="0" xmax="300" ymin="-56" ymax="-48"/>
+
+        <Simulation id="sim1" length="300ms" step="0.01ms" target="net2" display="disp1">
+
+            <DisplayList timeScale="1ms" title="Ex7: Cells with STP synapse: voltage">
+                <Line id="l1" quantity="pasPop[0]/v" scale="1mV"  color="#000000" timeScale="1ms"/>
+                <Line id="l2" quantity="pasPop[1]/v" scale="1mV"  color="#0000FF" timeScale="1ms"/>
+                <Line id="l3" quantity="pasPop[2]/v" scale="1mV"  color="#ff0000" timeScale="1ms"/>
+            </DisplayList>
+
+        </Simulation>
+    </SimulationSet>
+
+
+</Lems>
