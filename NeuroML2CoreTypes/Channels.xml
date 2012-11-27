@@ -475,13 +475,12 @@
         description="A _KSState_ with _relativeConductance of 1">
         <Fixed parameter="relativeConductance" value="1"/>
     </ComponentType>
+    
 
 
-<!--  TODO update!
     <ComponentType name="ionChannelKS" 
         extends="ionChannel"
         description="A kinetic scheme based ion channel with multiple _gateKS_s, each of which consists of multiple _KSState_s and _KSTransition_s giving the rates of transition between them">
-        <Parameter name="conductance" dimension="conductance"/>
         <Children name="gates" type="gateKS"/>
     
         <Text name="species"/>
@@ -493,7 +492,7 @@
         </Dynamics>
     </ComponentType>
 
- 
+
 
     <ComponentType name="KSTransition" description="Specified the forward and reverse rates of transition between two _KSState_s in a _gateKS_">
         <Link name="from" type="KSState"/>
@@ -553,7 +552,8 @@
     </ComponentType>
 
 
-    <ComponentType name="gateKS" 
+
+    <ComponentType name="gateKS"
         extends="baseGate"
         description="A gate which consists of multiple _KSState_s and _KSTransition_s giving the rates of transition between them">
         <Parameter name="deltaV" dimension="voltage"/>
@@ -567,15 +567,13 @@
             <DerivedVariable name="fopen" exposure="fcond" dimension="none" value="q^instances"/>
             <DerivedVariable name="qq" exposure="qq" dimension="none" value="q"/>
 
-            <KineticScheme name="ks">
-                <Nodes children="states" variable="occupancy"/>
-                <Edges children="transitions" sourceNodeName="from" targetNodeName="to" forwardRate="rf" reverseRate="rr"/>
-                <Tabulable variable="v" increment="deltaV"/>
-            </KineticScheme>
+            <KineticScheme name="ks" nodes="states" stateVariable="occupancy"
+            	edges="transitions" edgeSource="from" edgeTarget="to"
+            	forwardRate="rf" reverseRate="rr"/>
 
         </Dynamics>
     
-    </ComponentType>-->
+    </ComponentType>
 
 
 
