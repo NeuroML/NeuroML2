@@ -12,7 +12,7 @@
     <!-- Potentially needed for any NeuroMl 2 file...-->
 
 
-    <ComponentType name="notes" description="Human readable notes on the Component">
+    <ComponentType name="notes" description="Human readable notes on a Component">
     </ComponentType>
 
     <ComponentType name="pointDiam"
@@ -23,7 +23,8 @@
 
         <Parameter name="diameter" dimension="none" description="Diameter at point. Note: no dimension used, see note above!"/> <!-- TODO decide whether this or radius should be default input field!!! -->
 
-    <!--<DerivedParameter name="radius" dimension="length" value="0.000001 * diameter / 2"/>-->
+        <!--TODO: check if DerivedParameter would be more efficient than DerivedVariable below
+        <DerivedParameter name="radius" dimension="length" value="0.000001 * diameter / 2"/>-->
         <Exposure name="radius" dimension="length"/>
 
         <Exposure name="x" dimension="length"/>

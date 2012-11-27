@@ -24,10 +24,11 @@
     <xs:complexType name="Lems">
 
         <xs:sequence>
-            <xs:element name="DefaultRun" type="DefaultRun" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Target" type="Target" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Include" type="Include" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="Dimension" type="Dimension" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="Unit" type="Unit" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="Include" type="Include" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Constant" type="Constant" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="ComponentType" type="ComponentType" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="Component" type="Component" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
@@ -37,12 +38,12 @@
     </xs:complexType>
 
 
-    <xs:complexType name="Include">
-        <xs:attribute name="file" type="xs:string" use="required"/>
+    <xs:complexType name="Target">
+        <xs:attribute name="component" type="xs:string" use="required"/>
     </xs:complexType>
 
-    <xs:complexType name="DefaultRun">
-        <xs:attribute name="component" type="xs:string" use="required"/>
+    <xs:complexType name="Include">
+        <xs:attribute name="file" type="xs:string" use="required"/>
     </xs:complexType>
 
 
@@ -192,11 +193,8 @@
         <xs:attribute name="select" type="xs:string" use="optional"/>  <!-- only one of these... -->
         <xs:attribute name="value" type="xs:string" use="optional"/>   <!-- only one of these... -->
 
-        <xs:attribute name="valueCondition" type="xs:string" use="optional"/>   <!-- both of these, only if value present... -->
-        <xs:attribute name="valueIfFalse" type="xs:string" use="optional"/>     <!-- both of these, only if value present... -->
-
         <xs:attribute name="reduce" type="xs:string" use="optional"/>     <!-- only if select present... -->
-        <xs:attribute name="onAbsent" type="xs:string" use="optional"/>     <!-- only if select present... -->
+        <xs:attribute name="required" type="xs:string" use="optional"/>     <!-- only if reduce present... -->
 
     </xs:complexType>
 
@@ -305,9 +303,9 @@
     <!-- ComponentType is used for component definitions containing parts which are currently specific to LEMS, e.g. Build/MultiInstantiate -->
     <xs:complexType name="ComponentType">
         <xs:sequence>
-            <xs:element name="Property" type="Property" minOccurs="0" maxOccurs="unbounded"/>
+            <!--<xs:element name="Property" type="Property" minOccurs="0" maxOccurs="unbounded"/>-->
             <xs:element name="Parameter" type="Parameter" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="DerivedParameter" type="DerivedParameter" minOccurs="0" maxOccurs="unbounded"/>
+            <!--<xs:element name="DerivedParameter" type="DerivedParameter" minOccurs="0" maxOccurs="unbounded"/>-->
             <xs:element name="Constant" type="Constant" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="Child" type="Child" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="Children" type="Children" minOccurs="0" maxOccurs="unbounded"/>
@@ -441,8 +439,10 @@
         
         <xs:attribute name="from" type="xs:string" use="required"/>
         <xs:attribute name="to" type="xs:string" use="required"/>
+        <xs:attribute name="sourcePort" type="xs:string" use="optional"/>
         <xs:attribute name="targetPort" type="xs:string" use="optional"/>
         <xs:attribute name="receiver" type="xs:string" use="optional"/>
+        <xs:attribute name="receiverContainer" type="xs:string" use="optional"/>
         <xs:attribute name="delay" type="xs:string" use="optional"/>
 
     </xs:complexType>
@@ -472,39 +472,17 @@
 
     <xs:complexType name="KineticScheme">
 
-        <xs:sequence>
-            <xs:element name="Nodes" type="Nodes" minOccurs="1" maxOccurs="unbounded"/>
-            <xs:element name="Edges" type="Edges" minOccurs="1" maxOccurs="unbounded"/>
-            <xs:element name="Tabulable" type="Tabulable" minOccurs="1" maxOccurs="unbounded"/>
-        </xs:sequence>
-
         <xs:attribute name="name" type="xs:string" use="required"/>
-
-    </xs:complexType>
-    
-    <xs:complexType name="Nodes">
-
-        <xs:attribute name="children" type="xs:string" use="required"/>
-        <xs:attribute name="variable" type="xs:string" use="required"/>
-
-    </xs:complexType>
-
-    <xs:complexType name="Edges">
-
-        <xs:attribute name="children" type="xs:string" use="required"/>
-        <xs:attribute name="sourceNodeName" type="xs:string" use="required"/>
-        <xs:attribute name="targetNodeName" type="xs:string" use="required"/>
+        <xs:attribute name="nodes" type="xs:string" use="required"/>
+        <xs:attribute name="stateVariable" type="xs:string" use="required"/>
+        <xs:attribute name="edges" type="xs:string" use="required"/>
+        <xs:attribute name="edgeSource" type="xs:string" use="required"/>
+        <xs:attribute name="edgeTarget" type="xs:string" use="required"/>
         <xs:attribute name="forwardRate" type="xs:string" use="required"/>
         <xs:attribute name="reverseRate" type="xs:string" use="required"/>
 
     </xs:complexType>
-
-    <xs:complexType name="Tabulable">
-
-        <xs:attribute name="variable" type="xs:string" use="required"/>
-        <xs:attribute name="increment" type="xs:string" use="required"/>
-
-    </xs:complexType>
+    
 
 
     <xs:complexType name="Show">

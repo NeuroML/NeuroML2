@@ -100,11 +100,11 @@
             <StateVariable name="B" dimension="none"/>
 
          <!-- TODO: evaluate only once!! -->
-         <!-- Unfortunately this is needed to catch tauRise = 0... -->
-            <DerivedVariable name="peakTime" dimension="time" value="ln(tauDecay / tauRise) * (tauRise * tauDecay)/(tauDecay - tauRise)  " valueCondition="tauRise .gt. 0" valueIfFalse="0"/>
-            <DerivedVariable name="factor" dimension="none" value="1 / (-exp(-peakTime / tauRise) + exp(-peakTime / tauDecay))" valueCondition="tauRise .gt. 0" valueIfFalse="1"/>
-            <DerivedVariable name="A_rate" dimension="per_time" value="-1 / tauRise" valueCondition="tauRise .gt. 0" valueIfFalse="0"/>
-            <DerivedVariable name="A_factor" dimension="none" value="factor" valueCondition="tauRise .gt. 0" valueIfFalse="0"/>
+         <!-- TODO: catch tauRise = 0..! -->
+            <DerivedVariable name="peakTime" dimension="time" value="ln(tauDecay / tauRise) * (tauRise * tauDecay)/(tauDecay - tauRise)"/>
+            <DerivedVariable name="factor" dimension="none" value="1 / (-exp(-peakTime / tauRise) + exp(-peakTime / tauDecay))"/>
+            <DerivedVariable name="A_rate" dimension="per_time" value="-1 / tauRise"/>
+            <DerivedVariable name="A_factor" dimension="none" value="factor"/>
 
             <DerivedVariable name="g" dimension="conductance" exposure="g" value="gbase * (B - A)" />
             <DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
