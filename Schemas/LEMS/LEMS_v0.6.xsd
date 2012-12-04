@@ -303,7 +303,7 @@
     <!-- ComponentType is used for component definitions containing parts which are currently specific to LEMS, e.g. Build/MultiInstantiate -->
     <xs:complexType name="ComponentType">
         <xs:sequence>
-            <!--<xs:element name="Property" type="Property" minOccurs="0" maxOccurs="unbounded"/>-->
+            <xs:element name="Property" type="Property" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="Parameter" type="Parameter" minOccurs="0" maxOccurs="unbounded"/>
             <!--<xs:element name="DerivedParameter" type="DerivedParameter" minOccurs="0" maxOccurs="unbounded"/>-->
             <xs:element name="Constant" type="Constant" minOccurs="0" maxOccurs="unbounded"/>

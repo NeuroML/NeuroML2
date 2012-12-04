@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta.xsd"
+    id="NML2_InstanceBasedNetwork">
+
+<!-- Example of a network specified as a set of location and connection instances in NeuroML 2 -->
+
+<!-- This is a "pure" NeuroML 2 file. It cannot yet be used a simulation by the LEMS 
+     Interpreter, but this represents the target structure for populations & projections
+     in NeuroML 2 --> 
+
+    <expOneSynapse id="syn1" gbase="5nS" erev="0mV" tauDecay="3ms" />
+
+    <iafCell id="iaf" leakReversal="-60mV" thresh="-55mV" reset="-65mV" C="1.0nF" leakConductance="0.05uS"/>
+
+    <pulseGenerator id="pulseGen1" delay="100ms" duration="800ms" amplitude="0.3nA"/>
+
+    <network id="InstanceBasedNetwork">
+
+        <!-- TODO: Add list!!  -->
+        <population id="iafCells" component="iaf" size="1">
+            <instances>
+                <instance id="0">
+                    <location x="120" y="230" z="567"/>
+                </instance>
+                <instance id="1">
+                    <location x="270" y="450" z="56"/>
+                </instance>
+            </instances>
+        </population>
+
+        <!-- TESTING NEW FORM FOR synapticConnection -->
+
+        <!--<projection id="internal" from="iafCells[0]" to="iafCells[1]">
+            <synapticConnection synapse="syn1"/>
+            <connection id="0" preCell="../../iafCells[0]" postCell="../../iafCells[1]"/>
+        </projection> -->
+        
+        <synapticConnection from="iafCells[0]" to="iafCells[1]" synapse="syn1"/>
+
+        <explicitInput target="iafCells[0]" input="pulseGen1"/>
+
+    </network>
+
+</neuroml>
+
+
+
+
+
+
+
+
