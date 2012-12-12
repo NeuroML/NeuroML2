@@ -556,16 +556,13 @@
     <ComponentType name="gateKS"
         extends="baseGate"
         description="A gate which consists of multiple _KSState_s and _KSTransition_s giving the rates of transition between them">
-        <Parameter name="deltaV" dimension="voltage"/>
         <Children name="states" type="KSState"/>
         <Children name="transitions" type="KSTransition"/>
-        <Exposure name="qq" dimension="none"/>
 
         <Dynamics>
 
             <DerivedVariable name="q" exposure="q" dimension="none" select="states[*]/q" reduce="add"/>
             <DerivedVariable name="fopen" exposure="fcond" dimension="none" value="q^instances"/>
-            <DerivedVariable name="qq" exposure="qq" dimension="none" value="q"/>
 
             <KineticScheme name="ks" nodes="states" stateVariable="occupancy"
             	edges="transitions" edgeSource="from" edgeTarget="to"

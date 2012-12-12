@@ -16,7 +16,7 @@
 
 
         <!-- Including file with a <neuroml> root, a "real" NeuroML 2 file -->
-        <Include file="NML2_SingleCompHHCell.nml"/>
+        <Include file="../examples/NML2_SingleCompHHCell.nml"/>
 
 
 

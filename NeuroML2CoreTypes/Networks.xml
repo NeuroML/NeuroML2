@@ -9,8 +9,9 @@
 
 
     <ComponentType name="network" description="Network containing _population_s, _projection_s and lists of _explicitConnection_s (either directly between components of the populations or via synapses)">
-        
-        <Child name="extracellularProperties" type="extracellularProperties"/>
+
+        <!-- TODO: test this with <Child name=...> -->
+        <Children name="extracellularProperties" type="extracellularProperties"/>
         <Children name="regions" type="region"/>
         <Children name="populations" type="basePopulation"/>
         <Children name="projections" type="projection"/>
@@ -20,10 +21,10 @@
         <Children name="explicitInputs" type="explicitInput"/>
 
         <Exposure name="temperature" dimension="temperature" description="Temperature will be taken from extracellularProperties child. NOTE: temperature will be absolute zero if absent!!"/>
-        
+
         <Dynamics>
-            <!--<DerivedVariable name="temperature" exposure="temperature" dimension="temperature" select="extracellularProperties/temperature" reduce="add" required="false"/>-->
-            <DerivedVariable name="temperature" exposure="temperature" dimension="temperature" value="273.15"/> <!-- TODO check if absent-->
+            <DerivedVariable name="temperature" exposure="temperature" dimension="temperature" select="extracellularProperties[*]/temperature" reduce="add" required="false"/>
+            <!--<DerivedVariable name="temperature" exposure="temperature" dimension="temperature" value="0"/>-->
         </Dynamics>
 
     </ComponentType>

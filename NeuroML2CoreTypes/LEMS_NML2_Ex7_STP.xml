@@ -19,7 +19,7 @@
         <!-- Including file with a <neuroml> root, a "real" NeuroML 2 file -->
         <!-- Note: components defined in this can be reused, but we don't use the network here (net1) for simulation,
              We use the one defined below! -->
-        <Include file="NML2_SingleCompHHCell.nml"/>
+        <Include file="../examples/NML2_SingleCompHHCell.nml"/>
 
 
     <!-- NeuroML 2 elements... -->
