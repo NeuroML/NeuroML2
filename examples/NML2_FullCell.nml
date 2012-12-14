@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+      xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta.xsd"
+    id="NML2_FullCell">
+        
+
+<!-- Example of a multicompartmental cell with biophysics in NeuroML 2 -->
+
+<!-- This is a "pure" NeuroML 2 file. It cannot yet be used a simulation by the LEMS 
+     Interpreter as this does not yet support multicompartment cells -->   
+
+
+    <include href="SimpleIonChannel.xml"/> <!-- Contains ionChannel NaConductance -->
+
+    <!-- Note, no <cells> element...  -->
+    
+    <cell id="SpikingCell" metaid="HippoCA1Cell">
+
+        <notes>A Simple Spiking cell for testing purposes</notes>
+
+        <!-- Suggestion for annotation scheme based on reference to MIRIAM resource -->
+        <annotation>
+            <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+              <rdf:Description rdf:about="HippoCA1Cell">
+                <bqbiol:is>
+                  <rdf:Bag>
+                    <!-- This cell model is a version of a hippocampal CA1 pyramidal cell -->
+                    <rdf:li rdf:resource="urn:miriam:neurondb:258"/>
+                  </rdf:Bag>
+                </bqbiol:is>
+              </rdf:Description>
+            </rdf:RDF>
+        </annotation>
+
+        <morphology id="SpikingCell_morphology">
+
+            <segment id ="0" name="Soma">
+                <!-- no parent => root segment -->
+                <proximal x="0" y="0" z="0" diameter="10"/>
+                <distal x="10" y="0" z="0" diameter="10"/>
+            </segment>
+
+            <segment id ="1" name="Dendrite1">
+                <parent segment="0"/>
+                <!-- no proximal => use distal of parent -->
+                <distal x="20" y="0" z="0" diameter="3"/>
+            </segment>
+
+            <segment id ="2" name="Dendrite2">
+                <parent segment="1"/>
+                <distal x="30" y="0" z="0" diameter="1"/>
+            </segment>
+            
+            <segment id ="3" name="Spine1">
+                <parent segment="2" fractionAlong="0.5"/>
+                <proximal x="25" y="0" z="0" diameter="0.1"/>
+                <distal x="25" y="0.2" z="0" diameter="0.1"/>
+            </segment>
+
+            <!-- segmentGroups follow -->
+
+            <segmentGroup id="soma_group" neuroLexId="sao1044911821">     <!-- Points to category "Neuronal Cell Body" in NeuroLex -->   
+                <member segment="0"/>
+            </segmentGroup>
+
+            <segmentGroup id="dendrite_group" neuroLexId="sao1211023249">    <!-- Points to category "Dendrite" in NeuroLex -->
+                <member segment="1"/>
+                <member segment="2"/>
+                <member segment="3"/>
+            </segmentGroup>
+
+            <segmentGroup id="spines" neuroLexId="sao1145756102">    <!-- Points to category "Spine" in NeuroLex -->
+                <member segment="3"/>
+            </segmentGroup>
+
+        </morphology>
+
+        <biophysicalProperties id="bio_cell">
+
+            <membraneProperties> 
+
+                <channelPopulation id="naChansDend" ionChannel="NaConductance" segment="2" number="120000"/>   <!-- Use population instead of density -->
+
+                <channelDensity id="pasChans" ionChannel="pas" condDensity="3.0 S_per_m2"/> <!-- no segmentGroup => all segments! -->
+
+                <channelDensity id="naChansSoma" ionChannel="NaConductance" segmentGroup="soma_group" condDensity="120.0 mS_per_cm2"/>
+
+                <specificCapacitance segmentGroup="soma_group" value="1.0 uF_per_cm2"/>
+
+                <specificCapacitance segmentGroup="dendrite_group" value="2.0 uF_per_cm2"/>
+
+                <reversalPotential species="na" value="55mV"/>
+
+            </membraneProperties>
+
+            <intracellularProperties>
+
+                <resistivity value="0.1 kohm_cm"/>  <!-- Used for specific axial resistance -->
+
+            </intracellularProperties>
+
+        </biophysicalProperties>
+
+
+    </cell>
+
+</neuroml>

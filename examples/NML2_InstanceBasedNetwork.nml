@@ -21,14 +21,12 @@
 
         <!-- TODO: Add list!!  -->
         <population id="iafCells" component="iaf" size="1">
-            <instances>
-                <instance id="0">
-                    <location x="120" y="230" z="567"/>
-                </instance>
-                <instance id="1">
-                    <location x="270" y="450" z="56"/>
-                </instance>
-            </instances>
+            <instance id="0">
+                <location x="120" y="230" z="567"/>
+            </instance>
+            <instance id="1">
+                <location x="270" y="450" z="56"/>
+            </instance>
         </population>
 
         <!-- TESTING NEW FORM FOR synapticConnection -->

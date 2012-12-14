@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  ../Schemas/NeuroML2/NeuroML_v2beta.xsd"
+    id="NML2_SynapseTypes">
+
+    <!-- Some examples of the currently supported synapse types -->
+
+    <expOneSynapse id="sy1" gbase="0.5nS" erev="0mV" tauDecay="3ms" />
+
+    <expTwoSynapse id="SimpleSynapse" gbase="0.5nS" erev="0mV" tauRise="1ms" tauDecay="2ms" />
+
+    <nmdaSynapse id="nmdaSyn" gbase="0.5nS" erev="0mV" tauRise="2ms" tauDecay="8ms">
+        <voltageConcDepBlock species="mg" blockConcentration="1.2 mM" scalingConc="1.920544 mM" scalingVolt="16.129 mV"/>
+    </nmdaSynapse>
+
+    <stpSynapse id="STP_NML2" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="2ms">
+        <stpMechanism initReleaseProb="0.5" tauFac="0 ms" tauRec="120 ms" />
+    </stpSynapse>
+
+</neuroml>

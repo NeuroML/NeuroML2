@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  ../Schemas/NeuroML2/NeuroML_v2beta.xsd"
+    id="NML2_SimpleNetwork3D">
+
+<!-- Example of a simple network in a 3D region NeuroML 2 -->
+
+<!-- This is a "pure" NeuroML 2 file. It cannot yet be used a simulation by the LEMS 
+     Interpreter, but this represents the target structure for populations & projections
+     in NeuroML 2 --> 
+
+    <network id="SimpleNetwork3D">
+
+
+        <!-- A region of space defined in terms of Euclidean_3D which can be defined elsewhere/inbuilt,
+             It is useful to define this region here so it can be reused among populations -->
+        <region id="Region1" space="Euclidean_3D">
+            <rectangularRegion x="0" y="0" z="0" width="100" height="100" depth="100"/>
+        </region>
+
+        <!-- Population of 10 randomly placed cells of type c1 -->
+
+        <population id="Population1" cell="Cell1">
+            <layout space="Euclidean_3D">
+                <random region="Region1" number="10"/>
+            </layout>
+        </population>
+
+        <!-- Population of 20 randomly placed cells of type c2 -->
+
+        <population id="Population2" cell="Cell2">
+            <layout space="Euclidean_3D">
+                <random region="Region1" number="20"/>
+            </layout>
+        </population>
+
+        <!-- Local connections within this unit-->
+
+        <projection id="Proj1">
+            <source population="Population1"/>
+            <target population="Population2"/>
+           <!-- Further elements need to be added... -->
+        </projection>
+
+    </network>
+
+</neuroml>
+

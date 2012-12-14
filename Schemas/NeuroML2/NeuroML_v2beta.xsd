@@ -4,6 +4,8 @@
     xmlns="http://www.neuroml.org/schema/neuroml2"
     xmlns:xi="http://www.w3.org/2001/XInclude"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd"
     elementFormDefault="qualified"
     attributeFormDefault="unqualified">
 
@@ -572,9 +574,9 @@
                 <xs:attribute name="b" type="Nml2Quantity_none" use="required"/>
                 <xs:attribute name="c" type="Nml2Quantity_none" use="required"/>
                 <xs:attribute name="d" type="Nml2Quantity_none" use="required"/>
-                <xs:attribute name="Iamp" type="Nml2Quantity_none" use="required"/>
+                <!--<xs:attribute name="Iamp" type="Nml2Quantity_none" use="required"/>
                 <xs:attribute name="Idel" type="Nml2Quantity_time" use="required"/>
-                <xs:attribute name="Idur" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="Idur" type="Nml2Quantity_time" use="required"/>-->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -592,9 +594,9 @@
                 <xs:attribute name="tauw" type="Nml2Quantity_time" use="required"/>
                 <xs:attribute name="a" type="Nml2Quantity_conductance" use="required"/>
                 <xs:attribute name="b" type="Nml2Quantity_current" use="required"/>
-                <xs:attribute name="Iamp" type="Nml2Quantity_current" use="required"/>
+                <!--<xs:attribute name="Iamp" type="Nml2Quantity_current" use="required"/>
                 <xs:attribute name="Idel" type="Nml2Quantity_time" use="required"/>
-                <xs:attribute name="Idur" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="Idur" type="Nml2Quantity_time" use="required"/>-->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -1107,7 +1109,7 @@
             <xs:extension base="Standalone">
                 <xs:choice>
                     <xs:element name="layout" type="Layout" minOccurs="0"/>
-                    <xs:element name="instances" type="Instances"/>
+                    <xs:element name="instance" type="Instance" maxOccurs="unbounded"/>
                 </xs:choice>
 
                 <xs:attribute name="cell" type="NmlId" use="optional"/>       <!-- Only one of these should be used!!! -->
@@ -1155,13 +1157,6 @@
                 <xs:attribute name="zSize" type="xs:nonNegativeInteger" use="optional"/> <!-- only use if 3D grid-->
     </xs:complexType>
 
-
-    <xs:complexType name="Instances">
-                <xs:sequence>
-                    <xs:element name="instance" type="Instance" maxOccurs="unbounded"/>
-                </xs:sequence>
-                <xs:attribute name="size" type="xs:nonNegativeInteger"/>
-    </xs:complexType>
 
     <xs:complexType name="Instance">
                 <xs:sequence>
@@ -1262,6 +1257,12 @@
                     <xs:element name="notes" type="Notes" minOccurs="0"/> <!-- More metadata needed -->
                     <xs:element name="annotation" type="Annotation" minOccurs="0"/> <!-- More metadata needed -->
                 </xs:sequence>
+                <xs:attribute name="name" type="xs:string" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>Optional human readable name of the element. Not necessarily unique; should not be used for referencing/indexing.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                    
                 <xs:attribute name="metaid" type="MetaId" use="optional"/>
 
             </xs:extension>

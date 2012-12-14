@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  ../Schemas/NeuroML2/NeuroML_v2beta.xsd"
+    id="NML2_NestedNetworks">
+
+<!-- Example of a nested network in NeuroML 2 -->
+
+<!-- This is a "pure" NeuroML 2 file. It cannot yet be used a simulation by the LEMS 
+     Interpreter, but this represents the target structure for populations & projections
+     in NeuroML 2 --> 
+
+    <!-- The base network from which to build the main network -->
+
+    <network id="BaseNetwork">
+
+       <population id="Excitatory" cell="Cell_E">
+          <layout space="Grid_1D">
+              <grid xSize="2"/>
+          </layout>
+       </population>
+
+       <population id="Inhibitory" cell="Cell_I">
+          <layout space="Grid_1D">
+              <grid xSize="1"/>
+          </layout>
+       </population>
+
+       <!-- some local connections within this unit-->
+
+       <projection id="InternalRecurrentExc">
+           <source population="Excitatory"/>
+           <target population="Excitatory"/>
+           <!-- Further elements needed here... -->
+       </projection>
+
+       <projection id="InternalExcInh">
+           <source population="Excitatory"/>
+           <target population="Inhibitory"/>
+           <!-- Further elements needed here... -->
+       </projection>
+
+        <!-- More... -->
+
+    </network>
+
+        <!-- The main population which consists of copies of the base unit -->
+
+    <network id="NestedNetwork">
+
+        <!-- Space of discrete points in 2D space. Grid_2D can be defined elsewhere/inbuilt.
+             As this is defined at the top level, it is accessible for all sub populations & networks -->
+
+        <space id="2D_discrete" basedOn="Grid_2D">
+            <structure xSpacing="10" ySpacing="10"/>  <!-- Optional extra info to aid visualisation, but may be
+                                                used for connection setups too...-->
+        </space>
+
+
+        <population id="GridOfSubNets" network="BaseNetwork"> <!-- network used instead of cell -->
+          <layout space="2D_discrete">
+              <grid xSize="4" ySize="4"/>      <!-- 4x4 grid of population units -->
+          </layout>
+        </population>
+
+        <!-- Define sets  -->
+
+        <cellSet id="AllExcitatoryCells" select="GridOfSubNets/Excitatory"/> <!--simple version of XPath for selecting cells-->
+        <cellSet id="AllInhibitoryCells" select="GridOfSubNets/Inhibitory"/>
+
+        <!-- Define connections based on the sets  -->
+
+        <projection id="RecurrentGlobalExc">
+           <source set="AllExcitatoryCells"/>
+           <target set="AllExcitatoryCells"/>
+           <!-- Further elements needed here... -->
+        </projection>
+
+       <!-- More... -->
+
+    </network>
+
+</neuroml>
+
+
+
+
+
+
+
+
