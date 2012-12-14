@@ -1,0 +1,7 @@
+The NeuroML_v2alpha.xsd here should match the version on the SourceForge repository: 
+https://sourceforge.net/apps/trac/neuroml/browser/NeuroML2/Schemas/NeuroML2
+
+NeuroML_v2beta.xsd is being developed here.
+
+The alpha version was subject to change without notice, and the beta version will
+change rapidly too until publicly announced in early 2013!!
