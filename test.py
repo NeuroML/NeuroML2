@@ -70,6 +70,8 @@ assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2beta.xsd', '../neuroConstruct/Neu
 assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../libNeuroML/ideas/padraig/generatedFromV2Schema/regenerate/NeuroML_v2alpha.xsd')
 assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2beta.xsd', '../libNeuroML/ideas/padraig/generatedFromV2Schema/regenerate/NeuroML_v2beta.xsd')
 
+assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../org.neuroml.model/src/main/resources/Schemas/NeuroML2/NeuroML_v2alpha.xsd')
+assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2beta.xsd', '../org.neuroml.model/src/main/resources/Schemas/NeuroML2/NeuroML_v2beta.xsd')
 
 if '-r' in sys.argv:
 
