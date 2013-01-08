@@ -49,7 +49,7 @@
    <!-- End of NeuroML 2 elements... -->
 
 
-    <SimulationSet id="sim1">
+    <!-- <SimulationSet id="sim1">
         <Display id="disp1" title="NOT YET WORKING!! Ex11: Cells with STDP synapse: voltage" xmin="0" xmax="300" ymin="-75" ymax="-50"/>
 
         <Simulation id="sim1" length="300ms" step="0.01ms" target="net2" display="disp1">
@@ -60,20 +60,20 @@
             </DisplayList>
 
         </Simulation>
-    </SimulationSet>
+    </SimulationSet>-->
 
 
-       <!-- <Simulation id="sim1" length="300ms" step="0.01ms" target="net2">
-                <Display id="d1" title="NOT YET WORKING!! Ex11: Cells with STDP synapse: voltage" timeScale="1ms">
-                        <Line id="l0" quantity="src[0]/v" scale="1mV" color="#000000" save="examples/testResults/iaf11_v0.dat"/>
-                        <Line id="l1" quantity="tgt[0]/v" scale="1mV" color="#0000FF" save="examples/testResults/iaf11_v1.dat"/>
+       <Simulation id="sim1" length="300ms" step="0.01ms" target="net2">
+                <Display id="d1" title="NOT YET WORKING!! Ex11: Cells with STDP synapse: voltage" timeScale="1ms" xmin="0" xmax="300" ymin="-75" ymax="-50">
+                        <Line id="l0" quantity="src[0]/v" scale="1mV" color="#000000" timeScale="1ms"/>
+                        <Line id="l1" quantity="tgt[0]/v" scale="1mV" color="#0000FF" timeScale="1ms"/>
                 </Display>
 
-                <Display id="d2" title="NOT YET WORKING!! Ex11: Cells with STDP synapse: synaptic conductances" timeScale="1ms">
-                        <Line id ="l1" quantity="tgt[0]/stdpSyn/g" scale="1nS"  color="#000000" save="examples/testResults/ex11_syn0.dat"/>
+                <Display id="d2" title="NOT YET WORKING!! Ex11: Cells with STDP synapse: synaptic conductances" timeScale="1ms" xmin="0" xmax="300" ymin="-0.01" ymax="0.11">
+                        <Line id ="l1" quantity="tgt[0]/stdpSyn/g" scale="1nS"  color="#000000" timeScale="1ms"/>
                 </Display>
 
-        </Simulation>-->
+        </Simulation>
 
 
 </Lems>

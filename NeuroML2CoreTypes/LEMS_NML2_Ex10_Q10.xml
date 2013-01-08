@@ -1,116 +1,111 @@
 <Lems>
 
-        <!-- Example with Simple cell with temperature dependent channel activation rates -->
+    <!-- Example with Simple cell with temperature dependent channel activation rates -->
 
-        <!-- This is a file which can be read and executed by the LEMS Interpreter.
-             It imports the LEMS definitions of the core NeuroML 2 Components, creates 
-             a model in "pure" NeuroML 2 and contains some LEMS elements for running 
-             a simulation -->
+    <!-- This is a file which can be read and executed by the LEMS Interpreter.
+         It imports the LEMS definitions of the core NeuroML 2 Components, creates 
+         a model in "pure" NeuroML 2 and contains some LEMS elements for running 
+         a simulation -->
 
-<!-- Specify which component to run -->
-<Target component="sim1"/>
-
-<!-- Include core NeuroML2 ComponentType definitions -->
-<Include file="Cells.xml"/>
-<Include file="Networks.xml"/>
-<Include file="Simulation.xml"/>
-
-        <!-- Main NeuroML2 content -->
-
-
-<ionChannel id="passive" type="ionChannelPassive" conductance="10pS"/>
-
-<ionChannel id="na" type="ionChannelHH" conductance="10pS">
-
-   <gateHHrates id="m" instances="3">
-        <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="32degC" /> 
-        <forwardRate type="HHExpLinearRate" rate="1per_ms" midpoint="-40mV" scale="10mV"/>
-        <reverseRate type="HHExpRate" rate="4per_ms" midpoint="-65mV" scale="-18mV"/>
-   </gateHHrates>
-
-   <gateHHrates id="h" instances="1">
-        <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="32degC"/> 
-        <forwardRate type="HHExpRate" rate="0.07per_ms" midpoint="-65mV" scale="-20mV"/>
-        <reverseRate type="HHSigmoidRate" rate="1per_ms" midpoint="-35mV" scale="10mV"/>
-
-   </gateHHrates>
-
-</ionChannel>
-
-
-<ComponentType name="newExpRate" extends="baseVoltageDepRate">
-    <Constant name="rate" dimension="per_time" value="0.125per_ms"/>
-    <Constant name="midpoint" dimension="voltage" value="-65mV"/>
-    <Constant name="scale" dimension="voltage" value="-80mV"/>
-    <Dynamics>
-        <DerivedVariable name="r" exposure="r" value="rate * exp((v - midpoint)/scale)"/>
-    </Dynamics>
-</ComponentType>
-
-
-<ionChannel id="k" type="ionChannelHH" conductance="10pS">
-
-    <gateHHrates id="n" instances="4">
-
-        <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="32degC"/>
-
-        <forwardRate type="HHExpLinearRate" rate="0.1per_ms" midpoint="-55mV" scale="10mV"/>
-        <reverseRate type="newExpRate"/>
-    </gateHHrates>
-
-</ionChannel>
-
-
-
-<pointCellCondBased id="hhcell"  C="10pF"  v0="-65mV" thresh="20mV">
-
-    <channelPopulation id="leak" ionChannel="passive" number="300" erev="-54.3mV"/>
-    <channelPopulation id="naChans" ionChannel="na" number="120000" erev="50mV"/>
-    <channelPopulation id="kChans" ionChannel="k" number="36000" erev="-77mV"/>
-
-</pointCellCondBased>
-
-
-<pulseGenerator id="pulseGen1" delay="100ms" duration="100ms" amplitude="0.08 nA" />
-
-
-<network id="net1">
-    <extracellularProperties temperature = "22 degC"/>
-    <population id="hhpop" component="hhcell" size="1"/>
-    <explicitInput target="hhpop[0]" input="pulseGen1" destination="synapses"/>
-</network>
+    <!-- Specify which component to run -->
+    <Target component="sim1"/>
+    
+    <!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+    
+            <!-- Main NeuroML2 content -->
+    
+    
+    <ionChannel id="passive" type="ionChannelPassive" conductance="10pS"/>
+    
+    <ionChannel id="na" type="ionChannelHH" conductance="10pS">
+    
+       <gateHHrates id="m" instances="3">
+            <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="32degC" /> 
+            <forwardRate type="HHExpLinearRate" rate="1per_ms" midpoint="-40mV" scale="10mV"/>
+            <reverseRate type="HHExpRate" rate="4per_ms" midpoint="-65mV" scale="-18mV"/>
+       </gateHHrates>
+    
+       <gateHHrates id="h" instances="1">
+            <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="32degC"/> 
+            <forwardRate type="HHExpRate" rate="0.07per_ms" midpoint="-65mV" scale="-20mV"/>
+            <reverseRate type="HHSigmoidRate" rate="1per_ms" midpoint="-35mV" scale="10mV"/>
+    
+       </gateHHrates>
+    
+    </ionChannel>
+    
+    
+    <ComponentType name="newExpRate" extends="baseVoltageDepRate">
+        <Constant name="rate" dimension="per_time" value="0.125per_ms"/>
+        <Constant name="midpoint" dimension="voltage" value="-65mV"/>
+        <Constant name="scale" dimension="voltage" value="-80mV"/>
+        <Dynamics>
+            <DerivedVariable name="r" exposure="r" value="rate * exp((v - midpoint)/scale)"/>
+        </Dynamics>
+    </ComponentType>
+    
+    
+    <ionChannel id="k" type="ionChannelHH" conductance="10pS">
+    
+        <gateHHrates id="n" instances="4">
+    
+            <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="32degC"/>
+    
+            <forwardRate type="HHExpLinearRate" rate="0.1per_ms" midpoint="-55mV" scale="10mV"/>
+            <reverseRate type="newExpRate"/>
+        </gateHHrates>
+    
+    </ionChannel>
+    
+    
+    
+    <pointCellCondBased id="hhcell"  C="10pF"  v0="-65mV" thresh="20mV">
+    
+        <channelPopulation id="leak" ionChannel="passive" number="300" erev="-54.3mV"/>
+        <channelPopulation id="naChans" ionChannel="na" number="120000" erev="50mV"/>
+        <channelPopulation id="kChans" ionChannel="k" number="36000" erev="-77mV"/>
+    
+    </pointCellCondBased>
+    
+    
+    <pulseGenerator id="pulseGen1" delay="100ms" duration="100ms" amplitude="0.08 nA" />
+    
+    
+    <network id="net1">
+        <extracellularProperties temperature = "22 degC"/>
+        <population id="hhpop" component="hhcell" size="1"/>
+        <explicitInput target="hhpop[0]" input="pulseGen1" destination="synapses"/>
+    </network>
 
 
         <!-- End of NeuroML2 content -->
-
-<!--
-<Simulation id="sim1" length="300ms" step="0.01ms" target="net1">
-
-    <Display id="d1" title="Ex10: HH example with Q10 rate adjustments: Voltage" timeScale="1ms">
-        <Line id="l1" quantity="hhpop[0]/v" scale="1mV"  color="#ffffff" save="examples/testResults/q10_hh_v.dat"/>
-    </Display>
-
-    <Display id="d2" title="Ex10: HH example with Q10 rate adjustments: rate variables" timeScale="1ms">
         
-        <Line id="l2" quantity="hhpop[0]/naChans/na/m/q" scale="1"  color="#000000" save="examples/testResults/q10_hh_m.dat"/>
-        <Line id="l3" quantity="hhpop[0]/naChans/na/h/q" scale="1"  color="#ff0000" save="examples/testResults/q10_hh_h.dat"/>
-        <Line id="l4" quantity="hhpop[0]/kChans/k/n/q" scale="1"  color="#0000ff" save="examples/testResults/q10_hh_n.dat"/>
-        <Line id="l5" quantity="hhpop[0]/kChans/k/n/inf" scale="1"  color="#00ffff" save="examples/testResults/q10_hh_i.dat"/>
-    </Display>
-
-</Simulation>-->
-
-    <SimulationSet id="sim1">
-        <Display id="disp1" title="Ex10: HH example with Q10 rate adjustments: Voltage" xmin="0" xmax="300" ymin="-90" ymax="60"/>
-
-        <Simulation id="sim1" length="300ms" step="0.01ms" target="net1" display="disp1">
-
-            <DisplayList timeScale="1ms" title="Ex10: HH example with Q10 rate adjustments: Voltage">
-                <Line id="l1" quantity="hhpop[0]/v" scale="1mV"  color="#ff4040" timeScale="1ms"/>
-            </DisplayList>
-
-        </Simulation>
-    </SimulationSet>
+    
+    <Simulation id="sim1" length="300ms" step="0.01ms" target="net1">
+    
+        <Display id="d1" title="Ex10: HH example with Q10 rate adjustments: Voltage" timeScale="1ms" xmin="0" xmax="300" ymin="-90" ymax="60">
+            <Line id="l1" quantity="hhpop[0]/v" scale="1mV"  color="#ffffff" timeScale="1ms"/>
+        </Display>
+        
+        <Display id="d2" title="Ex10: HH example with Q10 rate adjustments: rate variables" timeScale="1ms" xmin="0" xmax="300" ymin="-0.1" ymax="1.1">
+            
+            <Line id="l2" quantity="hhpop[0]/naChans/na/m/q" scale="1"  color="#000000" timeScale="1ms"/>
+            <Line id="l3" quantity="hhpop[0]/naChans/na/h/q" scale="1"  color="#ff0000" timeScale="1ms"/>
+            <Line id="l4" quantity="hhpop[0]/kChans/k/n/q" scale="1"  color="#0000ff" timeScale="1ms"/>
+        </Display>
+    
+        <Display id="d3" title="Ex10: HH example with Q10 rate adjustments: currents" timeScale="1ms" xmin="0" xmax="300" ymin="-0.01" ymax="0.1">
+            <Line id="li1" quantity="hhpop[0]/pulseGen1/i" scale="1nA"  color="#000000" timeScale="1ms"/>
+        </Display>
+    
+        <OutputFile id="of0" fileName="results/hhq10_v.dat">
+            <OutputColumn id="v" quantity="hhpop[0]/v"/> 
+        </OutputFile>  
+    
+    </Simulation>
 
 
 </Lems>

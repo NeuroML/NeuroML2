@@ -73,6 +73,36 @@ assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2beta.xsd', '../libNeuroML/ideas/p
 assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../org.neuroml.model/src/main/resources/Schemas/NeuroML2/NeuroML_v2alpha.xsd')
 assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2beta.xsd', '../org.neuroml.model/src/main/resources/Schemas/NeuroML2/NeuroML_v2beta.xsd')
 
+
+print "--------------------------------------------------"
+print "    Checking local copies of Comp Type defs & examples"
+
+
+lems_ex_dir="NeuroML2CoreTypes"
+lems_ex_list=os.listdir(lems_ex_dir)
+
+for file in lems_def_list:
+
+    if file.endswith("xml") and not file.startswith("Ex"):
+    	main_ex = lems_ex_dir+"/"+file
+    	copy_org_neuroml_model = "../org.neuroml.model/src/main/resources/"+lems_ex_dir+"/"+file
+        print "Comparing %s to %s"%(main_ex, copy_org_neuroml_model)
+        assert filecmp.cmp(main_ex, copy_org_neuroml_model)
+
+print "--------------------------------------------------"
+print "    Checking local copies of jars"
+
+jlems_dir="../jLEMS"
+jlems_version = "0.9.0"
+jlems_jar = '%s/builtjars/lems-%s.jar'%(jlems_dir,jlems_version)
+local_copy = '../org.neuroml.export/lib/lems/lems-%s.jar'%jlems_version
+print "Checking jLEMS jar %s against %s"%(local_copy, jlems_jar)
+assert filecmp.cmp(local_copy, jlems_jar)
+
+    	
+    	
+
+
 if '-r' in sys.argv:
 
     print "--------------------------------------------------"
