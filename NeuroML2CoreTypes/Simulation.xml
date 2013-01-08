@@ -9,17 +9,100 @@
     
     <Include file="NeuroMLCoreDimensions.xml"/>
 
-    <ComponentType name="DisplayList">
+
+
+    <ComponentType name="Display">
+        <Parameter name="xmin" dimension="none"/>
+        <Parameter name="xmax" dimension="none"/>
+        <Parameter name="ymin" dimension="none"/>
+        <Parameter name="ymax" dimension="none"/>
+
         <Parameter name="timeScale" dimension="time"/>
         <Children name="lines" type="Line"/>
+        <Text name="title"/>   
+
+        <Simulation>
+            <DataDisplay title="title" dataRegion="xmin,xmax,ymin,ymax"/>
+        </Simulation>
+    </ComponentType>
+        
+
+
+
+    <ComponentType name="Line">
+        <Parameter name="scale" dimension="*"/>
+         <Parameter name="timeScale" dimension="*"/>
+        <Text name="color"/>
+        <Path name="quantity"/>
+        <Simulation>
+            <Record quantity="quantity" timeScale="timeScale" scale="scale" color="color"/>
+        </Simulation>
+    </ComponentType>
+
+    
+    
+    <ComponentType name="Simulation">
+        <Parameter name="length" dimension="time"/>
+        <Parameter name="step" dimension="time"/>
+        
+        <Children name="displays" type="Display"/>
+        <Children name="outputs" type="OutputFile"/>
+        
+        <ComponentReference name="target" type="Component"/>
+    
+       
+        <Dynamics>
+            <StateVariable name="t" dimension="time"/>
+        </Dynamics>
+        
+        <Simulation>
+            <Run component="target" variable="t" increment="step" total="length"/>
+        </Simulation>
+    </ComponentType>
+    
+    <ComponentType name="OutputFile">
+    	
+    	<Children name="outputColumn" type="OutputColumn"/>
+        
+        <Text name="path"/>
+        <Text name="fileName"/>
+    	
+    	<Simulation>
+    		<DataWriter path="path" fileName="fileName"/>
+    	</Simulation>
+    
+    </ComponentType>
+    
+    
+    <ComponentType name="OutputColumn">
+         <Path name="quantity"/>
+    	 <Simulation>
+            <Record quantity="quantity"/>
+        </Simulation>
+    </ComponentType>
+
+<!-- 
+    <ComponentType name="DisplayList">
+        <Parameter name="timeScale" dimension="time"/>
+        <Children name="lines" type="LineElement"/>
 
         <Text name="title"/>
         <Text name="display"/>
     </ComponentType>
 
 
-
-    <ComponentType name="Display">
+    <ComponentType name="LineElement">
+        <Parameter name="scale" dimension="*"/>
+        <Parameter name="timeScale" dimension="*"/>
+        <Text name="color"/>
+        <Text name="save"/>
+        <Path name="quantity"/>
+        <Simulation>
+            <Record quantity="quantity" timeScale="timeScale" scale="scale" color="color" display="display"/>
+        </Simulation>
+    </ComponentType>
+    
+    <ComponentType name="DisplayElement">
         <Parameter name="xmin" dimension="none"/>
         <Parameter name="xmax" dimension="none"/>
         <Parameter name="ymin" dimension="none"/>
@@ -30,26 +113,12 @@
             <DataDisplay title="title" dataRegion="xmin,xmax,ymin,ymax"/>
         </Simulation>
     </ComponentType>
-
-
-
-    <ComponentType name="Line">
-        <Parameter name="scale" dimension="*"/>
-        <Parameter name="timeScale" dimension="*"/>
-        <Text name="color"/>
-        <Text name="save"/>
-        <Path name="quantity"/>
-        <Simulation>
-            <Record quantity="quantity" timeScale="timeScale" scale="scale" color="color" display="display"/>
-        </Simulation>
-    </ComponentType>
-
-
-    <ComponentType name="Simulation">
+	
+    <ComponentType name="SimulationElement">
         <Parameter name="length" dimension="time"/>
         <Parameter name="step" dimension="time"/>
         <ComponentReference name="target" type="Component"/>
-        <Link name="display" type="Display"/>
+        <Link name="display" type="DisplayElement"/>
         <Children name="outputs" type="DisplayList"/>
         <Dynamics>
             <StateVariable name="t" dimension="time"/>
@@ -62,28 +131,15 @@
 
 
     <ComponentType name="SimulationSet">
-        <Children name="simulations" type="Simulation"/>
-        <Children name="displays" type="Display"/>
+        <Children name="simulations" type="SimulationElement"/>
+        <Children name="displays" type="DisplayElement"/>
     </ComponentType>
+     -->
 
-    <!--<ComponentType name="SingleSimulation">
-        <Parameter name="length" dimension="time"/>
-        <Parameter name="step" dimension="time"/>
-        <Children name="displays" type="Display"/>
-        <ComponentReference name="target" type="Component"/>
-        <Text name="report"/>
-        <Text name="timesFile"/>
 
-        <Dynamics>
-            <StateVariable name="t" dimension="time"/>
-        </Dynamics>
 
-        <Simulation>
-            <Run component="target" variable="t" increment="step" total="length"/>
-        </Simulation>
-    </ComponentType>-->
+<!-- In development... Might lead to SED-ML descriptions being natively used by LEMS...
 
-<!-- In development...
     <ComponentType name="listOfSimulations">
         <Children name="uniformTimeCourse" type="uniformTimeCourse"/>
     </ComponentType>
@@ -98,7 +154,6 @@
              <DerivedVariable name="length" dimension="time" value="outputEndTime - initialTime"/>
              <DerivedVariable name="step" dimension="time" value="length/numberOfPoints"/>
         </Dynamics>
-
 
     </ComponentType>
 
@@ -120,15 +175,10 @@
 
             <DerivedVariable name="length2" dimension="time" select="uniformTimeCourse/outputEndTime"/>
 
-
-
        <Run component="target" variable="t" increment="step" total="length"/>
             <Show src="displays"/>
         </Dynamics>
     </ComponentType>
-
-
-
 
 
     <ComponentType name="sedML">
@@ -141,11 +191,9 @@
         
         <Text name="version"/>
         <Text name="level"/>
-
         
         <Parameter name="length" dimension="time"/>
         <Parameter name="step" dimension="time"/>
-        
         
         <Dynamics>
             <StateVariable name="t" dimension="time"/>-->
