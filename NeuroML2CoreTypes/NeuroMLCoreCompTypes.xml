@@ -14,6 +14,37 @@
 
     <ComponentType name="notes" description="Human readable notes on a Component">
     </ComponentType>
+    <!--
+    <ComponentType name="annotation" description="Annotation...">
+        <Child name="rdf_RDF" type="rdf_RDF"/>
+        <Behavior/>
+    </ComponentType>
+
+    <ComponentType name="rdf_RDF" description="Annotation...">
+        <Child name="rdf_Description" type="rdf_Description"/>
+        <Behavior/>
+    </ComponentType>
+
+    <ComponentType name="rdf_Description" description="Annotation...">
+        <Child name="bqbiol_isVersionOf" type="bqbiol_isVersionOf"/>
+        <Behavior/>
+    </ComponentType>
+
+    <ComponentType name="bqbiol_isVersionOf" description="Annotation...">
+        <Child name="rdf_Bag" type="rdf_Bag"/>
+        <Behavior/>
+    </ComponentType>
+
+    <ComponentType name="rdf_Bag" description="Annotation...">
+        <Child name="rdf_li" type="rdf_li"/>
+        <Behavior/>
+    </ComponentType>
+
+    <ComponentType name="rdf_li" description="Annotation...">
+        <Text name="red:resource"/>
+        <Behavior/>
+    </ComponentType>-->
+
 
     <ComponentType name="pointDiam"
         description="Base type for ComponentTypes which specify an ( _x, _y, _z ) coordinate along with a _diameter. Note: no dimension used in the attributes for these coordinates! These are assumed to have dimension micrometer (10^-6 m). This is due to micrometers being the default option for the majority of neuronal morphology formats, and dimensions are omitted here to facilitate reading and writing of morphologies in NeuroML.">

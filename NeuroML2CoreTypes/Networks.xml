@@ -56,17 +56,19 @@
 
     <ComponentType name="populationList" extends="basePopulation" description="An explicit list of the cells in the population. Not yet stable...">
 
-        <Children name="networkElementInstance" type="networkElementInstance"/>
+        <Parameter name="size" dimension="none" description="Number of instances of this Component to create when the population is instantiated"/>
+        <Children name="instances" type="instance"/>
     
         <ComponentReference name="component" type="baseCell"/>
         <Structure>
-            <!-- Not yet working!! -->
-            <ForEach instances="networkElementInstances" as="inst">
+            <!-- Not yet working!!
+            <MultiInstantiate number="size" component="component"/> -->
+            <ForEach instances="instance" as="inst">
                 <MultiInstantiate number="1" component="component"/>
             </ForEach>
         </Structure>
     </ComponentType>
-
+    
 
     <ComponentType name="region" description="Initial attempt to specify 3D region for placing cells. Work in progress...">
         <Child name="rectangularExtent" type="rectangularExtent"/>
@@ -84,13 +86,12 @@
 
 
 
-    <ComponentType name="networkElementInstance"
+    <ComponentType name="instance"
         description="Initial attempt to specify instances in populations. Work in progress...">
-        <Parameter name="index" dimension="none"/>
     </ComponentType>
 
     <ComponentType name="networkElementInstance1D" 
-        extends="networkElementInstance"
+        extends="instance"
         description="Initial attempt to specify instances in 1D populations. Work in progress...">
         <Parameter name="x" dimension="none"/>
     </ComponentType>

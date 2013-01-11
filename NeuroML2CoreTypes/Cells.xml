@@ -11,8 +11,6 @@
     <Include file="Inputs.xml"/>
 
 
-<!-- PG added description attribute as minimal metadata which can (should?) be added to ComponentType.
-     More metadata options should be added later -->
     <ComponentType name="baseCell"
         description="Base type of any cell which can be used in a population">
 
@@ -101,7 +99,8 @@
 
             <DerivedVariable name="erev" dimension="voltage" exposure="erev" value="(R * temperature / (zCa * F)) * ln(caConcExt / caConc)"/>
 
-            <DerivedVariable name="i" dimension="current" exposure="i" value="totalConductance * (erev - v)" valueCondition="caConcExt .gt. 0" valueIfFalse="0"/>
+            <!--TODO: see if the check on caconcext needed: DerivedVariable name="i" dimension="current" exposure="i" value="totalConductance * (erev - v)" valueCondition="caConcExt .gt. 0" valueIfFalse="0"/>  -->
+            <DerivedVariable name="i" dimension="current" exposure="i" value="totalConductance * (erev - v)"/>  
 
         </Dynamics>
 
@@ -230,7 +229,8 @@
 
             <DerivedVariable name="erev" dimension="voltage" exposure="erev" value="(R * temperature / (zCa * F)) * ln(caConcExt / caConc)"/>
 
-            <DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" value="gDensity * (erev - v)" valueCondition="caConcExt .gt. 0" valueIfFalse="0"/>
+            <!-- TODO check if needed <DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" value="gDensity * (erev - v)" valueCondition="caConcExt .gt. 0" valueIfFalse="0"/>  -->
+            <DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" value="gDensity * (erev - v)"/>
 
         </Dynamics>
 
@@ -285,14 +285,16 @@
              Idensity = P * z^2 * ( (V * F^2)/(R * T) ) * ( concInt - ( concExt * exp(-z * V * F /(R * T)) ) ) / (1 - exp(-z * V * F /(R * T)) )
 
              -->
-
-            <DerivedVariable name="K" dimension="per_voltage"  value="(zCa * F) / (R * temperature)" valueCondition="temperature .gt. 0" valueIfFalse="0.1"/>
+            
+            <!-- TODO: check if needed <DerivedVariable name="K" dimension="per_voltage"  value="(zCa * F) / (R * temperature)" valueCondition="temperature .gt. 0" valueIfFalse="0.1"/>-->
+            <DerivedVariable name="K" dimension="per_voltage"  value="(zCa * F) / (R * temperature)"/>
 
             <DerivedVariable name="expKv" dimension="none"  value="exp(-1 * K * v)"/>
 
             <DerivedVariable name="channelf" dimension="none" select="ionChannel/fopen"/>
 
-            <DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" value="-1 * channelf * permeability * zCa * F * K * v * ( caConc - (caConcExt * expKv) ) / (1 - expKv)" valueCondition="expKv .neq. 1" valueIfFalse="0"/>
+            <!-- TODO check if needed: <DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" value="-1 * channelf * permeability * zCa * F * K * v * ( caConc - (caConcExt * expKv) ) / (1 - expKv)" valueCondition="expKv .neq. 1" valueIfFalse="0"/>-->
+          <DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" value="-1 * channelf * permeability * zCa * F * K * v * ( caConc - (caConcExt * expKv) ) / (1 - expKv)"/>
 
         </Dynamics>
         <Structure>
