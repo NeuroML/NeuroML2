@@ -224,13 +224,13 @@
     <!--      Main NeuroML element                             -->
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
-    <xs:element name="neuroml" type="neuroml">
+    <xs:element name="neuroml" type="NeuroMLDocument">
         <xs:annotation>
             <xs:documentation>The root NeuroML element.</xs:documentation>
         </xs:annotation>
     </xs:element>
 
-    <xs:complexType name="neuroml"> <!-- Making the complexType definition of the root element lowercase, not to confuse language binding generators... -->
+    <xs:complexType name="NeuroMLDocument"> <!-- Making the complexType definition of the root element lowercase, not to confuse language binding generators... -->
 
         <xs:complexContent>
 
@@ -238,7 +238,7 @@
 
             <xs:sequence>
                 
-                <xs:element name="include" type="includeType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="include" type="IncludeType" minOccurs="0" maxOccurs="unbounded"/>
 
                 <xs:element name="extracellularProperties" type="ExtracellularProperties" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element name="intracellularProperties" type="IntracellularProperties" minOccurs="0" maxOccurs="unbounded"/>
@@ -247,13 +247,13 @@
 
                 <xs:element name="ionChannel" type="IonChannel" minOccurs="0" maxOccurs="unbounded"/>
 
-                <xs:group ref="concentrationModelTypes"/>
+                <xs:group ref="ConcentrationModelTypes"/>
 
-                <xs:group ref="synapseTypes"/>
+                <xs:group ref="SynapseTypes"/>
 
                 <xs:element name="biophysicalProperties" type="BiophysicalProperties" minOccurs="0" maxOccurs="unbounded"/>
 
-                <xs:group ref="cellTypes"/>
+                <xs:group ref="CellTypes"/>
 
                 <xs:element name="pulseGenerator" type="PulseGenerator" minOccurs="0" maxOccurs="unbounded"/>
 
@@ -271,11 +271,11 @@
 
     <!-- A small subset of XLInclude from: http://www.w3.org/2001/XInclude.xsd  
          Will be sufficient for now... -->
-    <xs:complexType name="includeType" mixed="true">
+    <xs:complexType name="IncludeType" mixed="true">
         <xs:attribute name="href" use="optional" type="xs:anyURI"/>
     </xs:complexType>
 
-    <xs:group name="cellTypes">
+    <xs:group name="CellTypes">
         <xs:annotation>
         <xs:documentation>Various types of cells which are defined in NeuroML 2. This list will be expanded...</xs:documentation>
         </xs:annotation>
@@ -291,7 +291,7 @@
 
 
 
-    <xs:group name="synapseTypes">
+    <xs:group name="SynapseTypes">
         <xs:annotation>
         <xs:documentation>Various types of synapse which are defined in NeuroML 2. This list will be expanded...</xs:documentation>
         </xs:annotation>
@@ -304,7 +304,7 @@
    </xs:group>
 
 
-    <xs:group name="concentrationModelTypes">
+    <xs:group name="ConcentrationModelTypes">
         <xs:annotation>
         <xs:documentation>Various types of concentration model which are defined in NeuroML 2. This list will be expanded...</xs:documentation>
         </xs:annotation>
