@@ -1,9 +1,8 @@
 <Lems>
 
-        <!-- Example with instances of cells in populations having different parameters... -->
+   <!-- Example with instances of cells in populations having different parameters... -->
 
-
-             <!-- NOT YET FULLY TESTED!!!! -->
+   <!-- NOT YET FULLY TESTED!!!! -->
 
 
 <!-- Specify which component to run -->
@@ -15,43 +14,33 @@
 <Include file="Simulation.xml"/>
 
 
-        <!-- Main NeuroML2 content. Based on http://www.izhikevich.org/publications/figure1.m -->
+        <!-- Main NeuroML2 content.-->
 
-<izhikevichCell id="izMixed" v0 = "-90mV" thresh = "30mV" a ="0.02" b = "0.2" c = "-55.0" d = "4"/>
-<pulseGeneratorDL id="i0" delay="22ms" duration="2000ms" amplitude="15" />
 
-<network id="net1">
-        
-    <populationList id="ipop" component="izMixed" size="3">
-        <instance id="0"/>
-        <instance id="1"/>
-        <instance id="2"/>
-        <!-- Ideally:
-        
-                <instance id="0"><location x="0" y="0" z="0"/></instance>
-                
-                and this sets these parameters on the network component instance 
-                (or adds a Location child to the component?)
-         -->
-        
-    </populationList>
+    <iafTauCell id="iafTauSpontaneous1" leakReversal="-50mV" thresh="-55mV" reset="-70mV" tau="30ms" />
+    <iafTauCell id="iafTauSpontaneous2" leakReversal="-50mV" thresh="-55mV" reset="-70mV" tau="26ms" />
 
-    <!--
-    <explicitInput target="ipop[0]" input="i0" destination="synapses"/>
-    <explicitInput target="ipop[1]" input="i0" destination="synapses"/>
-    <explicitInput target="ipop[2]" input="i0" destination="synapses"/> -->
-</network>
+    <network id="net1">
+
+        <population id="iafpop" component="iafTauSpontaneous1" size="3"/>
+        
+        <!--<population type="populationList" id="iafpopinstances" component="iafTauSpontaneous2">
+            <instance id="0"/>
+        </population>-->
+    </network>
 
         <!-- End of NeuroML2 content -->
 
 
 <Simulation id="sim1" length="200ms" step="0.05ms" target="net1">
-    <Display id="d1" title="Ex13: Differences in cell instances in LEMS" timeScale="1ms"  xmin="0" xmax="200" ymin="-90" ymax="60">
-        <Line id ="iz0" quantity="ipop/izMixed/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
-        <!-- <Line id ="iz1" quantity="ipop[1]/v" scale="1mV"  color="#eeffFF" timeScale="1ms"/>
-        <Line id ="iz2" quantity="ipop[2]/v" scale="1mV"  color="#40eeFF" timeScale="1ms"/> -->
-    </Display>
-</Simulation>
 
+    <Display id="d1" title="Ex13: IaF cells in LEMS" timeScale="1ms" xmin="0" xmax="200" ymin="-75" ymax="-50">
+        <Line id ="iz0" quantity="iafpop[0]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
+        <!--<Line id ="iz1" quantity="iafpop[1]/v" scale="1mV"  color="#eeffFF" timeScale="1ms"/>
+        <Line id ="iz2" quantity="iafpop[2]/v" scale="1mV"  color="#40eeFF" timeScale="1ms"/>-->
+    </Display>
+
+
+</Simulation>
 
 </Lems>

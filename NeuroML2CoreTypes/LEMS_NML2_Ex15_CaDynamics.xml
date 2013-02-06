@@ -1,0 +1,420 @@
+
+<Lems>
+
+<!-- Example of conductance based cell with Na, K (incl [Ca2+] dependent) & Ca channels and a pool of Ca -->
+
+
+<!-- Specify which component to run -->
+    <Target component="sim1"/>
+
+<!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+
+
+<!-- Main NeuroML2 content -->
+
+    <ionChannel id="GranPassiveCond" conductance="10pS" type="ionChannelPassive"/>
+
+
+
+    <ionChannel id="Gran_KDr_98" conductance="10pS" type="ionChannelHH" species="k">
+        <notes>Delayed rectifyer K channel</notes>
+        <gateHHrates id="m" instances="4">
+            <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="17.350264793 degC"/>
+            <notes>Note: offset from ChannelML file incorporated into midpoint of rates!!</notes>
+            <forwardRate type="Gran_KDr_98_m_alpha_rate"/>
+            <reverseRate type="Gran_KDr_98_m_beta_rate"/>
+        </gateHHrates>
+        <gateHHrates id="h" instances="1">
+            <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="17.350264793 degC"/>
+            <notes>Note: offset from ChannelML file incorporated into midpoint of rates!!</notes>
+            <forwardRate type="Gran_KDr_98_h_alpha_rate"/>
+            <reverseRate type="Gran_KDr_98_h_beta_rate"/>
+        </gateHHrates>
+    </ionChannel>
+
+    <ComponentType name="Gran_KDr_98_m_alpha_rate" extends="baseVoltageDepRate">
+        <Constant name="TIME_SCALE" dimension="time" value="1 s"/>
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 V"/>
+        <Constant name="offset" dimension="voltage" value="0.010V"/>
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="(v - offset) / VOLT_SCALE"/>
+            <DerivedVariable name="r" exposure="r" dimension="per_time" value="(170 * (exp (73 *(V - (-0.038))))) / TIME_SCALE"/>
+        </Dynamics>
+    </ComponentType>
+
+    <ComponentType name="Gran_KDr_98_m_beta_rate" extends="baseVoltageDepRate">
+        <Constant name="TIME_SCALE" dimension="time" value="1 s"/>
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 V"/>
+        <Constant name="offset" dimension="voltage" value="0.010V"/>
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="(v - offset) / VOLT_SCALE"/>
+            <DerivedVariable name="r" exposure="r" dimension="per_time" value="(170 * (exp ((-18) *(V - (-0.038))))) / TIME_SCALE"/>
+        </Dynamics>
+    </ComponentType>
+
+    <ComponentType name="Gran_KDr_98_h_alpha_rate" extends="baseVoltageDepRate">
+        <Constant name="TIME_SCALE" dimension="time" value="1 s"/>
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 V"/>
+        <Constant name="offset" dimension="voltage" value="0.010V"/>
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="(v - offset) / VOLT_SCALE"/>
+            <DerivedVariable name="r" exposure="r" dimension="per_time" value="( 0.76 ) / TIME_SCALE" valueCondition="V  .gt. ( -0.046 )" valueIfFalse="( 0.7 + 0.065*(exp (-80*(V - (-0.046))))) / TIME_SCALE"/>
+        </Dynamics>
+    </ComponentType>
+
+    <ComponentType name="Gran_KDr_98_h_beta_rate" extends="baseVoltageDepRate">
+        <Constant name="TIME_SCALE" dimension="time" value="1 s"/>
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 V"/>
+        <Constant name="offset" dimension="voltage" value="0.010V"/>
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="(v - offset) / VOLT_SCALE"/>
+            <DerivedVariable name="r" exposure="r" dimension="per_time" value="(1.1/(1 + (exp (-80.7 * (V - (-0.044)))))) / TIME_SCALE"/>
+        </Dynamics>
+    </ComponentType>
+
+
+
+    <ionChannel id="Gran_H_98" conductance="10pS" type="ionChannelHH" species="h">
+        <notes>Anomalous inward rectifying H conductance</notes>
+        <gateHHrates id="n" instances="1">
+            <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="17.350264793 degC"/>
+            <notes>Note: offset from ChannelML file incorporated into midpoint of rates!!</notes>
+            <forwardRate type="HHExpRate" rate="0.8per_s" scale="-0.01100110011V" midpoint="-0.065V"/>
+            <reverseRate  type="HHExpRate" rate="0.8per_s" scale="0.01100110011V" midpoint="-0.065V"/>
+        </gateHHrates>
+    </ionChannel>
+
+
+
+    <ionChannel id = "ca" conductance = "10pS" type = "ionChannelHH">
+        <notes>A High Voltage Activated Ca2+ channel</notes>
+        <gateHHrates id="m" instances = "2">
+            <q10Settings type = "q10ExpTemp" q10Factor = "3" experimentalTemp = "17.350264793 degC"/>
+            <notes>Note: offset from ChannelML file incorporated into midpoint of rates!!</notes>
+            <forwardRate type = "HHSigmoidRate" rate = "1600per_s" scale = "0.01388888889V" midpoint = "0.015V"/>
+            <reverseRate type = "HHExpLinearRate" rate = "100per_s" scale = "-0.005V" midpoint = "0.0011000000000000003V"/>
+        </gateHHrates>
+        <gateHHrates id="h" instances = "1">
+            <q10Settings type = "q10ExpTemp" q10Factor = "3" experimentalTemp = "17.350264793 degC"/>
+            <notes>Note: offset from ChannelML file incorporated into midpoint of rates!!</notes>
+            <forwardRate type = "Gran_CaHVA_98_h_alpha_rate"/>
+            <reverseRate type = "Gran_CaHVA_98_h_beta_rate"/>
+        </gateHHrates>
+    </ionChannel>
+
+
+    <ionChannel id="Gran_CaHVA_98" conductance="10pS" type="ionChannelHH" species="ca">
+        <notes>A High Voltage Activated Ca2+ channel</notes>
+        <gateHHrates id="m" instances="2">
+            <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="17.350264793 degC"/>
+            <notes>Note: offset from ChannelML file incorporated into midpoint of rates!!</notes>
+            <forwardRate type="HHSigmoidRate" rate="1600per_s" scale="0.01388888889V" midpoint="0.015V"/>
+            <reverseRate type="HHExpLinearRate" rate="100per_s" scale="-0.005V" midpoint="0.0011000000000000003V"/>
+        </gateHHrates>
+        <gateHHrates id="h" instances="1">
+            <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="17.350264793 degC"/>
+            <notes>Note: offset from ChannelML file incorporated into midpoint of rates!!</notes>
+            <forwardRate type="Gran_CaHVA_98_h_alpha_rate"/>
+            <reverseRate type="Gran_CaHVA_98_h_beta_rate"/>
+        </gateHHrates>
+    </ionChannel>
+
+    <ComponentType name="Gran_CaHVA_98_h_alpha_rate" extends="baseVoltageDepRate">
+        <Constant name="TIME_SCALE" dimension="time" value="1 s"/>
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 V"/>
+        <Constant name="offset" dimension="voltage" value="0.010V"/>
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="(v - offset) / VOLT_SCALE"/>
+            <DerivedVariable name="r" exposure="r" dimension="per_time" value="( 5.0 ) / TIME_SCALE" valueCondition="V   .lt. ( -0.060 )" valueIfFalse="( 5 * (exp (-50 * (V - (-0.060))))) / TIME_SCALE"/>
+        </Dynamics>
+    </ComponentType>
+
+    <ComponentType name="Gran_CaHVA_98_h_beta_rate" extends="baseVoltageDepRate">
+        <Constant name="TIME_SCALE" dimension="time" value="1 s"/>
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 V"/>
+        <Constant name="offset" dimension="voltage" value="0.010V"/>
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="(v - offset) / VOLT_SCALE"/>
+            <DerivedVariable name="r" exposure="r" dimension="per_time" value="( 0 ) / TIME_SCALE" valueCondition="V   .lt. ( -0.060 )" valueIfFalse="( 5 - (5 * (exp (-50 * (V - (-0.060)))))) / TIME_SCALE"/>
+        </Dynamics>
+    </ComponentType>
+
+
+    <ionChannel id="Gran_KA_98" conductance="10pS" type="ionChannelHH" species="k">
+        <notes>A-type K channel, with rate equations expressed in tau and inf form</notes>
+        <gateHHtauInf id="m" instances="3">
+            <q10Settings type="q10ExpTemp" q10Factor="1" experimentalTemp="17.350264793 degC"/>
+            <notes>Note: offset from ChannelML file incorporated into midpoint of rates!!</notes>
+            <timeCourse type="Gran_KA_98_m_tau_tau"/>
+            <steadyState type="HHSigmoidVariable" rate="1" scale="0.0198V" midpoint="-0.036699999999999997V"/>
+        </gateHHtauInf>
+        <gateHHtauInf id="h" instances="1">
+            <q10Settings type="q10ExpTemp" q10Factor="1" experimentalTemp="17.350264793 degC"/>
+            <notes>Note: offset from ChannelML file incorporated into midpoint of rates!!</notes>
+            <timeCourse type="Gran_KA_98_h_tau_tau"/>
+            <steadyState type="HHSigmoidVariable" rate="1" scale="-0.0084V" midpoint="-0.0688V"/>
+        </gateHHtauInf>
+    </ionChannel>
+
+    <ComponentType name="Gran_KA_98_m_tau_tau" extends="baseVoltageDepTime">
+        <Constant name="TIME_SCALE" dimension="time" value="1 s"/>
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 V"/>
+        <Constant name="offset" dimension="voltage" value="0.010V"/>
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="(v - offset) / VOLT_SCALE"/>
+            <DerivedVariable name="t" exposure="t" dimension="time" value="(0.410e-3 * ((exp (( ((V) + 0.0435) / (-0.0428))))) + 0.167e-3) * TIME_SCALE"/>
+        </Dynamics>
+    </ComponentType>
+
+    <ComponentType name="Gran_KA_98_h_tau_tau" extends="baseVoltageDepTime">
+        <Constant name="TIME_SCALE" dimension="time" value="1 s"/>
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 V"/>
+        <Constant name="offset" dimension="voltage" value="0.010V"/>
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="(v - offset) / VOLT_SCALE"/>
+            <DerivedVariable name="t" exposure="t" dimension="time" value="(0.001) * (10.8 + (0.03 * V * 1000) + (1 / (57.9 * (exp (V * 0.127 * 1000)) + (134e-6 * (exp (V * (-0.059 * 1000))))))) * TIME_SCALE"/>
+        </Dynamics>
+    </ComponentType>
+
+
+
+
+
+    <ionChannel id="Gran_NaF_98" conductance="10pS" type="ionChannelHH" species="na">
+        <notes>Fast inactivating Na+ channel</notes>
+
+
+        <gateHHrates id="m" instances="3">
+            <forwardRate type="HHExpLinearRate" rate="1per_ms" midpoint="-40mV" scale="10mV"/>
+            <reverseRate type="HHExpRate" rate="4per_ms" midpoint="-65mV" scale="-18mV"/>
+       </gateHHrates>
+
+       <gateHHrates id="h" instances="1">
+           <forwardRate type="HHExpRate" rate="0.07per_ms" midpoint="-65mV" scale="-20mV"/>
+           <reverseRate type="HHSigmoidRate" rate="1per_ms" midpoint="-35mV" scale="10mV"/>
+       </gateHHrates>
+
+      <!-- <gateHHratesTau id="m" instances="3">
+            <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="17.350264793 degC"/>
+            <notes>Note: offset from ChannelML file incorporated into midpoint of rates!!</notes>
+            <forwardRate type="HHExpRate" rate="1500per_s" scale="0.012345679V" midpoint="-0.029V"/>
+            <reverseRate type="HHExpRate" rate="1500per_s" scale="-0.0151515V" midpoint="-0.029V"/>
+            <timeCourse type="Gran_NaF_98_m_tau_tau"/>
+        </gateHHratesTau>
+        <gateHHratesTau id="h" instances="1">
+            <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="17.350264793 degC"/>
+            <notes>Note: offset from ChannelML file incorporated into midpoint of rates!!</notes>
+            <forwardRate type="HHExpRate" rate="120per_s" scale="-0.01123596V" midpoint="-0.04V"/>
+            <reverseRate type="HHExpRate" rate="120per_s" scale="0.01123596V" midpoint="-0.04V"/>
+            <timeCourse type="Gran_NaF_98_h_tau_tau"/>
+        </gateHHratesTau>-->
+    </ionChannel>
+
+    <ComponentType name="Gran_NaF_98_m_tau_tau" extends="baseVoltageDepTime">
+        <Constant name="TIME_SCALE" dimension="time" value="1 s"/>
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 V"/>
+        <Constant name="offset" dimension="voltage" value="0.010V"/>
+        <Requirement name="alpha" dimension="per_time"/>
+        <Requirement name="beta" dimension="per_time"/>
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="(v - offset) / VOLT_SCALE"/>
+            <DerivedVariable name="t" exposure="t" dimension="time" value="( 0.00005 ) * TIME_SCALE" valueCondition="1/(alpha + beta)  .lt. ( 0.00005 )" valueIfFalse="( 1/(alpha + beta)) * TIME_SCALE"/>
+        </Dynamics>
+    </ComponentType>
+
+    <ComponentType name="Gran_NaF_98_h_tau_tau" extends="baseVoltageDepTime">
+        <Constant name="TIME_SCALE" dimension="time" value="1 s"/>
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 V"/>
+        <Constant name="offset" dimension="voltage" value="0.010V"/>
+        <Requirement name="alpha" dimension="per_time"/>
+        <Requirement name="beta" dimension="per_time"/>
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="(v - offset) / VOLT_SCALE"/>
+            <DerivedVariable name="t" exposure="t" dimension="time" value="( 0.000225 ) * TIME_SCALE" valueCondition="1/(alpha + beta)  .lt. ( 0.000225 )" valueIfFalse="( 1/(alpha + beta)) * TIME_SCALE"/>
+        </Dynamics>
+    </ComponentType>
+
+<!--
+
+
+
+        
+
+
+
+    <ionChannel id = "Gran_KCa_98" conductance = "10pS" type = "ionChannelHH" species = "k">
+        <notes>Calcium dependent K+ channel</notes>
+        <gateHHrates id="m" instances = "1">
+            <q10Settings type = "q10ExpTemp" q10Factor = "3" experimentalTemp = "17.350264793 degC"/>
+            <notes>Note: offset from ChannelML file incorporated into midpoint of rates!!</notes>
+            <forwardRate type = "Gran_KCa_98_m_alpha_rate"/>
+            <reverseRate type = "Gran_KCa_98_m_beta_rate"/>
+        </gateHHrates>
+    </ionChannel>
+
+    <ComponentType name = "Gran_KCa_98_m_alpha_rate" extends = "baseVoltageConcDepRate">
+        <Constant name = "TIME_SCALE" dimension = "time" value = "1 s"/>
+        <Constant name = "VOLT_SCALE" dimension = "voltage" value = "1 V"/>
+        <Constant name = "CONC_SCALE" dimension = "concentration" value = "1 mol_per_m3"/>
+        <Constant name = "offset" dimension = "voltage" value = "0.010V"/>
+        <Dynamics>
+            <DerivedVariable name = "V" dimension = "none" value = "(v - offset) / VOLT_SCALE"/>
+            <DerivedVariable name = "CACONC" dimension = "none" value = "caConc / CONC_SCALE"/>
+            <DerivedVariable name = "r" exposure = "r" dimension = "per_time" value = "(2500/(1 + ( (1.5e-3 *(exp (-85*V))) / CACONC))) / TIME_SCALE"/>
+        </Dynamics>
+    </ComponentType>
+
+    <ComponentType name = "Gran_KCa_98_m_beta_rate" extends = "baseVoltageConcDepRate">
+        <Constant name = "TIME_SCALE" dimension = "time" value = "1 s"/>
+        <Constant name = "VOLT_SCALE" dimension = "voltage" value = "1 V"/>
+        <Constant name = "CONC_SCALE" dimension = "concentration" value = "1 mol_per_m3"/>
+        <Constant name = "offset" dimension = "voltage" value = "0.010V"/>
+        <Dynamics>
+            <DerivedVariable name = "V" dimension = "none" value = "(v - offset) / VOLT_SCALE"/>
+            <DerivedVariable name = "CACONC" dimension = "none" value = "caConc / CONC_SCALE"/>
+            <DerivedVariable name = "r" exposure = "r" dimension = "per_time" value = "(1500/(1 + (CACONC / (1.5e-4 * (exp (-77*V)))))) / TIME_SCALE"/>
+        </Dynamics>
+    </ComponentType>
+
+
+    <concentrationModel id="Gran_CaPool" type="decayingPoolConcentrationModel"
+                         restingConc="7.55E-11 mol_per_cm3"
+                         decayConstant="10.0 ms"
+                         shellThickness="8.4E-6 cm"/>
+-->
+
+    <cell id="Granule_98">
+
+        <notes>An implementation using ChannelML of the Granule cell mode from Maex, R and De Schutter, E. Synchronization of Golgi and Granule Cell Firing in a Detailed Network Model of the Cerebellar Granule Cell Layer, 1998</notes>
+
+        <morphology id="morphology_Granule_98">
+
+            <segment id="0" name="Soma">
+                <proximal x="0.0" y="0.0" z="0.0" diameter="10.0"/>
+                <distal x="0.0" y="0.0" z="0.0" diameter="10.0"/>
+            </segment>
+
+            <segmentGroup id="Soma">
+                <member segment="0"/>
+            </segmentGroup>
+
+            <segmentGroup id="all">
+                <include segmentGroup="Soma"/>
+            </segmentGroup>
+
+            <segmentGroup id="soma_group">
+                <include segmentGroup="Soma"/>
+            </segmentGroup>
+
+            
+        </morphology>
+
+            <!--Adding the biophysical parameters-->
+
+        <biophysicalProperties id="biophys">
+
+            <membraneProperties>
+
+                <channelDensity condDensity="0.0330033 mS_per_cm2" id="GranPassiveCond_all" ionChannel="GranPassiveCond" erev="-65.0 mV" ion="non_specific"/>
+
+                <channelDensity condDensity="8.89691 mS_per_cm2" id="Gran_KDr_98_all" ionChannel="Gran_KDr_98" erev="-90.0 mV" ion="k"/>
+                <channelDensity condDensity="0.03090506 mS_per_cm2" id="Gran_H_98_all" ionChannel="Gran_H_98" erev="-42.0 mV" ion="h"/>
+                <channelDensity condDensity="0.9084216 mS_per_cm2" id="Gran_CaHVA_98_all" ionChannel="Gran_CaHVA_98" erev="80.0 mV" ion="ca"/>
+                <channelDensity condDensity="1.14567 mS_per_cm2" id="Gran_KA_98_all" ionChannel="Gran_KA_98" erev="-90.0 mV" ion="k"/>
+                <channelDensity condDensity="0 mS_per_cm2" id="Gran_NaF_98_all" ionChannel="Gran_NaF_98" erev="55.0 mV" ion="na"/>
+<!--
+                <channelDensity condDensity="55.7227 mS_per_cm2" id="Gran_NaF_98_all" ionChannel="Gran_NaF_98" erev="55.0 mV" ion="na"/>
+
+
+                <channelDensity condDensity="17.9811 mS_per_cm2" id="Gran_KCa_98_all" ionChannel="Gran_KCa_98" erev="-90.0 mV" ion="k"/>
+
+-->
+
+                <spikeThresh value="0 mV"/>
+
+                <specificCapacitance value="1.0 uF_per_cm2"/>
+
+                <initMembPotential value="-65.0 mV"/>
+
+            </membraneProperties>
+
+            <intracellularProperties>
+<!--
+                <species id="ca"
+                         ion="ca"
+                         concentrationModel="Gran_CaPool"
+                         initialConcentration="7.55E-5 mM"
+                         initialExtConcentration="2 mM"/>-->
+
+                <resistivity value="0.1 kohm_cm"/>
+
+            </intracellularProperties>
+
+        </biophysicalProperties>
+
+    </cell>
+
+
+    <pulseGenerator id="pulseGen1" delay="100ms" duration="100ms" amplitude="-0.01 nA" />
+    <pulseGenerator id="pulseGen2" delay="400ms" duration="100ms" amplitude="0.02 nA" />
+
+    <voltageClamp id="vClamp1" delay="150ms" duration="50ms" targetVoltage="10mV" seriesResistance="1ohm"/>
+
+    <network id="net1">
+        <extracellularProperties temperature = "32 degC"/>
+        <population id="hhpop" component="Granule_98" size="1"/>
+        <explicitInput target="hhpop[0]" input="pulseGen1"/>
+        <explicitInput target="hhpop[0]" input="pulseGen2"/>
+    </network>
+
+
+        <!-- End of NeuroML2 content -->
+
+
+    <Simulation id="sim1" length="700ms" step="0.05ms" target="net1">
+
+        <Display id="d1" title="Ex15: Ca Dynamics: Voltage (mV)" timeScale="1ms" xmin="0" xmax="700" ymin="-90" ymax="60">
+            <Line id="l1" quantity="hhpop[0]/v" scale="1mV"  color="#ffffff" timeScale="1ms"/>
+        </Display>
+
+        <Display id="d2" title="Ex15: Ca Dynamics: rate variables" timeScale="1ms" xmin="0" xmax="700" ymin="-0.1" ymax="1.1">
+
+            <Line id="l3" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/Gran_KDr_98/m/q" scale="1"  color="#00ff00" timeScale="1ms"/>
+            <Line id="l4" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/Gran_KDr_98/h/q" scale="1"  color="#ff00ff" timeScale="1ms"/>
+            <Line id="l7" quantity="hhpop[0]/biophys/membraneProperties/Gran_H_98_all/Gran_H_98/n/q" scale="1"  color="#ff0000" timeScale="1ms"/>
+        
+            <Line id="l5" quantity="hhpop[0]/biophys/membraneProperties/Gran_CaHVA_98_all/Gran_CaHVA_98/m/q" scale="1"  color="#770fff" timeScale="1ms"/>
+            <Line id="l6" quantity="hhpop[0]/biophys/membraneProperties/Gran_CaHVA_98_all/Gran_CaHVA_98/h/q" scale="1"  color="#55f00f" timeScale="1ms"/>
+            
+            <Line id="l8" quantity="hhpop[0]/biophys/membraneProperties/Gran_KA_98_all/Gran_KA_98/m/q" scale="1"  color="#ffff00" timeScale="1ms"/>
+            <Line id="l9" quantity="hhpop[0]/biophys/membraneProperties/Gran_KA_98_all/Gran_KA_98/h/q" scale="1"  color="#ffffff" timeScale="1ms"/>
+
+            <!--<Line id="l1" quantity="hhpop[0]/biophys/membraneProperties/Gran_NaF_98_all/Gran_NaF_98/m/q" scale="1"  color="#000000" timeScale="1ms"/>
+            <Line id="l2" quantity="hhpop[0]/biophys/membraneProperties/Gran_NaF_98_all/Gran_NaF_98/h/q" scale="1"  color="#0000ff" timeScale="1ms"/>-->
+
+        </Display>
+<!--
+        <Display id="d3" title="Ex15: Ca Dynamics: NaF, KDr, CaHVA, KA current densities (uA_per_cm2)" timeScale="1ms">
+            <Line id="l2" quantity="hhpop[0]/biophys/membraneProperties/Gran_NaF_98_all/iDensity" scale="1uA_per_cm2"  color="#000000" save="examples/testResults/ex15_nai.dat"/>
+            <Line id="l3" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/iDensity" scale="1uA_per_cm2"  color="#0000ff" save="examples/testResults/ex15_kdri.dat"/>
+            <Line id="l5" quantity="hhpop[0]/biophys/membraneProperties/Gran_CaHVA_98_all/iDensity" scale="1uA_per_cm2"  color="#00ff00" save="examples/testResults/ex15_cai.dat"/>
+            <Line id="l4" quantity="hhpop[0]/biophys/membraneProperties/Gran_KA_98_all/iDensity" scale="1uA_per_cm2"  color="#ff0000" save="examples/testResults/ex15_kai.dat"/>
+        </Display>
+
+        <Display id="d3" title="Ex15: Ca Dynamics: Ca concentration (mM)" timeScale="1ms">
+            <Line id="li12" quantity="hhpop[0]/caConc" scale="1 mM"  color="#ffffff" save="examples/testResults/ex15_c2.dat"/>
+        </Display>
+
+        <Display id="d4" title="Ex15: Ca Dynamics: current totals" timeScale="1ms">
+            <Line id="l0" quantity="hhpop[0]/pulseGen1/i" scale="1nA"  color="#dddddd" save="examples/testResults/ex15_naigc.dat"/>
+            <Line id="l2" quantity="hhpop[0]/iCa" scale="1nA"  color="#00aa00" save="examples/testResults/ex15_naic2.dat"/>
+        </Display>-->
+
+
+    </Simulation>
+
+
+</Lems>

@@ -65,13 +65,16 @@ print "    Checking local copies of Schemas"
 import filecmp
 
 assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../neuroConstruct/NeuroML2/Schemas/NeuroML2/NeuroML_v2alpha.xsd')
-assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2beta.xsd', '../neuroConstruct/NeuroML2/Schemas/NeuroML2/NeuroML_v2beta.xsd')
+assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../neuroConstruct/NeuroML2/Schemas/NeuroML2/NeuroML_v2beta.xsd')
 
 assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../libNeuroML/ideas/padraig/generatedFromV2Schema/regenerate/NeuroML_v2alpha.xsd')
-assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2beta.xsd', '../libNeuroML/ideas/padraig/generatedFromV2Schema/regenerate/NeuroML_v2beta.xsd')
+assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../libNeuroML/ideas/padraig/generatedFromV2Schema/regenerate/NeuroML_v2beta.xsd')
 
 assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../org.neuroml.model/src/main/resources/Schemas/NeuroML2/NeuroML_v2alpha.xsd')
-assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2beta.xsd', '../org.neuroml.model/src/main/resources/Schemas/NeuroML2/NeuroML_v2beta.xsd')
+assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../org.neuroml.model/src/main/resources/Schemas/NeuroML2/NeuroML_v2beta.xsd')
+
+assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../Cvapp-NeuroMorpho.org/Schemas/NeuroML2/NeuroML_v2alpha.xsd')
+assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../Cvapp-NeuroMorpho.org/Schemas/NeuroML2/NeuroML_v2beta.xsd')
 
 
 print "--------------------------------------------------"
@@ -81,11 +84,13 @@ print "    Checking local copies of Comp Type defs & examples"
 lems_ex_dir="NeuroML2CoreTypes"
 lems_ex_list=os.listdir(lems_ex_dir)
 
-for file in lems_def_list:
+ignores = ["LEMS_NML2_Ex13_Instances.xml", "LEMS_NML2_Ex15_CaDynamics.xml"]
 
-    if file.endswith("xml") and not file.startswith("Ex"):
-    	main_ex = lems_ex_dir+"/"+file
-    	copy_org_neuroml_model = "../org.neuroml.model/src/main/resources/"+lems_ex_dir+"/"+file
+for filename in lems_def_list:
+
+    if filename.endswith("xml") and not filename.startswith("Ex") and not filename in ignores:
+    	main_ex = lems_ex_dir+"/"+filename
+    	copy_org_neuroml_model = "../org.neuroml.model/src/main/resources/"+lems_ex_dir+"/"+filename
         print "Comparing %s to %s"%(main_ex, copy_org_neuroml_model)
         assert filecmp.cmp(main_ex, copy_org_neuroml_model)
 
@@ -98,7 +103,10 @@ jlems_jar = '%s/builtjars/lems-%s.jar'%(jlems_dir,jlems_version)
 local_copy = '../org.neuroml.export/lib/lems/lems-%s.jar'%jlems_version
 print "Checking jLEMS jar %s against %s"%(local_copy, jlems_jar)
 assert filecmp.cmp(local_copy, jlems_jar)
-
+jlems_jar = jlems_jar.replace('lems-','lems-viz-')
+local_copy = local_copy.replace('lems-','lems-viz-')
+print "Checking jLEMS viz jar %s against %s"%(local_copy, jlems_jar)
+assert filecmp.cmp(local_copy, jlems_jar)
     	
     	
 
