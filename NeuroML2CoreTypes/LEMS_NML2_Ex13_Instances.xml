@@ -17,33 +17,44 @@
         <!-- Main NeuroML2 content.-->
 
 
-    <iafTauCell id="iafTauSpontaneous1" leakReversal="-50mV" thresh="-55mV" reset="-70mV" tau="30ms" />
-    <iafTauCell id="iafTauSpontaneous2" leakReversal="-50mV" thresh="-55mV" reset="-70mV" tau="26ms" />
+    <iafCell id="iafSpontaneous1" leakReversal="-50mV" thresh="-55mV" reset="-70mV"  C="0.2nF" leakConductance="0.01uS"/>
+    <iafCell id="iafSpontaneous2" leakReversal="-50mV" thresh="-56mV" reset="-71mV"  C="0.21nF" leakConductance="0.01uS"/>
+
+    <pulseGenerator id="pulseGen1" delay="50ms" duration="50ms" amplitude="0.2 nA" />
+    <pulseGenerator id="pulseGen2" delay="100ms" duration="50ms" amplitude="0.2 nA" />
+    <pulseGenerator id="pulseGen3" delay="150ms" duration="50ms" amplitude="0.2 nA" />
 
     <network id="net1">
 
-
-        <population id="iafpop" component="iafTauSpontaneous1" size="3"/>
+        <population id="iafpop" component="iafSpontaneous1" size="3"/>
         
-        <population type="populationList" id="iafpopinstances" component="iafTauSpontaneous2">
-            <instance id="0"/>
-            <instance id="1"/>
-            <instance id="2"/>
+        <population type="populationList" id="iafpopinstances" component="iafSpontaneous2">
+            <instance id="0">
+                <location x="120" y="230" z="567"/>
+            </instance>
+            <instance id="1">
+                <location x="10" y="230" z="567"/>
+            </instance>
+            <instance id="2">
+                <location x="20" y="230" z="567"/>
+            </instance>
         </population>
+
+        <explicitInput target="iafpop[0]" input="pulseGen1" destination="synapses"/>
+        <explicitInput target="iafpopinstances/0/iafSpontaneous2" input="pulseGen2" destination="synapses"/>
+        <explicitInput target="iafpopinstances/2/iafSpontaneous2" input="pulseGen3" destination="synapses"/>
 
     </network>
 
         <!-- End of NeuroML2 content -->
 
 
-<Simulation id="sim1" length="200ms" step="0.05ms" target="net1">
+<Simulation id="sim1" length="300ms" step="0.05ms" target="net1">
 
-    <Display id="d1" title="Ex13: IaF cells in LEMS" timeScale="1ms" xmin="0" xmax="200" ymin="-75" ymax="-50">
+    <Display id="d1" title="Ex13: IaF cells in LEMS" timeScale="1ms" xmin="0" xmax="300" ymin="-75" ymax="-50">
         <Line id ="iz0" quantity="iafpop[0]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
-        <Line id ="iz1" quantity="iafpopinstances/0/iafTauSpontaneous2/v" scale="1mV"  color="#ee0555" timeScale="1ms"/>
-        <Line id ="iz2" quantity="iafpopinstances/2/iafTauSpontaneous2/v" scale="1mV"  color="#333FF" timeScale="1ms"/>
-        <!--<Line id ="iz1" quantity="iafpop[1]/v" scale="1mV"  color="#eeffFF" timeScale="1ms"/>
-        <Line id ="iz2" quantity="iafpop[2]/v" scale="1mV"  color="#40eeFF" timeScale="1ms"/>-->
+        <Line id ="iz1" quantity="iafpopinstances/0/iafSpontaneous2/v" scale="1mV"  color="#ee0555" timeScale="1ms"/>
+        <Line id ="iz2" quantity="iafpopinstances/2/iafSpontaneous2/v" scale="1mV"  color="#333FF" timeScale="1ms"/>
     </Display>
 
 

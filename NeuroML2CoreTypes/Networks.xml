@@ -60,28 +60,29 @@
         <Children name="instances" type="instance"/>
     
         <ComponentReference name="component" type="baseCell"/>
-        <Structure>
-            <!--<ForEach instances="instances" as="inst">
-                <MultiInstantiate number="1" component="component"/>
-            </ForEach>-->
-        </Structure>
     </ComponentType>
 
 
-    <ComponentType name="instance"
-        description="Initial attempt to specify instances in populations. Work in progress...">
-
+    <ComponentType name="instance"description="Initial attempt to specify instances in populations. Work in progress...">
+        <Child name="location" type="location"/>
         <Structure>
             <ChildInstance component="../component"/>
         </Structure>
 
     </ComponentType>
 
+    <ComponentType name="location" description="Initial attempt to specify instances in populations. Work in progress...">
+        <Parameter name="x" dimension="none"/>
+        <Parameter name="y" dimension="none"/>
+        <Parameter name="z" dimension="none"/>
+    </ComponentType>
+
+    <!--
     <ComponentType name="networkElementInstance1D"
         extends="instance"
         description="Initial attempt to specify instances in 1D populations. Work in progress...">
         <Parameter name="x" dimension="none"/>
-    </ComponentType>
+    </ComponentType>-->
 
     
 
