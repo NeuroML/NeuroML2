@@ -301,10 +301,10 @@
 
             <DerivedVariable name="inf" dimension="none" exposure="inf" value="alpha/(alpha+beta)"/>
 
-            <DerivedVariable name="tau" dimension="time" exposure="tau" value="1/((alpha+beta) * rateScale)"/>
-            <!-- TODO
+            <!-- TODO<DerivedVariable name="tau" dimension="time" exposure="tau" value="1/((alpha+beta) * rateScale)"/>-->
+            
             <DerivedVariable name="tauUnscaled" dimension="time" select="timeCourse/t"/>
-            <DerivedVariable name="tau" dimension="time" exposure="tau" value="tauUnscaled / rateScale"/>-->
+            <DerivedVariable name="tau" dimension="time" exposure="tau" value="tauUnscaled / rateScale"/>
 
             <TimeDerivative variable="q" value="(inf - q) / tau"/>
 
@@ -314,131 +314,6 @@
 
         </Dynamics>
     </ComponentType>
-
-
-    <!--
-    <ComponentType name="gateHHTauInf" extends="gate">
-
-
-        <Child name="notes" type="notes"/>
-        <Child name="q10Settings" type="q10Settings"/>
-
-         <Child name="alpha" type="HHRate"/> may be absent..
-         <Child name="beta" type="HHRate"/>  may be absent...
-
-
-         <Child type="timeCourse" name="timeCourse"/>
-
-        <Exposure name="tau" dimension="time"/>
-        <Exposure name="inf" dimension="none"/>
-
-
-        <Dynamics>
-            <StateVariable name="q" exposure="q" dimension="none"/>
-
-            <DerivedVariable name="rateScale" dimension="none" select="q10Settings/q10" onAbsent="1"/>
-
-            <DerivedVariable name="inf" dimension="none" exposure="inf" value="1"/>
-            <DerivedVariable name="tau" dimension="time" exposure="tau" value="1"/>
-
-            <DerivedVariable name="fcond" exposure="fcond" dimension="none" value="q^instances"/>
-            <OnStart>
-                 <StateAssignment variable="q" value="inf"/>
-            </OnStart>
-
-
-        </Dynamics>
-    </ComponentType>
-
-
-
-    <ComponentType name="gateTauInfComplex" extends="gate">
-        <Parameter name="threshold" dimension="voltage"/>
-        <Parameter name="vscale" dimension="voltage"/>
-        <Parameter name="C" dimension="time"/>
-        <Parameter name="a" dimension="none"/>
-        <Parameter name="b" dimension="none"/>
-        <Parameter name="vs1" dimension="voltage"/>
-        <Parameter name="vs2" dimension="voltage"/>
-
-        <Requirement name="v" dimension="voltage"/>
-
-        <Dynamics>
-            <StateVariable name="q" exposure="q" dimension="none"/>
-            <DerivedVariable name="tau" dimension="time" value="C / (exp(a + v/vs1) + exp(b + v/vs2))"/>
-            <DerivedVariable name="qinf" dimension="none" value="1 / (1 + exp((v - threshold)/vscale))"/>
-            <TimeDerivative variable="q" value="(qinf - q) / tau"/>
-            <DerivedVariable name="fcond" exposure="fcond" dimension="none" value="q^instances"/>
-        </Dynamics>
-    </ComponentType>-->
-
-
-    <!--<Component id="gtic" type="gateTauInfComplex" instances="1" C="1ms"
-        threshold="-75mV" vscale="5.5mV" a="-14.59" vs1="16mV" b="-1.87" vs2="17mV"/>-->
-
-
-
-    <!-- neater way of expressing same thing
-
-    <ComponentType name="Tau_t">
-            <Exposure name="tau" dimension="time"/>
-
-    </ComponentType>
-
-    <ComponentType name="Inf_t">
-              <Exposure name="minf" dimension="none"/>
-
-    </ComponentType>
-
-    <ComponentType name="gateTauInf" extends="gate">
-
-         <Child type="Tau_t" name="Tau"/>
-         <Child type="Inf_t" name="Inf"/>
-
-         <Exposure name="minf" dimension="none"/>
-         <Exposure name="tau" dimension="time"/>
-         <Requirement name="v" dimension="voltage"/>-->
-
-
-     <!-- likely need for inner types here, so the Tau and Inf type definitions could be nested in here
-          <Dynamics>
-            <StateVariable name="m" exposure="q" dimension="none"/>
-            <DerivedVariable name="minf" exposure="minf" dimension="none" select="Inf/minf"/>
-            <DerivedVariable name="tau" exposure="tau" dimension="time" select="Tau/tau"/>
-
-            <DerivedVariable name="fcond" exposure="fcond" dimension="none" value="m^instances"/>
-
-            <TimeDerivative variable="m" value="(minf - m) / tau"/> -->
-
-
-             <!--  note that '/' is part of a path, or a division operator depending on context
-
-          </Dynamics>
-    </ComponentType>-->
-
-    <!--
-    <ComponentType name="hillTau" extends="Tau_t">
-        <Parameter name="C" dimension="time"/>
-        <Parameter name="a" dimension="none"/>
-        <Parameter name="b" dimension="none"/>
-        <Parameter name="vs1" dimension="voltage"/>
-        <Parameter name="vs2" dimension="voltage"/>
-        <Requirement name="v" dimension="voltage"/>
-        <Dynamics>
-            <DerivedVariable name="tau" exposure="tau" dimension="time" value="C / (exp(a + v/vs1) + exp(b + v/vs2))"/>
-        </Dynamics>
-    </ComponentType>
-
-    <ComponentType name="hillInf" extends="Inf_t">
-        <Parameter name="threshold" dimension="voltage"/>
-        <Parameter name="vscale" dimension="voltage"/>
-         <Requirement name="v" dimension="voltage"/>
-
-        <Dynamics>
-            <DerivedVariable name="inf" exposure="minf" dimension="none" value="1 / (1 + exp((v - threshold)/vscale))"/>
-        </Dynamics>
-    </ComponentType>-->
-
 
 
 

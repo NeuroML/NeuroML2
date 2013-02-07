@@ -22,11 +22,12 @@
 
     <network id="net1">
 
-        <population id="iafpop" component="iafTauSpontaneous1" size="3"/>
+        <!--<population id="iafpop" component="iafTauSpontaneous1" size="3"/>-->
         
-        <!--<population type="populationList" id="iafpopinstances" component="iafTauSpontaneous2">
+        <population type="populationList" id="iafpopinstances" component="iafTauSpontaneous2">
             <instance id="0"/>
-        </population>-->
+        </population>
+
     </network>
 
         <!-- End of NeuroML2 content -->

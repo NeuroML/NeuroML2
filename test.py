@@ -84,7 +84,7 @@ print "    Checking local copies of Comp Type defs & examples"
 lems_ex_dir="NeuroML2CoreTypes"
 lems_ex_list=os.listdir(lems_ex_dir)
 
-ignores = ["LEMS_NML2_Ex13_Instances.xml", "LEMS_NML2_Ex15_CaDynamics.xml"]
+ignores = ["LEMS_NML2_Ex13_Instances.xml", "LEMS_NML2_Ex15_CaDynamics.xml", "LEMS_NML2_Ex16_Inputs.xml", "LEMS_NML2_Ex14_PyNN.xml"]
 
 for filename in lems_def_list:
 
@@ -108,7 +108,8 @@ local_copy = local_copy.replace('lems-','lems-viz-')
 print "Checking jLEMS viz jar %s against %s"%(local_copy, jlems_jar)
 assert filecmp.cmp(local_copy, jlems_jar)
     	
-    	
+
+print "\n  *** All tests passed! ***\n"
 
 
 if '-r' in sys.argv:

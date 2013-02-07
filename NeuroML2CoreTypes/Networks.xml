@@ -61,7 +61,7 @@
     
         <ComponentReference name="component" type="baseCell"/>
         <Structure>
-            <ForEach instances="instance/" as="inst">
+            <ForEach instances="instances[*]" as="inst">
                 <!--<MultiInstantiate number="1" component="component"/>-->
             </ForEach>
         </Structure>
