@@ -22,10 +22,13 @@
 
     <network id="net1">
 
-        <!--<population id="iafpop" component="iafTauSpontaneous1" size="3"/>-->
+
+        <population id="iafpop" component="iafTauSpontaneous1" size="3"/>
         
         <population type="populationList" id="iafpopinstances" component="iafTauSpontaneous2">
             <instance id="0"/>
+            <instance id="1"/>
+            <instance id="2"/>
         </population>
 
     </network>
@@ -37,6 +40,8 @@
 
     <Display id="d1" title="Ex13: IaF cells in LEMS" timeScale="1ms" xmin="0" xmax="200" ymin="-75" ymax="-50">
         <Line id ="iz0" quantity="iafpop[0]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
+        <Line id ="iz1" quantity="iafpopinstances/0/iafTauSpontaneous2/v" scale="1mV"  color="#ee0555" timeScale="1ms"/>
+        <Line id ="iz2" quantity="iafpopinstances/2/iafTauSpontaneous2/v" scale="1mV"  color="#333FF" timeScale="1ms"/>
         <!--<Line id ="iz1" quantity="iafpop[1]/v" scale="1mV"  color="#eeffFF" timeScale="1ms"/>
         <Line id ="iz2" quantity="iafpop[2]/v" scale="1mV"  color="#40eeFF" timeScale="1ms"/>-->
     </Display>

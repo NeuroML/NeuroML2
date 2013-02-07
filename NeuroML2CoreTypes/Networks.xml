@@ -61,15 +61,20 @@
     
         <ComponentReference name="component" type="baseCell"/>
         <Structure>
-            <ForEach instances="instances[*]" as="inst">
-                <!--<MultiInstantiate number="1" component="component"/>-->
-            </ForEach>
+            <!--<ForEach instances="instances" as="inst">
+                <MultiInstantiate number="1" component="component"/>
+            </ForEach>-->
         </Structure>
     </ComponentType>
 
 
     <ComponentType name="instance"
         description="Initial attempt to specify instances in populations. Work in progress...">
+
+        <Structure>
+            <ChildInstance component="../component"/>
+        </Structure>
+
     </ComponentType>
 
     <ComponentType name="networkElementInstance1D"
