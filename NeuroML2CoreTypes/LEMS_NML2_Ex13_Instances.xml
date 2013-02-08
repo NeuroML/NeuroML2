@@ -1,63 +1,34 @@
+
 <Lems>
 
-   <!-- Example with instances of cells in populations having different parameters... -->
-
-   <!-- NOT YET FULLY TESTED!!!! -->
+<!-- Example with instances of cells in populations having different parameters... -->
 
 
 <!-- Specify which component to run -->
-<Target component="sim1"/>
+    <Target component="sim1"/>
 
 <!-- Include core NeuroML2 ComponentType definitions -->
-<Include file="Cells.xml"/>
-<Include file="Networks.xml"/>
-<Include file="Simulation.xml"/>
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
 
 
-        <!-- Main NeuroML2 content.-->
+    <!-- Main NeuroML2 content. -->
+
+    <!-- Including file with a <neuroml> root, a "real" NeuroML 2 file -->
+    <Include file="../examples/NML2_InstanceBasedNetwork.nml"/>
+
+    <!-- End of NeuroML2 content -->
 
 
-    <iafCell id="iafSpontaneous1" leakReversal="-50mV" thresh="-55mV" reset="-70mV"  C="0.2nF" leakConductance="0.01uS"/>
-    <iafCell id="iafSpontaneous2" leakReversal="-50mV" thresh="-56mV" reset="-71mV"  C="0.21nF" leakConductance="0.01uS"/>
+    <Simulation id="sim1" length="300ms" step="0.05ms" target="InstanceBasedNetwork">
 
-    <pulseGenerator id="pulseGen1" delay="50ms" duration="50ms" amplitude="0.2 nA" />
-    <pulseGenerator id="pulseGen2" delay="100ms" duration="50ms" amplitude="0.2 nA" />
-    <pulseGenerator id="pulseGen3" delay="150ms" duration="50ms" amplitude="0.2 nA" />
-
-    <network id="net1">
-
-        <population id="iafpop" component="iafSpontaneous1" size="3"/>
-        
-        <population type="populationList" id="iafpopinstances" component="iafSpontaneous2">
-            <instance id="0">
-                <location x="120" y="230" z="567"/>
-            </instance>
-            <instance id="1">
-                <location x="10" y="230" z="567"/>
-            </instance>
-            <instance id="2">
-                <location x="20" y="230" z="567"/>
-            </instance>
-        </population>
-
-        <explicitInput target="iafpop[0]" input="pulseGen1" destination="synapses"/>
-        <explicitInput target="iafpopinstances/0/iafSpontaneous2" input="pulseGen2" destination="synapses"/>
-        <explicitInput target="iafpopinstances/2/iafSpontaneous2" input="pulseGen3" destination="synapses"/>
-
-    </network>
-
-        <!-- End of NeuroML2 content -->
+        <Display id="d1" title="Ex13: Instance Based Network in LEMS" timeScale="1ms" xmin="0" xmax="300" ymin="-75" ymax="-50">
+            <Line id ="iaf0" quantity="iafCells/0/iaf/v" scale="1mV"  color="#ee0555" timeScale="1ms"/>
+            <Line id ="iaf1" quantity="iafCells/1/iaf/v" scale="1mV"  color="#999255" timeScale="1ms"/>
+        </Display>
 
 
-<Simulation id="sim1" length="300ms" step="0.05ms" target="net1">
-
-    <Display id="d1" title="Ex13: IaF cells in LEMS" timeScale="1ms" xmin="0" xmax="300" ymin="-75" ymax="-50">
-        <Line id ="iz0" quantity="iafpop[0]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
-        <Line id ="iz1" quantity="iafpopinstances/0/iafSpontaneous2/v" scale="1mV"  color="#ee0555" timeScale="1ms"/>
-        <Line id ="iz2" quantity="iafpopinstances/2/iafSpontaneous2/v" scale="1mV"  color="#333FF" timeScale="1ms"/>
-    </Display>
-
-
-</Simulation>
+    </Simulation>
 
 </Lems>

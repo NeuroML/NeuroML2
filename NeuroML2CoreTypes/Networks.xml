@@ -21,6 +21,8 @@
 
         <Children name="explicitInputs" type="explicitInput"/>
 
+        <Children name="inputs" type="inputList"/>
+
         <Exposure name="temperature" dimension="temperature" description="Temperature will be taken from extracellularProperties child. NOTE: temperature will be absolute zero if absent!!"/>
 
         <Dynamics>
@@ -39,10 +41,10 @@
         </Dynamics>
     </ComponentType>
 
+
     <ComponentType name="basePopulation" description="A population of cells (anything which extends _baseCell_)">
         <ComponentReference name="component" type="baseCell"/>
         <Requirement name="temperature" dimension="temperature" description="Normally comes from the extracellularProperties in the network"/>
-
     </ComponentType>
 
 
@@ -63,7 +65,7 @@
     </ComponentType>
 
 
-    <ComponentType name="instance"description="Initial attempt to specify instances in populations. Work in progress...">
+    <ComponentType name="instance" description="Initial attempt to specify instances in populations. Work in progress...">
         <Child name="location" type="location"/>
         <Structure>
             <ChildInstance component="../component"/>
@@ -143,6 +145,7 @@
         <ComponentReference name="synapse" type="baseSynapse"/>
         <Path name="from"/>
         <Path name="to"/>
+        <Text name="destination"/>
 
         <Structure>
             <With instance="from" as="a"/>
@@ -216,6 +219,31 @@
             <!--<EventConnection from="a" to="b" receiver="input" receiverContainer="destination" sourcePort="sourcePort" targetPort="targetPort"/>-->
             <EventConnection from="a" to="b" receiver="input" receiverContainer="destination"/>
         </Structure>
+    </ComponentType>
+
+
+    <ComponentType name="inputList" description="An explicit list of inputs. Not yet stable...">
+
+
+        <Children name="inputs" type="input"/>
+
+        <ComponentReference name="component" type="basePointCurrent"/>
+    </ComponentType>
+
+
+    <ComponentType name="input" description="Initial attempt to specify input lists. Work in progress...">
+
+        <Path name="target"/>
+        <Structure>
+            <ChildInstance component="../component"/>
+
+            <With instance="target" as="a"/>
+            <With instance="target" as="b"/>
+
+            <!--<EventConnection from="a" to="b" receiver="input" receiverContainer="destination" sourcePort="sourcePort" targetPort="targetPort"/>-->
+            <EventConnection from="a" to="b" receiver="input" receiverContainer="destination"/>
+        </Structure>
+
     </ComponentType>
 
 </Lems>

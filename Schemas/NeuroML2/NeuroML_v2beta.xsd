@@ -1118,12 +1118,23 @@
 
                 <xs:attribute name="size" type="xs:integer" use="optional"/>    <!-- Temp!!! -->
 
+                <xs:attribute name="type" type="populationTypes" use="optional"/>
+
                 <xs:attribute name="extracellularProperties" type="NmlId" use="optional"/>
 
             </xs:extension>
         </xs:complexContent>
 
     </xs:complexType>
+
+
+
+    <xs:simpleType name="populationTypes">
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="population"/>
+        <xs:enumeration value="populationList"/>
+      </xs:restriction>
+    </xs:simpleType>
 
 
     <xs:complexType name="Layout">

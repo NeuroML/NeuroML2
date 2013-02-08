@@ -19,7 +19,7 @@
             <!-- Main NeuroML2 content -->
     
     <ionChannelKS id="k_vh" conductance="8pS">
-        <gateKS id="n" instances="1" deltaV="0.1mV">
+        <gateKS id="n" instances="1">
             <closedState id="c1"/>
             <openState id="o1"/>
             <vHalfTransition from="c1" to="o1" vHalf = "0mV" z="1.5" gamma="0.75" tau="3.2ms" tauMin="0.3ms"/>
@@ -28,7 +28,7 @@
     
     <!-- This channel is not fully tested yet! -->
     <ionChannelKS id="k_fr"  conductance="1pS">
-        <gateKS id="n" instances="1" deltaV="0.1mV">
+        <gateKS id="n" instances="1">
             <closedState id="c1"/>
             <openState id="o1"/>
             

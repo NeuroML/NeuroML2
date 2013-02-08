@@ -15,17 +15,20 @@
 
     <iafCell id="iaf" leakReversal="-60mV" thresh="-55mV" reset="-65mV" C="1.0nF" leakConductance="0.05uS"/>
 
-    <pulseGenerator id="pulseGen1" delay="100ms" duration="800ms" amplitude="0.3nA"/>
+    <pulseGenerator id="pulseGen1" delay="100ms" duration="100ms" amplitude="0.3nA"/>
+    <pulseGenerator id="pulseGen2" delay="100ms" duration="100ms" amplitude="0.4nA"/>
 
     <network id="InstanceBasedNetwork">
 
-        <!-- TODO: Add list!!  -->
-        <population id="iafCells" component="iaf" size="1">
+        <population id="iafCells" type="populationList" component="iaf">
             <instance id="0">
                 <location x="120" y="230" z="567"/>
             </instance>
             <instance id="1">
                 <location x="270" y="450" z="56"/>
+            </instance>
+            <instance id="2">
+                <location x="54" y="234" z="89"/>
             </instance>
         </population>
 
@@ -36,9 +39,14 @@
             <connection id="0" preCell="../../iafCells[0]" postCell="../../iafCells[1]"/>
         </projection> -->
         
-        <synapticConnection from="iafCells[0]" to="iafCells[1]" synapse="syn1"/>
+        <!--<synapticConnection from="iafCells[0]" to="iafCells[1]" synapse="syn1"/>-->
 
-        <explicitInput target="iafCells[0]" input="pulseGen1"/>
+        <explicitInput target="iafCells/0/iaf" input="pulseGen1"/>
+        <explicitInput target="iafCells/1/iaf" input="pulseGen2"/>
+        <!--
+        <inputList component="pulseGen1">
+            <input target="../iafCells/1/iaf"/>
+        </inputList>-->
 
     </network>
 
