@@ -48,7 +48,7 @@
             <!--<DerivedVariable name="t" exposure="t" dimension="time" value="( 0.00005 ) * TIME_SCALE" valueCondition="1/(alpha + beta)  .lt. ( 0.00005 )" valueIfFalse="( 1/(alpha + beta)) * TIME_SCALE"/>-->
             <ConditionalDerivedVariable name="t" exposure="t" dimension="time">
                 <Case condition="1/(alpha + beta)  .lt. ( 0.00005 )" value="( 0.00005 ) * TIME_SCALE"/>
-                <Case condition="1/(alpha + beta)  .geq. ( 0.00005 )" value="( 1/(alpha + beta)) * TIME_SCALE"/>
+                <Case value="( 1/(alpha + beta)) * TIME_SCALE"/>
             </ConditionalDerivedVariable>
         </Dynamics>
     </ComponentType>
@@ -64,7 +64,7 @@
             <!--<DerivedVariable name="t" exposure="t" dimension="time" value="( 0.000225 ) * TIME_SCALE" valueCondition="1/(alpha + beta)  .lt. ( 0.000225 )" valueIfFalse="( 1/(alpha + beta)) * TIME_SCALE"/>-->
             <ConditionalDerivedVariable name="t" exposure="t" dimension="time">
                 <Case condition="1/(alpha + beta)  .lt. ( 0.000225 )" value="( 0.000225 ) * TIME_SCALE"/>
-                <Case condition="1/(alpha + beta)  .geq. ( 0.000225 )" value="( 1/(alpha + beta)) * TIME_SCALE"/>
+                <Case value="( 1/(alpha + beta)) * TIME_SCALE"/>
             </ConditionalDerivedVariable>
         </Dynamics>
     </ComponentType><!-- -->
@@ -115,7 +115,7 @@
             <DerivedVariable name="V" dimension="none" value="(v - offset) / VOLT_SCALE"/>
             <ConditionalDerivedVariable name="r" exposure="r" dimension="per_time">
                 <Case condition="V  .gt. ( -0.046 )" value="( 0.76 ) / TIME_SCALE"/>
-                <Case condition="V  .leq. ( -0.046 )" value="( 0.7 + 0.065*(exp (-80*(V - (-0.046))))) / TIME_SCALE"/>
+                <Case value="( 0.7 + 0.065*(exp (-80*(V - (-0.046))))) / TIME_SCALE"/>
             </ConditionalDerivedVariable>
         </Dynamics>
     </ComponentType>
