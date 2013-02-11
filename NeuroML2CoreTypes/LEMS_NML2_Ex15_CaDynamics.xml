@@ -21,15 +21,6 @@
     <ionChannel id="Gran_NaF_98" conductance="10pS" type="ionChannelHH" species="na">
         <notes>Fast inactivating Na+ channel</notes>
 
-        <!--<gateHHrates id="m" instances="3">
-            <forwardRate type="HHExpLinearRate" rate="1per_ms" midpoint="-40mV" scale="10mV"/>
-            <reverseRate type="HHExpRate" rate="4per_ms" midpoint="-65mV" scale="-18mV"/>
-       </gateHHrates>
-
-       <gateHHrates id="h" instances="1">
-           <forwardRate type="HHExpRate" rate="0.07per_ms" midpoint="-65mV" scale="-20mV"/>
-           <reverseRate type="HHSigmoidRate" rate="1per_ms" midpoint="-35mV" scale="10mV"/>
-       </gateHHrates>-->
 
       <gateHHratesTau id="m" instances="3">
             <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="17.350264793 degC"/>
@@ -55,7 +46,11 @@
         <Requirement name="beta" dimension="per_time"/>
         <Dynamics>
             <DerivedVariable name="V" dimension="none" value="(v - offset) / VOLT_SCALE"/>
-            <DerivedVariable name="t" exposure="t" dimension="time" value="( 0.00005 ) * TIME_SCALE" valueCondition="1/(alpha + beta)  .lt. ( 0.00005 )" valueIfFalse="( 1/(alpha + beta)) * TIME_SCALE"/>
+            <!--<DerivedVariable name="t" exposure="t" dimension="time" value="( 0.00005 ) * TIME_SCALE" valueCondition="1/(alpha + beta)  .lt. ( 0.00005 )" valueIfFalse="( 1/(alpha + beta)) * TIME_SCALE"/>-->
+            <ConditionalDerivedVariable name="t" exposure="t" dimension="time">
+                <Case condition="1/(alpha + beta)  .lt. ( 0.00005 )" value="( 0.00005 ) * TIME_SCALE"/>
+                <Case condition="1/(alpha + beta)  .geq. ( 0.00005 )" value="( 1/(alpha + beta)) * TIME_SCALE"/>
+            </ConditionalDerivedVariable>
         </Dynamics>
     </ComponentType>
 
@@ -67,9 +62,13 @@
         <Requirement name="beta" dimension="per_time"/>
         <Dynamics>
             <DerivedVariable name="V" dimension="none" value="(v - offset) / VOLT_SCALE"/>
-            <DerivedVariable name="t" exposure="t" dimension="time" value="( 0.000225 ) * TIME_SCALE" valueCondition="1/(alpha + beta)  .lt. ( 0.000225 )" valueIfFalse="( 1/(alpha + beta)) * TIME_SCALE"/>
+            <!--<DerivedVariable name="t" exposure="t" dimension="time" value="( 0.000225 ) * TIME_SCALE" valueCondition="1/(alpha + beta)  .lt. ( 0.000225 )" valueIfFalse="( 1/(alpha + beta)) * TIME_SCALE"/>-->
+            <ConditionalDerivedVariable name="t" exposure="t" dimension="time">
+                <Case condition="1/(alpha + beta)  .lt. ( 0.000225 )" value="( 0.000225 ) * TIME_SCALE"/>
+                <Case condition="1/(alpha + beta)  .geq. ( 0.000225 )" value="( 1/(alpha + beta)) * TIME_SCALE"/>
+            </ConditionalDerivedVariable>
         </Dynamics>
-    </ComponentType>
+    </ComponentType><!-- -->
 
 
 
@@ -115,7 +114,10 @@
         <Constant name="offset" dimension="voltage" value="0.010V"/>
         <Dynamics>
             <DerivedVariable name="V" dimension="none" value="(v - offset) / VOLT_SCALE"/>
-            <DerivedVariable name="r" exposure="r" dimension="per_time" value="( 0.76 ) / TIME_SCALE" valueCondition="V  .gt. ( -0.046 )" valueIfFalse="( 0.7 + 0.065*(exp (-80*(V - (-0.046))))) / TIME_SCALE"/>
+            <ConditionalDerivedVariable name="r" exposure="r" dimension="per_time">
+                <Case condition="V  .gt. ( -0.046 )" value="( 0.76 ) / TIME_SCALE"/>
+                <Case condition="V  .leq. ( -0.046 )" value="( 0.7 + 0.065*(exp (-80*(V - (-0.046))))) / TIME_SCALE"/>
+            </ConditionalDerivedVariable>
         </Dynamics>
     </ComponentType>
 
@@ -182,7 +184,11 @@
         <Constant name="offset" dimension="voltage" value="0.010V"/>
         <Dynamics>
             <DerivedVariable name="V" dimension="none" value="(v - offset) / VOLT_SCALE"/>
-            <DerivedVariable name="r" exposure="r" dimension="per_time" value="( 5.0 ) / TIME_SCALE" valueCondition="V   .lt. ( -0.060 )" valueIfFalse="( 5 * (exp (-50 * (V - (-0.060))))) / TIME_SCALE"/>
+            <!--<DerivedVariable name="r" exposure="r" dimension="per_time" value="( 5.0 ) / TIME_SCALE" valueCondition="V   .lt. ( -0.060 )" valueIfFalse="( 5 * (exp (-50 * (V - (-0.060))))) / TIME_SCALE"/>-->
+            <ConditionalDerivedVariable name="r" exposure="r" dimension="per_time">
+                <Case condition="V   .lt. ( -0.060 )" value="( 5.0 ) / TIME_SCALE"/>
+                <Case condition="V   .geq. ( -0.060 )" value="( 5 * (exp (-50 * (V - (-0.060))))) / TIME_SCALE"/>
+            </ConditionalDerivedVariable>
         </Dynamics>
     </ComponentType>
 
@@ -192,7 +198,11 @@
         <Constant name="offset" dimension="voltage" value="0.010V"/>
         <Dynamics>
             <DerivedVariable name="V" dimension="none" value="(v - offset) / VOLT_SCALE"/>
-            <DerivedVariable name="r" exposure="r" dimension="per_time" value="( 0 ) / TIME_SCALE" valueCondition="V   .lt. ( -0.060 )" valueIfFalse="( 5 - (5 * (exp (-50 * (V - (-0.060)))))) / TIME_SCALE"/>
+            <!--<DerivedVariable name="r" exposure="r" dimension="per_time" value="( 0 ) / TIME_SCALE" valueCondition="V   .lt. ( -0.060 )" valueIfFalse="( 5 - (5 * (exp (-50 * (V - (-0.060)))))) / TIME_SCALE"/>-->
+            <ConditionalDerivedVariable name="r" exposure="r" dimension="per_time">
+                <Case condition="V .lt. ( -0.060 )" value="( 0 ) / TIME_SCALE"/>
+                <Case condition="V .geq. ( -0.060 )" value="( 5 - (5 * (exp (-50 * (V - (-0.060)))))) / TIME_SCALE"/>
+            </ConditionalDerivedVariable>
         </Dynamics>
     </ComponentType>
 
@@ -319,14 +329,13 @@
             <membraneProperties>
 
                 <channelDensity condDensity="0.0330033 mS_per_cm2" id="GranPassiveCond_all" ionChannel="GranPassiveCond" erev="-65.0 mV" ion="non_specific"/>
-                <channelDensity condDensity="0 mS_per_cm2" id="Gran_NaF_98_all" ionChannel="Gran_NaF_98" erev="55.0 mV" ion="na"/>
-<!--
-
-                <channelDensity condDensity="55.7227 mS_per_cm2" id="Gran_NaF_98_all" ionChannel="Gran_NaF_98" erev="55.0 mV" ion="na"/>
                 <channelDensity condDensity="8.89691 mS_per_cm2" id="Gran_KDr_98_all" ionChannel="Gran_KDr_98" erev="-90.0 mV" ion="k"/>
+                <channelDensity condDensity="55.7227 mS_per_cm2" id="Gran_NaF_98_all" ionChannel="Gran_NaF_98" erev="55.0 mV" ion="na"/>
                 <channelDensity condDensity="0.03090506 mS_per_cm2" id="Gran_H_98_all" ionChannel="Gran_H_98" erev="-42.0 mV" ion="h"/>
                 <channelDensity condDensity="0.9084216 mS_per_cm2" id="Gran_CaHVA_98_all" ionChannel="Gran_CaHVA_98" erev="80.0 mV" ion="ca"/>
                 <channelDensity condDensity="1.14567 mS_per_cm2" id="Gran_KA_98_all" ionChannel="Gran_KA_98" erev="-90.0 mV" ion="k"/>
+<!--
+
 
 
                 <channelDensity condDensity="17.9811 mS_per_cm2" id="Gran_KCa_98_all" ionChannel="Gran_KCa_98" erev="-90.0 mV" ion="k"/>
@@ -382,30 +391,32 @@
 
         <Display id="d2" title="Ex15: Ca Dynamics: rate variables" timeScale="1ms" xmin="0" xmax="700" ymin="-0.1" ymax="1.1">
 
-            <!--<Line id="Gran_KDr_98/m" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/Gran_KDr_98/m/q" scale="1"  color="#00ff00" timeScale="1ms"/>
+            <Line id="Gran_KDr_98/m" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/Gran_KDr_98/m/q" scale="1"  color="#00ff00" timeScale="1ms"/>
             <Line id="Gran_KDr_98/h" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/Gran_KDr_98/h/q" scale="1"  color="#ff00ff" timeScale="1ms"/>
-            <Line id="Gran_H_98/n" quantity="hhpop[0]/biophys/membraneProperties/Gran_H_98_all/Gran_H_98/n/q" scale="1"  color="#ff0000" timeScale="1ms"/>
-        
-            <Line id="Gran_CaHVA_98/m" quantity="hhpop[0]/biophys/membraneProperties/Gran_CaHVA_98_all/Gran_CaHVA_98/m/q" scale="1"  color="#770fff" timeScale="1ms"/>
-            <Line id="Gran_CaHVA_98/h" quantity="hhpop[0]/biophys/membraneProperties/Gran_CaHVA_98_all/Gran_CaHVA_98/h/q" scale="1"  color="#55f00f" timeScale="1ms"/>
-            
-            <Line id="Gran_KA_98/m" quantity="hhpop[0]/biophys/membraneProperties/Gran_KA_98_all/Gran_KA_98/m/q" scale="1"  color="#ffff00" timeScale="1ms"/>
-            <Line id="Gran_KA_98/h" quantity="hhpop[0]/biophys/membraneProperties/Gran_KA_98_all/Gran_KA_98/h/q" scale="1"  color="#ffffff" timeScale="1ms"/>-->
 
             <Line id="Gran_NaF_98/m" quantity="hhpop[0]/biophys/membraneProperties/Gran_NaF_98_all/Gran_NaF_98/m/q" scale="1"  color="#000000" timeScale="1ms"/>
             <Line id="Gran_NaF_98/h" quantity="hhpop[0]/biophys/membraneProperties/Gran_NaF_98_all/Gran_NaF_98/h/q" scale="1"  color="#0000ff" timeScale="1ms"/>
 
+            <Line id="Gran_CaHVA_98/m" quantity="hhpop[0]/biophys/membraneProperties/Gran_CaHVA_98_all/Gran_CaHVA_98/m/q" scale="1"  color="#770fff" timeScale="1ms"/>
+            <Line id="Gran_CaHVA_98/h" quantity="hhpop[0]/biophys/membraneProperties/Gran_CaHVA_98_all/Gran_CaHVA_98/h/q" scale="1"  color="#55f00f" timeScale="1ms"/>
+            <!--
+            <Line id="Gran_H_98/n" quantity="hhpop[0]/biophys/membraneProperties/Gran_H_98_all/Gran_H_98/n/q" scale="1"  color="#ff0000" timeScale="1ms"/>
+        
+            
+            <Line id="Gran_KA_98/m" quantity="hhpop[0]/biophys/membraneProperties/Gran_KA_98_all/Gran_KA_98/m/q" scale="1"  color="#ffff00" timeScale="1ms"/>
+            <Line id="Gran_KA_98/h" quantity="hhpop[0]/biophys/membraneProperties/Gran_KA_98_all/Gran_KA_98/h/q" scale="1"  color="#ffffff" timeScale="1ms"/>-->
+
 
             
 
         </Display>
-
+ <!--
         <Display id="d3" title="Ex15: Ca Dynamics: NaF, KDr, CaHVA, KA current densities (uA_per_cm2)" timeScale="1ms" xmin="0" xmax="700" ymin="-0.1" ymax="1.1">
             <Line id="l2" quantity="hhpop[0]/biophys/membraneProperties/Gran_NaF_98_all/iDensity" scale="1uA_per_cm2"  color="#000000" timeScale="1ms"/>
-            <!--<Line id="l3" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/iDensity" scale="1uA_per_cm2"  color="#0000ff" save="examples/testResults/ex15_kdri.dat"/>
+           <Line id="l3" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/iDensity" scale="1uA_per_cm2"  color="#0000ff" save="examples/testResults/ex15_kdri.dat"/>
             <Line id="l5" quantity="hhpop[0]/biophys/membraneProperties/Gran_CaHVA_98_all/iDensity" scale="1uA_per_cm2"  color="#00ff00" save="examples/testResults/ex15_cai.dat"/>
-            <Line id="l4" quantity="hhpop[0]/biophys/membraneProperties/Gran_KA_98_all/iDensity" scale="1uA_per_cm2"  color="#ff0000" save="examples/testResults/ex15_kai.dat"/>-->
-        </Display>
+            <Line id="l4" quantity="hhpop[0]/biophys/membraneProperties/Gran_KA_98_all/iDensity" scale="1uA_per_cm2"  color="#ff0000" save="examples/testResults/ex15_kai.dat"/>
+        </Display>-->
 <!--
         <Display id="d3" title="Ex15: Ca Dynamics: Ca concentration (mM)" timeScale="1ms">
             <Line id="li12" quantity="hhpop[0]/caConc" scale="1 mM"  color="#ffffff" save="examples/testResults/ex15_c2.dat"/>
@@ -416,16 +427,27 @@
             <Line id="l2" quantity="hhpop[0]/iCa" scale="1nA"  color="#00aa00" save="examples/testResults/ex15_naic2.dat"/>
         </Display>-->
 
+        <Display id="d5" title="Ex15: Ca Dynamics: tau values" timeScale="1ms" xmin="0" xmax="700" ymin="-0.1" ymax="1.1">
+            <Line id="mtau" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/Gran_KDr_98/m/tau" scale="1ms"  color="#dddddd" timeScale="1ms"/>
+            <Line id="htau" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/Gran_KDr_98/h/tau" scale="1ms"  color="#1111dd" timeScale="1ms"/>
+        </Display>
+
+        <!--<Display id="d6" title="Ex15: Ca Dynamics: alphabeta values" timeScale="1ms" xmin="0" xmax="700" ymin="-0.1" ymax="1.1">
+            <Line id="halpha" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/Gran_KDr_98/h/alpha" scale="1per_ms"  color="#dddddd" timeScale="1ms"/>
+            <Line id="hbeta" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/Gran_KDr_98/h/beta" scale="1per_ms"  color="#1111dd" timeScale="1ms"/>
+        </Display>-->
+
 
         <OutputFile id="of0" fileName="results/ex15_v.dat">
             <OutputColumn id="v" quantity="hhpop[0]/v"/>
         </OutputFile>
-        <OutputFile id="of1" fileName="results/ex15_nam.dat">
-            <OutputColumn id="v" quantity="hhpop[0]/biophys/membraneProperties/Gran_NaF_98_all/Gran_NaF_98/m/q"/>
+        
+        <!--<OutputFile id="of1" fileName="results/ex15_ha.dat">
+            <OutputColumn id="v" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/Gran_KDr_98/h/alpha"/>
         </OutputFile>
-        <OutputFile id="of2" fileName="results/ex15_nah.dat">
-            <OutputColumn id="v" quantity="hhpop[0]/biophys/membraneProperties/Gran_NaF_98_all/Gran_NaF_98/h/q"/>
-        </OutputFile>
+        <OutputFile id="of2" fileName="results/ex15_hb.dat">
+            <OutputColumn id="v" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/Gran_KDr_98/h/beta"/>
+        </OutputFile>-->
 
 
 
