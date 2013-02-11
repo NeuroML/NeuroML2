@@ -23,9 +23,10 @@
 
     <Simulation id="sim1" length="300ms" step="0.05ms" target="InstanceBasedNetwork">
 
-        <Display id="d1" title="Ex13: Instance Based Network in LEMS" timeScale="1ms" xmin="0" xmax="300" ymin="-75" ymax="-50">
+        <Display id="d1" title="Ex13: Instance Based Network in LEMS" timeScale="1ms" xmin="0" xmax="300" ymin="-65" ymax="-52">
             <Line id ="iaf0" quantity="iafCells/0/iaf/v" scale="1mV"  color="#ee0555" timeScale="1ms"/>
             <Line id ="iaf1" quantity="iafCells/1/iaf/v" scale="1mV"  color="#999255" timeScale="1ms"/>
+            <Line id ="iaf2" quantity="iafCells/2/iaf/v" scale="1mV"  color="#911155" timeScale="1ms"/>
         </Display>
 
 

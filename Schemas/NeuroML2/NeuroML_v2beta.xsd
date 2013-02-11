@@ -147,7 +147,8 @@
     <xs:simpleType name="NeuroLexId">
         <xs:annotation>
             <xs:documentation>An id string for pointing to an entry in the NeuroLex ontology. Use of this attribute is a shorthand for a full
-            RDF based reference to the MIRIAM Resource urn:miriam:neurolex, with an bqbiol:is qualifier</xs:documentation>
+            RDF based reference to the MIRIAM Resource urn:miriam:neurolex, with an bqbiol:is qualifier
+            </xs:documentation>
         </xs:annotation>
 
         <xs:restriction base="xs:string">
@@ -178,7 +179,8 @@
     <xs:simpleType name="Notes">
         <xs:annotation>
             <xs:documentation>Textual human readable notes related to the element in question. It's useful to put these into
-         the NeuroML files instead of XML comments, as the notes can be extracted and repeated in the files to which the NeuroML is mapped.</xs:documentation>
+         the NeuroML files instead of XML comments, as the notes can be extracted and repeated in the files to which the NeuroML is mapped.
+            </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string"/>
     </xs:simpleType>
@@ -210,7 +212,7 @@
 
     <xs:simpleType name="ZeroToOne">
         <xs:annotation>
-                <xs:documentation>Double restricted to between 1 and 0</xs:documentation>
+            <xs:documentation>Double restricted to between 1 and 0</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:double">
             <xs:minInclusive value="0"/>
@@ -236,32 +238,32 @@
 
             <xs:extension base="Standalone">
 
-            <xs:sequence>
+                <xs:sequence>
                 
-                <xs:element name="include" type="IncludeType" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="include" type="IncludeType" minOccurs="0" maxOccurs="unbounded"/>
 
-                <xs:element name="extracellularProperties" type="ExtracellularProperties" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element name="intracellularProperties" type="IntracellularProperties" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="extracellularProperties" type="ExtracellularProperties" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="intracellularProperties" type="IntracellularProperties" minOccurs="0" maxOccurs="unbounded"/>
 
-                <xs:element name="morphology" type="Morphology" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="morphology" type="Morphology" minOccurs="0" maxOccurs="unbounded"/>
 
-                <xs:element name="ionChannel" type="IonChannel" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="ionChannel" type="IonChannel" minOccurs="0" maxOccurs="unbounded"/>
 
-                <xs:group ref="ConcentrationModelTypes"/>
+                    <xs:group ref="ConcentrationModelTypes"/>
 
-                <xs:group ref="SynapseTypes"/>
+                    <xs:group ref="SynapseTypes"/>
 
-                <xs:element name="biophysicalProperties" type="BiophysicalProperties" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="biophysicalProperties" type="BiophysicalProperties" minOccurs="0" maxOccurs="unbounded"/>
 
-                <xs:group ref="CellTypes"/>
+                    <xs:group ref="CellTypes"/>
 
-                <xs:element name="pulseGenerator" type="PulseGenerator" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="pulseGenerator" type="PulseGenerator" minOccurs="0" maxOccurs="unbounded"/>
 
-                <xs:element name="network" type="Network" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="network" type="Network" minOccurs="0" maxOccurs="unbounded"/>
 
-                <xs:element name="ComponentType" type="ComponentType" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="ComponentType" type="ComponentType" minOccurs="0" maxOccurs="unbounded"/>
 
-            </xs:sequence>
+                </xs:sequence>
 
             </xs:extension>
 
@@ -277,41 +279,41 @@
 
     <xs:group name="CellTypes">
         <xs:annotation>
-        <xs:documentation>Various types of cells which are defined in NeuroML 2. This list will be expanded...</xs:documentation>
+            <xs:documentation>Various types of cells which are defined in NeuroML 2. This list will be expanded...</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-                <xs:element name="cell" type="Cell" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element name="abstractCell" type="AbstractCell" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element name="iafTauCell" type="IaFTauCell" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element name="iafCell" type="IaFCell" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element name="izhikevichCell" type="IzhikevichCell" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element name="adExIaFCell" type="AdExIaFCell" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="cell" type="Cell" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="abstractCell" type="AbstractCell" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="iafTauCell" type="IaFTauCell" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="iafCell" type="IaFCell" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="izhikevichCell" type="IzhikevichCell" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="adExIaFCell" type="AdExIaFCell" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
-   </xs:group>
+    </xs:group>
 
 
 
     <xs:group name="SynapseTypes">
         <xs:annotation>
-        <xs:documentation>Various types of synapse which are defined in NeuroML 2. This list will be expanded...</xs:documentation>
+            <xs:documentation>Various types of synapse which are defined in NeuroML 2. This list will be expanded...</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-                <xs:element name="expOneSynapse" type="ExpOneSynapse" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element name="expTwoSynapse" type="ExpTwoSynapse" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element name="nmdaSynapse"   type="NmdaSynapse"   minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element name="stpSynapse"    type="StpSynapse"    minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="expOneSynapse" type="ExpOneSynapse" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="expTwoSynapse" type="ExpTwoSynapse" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="nmdaSynapse"   type="NmdaSynapse"   minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="stpSynapse"    type="StpSynapse"    minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
-   </xs:group>
+    </xs:group>
 
 
     <xs:group name="ConcentrationModelTypes">
         <xs:annotation>
-        <xs:documentation>Various types of concentration model which are defined in NeuroML 2. This list will be expanded...</xs:documentation>
+            <xs:documentation>Various types of concentration model which are defined in NeuroML 2. This list will be expanded...</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-                <xs:element name="decayingPoolConcentrationModel" type="DecayingPoolConcentrationModel" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="decayingPoolConcentrationModel" type="DecayingPoolConcentrationModel" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
-   </xs:group>
+    </xs:group>
 
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     <!--      IonChannel element                                  -->
@@ -338,20 +340,20 @@
     </xs:complexType>
 
     <xs:simpleType name="channelTypes">
-      <xs:restriction base="xs:string">
-        <xs:enumeration value="ionChannelPassive"/>
-        <xs:enumeration value="ionChannelHH"/>
-        <xs:enumeration value="ionChannelKS"/>
-      </xs:restriction>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ionChannelPassive"/>
+            <xs:enumeration value="ionChannelHH"/>
+            <xs:enumeration value="ionChannelKS"/>
+        </xs:restriction>
     </xs:simpleType>
 
 
     <xs:simpleType name="gateTypes">
-      <xs:restriction base="xs:string">
-        <xs:enumeration value="gateHHrates"/>
-        <xs:enumeration value="gateHHtauInf"/>
-        <xs:enumeration value="gateKS"/>
-      </xs:restriction>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="gateHHrates"/>
+            <xs:enumeration value="gateHHtauInf"/>
+            <xs:enumeration value="gateKS"/>
+        </xs:restriction>
     </xs:simpleType>
 
 
@@ -388,32 +390,32 @@
 
 
     <xs:complexType name="Q10Settings">
-            <xs:attribute name="type" type="NmlId" use="required"/>
-            <xs:attribute name="fixedQ10" type="Nml2Quantity_none" use="optional"/>   <!-- TODO: make this and follwing 2 attrs either/or-->
-            <xs:attribute name="q10Factor" type="Nml2Quantity_none" use="optional"/>
-            <xs:attribute name="experimentalTemp" type="Nml2Quantity_temperature" use="optional"/>
+        <xs:attribute name="type" type="NmlId" use="required"/>
+        <xs:attribute name="fixedQ10" type="Nml2Quantity_none" use="optional"/>   <!-- TODO: make this and follwing 2 attrs either/or-->
+        <xs:attribute name="q10Factor" type="Nml2Quantity_none" use="optional"/>
+        <xs:attribute name="experimentalTemp" type="Nml2Quantity_temperature" use="optional"/>
     </xs:complexType>
 
     <xs:complexType name="HHRate">
-            <xs:attribute name="type" type="NmlId" use="required"/>
-            <xs:attribute name="rate" type="Nml2Quantity_pertime" use="optional"/>
-            <xs:attribute name="midpoint" type="Nml2Quantity_voltage" use="optional"/>
-            <xs:attribute name="scale" type="Nml2Quantity_voltage" use="optional"/>
+        <xs:attribute name="type" type="NmlId" use="required"/>
+        <xs:attribute name="rate" type="Nml2Quantity_pertime" use="optional"/>
+        <xs:attribute name="midpoint" type="Nml2Quantity_voltage" use="optional"/>
+        <xs:attribute name="scale" type="Nml2Quantity_voltage" use="optional"/>
     </xs:complexType>
 
     <xs:complexType name="HHVariable">
-            <xs:attribute name="type" type="NmlId" use="required"/>
-            <xs:attribute name="rate" type="xs:float" use="optional"/>
-            <xs:attribute name="midpoint" type="Nml2Quantity_voltage" use="optional"/>
-            <xs:attribute name="scale" type="Nml2Quantity_voltage" use="optional"/>
+        <xs:attribute name="type" type="NmlId" use="required"/>
+        <xs:attribute name="rate" type="xs:float" use="optional"/>
+        <xs:attribute name="midpoint" type="Nml2Quantity_voltage" use="optional"/>
+        <xs:attribute name="scale" type="Nml2Quantity_voltage" use="optional"/>
     </xs:complexType>
 
     <xs:complexType name="HHTime">
-            <xs:attribute name="type" type="NmlId" use="required"/>
-            <xs:attribute name="rate" type="Nml2Quantity_time" use="optional"/>
-            <xs:attribute name="midpoint" type="Nml2Quantity_voltage" use="optional"/>
-            <xs:attribute name="scale" type="Nml2Quantity_voltage" use="optional"/>
-            <xs:attribute name="tau" type="Nml2Quantity_time" use="optional"/>    <!-- TODO: make this and prev 3 attrs either/or-->
+        <xs:attribute name="type" type="NmlId" use="required"/>
+        <xs:attribute name="rate" type="Nml2Quantity_time" use="optional"/>
+        <xs:attribute name="midpoint" type="Nml2Quantity_voltage" use="optional"/>
+        <xs:attribute name="scale" type="Nml2Quantity_voltage" use="optional"/>
+        <xs:attribute name="tau" type="Nml2Quantity_time" use="optional"/>    <!-- TODO: make this and prev 3 attrs either/or-->
     </xs:complexType>
 
     <!--<xs:complexType name="FixedTimeCourse">
@@ -616,14 +618,16 @@
                 <xs:attribute name="morphology" type="NmlId" use="optional" default="1">
                     <xs:annotation>
                         <xs:documentation>Should only be used if morphology element is outside the cell.
-                                          This points to the id of the morphology</xs:documentation>
+                                          This points to the id of the morphology
+                        </xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
 
                 <xs:attribute name="biophysicalProperties" type="NmlId" use="optional" default="1">
                     <xs:annotation>
                         <xs:documentation>Should only be used if biophysicalProperties element is outside the cell.
-                                          This points to the id of the biophysicalProperties</xs:documentation>
+                                          This points to the id of the biophysicalProperties
+                        </xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
 
@@ -636,7 +640,8 @@
     <xs:complexType name="Morphology">
         <xs:annotation>
             <xs:documentation>Standalone element which is usually inside a single cell, but could be outside and
-                              referenced by id.</xs:documentation>
+                              referenced by id.
+            </xs:documentation>
         </xs:annotation>
 
         <xs:complexContent>
@@ -724,10 +729,10 @@
 
     <xs:simpleType name="Metric">
         <xs:annotation>
-                <xs:documentation>Allowed metrics for InhomogeneousParam</xs:documentation>
+            <xs:documentation>Allowed metrics for InhomogeneousParam</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
-                <xs:enumeration value="Path Length from root"/>
+            <xs:enumeration value="Path Length from root"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -775,7 +780,8 @@
     <xs:complexType name="BiophysicalProperties">
         <xs:annotation>
             <xs:documentation>Standalone element which is usually inside a single cell, but could be outside and
-                              referenced by id.</xs:documentation>
+                              referenced by id.
+            </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="Standalone">
@@ -815,7 +821,7 @@
             <xs:extension base="Base">
 
                 <xs:sequence>
-                        <xs:element name="variableParameter" type="VariableParameter" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="variableParameter" type="VariableParameter" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
 
                 <xs:attribute name="ionChannel" type="NmlId" use="required"/>
@@ -832,7 +838,8 @@
                         <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel. It is added here
                         TEMPORARILY as selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
                         It should be removed in the longer term, due to possible inconsistencies in this value and that in the ionChannel
-                        element. TODO: remove.</xs:documentation>
+                        element. TODO: remove.
+                        </xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
 
@@ -847,7 +854,7 @@
             <xs:extension base="Base">
                     
                 <xs:sequence>
-                        <xs:element name="variableParameter" type="VariableParameter" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="variableParameter" type="VariableParameter" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
 
                 <xs:attribute name="ionChannel" type="NmlId" use="required"/>
@@ -865,7 +872,8 @@
                         <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel. It is added here
                         TEMPORARILY as selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
                         It should be removed in the longer term, due to possible inconsistencies in this value and that in the ionChannel 
-                        element. TODO: remove.</xs:documentation>
+                        element. TODO: remove.
+                        </xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
 
@@ -924,7 +932,8 @@
                 <xs:attribute name="ion" type="NmlId" use="optional">
                     <xs:annotation>
                         <xs:documentation>Specifying the ion here again is redundant, the ion name should be the same as id. Kept for now
-                        until LEMS implementation can select by id. TODO: remove.</xs:documentation>
+                        until LEMS implementation can select by id. TODO: remove.
+                        </xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
 
@@ -1042,10 +1051,12 @@
                     <xs:element name="extracellularProperties" type="ExtracellularPropertiesLocal" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="population" type="Population" maxOccurs="unbounded"/>
                     <xs:element name="cellSet" type="CellSet" minOccurs="0" maxOccurs="unbounded"/>
-                    <xs:element name="projection" type="Projection" minOccurs="0" maxOccurs="unbounded"/>
+                        
                     <xs:element name="synapticConnection" type="SynapticConnection" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
-                    <xs:element name="connection" type="Connection" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
+                    <xs:element name="projection" type="Projection" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
+
                     <xs:element name="explicitInput" type="ExplicitInput" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
+                    <xs:element name="inputList" type="InputList" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1067,24 +1078,24 @@
     </xs:complexType>
 
     <xs:complexType name="SpaceStructure">
-                <xs:attribute name="xSpacing" type="xs:float"/>
-                <xs:attribute name="ySpacing" type="xs:float" use="optional"/> <!-- only use if >= 2D grid-->
-                <xs:attribute name="zSpacing" type="xs:float" use="optional"/> <!-- only use if 3D grid-->
-                <xs:attribute name="xStart" type="xs:float" use="optional" default="0"/>
-                <xs:attribute name="yStart" type="xs:float" use="optional" default="0"/> <!-- only use if >= 2D grid-->
-                <xs:attribute name="zStart" type="xs:float" use="optional" default="0"/> <!-- only use if 3D grid-->
+        <xs:attribute name="xSpacing" type="xs:float"/>
+        <xs:attribute name="ySpacing" type="xs:float" use="optional"/> <!-- only use if >= 2D grid-->
+        <xs:attribute name="zSpacing" type="xs:float" use="optional"/> <!-- only use if 3D grid-->
+        <xs:attribute name="xStart" type="xs:float" use="optional" default="0"/>
+        <xs:attribute name="yStart" type="xs:float" use="optional" default="0"/> <!-- only use if >= 2D grid-->
+        <xs:attribute name="zStart" type="xs:float" use="optional" default="0"/> <!-- only use if 3D grid-->
     </xs:complexType>
 
 
     <xs:simpleType name="allowedSpaces">
-      <xs:restriction base="xs:string">
-        <xs:enumeration value="Euclidean_1D"/>
-        <xs:enumeration value="Euclidean_2D"/>
-        <xs:enumeration value="Euclidean_3D"/>
-        <xs:enumeration value="Grid_1D"/>
-        <xs:enumeration value="Grid_2D"/>
-        <xs:enumeration value="Grid_3D"/>
-      </xs:restriction>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Euclidean_1D"/>
+            <xs:enumeration value="Euclidean_2D"/>
+            <xs:enumeration value="Euclidean_3D"/>
+            <xs:enumeration value="Grid_1D"/>
+            <xs:enumeration value="Grid_2D"/>
+            <xs:enumeration value="Grid_3D"/>
+        </xs:restriction>
     </xs:simpleType>
 
 
@@ -1130,59 +1141,59 @@
 
 
     <xs:simpleType name="populationTypes">
-      <xs:restriction base="xs:string">
-        <xs:enumeration value="population"/>
-        <xs:enumeration value="populationList"/>
-      </xs:restriction>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="population"/>
+            <xs:enumeration value="populationList"/>
+        </xs:restriction>
     </xs:simpleType>
 
 
     <xs:complexType name="Layout">
 
-                <xs:choice>
-                    <xs:element name="random" type="RandomLayout"/>
-                    <xs:element name="grid" type="GridLayout"/>
-                    <xs:element name="unstructured" type="UnstructuredLayout"/>
-                </xs:choice>
+        <xs:choice>
+            <xs:element name="random" type="RandomLayout"/>
+            <xs:element name="grid" type="GridLayout"/>
+            <xs:element name="unstructured" type="UnstructuredLayout"/>
+        </xs:choice>
 
-                <xs:attribute name="space" type="NmlId"/>
+        <xs:attribute name="space" type="NmlId"/>
 
     </xs:complexType>
 
 
 
     <xs:complexType name="UnstructuredLayout">
-                <xs:attribute name="number" type="xs:nonNegativeInteger"/>
+        <xs:attribute name="number" type="xs:nonNegativeInteger"/>
     </xs:complexType>
 
 
     <xs:complexType name="RandomLayout">
-                <xs:attribute name="number" type="xs:nonNegativeInteger"/>
-                <xs:attribute name="region" type="NmlId"/>
+        <xs:attribute name="number" type="xs:nonNegativeInteger"/>
+        <xs:attribute name="region" type="NmlId"/>
     </xs:complexType>
 
 
     <xs:complexType name="GridLayout">
-                <xs:attribute name="xSize" type="xs:nonNegativeInteger"/>
-                <xs:attribute name="ySize" type="xs:nonNegativeInteger" use="optional"/> <!-- only use if >= 2D grid-->
-                <xs:attribute name="zSize" type="xs:nonNegativeInteger" use="optional"/> <!-- only use if 3D grid-->
+        <xs:attribute name="xSize" type="xs:nonNegativeInteger"/>
+        <xs:attribute name="ySize" type="xs:nonNegativeInteger" use="optional"/> <!-- only use if >= 2D grid-->
+        <xs:attribute name="zSize" type="xs:nonNegativeInteger" use="optional"/> <!-- only use if 3D grid-->
     </xs:complexType>
 
 
     <xs:complexType name="Instance">
-                <xs:sequence>
-                    <xs:element name="location" type="Location"/>
-                </xs:sequence>
-                <xs:attribute name="id" type="xs:nonNegativeInteger"/>
-                <xs:attribute name="i" type="xs:nonNegativeInteger"/>  <!-- for grid -->
-                <xs:attribute name="j" type="xs:nonNegativeInteger"/>  <!-- for grid -->
-                <xs:attribute name="k" type="xs:nonNegativeInteger"/>  <!-- for grid -->
+        <xs:sequence>
+            <xs:element name="location" type="Location"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:nonNegativeInteger"/>
+        <xs:attribute name="i" type="xs:nonNegativeInteger"/>  <!-- for grid -->
+        <xs:attribute name="j" type="xs:nonNegativeInteger"/>  <!-- for grid -->
+        <xs:attribute name="k" type="xs:nonNegativeInteger"/>  <!-- for grid -->
     </xs:complexType>
 
     <xs:complexType name="Location">
-                <xs:attribute name="x" type="xs:float"/>
-                <xs:attribute name="y" type="xs:float"/>
-                <xs:attribute name="z" type="xs:float"/>
+        <xs:attribute name="x" type="xs:float"/>
+        <xs:attribute name="y" type="xs:float"/>
+        <xs:attribute name="z" type="xs:float"/>
     </xs:complexType>
 
 
@@ -1201,38 +1212,78 @@
     </xs:complexType>
 
 
-    <xs:complexType name="Projection">
+    <xs:complexType name="SynapticConnection">
+        <xs:annotation>
+            <xs:documentation>Single explicit connection. Introduced to test connections in LEMS. Will probably be removed in favour of
+            connections wrapped in projection element</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="from" type="xs:string"/>
+        <xs:attribute name="to" type="xs:string"/>
+        <xs:attribute name="synapse" type="xs:string"/>
+    </xs:complexType>
 
+    <xs:complexType name="Projection">
+        <xs:annotation>
+            <xs:documentation>Subject to change as it gets tested with LEMS</xs:documentation>
+        </xs:annotation>
         <xs:complexContent>
             <xs:extension base="Base">
                 <xs:sequence>
-                    <xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/> <!-- Further elements will be specified!! -->
+                    <xs:element name="connection" type="Connection" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
+                <xs:attribute name="presynapticPopulation" type="NmlId"/>
+                <xs:attribute name="postsynapticPopulation" type="NmlId"/>
+                <xs:attribute name="synapse" type="NmlId"/>
             </xs:extension>
         </xs:complexContent>
-
     </xs:complexType>
 
-
-<!--Will be updated in line with LEMS ComponentType definitions -->
-    <xs:complexType name="SynapticConnection">
-                <xs:attribute name="from" type="xs:string"/>
-                <xs:attribute name="to" type="xs:string"/>
-                <xs:attribute name="synapse" type="xs:string"/>
-    </xs:complexType>
-
-<!--Will be updated in line with LEMS ComponentType definitions -->
     <xs:complexType name="Connection">
-                <xs:attribute name="from" type="xs:string"/>
-                <xs:attribute name="to" type="xs:string"/>
+        <xs:annotation>
+            <xs:documentation>Subject to change as it gets tested with LEMS</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="id" type="xs:nonNegativeInteger"/>
+        <xs:attribute name="preCellId" type="xs:string"/>
+        <xs:attribute name="postCellId" type="xs:string"/>
     </xs:complexType>
 
-<!--Will be updated in line with LEMS ComponentType definitions -->
+
+
     <xs:complexType name="ExplicitInput">
-                <xs:attribute name="target" type="xs:string"/>
-                <xs:attribute name="input" type="xs:string"/>
-                <xs:attribute name="destination" type="xs:string"/>
+        <xs:annotation>
+            <xs:documentation>Single explicit input. Introduced to test inputs in LEMS. Will probably be removed in favour of
+            inputs wrapped in inputList element</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="target" type="xs:string"/>
+        <xs:attribute name="input" type="xs:string"/>
+        <xs:attribute name="destination" type="xs:string"/>
     </xs:complexType>
+
+
+    <xs:complexType name="InputList">
+        <xs:annotation>
+            <xs:documentation>Subject to change as it gets tested with LEMS</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="Base">
+                <xs:sequence>
+                    <xs:element name="input" type="Input" minOccurs="1" maxOccurs="unbounded"/>
+                </xs:sequence>
+                <xs:attribute name="population" type="NmlId"/>
+                <xs:attribute name="component" type="NmlId"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="Input">
+        <xs:annotation>
+            <xs:documentation>Subject to change as it gets tested with LEMS</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="id" type="xs:nonNegativeInteger"/>
+        <xs:attribute name="target" type="xs:string"/>
+        <xs:attribute name="destination" type="NmlId"/>
+    </xs:complexType>
+
 
 
 

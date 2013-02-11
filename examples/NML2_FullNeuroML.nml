@@ -128,8 +128,9 @@
              ... 
         </cellSet>-->
 
-        <projection id="Proj1">
-                <!-- ... -->
+
+        <projection id="Proj1" presynapticPopulation="Population1" postsynapticPopulation="Population1" synapse="AMPA">
+           <!-- Further elements need to be added... -->
         </projection>
 
     </network>

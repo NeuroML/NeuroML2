@@ -38,9 +38,7 @@
 
         <!-- Local connections within this unit-->
 
-        <projection id="Proj1">
-            <source population="Population1"/>
-            <target population="Population2"/>
+        <projection id="Proj1" presynapticPopulation="Population1" postsynapticPopulation="Population2" synapse="Syn1">
            <!-- Further elements need to be added... -->
         </projection>
 

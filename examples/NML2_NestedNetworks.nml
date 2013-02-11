@@ -29,15 +29,11 @@
 
        <!-- some local connections within this unit-->
 
-       <projection id="InternalRecurrentExc">
-           <source population="Excitatory"/>
-           <target population="Excitatory"/>
+       <projection id="InternalRecurrentExc" presynapticPopulation="Excitatory" postsynapticPopulation="Excitatory" synapse="Syn1">
            <!-- Further elements needed here... -->
        </projection>
 
-       <projection id="InternalExcInh">
-           <source population="Excitatory"/>
-           <target population="Inhibitory"/>
+       <projection id="InternalExcInh" presynapticPopulation="Excitatory" postsynapticPopulation="Inhibitory" synapse="Syn1">
            <!-- Further elements needed here... -->
        </projection>
 
@@ -71,9 +67,7 @@
 
         <!-- Define connections based on the sets  -->
 
-        <projection id="RecurrentGlobalExc">
-           <source set="AllExcitatoryCells"/>
-           <target set="AllExcitatoryCells"/>
+        <projection id="RecurrentGlobalExc" presynapticPopulation="AllExcitatoryCells" postsynapticPopulation="AllExcitatoryCells" synapse="Syn1">
            <!-- Further elements needed here... -->
         </projection>
 

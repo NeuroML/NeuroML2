@@ -57,7 +57,7 @@
     </ComponentType>
 
 
-    <ComponentType name="populationList" extends="basePopulation" description="An explicit list of the cells in the population. Not yet stable...">
+    <ComponentType name="populationList" extends="basePopulation" description="An explicit list of the cells in the population. Work in progress...">
 
         <Children name="instances" type="instance"/>
     
@@ -78,14 +78,6 @@
         <Parameter name="y" dimension="none"/>
         <Parameter name="z" dimension="none"/>
     </ComponentType>
-
-    <!--
-    <ComponentType name="networkElementInstance1D"
-        extends="instance"
-        description="Initial attempt to specify instances in 1D populations. Work in progress...">
-        <Parameter name="x" dimension="none"/>
-    </ComponentType>-->
-
     
 
     <ComponentType name="region" description="Initial attempt to specify 3D region for placing cells. Work in progress...">
@@ -106,35 +98,39 @@
 
     <ComponentType name="projection"
         description="Projection from one population to another. Currently it's better to define an explicit list of connections, using _explicitConnection_. Work in progress...">
-        <Children name="synapticConnections" type="synapticConnection"/>
+        <!--TODO: allow more than one...-->
+        <Child name="synapseComponent" type="synapseComponent"/>
         <Children name="connections" type="connection"/>
-        <Path name="from"/>
-        <Path name="to"/>
+        <ComponentReference name="synapse" type="baseSynapse"/>
+        <Path name="presynapticPopulation"/>
+        <Path name="postsynapticPopulation"/>
     </ComponentType>
 
 
+    <ComponentType name="synapseComponent" description="Work in progress...">
+        <ComponentReference name="component" type="baseSynapse"/>
+    </ComponentType>
+
+
+    <ComponentType name="connection"
+        description="Explicit event connection directly between named components">
+
+        <Path name="preCellId"/>
+        <Path name="postCellId"/>
+
+        <Structure>
+            <With instance="preCellId" as="a"/>
+            <With instance="postCellId" as="b"/>
+            <EventConnection from="a" to="b" receiver="../synapse" receiverContainer="destination" sourcePort="sourcePort" targetPort="targetPort"/>
+        </Structure>
+
+    </ComponentType>
 
     <ComponentType name="explicitConnection"
         description="Explicit event connection between components">
         <Path name="from"/>
         <Path name="to"/>
         <Text name="targetPort"/>
-    </ComponentType>
-
-
-    <ComponentType name="connection"
-        extends="explicitConnection"
-        description="Explicit event connection directly between named components">
-
-        <Path name="from"/> <!-- TODO check if these really need to be here if in explicitConnection... -->
-        <Path name="to"/>
-
-        <Structure>
-            <With instance="from" as="a"/>
-            <With instance="to" as="b"/>
-            <EventConnection from="a" to="b" targetPort="targetPort"/>
-        </Structure>
-
     </ComponentType>
 
 
@@ -224,24 +220,23 @@
 
     <ComponentType name="inputList" description="An explicit list of inputs. Not yet stable...">
 
-
         <Children name="inputs" type="input"/>
-
         <ComponentReference name="component" type="basePointCurrent"/>
+        <Text name="population"/>
+
     </ComponentType>
 
 
     <ComponentType name="input" description="Initial attempt to specify input lists. Work in progress...">
 
         <Path name="target"/>
+        <Text name="destination"/>
         <Structure>
-            <ChildInstance component="../component"/>
 
             <With instance="target" as="a"/>
             <With instance="target" as="b"/>
 
-            <!--<EventConnection from="a" to="b" receiver="input" receiverContainer="destination" sourcePort="sourcePort" targetPort="targetPort"/>-->
-            <EventConnection from="a" to="b" receiver="input" receiverContainer="destination"/>
+            <EventConnection from="a" to="b" receiver="../component" receiverContainer="destination"/>
         </Structure>
 
     </ComponentType>

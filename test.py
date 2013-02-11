@@ -34,14 +34,14 @@ for file in lems_def_list:
     
     if file.endswith("xml") and not file.startswith("LEMS") and not file.startswith("Ex"):
 
-        print "Validating %s..." %(file)
+        print("Validating %s..."%(file)),
 
         doc = etree.parse(lems_def_dir+"/"+file)
         valid = lems_xmlschema.validate(doc)
         if valid:
-            print "  It is valid!"
+            print "  it's valid!"
         else:
-            print "  *** It's NOT valid! ***"
+            print "\n\n  *** It's NOT valid! ***\n"
 
 print "--------------------------------------------------"
 print "    Validating NeuroML 2 files against: %s" %(nml2_schema)
@@ -50,14 +50,14 @@ for file in nml2_ex_list:
 
     if file.endswith("nml"):
 
-        print "Validating %s..." %(file)
+        print("Validating %s..." %(file)),
 
         doc = etree.parse(nml2_ex_dir+"/"+file)
         valid = nml2_xmlschema.validate(doc)
         if valid:
-            print "  It is valid!"
+            print "  it's valid!"
         else:
-            print "  *** It's NOT valid! ***"
+            print "\n\n  *** It's NOT valid! ***\n"
 
 print "--------------------------------------------------"
 print "    Checking local copies of Schemas"
@@ -119,6 +119,7 @@ if '-r' in sys.argv:
 
     import subprocess, os
     lems_def_list.sort()
+    
     to_ignore = ['LEMS_NML2_Ex13_Instances.xml']
     for file in lems_def_list:
 
