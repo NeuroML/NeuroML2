@@ -21,8 +21,7 @@
     <ionChannel id="Gran_NaF_98" conductance="10pS" type="ionChannelHH" species="na">
         <notes>Fast inactivating Na+ channel</notes>
 
-
-      <gateHHratesTau id="m" instances="3">
+        <gateHHratesTau id="m" instances="3">
             <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="17.350264793 degC"/>
             <notes>Note: offset from ChannelML file incorporated into midpoint of rates!!</notes>
             <forwardRate type="HHExpRate" rate="1500per_s" scale="0.012345679V" midpoint="-0.029V"/>
@@ -35,7 +34,7 @@
             <forwardRate type="HHExpRate" rate="120per_s" scale="-0.01123596V" midpoint="-0.04V"/>
             <reverseRate type="HHExpRate" rate="120per_s" scale="0.01123596V" midpoint="-0.04V"/>
             <timeCourse type="Gran_NaF_98_h_tau_tau"/>
-        </gateHHratesTau> 
+        </gateHHratesTau>
     </ionChannel>
 
     <ComponentType name="Gran_NaF_98_m_tau_tau" extends="baseVoltageDepTime">
@@ -246,15 +245,6 @@
 
 
 
-
-<!--
-
-
-
-        
-
-
-
     <ionChannel id = "Gran_KCa_98" conductance = "10pS" type = "ionChannelHH" species = "k">
         <notes>Calcium dependent K+ channel</notes>
         <gateHHrates id="m" instances = "1">
@@ -294,7 +284,7 @@
                          restingConc="7.55E-11 mol_per_cm3"
                          decayConstant="10.0 ms"
                          shellThickness="8.4E-6 cm"/>
--->
+
 
     <cell id="Granule_98">
 
@@ -334,13 +324,7 @@
                 <channelDensity condDensity="0.03090506 mS_per_cm2" id="Gran_H_98_all" ionChannel="Gran_H_98" erev="-42.0 mV" ion="h"/>
                 <channelDensity condDensity="0.9084216 mS_per_cm2" id="Gran_CaHVA_98_all" ionChannel="Gran_CaHVA_98" erev="80.0 mV" ion="ca"/>
                 <channelDensity condDensity="1.14567 mS_per_cm2" id="Gran_KA_98_all" ionChannel="Gran_KA_98" erev="-90.0 mV" ion="k"/>
-<!--
-
-
-
                 <channelDensity condDensity="17.9811 mS_per_cm2" id="Gran_KCa_98_all" ionChannel="Gran_KCa_98" erev="-90.0 mV" ion="k"/>
-
--->
 
                 <spikeThresh value="0 mV"/>
 
@@ -351,12 +335,12 @@
             </membraneProperties>
 
             <intracellularProperties>
-<!--
+
                 <species id="ca"
                          ion="ca"
                          concentrationModel="Gran_CaPool"
                          initialConcentration="7.55E-5 mM"
-                         initialExtConcentration="2 mM"/>-->
+                         initialExtConcentration="2 mM"/><!-- -->
 
                 <resistivity value="0.1 kohm_cm"/>
 
@@ -367,7 +351,7 @@
     </cell>
 
 
-    <pulseGenerator id="pulseGen1" delay="100ms" duration="100ms" amplitude="-0.01 nA" />
+    <pulseGenerator id="pulseGen1" delay="100ms" duration="500ms" amplitude="0.01 nA" />
     <pulseGenerator id="pulseGen2" delay="400ms" duration="100ms" amplitude="0.01 nA" />
 
     <voltageClamp id="vClamp1" delay="150ms" duration="50ms" targetVoltage="10mV" seriesResistance="1ohm"/>
@@ -376,7 +360,7 @@
         <extracellularProperties temperature = "32 degC"/>
         <population id="hhpop" component="Granule_98" size="1"/>
         <explicitInput target="hhpop[0]" input="pulseGen1"/>
-        <explicitInput target="hhpop[0]" input="pulseGen2"/>
+        <!--<explicitInput target="hhpop[0]" input="pulseGen2"/>-->
     </network>
 
 
@@ -399,38 +383,34 @@
 
             <Line id="Gran_CaHVA_98/m" quantity="hhpop[0]/biophys/membraneProperties/Gran_CaHVA_98_all/Gran_CaHVA_98/m/q" scale="1"  color="#770fff" timeScale="1ms"/>
             <Line id="Gran_CaHVA_98/h" quantity="hhpop[0]/biophys/membraneProperties/Gran_CaHVA_98_all/Gran_CaHVA_98/h/q" scale="1"  color="#55f00f" timeScale="1ms"/>
-            <!--
             <Line id="Gran_H_98/n" quantity="hhpop[0]/biophys/membraneProperties/Gran_H_98_all/Gran_H_98/n/q" scale="1"  color="#ff0000" timeScale="1ms"/>
+            <!--
         
-            
             <Line id="Gran_KA_98/m" quantity="hhpop[0]/biophys/membraneProperties/Gran_KA_98_all/Gran_KA_98/m/q" scale="1"  color="#ffff00" timeScale="1ms"/>
             <Line id="Gran_KA_98/h" quantity="hhpop[0]/biophys/membraneProperties/Gran_KA_98_all/Gran_KA_98/h/q" scale="1"  color="#ffffff" timeScale="1ms"/>-->
 
-
-            
-
         </Display>
- <!--
-        <Display id="d3" title="Ex15: Ca Dynamics: NaF, KDr, CaHVA, KA current densities (uA_per_cm2)" timeScale="1ms" xmin="0" xmax="700" ymin="-0.1" ymax="1.1">
-            <Line id="l2" quantity="hhpop[0]/biophys/membraneProperties/Gran_NaF_98_all/iDensity" scale="1uA_per_cm2"  color="#000000" timeScale="1ms"/>
-           <Line id="l3" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/iDensity" scale="1uA_per_cm2"  color="#0000ff" save="examples/testResults/ex15_kdri.dat"/>
-            <Line id="l5" quantity="hhpop[0]/biophys/membraneProperties/Gran_CaHVA_98_all/iDensity" scale="1uA_per_cm2"  color="#00ff00" save="examples/testResults/ex15_cai.dat"/>
-            <Line id="l4" quantity="hhpop[0]/biophys/membraneProperties/Gran_KA_98_all/iDensity" scale="1uA_per_cm2"  color="#ff0000" save="examples/testResults/ex15_kai.dat"/>
-        </Display>-->
+ 
+        <Display id="d3" title="Ex15: Ca Dynamics: NaF, KDr, CaHVA, KA current densities (uA_per_cm2)" timeScale="1ms" xmin="0" xmax="700" ymin="-650" ymax="650">
+            <Line id="NaF iDensity" quantity="hhpop[0]/biophys/membraneProperties/Gran_NaF_98_all/iDensity" scale="1uA_per_cm2"  color="#000000" timeScale="1ms"/>
+           <Line id="KDr iDensity" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/iDensity" scale="1uA_per_cm2"  color="#0000ff" timeScale="1ms"/>
+            <Line id="CaHVA iDensity" quantity="hhpop[0]/biophys/membraneProperties/Gran_CaHVA_98_all/iDensity" scale="1uA_per_cm2"  color="#00ff00" timeScale="1ms"/>
+            <Line id="KA iDensity" quantity="hhpop[0]/biophys/membraneProperties/Gran_KA_98_all/iDensity" scale="1uA_per_cm2"  color="#ff0000" timeScale="1ms"/>
+        </Display>
+
+        <Display id="d4" title="Ex15: Ca Dynamics: Ca concentration (mM)" timeScale="1ms" xmin="0" xmax="700" ymin="-0.0005" ymax="0.003">
+            <Line id="caConc" quantity="hhpop[0]/caConc" scale="1 mM"  color="#ffffff" timeScale="1ms"/>
+        </Display>
 <!--
-        <Display id="d3" title="Ex15: Ca Dynamics: Ca concentration (mM)" timeScale="1ms">
-            <Line id="li12" quantity="hhpop[0]/caConc" scale="1 mM"  color="#ffffff" save="examples/testResults/ex15_c2.dat"/>
-        </Display>
-
         <Display id="d4" title="Ex15: Ca Dynamics: current totals" timeScale="1ms">
             <Line id="l0" quantity="hhpop[0]/pulseGen1/i" scale="1nA"  color="#dddddd" save="examples/testResults/ex15_naigc.dat"/>
             <Line id="l2" quantity="hhpop[0]/iCa" scale="1nA"  color="#00aa00" save="examples/testResults/ex15_naic2.dat"/>
-        </Display>-->
+        </Display>
 
         <Display id="d5" title="Ex15: Ca Dynamics: tau values" timeScale="1ms" xmin="0" xmax="700" ymin="-0.1" ymax="1.1">
             <Line id="mtau" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/Gran_KDr_98/m/tau" scale="1ms"  color="#dddddd" timeScale="1ms"/>
             <Line id="htau" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/Gran_KDr_98/h/tau" scale="1ms"  color="#1111dd" timeScale="1ms"/>
-        </Display>
+        </Display>-->
 
         <!--<Display id="d6" title="Ex15: Ca Dynamics: alphabeta values" timeScale="1ms" xmin="0" xmax="700" ymin="-0.1" ymax="1.1">
             <Line id="halpha" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/Gran_KDr_98/h/alpha" scale="1per_ms"  color="#dddddd" timeScale="1ms"/>
