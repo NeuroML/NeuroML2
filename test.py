@@ -84,7 +84,7 @@ print "    Checking local copies of Comp Type defs & examples"
 lems_ex_dir="NeuroML2CoreTypes"
 lems_ex_list=os.listdir(lems_ex_dir)
 
-ignores = ["LEMS_NML2_Ex13_Instances.xml", "LEMS_NML2_Ex15_CaDynamics.xml", "LEMS_NML2_Ex16_Inputs.xml", "LEMS_NML2_Ex14_PyNN.xml"]
+ignores = []#["LEMS_NML2_Ex13_Instances.xml", "LEMS_NML2_Ex15_CaDynamics.xml", "LEMS_NML2_Ex16_Inputs.xml", "LEMS_NML2_Ex14_PyNN.xml"]
 
 for filename in lems_def_list:
 
@@ -94,19 +94,28 @@ for filename in lems_def_list:
         print "Comparing %s to %s"%(main_ex, copy_org_neuroml_model)
         assert filecmp.cmp(main_ex, copy_org_neuroml_model)
 
+
+for filename in nml2_ex_list:
+
+    if filename.endswith("nml"):
+    	main_ex = nml2_ex_dir+"/"+filename
+    	copy_org_neuroml_model = "../org.neuroml.model/src/test/resources/"+nml2_ex_dir+"/"+filename
+        print "Comparing %s to %s"%(main_ex, copy_org_neuroml_model)
+        assert filecmp.cmp(main_ex, copy_org_neuroml_model)
+
 print "--------------------------------------------------"
 print "    Checking local copies of jars"
 
 jlems_dir="../jLEMS"
-jlems_version = "0.9.0"
+jlems_version = "0.9.1"
 jlems_jar = '%s/builtjars/lems-%s.jar'%(jlems_dir,jlems_version)
-local_copy = '../org.neuroml.export/lib/lems/lems-%s.jar'%jlems_version
-print "Checking jLEMS jar %s against %s"%(local_copy, jlems_jar)
+local_copy = '../org.neuroml.export/libs/lems/jlems/%s/jlems-%s.jar'%(jlems_version,jlems_version)
+print "Checking jLEMS jar %s against %s"%(jlems_jar, local_copy)
 assert filecmp.cmp(local_copy, jlems_jar)
-jlems_jar = jlems_jar.replace('lems-','lems-viz-')
+'''jlems_jar = jlems_jar.replace('lems-','lems-viz-')
 local_copy = local_copy.replace('lems-','lems-viz-')
 print "Checking jLEMS viz jar %s against %s"%(local_copy, jlems_jar)
-assert filecmp.cmp(local_copy, jlems_jar)
+assert filecmp.cmp(local_copy, jlems_jar)'''
     	
 
 print "\n  *** All tests passed! ***\n"
