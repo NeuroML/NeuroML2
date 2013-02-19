@@ -9,6 +9,8 @@ import sys
 from lxml import etree
 from urllib import urlopen
 
+import subprocess
+
 lems_def_dir="NeuroML2CoreTypes"
 lems_def_list=os.listdir(lems_def_dir)
 
@@ -50,12 +52,13 @@ for file in nml2_ex_list:
 
     if file.endswith("nml"):
 
-        print("Validating %s..." %(file)),
+        print("Validating %s..." %(file))
 
-        doc = etree.parse(nml2_ex_dir+"/"+file)
-        valid = nml2_xmlschema.validate(doc)
-        if valid:
-            print "  it's valid!"
+        #doc = etree.parse(nml2_ex_dir+"/"+file)
+        #valid = nml2_xmlschema.validate(doc)
+        exitVal = subprocess.call(["jnml -validate "+ nml2_ex_dir+"/"+file], shell=True)
+        if exitVal == 0:
+            print "  ...it's valid!"
         else:
             print "\n\n  *** It's NOT valid! ***\n"
 

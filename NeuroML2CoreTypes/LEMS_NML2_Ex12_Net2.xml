@@ -105,7 +105,7 @@
             <Line id="l2" quantity="randSpikersPop[2]/tsince" scale="1ms" color="#ddff00" timeScale="1ms"/>
         </Display>
         
-        <Display id="d1" title="Ex12: spikersPop & " timeScale="1ms" xmin="0" xmax="300" ymin="-5" ymax="105">
+        <Display id="d1" title="Ex12: spikersPop" timeScale="1ms" xmin="0" xmax="300" ymin="-5" ymax="105">
             <Line id="l0" quantity="spikersPop[0]/tsince" scale="1ms" color="#000000" timeScale="1ms"/>
             <Line id="l1" quantity="spike100Pop[0]/tsince" scale="1ms" color="#ffff00" timeScale="1ms"/>  
         </Display>
