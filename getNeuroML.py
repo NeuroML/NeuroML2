@@ -43,21 +43,29 @@ pre_gh["SSH"]="git@github.com:"
 pre_gh["Git Read-Only"]="git://github.com/"
 
 
-def executeCommandInDir(command, directory):
+def execute_command_in_dir(command, directory):
     print ">> Executing: (%s) in dir: %s"%(command, directory)
-    subprocess.call("cd %s; %s"%(directory, command), shell=True)
+    return_string = subprocess.check_output("cd %s; %s"%(directory, command), shell=True)
+    return return_string
 
 for repo in all_repos:
     print
     print "------ Updating: %s -------"%repo
+
+    runMvnInstall = False
+
     local_dir = ".."+os.sep+repo.split("/")[1]
     if not op.isdir(local_dir):
         command = "git clone %s%s"%(pre_gh[github_pref], repo)
-        print "Creating a new directory: %s by cloning from GitHub"%(local_dir, command)
-        executeCommandInDir(command, "..")
+        print "Creating a new directory: %s by cloning from GitHub"%(local_dir)
+        execute_command_in_dir(command, "..")
+        runMvnInstall = True
 
-    executeCommandInDir("git pull", local_dir)
-    if repo in java_repos:
+    return_string = execute_command_in_dir("git pull", local_dir)
+
+    runMvnInstall = runMvnInstall or ("Already up-to-date" not in return_string) or not op.isdir(local_dir+os.sep+"target")
+
+    if repo in java_repos and runMvnInstall:
         print "It's a Java repository, so installing using Maven"
-        #executeCommandInDir("mvn install", local_dir)
+        execute_command_in_dir("mvn install", local_dir)
 
