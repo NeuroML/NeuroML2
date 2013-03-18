@@ -66,6 +66,22 @@ for repo in all_repos:
     runMvnInstall = runMvnInstall or ("Already up-to-date" not in return_string) or not op.isdir(local_dir+os.sep+"target")
 
     if repo in java_repos and runMvnInstall:
+        command = "mvn install"
         print "It's a Java repository, so installing using Maven"
-        execute_command_in_dir("mvn install", local_dir)
+        info = execute_command_in_dir(command, local_dir)
+        if "BUILD SUCCESS" in info:
+            print "Successful installation using : %s!"%command
+        else:
+            "Problem installing using : %s!"%command
+            print info
+            exit(1)
+
+print "All repositories successfully updated & Java modules built!"
+
+print
+print "You should be able to run some examples straight away using: "
+print
+print "  cd ../jNeuroML"
+print "  ./jnml ../NeuroML2/NeuroML2CoreTypes/LEMS_NML2_Ex8_AdEx.xml"
+print
 
