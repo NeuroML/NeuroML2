@@ -70,8 +70,7 @@ import filecmp
 assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../neuroConstruct/NeuroML2/Schemas/NeuroML2/NeuroML_v2alpha.xsd')
 assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../neuroConstruct/NeuroML2/Schemas/NeuroML2/NeuroML_v2beta.xsd')
 
-assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../libNeuroML/ideas/padraig/generatedFromV2Schema/regenerate/NeuroML_v2alpha.xsd')
-assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../libNeuroML/ideas/padraig/generatedFromV2Schema/regenerate/NeuroML_v2beta.xsd')
+assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../libNeuroML/neuroml/nml/NeuroML_v2beta.xsd')
 
 assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../org.neuroml.model/src/main/resources/Schemas/NeuroML2/NeuroML_v2alpha.xsd')
 assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../org.neuroml.model/src/main/resources/Schemas/NeuroML2/NeuroML_v2beta.xsd')
@@ -106,6 +105,8 @@ for filename in nml2_ex_list:
         print "Comparing %s to %s"%(main_ex, copy_org_neuroml_model)
         assert filecmp.cmp(main_ex, copy_org_neuroml_model)
 
+
+'''
 print "--------------------------------------------------"
 print "    Checking local copies of jars"
 
@@ -115,10 +116,7 @@ jlems_jar = '%s/builtjars/lems-%s.jar'%(jlems_dir,jlems_version)
 local_copy = '../org.neuroml.export/libs/lems/jlems/%s/jlems-%s.jar'%(jlems_version,jlems_version)
 print "Checking jLEMS jar %s against %s"%(jlems_jar, local_copy)
 assert filecmp.cmp(local_copy, jlems_jar)
-'''jlems_jar = jlems_jar.replace('lems-','lems-viz-')
-local_copy = local_copy.replace('lems-','lems-viz-')
-print "Checking jLEMS viz jar %s against %s"%(local_copy, jlems_jar)
-assert filecmp.cmp(local_copy, jlems_jar)'''
+'''
     	
 
 print "\n  *** All tests passed! ***\n"
