@@ -140,4 +140,4 @@ if '-r' in sys.argv:
 
             #subprocess.call(['lems %s'%(lems_file)])
             #os.system('~/jLEMS/lems %s'%(lems_file))
-            subprocess.call('~/jLEMS/lems %s &'%(lems_file), shell=True)
+            subprocess.call('jnml %s -nogui &'%(lems_file), shell=True)
