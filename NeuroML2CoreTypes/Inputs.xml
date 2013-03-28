@@ -1,6 +1,6 @@
-<Lems xmlns="http://www.neuroml.org/lems/0.6"
+<Lems xmlns="http://www.neuroml.org/lems/0.7"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/lems/0.6 ../Schemas/LEMS/LEMS_v0.6.xsd"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7 ../../LEMS/Schemas/LEMS/LEMS_v0.7.xsd"
       description="A number of ComponentTypes for providing spiking and current inputs to other ComponentTypes">
 
 

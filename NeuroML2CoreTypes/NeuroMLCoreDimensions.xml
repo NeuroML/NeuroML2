@@ -1,6 +1,6 @@
-<Lems xmlns="http://www.neuroml.org/lems/0.6"
+<Lems xmlns="http://www.neuroml.org/lems/0.7"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/lems/0.6 ../Schemas/LEMS/LEMS_v0.6.xsd">
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7 ../../LEMS/Schemas/LEMS/LEMS_v0.7.xsd">
 
     <!-- The core dimensional quantities as used in NeuroML version 2.0 -->
     <!-- Will be used in Type definitions, e.g. <StateVariable name="v" dimension="voltage"/> -->

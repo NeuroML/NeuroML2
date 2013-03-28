@@ -17,7 +17,7 @@ lems_def_list=os.listdir(lems_def_dir)
 nml2_ex_dir="examples"
 nml2_ex_list=os.listdir(nml2_ex_dir)
 
-lems_schema = "../LEMS/Schemas/LEMS/LEMS_v0.6.xsd"
+lems_schema = "../LEMS/Schemas/LEMS/LEMS_v0.7.xsd"
 lems_schema_file = urlopen(lems_schema)
 
 lems_xmlschema_doc = etree.parse(lems_schema_file)

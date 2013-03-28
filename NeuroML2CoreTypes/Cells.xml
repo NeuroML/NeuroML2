@@ -1,6 +1,6 @@
-<Lems xmlns="http://www.neuroml.org/lems/0.6"
+<Lems xmlns="http://www.neuroml.org/lems/0.7"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/lems/0.6 ../Schemas/LEMS/LEMS_v0.6.xsd"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7 ../../LEMS/Schemas/LEMS/LEMS_v0.7.xsd"
       description="Defines both abstract cell models (e.g. _izhikevichCell_, adaptive exponential integrate and fire cell, _adExIaFCell_), point conductance based cell models (_pointCellCondBased_, _pointCellCondBasedCa_) and cells models (_cell_) which specify the _morphology_ (containing _segment_s) and _biophysicalProperties_ separately.">
 
     <!-- A number of cell types for use in NeuroML 2 documents  -->
@@ -448,9 +448,15 @@
             <DerivedVariable name="py" dimension="length" select = "proximal/y"/>
             <DerivedVariable name="pz" dimension="length" select = "proximal/z"/>
 
-            <DerivedVariable name="length" dimension="length" exposure="length" value = "sqrt(((dx - px) * (dx - px) + (dy - py) * (dy - py) + (dz - pz) * (dz - pz))/(LEN * LEN)) * LEN"/>  <!--  "/>-->
+            <DerivedVariable name="length" dimension="length" exposure="length" value = "sqrt(((dx - px) * (dx - px) + (dy - py) * (dy - py) + (dz - pz) * (dz - pz))/(LEN * LEN)) * LEN"/> 
         
-            <DerivedVariable name="surfaceArea" dimension="area" exposure="surfaceArea" value = "4 * radDist * radDist * 3.14159265" valueCondition="length .eq. 0" valueIfFalse = "2 * radDist * 3.14159265 * length"/>
+            <!--<DerivedVariable name="surfaceArea" dimension="area" exposure="surfaceArea" value = "4 * radDist * radDist * 3.14159265" valueCondition="length .eq. 0" valueIfFalse = "2 * radDist * 3.14159265 * length"/>-->
+
+			<ConditionalDerivedVariable name="surfaceArea" dimension="area" exposure="surfaceArea">
+            	<Case condition="length .eq. 0" value="4 * radDist * radDist * 3.14159265"/>
+				<Case condition="length .gt. 0" value="2 * radDist * 3.14159265 * length"/>
+			</ConditionalDerivedVariable>
+
   
         </Dynamics>
 
