@@ -336,6 +336,7 @@
         extends="ionChannel"
         description="Simple passive ion channel where the constant conductance through the channel is equal to _conductance">
         <Child name="notes" type="notes"/>
+        <Child name="annotation" type="annotation"/>
         <Text name="neuroLexId"/>
 
         <Dynamics>
@@ -352,6 +353,7 @@
         extends="ionChannel"
         description="Ion channel according to the Hodgkin Huxley formalism, with a number of gates (of type _gateHH_)">
         <Child name="notes" type="notes"/>
+        <Child name="annotation" type="annotation"/>
         <Child name="conductanceScaling" type="baseConductanceScaling"/>
         <!--<Children name="parameters" type="parameter"/>-->
         <Children name="gatesHHrates" type="gateHHrates"/>

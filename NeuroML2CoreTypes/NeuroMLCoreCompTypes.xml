@@ -9,41 +9,47 @@
     <Include file="NeuroMLCoreDimensions.xml"/>
 
 
-    <!-- Potentially needed for any NeuroMl 2 file...-->
+    <!-- Potentially needed for any NeuroML 2 file...-->
 
 
     <ComponentType name="notes" description="Human readable notes on a Component">
     </ComponentType>
-    <!--
+    
     <ComponentType name="annotation" description="Annotation...">
-        <Child name="rdf_RDF" type="rdf_RDF"/>
-        <Behavior/>
+        <Child name="rdf:RDF" type="rdf_RDF"/>
+        <Dynamics/>
     </ComponentType>
 
     <ComponentType name="rdf_RDF" description="Annotation...">
-        <Child name="rdf_Description" type="rdf_Description"/>
-        <Behavior/>
+        <Child name="rdf:Description" type="rdf_Description"/>
+        <Dynamics/>
     </ComponentType>
 
     <ComponentType name="rdf_Description" description="Annotation...">
-        <Child name="bqbiol_isVersionOf" type="bqbiol_isVersionOf"/>
-        <Behavior/>
+        <Child name="bqbiol:isVersionOf" type="bqbiol_isVersionOf"/>
+        <Child name="bqmodel:isDescribedBy" type="bqmodel_isDescribedBy"/>
+        <Dynamics/>
     </ComponentType>
 
     <ComponentType name="bqbiol_isVersionOf" description="Annotation...">
-        <Child name="rdf_Bag" type="rdf_Bag"/>
-        <Behavior/>
+        <Child name="rdf:Bag" type="rdf_Bag"/>
+        <Dynamics/>
+    </ComponentType>
+
+    <ComponentType name="bqmodel_isDescribedBy" description="Annotation...">
+        <Child name="rdf:Bag" type="rdf_Bag"/>
+        <Dynamics/>
     </ComponentType>
 
     <ComponentType name="rdf_Bag" description="Annotation...">
-        <Child name="rdf_li" type="rdf_li"/>
-        <Behavior/>
+        <Child name="rdf:li" type="rdf_li"/>
+        <Dynamics/>
     </ComponentType>
 
     <ComponentType name="rdf_li" description="Annotation...">
-        <Text name="red:resource"/>
-        <Behavior/>
-    </ComponentType>-->
+        <Text name="rdf:resource"/>
+        <Dynamics/>
+    </ComponentType>
 
 
     <ComponentType name="pointDiam"

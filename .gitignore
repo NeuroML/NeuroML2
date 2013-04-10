@@ -1,6 +1,8 @@
 .project
 
 *.py~
+results
+
 NeuroML2CoreTypes/*.ode
 NeuroML2CoreTypes/*.sbml
 NeuroML2CoreTypes/*.py
