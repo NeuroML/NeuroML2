@@ -922,6 +922,10 @@
 	<StateVariable name="v" exposure="v" dimension="voltage"/>
 	<StateVariable name="lastSpikeTime" dimension="time"/>
 
+	<!-- iSyn and iMemb value is meaningless in the refractory regime -->
+	<DerivedVariable name="iSyn" dimension="current" exposure="iSyn" select="synapses[*]/i" reduce="add" />
+	<DerivedVariable name="iMemb" dimension="current" exposure="iMemb" value="leakConductance * (leakReversal - v) + iSyn"/>
+
 	<OnStart>
 	  <StateAssignment variable="v" value="reset"/>
 	</OnStart>
@@ -937,8 +941,6 @@
 	</Regime>
 
 	<Regime name="integrating" initial="true">
-	  <DerivedVariable name="iSyn" dimension="current" exposure="iSyn" select="synapses[*]/i" reduce="add" />
-	  <DerivedVariable name="iMemb" dimension="current" exposure="iMemb" value="leakConductance * (leakReversal - v) + iSyn"/>
 	  <TimeDerivative variable="v" value="iMemb / C"/>
 	  <OnCondition test="v .gt. thresh">
 	    <EventOut port="spike"/>
