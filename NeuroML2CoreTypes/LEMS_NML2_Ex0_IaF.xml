@@ -3,9 +3,9 @@
 
     <!-- Example with Simple Integrate and Fire cell -->
 
-    <!-- This is a file which can be read and executed by the LEMS Interpreter. 
-        It imports the LEMS definitions of the core NeuroML 2 Components, creates 
-        a model in "pure" NeuroML 2 and contains some LEMS elements for running a 
+    <!-- This is a file which can be read and executed by the LEMS Interpreter.
+        It imports the LEMS definitions of the core NeuroML 2 Components, creates
+        a model in "pure" NeuroML 2 and contains some LEMS elements for running a
         simulation -->
 
     <!-- Specify which component to run -->
@@ -14,7 +14,7 @@
     <!-- Include core NeuroML2 ComponentType definitions -->
 
     <Include file="Cells.xml" />
-    <!-- The above file includes NeuroMLCoreDimensions.xml, Channels.xml, 
+    <!-- The above file includes NeuroMLCoreDimensions.xml, Channels.xml,
         Synapses.xml and Inputs.xml -->
     <Include file="Networks.xml" />
     <Include file="Simulation.xml" />
@@ -25,9 +25,15 @@
 
     <iafTauCell id="iafTau" leakReversal="-50mV" thresh="-55mV"
         reset="-70mV" tau="30ms" />
+    <iafCell id="iaf" leakConductance="0.2nS" leakReversal="-53mV"
+	     thresh="-55mV" reset="-70mV" C="3.2pF"/>
+    <iafRefCell id="iafRef" leakConductance="0.2nS" leakReversal="-53mV"
+		thresh="-55mV" reset="-70mV" C="3.2pF" refract="2ms"/>
 
     <network id="net1">
         <population id="iafTauPop" component="iafTau" size="1" />
+	<population id="iafPop" component="iaf" size="1" />
+	<population id="iafRefPop" component="iafRef" size="1" />
     </network>
 
     <!-- End of NeuroML2 content -->
@@ -35,8 +41,10 @@
 
     <Simulation id="sim1" length="300ms" step="0.01ms" target="net1">
 
-        <Display id="d0" title="Ex0: Simple Integrate and Fire cell in LEMS" timeScale="1ms" xmin="0" xmax="300" ymin="-75" ymax="-50">
-            <Line id="iaf1" quantity="iafTauPop[0]/v" scale="1mV" color="#000000" timeScale="1ms" />
+        <Display id="d0" title="Ex0: Simple Integrate and Fire cells in LEMS" timeScale="1ms" xmin="0" xmax="300" ymin="-75" ymax="-50">
+            <Line id="iafTauCell" quantity="iafTauPop[0]/v" scale="1mV" color="#000000" timeScale="1ms" />
+	    <Line id="iafCell" quantity="iafPop[0]/v" scale="1mV" color="#3ADF00" timeScale="1ms" />
+	    <Line id="iafRefCell" quantity="iafRefPop[0]/v" scale="1mV" color="#0000FF" timeScale="1ms" />
         </Display>
 
         <OutputFile id="of0" fileName="results/iaf_v.dat">
