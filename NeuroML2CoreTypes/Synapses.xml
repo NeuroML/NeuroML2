@@ -58,7 +58,7 @@
        description="Ohmic synapse model whose conductance rises instantaneously by _gbase on receiving an event, and which decays exponentially to zero with time course _tauDecay">
 
         <Parameter name="tauDecay" dimension="time" description="Time course of decay"/>
-      
+
         <Child name="notes" type="notes"/>
 
         <Dynamics>
@@ -66,7 +66,7 @@
             <StateVariable name="g" dimension="conductance" exposure="g"/>
 
             <DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
-         
+
             <TimeDerivative variable="g" value="-g / tauDecay" />
 
             <OnStart>
@@ -84,7 +84,7 @@
     <ComponentType name="expTwoSynapse"
        extends="baseConductanceBasedSynapse"
        description="Ohmic synapse model whose conductance waveform on receiving an event has a rise time of _tauRise and a decay time of _tauDecay. Max conductance reached during this time (assuming zero conductance before) is _gbase.">
-      
+
         <Parameter name="tauRise" dimension="time" />
         <Parameter name="tauDecay" dimension="time" />
 
@@ -123,28 +123,28 @@
 
         </Dynamics>
     </ComponentType>
-   
-   
+
+
     <ComponentType name="baseBlock"
         description="Base of any ComponentType which produces a varying scaling (or blockage) of synaptic strength of magnitude _scaling">
-        
+
         <Exposure name="scaling" dimension="none"/>
 
     </ComponentType>
-   
+
 
     <ComponentType name="voltageConcDepBlock"
        extends="baseBlock"
        description="Synaptic blocking mechanism which varys with membrane potential across the synapse, e.g. in NMDA receptor mediated synapses">
-           
+
         <Parameter name="blockConcentration" dimension="concentration" />
         <Parameter name="scalingConc" dimension="concentration" />
         <Parameter name="scalingVolt" dimension="voltage" />
 
         <Requirement name="v" dimension="voltage"/>
-      
+
         <Text name="species"/>
-      
+
         <Dynamics>
             <DerivedVariable name="scaling" dimension="none" exposure="scaling" value="1/(1 + (blockConcentration / scalingConc)* exp(-1 * (v / scalingVolt)))" />
         </Dynamics>
@@ -186,8 +186,86 @@
                 <StateAssignment variable="A" value="A + factor" />
                 <StateAssignment variable="B" value="B + factor" />
             </OnEvent>
-         
+
         </Dynamics>
+    </ComponentType>
+
+    <ComponentType name="tsodyksMarkramSTPMechanism"
+		   description="ComponentType for model of short term plasticity. cno_0000182">
+      <Parameter name="initReleaseProb" dimension="none" />
+      <Parameter name="tauFac" dimension="time" />
+      <Parameter name="tauRec" dimension="time" />
+
+      <Constant name="tSinceRate" dimension="none" value="1"/>
+      <Constant name="longTime" dimension="time" value="1000s"/>
+
+      <EventPort name="in" direction="in" description="This is where the plasticity mechanism receives spike events from the parent synapse."/>
+
+      <Exposure name="plasticityFactor" dimension="none"/>
+
+      <Dynamics>
+	<StateVariable name="R" dimension="none"/>
+	<StateVariable name="U" dimension="none"/>
+	<StateVariable name="tSince" dimension="time"/>
+
+	<DerivedVariable name="plasticityFactor" dimension="none" exposure="plasticityFactor" value="R * U" />
+
+	<TimeDerivative variable="tSince" value="tSinceRate" />
+
+	<OnStart>
+	  <StateAssignment variable="R" value="1" />
+	  <StateAssignment variable="U" value="initReleaseProb" />
+	  <StateAssignment variable="tSince" value="longTime" />
+	</OnStart>
+
+	<OnEvent port="in">
+	  <StateAssignment variable="R" value="R * (1-U) * exp(-1 * (tSince/tauRec)) + 1 - exp(-1 * (tSince / tauRec)) " />
+	  <StateAssignment variable="U" value="U * exp(-(tSince) / tauFac) + initReleaseProb * (1 - (U * exp(-(tSince) / tauFac)))" />
+	  <StateAssignment variable="tSince" value="0" />
+	</OnEvent>
+      </Dynamics>
+
+      <Structure>
+	<With instance="parent" as="a"/>
+	<With instance="this" as="b"/>
+	<EventConnection from="a" to="b"/>
+      </Structure>
+    </ComponentType>
+
+
+    <ComponentType name="tsodyksMarkramSTPSynapse"
+		   extends="expTwoSynapse"
+		   description="Short term plasticity model based on Tsodyks, M., Uziel, A., and Markram, H. (2000). Synchrony generation in recurrent networks with frequency-dependent synapses. J Neurosci 20, RC50. and Tsodyks, M.V., and Markram, H. (1997). The neural code between neocortical pyramidal neurons depends on neurotransmitter release probability. Proc Natl Acad Sci U S A 94, 719-723. cno_0000188">
+      <Child name="tsodyksMarkramSTPMechanism" type="tsodyksMarkramSTPMechanism"/>
+
+      <EventPort name="relay" direction="out" description="Used to relay incoming spikes to child plasticity mechanism"/>
+
+      <Dynamics>
+	<StateVariable name="A" dimension="none"/>
+	<StateVariable name="B" dimension="none"/>
+
+	<DerivedVariable name="peakTime" dimension="time" value="(tauRise * tauDecay)/(tauDecay - tauRise) * ln(tauDecay / tauRise)" />
+	<DerivedVariable name="factor" dimension="none" value="1 / (-exp(-peakTime / tauRise) + exp(-peakTime / tauDecay))" />
+
+	<DerivedVariable name="g" dimension="conductance" exposure="g" value="gbase * (B - A)" />
+	<DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
+	<DerivedVariable name="plasticityFactor" dimension="none" select="tsodyksMarkramSTPMechanism/plasticityFactor" />
+
+	<TimeDerivative variable="A" value="-A / tauRise" />
+	<TimeDerivative variable="B" value="-B / tauDecay" />
+
+	<OnStart>
+	  <StateAssignment variable="A" value="0" />
+	  <StateAssignment variable="B" value="0" />
+	</OnStart>
+
+	<OnEvent port="in">
+	  <EventOut port="relay"/>
+	  <StateAssignment variable="A" value="A + plasticityFactor * factor" />
+	  <StateAssignment variable="B" value="B + plasticityFactor * factor" />
+	</OnEvent>
+
+      </Dynamics>
     </ComponentType>
 
 
@@ -258,6 +336,7 @@
                 <StateAssignment variable="B" value="0" />
 
                 <StateAssignment variable="R" value="1" />
+                <StateAssignment variable="U" value="initReleaseProb" />
                 <StateAssignment variable="tsince" value="longTime" />
             </OnStart>
 
@@ -272,15 +351,11 @@
                 <StateAssignment variable="tsince" value="0" />
             </OnEvent>
 
-            <OnCondition test="t .eq. 0">
-                <StateAssignment variable="U" value="initReleaseProb" />
-            </OnCondition>
-
         </Dynamics>
 
     </ComponentType>
 
-   
+
 
   <!---        -->
 
