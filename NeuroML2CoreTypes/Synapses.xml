@@ -190,15 +190,58 @@
         </Dynamics>
     </ComponentType>
 
+
     <ComponentType name="tsodyksMarkramSTPMechanism"
-		   description="ComponentType for model of short term plasticity. cno_0000182">
+		   description="Base Tsodyks-Markram short term plasticity mechanism.">
+
       <Parameter name="initReleaseProb" dimension="none" />
-      <Parameter name="tauFac" dimension="time" />
+      <EventPort name="in" direction="in" description="This is where the plasticity mechanism receives spike events from the parent synapse."/>
+      <Exposure name="plasticityFactor" dimension="none"/>
+
+    </ComponentType>
+
+
+    <ComponentType name="tsodyksMarkramDepMechanism"
+		   extends="tsodyksMarkramSTPMechanism"
+		   description="Depression-only Tsodyks-Markram model, as in Tsodyks and Markram 1997.">
       <Parameter name="tauRec" dimension="time" />
 
-      <EventPort name="in" direction="in" description="This is where the plasticity mechanism receives spike events from the parent synapse."/>
+      <Structure>
+	<With instance="parent" as="a"/>
+	<With instance="this" as="b"/>
+	<EventConnection from="a" to="b"/>
+      </Structure>
 
-      <Exposure name="plasticityFactor" dimension="none"/>
+      <Dynamics>
+	<StateVariable name="R" dimension="none"/>
+
+	<DerivedVariable name="U" dimension="none" value="initReleaseProb"/>
+	<DerivedVariable name="plasticityFactor" dimension="none" exposure="plasticityFactor" value="R * U" />
+
+	<TimeDerivative variable="R" value="(1 - R) / tauRec"/>
+
+	<OnStart>
+	  <StateAssignment variable="R" value="1" />
+	</OnStart>
+
+	<OnEvent port="in">
+	  <StateAssignment variable="R" value="R * (1 - U)" />
+	</OnEvent>
+      </Dynamics>
+    </ComponentType>
+
+
+    <ComponentType name="tsodyksMarkramDepFacMechanism"
+		   extends="tsodyksMarkramSTPMechanism"
+		   description="Full Tsodyks-Markram STP model with both depression and facilitation, as in Tsodyks, Pawelzik and Markram 1998.">
+      <Parameter name="tauRec" dimension="time" />
+      <Parameter name="tauFac" dimension="time" />
+
+      <Structure>
+	<With instance="parent" as="a"/>
+	<With instance="this" as="b"/>
+	<EventConnection from="a" to="b"/>
+      </Structure>
 
       <Dynamics>
 	<StateVariable name="R" dimension="none"/>
@@ -219,19 +262,13 @@
 	  <StateAssignment variable="U" value="U + initReleaseProb * (1 - U)" />
 	</OnEvent>
       </Dynamics>
-
-      <Structure>
-	<With instance="parent" as="a"/>
-	<With instance="this" as="b"/>
-	<EventConnection from="a" to="b"/>
-      </Structure>
     </ComponentType>
 
 
     <ComponentType name="tsodyksMarkramSTPSynapse"
 		   extends="expTwoSynapse"
 		   description="Short term plasticity model based on Tsodyks, M., Uziel, A., and Markram, H. (2000). Synchrony generation in recurrent networks with frequency-dependent synapses. J Neurosci 20, RC50. and Tsodyks, M.V., and Markram, H. (1997). The neural code between neocortical pyramidal neurons depends on neurotransmitter release probability. Proc Natl Acad Sci U S A 94, 719-723. cno_0000188">
-      <Child name="tsodyksMarkramSTPMechanism" type="tsodyksMarkramSTPMechanism"/>
+      <Child name="plasticityMechanism" type="tsodyksMarkramSTPMechanism"/>
 
       <EventPort name="relay" direction="out" description="Used to relay incoming spikes to child plasticity mechanism"/>
 
@@ -244,7 +281,7 @@
 
 	<DerivedVariable name="g" dimension="conductance" exposure="g" value="gbase * (B - A)" />
 	<DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
-	<DerivedVariable name="plasticityFactor" dimension="none" select="tsodyksMarkramSTPMechanism/plasticityFactor" />
+	<DerivedVariable name="plasticityFactor" dimension="none" select="plasticityMechanism/plasticityFactor" />
 
 	<TimeDerivative variable="A" value="-A / tauRise" />
 	<TimeDerivative variable="B" value="-B / tauDecay" />

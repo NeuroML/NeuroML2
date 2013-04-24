@@ -45,8 +45,12 @@
             <stpMechanism initReleaseProb = "0.9" tauFac = "200 ms" tauRec = "300 ms"/>
     </stpSynapse>
 
-    <tsodyksMarkramSTPSynapse id="tmStpSyn" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="40ms">
-            <tsodyksMarkramSTPMechanism initReleaseProb = "0.9" tauFac = "200 ms" tauRec = "300 ms"/>
+    <tsodyksMarkramSTPSynapse id="tmDepSyn" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="40ms">
+            <plasticityMechanism type="tsodyksMarkramDepMechanism" initReleaseProb = "0.9" tauRec = "300 ms"/>
+    </tsodyksMarkramSTPSynapse>
+
+    <tsodyksMarkramSTPSynapse id="tmDepFacSyn" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="40ms">
+            <plasticityMechanism type="tsodyksMarkramDepFacMechanism" initReleaseProb = "0.9" tauFac = "200 ms" tauRec = "300 ms"/>
     </tsodyksMarkramSTPSynapse>
 
 
@@ -57,7 +61,7 @@
         <synapticConnection from="srcPop[0]" to="pasPop[1]" synapse="stpSynDep" destination="synapses"/>
         <synapticConnection from="srcPop[0]" to="pasPop[2]" synapse="stpSynFac" destination="synapses"/>
         <synapticConnection from="srcPop[0]" to="pasPop[3]" synapse="stpSynDepFac" destination="synapses"/>
-	<synapticConnection from="srcPop[0]" to="pasPop[4]" synapse="tmStpSyn" destination="synapses"/>
+	<synapticConnection from="srcPop[0]" to="pasPop[4]" synapse="tmDepFacSyn" destination="synapses"/>
     </network>
 
    <!-- End of NeuroML 2 elements... -->
@@ -70,7 +74,7 @@
                 <Line id="stpSynDep" quantity="pasPop[1]/v" scale="1mV" color="#0000FF" timeScale="1ms"/>
                 <Line id="stpSynFac" quantity="pasPop[2]/v" scale="1mV" color="#ff0000" timeScale="1ms"/>
 		<Line id="stpSynDepFac" quantity="pasPop[3]/v" scale="1mV" color="#AEB404" timeScale="1ms"/>
-		<Line id="tmStpSyn" quantity="pasPop[4]/v" scale="1mV" color="#DF013A" timeScale="1ms"/>
+		<Line id="tmDepFacSyn" quantity="pasPop[4]/v" scale="1mV" color="#04B431" timeScale="1ms"/>
         </Display>
 
         <Display id="d2" title="Ex7: Cells with STP synapse: synaptic conductances" timeScale="1ms" xmin="0" xmax="300" ymin="-0.1" ymax="1.1">
@@ -78,7 +82,7 @@
                 <Line id ="stpSynDep" quantity="pasPop[1]/stpSynDep/g" scale="1nS"  color="#0000FF" timeScale="1ms"/>
                 <Line id ="stpSynFac" quantity="pasPop[2]/stpSynFac/g" scale="1nS"  color="#ff0000" timeScale="1ms"/>-->
 		<Line id ="stpSynDepFac" quantity="pasPop[3]/stpSynDepFac/g" scale="1nS"  color="#AEB404" timeScale="1ms"/>
-		<Line id ="tmStpSyn" quantity="pasPop[4]/tmStpSyn/g" scale="1nS"  color="#DF013A" timeScale="1ms"/>
+		<Line id ="tmDepFacSyn" quantity="pasPop[4]/tmDepFacSyn/g" scale="1nS"  color="#04B431" timeScale="1ms"/>
         </Display>
 
         <Display id="d4" title="Ex7: Cells with STP synapse: scaling variables" timeScale="1ms" xmin="0" xmax="300" ymin="-0.1" ymax="1.1">
@@ -88,8 +92,8 @@
                 <Line id ="l4" quantity="pasPop[2]/stpSynFac/U" scale="1"  color="#0055ff" timeScale="1ms"/>-->
                 <Line id ="DepFac_R" quantity="pasPop[3]/stpSynDepFac/R" scale="1"  color="#AEB404" timeScale="1ms"/>
                 <Line id ="DepFac_U" quantity="pasPop[3]/stpSynDepFac/U" scale="1"  color="#886A08" timeScale="1ms"/>
-                <Line id ="TM_R" quantity="pasPop[4]/tmStpSyn/tsodyksMarkramSTPMechanism/R" scale="1"  color="#DF013A" timeScale="1ms"/>
-                <Line id ="TM_U" quantity="pasPop[4]/tmStpSyn/tsodyksMarkramSTPMechanism/U" scale="1"  color="#8A0868" timeScale="1ms"/>
+                <Line id ="TM_R" quantity="pasPop[4]/tmDepFacSyn/plasticityMechanism/R" scale="1"  color="#04B431" timeScale="1ms"/>
+                <Line id ="TM_U" quantity="pasPop[4]/tmDepFacSyn/plasticityMechanism/U" scale="1"  color="#0B610B" timeScale="1ms"/>
 
         </Display>
     </Simulation>
