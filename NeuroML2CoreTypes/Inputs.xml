@@ -13,7 +13,7 @@
 
     </ComponentType>
 
-    
+
     <ComponentType name="baseVoltageDepPointCurrent"
         extends="basePointCurrent"
         description="Base type for all ComponentTypes which produce a current _i (with dimension current) and require a membrane potential _v exposed on the parent Component">
@@ -38,19 +38,19 @@
         <Requirement name="V" dimension="none" description="The current may vary with the voltage exposed by the ComponentType on which this is placed"/>
 
     </ComponentType>
-    
+
 
     <ComponentType name="baseSpikeSource"
         description="Base for any ComponentType whose main purpose is to emit spikes. The exposed variable _tsince can be used for plotting the time since the Component has spiked last">
 
-        <EventPort name="spike" 
+        <EventPort name="spike"
             direction="out"
             description="Port on which spikes are emitted"/>
 
-        <Exposure name="tsince" 
+        <Exposure name="tsince"
             dimension="time"
             description="Time since the last spike was emitted"/>
-    
+
     </ComponentType>
 
 
@@ -61,7 +61,7 @@
         <Parameter name="period" dimension="time" description="Time between spikes. First spike will be emitted after this time."/>
         <Dynamics>
             <StateVariable name="tsince" dimension="time" exposure="tsince"/>
-            
+
             <TimeDerivative variable="tsince" value="1"/>
 
             <OnStart>
@@ -95,7 +95,7 @@
             <StateVariable name="isi" dimension="time" exposure="isi"/>
 
             <TimeDerivative variable="tsince" value="1"/>
-        
+
             <OnStart>
                 <StateAssignment variable="tsince" value="0"/>
                 <StateAssignment variable="isi" value="minISI + MSEC * random((maxISI - minISI) / MSEC)"/>
@@ -111,7 +111,28 @@
         </Dynamics>
     </ComponentType>
 
+    <ComponentType name="spikeGeneratorPoisson" extends="baseSpikeSource"
+		   description="Generator of spikes whose ISI is distributed according to an exponential pdf with scale 1/_averageRate">
+      <Parameter name="averageRate" dimension="per_time"/>
+      <DerivedParameter name="averageIsi" dimension="time" value="1 / averageRate"/>
+      <Dynamics>
+	<StateVariable name="tsince" dimension="time" exposure="tsince"/>
+	<StateVariable name="isi" dimension="time"/>
 
+	<TimeDerivative variable="tsince" value="1"/>
+
+	<OnStart>
+	  <StateAssignment variable="tsince" value="0"/>
+	  <StateAssignment variable="isi" value="- averageIsi * ln(1 - random(1))"/>
+	</OnStart>
+
+	<OnCondition test="tsince .geq. isi">
+	  <StateAssignment variable="tsince" value="0"/>
+	  <StateAssignment variable="isi" value="- averageIsi * ln(1 - random(1))"/>
+	  <EventOut port="spike"/>
+	</OnCondition>
+      </Dynamics>
+    </ComponentType>
 
     <ComponentType name="pulseGenerator" extends="basePointCurrent"
         description="Generates a constant current pulse of a certain _amplitude for a specified _duration after a _delay"> <!-- Note: a synpase also extends basePointCurrent -->
@@ -237,7 +258,7 @@
             <OnStart>
                 <StateAssignment variable="i" value="baselineAmplitude"/>
             </OnStart>
-            
+
             <OnEvent port="in"><!--TODO: remove-->
             </OnEvent>
 
@@ -342,7 +363,7 @@
 
         <Dynamics>
             <StateVariable name="tsince" dimension="time" exposure="tsince"/>
-            
+
             <TimeDerivative variable="tsince" value="1"/>
 
             <OnStart>
@@ -371,7 +392,7 @@
             <StateVariable name="spiked" dimension="none" exposure="spiked"/>
 
             <TimeDerivative variable="tsince" value="1"/>
-            
+
             <OnStart>
                 <StateAssignment variable="tsince" value="0"/>
             </OnStart>

@@ -4,8 +4,8 @@
         <!-- Example showing new types of network populations & projection templates in v2 -->
 
         <!-- This is a file which can be read and executed by the LEMS Interpreter.
-             It imports the LEMS definitions of the core NeuroML 2 Components, creates 
-             a model in "pure" NeuroML 2 and contains some LEMS elements for running 
+             It imports the LEMS definitions of the core NeuroML 2 Components, creates
+             a model in "pure" NeuroML 2 and contains some LEMS elements for running
              a simulation -->
 
 
@@ -22,6 +22,8 @@
     <spikeGenerator id="spiker" period="30ms"/>
 
     <spikeGeneratorRandom id="randSpiker" minISI="10ms" maxISI="30ms"/>
+
+    <spikeGeneratorPoisson id="poissonSpiker" averageRate="50per_s"/>
 
     <spikeArray id="spikes2">
         <spike id="0" time="55ms"/>
@@ -45,7 +47,7 @@
     <ComponentType name="expOneSynapseW" extends="baseConductanceBasedSynapse">
 
         <Property name="weight" dimension="none"/>
-        
+
         <Parameter name="tauDecay" dimension="time" />
 
         <Child name="notes" type="notes"/>
@@ -77,14 +79,15 @@
 
         <population id="randSpikersPop" component="randSpiker" size="3"/>
 
+	<population id="poissonSpikersPop" component="poissonSpiker" size="3"/>
+
         <population id="spikersPop" component="spiker" size="1"/>
 
         <population id="spikeArrayPop" component="spikes2" size="1"/>
 
         <population id="spike100Pop" component="spike100" size="3"/>
-            
+
         <population id="iafPop" component="iaf1" size="3"/>
-            
 
         <!--<synapticConnection from="spike100Pop[0]" to="iafPop[0]" synapse="synW" weight="1.5" delay="5ms"/>   Delays need to have dimensions!!-->
         <synapticConnection from="spike100Pop[0]" to="iafPop[0]" synapse="syn1" destination="synapses"/>
@@ -98,32 +101,40 @@
 
 
     <Simulation id="sim1" length="300ms" step="0.01ms" target="net2">
-    
-        <Display id="d0" title="Ex12: random spike sources" timeScale="1ms" xmin="0" xmax="300" ymin="-5" ymax="35">
+
+        <Display id="dUniform" title="Ex12: random (uniform ISI) spike sources" timeScale="1ms" xmin="0" xmax="300" ymin="-5" ymax="35">
             <Line id="l0" quantity="randSpikersPop[0]/tsince" scale="1ms" color="#000000" timeScale="1ms"/>
             <Line id="l1" quantity="randSpikersPop[1]/tsince" scale="1ms" color="#00ff00" timeScale="1ms"/>
             <Line id="l2" quantity="randSpikersPop[2]/tsince" scale="1ms" color="#ddff00" timeScale="1ms"/>
         </Display>
-        
+
+        <Display id="dPoisson" title="Ex12: random (Poisson: exponential ISI) spike sources" timeScale="1ms" xmin="0" xmax="300" ymin="-5" ymax="35">
+            <Line id="l0" quantity="poissonSpikersPop[0]/tsince" scale="1ms" color="#000000" timeScale="1ms"/>
+            <Line id="l1" quantity="poissonSpikersPop[1]/tsince" scale="1ms" color="#00ff00" timeScale="1ms"/>
+            <Line id="l2" quantity="poissonSpikersPop[2]/tsince" scale="1ms" color="#ddff00" timeScale="1ms"/>
+        </Display>
+
+
         <Display id="d1" title="Ex12: spikersPop" timeScale="1ms" xmin="0" xmax="300" ymin="-5" ymax="105">
             <Line id="l0" quantity="spikersPop[0]/tsince" scale="1ms" color="#000000" timeScale="1ms"/>
-            <Line id="l1" quantity="spike100Pop[0]/tsince" scale="1ms" color="#ffff00" timeScale="1ms"/>  
+            <Line id="l1" quantity="spike100Pop[0]/tsince" scale="1ms" color="#ffff00" timeScale="1ms"/>
         </Display>
-        
+
         <Display id="d2" title="Ex12: spike array" timeScale="1ms" xmin="0" xmax="300" ymin="-20" ymax="270">
             <Line id="l0" quantity="spikeArrayPop[0]/0/tsince" scale="1ms" color="#000000" timeScale="1ms"/>
             <Line id="l1" quantity="spikeArrayPop[0]/1/tsince" scale="1ms" color="#00ff00"  timeScale="1ms"/>
             <Line id="l2" quantity="spikeArrayPop[0]/2/tsince" scale="1ms" color="#ddff00" timeScale="1ms"/>
             <Line id="l3" quantity="spikeArrayPop[0]/tsince" scale="1ms" color="#ff0000" timeScale="1ms"/>
         </Display>
-        
+
+
         <Display id="dcells" title="Ex12: iafPop" timeScale="1ms" xmin="0" xmax="300" ymin="-65" ymax="-58">
             <Line id="l0" quantity="iafPop[0]/v" scale="1mV" color="#000000" timeScale="1ms"/>
             <Line id="l1" quantity="iafPop[1]/v" scale="1mV" color="#008800" timeScale="1ms"/>
             <Line id="l2" quantity="iafPop[2]/v" scale="1mV" color="#880000" timeScale="1ms"/>
         </Display>
-        
+
     </Simulation>
-    
+
 
 </Lems>
