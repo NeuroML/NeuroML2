@@ -210,7 +210,8 @@
 
 	<DerivedVariable name="plasticityFactor" dimension="none" exposure="plasticityFactor" value="R * U" />
 
-	<TimeDerivative variable="tSince" value="tSinceRate" />
+	<TimeDerivative variable="R" value="(1 - R) / tauRec"/>
+	<TimeDerivative variable="U" value="(initReleaseProb - U) / tauFac"/>
 
 	<OnStart>
 	  <StateAssignment variable="R" value="1" />
@@ -219,8 +220,8 @@
 	</OnStart>
 
 	<OnEvent port="in">
-	  <StateAssignment variable="R" value="R * (1-U) * exp(-1 * (tSince/tauRec)) + 1 - exp(-1 * (tSince / tauRec)) " />
-	  <StateAssignment variable="U" value="U * exp(-(tSince) / tauFac) + initReleaseProb * (1 - (U * exp(-(tSince) / tauFac)))" />
+	  <StateAssignment variable="R" value="R * (1 - U)" />
+	  <StateAssignment variable="U" value="U + initReleaseProb * (1 - U)" />
 	  <StateAssignment variable="tSince" value="0" />
 	</OnEvent>
       </Dynamics>
@@ -260,9 +261,9 @@
 	</OnStart>
 
 	<OnEvent port="in">
-	  <EventOut port="relay"/>
 	  <StateAssignment variable="A" value="A + plasticityFactor * factor" />
 	  <StateAssignment variable="B" value="B + plasticityFactor * factor" />
+	  <EventOut port="relay"/>
 	</OnEvent>
 
       </Dynamics>

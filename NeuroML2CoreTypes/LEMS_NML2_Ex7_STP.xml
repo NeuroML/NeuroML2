@@ -31,22 +31,22 @@
     </abstractCell>
 
 
-    <expTwoSynapse id="noStpSyn" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="2ms"/>
+    <expTwoSynapse id="noStpSyn" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="40ms"/>
 
-    <stpSynapse id="stpSynDep" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="2ms">
+    <stpSynapse id="stpSynDep" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="40ms">
             <stpMechanism initReleaseProb = "0.5" tauFac = "0 ms" tauRec = "120 ms"/>
     </stpSynapse>
 
-    <stpSynapse id="stpSynFac" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="2ms">
+    <stpSynapse id="stpSynFac" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="40ms">
             <stpMechanism initReleaseProb = "0.5" tauFac = "300 ms" tauRec = "0 ms"/>
     </stpSynapse>
 
-    <stpSynapse id="stpSynDepFac" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="2ms">
-            <stpMechanism initReleaseProb = "0.9" tauFac = "300 ms" tauRec = "120 ms"/>
+    <stpSynapse id="stpSynDepFac" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="40ms">
+            <stpMechanism initReleaseProb = "0.9" tauFac = "200 ms" tauRec = "300 ms"/>
     </stpSynapse>
 
-    <tsodyksMarkramSTPSynapse id="tmStpSyn" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="2ms">
-            <tsodyksMarkramSTPMechanism initReleaseProb = "0.9" tauFac = "300 ms" tauRec = "120 ms"/>
+    <tsodyksMarkramSTPSynapse id="tmStpSyn" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="40ms">
+            <tsodyksMarkramSTPMechanism initReleaseProb = "0.9" tauFac = "200 ms" tauRec = "300 ms"/>
     </tsodyksMarkramSTPSynapse>
 
 
@@ -65,7 +65,7 @@
 
 
     <Simulation id="sim1" length="300ms" step="0.01ms" target="net2">
-        <Display id="d1" title="Ex7: Cells with STP synapse: voltage" timeScale="1ms" xmin="0" xmax="300" ymin="-56" ymax="-48">
+        <Display id="d1" title="Ex7: Cells with STP synapse: voltage" timeScale="1ms" xmin="0" xmax="300" ymin="-56" ymax="-35">
                 <Line id="noStp" quantity="pasPop[0]/v" scale="1mV" color="#000000" timeScale="1ms"/>
                 <Line id="stpSynDep" quantity="pasPop[1]/v" scale="1mV" color="#0000FF" timeScale="1ms"/>
                 <Line id="stpSynFac" quantity="pasPop[2]/v" scale="1mV" color="#ff0000" timeScale="1ms"/>
