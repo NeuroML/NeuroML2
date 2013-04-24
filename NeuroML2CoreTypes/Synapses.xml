@@ -196,9 +196,6 @@
       <Parameter name="tauFac" dimension="time" />
       <Parameter name="tauRec" dimension="time" />
 
-      <Constant name="tSinceRate" dimension="none" value="1"/>
-      <Constant name="longTime" dimension="time" value="1000s"/>
-
       <EventPort name="in" direction="in" description="This is where the plasticity mechanism receives spike events from the parent synapse."/>
 
       <Exposure name="plasticityFactor" dimension="none"/>
@@ -206,7 +203,6 @@
       <Dynamics>
 	<StateVariable name="R" dimension="none"/>
 	<StateVariable name="U" dimension="none"/>
-	<StateVariable name="tSince" dimension="time"/>
 
 	<DerivedVariable name="plasticityFactor" dimension="none" exposure="plasticityFactor" value="R * U" />
 
@@ -216,13 +212,11 @@
 	<OnStart>
 	  <StateAssignment variable="R" value="1" />
 	  <StateAssignment variable="U" value="initReleaseProb" />
-	  <StateAssignment variable="tSince" value="longTime" />
 	</OnStart>
 
 	<OnEvent port="in">
 	  <StateAssignment variable="R" value="R * (1 - U)" />
 	  <StateAssignment variable="U" value="U + initReleaseProb * (1 - U)" />
-	  <StateAssignment variable="tSince" value="0" />
 	</OnEvent>
       </Dynamics>
 
