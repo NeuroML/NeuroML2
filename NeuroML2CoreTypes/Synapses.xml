@@ -87,28 +87,21 @@
 
         <Parameter name="tauRise" dimension="time" />
         <Parameter name="tauDecay" dimension="time" />
-
-      <!--<DerivedParameter name="peakTime" dimension="time" value="ln(tauDecay/tauRise) * (tauRise*tauDecay)/(tauDecay - tauRise)" />
-      <DerivedParameter name="factor" dimension="none" value="1 / (-exp(-peakTime/tauRise) + exp(-peakTime/tauDecay))" />-->
+	<DerivedParameter name="peakTime" dimension="time" value="ln(tauDecay / tauRise) * (tauRise * tauDecay)/(tauDecay - tauRise)"/>
+	<DerivedParameter name="waveformFactor" dimension="none" value="1 / (-exp(-peakTime / tauRise) + exp(-peakTime / tauDecay))"/>
 
         <Child name="notes" type="notes"/>
 
         <Dynamics>
-
             <StateVariable name="A" dimension="none"/>
             <StateVariable name="B" dimension="none"/>
 
-         <!-- TODO: evaluate only once!! -->
-         <!-- TODO: catch tauRise = 0..! -->
-            <DerivedVariable name="peakTime" dimension="time" value="ln(tauDecay / tauRise) * (tauRise * tauDecay)/(tauDecay - tauRise)"/>
-            <DerivedVariable name="factor" dimension="none" value="1 / (-exp(-peakTime / tauRise) + exp(-peakTime / tauDecay))"/>
-            <DerivedVariable name="A_rate" dimension="per_time" value="-1 / tauRise"/>
-            <DerivedVariable name="A_factor" dimension="none" value="factor"/>
+	    <!-- TODO: catch tauRise = 0..! -->
 
             <DerivedVariable name="g" dimension="conductance" exposure="g" value="gbase * (B - A)" />
             <DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
 
-            <TimeDerivative variable="A" value="A * A_rate" />
+            <TimeDerivative variable="A" value="-A / tauRise" />
             <TimeDerivative variable="B" value="-B / tauDecay" />
 
             <OnStart>
@@ -117,8 +110,8 @@
             </OnStart>
 
             <OnEvent port="in">
-                <StateAssignment variable="A" value="A + A_factor" />
-                <StateAssignment variable="B" value="B + factor" />
+                <StateAssignment variable="A" value="A + waveformFactor" />
+                <StateAssignment variable="B" value="B + waveformFactor" />
             </OnEvent>
 
         </Dynamics>
@@ -165,10 +158,6 @@
             <StateVariable name="A" dimension="none"/>
             <StateVariable name="B" dimension="none"/>
 
-         <!-- TODO: evaluate only once!! -->
-            <DerivedVariable name="peakTime" dimension="time" value="(tauRise * tauDecay)/(tauDecay - tauRise) * ln(tauDecay / tauRise)" />
-            <DerivedVariable name="factor" dimension="none" value="1 / (-exp(-peakTime / tauRise) + exp(-peakTime / tauDecay))" />
-
             <DerivedVariable name="block" dimension="none" select="voltageConcDepBlock/scaling" />
             <DerivedVariable name="g" dimension="conductance" exposure="g" value="gbase * block * (B - A)" />
             <DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
@@ -183,8 +172,8 @@
             </OnStart>
 
             <OnEvent port="in">
-                <StateAssignment variable="A" value="A + factor" />
-                <StateAssignment variable="B" value="B + factor" />
+                <StateAssignment variable="A" value="A + waveformFactor" />
+                <StateAssignment variable="B" value="B + waveformFactor" />
             </OnEvent>
 
         </Dynamics>
@@ -276,9 +265,6 @@
 	<StateVariable name="A" dimension="none"/>
 	<StateVariable name="B" dimension="none"/>
 
-	<DerivedVariable name="peakTime" dimension="time" value="(tauRise * tauDecay)/(tauDecay - tauRise) * ln(tauDecay / tauRise)" />
-	<DerivedVariable name="factor" dimension="none" value="1 / (-exp(-peakTime / tauRise) + exp(-peakTime / tauDecay))" />
-
 	<DerivedVariable name="g" dimension="conductance" exposure="g" value="gbase * (B - A)" />
 	<DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
 	<DerivedVariable name="plasticityFactor" dimension="none" select="plasticityMechanism/plasticityFactor" />
@@ -292,8 +278,8 @@
 	</OnStart>
 
 	<OnEvent port="in">
-	  <StateAssignment variable="A" value="A + plasticityFactor * factor" />
-	  <StateAssignment variable="B" value="B + plasticityFactor * factor" />
+	  <StateAssignment variable="A" value="A + plasticityFactor * waveformFactor" />
+	  <StateAssignment variable="B" value="B + plasticityFactor * waveformFactor" />
 	  <EventOut port="relay"/>
 	</OnEvent>
 
@@ -343,10 +329,6 @@
 
             <StateVariable name="tsince" dimension="time" exposure="tsince"/>
 
-         <!-- TODO: evaluate only once!! -->
-            <DerivedVariable name="peakTime" dimension="time" value="(tauRise * tauDecay)/(tauDecay - tauRise) * ln(tauDecay / tauRise)" />
-            <DerivedVariable name="factor" dimension="none" value="1 / (-exp(-peakTime / tauRise) + exp(-peakTime / tauDecay))" />
-
             <DerivedVariable name="initReleaseProb" dimension="none" select="stpMechanism/initReleaseProb" />
             <DerivedVariable name="tauRec" dimension="time" select="stpMechanism/tauRec" />
             <DerivedVariable name="tauFac" dimension="time" select="stpMechanism/tauFac" />
@@ -373,8 +355,8 @@
             </OnStart>
 
             <OnEvent port="in">
-                <StateAssignment variable="A" value="A + factor" />
-                <StateAssignment variable="B" value="B + factor" />
+                <StateAssignment variable="A" value="A + waveformFactor" />
+                <StateAssignment variable="B" value="B + waveformFactor" />
 
                 <StateAssignment variable="R" value="R * (1-U) * exp(-1 * (tsince/tauRec)) + 1 - exp(-1 * (tsince / tauRec)) " />
 
@@ -412,10 +394,6 @@
 
             <StateVariable name="tsince" dimension="time" exposure="tsince"/>
 
-         <!-- TODO: evaluate only once!! -->
-            <DerivedVariable name="peakTime" dimension="time" value="(tauRise * tauDecay) / (tauDecay - tauRise) * ln(tauDecay / tauRise)" />
-            <DerivedVariable name="factor" dimension="none" value="1 / (-exp(-peakTime / tauRise) + exp(-peakTime / tauDecay))" />
-
             <DerivedVariable name="g" dimension="conductance" exposure="g" value="gbase * (B - A)" />
 
             <DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
@@ -437,8 +415,8 @@
             </OnStart>
 
             <OnEvent port="in">
-                <StateAssignment variable="A" value="A + factor" />
-                <StateAssignment variable="B" value="B + factor" />
+                <StateAssignment variable="A" value="A + waveformFactor" />
+                <StateAssignment variable="B" value="B + waveformFactor" />
                 <StateAssignment variable="tsince" value="0" />
             </OnEvent>
 
