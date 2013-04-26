@@ -184,7 +184,7 @@
     <ComponentType name="stpMechanism"
 		   description="Base short term plasticity mechanism.">
       <EventPort name="in" direction="in" description="This is where the plasticity mechanism receives spike events from the parent synapse."/>
-      <Exposure name="plasticityFactor" dimension="none"/>
+      <Exposure name="stpFactor" dimension="none"/>
     </ComponentType>
 
 
@@ -204,7 +204,7 @@
 	<StateVariable name="R" dimension="none"/>
 
 	<DerivedVariable name="U" dimension="none" value="initReleaseProb"/>
-	<DerivedVariable name="plasticityFactor" dimension="none" exposure="plasticityFactor" value="R * U" />
+	<DerivedVariable name="stpFactor" dimension="none" exposure="stpFactor" value="R * U" />
 
 	<TimeDerivative variable="R" value="(1 - R) / tauRec"/>
 
@@ -236,7 +236,7 @@
 	<StateVariable name="R" dimension="none"/>
 	<StateVariable name="U" dimension="none"/>
 
-	<DerivedVariable name="plasticityFactor" dimension="none" exposure="plasticityFactor" value="R * U" />
+	<DerivedVariable name="stpFactor" dimension="none" exposure="stpFactor" value="R * U" />
 
 	<TimeDerivative variable="R" value="(1 - R) / tauRec"/>
 	<TimeDerivative variable="U" value="(initReleaseProb - U) / tauFac"/>
@@ -267,7 +267,7 @@
 
 	<DerivedVariable name="g" dimension="conductance" exposure="g" value="gbase * (B - A)" />
 	<DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
-	<DerivedVariable name="plasticityFactor" dimension="none" select="stpMechanism/plasticityFactor" />
+	<DerivedVariable name="stpFactor" dimension="none" select="stpMechanism/stpFactor" />
 
 	<TimeDerivative variable="A" value="-A / tauRise" />
 	<TimeDerivative variable="B" value="-B / tauDecay" />
@@ -278,8 +278,8 @@
 	</OnStart>
 
 	<OnEvent port="in">
-	  <StateAssignment variable="A" value="A + plasticityFactor * waveformFactor" />
-	  <StateAssignment variable="B" value="B + plasticityFactor * waveformFactor" />
+	  <StateAssignment variable="A" value="A + stpFactor * waveformFactor" />
+	  <StateAssignment variable="B" value="B + stpFactor * waveformFactor" />
 	  <EventOut port="relay"/>
 	</OnEvent>
 
@@ -287,16 +287,16 @@
     </ComponentType>
 
 
-    <ComponentType name="stpBlockingSynapse"
+    <ComponentType name="blockStpSynapse"
 		   extends="stpSynapse">
-      <Child name="blockageMechanism" type="baseBlock"/>
+      <Child name="blockMechanism" type="baseBlock"/>
       <Dynamics>
 	<StateVariable name="A" dimension="none"/>
 	<StateVariable name="B" dimension="none"/>
 
-	<DerivedVariable name="plasticityFactor" dimension="none" select="stpMechanism/plasticityFactor" />
-	<DerivedVariable name="blockageFactor" dimension="none" select="blockageMechanism/scaling" />
-	<DerivedVariable name="g" dimension="conductance" exposure="g" value="blockageFactor * gbase * (B - A)" />
+	<DerivedVariable name="stpFactor" dimension="none" select="stpMechanism/stpFactor" />
+	<DerivedVariable name="blockFactor" dimension="none" select="blockMechanism/scaling" />
+	<DerivedVariable name="g" dimension="conductance" exposure="g" value="blockFactor * gbase * (B - A)" />
 	<DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
 
 	<TimeDerivative variable="A" value="-A / tauRise" />
@@ -308,8 +308,8 @@
 	</OnStart>
 
 	<OnEvent port="in">
-	  <StateAssignment variable="A" value="A + plasticityFactor * waveformFactor" />
-	  <StateAssignment variable="B" value="B + plasticityFactor * waveformFactor" />
+	  <StateAssignment variable="A" value="A + stpFactor * waveformFactor" />
+	  <StateAssignment variable="B" value="B + stpFactor * waveformFactor" />
 	  <EventOut port="relay"/>
 	</OnEvent>
       </Dynamics>
