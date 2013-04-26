@@ -176,23 +176,22 @@
                 <StateAssignment variable="B" value="B + waveformFactor" />
             </OnEvent>
 
-        </Dynamics>
+        </Dynamics>      <Parameter name="initReleaseProb" dimension="none" />
+
     </ComponentType>
 
 
-    <ComponentType name="tsodyksMarkramSTPMechanism"
-		   description="Base Tsodyks-Markram short term plasticity mechanism.">
-
-      <Parameter name="initReleaseProb" dimension="none" />
+    <ComponentType name="stpMechanism"
+		   description="Base short term plasticity mechanism.">
       <EventPort name="in" direction="in" description="This is where the plasticity mechanism receives spike events from the parent synapse."/>
       <Exposure name="plasticityFactor" dimension="none"/>
-
     </ComponentType>
 
 
     <ComponentType name="tsodyksMarkramDepMechanism"
-		   extends="tsodyksMarkramSTPMechanism"
+		   extends="stpMechanism"
 		   description="Depression-only Tsodyks-Markram model, as in Tsodyks and Markram 1997.">
+      <Parameter name="initReleaseProb" dimension="none" />
       <Parameter name="tauRec" dimension="time" />
 
       <Structure>
@@ -221,8 +220,9 @@
 
 
     <ComponentType name="tsodyksMarkramDepFacMechanism"
-		   extends="tsodyksMarkramSTPMechanism"
+		   extends="stpMechanism"
 		   description="Full Tsodyks-Markram STP model with both depression and facilitation, as in Tsodyks, Pawelzik and Markram 1998.">
+      <Parameter name="initReleaseProb" dimension="none" />
       <Parameter name="tauRec" dimension="time" />
       <Parameter name="tauFac" dimension="time" />
 
@@ -254,10 +254,10 @@
     </ComponentType>
 
 
-    <ComponentType name="tsodyksMarkramSTPSynapse"
+    <ComponentType name="stpSynapse"
 		   extends="expTwoSynapse"
-		   description="Short term plasticity model based on Tsodyks, M., Uziel, A., and Markram, H. (2000). Synchrony generation in recurrent networks with frequency-dependent synapses. J Neurosci 20, RC50. and Tsodyks, M.V., and Markram, H. (1997). The neural code between neocortical pyramidal neurons depends on neurotransmitter release probability. Proc Natl Acad Sci U S A 94, 719-723. cno_0000188">
-      <Child name="plasticityMechanism" type="tsodyksMarkramSTPMechanism"/>
+		   description="Biexponential synaptic model with short term plasticity. The specific STP model is determined by the plasticityMechanism child element.">
+      <Child name="stpMechanism" type="stpMechanism"/>
 
       <EventPort name="relay" direction="out" description="Used to relay incoming spikes to child plasticity mechanism"/>
 
@@ -267,7 +267,7 @@
 
 	<DerivedVariable name="g" dimension="conductance" exposure="g" value="gbase * (B - A)" />
 	<DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
-	<DerivedVariable name="plasticityFactor" dimension="none" select="plasticityMechanism/plasticityFactor" />
+	<DerivedVariable name="plasticityFactor" dimension="none" select="stpMechanism/plasticityFactor" />
 
 	<TimeDerivative variable="A" value="-A / tauRise" />
 	<TimeDerivative variable="B" value="-B / tauDecay" />
@@ -287,89 +287,33 @@
     </ComponentType>
 
 
-    <ComponentType name="stpMechanism"
-      description="ComponentType for model of short term plasticity. Used in _stpSynapse_. Note, need to enable passing of spike events to child elements so that stpMechanism can contain the state variables _R, _U, etc. and update them appropriately. cno_0000182">
+    <ComponentType name="stpBlockingSynapse"
+		   extends="stpSynapse">
+      <Child name="blockageMechanism" type="baseBlock"/>
+      <Dynamics>
+	<StateVariable name="A" dimension="none"/>
+	<StateVariable name="B" dimension="none"/>
 
-        <Parameter name="initReleaseProb" dimension="none" />
-        <Parameter name="tauFac" dimension="time" />
-        <Parameter name="tauRec" dimension="time" />
+	<DerivedVariable name="plasticityFactor" dimension="none" select="stpMechanism/plasticityFactor" />
+	<DerivedVariable name="blockageFactor" dimension="none" select="blockageMechanism/scaling" />
+	<DerivedVariable name="g" dimension="conductance" exposure="g" value="blockageFactor * gbase * (B - A)" />
+	<DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
 
-        <Exposure name="initReleaseProb" dimension="none"/>
-        <Exposure name="tauFac" dimension="time"/>
-        <Exposure name="tauRec" dimension="time"/>
+	<TimeDerivative variable="A" value="-A / tauRise" />
+	<TimeDerivative variable="B" value="-B / tauDecay" />
 
-        <Dynamics>
-            <DerivedVariable name="initReleaseProb" dimension="none"  exposure="initReleaseProb" value="initReleaseProb" />
-            <DerivedVariable name="tauFac" dimension="time" exposure="tauFac" value="tauFac" />
-            <DerivedVariable name="tauRec" dimension="time" exposure="tauRec" value="tauRec" />
-        </Dynamics>
+	<OnStart>
+	  <StateAssignment variable="A" value="0" />
+	  <StateAssignment variable="B" value="0" />
+	</OnStart>
 
+	<OnEvent port="in">
+	  <StateAssignment variable="A" value="A + plasticityFactor * waveformFactor" />
+	  <StateAssignment variable="B" value="B + plasticityFactor * waveformFactor" />
+	  <EventOut port="relay"/>
+	</OnEvent>
+      </Dynamics>
     </ComponentType>
-
-
-    <ComponentType name="stpSynapse"
-       extends="expTwoSynapse"
-       description="Short term plasticity model based on Tsodyks, M., Uziel, A., and Markram, H. (2000). Synchrony generation in recurrent networks with frequency-dependent synapses. J Neurosci 20, RC50. and Tsodyks, M.V., and Markram, H. (1997). The neural code between neocortical pyramidal neurons depends on neurotransmitter release probability. Proc Natl Acad Sci U S A 94, 719-723. cno_0000188">
-
-        <Constant name="tsinceRate" dimension="none" value="1"/>
-        <Constant name="longTime" dimension="time" value="1000s"/>
-
-        <Child name="stpMechanism" type="stpMechanism"/>
-
-        <Exposure name="tsince" dimension="time"/>
-        <Exposure name="R" dimension="none"/>
-        <Exposure name="U" dimension="none"/>
-
-        <Dynamics>
-            <StateVariable name="A" dimension="none"/>
-            <StateVariable name="B" dimension="none"/>
-
-            <StateVariable name="R" dimension="none" exposure="R"/>
-            <StateVariable name="U" dimension="none" exposure="U"/>
-
-            <StateVariable name="tsince" dimension="time" exposure="tsince"/>
-
-            <DerivedVariable name="initReleaseProb" dimension="none" select="stpMechanism/initReleaseProb" />
-            <DerivedVariable name="tauRec" dimension="time" select="stpMechanism/tauRec" />
-            <DerivedVariable name="tauFac" dimension="time" select="stpMechanism/tauFac" />
-
-            <DerivedVariable name="plasticityFactor" dimension="none" value="R * U" />
-
-            <DerivedVariable name="g" dimension="conductance" exposure="g" value="gbase * plasticityFactor * (B - A)" />
-
-            <DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
-
-
-            <TimeDerivative variable="A" value="-A / tauRise" />
-            <TimeDerivative variable="B" value="-B / tauDecay" />
-
-            <TimeDerivative variable="tsince" value="tsinceRate" />
-
-            <OnStart>
-                <StateAssignment variable="A" value="0" />
-                <StateAssignment variable="B" value="0" />
-
-                <StateAssignment variable="R" value="1" />
-                <StateAssignment variable="U" value="initReleaseProb" />
-                <StateAssignment variable="tsince" value="longTime" />
-            </OnStart>
-
-            <OnEvent port="in">
-                <StateAssignment variable="A" value="A + waveformFactor" />
-                <StateAssignment variable="B" value="B + waveformFactor" />
-
-                <StateAssignment variable="R" value="R * (1-U) * exp(-1 * (tsince/tauRec)) + 1 - exp(-1 * (tsince / tauRec)) " />
-
-                <StateAssignment variable="U" value="U * exp(-(tsince) / tauFac) + initReleaseProb * (1 - (U * exp(-(tsince) / tauFac)))" />
-
-                <StateAssignment variable="tsince" value="0" />
-            </OnEvent>
-
-        </Dynamics>
-
-    </ComponentType>
-
-
 
   <!---        -->
 
