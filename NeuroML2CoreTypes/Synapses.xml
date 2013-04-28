@@ -20,6 +20,7 @@
     <ComponentType name="baseSynapse"
         extends="baseVoltageDepPointCurrent"
         description="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009"> <!-- http://bioportal.bioontology.org/ontologies/46856/?p=terms&conceptid=cno%3Acno_0000009 -->
+        <Child name="notes" type="notes"/>
 
         <EventPort name="in" direction="in"/>
 
@@ -59,8 +60,6 @@
 
         <Parameter name="tauDecay" dimension="time" description="Time course of decay"/>
 
-        <Child name="notes" type="notes"/>
-
         <Dynamics>
 
             <StateVariable name="g" dimension="conductance" exposure="g"/>
@@ -89,8 +88,6 @@
         <Parameter name="tauDecay" dimension="time" />
 	<DerivedParameter name="peakTime" dimension="time" value="ln(tauDecay / tauRise) * (tauRise * tauDecay)/(tauDecay - tauRise)"/>
 	<DerivedParameter name="waveformFactor" dimension="none" value="1 / (-exp(-peakTime / tauRise) + exp(-peakTime / tauDecay))"/>
-
-        <Child name="notes" type="notes"/>
 
         <Dynamics>
             <StateVariable name="A" dimension="none"/>
@@ -151,7 +148,6 @@
        extends="expTwoSynapse"
        description="NMDA receptor mediated synapse, whose conductance is scaled by a factor dependent on the concentration of magnesium (assumed fixed) and membrane potential">
 
-        <Child name="notes" type="notes"/>
         <Child name="voltageConcDepBlock" type="voltageConcDepBlock"/>
 
         <Dynamics>
