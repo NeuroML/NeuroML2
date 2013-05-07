@@ -101,23 +101,11 @@ for filename in nml2_ex_list:
 
     if filename.endswith("nml"):
     	main_ex = nml2_ex_dir+"/"+filename
-    	copy_org_neuroml_model = "../org.neuroml.model/src/test/resources/"+nml2_ex_dir+"/"+filename
+    	copy_org_neuroml_model = "../org.neuroml.model/src/main/resources/"+nml2_ex_dir+"/"+filename
         print "Comparing %s to %s"%(main_ex, copy_org_neuroml_model)
         assert filecmp.cmp(main_ex, copy_org_neuroml_model)
 
 
-'''
-print "--------------------------------------------------"
-print "    Checking local copies of jars"
-
-jlems_dir="../jLEMS"
-jlems_version = "0.9.1"
-jlems_jar = '%s/builtjars/lems-%s.jar'%(jlems_dir,jlems_version)
-local_copy = '../org.neuroml.export/libs/lems/jlems/%s/jlems-%s.jar'%(jlems_version,jlems_version)
-print "Checking jLEMS jar %s against %s"%(jlems_jar, local_copy)
-assert filecmp.cmp(local_copy, jlems_jar)
-'''
-    	
 
 print "\n  *** All tests passed! ***\n"
 
