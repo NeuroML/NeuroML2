@@ -324,8 +324,9 @@
         <xs:complexContent>
             <xs:extension base="Standalone">
                 <xs:choice>
-                    <xs:element name="gate" type="GateHHRates" minOccurs="0" maxOccurs="unbounded"/>    <!-- TODO check type="gateHHrates" for this -->
+                    <xs:element name="gate" type="GateHHUndetermined" minOccurs="0" maxOccurs="unbounded"/>    <!-- TODO check type="gateHHrates" for this -->
                     <xs:element name="gateHHrates" type="GateHHRates" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="gateHHratesTau" type="GateHHRatesTau" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="gateHHtauInf" type="GateHHTauInf" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:choice>
 
@@ -351,6 +352,7 @@
     <xs:simpleType name="gateTypes">
         <xs:restriction base="xs:string">
             <xs:enumeration value="gateHHrates"/>
+            <xs:enumeration value="gateHHratesTau"/>
             <xs:enumeration value="gateHHtauInf"/>
             <xs:enumeration value="gateKS"/>
         </xs:restriction>
@@ -358,7 +360,7 @@
 
 
 
-    <xs:complexType name="GateHHRates">
+    <xs:complexType name="GateHHUndetermined">
         <xs:complexContent>
             <xs:extension base="Base">
                 <xs:all>
@@ -366,12 +368,30 @@
                     <xs:element name="q10Settings" type="Q10Settings" minOccurs="0"/>
                     <xs:element name="forwardRate" type="HHRate" minOccurs="0"/>
                     <xs:element name="reverseRate" type="HHRate" minOccurs="0"/>
+                    <xs:element name="timeCourse" type="HHTime"  minOccurs="0"/>
+                    <xs:element name="steadyState" type="HHVariable" minOccurs="0"/>
                 </xs:all>
                 <xs:attribute name="instances" type="xs:integer" use="optional" default="1"/>
                 <xs:attribute name="type" type="gateTypes" use="optional"/>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>    
+
+    <xs:complexType name="GateHHRates">
+        <xs:complexContent>
+            <xs:extension base="Base">
+                <xs:all>
+                    <xs:element name="notes" type="Notes" minOccurs="0"/>
+                    <xs:element name="q10Settings" type="Q10Settings" minOccurs="0"/>
+                    <xs:element name="forwardRate" type="HHRate" minOccurs="1"/>
+                    <xs:element name="reverseRate" type="HHRate" minOccurs="1"/>
+                </xs:all>
+                <xs:attribute name="instances" type="xs:integer" use="optional" default="1"/>
+                <xs:attribute name="type" type="gateTypes" use="optional"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>    
+
 
     <xs:complexType name="GateHHTauInf">
         <xs:complexContent>
@@ -379,8 +399,24 @@
                 <xs:all>
                     <xs:element name="notes" type="Notes" minOccurs="0"/>
                     <xs:element name="q10Settings" type="Q10Settings" minOccurs="0"/>
-                    <xs:element name="timeCourse" type="HHTime"  minOccurs="0"/>
-                    <xs:element name="steadyState" type="HHVariable" minOccurs="0"/>
+                    <xs:element name="timeCourse" type="HHTime"  minOccurs="1"/>
+                    <xs:element name="steadyState" type="HHVariable" minOccurs="1"/>
+                </xs:all>
+                <xs:attribute name="instances" type="xs:integer" use="optional" default="1"/>
+                <xs:attribute name="type" type="gateTypes" use="optional"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="GateHHRatesTau">
+        <xs:complexContent>
+            <xs:extension base="Base">
+                <xs:all>
+                    <xs:element name="notes" type="Notes" minOccurs="0"/>
+                    <xs:element name="q10Settings" type="Q10Settings" minOccurs="0"/>
+                    <xs:element name="forwardRate" type="HHRate" minOccurs="1"/>
+                    <xs:element name="reverseRate" type="HHRate" minOccurs="1"/>
+                    <xs:element name="timeCourse" type="HHTime"  minOccurs="1"/>
                 </xs:all>
                 <xs:attribute name="instances" type="xs:integer" use="optional" default="1"/>
                 <xs:attribute name="type" type="gateTypes" use="optional"/>
