@@ -1,0 +1,10 @@
+<Lems xmlns="http://www.neuroml.org/lems/0.7"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7 ../../LEMS/Schemas/LEMS/LEMS_v0.7.xsd"
+      description="All NeuroML2 Component Types">
+
+
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    
+</Lems>
