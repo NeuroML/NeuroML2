@@ -10,6 +10,7 @@ from lxml import etree
 from urllib import urlopen
 
 import subprocess
+import filecmp
 
 lems_def_dir="NeuroML2CoreTypes"
 lems_def_list=os.listdir(lems_def_dir)
@@ -65,7 +66,6 @@ for file in nml2_ex_list:
 print "--------------------------------------------------"
 print "    Checking local copies of Schemas"
 
-import filecmp
 
 assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../neuroConstruct/NeuroML2/Schemas/NeuroML2/NeuroML_v2alpha.xsd')
 assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../neuroConstruct/NeuroML2/Schemas/NeuroML2/NeuroML_v2beta.xsd')
@@ -104,7 +104,22 @@ for filename in nml2_ex_list:
     	copy_org_neuroml_model = "../org.neuroml.model/src/main/resources/"+nml2_ex_dir+"/"+filename
         print "Comparing %s to %s"%(main_ex, copy_org_neuroml_model)
         assert filecmp.cmp(main_ex, copy_org_neuroml_model)
+   
+lems_ex_dir="../LEMS/examples"
+lems_ex_list=os.listdir(lems_ex_dir)
 
+for filename in lems_ex_list:
+
+    if filename.endswith("xml"):
+    	main_ex = lems_ex_dir+"/"+filename
+    	
+    	copy_org_lems_ex = "../jLEMS/src/test/resources/"+filename
+        print "Comparing %s to %s"%(main_ex, copy_org_lems_ex)
+        assert filecmp.cmp(main_ex, copy_org_lems_ex)
+        
+    	copy_org_lems_ex = "../pylems/examples/"+filename
+        print "Comparing %s to %s"%(main_ex, copy_org_lems_ex)
+        assert filecmp.cmp(main_ex, copy_org_lems_ex)
 
 
 print "\n  *** All tests passed! ***\n"
