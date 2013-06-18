@@ -49,7 +49,6 @@
             <segmentGroup id="dendrite_group" neuroLexId="sao1211023249">  
                 <member segment="1"/>
                 <member segment="2"/>
-                <member segment="3"/>
 
                 <!-- A parameter whose value varies from 0 at the start of the group closest to the soma
                      to 1 at the most distal point of the segments in the group.-->
