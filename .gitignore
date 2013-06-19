@@ -3,6 +3,7 @@
 
 *.py~
 results
+build
 
 NeuroML2CoreTypes/*.ode
 NeuroML2CoreTypes/*.sbml
