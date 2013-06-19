@@ -1,12 +1,11 @@
-
 <Lems>
 
-        <!-- Example showing new types of network populations & projection templates in v2 -->
+    <!-- Example showing new types of network populations & projection templates in v2 -->
 
-        <!-- This is a file which can be read and executed by the LEMS Interpreter.
-             It imports the LEMS definitions of the core NeuroML 2 Components, creates
-             a model in "pure" NeuroML 2 and contains some LEMS elements for running
-             a simulation -->
+    <!-- This is a file which can be read and executed by the LEMS Interpreter.
+    It imports the LEMS definitions of the core NeuroML 2 Components, creates
+    a model in "pure" NeuroML 2 and contains some LEMS elements for running
+    a simulation -->
 
 
     <Target component="sim1"/>
@@ -74,12 +73,30 @@
     <expOneSynapseW id="synW" gbase="0.1nS" erev="0mV" tauDecay="2ms"/>
 
 
+    <ComponentType name="connectionWD"
+        description="Explicit event connection directly between named components, which gets processed via a new instance of a _synapse component which is created on the target component, transmitted after a time _delay. Synapse should use _weight value. Normally contained inside a _projection_ element."
+        extends="connection">
+
+        <Parameter name="weight" dimension="none"/>
+        <Parameter name="delay" dimension="time"/>
+        <Path name="preCellId"/>
+        <Path name="postCellId"/>
+
+        <Structure>
+            <With instance="preCellId" as="a"/>
+            <With instance="postCellId" as="b"/>
+            <EventConnection from="a" to="b" receiver="../synapse" delay="delay">
+                <Assign property="weight" value="weight"/>
+            </EventConnection>
+        </Structure>
+       
+    </ComponentType>
 
     <network id="net2">
 
         <population id="randSpikersPop" component="randSpiker" size="3"/>
 
-	<population id="poissonSpikersPop" component="poissonSpiker" size="3"/>
+        <population id="poissonSpikersPop" component="poissonSpiker" size="3"/>
 
         <population id="spikersPop" component="spiker" size="1"/>
 
@@ -89,14 +106,19 @@
 
         <population id="iafPop" component="iaf1" size="3"/>
 
-        <!--<synapticConnection from="spike100Pop[0]" to="iafPop[0]" synapse="synW" weight="1.5" delay="5ms"/>   Delays need to have dimensions!!-->
-        <synapticConnection from="spike100Pop[0]" to="iafPop[0]" synapse="syn1" destination="synapses"/>
-        <synapticConnectionWD from="spike100Pop[1]" to="iafPop[1]" synapse="synW" weight="0.5" delay="10ms" destination="synapses"/>
-        <synapticConnectionWD from="spike100Pop[2]" to="iafPop[2]" synapse="synW" weight="0.25" delay="15ms" destination="synapses"/>
+        <projection id="projection1" presynapticPopulation="spike100Pop" postsynapticPopulation="iafPop" synapse="syn1">
+            <connection preCellId="../spike100Pop[0]" postCellId="../iafPop[0]"/>
+        </projection>
+        
+        <projection id="projection2" presynapticPopulation="spike100Pop" postsynapticPopulation="iafPop" synapse="synW">
+            <connectionWD preCellId="../spike100Pop[1]" postCellId="../iafPop[1]" weight="0.5"  delay="10ms" />
+            <connectionWD preCellId="../spike100Pop[2]" postCellId="../iafPop[2]" weight="0.25" delay="15ms" />
+        </projection>
+        
 
     </network>
 
-   <!-- End of NeuroML 2 elements... -->
+    <!-- End of NeuroML 2 elements... -->
 
 
 
