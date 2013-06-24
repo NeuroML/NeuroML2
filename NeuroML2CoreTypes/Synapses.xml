@@ -172,7 +172,7 @@
                 <StateAssignment variable="B" value="B + waveformFactor" />
             </OnEvent>
 
-        </Dynamics>      <Parameter name="initReleaseProb" dimension="none" />
+        </Dynamics>
 
     </ComponentType>
 
@@ -190,12 +190,6 @@
       <Parameter name="initReleaseProb" dimension="none" />
       <Parameter name="tauRec" dimension="time" />
 
-      <Structure>
-	<With instance="parent" as="a"/>
-	<With instance="this" as="b"/>
-	<EventConnection from="a" to="b"/>
-      </Structure>
-
       <Dynamics>
 	<StateVariable name="R" dimension="none"/>
 
@@ -212,6 +206,13 @@
 	  <StateAssignment variable="R" value="R * (1 - U)" />
 	</OnEvent>
       </Dynamics>
+
+      <Structure>
+	<With instance="parent" as="a"/>
+	<With instance="this" as="b"/>
+	<EventConnection from="a" to="b"/>
+      </Structure>
+
     </ComponentType>
 
 
@@ -221,12 +222,6 @@
       <Parameter name="initReleaseProb" dimension="none" />
       <Parameter name="tauRec" dimension="time" />
       <Parameter name="tauFac" dimension="time" />
-
-      <Structure>
-	<With instance="parent" as="a"/>
-	<With instance="this" as="b"/>
-	<EventConnection from="a" to="b"/>
-      </Structure>
 
       <Dynamics>
 	<StateVariable name="R" dimension="none"/>
@@ -247,6 +242,13 @@
 	  <StateAssignment variable="U" value="U + initReleaseProb * (1 - U)" />
 	</OnEvent>
       </Dynamics>
+
+      <Structure>
+	<With instance="parent" as="a"/>
+	<With instance="this" as="b"/>
+	<EventConnection from="a" to="b"/>
+      </Structure>
+
     </ComponentType>
 
 
@@ -366,4 +368,3 @@
     </ComponentType>
 
 </Lems>
-
