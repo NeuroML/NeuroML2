@@ -63,20 +63,26 @@ for file in nml2_ex_list:
         else:
             print "\n\n  *** It's NOT valid! ***\n"
 
+def checkSameFile(fileA, fileB):
+    print "Comparing %s to %s"%(fileA, fileB)
+    assert filecmp.cmp(fileA, fileB)
+    
+
 print "--------------------------------------------------"
 print "    Checking local copies of Schemas"
 
+checkSameFile('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../libNeuroML/neuroml/nml/NeuroML_v2beta.xsd')
 
-assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../neuroConstruct/NeuroML2/Schemas/NeuroML2/NeuroML_v2alpha.xsd')
-assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../neuroConstruct/NeuroML2/Schemas/NeuroML2/NeuroML_v2beta.xsd')
+checkSameFile('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../org.neuroml.model/src/main/resources/Schemas/NeuroML2/NeuroML_v2alpha.xsd')
+checkSameFile('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../org.neuroml.model/src/main/resources/Schemas/NeuroML2/NeuroML_v2beta.xsd')
 
-assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../libNeuroML/neuroml/nml/NeuroML_v2beta.xsd')
+if os.path.isdir('../Cvapp-NeuroMorpho.org'):
+    checkSameFile('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../Cvapp-NeuroMorpho.org/Schemas/NeuroML2/NeuroML_v2alpha.xsd')
+    checkSameFile('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../Cvapp-NeuroMorpho.org/Schemas/NeuroML2/NeuroML_v2beta.xsd')
 
-assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../org.neuroml.model/src/main/resources/Schemas/NeuroML2/NeuroML_v2alpha.xsd')
-assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../org.neuroml.model/src/main/resources/Schemas/NeuroML2/NeuroML_v2beta.xsd')
-
-assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../Cvapp-NeuroMorpho.org/Schemas/NeuroML2/NeuroML_v2alpha.xsd')
-assert filecmp.cmp('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../Cvapp-NeuroMorpho.org/Schemas/NeuroML2/NeuroML_v2beta.xsd')
+if os.path.isdir('../neuroConstruct'):
+    checkSameFile('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../neuroConstruct/NeuroML2/Schemas/NeuroML2/NeuroML_v2alpha.xsd')
+    checkSameFile('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../neuroConstruct/NeuroML2/Schemas/NeuroML2/NeuroML_v2beta.xsd')
 
 
 print "--------------------------------------------------"
@@ -93,8 +99,7 @@ for filename in lems_def_list:
     if filename.endswith("xml") and not filename.startswith("Ex") and not filename in ignores:
     	main_ex = lems_ex_dir+"/"+filename
     	copy_org_neuroml_model = "../org.neuroml.model/src/main/resources/"+lems_ex_dir+"/"+filename
-        print "Comparing %s to %s"%(main_ex, copy_org_neuroml_model)
-        assert filecmp.cmp(main_ex, copy_org_neuroml_model)
+        checkSameFile(main_ex, copy_org_neuroml_model)
 
 
 for filename in nml2_ex_list:
@@ -102,8 +107,7 @@ for filename in nml2_ex_list:
     if filename.endswith("nml"):
     	main_ex = nml2_ex_dir+"/"+filename
     	copy_org_neuroml_model = "../org.neuroml.model/src/main/resources/"+nml2_ex_dir+"/"+filename
-        print "Comparing %s to %s"%(main_ex, copy_org_neuroml_model)
-        assert filecmp.cmp(main_ex, copy_org_neuroml_model)
+        checkSameFile(main_ex, copy_org_neuroml_model)
    
 lems_ex_dir="../LEMS/examples"
 lems_ex_list=os.listdir(lems_ex_dir)
@@ -114,12 +118,10 @@ for filename in lems_ex_list:
     	main_ex = lems_ex_dir+"/"+filename
     	
     	copy_org_lems_ex = "../jLEMS/src/test/resources/"+filename
-        print "Comparing %s to %s"%(main_ex, copy_org_lems_ex)
-        assert filecmp.cmp(main_ex, copy_org_lems_ex)
+        checkSameFile(main_ex, copy_org_lems_ex)
         
     	copy_org_lems_ex = "../pylems/examples/"+filename
-        print "Comparing %s to %s"%(main_ex, copy_org_lems_ex)
-        assert filecmp.cmp(main_ex, copy_org_lems_ex)
+        checkSameFile(main_ex, copy_org_lems_ex)
 
 
 print "\n  *** All tests passed! ***\n"

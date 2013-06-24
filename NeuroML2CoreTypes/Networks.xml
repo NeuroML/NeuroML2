@@ -113,7 +113,7 @@
 
 
     <ComponentType name="connection"
-        description="Explicit event connection directly between named components">
+        description="Explicit event connection directly between named components, which gets processed via a new instance of a _synapse component which is created on the target component. Normally contained inside a _projection_ element.">
 
         <Path name="preCellId"/>
         <Path name="postCellId"/>
