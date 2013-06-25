@@ -20,18 +20,27 @@
         <!-- Main NeuroML2 content. http://www.scholarpedia.org/article/Adaptive_exponential_integrate-and-fire_model -->
 
 
-<adExIaFCell id="adExBurst2"     C="281pF" gL="30nS" EL="-70.6mV" reset="-48.5mV" VT = "-50.4mV" thresh = "-40.4mV" delT="2mV" tauw="40ms"  a ="4nS"   b = "0.08nA" refract="0ms" Iamp="0.8nA"  Idel="0ms"   Idur="2000ms"/>
-<adExIaFCell id="adExBurst4"     C="281pF" gL="30nS" EL="-70.6mV" reset="-47.2mV" VT = "-50.4mV" thresh = "-40.4mV" delT="2mV" tauw="40ms"  a ="4nS"   b = "0.08nA" refract="0ms" Iamp="0.8nA"  Idel="0ms"   Idur="2000ms"/>
-<adExIaFCell id="adExBurstChaos" C="281pF" gL="30nS" EL="-70.6mV" reset="-48mV"   VT = "-50.4mV" thresh = "-40.4mV" delT="2mV" tauw="40ms"  a ="4nS"   b = "0.08nA" refract="0ms" Iamp="0.8nA"  Idel="0ms"   Idur="2000ms"/>
-<adExIaFCell id="adExRebound"    C="281pF" gL="30nS" EL="-60mV"   reset="-51mV"   VT = "-54mV"   thresh = "-30mV"   delT="2mV" tauw="150ms" a ="200nS" b = "0.1nA"  refract="0ms" Iamp="-0.5nA" Idel="150ms" Idur="50ms"/>
+<adExIaFCell id="adExBurst2"     C="281pF" gL="30nS" EL="-70.6mV" reset="-48.5mV" VT = "-50.4mV" thresh = "-40.4mV" delT="2mV" tauw="40ms"  a ="4nS"   b = "0.08nA" refract="0ms"/>
 
+<adExIaFCell id="adExBurst4"     C="281pF" gL="30nS" EL="-70.6mV" reset="-47.2mV" VT = "-50.4mV" thresh = "-40.4mV" delT="2mV" tauw="40ms"  a ="4nS"   b = "0.08nA" refract="0ms"/>
 
+<adExIaFCell id="adExBurstChaos" C="281pF" gL="30nS" EL="-70.6mV" reset="-48mV"   VT = "-50.4mV" thresh = "-40.4mV" delT="2mV" tauw="40ms"  a ="4nS"   b = "0.08nA" refract="0ms"/>
+
+<adExIaFCell id="adExRebound"    C="281pF" gL="30nS" EL="-60mV"   reset="-51mV"   VT = "-54mV"   thresh = "-30mV"   delT="2mV" tauw="150ms" a ="200nS" b = "0.1nA"  refract="0ms"/>
+
+<pulseGenerator id="pulseGen1" delay="0ms" duration="2000ms" amplitude="0.8nA" />
+<pulseGenerator id="pulseGen2" delay="150ms" duration="50ms" amplitude="-0.5nA" />
 
 <network id="net1">
     <population id="adExPop1" component="adExBurst2" size="1"/>
     <population id="adExPop2" component="adExBurst4" size="1"/>
     <population id="adExPop3" component="adExBurstChaos" size="1"/>
     <population id="adExPop4" component="adExRebound" size="1"/>
+    
+    <explicitInput target="adExPop1[0]" input="pulseGen1" destination="synapses"/>
+    <explicitInput target="adExPop2[0]" input="pulseGen1" destination="synapses"/>
+    <explicitInput target="adExPop3[0]" input="pulseGen1" destination="synapses"/>
+    <explicitInput target="adExPop4[0]" input="pulseGen2" destination="synapses"/>
 </network>
 
         <!-- End of NeuroML2 content -->

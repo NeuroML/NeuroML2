@@ -48,6 +48,9 @@
     <expCondSynapse id="ps1" tau_syn="5" e_rev="0"/>
     <alphaCondSynapse id="ps2" tau_syn="5" e_rev="0"/>
     
+    <SpikeSourcePoisson id="spikes1" start="50ms" duration="400ms" rate="50Hz"/>
+    <SpikeSourcePoisson id="spikes2" start="50ms" duration="400ms" rate="80Hz"/>
+    
     <network id="netAll">
         <population component="IF_curr_alpha_pop_IF_curr_alpha" id="pop_IF_curr_alpha" size="1"/>
         <population component="IF_curr_exp_pop_IF_curr_exp" id="pop_IF_curr_exp" size="1"/>
@@ -58,33 +61,40 @@
     
         <population component="silent_cell_2" id="pop_target_1" size="1"/>
         <population component="silent_cell_2" id="pop_target_2" size="1"/>
+        
+        <population component="spikes1" id="pop_spikes1" size="1"/>
+        <population component="spikes2" id="pop_spikes2" size="1"/>
          
         <synapticConnectionWD from="pop_EIF_cond_exp_isfa_ista[0]" to="pop_target_1[0]" synapse="ps1" weight="0.01" delay="10ms"/>
-        <synapticConnectionWD from="pop_EIF_cond_exp_isfa_ista[0]" to="pop_target_2[0]" synapse="ps2" weight="0.01" delay="10ms"/>
+        <synapticConnectionWD from="pop_EIF_cond_exp_isfa_ista[0]" to="pop_target_2[0]" synapse="ps2" weight="0.01" delay="20ms"/>
     </network>
     
     
     <Simulation id="sim1" length="500.0ms" step="0.05ms" target="netAll">
         <Display id="display_0" timeScale="1ms" title="PyNN IaF models run in LEMS" xmin="0" xmax="500" ymin="-72" ymax="-48">
-            <Line color="#000000" id="line_pop_IF_curr_alpha" quantity="pop_IF_curr_alpha[0]/v" scale="1mV" timeScale="1ms"/>
-            <Line color="#FF0000" id="line_pop_IF_curr_exp" quantity="pop_IF_curr_exp[0]/v" scale="1mV" timeScale="1ms"/>
-            <Line color="#0000FF" id="line_pop_IF_cond_alpha" quantity="pop_IF_cond_alpha[0]/v" scale="1mV" timeScale="1ms"/>
-            <Line color="#009b00" id="line_pop_IF_cond_exp" quantity="pop_IF_cond_exp[0]/v" scale="1mV" timeScale="1ms"/>
+            <Line color="#000000" id="IF_curr_alpha_v" quantity="pop_IF_curr_alpha[0]/v" scale="1mV" timeScale="1ms"/>
+            <Line color="#FF0000" id="IF_curr_exp_v" quantity="pop_IF_curr_exp[0]/v" scale="1mV" timeScale="1ms"/>
+            <Line color="#0000FF" id="IF_cond_alpha_v" quantity="pop_IF_cond_alpha[0]/v" scale="1mV" timeScale="1ms"/>
+            <Line color="#009b00" id="IF_cond_exp_v" quantity="pop_IF_cond_exp[0]/v" scale="1mV" timeScale="1ms"/>
         </Display>
         <Display id="display_1" timeScale="1ms" title="PyNN EIF model run in LEMS" xmin="0" xmax="500" ymin="-72" ymax="-38">
-            <Line color="#ffc800" id="line_pop_EIF_cond_exp_isfa_ista" quantity="pop_EIF_cond_exp_isfa_ista[0]/v" scale="1mV" timeScale="1ms"/>
+            <Line color="#ffc800" id="EIF_cond_exp_isfa_ista_v" quantity="pop_EIF_cond_exp_isfa_ista[0]/v" scale="1mV" timeScale="1ms"/>
         </Display>
         <Display id="display_2" timeScale="1ms" title="PyNN HH model run in LEMS" xmin="0" xmax="500" ymin="-100" ymax="100">
-            <Line color="#8c6400" id="line_pop_HH_cond_exp" quantity="pop_HH_cond_exp[0]/v" scale="1mV" timeScale="1ms"/>
+            <Line color="#8c6400" id="HH_cond_exp_v" quantity="pop_HH_cond_exp[0]/v" scale="1mV" timeScale="1ms"/>
         </Display>
         <Display id="display_3" timeScale="1ms" title="PyNN Target population" xmin="0" xmax="500" ymin="-66" ymax="-59">
-            <Line color="#0000FF" id="line_pop_target" quantity="pop_target_1[0]/v" scale="1mV" timeScale="1ms"/>
-            <Line color="#00aaFF" id="line_pop_target2" quantity="pop_target_2[0]/v" scale="1mV" timeScale="1ms"/>
+            <Line color="#0000FF" id="target1" quantity="pop_target_1[0]/v" scale="1mV" timeScale="1ms"/>
+            <Line color="#00aaFF" id="target2" quantity="pop_target_2[0]/v" scale="1mV" timeScale="1ms"/>
         </Display>
         <Display id="display_4" timeScale="1ms" title="PyNN Target syn conductances" xmin="0" xmax="500" ymin="-0.001" ymax="0.011">
-            <Line color="#0000FF" id="line_pop_target1" quantity="pop_target_1[0]/ps1/g" scale="1" timeScale="1ms"/>
-            <Line color="#00aaFF" id="line_pop_target2" quantity="pop_target_2[0]/ps2/g" scale="1" timeScale="1ms"/>
+            <Line color="#0000FF" id="target1_syn_cond" quantity="pop_target_1[0]/ps1/g" scale="1" timeScale="1ms"/>
+            <Line color="#00aaFF" id="target2_syn_cond" quantity="pop_target_2[0]/ps2/g" scale="1" timeScale="1ms"/>
         </Display> 
+        <Display id="display_5" timeScale="1ms" title="PyNN Spike source" xmin="0" xmax="500" ymin="0" ymax="50">
+            <Line color="#0000FF" id="spikes1" quantity="pop_spikes1[0]/tsince" scale="1ms" timeScale="1ms"/>
+            <Line color="#00aaFF" id="spikes2" quantity="pop_spikes2[0]/tsince" scale="1ms" timeScale="1ms"/>
+        </Display>
     </Simulation>
 
 

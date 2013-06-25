@@ -45,8 +45,9 @@
     <!-- Note, new units can be defined in a NeuroML file based on the dimensions above -->
 
     <Unit symbol="s" dimension="time" power="0"/>
-    <Unit symbol="per_s" dimension="per_time" power="0"/>          <!-- Physiological Units -->
-    <Unit symbol="ms" dimension="time" power="-3"/>
+    <Unit symbol="per_s" dimension="per_time" power="0"/>          
+    <Unit symbol="Hz" dimension="per_time" power="0"/>          
+    <Unit symbol="ms" dimension="time" power="-3"/>                <!-- Physiological Units -->
     <Unit symbol="per_ms" dimension="per_time" power="3"/>         <!-- Physiological Units -->
 
     <Unit symbol="m" dimension="length" power="0"/>

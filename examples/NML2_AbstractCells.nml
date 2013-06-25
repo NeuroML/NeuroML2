@@ -5,11 +5,7 @@
     xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  ../Schemas/NeuroML2/NeuroML_v2beta.xsd"
     id="NML2_AbstractCells">
 
-
-    <!-- Instances of some of the abstract cell types currently supported in NeuroML 2. The behaviour of these is defined in the LEMS
-         specifications at: http://sourceforge.net/apps/trac/neuroml/browser/NeuroML2/Schemas/NeuroML2/NeuroML_v2alpha.xsd -->
-
-    <!-- This is a "pure" NeuroML 2 file. It can be included in a LEMS file for use in a simulaton by the LEMS interpreter, see LEMS_NML2_ExN_AllCells.xml -->
+    <!-- Instances of some of the abstract cell types currently supported in NeuroML 2. -->
 
     <iafTauCell id="iafTau" leakReversal="-50mV" thresh="-55mV" reset="-70mV" tau="30ms"/>
 
@@ -18,7 +14,7 @@
     <izhikevichCell id="izBurst" v0 = "-70mV" thresh = "30mV" a ="0.02" b = "0.2" c = "-50.0" d = "2"/>
 
     <adExIaFCell id="adExBurst" C="281pF" gL="30nS" EL="-70.6mV" reset="-48.5mV" VT = "-50.4mV" thresh = "-40.4mV"
-                 delT="2mV" tauw="40ms"  a ="4nS"   b = "0.08nA"/>
+                 refract="0ms" delT="2mV" tauw="40ms"  a ="4nS"   b = "0.08nA"/>
 
 
 </neuroml>
