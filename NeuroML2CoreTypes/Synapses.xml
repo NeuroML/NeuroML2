@@ -177,15 +177,15 @@
     </ComponentType>
 
 
-    <ComponentType name="stpMechanism"
-		   description="Base short term plasticity mechanism.">
+    <ComponentType name="basePlasticityMechanism"
+		   description="Base plasticity mechanism.">
       <EventPort name="in" direction="in" description="This is where the plasticity mechanism receives spike events from the parent synapse."/>
-      <Exposure name="stpFactor" dimension="none"/>
+      <Exposure name="plasticityFactor" dimension="none"/>
     </ComponentType>
 
 
     <ComponentType name="tsodyksMarkramDepMechanism"
-		   extends="stpMechanism"
+		   extends="basePlasticityMechanism"
 		   description="Depression-only Tsodyks-Markram model, as in Tsodyks and Markram 1997.">
       <Parameter name="initReleaseProb" dimension="none" />
       <Parameter name="tauRec" dimension="time" />
@@ -194,7 +194,7 @@
 	<StateVariable name="R" dimension="none"/>
 
 	<DerivedVariable name="U" dimension="none" value="initReleaseProb"/>
-	<DerivedVariable name="stpFactor" dimension="none" exposure="stpFactor" value="R * U" />
+	<DerivedVariable name="plasticityFactor" dimension="none" exposure="plasticityFactor" value="R * U" />
 
 	<TimeDerivative variable="R" value="(1 - R) / tauRec"/>
 
@@ -217,7 +217,7 @@
 
 
     <ComponentType name="tsodyksMarkramDepFacMechanism"
-		   extends="stpMechanism"
+		   extends="basePlasticityMechanism"
 		   description="Full Tsodyks-Markram STP model with both depression and facilitation, as in Tsodyks, Pawelzik and Markram 1998.">
       <Parameter name="initReleaseProb" dimension="none" />
       <Parameter name="tauRec" dimension="time" />
@@ -227,7 +227,7 @@
 	<StateVariable name="R" dimension="none"/>
 	<StateVariable name="U" dimension="none"/>
 
-	<DerivedVariable name="stpFactor" dimension="none" exposure="stpFactor" value="R * U" />
+	<DerivedVariable name="plasticityFactor" dimension="none" exposure="plasticityFactor" value="R * U" />
 
 	<TimeDerivative variable="R" value="(1 - R) / tauRec"/>
 	<TimeDerivative variable="U" value="(initReleaseProb - U) / tauFac"/>
@@ -252,20 +252,18 @@
     </ComponentType>
 
 
-    <ComponentType name="stpSynapse"
-		   extends="expTwoSynapse"
-		   description="Biexponential synaptic model with short term plasticity. The specific STP model is determined by the plasticityMechanism child element.">
-      <Child name="stpMechanism" type="stpMechanism"/>
-
+    <ComponentType name="plasticSynapse"
+		   extends="expTwosynapse"
+		   description="Biexponential synaptic model with plasticity. The specific plasticity model is determined by the plasticityMechanism child element.">
+      <Child name="plasticityMechanism" type="basePlasticityMechanism"/>
       <EventPort name="relay" direction="out" description="Used to relay incoming spikes to child plasticity mechanism"/>
-
       <Dynamics>
 	<StateVariable name="A" dimension="none"/>
 	<StateVariable name="B" dimension="none"/>
 
 	<DerivedVariable name="g" dimension="conductance" exposure="g" value="gbase * (B - A)" />
 	<DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
-	<DerivedVariable name="stpFactor" dimension="none" select="stpMechanism/stpFactor" />
+	<DerivedVariable name="plasticityFactor" dimension="none" select="plasticityMechanism/plasticityFactor" />
 
 	<TimeDerivative variable="A" value="-A / tauRise" />
 	<TimeDerivative variable="B" value="-B / tauDecay" />
@@ -276,8 +274,8 @@
 	</OnStart>
 
 	<OnEvent port="in">
-	  <StateAssignment variable="A" value="A + stpFactor * waveformFactor" />
-	  <StateAssignment variable="B" value="B + stpFactor * waveformFactor" />
+	  <StateAssignment variable="A" value="A + plasticityFactor * waveformFactor" />
+	  <StateAssignment variable="B" value="B + plasticityFactor * waveformFactor" />
 	  <EventOut port="relay"/>
 	</OnEvent>
 
@@ -285,14 +283,20 @@
     </ComponentType>
 
 
-    <ComponentType name="blockStpSynapse"
-		   extends="stpSynapse">
+    <ComponentType name="blockPlasticSynapse"
+		   extends="plasticSynapse"
+		   description="Biexponential blocking (non-ohmic)
+				synaptic model with
+				plasticity. The blockage and
+				plasticity models are determined by
+				the blockMechanism and
+				plasticityMechanism child elements.">
       <Child name="blockMechanism" type="baseBlock"/>
       <Dynamics>
 	<StateVariable name="A" dimension="none"/>
 	<StateVariable name="B" dimension="none"/>
 
-	<DerivedVariable name="stpFactor" dimension="none" select="stpMechanism/stpFactor" />
+	<DerivedVariable name="plasticityFactor" dimension="none" select="plasticityMechanism/plasticityFactor" />
 	<DerivedVariable name="blockFactor" dimension="none" select="blockMechanism/scaling" />
 	<DerivedVariable name="g" dimension="conductance" exposure="g" value="blockFactor * gbase * (B - A)" />
 	<DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
@@ -306,14 +310,14 @@
 	</OnStart>
 
 	<OnEvent port="in">
-	  <StateAssignment variable="A" value="A + stpFactor * waveformFactor" />
-	  <StateAssignment variable="B" value="B + stpFactor * waveformFactor" />
+	  <StateAssignment variable="A" value="A + plasticityFactor * waveformFactor" />
+	  <StateAssignment variable="B" value="B + plasticityFactor * waveformFactor" />
 	  <EventOut port="relay"/>
 	</OnEvent>
       </Dynamics>
     </ComponentType>
 
-  <!---        -->
+  <!--- -->
 
     <ComponentType name="stdpSynapse"
        extends="expTwoSynapse"
