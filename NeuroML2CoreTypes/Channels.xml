@@ -314,6 +314,49 @@
 
         </Dynamics>
     </ComponentType>
+    
+        <ComponentType name="gateHHratesInf"
+        extends="baseGate"
+        description="Gate which follows the general Hodgkin Huxley formalism">
+
+        <Child name="notes" type="notes"/>
+        <Child name="q10Settings" type="baseQ10Settings"/>
+
+        <Child name="forwardRate" type="baseVoltageDepRate"/>
+        <Child name="reverseRate" type="baseVoltageDepRate"/>
+        <Child name="steadyState" type="baseVoltageDepVariable" />
+
+
+        <Exposure name="alpha" dimension="per_time"/>
+        <Exposure name="beta" dimension="per_time"/>
+
+        <Exposure name="tau" dimension="time"/>
+        <Exposure name="inf" dimension="none"/>
+
+        <Exposure name="rateScale" dimension="none"/>
+
+        <Dynamics>
+            <StateVariable name="q" exposure="q" dimension="none"/>
+
+            <DerivedVariable name="rateScale" exposure="rateScale" dimension="none" select="q10Settings/q10" reduce="multiply" required="false"/>
+
+            <DerivedVariable name="alpha" dimension="per_time" exposure="alpha" select="forwardRate/r"/>
+            <DerivedVariable name="beta" dimension="per_time" exposure="beta" select="reverseRate/r"/>
+
+            <DerivedVariable name="fcond" exposure="fcond" dimension="none" value="q^instances"/>
+
+            <DerivedVariable name="inf" dimension="none" exposure="inf" select="steadyState/x"/>
+
+            <DerivedVariable name="tau" dimension="time" exposure="tau" value="1/((alpha+beta) * rateScale)"/>
+
+            <TimeDerivative variable="q" value="(inf - q) / tau"/>
+
+            <OnStart>
+                <StateAssignment variable="q" value="inf"/>
+            </OnStart>
+
+        </Dynamics>
+    </ComponentType>
 
 
 
@@ -359,6 +402,7 @@
         <Children name="gatesHHrates" type="gateHHrates"/>
         <Children name="gatesHHtauInf" type="gateHHtauInf"/>
         <Children name="gatesHHratesTau" type="gateHHratesTau"/>
+        <Children name="gatesHHratesInf" type="gateHHratesInf"/>
         <Requirement name="temperature" dimension="temperature"/>
         <Text name="neuroLexId"/>
         <Text name="species"/>
@@ -369,7 +413,8 @@
             <DerivedVariable name="fopenHHrates" dimension="none" select="gatesHHrates[*]/fcond" reduce="multiply"/>
             <DerivedVariable name="fopenHHtauInf" dimension="none" select="gatesHHtauInf[*]/fcond" reduce="multiply"/>
             <DerivedVariable name="fopenHHratesTau" dimension="none" select="gatesHHratesTau[*]/fcond" reduce="multiply"/>
-            <DerivedVariable name="fopen" exposure="fopen" dimension="none" value="conductanceScale * fopenHHrates * fopenHHtauInf * fopenHHratesTau"/>
+            <DerivedVariable name="fopenHHratesInf" dimension="none" select="gatesHHratesInf[*]/fcond" reduce="multiply"/>
+            <DerivedVariable name="fopen" exposure="fopen" dimension="none" value="conductanceScale * fopenHHrates * fopenHHtauInf * fopenHHratesTau * fopenHHratesInf"/>
             <DerivedVariable name="g" exposure="g" value="conductance * fopen" dimension="conductance"/>
         </Dynamics>
     </ComponentType>

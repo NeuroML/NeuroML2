@@ -7,10 +7,6 @@
 
 <!-- Example of a simple network in NeuroML 2 -->
 
-<!-- This is a "pure" NeuroML 2 file. It cannot yet be used a simulation by the LEMS 
-     Interpreter, but this represents the target structure for populations & projections
-     in NeuroML 2 --> 
-
     <network id="SimpleNetwork">
 
         <!-- Cells are placed on a grid in 2D. Discrete_2D can be defined elsewhere/inbuilt -->
