@@ -35,6 +35,10 @@ nml2_xmlschema = etree.XMLSchema(nml2_xmlschema_doc)
 nml2_ex_dir="examples"
 nml2_ex_list=os.listdir(nml2_ex_dir)
 
+def checkSameFile(fileA, fileB):
+    print "Comparing {} to {}".format(fileA, fileB)
+    return filecmp.cmp(fileA, fileB)
+
 class TestValidateLEMSDefinitions(unittest.TestCase):
     def test_LEMS_definitions(self):
         print("Validating LEMS files against: {}".format(lems_schema))
@@ -56,73 +60,68 @@ class TestValidateNeuroMLExamples(unittest.TestCase):
                 exitVal = bool(subprocess.call(["jnml -validate "+ nml2_ex_dir+"/"+file], shell=True))
                 self.assertTrue(exitVal, msg="{} is not valid!".format(file))
 
-class TestLocalFilesInSync(unittest.TestCase):
-    def checkSameFile(self, fileA, fileB):
-        print "Comparing {} to {}".format(fileA, fileB)
-        return filecmp.cmp(fileA, fileB)
-    def test_NeuroML_schemas_libNeuroML(self):
-        self.assertTrue(self.checkSameFile('Schemas/NeuroML2/NeuroML_v2beta.xsd',
-                                           '../libNeuroML/neuroml/nml/NeuroML_v2beta.xsd'),
-                        msg="NeuroML schemas in libNeuroML not in sync!")
-    def test_NeuroML_schemas_org_neuroml_model(self):
-        self.assertTrue(self.checkSameFile('Schemas/NeuroML2/NeuroML_v2alpha.xsd',
-                                           '../org.neuroml.model/src/main/resources/Schemas/NeuroML2/NeuroML_v2alpha.xsd'),
-                        msg="NeuroML alpha schemas in org.neuroml.model not in sync!")
-        self.assertTrue(self.checkSameFile('Schemas/NeuroML2/NeuroML_v2beta.xsd',
-                                           '../org.neuroml.model/src/main/resources/Schemas/NeuroML2/NeuroML_v2beta.xsd'),
-                        msg="NeuroML beta schemas in org.neuroml.model not in sync!")
-    def test_NeuroML_schemas_Cvapp_NeuroMorpho(self):
-        neuromorpho_not_present = not os.path.isdir('../Cvapp-NeuroMorpho.org')
-        self.assertTrue(neuromorpho_not_present or self.checkSameFile('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../Cvapp-NeuroMorpho.org/Schemas/NeuroML2/NeuroML_v2alpha.xsd'),
-                        msg="NeuroML alpha schemas in Cvapp-NeuroMorpho.org not in sync!")
-        self.assertTrue(neuromorpho_not_present or self.checkSameFile('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../Cvapp-NeuroMorpho.org/Schemas/NeuroML2/NeuroML_v2beta.xsd'),
-                        msg="NeuroML beta schemas in Cvapp-NeuroMorpho.org not in sync!")
-    def test_NeuroML_schemas_neuroConstruct(self):
-        neuroConstruct_not_present = not os.path.isdir('../neuroConstruct')
-        self.assertTrue(neuroConstruct_not_present or self.checkSameFile('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../neuroConstruct/NeuroML2/Schemas/NeuroML2/NeuroML_v2alpha.xsd'),
-                        msg="NeuroML alpha schemas in neuroConstruct not in sync!")
-        self.assertTrue(neuroConstruct_not_present or self.checkSameFile('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../neuroConstruct/NeuroML2/Schemas/NeuroML2/NeuroML_v2beta.xsd'),
-                        msg="NeuroML beta schemas in neuroConstruct not in sync!")
-    def test_NeuroML_comp_types_org_neuroml_model(self):
-        are_files_identical_list = []
-        for filename in lems_def_list:
-            if filename.endswith("xml") and not filename.startswith("Ex"):
-                main_def = lems_def_dir+"/"+filename
-                copy_org_neuroml_model = "../org.neuroml.model/src/main/resources/"+lems_def_dir+"/"+filename
-                are_files_identical_list.append(self.checkSameFile(main_def, copy_org_neuroml_model))
-        self.assertTrue(all(are_files_identical_list),
-                        msg="NeuroML core component types definitions in org.neuroml.model are not in sync!")
-    def test_NeuroML_examples_org_neuroml_model(self):
-        are_files_identical_list = []
-        for filename in nml2_ex_list:
-            if filename.endswith("nml"):
-                main_ex = nml2_ex_dir+"/"+filename
-                copy_org_neuroml_model = "../org.neuroml.model/src/main/resources/"+nml2_ex_dir+"/"+filename
-                are_files_identical_list.append(self.checkSameFile(main_ex, copy_org_neuroml_model))
-        self.assertTrue(all(are_files_identical_list),
-                        msg="NeuroML examples in org.neuroml.model are not in sync!")
-    def test_LEMS_examples_jLEMS(self):
-        are_files_identical_list = []
-        for filename in lems_ex_list:
-            if filename.endswith("xml"):
-                main_ex = lems_ex_dir+"/"+filename
-                copy_jLEMS = "../jLEMS/src/test/resources/"+filename
-                are_files_identical_list.append(self.checkSameFile(main_ex, copy_jLEMS))
-        self.assertTrue(all(are_files_identical_list),
-                        msg="LEMS examples in jLEMS are not in sync!")
-    def test_LEMS_examples_pylems(self):
-        are_files_identical_list = []
-        for filename in lems_ex_list:
-            if filename.endswith("xml"):
-                main_ex = lems_ex_dir+"/"+filename
-                copy_pylems = "../pylems/examples/"+filename
-                are_files_identical_list.append(self.checkSameFile(main_ex, copy_pylems))
-        self.assertTrue(all(are_files_identical_list),
-                        msg="LEMS examples in pylems are not in sync!")
-
-
 if __name__ == '__main__':
-    unittest.main()
+    print "--------------------------------------------------"
+    print "    Checking local copies of NeuroML schemas"
+
+    if not checkSameFile('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../libNeuroML/neuroml/nml/NeuroML_v2beta.xsd'):
+        print("FAIL: NeuroML schemas in libNeuroML not in sync!")
+
+    if not checkSameFile('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../org.neuroml.model/src/main/resources/Schemas/NeuroML2/NeuroML_v2alpha.xsd'):
+        print("FAIL: NeuroML alpha schemas in org.neuroml.model not in sync!")
+    if not checkSameFile('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../org.neuroml.model/src/main/resources/Schemas/NeuroML2/NeuroML_v2beta.xsd'):
+        print("FAIL: NeuroML beta schemas in org.neuroml.model not in sync!")
+
+
+    if os.path.isdir('../Cvapp-NeuroMorpho.org') and not checkSameFile('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../Cvapp-NeuroMorpho.org/Schemas/NeuroML2/NeuroML_v2alpha.xsd'):
+        print("FAIL: NeuroML alpha schemas in Cvapp-NeuroMorpho.org not in sync!")
+    if os.path.isdir('../Cvapp-NeuroMorpho.org') and not checkSameFile('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../Cvapp-NeuroMorpho.org/Schemas/NeuroML2/NeuroML_v2beta.xsd'):
+        print("FAIL: NeuroML beta schemas in Cvapp-NeuroMorpho.org not in sync!")
+
+    if os.path.isdir('../neuroConstruct') and not checkSameFile('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../neuroConstruct/NeuroML2/Schemas/NeuroML2/NeuroML_v2alpha.xsd'):
+        print("FAIL: NeuroML alpha schemas in neuroConstruct not in sync!")
+    if os.path.isdir('../neuroConstruct') and not checkSameFile('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../neuroConstruct/NeuroML2/Schemas/NeuroML2/NeuroML_v2beta.xsd'):
+        print("FAIL: NeuroML beta schemas in neuroConstruct not in sync!")
+
+    print "--------------------------------------------------"
+    print "    Checking local copies of Comp Type defs & examples"
+
+    are_files_identical_list = []
+    for filename in lems_def_list:
+        if filename.endswith("xml") and not filename.startswith("Ex"):
+            main_def = lems_def_dir+"/"+filename
+            copy_org_neuroml_model = "../org.neuroml.model/src/main/resources/"+lems_def_dir+"/"+filename
+            are_files_identical_list.append(checkSameFile(main_def, copy_org_neuroml_model))
+    if not all(are_files_identical_list):
+        print("FAIL: NeuroML core component types definitions in org.neuroml.model are not in sync!")
+
+    are_files_identical_list = []
+    for filename in nml2_ex_list:
+        if filename.endswith("nml"):
+            main_ex = nml2_ex_dir+"/"+filename
+            copy_org_neuroml_model = "../org.neuroml.model/src/main/resources/"+nml2_ex_dir+"/"+filename
+            are_files_identical_list.append(checkSameFile(main_ex, copy_org_neuroml_model))
+    if not all(are_files_identical_list):
+        print("FAIL: NeuroML examples in org.neuroml.model are not in sync!")
+
+    are_files_identical_list = []
+    for filename in lems_ex_list:
+        if filename.endswith("xml"):
+            main_ex = lems_ex_dir+"/"+filename
+            copy_org_lems_ex = "../jLEMS/src/test/resources/"+filename
+            are_files_identical_list.append(checkSameFile(main_ex, copy_org_lems_ex))
+    if not all(are_files_identical_list):
+        print("FAIL: LEMS examples in jLEMS are not in sync!")
+
+    are_files_identical_list = []
+    for filename in lems_ex_list:
+        if filename.endswith("xml"):
+            main_ex = lems_ex_dir+"/"+filename
+            copy_org_lems_ex = "../pylems/examples/"+filename
+            are_files_identical_list.append(checkSameFile(main_ex, copy_org_lems_ex))
+    if not all(are_files_identical_list):
+        print("FAIL: LEMS examples in pylems are not in sync!")
+
 
     if '-r' in sys.argv:
 
@@ -143,3 +142,5 @@ if __name__ == '__main__':
                 #subprocess.call(['lems %s'%(lems_file)])
                 #os.system('~/jLEMS/lems %s'%(lems_file))
                 subprocess.call('jnml %s -nogui &'%(lems_file), shell=True)
+
+    unittest.main()
