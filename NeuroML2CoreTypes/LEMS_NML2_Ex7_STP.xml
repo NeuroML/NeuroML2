@@ -33,13 +33,13 @@
 
     <expTwoSynapse id="noStpSyn" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="40ms"/>
 
-    <stpSynapse id="stpSynDep" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="40ms">
-            <stpMechanism type="tsodyksMarkramDepMechanism" initReleaseProb = "0.5" tauRec = "300 ms"/>
-    </stpSynapse>
+    <plasticSynapse id="stpSynDep" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="40ms">
+            <plasticityMechanism type="tsodyksMarkramDepMechanism" initReleaseProb = "0.5" tauRec = "300 ms"/>
+    </plasticSynapse>
 
-    <stpSynapse id="stpSynDepFac" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="40ms">
-            <stpMechanism type="tsodyksMarkramDepFacMechanism" initReleaseProb = "0.5" tauFac = "200 ms" tauRec = "300 ms"/>
-    </stpSynapse>
+    <plasticSynapse id="stpSynDepFac" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="40ms">
+            <plasticityMechanism type="tsodyksMarkramDepFacMechanism" initReleaseProb = "0.5" tauFac = "200 ms" tauRec = "300 ms"/>
+    </plasticSynapse>
 
 
     <network id="net2">
@@ -68,10 +68,10 @@
         </Display>
 
         <Display id="d4" title="Ex7: Cells with STP synapse: scaling variables" timeScale="1ms" xmin="0" xmax="300" ymin="-0.1" ymax="1.1">
-                <Line id ="Dep_R" quantity="pasPop[1]/stpSynDep/stpMechanism/R" scale="1"  color="#00ffff" timeScale="1ms"/>
-                <Line id ="Dep_U" quantity="pasPop[1]/stpSynDep/stpMechanism/U" scale="1"  color="#0000ff" timeScale="1ms"/>
-                <Line id ="DepFac_R" quantity="pasPop[2]/stpSynDepFac/stpMechanism/R" scale="1"  color="#ffffff" timeScale="1ms"/>
-                <Line id ="DepFac_U" quantity="pasPop[2]/stpSynDepFac/stpMechanism/U" scale="1"  color="#0055ff" timeScale="1ms"/>
+                <Line id ="Dep_R" quantity="pasPop[1]/stpSynDep/plasticityMechanism/R" scale="1"  color="#00ffff" timeScale="1ms"/>
+                <Line id ="Dep_U" quantity="pasPop[1]/stpSynDep/plasticityMechanism/U" scale="1"  color="#0000ff" timeScale="1ms"/>
+                <Line id ="DepFac_R" quantity="pasPop[2]/stpSynDepFac/plasticityMechanism/R" scale="1"  color="#ffffff" timeScale="1ms"/>
+                <Line id ="DepFac_U" quantity="pasPop[2]/stpSynDepFac/plasticityMechanism/U" scale="1"  color="#0055ff" timeScale="1ms"/>
         </Display>
     </Simulation>
 
