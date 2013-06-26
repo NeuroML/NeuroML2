@@ -325,9 +325,9 @@
             <xs:element name="expOneSynapse" type="ExpOneSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="expTwoSynapse" type="ExpTwoSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="nmdaSynapse"   type="NmdaSynapse"   minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="stpSynapse"    type="StpSynapse"
+            <xs:element name="plasticSynapse"    type="PlasticSynapse"
 			minOccurs="0" maxOccurs="unbounded"/>
-	    <xs:element name="blockStpSynapse" type="BlockStpSynapse"
+	    <xs:element name="blockPlasticSynapse" type="BlockPlasticSynapse"
 			minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:group>
@@ -616,20 +616,20 @@
     </xs:complexType>
 
 
-    <xs:complexType name="StpSynapse">
+    <xs:complexType name="PlasticSynapse">
         <xs:complexContent>
             <xs:extension base="ExpTwoSynapse">
                 <xs:sequence>
-                    <xs:element name="stpMechanism"
-				type="StpMechanism"/>
+                    <xs:element name="plasticityMechanism"
+				type="PlasticityMechanism"/>
 		</xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="BlockStpSynapse">
+    <xs:complexType name="BlockPlasticSynapse">
         <xs:complexContent>
-            <xs:extension base="StpSynapse">
+            <xs:extension base="PlasticSynapse">
 	      <xs:sequence>
 		<xs:element name="blockMechanism"
 			    type="VoltageConcDepBlock"/>
@@ -647,15 +647,15 @@
         <xs:attribute name="scalingVolt" type="Nml2Quantity_voltage" use="required"/>
     </xs:complexType>
 
-    <xs:simpleType name="StpTypes">
+    <xs:simpleType name="PlasticityTypes">
         <xs:restriction base="xs:string">
             <xs:enumeration value="tsodyksMarkramDepMechanism"/>
             <xs:enumeration value="tsodyksMarkramDepFacMechanism"/>
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:complexType name="StpMechanism">
-      <xs:attribute name="type" type="StpTypes" use="required"/>
+    <xs:complexType name="PlasticityMechanism">
+      <xs:attribute name="type" type="PlasticityTypes" use="required"/>
       <xs:attribute name="initReleaseProb" type="ZeroToOne"
 		    use="required"/>
       <xs:attribute name="tauRec" type="Nml2Quantity_time"
