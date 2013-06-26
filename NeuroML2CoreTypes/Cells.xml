@@ -1013,9 +1013,9 @@
 
         <Parameter name="refract" dimension="time"/>
 
-        <Parameter name="Iamp" dimension="current"/>
+        <!--<Parameter name="Iamp" dimension="current"/>
         <Parameter name="Idel" dimension="time"/>
-        <Parameter name="Idur" dimension="time"/>
+        <Parameter name="Idur" dimension="time"/>-->
 
         <Parameter name="a" dimension="conductance"/>
         <Parameter name="b" dimension="current"/>
@@ -1023,32 +1023,32 @@
         <Attachments name="synapses" type="basePointCurrent"/>
 
         <Exposure name="w" dimension="current"/>
-        <Exposure name="I" dimension="current"/>
+        <!--<Exposure name="I" dimension="current"/>-->
 
         <Dynamics>
 
             <StateVariable name="v" dimension="voltage" exposure="v"/>
             <StateVariable name="w" dimension="current" exposure="w"/>
-            <StateVariable name="I" dimension="current" exposure="I"/>
+            <!--<StateVariable name="I" dimension="current" exposure="I"/>-->
 
             <StateVariable name="lastSpikeTime" dimension="time"/>
 
             <DerivedVariable name="iSyn" dimension="current" exposure="iSyn" select="synapses[*]/i" reduce="add" />
-            <DerivedVariable name="iMemb" dimension="current" exposure="iMemb" value="-1 * gL * (v - EL) + gL * delT * exp((v - VT) / delT) - w + I + iSyn"/>
+            <DerivedVariable name="iMemb" dimension="current" exposure="iMemb" value="-1 * gL * (v - EL) + gL * delT * exp((v - VT) / delT) - w + iSyn"/>
 
             <OnStart>
                 <StateAssignment variable="v" value="EL"/>
                 <StateAssignment variable="w" value="0"/>
-                <StateAssignment variable="I" value="0"/>
+                <!--<StateAssignment variable="I" value="0"/>-->
             </OnStart>
-
+            <!--
             <OnCondition test="t .gt. Idel .and. t .lt. Idel + Idur">
                 <StateAssignment variable="I" value="Iamp"/>
             </OnCondition>
 
             <OnCondition test="t .gt. Idel + Idur">
                 <StateAssignment variable="I" value="0"/>
-            </OnCondition>
+            </OnCondition>-->
 
             <Regime name="refractory">
             <!-- Note: this is important to change also during the refractory period!! -->

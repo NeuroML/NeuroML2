@@ -5,11 +5,7 @@
       xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta.xsd"
     id="NML2_InstanceBasedNetwork">
 
-<!-- Example of a network specified as a set of location and connection instances in NeuroML 2 -->
-
-<!-- This is a "pure" NeuroML 2 file. It cannot yet be used a simulation by the LEMS 
-     Interpreter, but this represents the target structure for populations & projections
-     in NeuroML 2 --> 
+<!-- Example of a network specified as a set of location and connection instances in NeuroML 2 --> 
 
     <expOneSynapse id="syn1" gbase="5nS" erev="0mV" tauDecay="3ms" />
     <expOneSynapse id="syn2" gbase="10nS" erev="0mV" tauDecay="2ms" />

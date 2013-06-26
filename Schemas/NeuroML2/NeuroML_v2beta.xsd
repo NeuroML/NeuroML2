@@ -86,7 +86,7 @@
     <xs:simpleType name="Nml2Quantity_pertime">
 
         <xs:restriction base="xs:string">
-            <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(per_s|per_ms)"/> <!-- Based on set of defined Units in NeuroMLCoreDimensions.xml -->
+            <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(per_s|per_ms|Hz)"/> <!-- Based on set of defined Units in NeuroMLCoreDimensions.xml -->
         </xs:restriction>
 
     </xs:simpleType>
@@ -252,10 +252,17 @@
                     <xs:group ref="ConcentrationModelTypes"/>
 
                     <xs:group ref="SynapseTypes"/>
+                    
 
                     <xs:element name="biophysicalProperties" type="BiophysicalProperties" minOccurs="0" maxOccurs="unbounded"/>
 
                     <xs:group ref="CellTypes"/>
+                    
+                    <xs:group ref="PyNNCellTypes"/>
+                    
+                    <xs:group ref="PyNNSynapseTypes"/>
+                    
+                    <xs:group ref="PyNNInputTypes"/>
 
                     <xs:element name="pulseGenerator" type="PulseGenerator" minOccurs="0" maxOccurs="unbounded"/>
 
@@ -283,11 +290,28 @@
         </xs:annotation>
         <xs:sequence>
             <xs:element name="cell" type="Cell" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="abstractCell" type="AbstractCell" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="baseCell" type="BaseCell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="iafTauCell" type="IaFTauCell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="iafCell" type="IaFCell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="izhikevichCell" type="IzhikevichCell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="adExIaFCell" type="AdExIaFCell" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:group>
+    
+    
+    <xs:group name="PyNNCellTypes">
+        <xs:annotation>
+            <xs:documentation>Various types of cells which are defined in NeuroML 2 based on PyNN standard cell models. </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="IF_curr_alpha" type="IF_curr_alpha" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="IF_curr_exp" type="IF_curr_exp" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="IF_cond_alpha" type="IF_cond_alpha" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="IF_cond_exp" type="IF_cond_exp" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="EIF_cond_exp_isfa_ista" type="EIF_cond_exp_isfa_ista" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="EIF_cond_alpha_isfa_ista" type="EIF_cond_alpha_isfa_ista" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="HH_cond_exp" type="HH_cond_exp" minOccurs="0" maxOccurs="unbounded"/>
+            
         </xs:sequence>
     </xs:group>
 
@@ -304,6 +328,29 @@
             <xs:element name="stpSynapse"    type="StpSynapse"    minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:group>
+    
+    <xs:group name="PyNNSynapseTypes">
+        <xs:annotation>
+            <xs:documentation>Various types of synapse which are defined in NeuroML 2 based on PyNN standard cell/synapse models. </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="expCondSynapse" type="ExpCondSynapse" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="alphaCondSynapse" type="AlphaCondSynapse" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="expCurrSynapse" type="ExpCurrSynapse" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="alphaCurrSynapse" type="AlphaCurrSynapse" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:group>
+    
+    
+    <xs:group name="PyNNInputTypes">
+        <xs:annotation>
+            <xs:documentation>Various types of input which are defined in NeuroML 2 based on PyNN standard cell/synapse models. </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="SpikeSourcePoisson" type="SpikeSourcePoisson" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:group>
+
 
 
     <xs:group name="ConcentrationModelTypes">
@@ -328,6 +375,7 @@
                     <xs:element name="gateHHrates" type="GateHHRates" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="gateHHratesTau" type="GateHHRatesTau" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="gateHHtauInf" type="GateHHTauInf" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="gateHHratesInf" type="GateHHRatesInf" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:choice>
 
                 <xs:attribute name="species" type="NmlId" use="optional"/>
@@ -354,6 +402,7 @@
             <xs:enumeration value="gateHHrates"/>
             <xs:enumeration value="gateHHratesTau"/>
             <xs:enumeration value="gateHHtauInf"/>
+            <xs:enumeration value="gateHHratesInf"/>
             <xs:enumeration value="gateKS"/>
         </xs:restriction>
     </xs:simpleType>
@@ -417,6 +466,22 @@
                     <xs:element name="forwardRate" type="HHRate" minOccurs="1"/>
                     <xs:element name="reverseRate" type="HHRate" minOccurs="1"/>
                     <xs:element name="timeCourse" type="HHTime"  minOccurs="1"/>
+                </xs:all>
+                <xs:attribute name="instances" type="xs:integer" use="optional" default="1"/>
+                <xs:attribute name="type" type="gateTypes" use="optional"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="GateHHRatesInf">
+        <xs:complexContent>
+            <xs:extension base="Base">
+                <xs:all>
+                    <xs:element name="notes" type="Notes" minOccurs="0"/>
+                    <xs:element name="q10Settings" type="Q10Settings" minOccurs="0"/>
+                    <xs:element name="forwardRate" type="HHRate" minOccurs="1"/>
+                    <xs:element name="reverseRate" type="HHRate" minOccurs="1"/>
+                    <xs:element name="steadyState" type="HHVariable" minOccurs="1"/>
                 </xs:all>
                 <xs:attribute name="instances" type="xs:integer" use="optional" default="1"/>
                 <xs:attribute name="type" type="gateTypes" use="optional"/>
@@ -487,10 +552,20 @@
     <!--      Synapse types                                    -->
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
-    <xs:complexType name="ConductanceBasedSynapse">
+
+    <xs:complexType name="BaseSynapse">
 
         <xs:complexContent>
             <xs:extension base="Standalone">
+
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="BaseConductanceBasedSynapse">
+
+        <xs:complexContent>
+            <xs:extension base="BaseSynapse">
 
                 <xs:attribute name="gbase" type="Nml2Quantity_conductance" use="required"/>
                 <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>
@@ -503,7 +578,7 @@
     <xs:complexType name="ExpOneSynapse">
 
         <xs:complexContent>
-            <xs:extension base="ConductanceBasedSynapse">
+            <xs:extension base="BaseConductanceBasedSynapse">
 
                 <xs:attribute name="tauDecay" type="Nml2Quantity_time" use="required"/>
 
@@ -515,7 +590,7 @@
     <xs:complexType name="ExpTwoSynapse">
 
         <xs:complexContent>
-            <xs:extension base="ConductanceBasedSynapse">
+            <xs:extension base="BaseConductanceBasedSynapse">
 
                 <xs:attribute name="tauDecay" type="Nml2Quantity_time" use="required"/>
                 <xs:attribute name="tauRise" type="Nml2Quantity_time" use="required"/>
@@ -571,7 +646,7 @@
     <!--      Cell element                                     -->
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
-    <xs:complexType name="AbstractCell">
+    <xs:complexType name="BaseCell">
 
         <xs:complexContent>
             <xs:extension base="Standalone">
@@ -582,7 +657,7 @@
 
     <xs:complexType name="IaFTauCell">
         <xs:complexContent>
-            <xs:extension base="AbstractCell">
+            <xs:extension base="BaseCell">
                 <xs:attribute name="leakReversal" type="Nml2Quantity_voltage" use="required"/>
                 <xs:attribute name="thresh" type="Nml2Quantity_voltage" use="required"/>
                 <xs:attribute name="reset" type="Nml2Quantity_voltage" use="required"/>
@@ -593,7 +668,7 @@
 
     <xs:complexType name="IaFCell">
         <xs:complexContent>
-            <xs:extension base="AbstractCell">
+            <xs:extension base="BaseCell">
                 <xs:attribute name="leakReversal" type="Nml2Quantity_voltage" use="required"/>
                 <xs:attribute name="thresh" type="Nml2Quantity_voltage" use="required"/>
                 <xs:attribute name="reset" type="Nml2Quantity_voltage" use="required"/>
@@ -605,7 +680,7 @@
 
     <xs:complexType name="IzhikevichCell">
         <xs:complexContent>
-            <xs:extension base="AbstractCell">
+            <xs:extension base="BaseCell">
                 <xs:attribute name="v0" type="Nml2Quantity_voltage" use="required"/>
                 <xs:attribute name="thresh" type="Nml2Quantity_voltage" use="required"/>
                 <xs:attribute name="a" type="Nml2Quantity_none" use="required"/>
@@ -621,7 +696,7 @@
 
     <xs:complexType name="AdExIaFCell">
         <xs:complexContent>
-            <xs:extension base="AbstractCell">
+            <xs:extension base="BaseCell">
                 <xs:attribute name="C" type="Nml2Quantity_capacitance" use="required"/>
                 <xs:attribute name="gL" type="Nml2Quantity_conductance" use="required"/>
                 <xs:attribute name="EL" type="Nml2Quantity_voltage" use="required"/>
@@ -630,6 +705,7 @@
                 <xs:attribute name="thresh" type="Nml2Quantity_voltage" use="required"/>
                 <xs:attribute name="delT" type="Nml2Quantity_voltage" use="required"/>
                 <xs:attribute name="tauw" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="refract" type="Nml2Quantity_time" use="required"/>
                 <xs:attribute name="a" type="Nml2Quantity_conductance" use="required"/>
                 <xs:attribute name="b" type="Nml2Quantity_current" use="required"/>
                 <!--<xs:attribute name="Iamp" type="Nml2Quantity_current" use="required"/>
@@ -643,7 +719,7 @@
     <xs:complexType name="Cell">
 
         <xs:complexContent>
-            <xs:extension base="AbstractCell">
+            <xs:extension base="BaseCell">
 
                 <xs:sequence>
                     <xs:element name="morphology" type="Morphology" minOccurs="0"/>
@@ -1321,6 +1397,196 @@
     </xs:complexType>
 
 
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+    <!--      PyNN standard cell & synapse definitions         -->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    
+    <xs:complexType name="basePyNNCell">
+
+        <xs:complexContent>
+            <xs:extension base="BaseCell">
+                <xs:attribute name="cm" type="xs:double"/>
+                <xs:attribute name="i_offset" type="xs:double"/>
+                <xs:attribute name="tau_syn_E" type="xs:double"/>
+                <xs:attribute name="tau_syn_I" type="xs:double"/>
+                <xs:attribute name="v_init" type="xs:double"/>
+            </xs:extension>
+        </xs:complexContent>
+        
+    </xs:complexType>
+    
+    <xs:complexType name="basePyNNIaFCell">
+
+        <xs:complexContent>
+            <xs:extension base="basePyNNCell">
+                <xs:attribute name="tau_m" type="xs:double"/>
+                <xs:attribute name="tau_refrac" type="xs:double"/>
+                <xs:attribute name="v_reset" type="xs:double"/>
+                <xs:attribute name="v_rest" type="xs:double"/>
+                <xs:attribute name="v_thresh" type="xs:double"/>
+            </xs:extension>
+        </xs:complexContent>
+        
+    </xs:complexType>
+    
+    <xs:complexType name="basePyNNIaFCondCell">
+
+        <xs:complexContent>
+            <xs:extension base="basePyNNIaFCell">
+                <xs:attribute name="e_rev_E" type="xs:double"/>
+                <xs:attribute name="e_rev_I" type="xs:double"/>
+            </xs:extension>
+        </xs:complexContent>
+        
+    </xs:complexType>
+    
+    
+    
+    <xs:complexType name="IF_curr_alpha">
+
+        <xs:complexContent>
+            <xs:extension base="basePyNNIaFCell">
+            </xs:extension>
+        </xs:complexContent>
+        
+    </xs:complexType>
+    
+    <xs:complexType name="IF_curr_exp">
+        
+        <xs:complexContent>
+            <xs:extension base="basePyNNIaFCell">
+            </xs:extension>
+        </xs:complexContent>
+        
+    </xs:complexType>
+    
+    <xs:complexType name="IF_cond_alpha">
+        
+        <xs:complexContent>
+            <xs:extension base="basePyNNIaFCondCell">
+            </xs:extension>
+        </xs:complexContent>
+        
+    </xs:complexType>
+    
+    <xs:complexType name="IF_cond_exp">
+        
+        <xs:complexContent>
+            <xs:extension base="basePyNNIaFCondCell">
+            </xs:extension>
+        </xs:complexContent>
+        
+    </xs:complexType>
+    
+    <xs:complexType name="EIF_cond_exp_isfa_ista">
+        
+        <xs:complexContent>
+            <xs:extension base="basePyNNIaFCondCell">
+                <xs:attribute name="a" type="xs:double"/>
+                <xs:attribute name="b" type="xs:double"/>
+                <xs:attribute name="delta_T" type="xs:double"/>
+                <xs:attribute name="tau_w" type="xs:double"/>
+                <xs:attribute name="v_spike" type="xs:double"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="EIF_cond_alpha_isfa_ista">
+        
+        <xs:complexContent>
+            <xs:extension base="basePyNNIaFCondCell">
+                <xs:attribute name="a" type="xs:double"/>
+                <xs:attribute name="b" type="xs:double"/>
+                <xs:attribute name="delta_T" type="xs:double"/>
+                <xs:attribute name="tau_w" type="xs:double"/>
+                <xs:attribute name="v_spike" type="xs:double"/>   
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="HH_cond_exp">
+        
+        <xs:complexContent>
+            <xs:extension base="basePyNNCell">
+                <xs:attribute name="v_offset" type="xs:double"/>
+                <xs:attribute name="e_rev_E" type="xs:double"/>
+                <xs:attribute name="e_rev_I" type="xs:double"/>
+                <xs:attribute name="e_rev_K" type="xs:double"/>
+                <xs:attribute name="e_rev_Na" type="xs:double"/>
+                <xs:attribute name="e_rev_leak" type="xs:double"/>
+                <xs:attribute name="g_leak" type="xs:double"/>
+                <xs:attribute name="gbar_K" type="xs:double"/>
+                <xs:attribute name="gbar_Na" type="xs:double"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="BasePynnSynapse">
+
+        <xs:complexContent>
+            <xs:extension base="BaseSynapse">
+                <xs:attribute name="tau_syn" type="xs:double"/>
+            </xs:extension>
+        </xs:complexContent>
+        
+    </xs:complexType>
+    
+    <xs:complexType name="ExpCondSynapse">
+
+        <xs:complexContent>
+            <xs:extension base="BasePynnSynapse">
+                <xs:attribute name="e_rev" type="xs:double"/>
+            </xs:extension>
+        </xs:complexContent>
+        
+    </xs:complexType>
+    
+    <xs:complexType name="AlphaCondSynapse">
+
+        <xs:complexContent>
+            <xs:extension base="BasePynnSynapse">
+                <xs:attribute name="e_rev" type="xs:double"/>
+            </xs:extension>
+        </xs:complexContent>
+        
+    </xs:complexType>
+    
+    <xs:complexType name="ExpCurrSynapse">
+
+        <xs:complexContent>
+            <xs:extension base="BasePynnSynapse">
+                
+            </xs:extension>
+        </xs:complexContent>
+        
+    </xs:complexType>
+    
+    <xs:complexType name="AlphaCurrSynapse">
+
+        <xs:complexContent>
+            <xs:extension base="BasePynnSynapse">
+                
+            </xs:extension>
+        </xs:complexContent>
+        
+    </xs:complexType>
+    
+    
+    <xs:complexType name="SpikeSourcePoisson">
+
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+
+                <xs:attribute name="start" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="duration" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="rate" type="Nml2Quantity_pertime" use="required"/>
+
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
 
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
