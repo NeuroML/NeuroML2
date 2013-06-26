@@ -253,7 +253,7 @@
 
 
     <ComponentType name="plasticSynapse"
-		   extends="expTwosynapse"
+		   extends="expTwoSynapse"
 		   description="Biexponential synaptic model with plasticity. The specific plasticity model is determined by the plasticityMechanism child element.">
       <Child name="plasticityMechanism" type="basePlasticityMechanism"/>
       <EventPort name="relay" direction="out" description="Used to relay incoming spikes to child plasticity mechanism"/>
