@@ -39,28 +39,33 @@ def checkSameFile(fileA, fileB):
     print "Comparing {} to {}".format(fileA, fileB)
     return filecmp.cmp(fileA, fileB)
 
-class TestValidateLEMSDefinitions(unittest.TestCase):
-    def test_LEMS_definitions(self):
-        print("Validating LEMS files against: {}".format(lems_schema))
-        for file in lems_def_list:
-            if file.endswith("xml") and not file.startswith("LEMS") and not file.startswith("Ex"):
-                print("Validating {}...".format(file)),
-                doc = etree.parse(lems_def_dir+"/"+file)
-                valid = lems_xmlschema.validate(doc)
-                self.assertTrue(valid, msg="{} is not valid!".format(file))
+def check_valid_LEMS(schema, document):
+    tree = etree.parse(lems_def_dir+"/"+document)
+    assert lems_xmlschema.validate(tree), "{} is not valid LEMS!".format(document)
 
-class TestValidateNeuroMLExamples(unittest.TestCase):
-    def test_NeuroML_examples(self):
-        print("Validating NeuroML 2 files against: {}".format(nml2_schema))
-        for file in nml2_ex_list:
-            if file.endswith("nml"):
-                print("Validating {}...".format(file))
-                #doc = etree.parse(nml2_ex_dir+"/"+file)
-                #valid = nml2_xmlschema.validate(doc)
-                exitVal = bool(subprocess.call(["jnml -validate "+ nml2_ex_dir+"/"+file], shell=True))
-                self.assertTrue(exitVal, msg="{} is not valid!".format(file))
+def check_valid_NeuroML(document):
+    #doc = etree.parse(nml2_ex_dir+"/"+file)
+    #valid = nml2_xmlschema.validate(doc)
+    p = subprocess.Popen(["jnml -validate "+ nml2_ex_dir+"/"+document], shell=True, stdout=subprocess.PIPE)
+    p.communicate()
+    assert not bool(p.returncode), "{} is not valid NeuroML!".format(document)
+
+def test_validate_LEMS_files():
+    print("Validating LEMS files against: {}".format(lems_schema))
+    for document in lems_def_list:
+        if document.endswith("xml") and not document.startswith("LEMS") and not document.startswith("Ex"):
+            yield check_valid_LEMS, lems_schema, document
+
+
+def test_validate_NeuroML_files():
+    print("Validating NeuroML 2 files against: {}".format(nml2_schema))
+    for document in nml2_ex_list:
+        if document.endswith("nml"):
+            yield check_valid_NeuroML, document
+
 
 if __name__ == '__main__':
+    import nose
     print "--------------------------------------------------"
     print "    Checking local copies of NeuroML schemas"
 
@@ -143,4 +148,4 @@ if __name__ == '__main__':
                 #os.system('~/jLEMS/lems %s'%(lems_file))
                 subprocess.call('jnml %s -nogui &'%(lems_file), shell=True)
 
-    unittest.main()
+    nose.main()
