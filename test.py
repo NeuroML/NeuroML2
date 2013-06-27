@@ -22,8 +22,6 @@ from urllib import urlopen
 
 import subprocess
 import filecmp
-import unittest
-import logging
 
 lems_def_dir="NeuroML2CoreTypes"
 lems_def_list=os.listdir(lems_def_dir)
