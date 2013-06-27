@@ -278,7 +278,7 @@
 
     </xs:complexType>
 
-    <!-- A small subset of XLInclude from: http://www.w3.org/2001/XInclude.xsd  
+    <!-- A small subset of XLInclude from: http://www.w3.org/2001/XInclude.xsd
          Will be sufficient for now... -->
     <xs:complexType name="IncludeType" mixed="true">
         <xs:attribute name="href" use="optional" type="xs:anyURI"/>
@@ -291,14 +291,20 @@
         <xs:sequence>
             <xs:element name="cell" type="Cell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="baseCell" type="BaseCell" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="iafTauCell" type="IaFTauCell" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="iafCell" type="IaFCell" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="iafTauCell" type="IaFTauCell"
+			minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="iafTauRefCell" type="IaFTauRefCell"
+			minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="iafCell" type="IaFCell" minOccurs="0"
+			maxOccurs="unbounded"/>
+            <xs:element name="iafRefCell" type="IaFRefCell" minOccurs="0"
+			maxOccurs="unbounded"/>
             <xs:element name="izhikevichCell" type="IzhikevichCell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="adExIaFCell" type="AdExIaFCell" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:group>
-    
-    
+
+
     <xs:group name="PyNNCellTypes">
         <xs:annotation>
             <xs:documentation>Various types of cells which are defined in NeuroML 2 based on PyNN standard cell models. </xs:documentation>
@@ -666,6 +672,14 @@
         </xs:complexContent>
     </xs:complexType>
 
+    <xs:complexType name="IaFTauRefCell">
+      <xs:complexContent>
+	<xs:extension base="IaFTauCell">
+	  <xs:attribute name="refract" type="Nml2Quantity_time" use="required"/>
+	</xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+
     <xs:complexType name="IaFCell">
         <xs:complexContent>
             <xs:extension base="BaseCell">
@@ -676,6 +690,14 @@
                 <xs:attribute name="leakConductance" type="Nml2Quantity_conductance" use="required"/>
             </xs:extension>
         </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="IaFRefCell">
+      <xs:complexContent>
+	<xs:extension base="IaFCell">
+	  <xs:attribute name="refract" type="Nml2Quantity_time" use="required"/>
+	</xs:extension>
+      </xs:complexContent>
     </xs:complexType>
 
     <xs:complexType name="IzhikevichCell">
@@ -983,7 +1005,7 @@
                     <xs:annotation>
                         <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel. It is added here
                         TEMPORARILY as selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
-                        It should be removed in the longer term, due to possible inconsistencies in this value and that in the ionChannel 
+                        It should be removed in the longer term, due to possible inconsistencies in this value and that in the ionChannel
                         element. TODO: remove.
                         </xs:documentation>
                     </xs:annotation>
@@ -1635,6 +1657,3 @@
     </xs:complexType>
 
 </xs:schema>
-
-
-
