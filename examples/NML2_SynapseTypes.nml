@@ -24,44 +24,43 @@
 			   scalingVolt="16.129 mV"/>
     </nmdaSynapse>
 
-    <stpSynapse id="stpSynDep" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="2ms">
+    <plasticSynapse id="stpSynDep" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="2ms">
       <notes>A biexponential synapse exhibiting STD.</notes>
-      <stpMechanism type="tsodyksMarkramDepMechanism"
+      <plasticityMechanism type="tsodyksMarkramDepMechanism"
 		 initReleaseProb="0.5" tauRec="120 ms" />
-    </stpSynapse>
+    </plasticSynapse>
 
-    <stpSynapse id="stpSynDepFac" gbase="1nS" erev="0mV"
+    <plasticSynapse id="stpSynDepFac" gbase="1nS" erev="0mV"
 		tauRise="0.1ms" tauDecay="2ms">
       <notes>A biexponential synapse with short term depression
       and facilitation.</notes>
-      <stpMechanism type="tsodyksMarkramDepFacMechanism"
+      <plasticityMechanism type="tsodyksMarkramDepFacMechanism"
 		    initReleaseProb="0.5" tauRec="120 ms" tauFac="10
 								  ms"/>
-    </stpSynapse>
+    </plasticSynapse>
 
-    <blockStpSynapse id="blockStpSynDep" gbase="1nS" erev="0mV"
+    <blockPlasticSynapse id="blockStpSynDep" gbase="1nS" erev="0mV"
 		     tauRise="0.1ms" tauDecay="2ms">
       <notes>A biexponential blocking synapse, with STD.</notes>
-      <stpMechanism type="tsodyksMarkramDepFacMechanism"
+      <plasticityMechanism type="tsodyksMarkramDepFacMechanism"
 		    initReleaseProb="0.5" tauRec="120 ms"/>
       <blockMechanism type="voltageConcDepBlock" species="mg"
 		      blockConcentration="1.2 mM"
 		      scalingConc="1.920544 mM" scalingVolt="16.129
 							     mV"/>
-    </blockStpSynapse>
+    </blockPlasticSynapse>
 
-    <blockStpSynapse id="blockStpSynDepFac" gbase="1nS" erev="0mV"
+    <blockPlasticSynapse id="blockStpSynDepFac" gbase="1nS" erev="0mV"
 		     tauRise="0.1ms" tauDecay="2ms">
       <notes>A biexponential blocking synapse with short term
       depression and facilitation.</notes>
-      <stpMechanism type="tsodyksMarkramDepFacMechanism"
+      <plasticityMechanism type="tsodyksMarkramDepFacMechanism"
 		    initReleaseProb="0.5" tauRec="120 ms" tauFac="10
 								  ms"/>
       <blockMechanism type="voltageConcDepBlock" species="mg"
 		      blockConcentration="1.2 mM"
 		      scalingConc="1.920544 mM" scalingVolt="16.129
 							     mV"/>
-    </blockStpSynapse
->
+    </blockPlasticSynapse>
 
 </neuroml>
