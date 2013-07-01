@@ -291,8 +291,14 @@
         <xs:sequence>
             <xs:element name="cell" type="Cell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="baseCell" type="BaseCell" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="iafTauCell" type="IaFTauCell" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="iafCell" type="IaFCell" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="iafTauCell" type="IaFTauCell"
+			minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="iafTauRefCell" type="IaFTauRefCell"
+			minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="iafCell" type="IaFCell" minOccurs="0"
+			maxOccurs="unbounded"/>
+            <xs:element name="iafRefCell" type="IaFRefCell" minOccurs="0"
+			maxOccurs="unbounded"/>
             <xs:element name="izhikevichCell" type="IzhikevichCell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="adExIaFCell" type="AdExIaFCell" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
@@ -687,6 +693,14 @@
         </xs:complexContent>
     </xs:complexType>
 
+    <xs:complexType name="IaFTauRefCell">
+      <xs:complexContent>
+	<xs:extension base="IaFTauCell">
+	  <xs:attribute name="refract" type="Nml2Quantity_time" use="required"/>
+	</xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+
     <xs:complexType name="IaFCell">
         <xs:complexContent>
             <xs:extension base="BaseCell">
@@ -697,6 +711,14 @@
                 <xs:attribute name="leakConductance" type="Nml2Quantity_conductance" use="required"/>
             </xs:extension>
         </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="IaFRefCell">
+      <xs:complexContent>
+	<xs:extension base="IaFCell">
+	  <xs:attribute name="refract" type="Nml2Quantity_time" use="required"/>
+	</xs:extension>
+      </xs:complexContent>
     </xs:complexType>
 
     <xs:complexType name="IzhikevichCell">

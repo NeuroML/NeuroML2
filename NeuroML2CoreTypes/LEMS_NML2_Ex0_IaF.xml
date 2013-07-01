@@ -22,18 +22,25 @@
 
 
     <!-- Main NeuroML2 content -->
-
     <iafTauCell id="iafTau" leakReversal="-50mV" thresh="-55mV"
         reset="-70mV" tau="30ms" />
+    <iafTauRefCell id="iafTauRef" leakReversal="-50mV" thresh="-55mV"
+        reset="-70mV" tau="30ms" refract="5ms"/>
     <iafCell id="iaf" leakConductance="0.2nS" leakReversal="-53mV"
 	     thresh="-55mV" reset="-70mV" C="3.2pF"/>
     <iafRefCell id="iafRef" leakConductance="0.2nS" leakReversal="-53mV"
-		thresh="-55mV" reset="-70mV" C="3.2pF" refract="2ms"/>
+		thresh="-55mV" reset="-70mV" C="3.2pF" refract="5ms"/>
+    <adExIaFCell id="adExBurst" C="3.2pF" gL="2nS" EL="-53mV"
+		 reset="-70mV" VT="-50.4mV" thresh ="-55mV"
+		 refract="0ms" delT="2mV" tauw="40ms" a="4nS"
+		 b="0.08nA"/>
 
     <network id="net1">
         <population id="iafTauPop" component="iafTau" size="1" />
+        <population id="iafTauRefPop" component="iafTauRef" size="1" />
 	<population id="iafPop" component="iaf" size="1" />
 	<population id="iafRefPop" component="iafRef" size="1" />
+	<population id="adExBurstPop" component="adExBurst" size="1"/>
     </network>
 
     <!-- End of NeuroML2 content -->
@@ -41,10 +48,19 @@
 
     <Simulation id="sim1" length="300ms" step="0.01ms" target="net1">
 
-        <Display id="d0" title="Ex0: Simple Integrate and Fire cells in LEMS" timeScale="1ms" xmin="0" xmax="300" ymin="-75" ymax="-50">
-            <Line id="iafTauCell" quantity="iafTauPop[0]/v" scale="1mV" color="#000000" timeScale="1ms" />
-	    <Line id="iafCell" quantity="iafPop[0]/v" scale="1mV" color="#3ADF00" timeScale="1ms" />
-	    <Line id="iafRefCell" quantity="iafRefPop[0]/v" scale="1mV" color="#0000FF" timeScale="1ms" />
+        <Display id="d0" title="Ex0: Simple Integrate and Fire cells
+				in LEMS" timeScale="1ms" xmin="0"
+		 xmax="300" ymin="-75" ymax="-50">
+            <Line id="iafTauCell" quantity="iafTauPop[0]/v"
+		  scale="1mV" color="#FF0000" timeScale="1ms" />
+            <Line id="iafTauRefCell" quantity="iafTauRefPop[0]/v"
+		  scale="1mV" color="#D7DF01" timeScale="1ms" />
+	    <Line id="iafCell" quantity="iafPop[0]/v" scale="1mV"
+		  color="#01DF3A" timeScale="1ms" />
+	    <Line id="iafRefCell" quantity="iafRefPop[0]/v"
+		  scale="1mV" color="#0174DF" timeScale="1ms" />
+	    <Line id="adExBurstCell" quantity="adExBurstPop[0]/v"
+		  scale="1mV" color="#B40486" timeScale="1ms"/>
         </Display>
 
         <OutputFile id="of0" fileName="results/iaf_v.dat">
