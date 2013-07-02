@@ -19,9 +19,9 @@
     <nmdaSynapse id="nmdaSyn" gbase="0.5nS" erev="0mV" tauRise="2ms"
 		 tauDecay="8ms">
       <notes>A blocking synapse.</notes>
-      <voltageConcDepBlock species="mg" blockConcentration="1.2 mM"
-			   scalingConc="1.920544 mM"
-			   scalingVolt="16.129 mV"/>
+      <blockMechanism type="voltageConcDepBlockMechanism" species="mg"
+		      blockConcentration="1.2 mM"
+		      scalingConc="1.920544 mM" scalingVolt="16.129 mV"/>
     </nmdaSynapse>
 
     <plasticSynapse id="stpSynDep" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="2ms">
@@ -44,7 +44,7 @@
       <notes>A biexponential blocking synapse, with STD.</notes>
       <plasticityMechanism type="tsodyksMarkramDepFacMechanism"
 		    initReleaseProb="0.5" tauRec="120 ms"/>
-      <blockMechanism type="voltageConcDepBlock" species="mg"
+      <blockMechanism type="voltageConcDepBlockMechanism" species="mg"
 		      blockConcentration="1.2 mM"
 		      scalingConc="1.920544 mM" scalingVolt="16.129
 							     mV"/>
@@ -57,7 +57,7 @@
       <plasticityMechanism type="tsodyksMarkramDepFacMechanism"
 		    initReleaseProb="0.5" tauRec="120 ms" tauFac="10
 								  ms"/>
-      <blockMechanism type="voltageConcDepBlock" species="mg"
+      <blockMechanism type="voltageConcDepBlockMechanism" species="mg"
 		      blockConcentration="1.2 mM"
 		      scalingConc="1.920544 mM" scalingVolt="16.129
 							     mV"/>

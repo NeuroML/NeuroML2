@@ -30,7 +30,7 @@
     </abstractCell>
 
     <nmdaSynapse id="nmdaSyn1" gbase="0.5nS" erev="0mV" tauRise="2ms" tauDecay="8ms">
-        <voltageConcDepBlock species="mg" blockConcentration="1.2 mM" scalingConc="1.920544 mM" scalingVolt="16.129 mV"/>
+        <blockMechanism type="voltageConcDepBlockMechanism" species="mg" blockConcentration="1.2 mM" scalingConc="1.920544 mM" scalingVolt="16.129 mV"/>
     </nmdaSynapse>
 
     <pulseGenerator id="pulseGen2" delay="200ms" duration="10000ms" amplitude="0.065nA"/>
@@ -57,7 +57,7 @@
         </Display>
         
         <Display id="db" title="Ex6: Cells with NMDA mediated synapse: synaptic block factor" timeScale="1ms" xmin="0" xmax="400" ymin="0" ymax="0.2">
-            <Line id ="l1" quantity="pasPop[0]/nmdaSyn1/voltageConcDepBlock/scaling" scale="1"  color="#11FF33" timeScale="1ms"/>
+            <Line id ="l1" quantity="pasPop[0]/nmdaSyn1/blockMechanism/blockFactor" scale="1"  color="#11FF33" timeScale="1ms"/>
         </Display>
         
         <Display id="d3" title="Ex6: Cells with NMDA mediated synapse: spike generator" timeScale="1ms" xmin="0" xmax="400" ymin="-10" ymax="90">

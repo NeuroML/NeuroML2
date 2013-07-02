@@ -115,16 +115,16 @@
     </ComponentType>
 
 
-    <ComponentType name="baseBlock"
+    <ComponentType name="baseBlockMechanism"
         description="Base of any ComponentType which produces a varying scaling (or blockage) of synaptic strength of magnitude _scaling">
 
-        <Exposure name="scaling" dimension="none"/>
+        <Exposure name="blockFactor" dimension="none"/>
 
     </ComponentType>
 
 
-    <ComponentType name="voltageConcDepBlock"
-       extends="baseBlock"
+    <ComponentType name="voltageConcDepBlockMechanism"
+       extends="baseBlockMechanism"
        description="Synaptic blocking mechanism which varys with membrane potential across the synapse, e.g. in NMDA receptor mediated synapses">
 
         <Parameter name="blockConcentration" dimension="concentration" />
@@ -136,7 +136,7 @@
         <Text name="species"/>
 
         <Dynamics>
-            <DerivedVariable name="scaling" dimension="none" exposure="scaling" value="1/(1 + (blockConcentration / scalingConc)* exp(-1 * (v / scalingVolt)))" />
+            <DerivedVariable name="blockFactor" dimension="none" exposure="blockFactor" value="1/(1 + (blockConcentration / scalingConc)* exp(-1 * (v / scalingVolt)))" />
         </Dynamics>
 
     </ComponentType>
@@ -148,14 +148,14 @@
        extends="expTwoSynapse"
        description="NMDA receptor mediated synapse, whose conductance is scaled by a factor dependent on the concentration of magnesium (assumed fixed) and membrane potential">
 
-        <Child name="voltageConcDepBlock" type="voltageConcDepBlock"/>
+        <Child name="blockMechanism" type="voltageConcDepBlockMechanism"/>
 
         <Dynamics>
             <StateVariable name="A" dimension="none"/>
             <StateVariable name="B" dimension="none"/>
 
-            <DerivedVariable name="block" dimension="none" select="voltageConcDepBlock/scaling" />
-            <DerivedVariable name="g" dimension="conductance" exposure="g" value="gbase * block * (B - A)" />
+            <DerivedVariable name="blockFactor" dimension="none" select="blockMechanism/blockFactor" />
+            <DerivedVariable name="g" dimension="conductance" exposure="g" value="gbase * blockFactor * (B - A)" />
             <DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
 
 
@@ -283,7 +283,7 @@
     </ComponentType>
 
 
-    <ComponentType name="blockPlasticSynapse"
+    <ComponentType name="blockingPlasticSynapse"
 		   extends="plasticSynapse"
 		   description="Biexponential blocking (non-ohmic)
 				synaptic model with
@@ -291,13 +291,13 @@
 				plasticity models are determined by
 				the blockMechanism and
 				plasticityMechanism child elements.">
-      <Child name="blockMechanism" type="baseBlock"/>
+      <Child name="blockMechanism" type="baseBlockMechanism"/>
       <Dynamics>
 	<StateVariable name="A" dimension="none"/>
 	<StateVariable name="B" dimension="none"/>
 
 	<DerivedVariable name="plasticityFactor" dimension="none" select="plasticityMechanism/plasticityFactor" />
-	<DerivedVariable name="blockFactor" dimension="none" select="blockMechanism/scaling" />
+	<DerivedVariable name="blockFactor" dimension="none" select="blockMechanism/blockFactor" />
 	<DerivedVariable name="g" dimension="conductance" exposure="g" value="blockFactor * gbase * (B - A)" />
 	<DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
 

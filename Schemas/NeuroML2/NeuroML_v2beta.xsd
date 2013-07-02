@@ -648,7 +648,8 @@
         <xs:complexContent>
             <xs:extension base="ExpTwoSynapse">
                 <xs:sequence>
-                    <xs:element name="voltageConcDepBlock" type="VoltageConcDepBlock"/>
+                    <xs:element name="blockMechanism"
+				type="BlockMechanism"/>
                 </xs:sequence>
 
             </xs:extension>
@@ -672,19 +673,28 @@
             <xs:extension base="PlasticSynapse">
 	      <xs:sequence>
 		<xs:element name="blockMechanism"
-			    type="VoltageConcDepBlock"/>
+			    type="BlockMechanism"/>
 	      </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
+    <xs:simpleType name="BlockTypes">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="voltageConcDepBlockMechanism"/>
+        </xs:restriction>
+    </xs:simpleType>
 
-    <xs:complexType name="VoltageConcDepBlock">
-        <xs:attribute name="type" type="xs:string" fixed="voltageConcDepBlock"/>
-        <xs:attribute name="species" type="NmlId" use="required"/>
-        <xs:attribute name="blockConcentration" type="Nml2Quantity_concentration" use="required"/>
-        <xs:attribute name="scalingConc" type="Nml2Quantity_concentration" use="required"/>
-        <xs:attribute name="scalingVolt" type="Nml2Quantity_voltage" use="required"/>
+    <xs:complexType name="BlockMechanism">
+      <xs:attribute name="type" type="BlockTypes"
+		    use="required"/>
+      <xs:attribute name="species" type="NmlId" use="required"/>
+      <xs:attribute name="blockConcentration"
+		    type="Nml2Quantity_concentration" use="required"/>
+      <xs:attribute name="scalingConc"
+		    type="Nml2Quantity_concentration" use="required"/>
+      <xs:attribute name="scalingVolt" type="Nml2Quantity_voltage"
+		    use="required"/>
     </xs:complexType>
 
     <xs:simpleType name="PlasticityTypes">
