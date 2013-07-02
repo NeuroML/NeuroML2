@@ -33,13 +33,13 @@
 
     <expTwoSynapse id="noStpSyn" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="40ms"/>
 
-    <plasticSynapse id="stpSynDep" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="40ms">
+    <blockingPlasticSynapse id="stpSynDep" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="40ms">
             <plasticityMechanism type="tsodyksMarkramDepMechanism" initReleaseProb = "0.5" tauRec = "300 ms"/>
-    </plasticSynapse>
+    </blockingPlasticSynapse>
 
-    <plasticSynapse id="stpSynDepFac" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="40ms">
+    <blockingPlasticSynapse id="stpSynDepFac" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="40ms">
             <plasticityMechanism type="tsodyksMarkramDepFacMechanism" initReleaseProb = "0.5" tauFac = "200 ms" tauRec = "300 ms"/>
-    </plasticSynapse>
+    </blockingPlasticSynapse>
 
 
     <network id="net2">
