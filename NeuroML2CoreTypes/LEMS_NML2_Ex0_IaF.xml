@@ -4,9 +4,9 @@
     <!-- Example with Simple Integrate and Fire cell -->
 
     <!-- This is a file which can be read and executed by the LEMS Interpreter.
-        It imports the LEMS definitions of the core NeuroML 2 Components, creates
-        a model in "pure" NeuroML 2 and contains some LEMS elements for running a
-        simulation -->
+    It imports the LEMS definitions of the core NeuroML 2 Components, creates
+    a model in "pure" NeuroML 2 and contains some LEMS elements for running a
+    simulation -->
 
     <!-- Specify which component to run -->
     <Target component="sim1" />
@@ -15,7 +15,7 @@
 
     <Include file="Cells.xml" />
     <!-- The above file includes NeuroMLCoreDimensions.xml, Channels.xml,
-        Synapses.xml and Inputs.xml -->
+    Synapses.xml and Inputs.xml -->
     <Include file="Networks.xml" />
     <Include file="Simulation.xml" />
 
@@ -23,24 +23,19 @@
 
     <!-- Main NeuroML2 content -->
     <iafTauCell id="iafTau" leakReversal="-50mV" thresh="-55mV"
-        reset="-70mV" tau="30ms" />
+                reset="-70mV" tau="30ms" />
     <iafTauRefCell id="iafTauRef" leakReversal="-50mV" thresh="-55mV"
-        reset="-70mV" tau="30ms" refract="5ms"/>
+                   reset="-70mV" tau="30ms" refract="5ms"/>
     <iafCell id="iaf" leakConductance="0.2nS" leakReversal="-53mV"
-	     thresh="-55mV" reset="-70mV" C="3.2pF"/>
+             thresh="-55mV" reset="-70mV" C="3.2pF"/>
     <iafRefCell id="iafRef" leakConductance="0.2nS" leakReversal="-53mV"
-		thresh="-55mV" reset="-70mV" C="3.2pF" refract="5ms"/>
-    <adExIaFCell id="adExBurst" C="3.2pF" gL="2nS" EL="-53mV"
-		 reset="-70mV" VT="-50.4mV" thresh ="-55mV"
-		 refract="0ms" delT="2mV" tauw="40ms" a="4nS"
-		 b="0.08nA"/>
+                thresh="-55mV" reset="-70mV" C="3.2pF" refract="5ms"/>
 
     <network id="net1">
         <population id="iafTauPop" component="iafTau" size="1" />
         <population id="iafTauRefPop" component="iafTauRef" size="1" />
-	<population id="iafPop" component="iaf" size="1" />
-	<population id="iafRefPop" component="iafRef" size="1" />
-	<population id="adExBurstPop" component="adExBurst" size="1"/>
+        <population id="iafPop" component="iaf" size="1" />
+        <population id="iafRefPop" component="iafRef" size="1" />
     </network>
 
     <!-- End of NeuroML2 content -->
@@ -50,17 +45,15 @@
 
         <Display id="d0" title="Ex0: Simple Integrate and Fire cells
 				in LEMS" timeScale="1ms" xmin="0"
-		 xmax="300" ymin="-75" ymax="-50">
+                 xmax="300" ymin="-75" ymax="-50">
             <Line id="iafTauCell" quantity="iafTauPop[0]/v"
-		  scale="1mV" color="#FF0000" timeScale="1ms" />
+                  scale="1mV" color="#FF0000" timeScale="1ms" />
             <Line id="iafTauRefCell" quantity="iafTauRefPop[0]/v"
-		  scale="1mV" color="#D7DF01" timeScale="1ms" />
-	    <Line id="iafCell" quantity="iafPop[0]/v" scale="1mV"
-		  color="#01DF3A" timeScale="1ms" />
-	    <Line id="iafRefCell" quantity="iafRefPop[0]/v"
-		  scale="1mV" color="#0174DF" timeScale="1ms" />
-	    <Line id="adExBurstCell" quantity="adExBurstPop[0]/v"
-		  scale="1mV" color="#B40486" timeScale="1ms"/>
+                  scale="1mV" color="#D7DF01" timeScale="1ms" />
+            <Line id="iafCell" quantity="iafPop[0]/v" scale="1mV"
+              color="#01DF3A" timeScale="1ms" />
+            <Line id="iafRefCell" quantity="iafRefPop[0]/v"
+              scale="1mV" color="#0174DF" timeScale="1ms" />
         </Display>
 
         <OutputFile id="of0" fileName="results/iaf_v.dat">
