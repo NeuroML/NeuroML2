@@ -251,55 +251,29 @@
 
     </ComponentType>
 
-
-    <ComponentType name="plasticSynapse"
+    <ComponentType name="blockingPlasticSynapse"
 		   extends="expTwoSynapse"
-		   description="Biexponential synaptic model with plasticity. The specific plasticity model is determined by the plasticityMechanism child element.">
+		   description="Biexponential synapse that allows for
+				optional block and plasticity
+				mechanisms, which can be expressed as
+				child elements.">
       <Child name="plasticityMechanism" type="basePlasticityMechanism"/>
+      <Child name="blockMechanism" type="baseBlockMechanism"/>
       <EventPort name="relay" direction="out" description="Used to relay incoming spikes to child plasticity mechanism"/>
       <Dynamics>
 	<StateVariable name="A" dimension="none"/>
 	<StateVariable name="B" dimension="none"/>
 
-	<DerivedVariable name="g" dimension="conductance" exposure="g" value="gbase * (B - A)" />
-	<DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
-	<DerivedVariable name="plasticityFactor" dimension="none" select="plasticityMechanism/plasticityFactor" />
-
-	<TimeDerivative variable="A" value="-A / tauRise" />
-	<TimeDerivative variable="B" value="-B / tauDecay" />
-
-	<OnStart>
-	  <StateAssignment variable="A" value="0" />
-	  <StateAssignment variable="B" value="0" />
-	</OnStart>
-
-	<OnEvent port="in">
-	  <StateAssignment variable="A" value="A + plasticityFactor * waveformFactor" />
-	  <StateAssignment variable="B" value="B + plasticityFactor * waveformFactor" />
-	  <EventOut port="relay"/>
-	</OnEvent>
-
-      </Dynamics>
-    </ComponentType>
-
-
-    <ComponentType name="blockingPlasticSynapse"
-		   extends="plasticSynapse"
-		   description="Biexponential blocking (non-ohmic)
-				synaptic model with
-				plasticity. The blockage and
-				plasticity models are determined by
-				the blockMechanism and
-				plasticityMechanism child elements.">
-      <Child name="blockMechanism" type="baseBlockMechanism"/>
-      <Dynamics>
-	<StateVariable name="A" dimension="none"/>
-	<StateVariable name="B" dimension="none"/>
-
-	<DerivedVariable name="plasticityFactor" dimension="none" select="plasticityMechanism/plasticityFactor" />
-	<DerivedVariable name="blockFactor" dimension="none" select="blockMechanism/blockFactor" />
-	<DerivedVariable name="g" dimension="conductance" exposure="g" value="blockFactor * gbase * (B - A)" />
-	<DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
+	<DerivedVariable name="plasticityFactor" dimension="none"
+			 select="plasticityMechanism/plasticityFactor"
+			 reduce="multiply" required="false"/>
+	<DerivedVariable name="blockFactor" dimension="none"
+			 select="blockMechanism/blockFactor"
+			 reduce="multiply" required="false"/>
+	<DerivedVariable name="g" dimension="conductance" exposure="g"
+			 value="blockFactor * gbase * (B - A)" />
+	<DerivedVariable name="i" exposure="i" dimension="current"
+			 value="g * (erev - v)" />
 
 	<TimeDerivative variable="A" value="-A / tauRise" />
 	<TimeDerivative variable="B" value="-B / tauDecay" />

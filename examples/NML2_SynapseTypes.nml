@@ -24,20 +24,20 @@
 		      scalingConc="1.920544 mM" scalingVolt="16.129 mV"/>
     </nmdaSynapse>
 
-    <plasticSynapse id="stpSynDep" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="2ms">
+    <blockPlasticSynapse id="stpSynDep" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="2ms">
       <notes>A biexponential synapse exhibiting STD.</notes>
       <plasticityMechanism type="tsodyksMarkramDepMechanism"
 		 initReleaseProb="0.5" tauRec="120 ms" />
-    </plasticSynapse>
+    </blockPlasticSynapse>
 
-    <plasticSynapse id="stpSynDepFac" gbase="1nS" erev="0mV"
+    <blockPlasticSynapse id="stpSynDepFac" gbase="1nS" erev="0mV"
 		tauRise="0.1ms" tauDecay="2ms">
       <notes>A biexponential synapse with short term depression
       and facilitation.</notes>
       <plasticityMechanism type="tsodyksMarkramDepFacMechanism"
 		    initReleaseProb="0.5" tauRec="120 ms" tauFac="10
 								  ms"/>
-    </plasticSynapse>
+    </blockPlasticSynapse>
 
     <blockPlasticSynapse id="blockStpSynDep" gbase="1nS" erev="0mV"
 		     tauRise="0.1ms" tauDecay="2ms">
