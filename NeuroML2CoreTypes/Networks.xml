@@ -1,6 +1,6 @@
-<Lems xmlns="http://www.neuroml.org/lems/0.7"
+<Lems xmlns="http://www.neuroml.org/lems/0.7.1"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/lems/0.7 ../../LEMS/Schemas/LEMS/LEMS_v0.7.xsd"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.1 ../../LEMS/Schemas/LEMS/LEMS_v0.7.1.xsd"
       description="Network descriptions in NeuroML 2. Describes _network_ elements containing _population_s ">
 
     <!-- A number of network elements for use in NeuroML 2 documents  -->
