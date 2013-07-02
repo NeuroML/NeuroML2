@@ -29,17 +29,25 @@
         <channelPopulation id="leak" ionChannel="passive" number="300" erev="-54.3mV"/>
     </abstractCell>
 
-    <nmdaSynapse id="nmdaSyn1" gbase="0.5nS" erev="0mV" tauRise="2ms" tauDecay="8ms">
-        <voltageConcDepBlock species="mg" blockConcentration="1.2 mM" scalingConc="1.920544 mM" scalingVolt="16.129 mV"/>
-    </nmdaSynapse>
+    <blockingPlasticSynapse id="nmdaSyn1" gbase="0.5nS"
+			    erev="0mV" tauRise="2ms" tauDecay="8ms">
+        <blockMechanism type="voltageConcDepBlockMechanism"
+			species="mg" blockConcentration="1.2 mM"
+			scalingConc="1.920544 mM" scalingVolt="16.129
+							       mV"/>
+    </blockingPlasticSynapse>
 
     <pulseGenerator id="pulseGen2" delay="200ms" duration="10000ms" amplitude="0.065nA"/>
 
     <network id="net2">
         <population id="srcPop" component="spikeGen55ms" size="1"/>
-        <population id="pasPop" component="passiveCell" size="1"/>
-        <synapticConnection from="srcPop[0]" to="pasPop[0]" synapse="nmdaSyn1" destination="synapses"/>
-        <explicitInput target="pasPop[0]" input="pulseGen2" destination="synapses"/>
+        <population id="pasPop1" component="passiveCell" size="1"/>
+	<population id="pasPop2" component="passiveCell" size="1"/>
+        <synapticConnection from="srcPop[0]" to="pasPop1[0]"
+			    synapse="nmdaSyn1"
+			    destination="synapses"/>
+        <explicitInput target="pasPop1[0]" input="pulseGen2"
+		       destination="synapses"/>
         <!--<explicitInput target="srcPop[0]" input="pulseGen2"/>-->
     </network>
 
@@ -49,15 +57,19 @@
     <Simulation id="sim1" length="400ms" step="0.01ms" target="net2">
     
         <Display id="d1" title="Ex6: Cells with NMDA mediated synapse: voltage" timeScale="1ms" xmin="0" xmax="400" ymin="-60" ymax="-25">
-            <Line id="l2" quantity="pasPop[0]/v" scale="1mV" color="#00ffff" timeScale="1ms"/>
+            <Line id="V" quantity="pasPop1[0]/v" scale="1mV"
+		  color="#01DF01" timeScale="1ms"/>
         </Display>
         
         <Display id="d2" title="Ex6: Cells with NMDA mediated synapse: synaptic conductance" timeScale="1ms" xmin="0" xmax="400" ymin="-0.02" ymax="0.1">
-            <Line id ="l1" quantity="pasPop[0]/nmdaSyn1/g" scale="1nS"  color="#1111FF" timeScale="1ms"/>
+            <Line id ="g(nmdaSyn1)" quantity="pasPop1[0]/nmdaSyn1/g" scale="1nS"
+		  color="#01DF01" timeScale="1ms"/>
         </Display>
         
         <Display id="db" title="Ex6: Cells with NMDA mediated synapse: synaptic block factor" timeScale="1ms" xmin="0" xmax="400" ymin="0" ymax="0.2">
-            <Line id ="l1" quantity="pasPop[0]/nmdaSyn1/voltageConcDepBlock/scaling" scale="1"  color="#11FF33" timeScale="1ms"/>
+            <Line id ="blockFactor(nmdaSyn1)"
+		  quantity="pasPop1[0]/nmdaSyn1/blockMechanism/blockFactor"
+		  scale="1"  color="#01DF01" timeScale="1ms"/>
         </Display>
         
         <Display id="d3" title="Ex6: Cells with NMDA mediated synapse: spike generator" timeScale="1ms" xmin="0" xmax="400" ymin="-10" ymax="90">
