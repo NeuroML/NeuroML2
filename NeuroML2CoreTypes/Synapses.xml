@@ -142,41 +142,6 @@
     </ComponentType>
 
 
-
-
-    <ComponentType name="nmdaSynapse"
-       extends="expTwoSynapse"
-       description="NMDA receptor mediated synapse, whose conductance is scaled by a factor dependent on the concentration of magnesium (assumed fixed) and membrane potential">
-
-        <Child name="blockMechanism" type="voltageConcDepBlockMechanism"/>
-
-        <Dynamics>
-            <StateVariable name="A" dimension="none"/>
-            <StateVariable name="B" dimension="none"/>
-
-            <DerivedVariable name="blockFactor" dimension="none" select="blockMechanism/blockFactor" />
-            <DerivedVariable name="g" dimension="conductance" exposure="g" value="gbase * blockFactor * (B - A)" />
-            <DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
-
-
-            <TimeDerivative variable="A" value="-A / tauRise" />
-            <TimeDerivative variable="B" value="-B / tauDecay" />
-
-            <OnStart>
-                <StateAssignment variable="A" value="0" />
-                <StateAssignment variable="B" value="0" />
-            </OnStart>
-
-            <OnEvent port="in">
-                <StateAssignment variable="A" value="A + waveformFactor" />
-                <StateAssignment variable="B" value="B + waveformFactor" />
-            </OnEvent>
-
-        </Dynamics>
-
-    </ComponentType>
-
-
     <ComponentType name="basePlasticityMechanism"
 		   description="Base plasticity mechanism.">
       <EventPort name="in" direction="in" description="This is where the plasticity mechanism receives spike events from the parent synapse."/>

@@ -16,14 +16,6 @@
       <notes>A biexponential synapse.</notes>
     </expTwoSynapse>
 
-    <nmdaSynapse id="nmdaSyn" gbase="0.5nS" erev="0mV" tauRise="2ms"
-		 tauDecay="8ms">
-      <notes>A blocking synapse.</notes>
-      <blockMechanism type="voltageConcDepBlockMechanism" species="mg"
-		      blockConcentration="1.2 mM"
-		      scalingConc="1.920544 mM" scalingVolt="16.129 mV"/>
-    </nmdaSynapse>
-
     <blockingPlasticSynapse id="stpSynDep" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="2ms">
       <notes>A biexponential synapse exhibiting STD.</notes>
       <plasticityMechanism type="tsodyksMarkramDepMechanism"
