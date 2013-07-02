@@ -339,7 +339,7 @@
             <xs:element name="expOneSynapse" type="ExpOneSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="expTwoSynapse" type="ExpTwoSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="nmdaSynapse"   type="NmdaSynapse"   minOccurs="0" maxOccurs="unbounded"/>
-	    <xs:element name="blockPlasticSynapse" type="BlockPlasticSynapse"
+	    <xs:element name="blockingPlasticSynapse" type="BlockingPlasticSynapse"
 			minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:group>
@@ -654,7 +654,7 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="BlockPlasticSynapse">
+    <xs:complexType name="BlockingPlasticSynapse">
         <xs:complexContent>
             <xs:extension base="ExpTwoSynapse">
 	      <xs:sequence>

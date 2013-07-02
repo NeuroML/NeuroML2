@@ -24,22 +24,22 @@
 		      scalingConc="1.920544 mM" scalingVolt="16.129 mV"/>
     </nmdaSynapse>
 
-    <blockPlasticSynapse id="stpSynDep" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="2ms">
+    <blockingPlasticSynapse id="stpSynDep" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="2ms">
       <notes>A biexponential synapse exhibiting STD.</notes>
       <plasticityMechanism type="tsodyksMarkramDepMechanism"
 		 initReleaseProb="0.5" tauRec="120 ms" />
-    </blockPlasticSynapse>
+    </blockingPlasticSynapse>
 
-    <blockPlasticSynapse id="stpSynDepFac" gbase="1nS" erev="0mV"
+    <blockingPlasticSynapse id="stpSynDepFac" gbase="1nS" erev="0mV"
 		tauRise="0.1ms" tauDecay="2ms">
       <notes>A biexponential synapse with short term depression
       and facilitation.</notes>
       <plasticityMechanism type="tsodyksMarkramDepFacMechanism"
 		    initReleaseProb="0.5" tauRec="120 ms" tauFac="10
 								  ms"/>
-    </blockPlasticSynapse>
+    </blockingPlasticSynapse>
 
-    <blockPlasticSynapse id="blockStpSynDep" gbase="1nS" erev="0mV"
+    <blockingPlasticSynapse id="blockStpSynDep" gbase="1nS" erev="0mV"
 		     tauRise="0.1ms" tauDecay="2ms">
       <notes>A biexponential blocking synapse, with STD.</notes>
       <plasticityMechanism type="tsodyksMarkramDepFacMechanism"
@@ -48,9 +48,9 @@
 		      blockConcentration="1.2 mM"
 		      scalingConc="1.920544 mM" scalingVolt="16.129
 							     mV"/>
-    </blockPlasticSynapse>
+    </blockingPlasticSynapse>
 
-    <blockPlasticSynapse id="blockStpSynDepFac" gbase="1nS" erev="0mV"
+    <blockingPlasticSynapse id="blockStpSynDepFac" gbase="1nS" erev="0mV"
 		     tauRise="0.1ms" tauDecay="2ms">
       <notes>A biexponential blocking synapse with short term
       depression and facilitation.</notes>
@@ -61,6 +61,6 @@
 		      blockConcentration="1.2 mM"
 		      scalingConc="1.920544 mM" scalingVolt="16.129
 							     mV"/>
-    </blockPlasticSynapse>
+    </blockingPlasticSynapse>
 
 </neuroml>
