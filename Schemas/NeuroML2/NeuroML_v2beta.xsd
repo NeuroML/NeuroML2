@@ -59,6 +59,14 @@
 
     </xs:simpleType>
 
+    <xs:simpleType name="Nml2Quantity_resistance">
+
+        <xs:restriction base="xs:string">
+            <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(ohm|Kohm|Mohm)"/> <!-- Based on set of defined Units in NeuroMLCoreDimensions.xml -->
+        </xs:restriction>
+
+    </xs:simpleType>
+
     <xs:simpleType name="Nml2Quantity_conductance">
 
         <xs:restriction base="xs:string">
@@ -258,13 +266,13 @@
 
                     <xs:group ref="CellTypes"/>
 
+		    <xs:group ref="InputTypes"/>
+                    
                     <xs:group ref="PyNNCellTypes"/>
 
                     <xs:group ref="PyNNSynapseTypes"/>
 
                     <xs:group ref="PyNNInputTypes"/>
-
-                    <xs:element name="pulseGenerator" type="PulseGenerator" minOccurs="0" maxOccurs="unbounded"/>
 
                     <xs:element name="network" type="Network" minOccurs="0" maxOccurs="unbounded"/>
 
@@ -349,8 +357,34 @@
             <xs:element name="alphaCurrSynapse" type="AlphaCurrSynapse" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:group>
-
-
+    
+    <xs:group name="InputTypes">
+      <xs:annotation>
+	<xs:documentation>
+	  Various types of inputs which are defined in NeuroML2. This
+	  list will be expanded...
+	</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+	<xs:element name="pulseGenerator" type="PulseGenerator"
+		    minOccurs="0" maxOccurs="unbounded"/>
+	<xs:element name="sineGenerator" type="SineGenerator"
+		    minOccurs="0" maxOccurs="unbounded"/>
+	<xs:element name="rampGenerator" type="RampGenerator"
+		    minOccurs="0" maxOccurs="unbounded"/>
+	<xs:element name="voltageClamp" type="VoltageClamp"
+		    minOccurs="0" maxOccurs="unbounded"/>
+	<xs:element name="spikeArray" type="SpikeArray" minOccurs="0"
+		    maxOccurs="unbounded"/>
+	<xs:element name="spikeGenerator" type="SpikeGenerator" 
+		    minOccurs="0" maxOccurs="unbounded"/>
+	<xs:element name="spikeGeneratorRandom" type="SpikeGeneratorRandom"
+		    minOccurs="0" maxOccurs="unbounded"/>
+	<xs:element name="spikeGeneratorPoisson" type="SpikeGeneratorPoisson" 
+		    minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:group>
+    
     <xs:group name="PyNNInputTypes">
         <xs:annotation>
             <xs:documentation>Various types of input which are defined in NeuroML 2 based on PyNN standard cell/synapse models. </xs:documentation>
@@ -1179,17 +1213,124 @@
 <!--Will be updated in line with LEMS ComponentType definitions -->
 
     <xs:complexType name="PulseGenerator">
-
         <xs:complexContent>
             <xs:extension base="Standalone">
-
-                <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
-                <xs:attribute name="duration" type="Nml2Quantity_time" use="required"/>
-                <xs:attribute name="amplitude" type="Nml2Quantity_current" use="required"/>
-
+              <xs:attribute name="delay" type="Nml2Quantity_time"
+			    use="required"/>
+              <xs:attribute name="duration" type="Nml2Quantity_time"
+			    use="required"/>
+              <xs:attribute name="amplitude"
+			    type="Nml2Quantity_current"
+			    use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+
+    <xs:complexType name="SineGenerator">
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+              <xs:attribute name="delay" type="Nml2Quantity_time"
+			    use="required"/>
+	      <xs:attribute name="phase" type="Nml2Quantity_none"
+			    use="required"/>
+              <xs:attribute name="duration" type="Nml2Quantity_time"
+			    use="required"/>
+              <xs:attribute name="amplitude"
+			    type="Nml2Quantity_current"
+			    use="required"/>
+	      <xs:attribute name="period" type="Nml2Quantity_time"
+			    use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="RampGenerator">
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+              <xs:attribute name="delay" type="Nml2Quantity_time"
+			    use="required"/>
+              <xs:attribute name="duration" type="Nml2Quantity_time"
+			    use="required"/>
+              <xs:attribute name="startAmplitude"
+			    type="Nml2Quantity_current"
+			    use="required"/>
+              <xs:attribute name="finishAmplitude"
+			    type="Nml2Quantity_current"
+			    use="required"/>
+              <xs:attribute name="baselineAmplitude"
+			    type="Nml2Quantity_current"
+			    use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="VoltageClamp">
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+              <xs:attribute name="delay" type="Nml2Quantity_time"
+			    use="required"/>
+              <xs:attribute name="duration" type="Nml2Quantity_time"
+			    use="required"/>
+	      <xs:attribute name="targetVoltage"
+			    type="Nml2Quantity_voltage"
+			    use="required"/>
+	      <xs:attribute name="seriesResistance"
+			    type="Nml2Quantity_resistance"
+			    use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="Spike">
+      <xs:complexContent>
+	<xs:extension base="Standalone">
+	  <xs:attribute name="time" type="Nml2Quantity_time"
+			use="required"/>
+	</xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="SpikeArray">
+      <xs:complexContent>
+	<xs:extension base="Standalone">
+          <xs:sequence>
+            <xs:element name="spike" type="Spike" minOccurs="0"
+			maxOccurs="unbounded"/>
+	  </xs:sequence>
+	</xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="SpikeGenerator">
+      <xs:complexContent>
+	<xs:extension base="Standalone">
+	  <xs:attribute name="period" type="Nml2Quantity_time"
+			use="required"/>
+	</xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="SpikeGeneratorRandom">
+      <xs:complexContent>
+	<xs:extension base="Standalone">
+	  <xs:attribute name="maxISI" type="Nml2Quantity_time"
+			use="required"/>
+	  <xs:attribute name="minISI" type="Nml2Quantity_time"
+			use="required"/>
+	</xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="SpikeGeneratorPoisson">
+      <xs:complexContent>
+	<xs:extension base="Standalone">
+	  <xs:attribute name="averageRate" type="Nml2Quantity_pertime"
+			use="required"/>
+	</xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+
+
 
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     <!--      Networks                                         -->

@@ -1,6 +1,6 @@
-<Lems xmlns="http://www.neuroml.org/lems/0.7"
+<Lems xmlns="http://www.neuroml.org/lems/0.7.1"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/lems/0.7 ../../LEMS/Schemas/LEMS/LEMS_v0.7.xsd">
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.1 ../../LEMS/Schemas/LEMS/LEMS_v0.7.1.xsd">
 
     <!-- A number of Simulation types for use in NeuroML 2 documents  -->
 
@@ -31,8 +31,8 @@
     <ComponentType name="Line">
         <Parameter name="scale" dimension="*"/>
          <Parameter name="timeScale" dimension="*"/>
-        <Text name="color"/>
         <Path name="quantity"/>
+        <Text name="color"/>
         <Simulation>
             <Record quantity="quantity" timeScale="timeScale" scale="scale" color="color"/>
         </Simulation>

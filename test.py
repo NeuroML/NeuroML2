@@ -23,10 +23,14 @@ from urllib import urlopen
 import subprocess
 import filecmp
 
+verbose = False
+if len(sys.argv) == 2 and sys.argv[1]=="-v":
+    verbose = True
+
 lems_def_dir="NeuroML2CoreTypes"
 lems_def_list=os.listdir(lems_def_dir)
 
-lems_schema = "../LEMS/Schemas/LEMS/LEMS_v0.7.xsd"
+lems_schema = "../LEMS/Schemas/LEMS/LEMS_v0.7.1.xsd"
 lems_schema_file = urlopen(lems_schema)
 
 lems_xmlschema_doc = etree.parse(lems_schema_file)
@@ -45,8 +49,10 @@ nml2_ex_dir="examples"
 nml2_ex_list=os.listdir(nml2_ex_dir)
 
 def checkSameFile(fileA, fileB):
-    #print "Comparing {} to {}".format(fileA, fileB)
-    return filecmp.cmp(fileA, fileB)
+
+    same = filecmp.cmp(fileA, fileB)
+    if not same and verbose: print " -- Files {} and {} are different!".format(fileA, fileB)
+    return same
 
 def check_valid_LEMS(schema, document):
     tree = etree.parse(lems_def_dir + "/" + document)

@@ -1,8 +1,9 @@
+/updateExamples.sh
 /updateSchemas.sh
 /.pydevproject
 .project
 
-*.py~
+*.*~
 *.pyc
 results
 build
