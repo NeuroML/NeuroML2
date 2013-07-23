@@ -403,7 +403,7 @@
         <Children name="gatesHHtauInf" type="gateHHtauInf"/>
         <Children name="gatesHHratesTau" type="gateHHratesTau"/>
         <Children name="gatesHHratesInf" type="gateHHratesInf"/>
-        <Requirement name="temperature" dimension="temperature"/>
+        
         <Text name="neuroLexId"/>
         <Text name="species"/>
     
