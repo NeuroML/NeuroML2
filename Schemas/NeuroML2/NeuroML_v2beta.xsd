@@ -834,7 +834,7 @@
 
     <xs:complexType name="Segment">
         <xs:complexContent>
-            <xs:extension base="Base">
+            <xs:extension base="BaseWithoutId">  <!-- Don't want to allow string value as with NmlId, want just non negative integer-->
 
                 <xs:sequence>
                     <xs:element name="parent" type="SegmentParent" minOccurs="0"/>
@@ -842,8 +842,7 @@
                     <xs:element name="distal" type="Point3DWithDiam" minOccurs="1"/>
                 </xs:sequence>
 
-                <!-- TODO: Do we want to do away with numerical ids and just use unique strings/names in id attribute?? -->
-                <!--<xs:attribute name="id" type="SegmentId" use="required"/>-->
+                <xs:attribute name="id" type="SegmentId" use="required"/>
                 <xs:attribute name="name" type="xs:string" use="optional"/>
 
             </xs:extension>
@@ -1766,17 +1765,32 @@
     <!--NOTE: Base and Standalone definitions moved to end of file, as some XML language binding
         generators, e.g. generateDS.py, require superclasses to be defined after the subclasses... -->
 
-    <xs:complexType name="Base">
+    <xs:complexType name="BaseWithoutId">
 
         <xs:annotation>
-            <xs:documentation>Anything which can have a unique id (within its parent) i.e. most elements.</xs:documentation>
+            <xs:documentation>Base element without ID specified *yet*, e.g. for an element with a particular requirement on its id which does not comply with NmlId (e.g. Segment needs nonNegativeInteger).</xs:documentation>
         </xs:annotation>
-
-        <xs:attribute name="id" type="NmlId" use="required"/>
 
         <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
 
     </xs:complexType>
+    
+    <xs:complexType name="Base">
+
+        <xs:annotation>
+            <xs:documentation>Anything which can have a unique (within its parent) id of the form NmlId (spaceless combination of letters, numbers and underscore).</xs:documentation>
+        </xs:annotation>
+        
+        <xs:complexContent>
+            <xs:extension base="BaseWithoutId">
+
+                <xs:attribute name="id" type="NmlId" use="required"/>
+                
+            </xs:extension>
+        </xs:complexContent>
+
+    </xs:complexType>
+    
 
 
     <xs:complexType name="Standalone">
