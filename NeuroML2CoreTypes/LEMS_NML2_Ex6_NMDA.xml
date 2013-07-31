@@ -25,9 +25,9 @@
 
     <spikeGenerator id="spikeGen55ms" period="75ms" />
 
-    <abstractCell id="passiveCell" type="pointCellCondBased" C="10pF"  v0="-55mV" thresh="20mV">
+    <baseCell id="passiveCell" type="pointCellCondBased" C="10pF"  v0="-55mV" thresh="20mV">
         <channelPopulation id="leak" ionChannel="passive" number="300" erev="-54.3mV"/>
-    </abstractCell>
+    </baseCell>
 
     <blockingPlasticSynapse id="nmdaSyn1" gbase="0.5nS"
 			    erev="0mV" tauRise="2ms" tauDecay="8ms">
