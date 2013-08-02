@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta.xsd"
+    id="NML2_SegmentConnections">
+
+    <expOneSynapse id="syn1" gbase="5nS" erev="0mV" tauDecay="3ms" />
+    
+    <cell id="dendCell">
+
+        <morphology id="CellWithDends_morphology">
+
+            <segment id ="0" name="Soma">
+                <!-- no parent => root segment -->
+                <proximal x="0" y="0" z="0" diameter="10"/>
+                <distal x="10" y="0" z="0" diameter="10"/>
+            </segment>
+
+            <segment id ="1" name="Dendrite1">
+                <parent segment="0"/>
+                <distal x="20" y="0" z="0" diameter="3"/>
+            </segment>
+
+            <segment id ="2" name="Dendrite2">
+                <parent segment="1"/>
+                <distal x="30" y="0" z="0" diameter="1"/>
+            </segment>
+            
+            <!-- segmentGroups -->
+
+            <segmentGroup id="soma_group"> 
+                <member segment="0"/>
+            </segmentGroup>
+
+            <segmentGroup id="dendrite_group">
+                <member segment="1"/>
+                <member segment="2"/>
+            </segmentGroup>
+
+        </morphology>
+
+    </cell>
+
+
+    <network id="SegmentConnectionsNetwork">
+
+        <population id="popA" type="populationList" component="dendCell">
+            <instance id="0">
+                <location x="0" y="0" z="0"/>
+            </instance>
+        </population>
+        
+        <population id="popB" type="populationList" component="SegmentConnections">
+            <instance id="0">
+                <location x="100" y="100" z="100"/>
+            </instance>
+        </population>
+
+        <projection id="proj0" presynapticPopulation="popA" postsynapticPopulation="popB" synapse="syn1">
+            <!--<connection id="0" preCellId="../popA/0/dendCell" preSegment="0" postCellId="../popB/0/dendCell" postSegmentId="1"/>-->
+            <connection id="0" preCellId="../popA/0/dendCell"  postCellId="../popB/0/dendCell" />
+        </projection>
+
+    </network>
+
+</neuroml>
+
+
+
+
+
+
+
+
