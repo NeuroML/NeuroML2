@@ -94,20 +94,12 @@ if __name__ == '__main__':
         print("FAIL: NeuroML alpha schemas in org.neuroml.model not in sync!")
     else:
         print("NeuroML alpha schemas in org.neuroml.model are in sync.")
+
     if not checkSameFile('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../org.neuroml.model/src/main/resources/Schemas/NeuroML2/NeuroML_v2beta.xsd'):
         print("FAIL: NeuroML beta schemas in org.neuroml.model not in sync!")
     else:
         print("NeuroML beta schemas in org.neuroml.model are in sync.")
 
-
-    if os.path.isdir('../Cvapp-NeuroMorpho.org') and not checkSameFile('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../Cvapp-NeuroMorpho.org/Schemas/NeuroML2/NeuroML_v2alpha.xsd'):
-        print("FAIL: NeuroML alpha schemas in Cvapp-NeuroMorpho.org not in sync!")
-    else:
-        print("NeuroML alpha schemas in Cvapp-NeuroMorpho.org are in sync.")
-    if os.path.isdir('../Cvapp-NeuroMorpho.org') and not checkSameFile('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../Cvapp-NeuroMorpho.org/Schemas/NeuroML2/NeuroML_v2beta.xsd'):
-        print("FAIL: NeuroML beta schemas in Cvapp-NeuroMorpho.org not in sync!")
-    else:
-        print("NeuroML beta schemas in Cvapp-NeuroMorpho.org are in sync.")
 
     if os.path.isdir('../neuroConstruct') and not checkSameFile('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../neuroConstruct/NeuroML2/Schemas/NeuroML2/NeuroML_v2alpha.xsd'):
         print("FAIL: NeuroML alpha schemas in neuroConstruct not in sync!")

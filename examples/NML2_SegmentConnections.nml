@@ -58,8 +58,8 @@
         </population>
 
         <projection id="proj0" presynapticPopulation="popA" postsynapticPopulation="popB" synapse="syn1">
-            <!--<connection id="0" preCellId="../popA/0/dendCell" preSegment="0" postCellId="../popB/0/dendCell" postSegmentId="1"/>-->
-            <connection id="0" preCellId="../popA/0/dendCell"  postCellId="../popB/0/dendCell" />
+            <connection id="0" preCellId="../popA/0/dendCell" preSegmentId="0" postCellId="../popB/0/dendCell" postSegmentId="1"/>
+            <connection id="1" preCellId="../popA/0/dendCell" preSegmentId="0" postCellId="../popB/0/dendCell" postSegmentId="2"/>
         </projection>
 
     </network>
