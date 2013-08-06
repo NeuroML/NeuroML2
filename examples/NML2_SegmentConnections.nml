@@ -2,7 +2,7 @@
 
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta.xsd"
+      xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta1.xsd"
     id="NML2_SegmentConnections">
 
     <expOneSynapse id="syn1" gbase="5nS" erev="0mV" tauDecay="3ms" />
@@ -58,8 +58,8 @@
         </population>
 
         <projection id="proj0" presynapticPopulation="popA" postsynapticPopulation="popB" synapse="syn1">
-            <connection id="0" preCellId="../popA/0/dendCell" preSegmentId="0" postCellId="../popB/0/dendCell" postSegmentId="1"/>
-            <connection id="1" preCellId="../popA/0/dendCell" preSegmentId="0" postCellId="../popB/0/dendCell" postSegmentId="2"/>
+            <connection id="0" preCellId="../popA/0/dendCell" preSegmentId="0" preFractionAlong="0.5" postCellId="../popB/0/dendCell" postSegmentId="1" postFractionAlong="1"/>
+            <connection id="1" preCellId="../popA/0/dendCell" preSegmentId="0" preFractionAlong="0.1" postCellId="../popB/0/dendCell" postSegmentId="2" postFractionAlong="0.9"/>
         </projection>
 
     </network>

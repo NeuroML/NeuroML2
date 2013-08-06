@@ -39,7 +39,8 @@ lems_xmlschema = etree.XMLSchema(lems_xmlschema_doc)
 lems_ex_dir="../LEMS/examples"
 lems_ex_list=os.listdir(lems_ex_dir)
 
-nml2_schema = "Schemas/NeuroML2/NeuroML_v2beta.xsd"
+nml2_schema_name = "NeuroML_v2beta1.xsd"
+nml2_schema = "Schemas/NeuroML2/%s"%nml2_schema_name
 nml2_schema_file = urlopen(nml2_schema)
 
 nml2_xmlschema_doc = etree.parse(nml2_schema_file)
@@ -85,7 +86,7 @@ if __name__ == '__main__':
     print "--------------------------------------------------"
     print "    Checking local copies of NeuroML schemas"
 
-    if not checkSameFile('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../libNeuroML/neuroml/nml/NeuroML_v2beta.xsd'):
+    if not checkSameFile('Schemas/NeuroML2/%s'%nml2_schema_name,  '../libNeuroML/neuroml/nml/%s'%nml2_schema_name):
         print("FAIL: NeuroML schemas in libNeuroML not in sync!")
     else:
         print("NeuroML schemas in libNeuroML are in sync.")
@@ -95,7 +96,7 @@ if __name__ == '__main__':
     else:
         print("NeuroML alpha schemas in org.neuroml.model are in sync.")
 
-    if not checkSameFile('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../org.neuroml.model/src/main/resources/Schemas/NeuroML2/NeuroML_v2beta.xsd'):
+    if not checkSameFile('Schemas/NeuroML2/%s'%nml2_schema_name,  '../org.neuroml.model/src/main/resources/Schemas/NeuroML2/%s'%nml2_schema_name):
         print("FAIL: NeuroML beta schemas in org.neuroml.model not in sync!")
     else:
         print("NeuroML beta schemas in org.neuroml.model are in sync.")
@@ -105,7 +106,7 @@ if __name__ == '__main__':
         print("FAIL: NeuroML alpha schemas in neuroConstruct not in sync!")
     else:
         print("NeuroML alpha schemas in neuroConstruct are in sync.")
-    if os.path.isdir('../neuroConstruct') and not checkSameFile('Schemas/NeuroML2/NeuroML_v2beta.xsd',  '../neuroConstruct/NeuroML2/Schemas/NeuroML2/NeuroML_v2beta.xsd'):
+    if os.path.isdir('../neuroConstruct') and not checkSameFile('Schemas/NeuroML2/%s'%nml2_schema_name,  '../neuroConstruct/NeuroML2/Schemas/NeuroML2/%s'%nml2_schema_name):
         print("FAIL: NeuroML beta schemas in neuroConstruct not in sync!")
     else:
         print("NeuroML beta schemas in neuroConstruct are in sync.")

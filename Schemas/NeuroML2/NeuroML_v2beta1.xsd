@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <xs:schema targetNamespace="http://www.neuroml.org/schema/neuroml2"
     xmlns="http://www.neuroml.org/schema/neuroml2"
     xmlns:xi="http://www.w3.org/2001/XInclude"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="2.0"
     xsi:schemaLocation="http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd"
     elementFormDefault="qualified"
     attributeFormDefault="unqualified">
@@ -169,6 +169,10 @@
     <xs:simpleType name="SegmentId">
         <xs:annotation>
             <xs:documentation>An id attribute for segments: integer >=0 only!</xs:documentation>
+            <xs:appinfo >
+                <!-- This tells JAXB to use an int for this attribute instead of BigInteger-->
+               <jxb:javaType name="int" parseMethod="javax.xml.bind.DatatypeConverter.parseInt" printMethod="javax.xml.bind.DatatypeConverter.printInt" />
+            </xs:appinfo>
         </xs:annotation>
 
         <xs:restriction base="xs:nonNegativeInteger">
@@ -266,7 +270,7 @@
 
                     <xs:group ref="CellTypes"/>
 
-		    <xs:group ref="InputTypes"/>
+                    <xs:group ref="InputTypes"/>
                     
                     <xs:group ref="PyNNCellTypes"/>
 
@@ -834,7 +838,7 @@
 
     <xs:complexType name="Segment">
         <xs:complexContent>
-            <xs:extension base="Base">
+            <xs:extension base="BaseWithoutId">  <!-- Don't want to allow string value as with NmlId, want just non negative integer-->
 
                 <xs:sequence>
                     <xs:element name="parent" type="SegmentParent" minOccurs="0"/>
@@ -842,8 +846,7 @@
                     <xs:element name="distal" type="Point3DWithDiam" minOccurs="1"/>
                 </xs:sequence>
 
-                <!-- TODO: Do we want to do away with numerical ids and just use unique strings/names in id attribute?? -->
-                <!--<xs:attribute name="id" type="SegmentId" use="required"/>-->
+                <xs:attribute name="id" type="SegmentId" use="required"/>
                 <xs:attribute name="name" type="xs:string" use="optional"/>
 
             </xs:extension>
@@ -1522,11 +1525,15 @@
 
     <xs:complexType name="Connection">
         <xs:annotation>
-            <xs:documentation>Subject to change as it gets tested with LEMS</xs:documentation>
+            <xs:documentation>Subject to change as it gets tested with LEMS!!</xs:documentation>
         </xs:annotation>
         <xs:attribute name="id" type="xs:nonNegativeInteger"/>
         <xs:attribute name="preCellId" type="xs:string"/>
+        <xs:attribute name="preSegmentId" type="SegmentId"/>
+        <xs:attribute name="preFractionAlong" type="ZeroToOne"/>
         <xs:attribute name="postCellId" type="xs:string"/>
+        <xs:attribute name="postSegmentId" type="SegmentId"/>
+        <xs:attribute name="postFractionAlong" type="ZeroToOne"/>
     </xs:complexType>
 
 
@@ -1766,17 +1773,32 @@
     <!--NOTE: Base and Standalone definitions moved to end of file, as some XML language binding
         generators, e.g. generateDS.py, require superclasses to be defined after the subclasses... -->
 
-    <xs:complexType name="Base">
+    <xs:complexType name="BaseWithoutId">
 
         <xs:annotation>
-            <xs:documentation>Anything which can have a unique id (within its parent) i.e. most elements.</xs:documentation>
+            <xs:documentation>Base element without ID specified *yet*, e.g. for an element with a particular requirement on its id which does not comply with NmlId (e.g. Segment needs nonNegativeInteger).</xs:documentation>
         </xs:annotation>
-
-        <xs:attribute name="id" type="NmlId" use="required"/>
 
         <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
 
     </xs:complexType>
+    
+    <xs:complexType name="Base">
+
+        <xs:annotation>
+            <xs:documentation>Anything which can have a unique (within its parent) id of the form NmlId (spaceless combination of letters, numbers and underscore).</xs:documentation>
+        </xs:annotation>
+        
+        <xs:complexContent>
+            <xs:extension base="BaseWithoutId">
+
+                <xs:attribute name="id" type="NmlId" use="required"/>
+                
+            </xs:extension>
+        </xs:complexContent>
+
+    </xs:complexType>
+    
 
 
     <xs:complexType name="Standalone">
