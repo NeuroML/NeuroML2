@@ -52,8 +52,8 @@
     
     <abstractCell id="hhcell" type="pointCellCondBased" C="10pF"  v0="-65mV" thresh="20mV">
     
-        <channelPopulation id="leak" ionChannel="passive" number="300" erev="-54.3mV"/>
-        <channelPopulation id="naChans" ionChannel="na" number="120000" erev="50mV"/><!-- -->
+        <channelPopulation id="leak" ionChannel="passive" number="300" erev="-4.3mV"/>
+        <channelPopulation id="naChans" ionChannel="na" number="120000" erev="50mV"/> 
         <channelPopulation id="kChans" ionChannel="k" number="36000" erev="-77mV"/>
     
     </abstractCell>
@@ -75,9 +75,9 @@
     <Simulation id="sim1" length="150ms" step="0.01ms" target="net1">
     
         <Display id="d1" title="Ex1: Simple HH example: Voltage" timeScale="1ms" xmin="0" xmax="150" ymin="-90" ymax="60">
-            <Line id="l1" quantity="hhpop[0]/v" scale="1mV"  color="#ffffff" timeScale="1ms"/>
+            <Line id="l1" quantity="hhpop[0]/v" scale="1mV"  color="#ff00ff" timeScale="1ms"/>
         </Display>
-        
+        <!--
         <Display id="d2" title="Ex1: Simple HH example: rate variables" timeScale="1ms" xmin="0" xmax="150" ymin="-0.1" ymax="1.1">
             
             <Line id="l2" quantity="hhpop[0]/naChans/na/m/q" scale="1"  color="#000000" timeScale="1ms"/>
@@ -90,8 +90,8 @@
         </Display>
     
         <OutputFile id="of0" fileName="results/hh_v.dat">
-            <OutputColumn id="v" quantity="hhpop[0]/v"/> 
-        </OutputFile>  
+            <OutputColumn id="v" quantity="hhpop[0]/v"/>   
+        </OutputFile>  -->
     
     </Simulation>
 
