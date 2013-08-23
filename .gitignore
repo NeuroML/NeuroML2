@@ -15,4 +15,5 @@ NeuroML2CoreTypes/*.gv
 NeuroML2CoreTypes/*.png
 NeuroML2CoreTypes/x86_64
 NeuroML2CoreTypes/*.mod
+NeuroML2CoreTypes/*.sedml
 NeuroML2CoreTypes/results/*.dat
