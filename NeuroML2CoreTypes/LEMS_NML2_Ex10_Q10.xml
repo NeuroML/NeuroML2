@@ -74,8 +74,7 @@
     <pulseGenerator id="pulseGen1" delay="100ms" duration="100ms" amplitude="0.08 nA" />
     
     
-    <network id="net1">
-        <extracellularProperties temperature = "22 degC"/>
+    <network id="net1" type="networkWithTemperature" temperature = "22 degC">
         <population id="hhpop" component="hhcell" size="1"/>
         <explicitInput target="hhpop[0]" input="pulseGen1" destination="synapses"/>
     </network>

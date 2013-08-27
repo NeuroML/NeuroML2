@@ -20,28 +20,28 @@
         <Dynamics/>
     </ComponentType>
 
-    <ComponentType name="rdf_RDF" description="Annotation...">
+    <ComponentType name="rdf_RDF" description="Work in progress...">
         <Child name="rdf:Description" type="rdf_Description"/>
         <Dynamics/>
     </ComponentType>
 
-    <ComponentType name="rdf_Description" description="Annotation...">
+    <ComponentType name="rdf_Description" description="Work in progress...">
         <Child name="bqbiol:isVersionOf" type="bqbiol_isVersionOf"/>
         <Child name="bqmodel:isDescribedBy" type="bqmodel_isDescribedBy"/>
         <Dynamics/>
     </ComponentType>
 
-    <ComponentType name="bqbiol_isVersionOf" description="Annotation...">
+    <ComponentType name="bqbiol_isVersionOf" description="Work in progress...">
         <Child name="rdf:Bag" type="rdf_Bag"/>
         <Dynamics/>
     </ComponentType>
 
-    <ComponentType name="bqmodel_isDescribedBy" description="Annotation...">
+    <ComponentType name="bqmodel_isDescribedBy" description="Work in progress...">
         <Child name="rdf:Bag" type="rdf_Bag"/>
         <Dynamics/>
     </ComponentType>
 
-    <ComponentType name="rdf_Bag" description="Annotation...">
+    <ComponentType name="rdf_Bag" description="Work in progress...">
         <Child name="rdf:li" type="rdf_li"/>
         <Dynamics/>
     </ComponentType>
