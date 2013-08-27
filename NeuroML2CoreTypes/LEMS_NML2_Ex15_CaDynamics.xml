@@ -356,8 +356,7 @@
 
     <voltageClamp id="vClamp1" delay="150ms" duration="50ms" targetVoltage="10mV" seriesResistance="1ohm"/>
 
-    <network id="net1">
-        <extracellularProperties temperature = "32 degC"/>
+    <network id="net1" type="networkWithTemperature" temperature = "32 degC">
         <population id="hhpop" component="Granule_98" size="1"/>
         <explicitInput target="hhpop[0]" input="pulseGen1"/>
         <!--<explicitInput target="hhpop[0]" input="pulseGen2"/>-->
