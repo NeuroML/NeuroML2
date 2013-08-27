@@ -42,7 +42,7 @@
     <network id="net2">
         <population id="srcPop" component="spikeGen55ms" size="1"/>
         <population id="pasPop1" component="passiveCell" size="1"/>
-	<population id="pasPop2" component="passiveCell" size="1"/>
+        <population id="pasPop2" component="passiveCell" size="1"/>
         <synapticConnection from="srcPop[0]" to="pasPop1[0]"
 			    synapse="nmdaSyn1"
 			    destination="synapses"/>

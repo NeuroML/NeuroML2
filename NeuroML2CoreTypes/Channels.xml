@@ -110,9 +110,15 @@
 
 
     <ComponentType name="baseVoltageDepTime"
-               description="Base type for voltage dependent ComponentType producing value _t with dimension time (e.g. for time course of rate variable). Note: time course would not normally be fit to exp/sigmoid etc.">
+               description="Base ComponentType for voltage dependent ComponentType producing value _t with dimension time (e.g. for time course of rate variable). Note: time course would not normally be fit to exp/sigmoid etc.">
         <Exposure name="t" dimension="time"/>
         <Requirement name="v" dimension="voltage"/>
+    </ComponentType>
+    
+    <ComponentType name="baseVoltageConcDepTime"
+               description="Base type for voltage and calcium concentration dependent ComponentType producing value _t with dimension time (e.g. for time course of rate variable)."
+               extends="baseVoltageDepTime">
+        <Requirement name="caConc" dimension="concentration"/>
     </ComponentType>
 
     <ComponentType name="fixedTimeCourse"

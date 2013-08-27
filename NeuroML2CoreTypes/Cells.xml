@@ -436,6 +436,8 @@
         <Exposure name="surfaceArea" dimension="area"/>
         <Exposure name="radDist" dimension="length"/>
         <Exposure name="length" dimension="length"/>
+        
+        <Text name="name"/>
 
         <Dynamics>
             <!-- TODO: make all of these derived params!! -->
@@ -729,7 +731,8 @@
 
         <Exposure name="spiking" dimension="none"/>
         <Exposure name="debugVal" dimension="none"/>
-        <Exposure name="totChanCurrent" dimension="current"/>
+        <Exposure name="iChannels" dimension="current"/>
+        <Exposure name="iSyn" dimension="current"/>
         <Exposure name="totSpecCap" dimension="specificCapacitance"/>
 
         <Exposure name="surfaceArea" dimension="area"/>
@@ -752,8 +755,8 @@
             <DerivedVariable name="totSpecCap" dimension="specificCapacitance" exposure="totSpecCap" select="biophysicalProperties/totSpecCap"/>
             <DerivedVariable name="totCap" dimension="capacitance" value="totSpecCap * surfaceArea "/>
 
-            <DerivedVariable name="iChannels" dimension="current" exposure="totChanCurrent" select="biophysicalProperties/membraneProperties/totChanCurrent"/>
-            <DerivedVariable name="iSyn" dimension="current" select="synapses[*]/i" reduce="add" />
+            <DerivedVariable name="iChannels" dimension="current" exposure="iChannels" select="biophysicalProperties/membraneProperties/totChanCurrent"/>
+            <DerivedVariable name="iSyn" dimension="current" exposure="iSyn" select="synapses[*]/i" reduce="add" />
 
             <DerivedVariable name="iCa" dimension="current" exposure="iCa" select="biophysicalProperties/membraneProperties/iCa"/>
             <DerivedVariable name="caConc" dimension="concentration" exposure="caConc"  select="biophysicalProperties/intracellularProperties/caConc"/>

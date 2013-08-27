@@ -1813,11 +1813,6 @@
                     <xs:element name="notes" type="Notes" minOccurs="0"/> <!-- More metadata needed -->
                     <xs:element name="annotation" type="Annotation" minOccurs="0"/> <!-- More metadata needed -->
                 </xs:sequence>
-                <xs:attribute name="name" type="xs:string" use="optional">
-                    <xs:annotation>
-                        <xs:documentation>Optional human readable name of the element. Not necessarily unique; should not be used for referencing/indexing.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
 
                 <xs:attribute name="metaid" type="MetaId" use="optional"/>
 

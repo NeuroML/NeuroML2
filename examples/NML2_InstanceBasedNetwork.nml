@@ -2,7 +2,7 @@
 
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta.xsd"
+      xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta1.xsd"
     id="NML2_InstanceBasedNetwork">
 
 <!-- Example of a network specified as a set of location and connection instances in NeuroML 2 --> 
