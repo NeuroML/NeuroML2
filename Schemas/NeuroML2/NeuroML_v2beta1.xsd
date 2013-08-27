@@ -1160,8 +1160,6 @@
                     <xs:element name="species" type="Species" minOccurs="0" maxOccurs="unbounded"/> <!-- Further elements will be specified!! -->
                 </xs:sequence>
 
-                <xs:attribute name="temperature" type="Nml2Quantity_temperature" use="optional"/>
-
             </xs:extension>
         </xs:complexContent>
 
@@ -1173,8 +1171,6 @@
         <xs:sequence>
             <xs:element name="species" type="Species" minOccurs="0" maxOccurs="unbounded"/> <!-- Further elements will be specified!! -->
         </xs:sequence>
-
-        <xs:attribute name="temperature" type="Nml2Quantity_temperature" use="optional"/>
 
     </xs:complexType>
 
@@ -1343,10 +1339,23 @@
                     <xs:element name="explicitInput" type="ExplicitInput" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
                     <xs:element name="inputList" type="InputList" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
                 </xs:sequence>
+                
+                <xs:attribute name="type" type="networkTypes" use="optional"/>
+                <xs:attribute name="temperature" type="Nml2Quantity_temperature" use="optional"/>  <!-- TODO: put check that type=networkWithTemperature -->
+                
             </xs:extension>
         </xs:complexContent>
 
     </xs:complexType>
+    
+    
+    <xs:simpleType name="networkTypes">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="network"/>
+            <xs:enumeration value="networkWithTemperature"/>
+        </xs:restriction>
+    </xs:simpleType>
+
 
 
     <xs:complexType name="Space"> <!-- Something onto which cells & networks can be laid out, e.g. n dim grid or n dim Euclidean space -->
