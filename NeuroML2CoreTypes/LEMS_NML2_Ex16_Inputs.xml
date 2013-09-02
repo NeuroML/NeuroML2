@@ -22,7 +22,7 @@
 <adExIaFCell id="adExBurst4"  C="281pF" gL="10nS" EL="-70.6mV"
 	     reset="-47.2mV" VT = "-50.4mV" thresh = "-40.4mV"
 	     delT="2mV" tauw="40ms"  a ="4nS"   b = "0.08nA"
-	     refract="0ms" Iamp="0.0nA" Idel="0ms" Idur="2000ms"/>
+	     refract="0ms"/>
 
 <expTwoSynapse id="syn1" gbase="1nS" erev="20mV" tauRise="0.1ms"
 	       tauDecay="5ms"/>

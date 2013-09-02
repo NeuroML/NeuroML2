@@ -978,18 +978,19 @@
 
     <xs:complexType name="MembraneProperties">
 
-        <xs:sequence>
+        <!-- Use of choice with minOccurs and maxOccurs allows greater flexibility in order of these in cell membrane props-->
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:element name="channelPopulation" type="ChannelPopulation" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="channelDensity" type="ChannelDensity" minOccurs="0" maxOccurs="unbounded"/>
-
+            <xs:element name="channelDensityNernst" type="ChannelDensityNernst" minOccurs="0" maxOccurs="unbounded"/>
+        
             <xs:element name="spikeThresh" type="ValueAcrossSegOrSegGroup" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="specificCapacitance" type="ValueAcrossSegOrSegGroup" minOccurs="0" maxOccurs="unbounded"/>
 
             <xs:element name="initMembPotential" type="ValueAcrossSegOrSegGroup" minOccurs="0" maxOccurs="unbounded"/>
 
             <xs:element name="reversalPotential" type="ReversalPotential" minOccurs="0" maxOccurs="unbounded"/>
-
-        </xs:sequence>
+        </xs:choice>
 
     </xs:complexType>
 
@@ -1039,6 +1040,34 @@
                 <xs:attribute name="condDensity" type="Nml2Quantity_conductanceDensity" use="optional"/>
 
                 <xs:attribute name="erev" type="Nml2Quantity_voltage" use="optional"/>
+
+                <!-- Note: only one of the following should be used!! -->
+                <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
+
+                <xs:attribute name="segment" type="NmlId" use="optional"/>
+
+                <xs:attribute name="ion" type="NmlId" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel. It is added here
+                        TEMPORARILY as selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
+                        It should be removed in the longer term, due to possible inconsistencies in this value and that in the ionChannel
+                        element. TODO: remove.
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+
+            </xs:extension>
+        </xs:complexContent>
+
+    </xs:complexType>
+
+    <xs:complexType name="ChannelDensityNernst">
+
+        <xs:complexContent>
+            <xs:extension base="Base">
+
+                <xs:attribute name="ionChannel" type="NmlId" use="required"/>
+                <xs:attribute name="condDensity" type="Nml2Quantity_conductanceDensity" use="optional"/>
 
                 <!-- Note: only one of the following should be used!! -->
                 <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>

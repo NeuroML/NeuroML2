@@ -9,6 +9,10 @@
     <Include file="Channels.xml"/>
     <Include file="Synapses.xml"/>
     <Include file="Inputs.xml"/>
+     
+    <!-- These dimensions/units are added here since it's unlikely that the units for phi in fixedFactorConcentrationModel will be needed anywhere else-->
+    <Dimension name="phi_factor" l="-3" n="1" i="-1" t="-1"/>
+    <Unit symbol="mol_per_m3_per_A_per_s" dimension="phi_factor" power="0"/> <!-- SI -->
 
 
     <ComponentType name="baseCell"
@@ -226,12 +230,23 @@
 
             <DerivedVariable name="channelf" dimension="none" select="ionChannel/fopen"/>
 
-            <DerivedVariable name="gDensity" dimension="conductanceDensity" exposure="gDensity" value="condDensity * channelf"/>
+            <ConditionalDerivedVariable name="gDensity" dimension="conductanceDensity" exposure="gDensity">
+            	<Case condition="caConcExt .gt. 0" value="condDensity * channelf"/>
+            	<Case condition="caConcExt .leq. 0" value="0"/>
+            </ConditionalDerivedVariable>
+  
+            <ConditionalDerivedVariable name="erev" dimension="voltage" exposure="erev">
+            	<Case condition="caConcExt .gt. 0" value="(R * temperature / (zCa * F)) * ln(caConcExt / caConc)"/>
+            	<Case condition="caConcExt .leq. 0" value="0"/>
+            </ConditionalDerivedVariable>
 
-            <DerivedVariable name="erev" dimension="voltage" exposure="erev" value="(R * temperature / (zCa * F)) * ln(caConcExt / caConc)"/>
+            <!-- TODO check if needed <DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" 
+                                                       value="gDensity * (erev - v)" valueCondition="caConcExt .gt. 0" valueIfFalse="0"/>  -->
+            <ConditionalDerivedVariable name="iDensity" dimension="currentDensity" exposure="iDensity">
+            	<Case condition="caConcExt .gt. 0" value="gDensity * (erev - v)"/>
+            	<Case condition="caConcExt .leq. 0" value="0"/>
+            </ConditionalDerivedVariable>
 
-            <!-- TODO check if needed <DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" value="gDensity * (erev - v)" valueCondition="caConcExt .gt. 0" valueIfFalse="0"/>  -->
-            <DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" value="gDensity * (erev - v)"/>
 
         </Dynamics>
 
@@ -680,11 +695,47 @@
                 <StateAssignment variable="concentration" value="initialConcentration"/>
                 <StateAssignment variable="extConcentration" value="initialExtConcentration"/>
             </OnStart>
+            
+            <OnCondition test="concentration .lt. 0">
+                <StateAssignment variable="concentration" value="0"/>
+            </OnCondition>
 
         </Dynamics>
 
     </ComponentType>
 
+
+
+    <ComponentType name="fixedFactorConcentrationModel"
+        extends="concentrationModel"
+        description="Model of buffering of concentration of an ion (currently hard coded to be calcium, due to requirement for _iCa) which has a baseline level _restingConc and tends to this value with time course _decayConstant. A fixed factor _phi is used to scale the incoming current INDEPENDENTLY OF THE SIZE OF THE COMPARTMENT to produce a concentration change.">
+
+        <Parameter name="restingConc" dimension="concentration"/>
+        <Parameter name="decayConstant" dimension="time"/>
+        
+        <Parameter name="phi" dimension="phi_factor"/>
+        
+        <Requirement name="iCa" dimension="current"/>
+
+        <Text name="species"/> <!-- TODO: check why this isn't inherited from concentrationModel -->
+
+        <Dynamics>
+
+            <StateVariable name="concentration" exposure="concentration" dimension="concentration"/>
+            <StateVariable name="extConcentration" exposure="extConcentration" dimension="concentration"/>
+            
+            <TimeDerivative variable="concentration" value="iCa * phi - ((concentration - restingConc) / decayConstant)"/>
+            
+            <OnStart>
+                <StateAssignment variable="concentration" value="initialConcentration"/>
+                <StateAssignment variable="extConcentration" value="initialExtConcentration"/>
+            </OnStart>
+            
+            <OnCondition test="concentration .lt. 0">
+                <StateAssignment variable="concentration" value="0"/>
+            </OnCondition>
+        </Dynamics>
+    </ComponentType>
 
 
     <ComponentType name="species"
