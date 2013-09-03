@@ -46,19 +46,19 @@
     </ionChannel>
     
     
-    <abstractCell id="hhcell_1" type="pointCellCondBased" C="10pF"  v0="-65mV" thresh="20mV">
+    <baseCell id="hhcell_1" type="pointCellCondBased" C="10pF"  v0="-65mV" thresh="20mV">
     
         <channelPopulation id="leak" ionChannel="passive" number="300" erev="-54.3mV"/>
         <channelPopulation id="naChans" ionChannel="na" number="120000" erev="50mV"/>
         <channelPopulation id="kChans" ionChannel="k" number="36000" erev="-77mV"/>
     
-    </abstractCell>
+    </baseCell>
     
-    <abstractCell id="hhcell_2" type="pointCellCondBased" C="10pF"  v0="-55mV" thresh="20mV">
+    <baseCell id="hhcell_2" type="pointCellCondBased" C="10pF"  v0="-55mV" thresh="20mV">
     
         <channelPopulation id="leak" ionChannel="passive" number="300" erev="-54.3mV"/>
     
-    </abstractCell>
+    </baseCell>
     
     
     <pulseGenerator id="pulseGen1" delay="25ms" duration="50ms" amplitude="0.065 nA" />
