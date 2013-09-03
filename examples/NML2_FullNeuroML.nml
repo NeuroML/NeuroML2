@@ -2,21 +2,11 @@
 
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta.xsd"
+    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta1.xsd"
     id="NML2_FullNeuroML">
 
 
 <!-- Example containing a range of different elements from NeuroML 2 -->
-
-<!-- Bioelectrical properties of different media -->
-
-    <!-- used for reactions outside all cells -->
-    <extracellularProperties id="extracellular" temperature="32degC">  <!-- Perhaps temp could be an attribute here? -->
-
-        <!-- see FullNeuroML_SBML.xml for example with SBML interaction -->
-        
-    </extracellularProperties>
-
 
 
 
