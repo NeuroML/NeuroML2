@@ -1,0 +1,121 @@
+<Lems>
+
+    <!-- Example with Simple cell with temperature dependent channel activation rates in a temperatue varying tissue -->
+
+    <!-- This is a file which can be read and executed by the LEMS Interpreter.
+         It imports the LEMS definitions of the core NeuroML 2 Components, creates 
+         a model in "pure" NeuroML 2 and contains some LEMS elements for running 
+         a simulation -->
+
+    <!-- Specify which component to run -->
+    <Target component="sim1"/>
+    
+    <!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+    
+    
+    <ComponentType name="baseTissue" description="...">
+        <Child name="network" type="network"/>
+    </ComponentType>
+    
+    <ComponentType name="tissueWithVaryingTemperature" description="..." extends="baseTissue">
+
+        <Exposure name="temperature" dimension="temperature"/>
+        <Parameter name="startTemperature" dimension="temperature"/>
+        <Parameter name="endTemperature" dimension="temperature"/>
+        <Parameter name="changeTime" dimension="time"/>
+        
+        
+        <Dynamics>
+            <StateVariable name="temperature" exposure="temperature" dimension="temperature"/>
+            
+            <OnStart>
+                <StateAssignment variable="temperature" value="startTemperature"/>
+            </OnStart>
+            <OnCondition test="t .gt. changeTime">
+                <StateAssignment variable="temperature" value="endTemperature"/>
+            </OnCondition>
+        </Dynamics>
+
+    </ComponentType>
+    
+    
+            <!-- Main NeuroML2 content -->
+    
+    
+    <ionChannel id="passive" type="ionChannelPassive" conductance="10pS"/>
+    
+    <ionChannel id="na" type="ionChannelHH" conductance="10pS">
+    
+       <gateHHrates id="m" instances="3">
+            <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="32degC" /> 
+            <forwardRate type="HHExpLinearRate" rate="1per_ms" midpoint="-40mV" scale="10mV"/>
+            <reverseRate type="HHExpRate" rate="4per_ms" midpoint="-65mV" scale="-18mV"/>
+       </gateHHrates>
+    
+       <gateHHrates id="h" instances="1">
+            <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="32degC"/> 
+            <forwardRate type="HHExpRate" rate="0.07per_ms" midpoint="-65mV" scale="-20mV"/>
+            <reverseRate type="HHSigmoidRate" rate="1per_ms" midpoint="-35mV" scale="10mV"/>
+       </gateHHrates>
+    
+    </ionChannel>
+    
+    
+    <ionChannel id="k" type="ionChannelHH" conductance="10pS">
+    
+        <gateHHrates id="n" instances="4">
+            <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="32degC"/>
+            <forwardRate type="HHExpLinearRate" rate="0.1per_ms" midpoint="-55mV" scale="10mV"/>
+            <reverseRate type="HHExpRate" rate="0.125per_ms" midpoint="-65mV" scale="-80mV"/>
+        </gateHHrates>
+    </ionChannel>
+    
+    
+    
+    <pointCellCondBased id="hhcell"  C="10pF"  v0="-65mV" thresh="20mV">
+    
+        <channelPopulation id="leak" ionChannel="passive" number="300" erev="-54.3mV"/>
+        <channelPopulation id="naChans" ionChannel="na" number="120000" erev="50mV"/>
+        <channelPopulation id="kChans" ionChannel="k" number="36000" erev="-77mV"/>
+    
+    </pointCellCondBased>
+    
+    
+    <pulseGenerator id="pulseGen1" delay="0ms" duration="1000ms" amplitude="0.08 nA" />
+    
+    <tissueWithVaryingTemperature id="slice" startTemperature ="22degC" endTemperature="16degC" changeTime="500ms">
+        <network id="net1">
+            <population id="hhpop" component="hhcell" size="1"/>
+            <explicitInput target="hhpop[0]" input="pulseGen1" destination="synapses"/>
+        </network>
+    </tissueWithVaryingTemperature>
+
+
+        <!-- End of NeuroML2 content -->
+        
+    
+    <Simulation id="sim1" length="1000ms" step="0.01ms" target="slice">
+    
+        <Display id="d1" title="Ex17: HH example with Q10 rate adjustments in a tissue: Voltage" timeScale="1ms" xmin="-100" xmax="1100" ymin="-90" ymax="60">
+            <Line id="V" quantity="net1/hhpop[0]/v" scale="1mV"  color="#ffffff" timeScale="1ms"/>
+        </Display>
+        
+        <Display id="d2" title="Ex17: HH example with Q10 rate adjustments in a tissue: tau" timeScale="1ms" xmin="-100" xmax="1100" ymin="-2" ymax="35">
+            
+            <Line id="m_tau" quantity="net1/hhpop[0]/naChans/na/m/tau" scale="1ms"  color="#000000" timeScale="1ms"/>
+            <Line id="n_tau" quantity="net1/hhpop[0]/kChans/k/n/tau" scale="1ms"  color="#005500" timeScale="1ms"/>
+        </Display>
+        
+        <Display id="d3" title="Ex17: HH example with Q10 rate adjustments in a tissue: temperature" timeScale="1ms" xmin="-100" xmax="1100" ymin="288" ymax="296">
+            
+            <Line id="Temperature (K)" quantity="temperature" scale="1"  color="#000000" timeScale="1ms"/>
+        </Display>
+    
+    
+    </Simulation>
+
+
+</Lems>
