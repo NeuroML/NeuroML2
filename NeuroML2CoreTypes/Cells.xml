@@ -1144,7 +1144,7 @@
             <StateVariable name="V" dimension="none" exposure="V"/>
             <StateVariable name="W" dimension="none" exposure="W"/>
 
-            <TimeDerivative variable="V" value="(V - (V^3) / 3 - W + I) / SEC"/>
+            <TimeDerivative variable="V" value="( (V - ((V^3) / 3)) - W + I) / SEC"/>
             <TimeDerivative variable="W" value="(0.08 * (V + 0.7 - 0.8 * W)) / SEC"/>
 
         </Dynamics>
