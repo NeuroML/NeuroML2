@@ -139,6 +139,14 @@
 
     </xs:simpleType>
 
+    <xs:simpleType name="Nml2Quantity_phiFactor">
+
+        <xs:restriction base="xs:string">
+            <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(mol_per_m3_per_A_per_s)"/>  <!-- See Cells.xml-->
+        </xs:restriction>
+
+    </xs:simpleType>
+
 
     <xs:simpleType name="MetaId">
         <xs:annotation>
@@ -403,6 +411,7 @@
         </xs:annotation>
         <xs:sequence>
             <xs:element name="decayingPoolConcentrationModel" type="DecayingPoolConcentrationModel" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="fixedFactorConcentrationModel" type="FixedFactorConcentrationModel" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:group>
 
@@ -586,6 +595,24 @@
                 <xs:attribute name="restingConc" type="Nml2Quantity_concentration" use="required"/>
                 <xs:attribute name="decayConstant" type="Nml2Quantity_time" use="required"/>
                 <xs:attribute name="shellThickness" type="Nml2Quantity_length" use="required"/>
+
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="FixedFactorConcentrationModel">
+
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+
+                <xs:attribute name="ion" type="NmlId" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Should not be required, as it's present on the species element!</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="restingConc" type="Nml2Quantity_concentration" use="required"/>
+                <xs:attribute name="decayConstant" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="phi" type="Nml2Quantity_phiFactor" use="required"/>
 
             </xs:extension>
         </xs:complexContent>
