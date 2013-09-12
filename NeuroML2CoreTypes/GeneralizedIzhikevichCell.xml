@@ -1,0 +1,106 @@
+<Lems xmlns="http://www.neuroml.org/lems/0.7.1"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.1 ../../LEMS/Schemas/LEMS/LEMS_v0.7.1.xsd"
+      description="Defines a 'generalized' izhikevichCell model, to cope for slightly altered definition of model in G and L here: http://izhikevich.org/publications/figure1.m">
+
+    
+    
+    <ComponentType name="generalizedIzhikevichCell"
+        extends="baseCellMembPot"
+        description="Defines a 'generalized' izhikevichCell model, to cope for slightly altered definition of model in G and L here: http://izhikevich.org/publications/figure1.m">
+
+        <Parameter name="v0" dimension="voltage"/> 
+        <Parameter name="a" dimension="none"/>
+        <Parameter name="b" dimension="none"/>
+        <Parameter name="c" dimension="none"/>
+        <Parameter name="d" dimension="none"/>
+        
+        <Parameter name="X" dimension="none"/>     <!-- New parameter!! -->
+        <Parameter name="Y" dimension="none"/>     <!-- New parameter!! -->
+        <Parameter name="Z" dimension="none"/>     <!-- New parameter!! -->
+        
+        <Parameter name="thresh" dimension="voltage"/>
+
+    <!-- These are needed to ensure a, b, c, d, U & I remain dimensionless... -->
+        <Constant name="MSEC" dimension="time" value="1ms"/>
+        <Constant name="MVOLT" dimension="voltage" value="1mV"/>
+
+        <Attachments name="synapses" type="basePointCurrentDL"/>
+
+        <Exposure name="U" dimension="none"/>
+
+        <Dynamics>
+
+            <StateVariable name="v" dimension="voltage" exposure="v"/>
+            <StateVariable name="U" dimension="none" exposure="U"/>
+
+            <DerivedVariable name="ISyn" dimension="none" select="synapses[*]/I" reduce="add" />
+
+            <TimeDerivative variable="v" value="(X * v^2 / MVOLT + Y * v + (Z - U + ISyn) * MVOLT)/MSEC"/>
+            <TimeDerivative variable="U" value="a * (b * v / MVOLT - U) / MSEC"/>
+
+
+            <OnStart>
+                <StateAssignment variable="v" value="v0"/>
+                <StateAssignment variable="U" value="v0 * b / MVOLT"/>
+            </OnStart>
+
+            <OnCondition test="v .gt. thresh">
+                <StateAssignment variable="v" value="c * MVOLT"/>
+                <StateAssignment variable="U" value="U + d"/>
+                <EventOut port="spike"/>
+            </OnCondition>
+
+        </Dynamics>
+
+    </ComponentType>
+    
+    
+    <ComponentType name="accomodationIzhikevichCell"
+        extends="baseCellMembPot"
+        description="Modified model for R here: http://izhikevich.org/publications/figure1.m">
+
+        <Parameter name="v0" dimension="voltage"/> 
+        <Parameter name="U0" dimension="none"/>                            <!-- Changed! -->
+        <Parameter name="a" dimension="none"/>
+        <Parameter name="b" dimension="none"/>
+        <Parameter name="c" dimension="none"/>
+        <Parameter name="d" dimension="none"/>
+        <Parameter name="thresh" dimension="voltage"/>
+
+        <Constant name="MSEC" dimension="time" value="1ms"/>
+        <Constant name="MVOLT" dimension="voltage" value="1mV"/>
+
+        <Attachments name="synapses" type="basePointCurrentDL"/>
+
+        <Exposure name="U" dimension="none"/>
+
+        <Dynamics>
+
+            <StateVariable name="v" dimension="voltage" exposure="v"/>
+            <StateVariable name="U" dimension="none" exposure="U"/>
+
+            <DerivedVariable name="ISyn" dimension="none" select="synapses[*]/I" reduce="add" />
+
+            <TimeDerivative variable="v" value="(0.04 * v^2 / MVOLT + 5 * v + (140.0 - U + ISyn) * MVOLT)/MSEC"/>
+            <!--<TimeDerivative variable="U" value="a * (b * v / MVOLT - U) / MSEC"/>-->
+            <TimeDerivative variable="U" value="a * (b * ( (v / MVOLT) +65) ) / MSEC"/>              <!-- Changed! -->
+
+
+            <OnStart>
+                <StateAssignment variable="v" value="v0"/>
+                <StateAssignment variable="U" value="U0"/>                     <!-- Changed! -->
+            </OnStart>
+
+            <OnCondition test="v .gt. thresh">
+                <StateAssignment variable="v" value="c * MVOLT"/>
+                <StateAssignment variable="U" value="U + d"/>
+                <EventOut port="spike"/>
+            </OnCondition>
+
+        </Dynamics>
+
+    </ComponentType>
+
+
+</Lems>

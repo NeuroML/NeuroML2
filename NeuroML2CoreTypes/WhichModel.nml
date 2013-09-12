@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  http://neuroml.svn.sourceforge.net/viewvc/neuroml/NeuroML2/Schemas/NeuroML2/NeuroML_v2alpha.xsd"
+    id="WhichModel">
+
+    <!-- (A) tonic spiking -->
+    <izhikevichCell id="izTonicSpiking" v0 = "-70mV" thresh = "30mV" a ="0.02" b = "0.2" c = "-65" d = "6"/>
+    <pulseGeneratorDL id="iA" delay="10ms" duration="90ms" amplitude="14" />
+
+    <!-- (B) phasic spiking -->
+    <izhikevichCell id="izPhasicSpiking" v0 = "-64mV" thresh = "30mV" a ="0.02" b = "0.25" c = "-65" d = "6"/>
+    <pulseGeneratorDL id="iB" delay="20ms" duration="180ms" amplitude="0.5" />
+
+    <!-- (C) tonic bursting -->
+    <izhikevichCell id="izTonicBursting" v0 = "-70mV" thresh = "30mV" a ="0.02" b = "0.2" c = "-50" d = "2"/>
+    <pulseGeneratorDL id="iC" delay="22ms" duration="198ms" amplitude="15" />
+
+    <!-- (D) phasic bursting -->
+    <izhikevichCell id="izPhasicBursting" v0 = "-64mV" thresh = "30mV" a ="0.02" b = "0.25" c = "-55" d = "0.05"/>
+    <pulseGeneratorDL id="iD" delay="20ms" duration="180ms" amplitude="0.6" />
+
+    <!-- (E) mixed mode -->
+    <izhikevichCell id="izMixedMode" v0 = "-70mV" thresh = "30mV" a ="0.02" b = "0.2" c = "-55" d = "4"/>
+    <pulseGeneratorDL id="iE" delay="16ms" duration="144ms" amplitude="10" />
+
+    <!-- (F) spike freq. adapt -->
+    <izhikevichCell id="izSpikeFreqAdapt" v0 = "-70mV" thresh = "30mV" a ="0.01" b = "0.2" c = "-65" d = "8"/>
+    <pulseGeneratorDL id="iF" delay="8.5ms" duration="76.5ms" amplitude="30" />
+
+    <!-- (G) Class 1 excitable 
+         Note eqn for this cell is:
+            V = V + tau*(0.04*V^2+4.1*V+108-u+I);
+         as opposed to
+            V = V + tau*(0.04*V^2+5*V+140-u+I);
+         in figure1.m
+         
+         We use generalizedIzhikevichCell with extra X, Y, Z parameters from GeneralizedIzhikevichCell.xml
+    -->
+    <generalizedIzhikevichCell id="izClass1Exc" v0 = "-60mV" thresh = "30mV" a ="0.02" b = "-0.1" c = "-55" d = "6" X="0.04" Y="4.1" Z="108"/>
+    <rampGeneratorDL id="iG" delay="30ms" duration="270ms" startAmplitude="0" finishAmplitude="20.25" baselineAmplitude="0"/>
+    
+
+    <!-- (H) Class 2 excitable -->
+    <izhikevichCell id="izClass2Exc" v0 = "-64mV" thresh = "30mV" a ="0.2" b = "0.26" c = "-65" d = "0"/>
+    <rampGeneratorDL id="iH" delay="30ms" duration="270ms" startAmplitude="-0.5" finishAmplitude="3.55" baselineAmplitude="-0.5"/>
+
+    <!-- (I) spike latency -->
+    <izhikevichCell id="izSpikeLatency" v0 = "-70mV" thresh = "30mV" a ="0.02" b = "0.2" c = "-65" d = "6"/>
+    <pulseGeneratorDL id="iI" delay="10ms" duration="3ms" amplitude="6.71" />
+
+    <!-- (J) subthresh. osc. -->
+    <izhikevichCell id="izSubthreshOsc" v0 = "-62mV" thresh = "30mV" a ="0.05" b = "0.26" c = "-60" d = "0"/>
+    <pulseGeneratorDL id="iJ" delay="20ms" duration="5ms" amplitude="2" />
+
+    <!-- (K) resonator -->
+    <izhikevichCell id="izResonator" v0 = "-62mV" thresh = "30mV" a ="0.1" b = "0.26" c = "-60" d = "-1"/>
+    <pulseGeneratorDL id="iK1" delay="40ms" duration="4ms" amplitude="0.65" />
+    <pulseGeneratorDL id="iK2" delay="60ms" duration="4ms" amplitude="0.65" />
+    <pulseGeneratorDL id="iK3" delay="200ms" duration="4ms" amplitude="0.65" /> <!-- Using shorter delay -->
+    <pulseGeneratorDL id="iK4" delay="240ms" duration="4ms" amplitude="0.65" />
+
+    <!-- (L) integrator 
+    
+         Note eqn for this cell is:
+            V = V + tau*(0.04*V^2+4.1*V+108-u+I);
+         as opposed to
+            V = V + tau*(0.04*V^2+5*V+140-u+I);
+         in figure1.m
+         
+         We use generalizedIzhikevichCell with extra X, Y, Z parameters from GeneralizedIzhikevichCell.xml
+    -->
+    <generalizedIzhikevichCell id="izIntegrator" v0 = "-60mV" thresh = "30mV" a ="0.02" b = "-0.1" c = "-55.0" d = "6.0" X="0.04" Y="4.1" Z="108"/>
+    <pulseGeneratorDL id="iL1" delay="9ms" duration="2ms" amplitude="9.0" />
+    <pulseGeneratorDL id="iL2" delay="14ms" duration="2ms" amplitude="9.0" />
+    <pulseGeneratorDL id="iL3" delay="70ms" duration="2ms" amplitude="9.0" />
+    <pulseGeneratorDL id="iL4" delay="80ms" duration="2ms" amplitude="9.0" />
+
+    <!-- (M) Rebound spike -->
+    <izhikevichCell id="izReboundSpike" v0 = "-64mV" thresh = "30mV" a ="0.03" b = "0.25" c = "-60.0" d = "4.0"/>
+    <pulseGeneratorDL id="iM" delay="20ms" duration="5ms" amplitude="-15" />
+
+    <!-- (N) Rebound burst -->
+    <izhikevichCell id="izReboundBurst" v0 = "-64mV" thresh = "30mV" a ="0.03" b = "0.25" c = "-52.0" d = "0.0"/>
+    <pulseGeneratorDL id="iN" delay="20ms" duration="5ms" amplitude="-15" />
+
+    <!-- (O) Threshold variability -->
+    <izhikevichCell id="izThVar" v0 = "-64mV" thresh = "30mV" a ="0.03" b = "0.25" c = "-60.0" d = "4.0"/>
+    <pulseGeneratorDL id="iO1" delay="10.0ms" duration="5ms" amplitude="1" />
+    <pulseGeneratorDL id="iO2" delay="70.0ms" duration="5ms" amplitude="-6" />
+    <pulseGeneratorDL id="iO3" delay="80.0ms" duration="5ms" amplitude="1" />
+
+    <!-- (P) bistability -->
+    <izhikevichCell id="izBistability" v0 = "-61mV" thresh = "30mV" a ="0.1" b = "0.26" c = "-60" d = "0"/>
+    <pulseGeneratorDL id="iP1" delay="37.5ms" duration="5ms" amplitude="1" />
+    <pulseGeneratorDL id="iP2" delay="208ms" duration="5ms" amplitude="1" />
+    <pulseGeneratorDL id="iP3" delay="0ms" duration="300ms" amplitude="0.24" />
+
+    <!-- (Q) Depolarizing after-potential (DAP) -->
+    <izhikevichCell id="izDAP" v0 = "-70mV" thresh = "30mV" a ="1.0" b = "0.18" c = "-60.0" d = "-21"/>
+    <pulseGeneratorDL id="iQ" delay="9.0ms" duration="2ms" amplitude="20.0" />
+
+    <!-- (R) Accomodation 
+        Note:
+        
+        u = u + tau*a*(b*(V+65));
+            not
+        u = u + tau*a*(b*V-u);
+        
+        So using accomodationIzhikevichCell from GeneralizedIzhikevichCell.xml
+    
+    -->
+    <accomodationIzhikevichCell id="izAccomodation" v0 = "-65.0mV" U0 = "-16.0" thresh = "30mV" a ="0.02" b = "1.0" c = "-55.0" d = "4.0"/>
+    <rampGeneratorDL id="iR1" delay="0ms" duration="200ms" startAmplitude="0.0" finishAmplitude="8" baselineAmplitude="0.0"/>
+    <rampGeneratorDL id="iR2" delay="300ms" duration="12.5ms" startAmplitude="0.0" finishAmplitude="4" baselineAmplitude="0.0"/>
+	
+    <!-- (S) Inhibition induced spiking (IIS) -->
+    <izhikevichCell id="izIIS" v0 = "-63.8mV" thresh = "30mV" a ="-0.02" b = "-1.0" c = "-60.0" d = "8.0"/>
+    <pulseGeneratorDL id="iS1" delay="0.0ms" duration="400ms" amplitude="80.0" />
+    <pulseGeneratorDL id="iS2" delay="50.0ms" duration="170ms" amplitude="-5.0" />
+
+    <!-- (T) Inhibition induced bursting (IIB) 
+
+	Modifying parameter d from -2.0 to -0.7 in order to reproduce Fig. 1
+
+    -->
+    <izhikevichCell id="izIIB" v0 = "-63.8mV" thresh = "30mV" a ="-0.026" b = "-1.0" c = "-45.0" d = "-0.7"/>
+    <pulseGeneratorDL id="iT1" delay="0.0ms" duration="350ms" amplitude="80.0" />
+    <pulseGeneratorDL id="iT2" delay="50.0ms" duration="200ms" amplitude="-5.0" />
+
+
+    <network id="net1">
+        <population id="popA" component="izTonicSpiking" size="1"/>
+        <population id="popB" component="izPhasicSpiking" size="1"/>
+        <population id="popC" component="izTonicBursting" size="1"/>
+        <population id="popD" component="izPhasicBursting" size="1"/>
+        <population id="popE" component="izMixedMode" size="1"/>
+        <population id="popF" component="izSpikeFreqAdapt" size="1"/>
+        <population id="popG" component="izClass1Exc" size="1"/>
+        <population id="popH" component="izClass2Exc" size="1"/>
+        <population id="popI" component="izSpikeLatency" size="1"/>
+        <population id="popJ" component="izSubthreshOsc" size="1"/>
+        <population id="popK" component="izResonator" size="1"/>
+        <population id="popL" component="izIntegrator" size="1"/>
+        <population id="popM" component="izReboundSpike" size="1"/>
+        <population id="popN" component="izReboundBurst" size="1"/>
+        <population id="popO" component="izThVar" size="1"/>
+        <population id="popP" component="izBistability" size="1"/>
+        <population id="popQ" component="izDAP" size="1"/>
+        <population id="popR" component="izAccomodation" size="1"/>
+        <population id="popS" component="izIIS" size="1"/>
+        <population id="popT" component="izIIB" size="1"/>
+    
+        <explicitInput target="popA[0]" input="iA"/>
+        <explicitInput target="popB[0]" input="iB"/>
+        <explicitInput target="popC[0]" input="iC"/>
+        <explicitInput target="popD[0]" input="iD"/>
+        <explicitInput target="popE[0]" input="iE"/>
+        <explicitInput target="popF[0]" input="iF"/>
+        <explicitInput target="popG[0]" input="iG"/>
+        <explicitInput target="popH[0]" input="iH"/>
+        <explicitInput target="popI[0]" input="iI"/>
+        <explicitInput target="popJ[0]" input="iJ"/>
+        <explicitInput target="popK[0]" input="iK1"/>
+        <explicitInput target="popK[0]" input="iK2"/>
+        <explicitInput target="popK[0]" input="iK3"/>
+        <explicitInput target="popK[0]" input="iK4"/>
+        <explicitInput target="popL[0]" input="iL1"/>
+        <explicitInput target="popL[0]" input="iL2"/>
+        <explicitInput target="popL[0]" input="iL3"/>
+        <explicitInput target="popL[0]" input="iL4"/>
+        <explicitInput target="popM[0]" input="iM"/>
+        <explicitInput target="popN[0]" input="iN"/>
+        <explicitInput target="popO[0]" input="iO1"/>
+        <explicitInput target="popO[0]" input="iO2"/>
+        <explicitInput target="popO[0]" input="iO3"/>
+        <explicitInput target="popP[0]" input="iP1"/>
+        <explicitInput target="popP[0]" input="iP2"/>
+        <explicitInput target="popP[0]" input="iP3"/>
+        <explicitInput target="popQ[0]" input="iQ"/>
+        <explicitInput target="popR[0]" input="iR1"/>
+        <explicitInput target="popR[0]" input="iR2"/>
+        <explicitInput target="popS[0]" input="iS1"/>
+        <explicitInput target="popS[0]" input="iS2"/>
+        <explicitInput target="popT[0]" input="iT1"/>
+        <explicitInput target="popT[0]" input="iT2"/>
+    </network>
+<!--
+
+
+-->
+</neuroml>

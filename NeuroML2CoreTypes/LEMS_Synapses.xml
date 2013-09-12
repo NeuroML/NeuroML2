@@ -1,0 +1,41 @@
+<Lems>
+
+
+    <Target component="sim2"/>
+
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+
+
+    <Include file="GeneralizedIzhikevichCell.xml"/>
+    <Include file="WhichModel.nml"/>
+
+
+    <!-- NeuroML 2 elements... -->
+
+    <spikeGenerator id="spikeGen55ms" period="5ms" />
+    
+    <expOneSynapseCurrentDL id="syn0" tauDecay="5ms" Ibase="5"/>
+    
+    
+    <network id="net2">
+        <population id="popA" component="izTonicBursting" size="1"/>
+        <population id="srcPop" component="spikeGen55ms" size="1"/>
+        
+        <synapticConnection from="srcPop[0]" to="popA[0]"
+			    synapse="syn0"
+			    destination="synapses"/>
+        
+    </network>
+    
+    
+    <Simulation id="sim2" length="400ms" step="0.01ms" target="net2">
+
+        <Display id="A" title="(A) tonic spiking" timeScale="1ms" xmin="-20" xmax="420" ymin="-90" ymax="40">
+            <Line id ="iz1" quantity="popA[0]/v" scale="1mV"  color="#FF0000" timeScale="1ms"/>
+        </Display>
+        
+    </Simulation>
+    
+</Lems>
