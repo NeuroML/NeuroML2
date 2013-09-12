@@ -28,7 +28,7 @@
     </ComponentType>
 
     <ComponentType name="baseSynapseDL"
-        extends="baseVoltageDepPointCurrentDL"
+        extends="basePointCurrentDL"
         description="Base type for all synapses, i.e. ComponentTypes which produce a dimensionless current and change Dynamics in response to an incoming event. cno_0000009"> <!-- http://bioportal.bioontology.org/ontologies/46856/?p=terms&conceptid=cno%3Acno_0000009 -->
 
         <EventPort name="in" direction="in"/>
@@ -86,6 +86,9 @@
 
         <Parameter name="tauRise" dimension="time" />
         <Parameter name="tauDecay" dimension="time" />
+        
+        <!-- TODO: catch tauRise = 0..! -->
+        <!--  Temporarily using DerivedVariable instead ...-->
 	<DerivedParameter name="peakTime" dimension="time" value="ln(tauDecay / tauRise) * (tauRise * tauDecay)/(tauDecay - tauRise)"/>
 	<DerivedParameter name="waveformFactor" dimension="none" value="1 / (-exp(-peakTime / tauRise) + exp(-peakTime / tauDecay))"/>
 
@@ -94,7 +97,9 @@
             <StateVariable name="B" dimension="none"/>
 
 	    <!-- TODO: catch tauRise = 0..! -->
-
+            <!--<DerivedVariable name="peakTime" dimension="time" value="ln(tauDecay / tauRise) * (tauRise * tauDecay)/(tauDecay - tauRise)"/>
+            <DerivedVariable name="factor" dimension="none" value="1 / (-exp(-peakTime / tauRise) + exp(-peakTime / tauDecay))"/>-->
+            
             <DerivedVariable name="g" dimension="conductance" exposure="g" value="gbase * (B - A)" />
             <DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
 
@@ -308,6 +313,36 @@
 
         </Dynamics>
 
+    </ComponentType>
+    
+    
+    
+
+    <ComponentType name="expOneSynapseCurrentDL"
+       extends="baseSynapseDL"
+       description="...">
+
+        <Parameter name="tauDecay" dimension="time" description="Time course of decay"/>
+        
+        <Parameter name="Ibase" dimension="none" description="Instantaneous current"/>
+       
+        <Requirement name="v" dimension="voltage" description="The current may vary with the voltage exposed by the ComponentType on which this is placed"/>
+
+        <Dynamics>
+
+            <StateVariable name="I" dimension="none" exposure="I"/>
+
+            <TimeDerivative variable="I" value="-I / tauDecay" />
+
+            <OnStart>
+                <StateAssignment variable="I" value="0" />
+            </OnStart>
+
+            <OnEvent port="in">
+                <StateAssignment variable="I" value="I + Ibase" />
+            </OnEvent>
+
+        </Dynamics>
     </ComponentType>
 
 </Lems>
