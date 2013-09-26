@@ -1570,6 +1570,7 @@
         <xs:attribute name="from" type="xs:string"/>
         <xs:attribute name="to" type="xs:string"/>
         <xs:attribute name="synapse" type="xs:string"/>
+        <xs:attribute name="destination" type="NmlId" use="optional"/>
     </xs:complexType>
 
     <xs:complexType name="Projection">
