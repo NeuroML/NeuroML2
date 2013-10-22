@@ -24,8 +24,11 @@ import subprocess
 import filecmp
 
 verbose = False
+vverbose = False
 if len(sys.argv) == 2 and sys.argv[1]=="-v":
     verbose = True
+if len(sys.argv) == 2 and sys.argv[1]=="-vv":
+    vverbose = True
 
 lems_def_dir="NeuroML2CoreTypes"
 lems_def_list=os.listdir(lems_def_dir)
@@ -49,9 +52,16 @@ nml2_xmlschema = etree.XMLSchema(nml2_xmlschema_doc)
 nml2_ex_dir="examples"
 nml2_ex_list=os.listdir(nml2_ex_dir)
 
+template_src_dir="../git/som-codegen"
+template_java_dir="../org.neuroml.export/src/main/resources"
+##template_python_dir="../pylems/lems/"
+template_list=['cvode/cvode.vm', 'cvode/Makefile', 'matlab/matlab_ode.vm', 'modelica/main_class.vm', 'modelica/run.vm', 'xpp/xpp.vm']
+
+
 def checkSameFile(fileA, fileB):
 
     same = filecmp.cmp(fileA, fileB)
+    if vverbose: print " -- Comparing files {} and {}...".format(fileA, fileB)
     if not same and verbose: print " -- Files {} and {} are different!".format(fileA, fileB)
     return same
 
@@ -157,6 +167,17 @@ if __name__ == '__main__':
         print("FAIL: LEMS examples in pylems are not in sync!")
     else:
         print("LEMS examples in pylems are in sync.")
+        
+
+    are_files_identical_list = []
+    for filename in template_list:
+            src_template = template_src_dir+"/"+filename
+            java_template = template_java_dir+"/"+filename
+            are_files_identical_list.append(checkSameFile(src_template, java_template))
+    if not all(are_files_identical_list):
+        print("FAIL: Templates for Java are not in sync!")
+    else:
+        print("LEMS Templates for Java are in sync.")
 
     print("-------------------------------------------------------")
     print("    Testing if jnml validates the NeuroML example files")

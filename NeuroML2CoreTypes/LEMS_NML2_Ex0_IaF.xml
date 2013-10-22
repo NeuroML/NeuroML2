@@ -26,16 +26,16 @@
                 reset="-70mV" tau="30ms" />
     <iafTauRefCell id="iafTauRef" leakReversal="-50mV" thresh="-55mV"
                    reset="-70mV" tau="30ms" refract="5ms"/>
-    <iafCell id="iaf" leakConductance="0.2nS" leakReversal="-53mV"
-             thresh="-55mV" reset="-70mV" C="3.2pF"/>
     <iafRefCell id="iafRef" leakConductance="0.2nS" leakReversal="-53mV"
                 thresh="-55mV" reset="-70mV" C="3.2pF" refract="5ms"/>
+    <iafCell id="iaf" leakConductance="0.2nS" leakReversal="-53mV"
+             thresh="-55mV" reset="-70mV" C="3.2pF"/>
 
     <network id="net1">
         <population id="iafTauPop" component="iafTau" size="1" />
         <population id="iafTauRefPop" component="iafTauRef" size="1" />
-        <population id="iafPop" component="iaf" size="1" />
         <population id="iafRefPop" component="iafRef" size="1" />
+        <population id="iafPop" component="iaf" size="1" />
     </network>
 
     <!-- End of NeuroML2 content -->
@@ -43,8 +43,7 @@
 
     <Simulation id="sim1" length="300ms" step="0.01ms" target="net1">
 
-        <Display id="d0" title="Ex0: Simple Integrate and Fire cells
-				in LEMS" timeScale="1ms" xmin="0"
+        <Display id="d0" title="Ex0: Simple Integrate and Fire cells in LEMS" timeScale="1ms" xmin="0"
                  xmax="300" ymin="-75" ymax="-50">
             <Line id="iafTauCell" quantity="iafTauPop[0]/v"
                   scale="1mV" color="#FF0000" timeScale="1ms" />
