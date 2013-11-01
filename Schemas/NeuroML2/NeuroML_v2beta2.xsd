@@ -1005,20 +1005,61 @@
 
     <xs:complexType name="MembraneProperties">
 
-        <!-- Use of choice with minOccurs and maxOccurs allows greater flexibility in order of these in cell membrane props-->
-        <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:sequence>
             <xs:element name="channelPopulation" type="ChannelPopulation" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="channelDensity" type="ChannelDensity" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="channelDensityNernst" type="ChannelDensityNernst" minOccurs="0" maxOccurs="unbounded"/>
         
-            <xs:element name="spikeThresh" type="ValueAcrossSegOrSegGroup" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="specificCapacitance" type="ValueAcrossSegOrSegGroup" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="spikeThresh" type="SpikeThresh" minOccurs="0" maxOccurs="unbounded"/>
+            
+            <xs:element name="specificCapacitance" type="SpecificCapacitance" minOccurs="0" maxOccurs="unbounded"/>
 
-            <xs:element name="initMembPotential" type="ValueAcrossSegOrSegGroup" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="initMembPotential" type="InitMembPotential" minOccurs="0" maxOccurs="unbounded"/>
 
             <xs:element name="reversalPotential" type="ReversalPotential" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:choice>
+        </xs:sequence>
 
+    </xs:complexType>
+    
+    
+    <xs:complexType name="SpikeThresh">
+        <xs:annotation>
+            <xs:documentation>Using a thin extension of ValueAcrossSegOrSegGroup to facilitate library generation (e.g. libNeuroML)</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ValueAcrossSegOrSegGroup">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="SpecificCapacitance">
+        <xs:annotation>
+            <xs:documentation>Using a thin extension of ValueAcrossSegOrSegGroup to facilitate library generation (e.g. libNeuroML)</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ValueAcrossSegOrSegGroup">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="InitMembPotential">
+        <xs:annotation>
+            <xs:documentation>Using a thin extension of ValueAcrossSegOrSegGroup to facilitate library generation (e.g. libNeuroML)</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ValueAcrossSegOrSegGroup">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="Resistivity">
+        <xs:annotation>
+            <xs:documentation>Using a thin extension of ValueAcrossSegOrSegGroup to facilitate library generation (e.g. libNeuroML)</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ValueAcrossSegOrSegGroup">
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
     <xs:complexType name="ChannelPopulation">
@@ -1203,7 +1244,7 @@
 
         <xs:sequence>
             <xs:element name="species" type="Species" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="resistivity" type="ValueAcrossSegOrSegGroup" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="resistivity" type="Resistivity" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
 
     </xs:complexType>

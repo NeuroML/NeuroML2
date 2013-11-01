@@ -9,10 +9,6 @@
     <Include file="Channels.xml"/>
     <Include file="Synapses.xml"/>
     <Include file="Inputs.xml"/>
-     
-    <!-- These dimensions/units are added here since it's unlikely that the units for phi in fixedFactorConcentrationModel will be needed anywhere else-->
-    <Dimension name="phi_factor" l="-3" n="1" i="-1" t="-1"/>
-    <Unit symbol="mol_per_m3_per_A_per_s" dimension="phi_factor" power="0"/> <!-- SI -->
 
 
     <ComponentType name="baseCell"
