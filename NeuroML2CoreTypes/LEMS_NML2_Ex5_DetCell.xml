@@ -27,9 +27,9 @@
                 <!--<Line id="l3" quantity="hhpop[0]/debugVal" scale="1V"  color="#999999" timeScale="1ms"/>-->
         </Display>
         <Display id="d2" title="Ex5: HH cell with simple morphology: rate variables" timeScale="1ms" xmin="0" xmax="300" ymin="-0.1" ymax="1.1">
-                <Line id="m" quantity="hhpop[0]/bioPhys1/membraneProperties/naChans/na/m/q" scale="1"  color="#000000" timeScale="1ms"/>
-                <Line id="h" quantity="hhpop[0]/bioPhys1/membraneProperties/naChans/na/h/q" scale="1"  color="#ff0000" timeScale="1ms"/>
-                <Line id="n" quantity="hhpop[0]/bioPhys1/membraneProperties/kChans/k/n/q" scale="1"  color="#0000ff" timeScale="1ms"/>
+                <Line id="m" quantity="hhpop[0]/bioPhys1/membraneProperties/naChans/naChan/m/q" scale="1"  color="#000000" timeScale="1ms"/>
+                <Line id="h" quantity="hhpop[0]/bioPhys1/membraneProperties/naChans/naChan/h/q" scale="1"  color="#ff0000" timeScale="1ms"/>
+                <Line id="n" quantity="hhpop[0]/bioPhys1/membraneProperties/kChans/kChan/n/q" scale="1"  color="#0000ff" timeScale="1ms"/>
         </Display>
         <Display id="d3" title="Ex5: HH cell with simple morphology: current densities" timeScale="1ms" xmin="0" xmax="300" ymin="-0.1" ymax="1.1">
                 <Line id="ina" quantity="hhpop[0]/bioPhys1/membraneProperties/naChans/iDensity" scale="1"  color="#000000" timeScale="1ms"/>

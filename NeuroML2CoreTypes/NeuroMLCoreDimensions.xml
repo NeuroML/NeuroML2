@@ -93,7 +93,7 @@
     <Unit symbol="uF_per_cm2" dimension="specificCapacitance" power="-2"/>  <!-- Physiological Units -->
 
     <Unit symbol="ohm_m" dimension="resistivity" power="0"/>
-    <Unit symbol="kohm_cm" dimension="resistivity" power="-1"/>    <!-- Physiological Units -->
+    <Unit symbol="kohm_cm" dimension="resistivity" power="1"/>    <!-- Physiological Units -->
 
     <Unit symbol="C" dimension="charge" power="0"/>
 
