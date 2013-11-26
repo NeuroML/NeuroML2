@@ -40,8 +40,8 @@
 
     <Dimension name="idealGasConstantDims" m="1" l="2" t="-2" k="-1" n="-1"/>
     
-    <!-- Note: it's unlikely that this dimension/unit for phi in fixedFactorConcentrationModel will be needed anywhere else-->
-    <Dimension name="phi_factor" l="-3" n="1" i="-1" t="-1"/>
+    <!-- Note: it's unlikely that this dimension/unit for rho in fixedFactorConcentrationModel will be needed anywhere else-->
+    <Dimension name="rho_factor" l="-1" n="1" i="-1" t="-1"/>
 
     <!-- The core units as used in NeuroML version 2.0.   -->
     <!-- Will be used in Component definitions, e.g. duration="60ms" amplitude="0.2 nA" -->
@@ -124,7 +124,7 @@
 
     <Unit symbol="J_per_K_per_mol" dimension="idealGasConstantDims" power="0"/>
  
-    <!-- Note: it's unlikely that this dimension/unit for phi in fixedFactorConcentrationModel will be needed anywhere else-->
-    <Unit symbol="mol_per_m3_per_A_per_s" dimension="phi_factor" power="0"/> <!-- SI -->
+    <!-- Note: it's unlikely that this dimension/unit for rho in fixedFactorConcentrationModel will be needed anywhere else-->
+    <Unit symbol="mol_per_m_per_A_per_s" dimension="rho_factor" power="0"/> <!-- SI -->
 
 </Lems>
