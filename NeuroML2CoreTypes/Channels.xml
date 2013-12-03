@@ -158,10 +158,12 @@
 
         <Parameter name="q10Factor" dimension="none"/>
         <Parameter name="experimentalTemp" dimension="temperature"/>
+        
+        <Constant name="TENDEGREES" dimension="temperature" value="10K"/>
 
         <Dynamics>
             <!-- TODO: make sure correct dimensions in exponent, even though LEMS doesn't seem to mind...-->
-            <DerivedVariable name="q10" exposure="q10" dimension="none" value="q10Factor^((temperature - experimentalTemp)/10)"/>
+            <DerivedVariable name="q10" exposure="q10" dimension="none" value="q10Factor^((temperature - experimentalTemp)/TENDEGREES)"/>
         </Dynamics>
     </ComponentType>
 

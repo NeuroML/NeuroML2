@@ -139,10 +139,10 @@
 
     </xs:simpleType>
 
-    <xs:simpleType name="Nml2Quantity_phiFactor">
+    <xs:simpleType name="Nml2Quantity_rhoFactor">
 
         <xs:restriction base="xs:string">
-            <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(mol_per_m3_per_A_per_s)"/>  <!-- See Cells.xml-->
+            <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(mol_per_m_per_A_per_s)"/>  <!-- See Cells.xml-->
         </xs:restriction>
 
     </xs:simpleType>
@@ -612,7 +612,7 @@
                 </xs:attribute>
                 <xs:attribute name="restingConc" type="Nml2Quantity_concentration" use="required"/>
                 <xs:attribute name="decayConstant" type="Nml2Quantity_time" use="required"/>
-                <xs:attribute name="phi" type="Nml2Quantity_phiFactor" use="required"/>
+                <xs:attribute name="rho" type="Nml2Quantity_rhoFactor" use="required"/>
 
             </xs:extension>
         </xs:complexContent>
