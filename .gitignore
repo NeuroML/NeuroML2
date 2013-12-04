@@ -8,6 +8,7 @@
 results
 build
 *.log
+*.xml0
 
 NeuroML2CoreTypes/*.ode
 NeuroML2CoreTypes/*.sbml
