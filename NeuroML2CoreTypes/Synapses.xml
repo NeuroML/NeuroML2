@@ -46,11 +46,6 @@
 
         <Exposure name="g" dimension="conductance" description="Time varying conductance through the synapse"/>
 
-        <Dynamics>
-            <DerivedVariable name="i" exposure="i" dimension="current" value="0" />
-            <DerivedVariable name="g" exposure="g" dimension="conductance" value="0" />
-        </Dynamics>
-
     </ComponentType>
 
 
@@ -86,8 +81,9 @@
 
         <Parameter name="tauRise" dimension="time" />
         <Parameter name="tauDecay" dimension="time" />
-	<DerivedParameter name="peakTime" dimension="time" value="ln(tauDecay / tauRise) * (tauRise * tauDecay)/(tauDecay - tauRise)"/>
-	<DerivedParameter name="waveformFactor" dimension="none" value="1 / (-exp(-peakTime / tauRise) + exp(-peakTime / tauDecay))"/>
+        
+        <DerivedParameter name="peakTime" dimension="time" value="ln(tauDecay / tauRise) * (tauRise * tauDecay)/(tauDecay - tauRise)"/>
+        <DerivedParameter name="waveformFactor" dimension="none" value="1 / (-exp(-peakTime / tauRise) + exp(-peakTime / tauDecay))"/>
 
         <Dynamics>
             <StateVariable name="A" dimension="none"/>
