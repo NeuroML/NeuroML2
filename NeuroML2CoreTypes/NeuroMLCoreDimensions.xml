@@ -52,6 +52,11 @@
     <Unit symbol="Hz" dimension="per_time" power="0"/>          
     <Unit symbol="ms" dimension="time" power="-3"/>                <!-- Physiological Units -->
     <Unit symbol="per_ms" dimension="per_time" power="3"/>         <!-- Physiological Units -->
+    
+    <Unit symbol="min" dimension="time" power="0" scale="60"/>
+    <Unit symbol="per_min" dimension="per_time" power="0" scale="0.01666666667"/>
+    <Unit symbol="hour" dimension="time" power="0" scale="3600"/>
+    <Unit symbol="per_hour" dimension="per_time" power="0" scale="0.00027777777778"/>
 
     <Unit symbol="m" dimension="length" power="0"/>
     <Unit symbol="cm" dimension="length" power="-2"/>              <!-- Physiological Units -->
@@ -63,6 +68,7 @@
     
     <Unit symbol="m3" dimension="volume" power="0"/>
     <Unit symbol="cm3" dimension="volume" power="-6"/>             <!-- Physiological Units -->
+    <Unit symbol="litre" dimension="volume" power="-3"/>
     <Unit symbol="um3" dimension="volume" power="-18"/>
 
     <Unit symbol="V" dimension="voltage" power="0"/>

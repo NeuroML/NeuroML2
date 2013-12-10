@@ -1,3 +1,19 @@
+v2beta2 / 2013-12-11
+
+* Renamed the main Schema from NeuroML_v2beta1.xsd to NeuroML_v2beta2.xsd. Changes outlined below reflected in the schema
+
+* Better support for GHK...
+
+* Update to fixedFactorConc...
+
+* PyLEMS
+
+* Ordering of channelDensity
+
+
+
+
+
 v2beta1 / 2013-09-03
 --------------------
 
