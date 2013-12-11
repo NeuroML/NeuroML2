@@ -34,6 +34,8 @@
 
     <Dimension name="concentration" l="-3" n="1"/>
 
+    <Dimension name="substance" n="1"/>
+
     <Dimension name="permeability" l="1" t="-1"/>
 
     <Dimension name="temperature" k="1"/>
@@ -119,6 +121,8 @@
     <Unit symbol="mol_per_cm3" dimension="concentration" power="6"/>  <!-- Physiological Units -->
     <Unit symbol="M" dimension="concentration" power="3"/>
     <Unit symbol="mM" dimension="concentration" power="0"/>
+    
+    <Unit symbol="mol" dimension="substance" power="0"/>
 
     <Unit symbol="m_per_s" dimension="permeability" power="0"/>
     <Unit symbol="cm_per_s" dimension="permeability" power="-2"/>
