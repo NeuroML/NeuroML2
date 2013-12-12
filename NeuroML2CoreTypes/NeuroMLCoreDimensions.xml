@@ -126,6 +126,8 @@
 
     <Unit symbol="m_per_s" dimension="permeability" power="0"/>
     <Unit symbol="cm_per_s" dimension="permeability" power="-2"/>
+    <Unit symbol="um_per_ms" dimension="permeability" power="-3"/>
+    <Unit symbol="cm_per_ms" dimension="permeability" power="1"/>
 
  
     <Unit symbol="degC" dimension="temperature" offset="273.15"/>
