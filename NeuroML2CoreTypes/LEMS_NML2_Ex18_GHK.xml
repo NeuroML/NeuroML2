@@ -1,8 +1,8 @@
 <Lems>
 
-  <!-- Simple cell with Sodium, Potassium and Calcium channels and
-       an exponentially decaying Calcium pool. The Calcium current due to the
-       channels is calculated using the GHK field equation -->
+  <!-- Simple cell with Sodium, Potassium and Calcium channels and an
+       exponentially decaying Calcium pool. The Calcium current due to
+       the channels is calculated using the GHK field equation -->
 
   <Target component="sim1"/>
 
@@ -56,7 +56,7 @@
   
   <!-- Intracellular Calcium dynamics -->
   <concentrationModel id="simple_decay" type="fixedFactorConcentrationModel"
-		      ion="ca"
+                      ion="ca"
                       restingConc="3e-6 mM"
                       decayConstant="1.0 ms"
                       rho="3e-1 mol_per_m_per_A_per_s"/>
