@@ -274,40 +274,17 @@
 
         <Text name="ion"/> <!-- TODO: Ideally this needs to be a property of ionChannel only!
                                 But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
-
         <Dynamics>
 
-            <!-- From GENESIS: http://www.genesis-sim.org/GENESIS/gum-tutorials/beeman/Hyperdoc/Manual-26.html#ss26.30
-                                    Cin * exp(K * Vm) - Cout
-            Ik    =  -p * F * K * Vm  - - - - - - - - - - - -
-                                       exp(K * Vm) - 1
-
-                  This looks like it's wrong...
-             -->
-             <!-- From Steuber et al DCN model:
-
-             A = exp(-23.20764929 * v / T) = exp((-z * F * (0.001) * v) / (R * T))
-
-             ical = perm * m*m * h * (4.47814e6 * v / T) * ((cali/1000) - (calo/1000) * A) / (1 - A)
-
-                                     (z^2 * F^2 * (0.001) * v) / (R * T)
-
-             -->
-             <!-- From Wikipedia:
-
-             Idensity = P * z^2 * ( (V * F^2)/(R * T) ) * ( concInt - ( concExt * exp(-z * V * F /(R * T)) ) ) / (1 - exp(-z * V * F /(R * T)) )
-
-             -->
-
-            <!-- TODO: check if needed <DerivedVariable name="K" dimension="per_voltage"  value="(zCa * F) / (R * temperature)" valueCondition="temperature .gt. 0" valueIfFalse="0.1"/>-->
             <DerivedVariable name="K" dimension="per_voltage"  value="(zCa * F) / (R * temperature)"/>
-
             <DerivedVariable name="expKv" dimension="none"  value="exp(-1 * K * v)"/>
-
             <DerivedVariable name="channelf" dimension="none" select="ionChannel/fopen"/>
 
-            <!-- TODO check if needed: <DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" value="-1 * channelf * permeability * zCa * F * K * v * ( caConc - (caConcExt * expKv) ) / (1 - expKv)" valueCondition="expKv .neq. 1" valueIfFalse="0"/>-->
-          <DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" value="-1 * channelf * permeability * zCa * F * K * v * ( caConc - (caConcExt * expKv) ) / (1 - expKv)"/>
+	    <!--TODO: used conditional var, just as in nernst above, to circumvent problems with initialization.  -->
+            <ConditionalDerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity">
+	            <Case condition="caConcExt .gt. 0" value="-1 * channelf * permeability * zCa * F * K * v * ( caConc - (caConcExt * expKv) ) / (1 - expKv)"/>
+	            <Case condition="caConcExt .leq. 0" value="0"/>
+	    </ConditionalDerivedVariable>
 
         </Dynamics>
         <Structure>
@@ -722,8 +699,8 @@
             <StateVariable name="concentration" exposure="concentration" dimension="concentration"/>
             <StateVariable name="extConcentration" exposure="extConcentration" dimension="concentration"/>
             
-            <TimeDerivative variable="concentration" value="(iCa/surfaceArea) * rho - ((concentration - restingConc) / decayConstant)"/>
-            
+	    <TimeDerivative variable="concentration" value="(iCa/surfaceArea) * rho - ((concentration - restingConc) / decayConstant)"/>
+
             <OnStart>
                 <StateAssignment variable="concentration" value="initialConcentration"/>
                 <StateAssignment variable="extConcentration" value="initialExtConcentration"/>
