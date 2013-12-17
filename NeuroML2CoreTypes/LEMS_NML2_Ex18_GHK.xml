@@ -123,35 +123,39 @@
   <!-- Point process: Current clamp -->
   <pulseGenerator id="IClamp" delay="4ms" duration="6.0ms" amplitude="0.005nA" />
 
-
   <!-- Create a single-cell network -->
   <network id="net1" type="networkWithTemperature" temperature = "16.3 degC">
-    <population id="pop" component="na_k_ca" size="1"/>
-    <explicitInput target="pop[0]" input="IClamp"/>
+    <population id="pop" component="na_k_ca" type="populationList" size="1">
+      <instance id="0">
+        <location x="0" y="0" z="0"/>
+      </instance>
+    </population>
+
+    <inputList id="IClamp" component="IClamp" population="pop">
+      <input id="0" target="../pop/0/na_k_ca" destination="synapses"/>
+    </inputList>
   </network>
 
 
-
   <!-- Simulation specifications -->
-  <Simulation id="sim1" length="50ms" step="0.0001ms" target="net1">
+  <Simulation id="sim1" length="50ms" step="0.001ms" target="net1">
 
     <Display id="d1" title="Membrane Potential (mV)" timeScale="1ms" xmin="0" xmax="50" ymin="-80" ymax="40">
-      <Line id="pop[0]/v" quantity="pop[0]/v" scale="1mV"  color="#ffffff" timeScale="1ms"/>
+      <Line id="V" quantity="pop/0/na_k_ca/v" scale="1mV"  color="#ffffff" timeScale="1ms"/>
     </Display>
 
-    <Display id="d2" title="Ca current density (uA_per_cm2)" timeScale="1ms" xmin="0" xmax="50" ymin="0" ymax="3">
-      <Line id="Ca iDensity" quantity="pop[0]/biophys/membraneProperties/ca_all/iDensity" scale="1uA_per_cm2"  color="#00ff00" timeScale="1ms"/>
+    <Display id="d2" title="Ca current density (uA_per_cm2)" timeScale="1ms" xmin="0" xmax="50" ymin="0" ymax="25">
+      <Line id="Ca iDensity" quantity="pop/0/na_k_ca/biophys/membraneProperties/ca_all/iDensity" scale="1uA_per_cm2"  color="#00ff00" timeScale="1ms"/>
     </Display>
 
     <Display id="d3" title="Internal Ca concentration (mM)" timeScale="1ms" xmin="0" xmax="50" ymin="0" ymax="30">
-      <Line id="caConc" quantity="pop[0]/caConc" scale="1e-6 mM"  color="#ff0000" timeScale="1ms"/>
+      <Line id="caConc" quantity="pop/0/na_k_ca/caConc" scale="1e-6 mM"  color="#ff0000" timeScale="1ms"/>
     </Display>
 
     <OutputFile id="of0" fileName="/tmp/lems_ghk.dat">
-      <OutputColumn id="v" quantity="pop[0]/v"/>
-      <OutputColumn id="ica" quantity="pop[0]/biophys/membraneProperties/ca_all/iDensity"/>
-      <OutputColumn id="ca" quantity="pop[0]/caConc"/>
-      <!-- <OutputColumn id="oca" quantity="pop[0]/biophys/membraneProperties/ca_all/ca_chan/p/q"/> -->
+      <OutputColumn id="v" quantity="pop/0/na_k_ca/v"/>
+      <OutputColumn id="ica" quantity="pop/0/na_k_ca/biophys/membraneProperties/ca_all/iDensity"/>
+      <OutputColumn id="ca" quantity="pop/0/na_k_ca/caConc"/>
     </OutputFile>
     
   </Simulation>
