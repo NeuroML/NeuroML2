@@ -18,8 +18,8 @@
 
 
     <ComponentType name="baseSynapse"
-        extends="baseVoltageDepPointCurrent"
-        description="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009"> <!-- http://bioportal.bioontology.org/ontologies/46856/?p=terms&conceptid=cno%3Acno_0000009 -->
+                   extends="baseVoltageDepPointCurrent"
+                   description="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009"> <!-- http://bioportal.bioontology.org/ontologies/46856/?p=terms&conceptid=cno%3Acno_0000009 -->
         <Child name="notes" type="notes"/>
 
         <EventPort name="in" direction="in"/>
@@ -28,8 +28,8 @@
     </ComponentType>
 
     <ComponentType name="baseSynapseDL"
-        extends="baseVoltageDepPointCurrentDL"
-        description="Base type for all synapses, i.e. ComponentTypes which produce a dimensionless current and change Dynamics in response to an incoming event. cno_0000009"> <!-- http://bioportal.bioontology.org/ontologies/46856/?p=terms&conceptid=cno%3Acno_0000009 -->
+                   extends="baseVoltageDepPointCurrentDL"
+                   description="Base type for all synapses, i.e. ComponentTypes which produce a dimensionless current and change Dynamics in response to an incoming event. cno_0000009"> <!-- http://bioportal.bioontology.org/ontologies/46856/?p=terms&conceptid=cno%3Acno_0000009 -->
 
         <EventPort name="in" direction="in"/>
 
@@ -38,8 +38,8 @@
 
 
     <ComponentType name="baseConductanceBasedSynapse"
-        extends="baseSynapse"
-        description="Synapse model which exposes a conductance _g in addition to producing a current. Not necessarily ohmic!! cno_0000027">
+                   extends="baseSynapse"
+                   description="Synapse model which exposes a conductance _g in addition to producing a current. Not necessarily ohmic!! cno_0000027">
 
         <Parameter name="gbase" dimension="conductance" description="Baseline conductance, generally the maximum conductance following a single spike"/>
         <Parameter name="erev" dimension="voltage" description="Reversal potential of the synapse"/>
@@ -50,8 +50,8 @@
 
 
     <ComponentType name="expOneSynapse"
-       extends="baseConductanceBasedSynapse"
-       description="Ohmic synapse model whose conductance rises instantaneously by _gbase on receiving an event, and which decays exponentially to zero with time course _tauDecay">
+                   extends="baseConductanceBasedSynapse"
+                   description="Ohmic synapse model whose conductance rises instantaneously by _gbase on receiving an event, and which decays exponentially to zero with time course _tauDecay">
 
         <Parameter name="tauDecay" dimension="time" description="Time course of decay"/>
 
@@ -76,8 +76,8 @@
 
 
     <ComponentType name="expTwoSynapse"
-       extends="baseConductanceBasedSynapse"
-       description="Ohmic synapse model whose conductance waveform on receiving an event has a rise time of _tauRise and a decay time of _tauDecay. Max conductance reached during this time (assuming zero conductance before) is _gbase.">
+                   extends="baseConductanceBasedSynapse"
+                   description="Ohmic synapse model whose conductance waveform on receiving an event has a rise time of _tauRise and a decay time of _tauDecay. Max conductance reached during this time (assuming zero conductance before) is _gbase.">
 
         <Parameter name="tauRise" dimension="time" />
         <Parameter name="tauDecay" dimension="time" />
@@ -89,7 +89,7 @@
             <StateVariable name="A" dimension="none"/>
             <StateVariable name="B" dimension="none"/>
 
-	    <!-- TODO: catch tauRise = 0..! -->
+            <!-- TODO: catch tauRise = 0..! -->
 
             <DerivedVariable name="g" dimension="conductance" exposure="g" value="gbase * (B - A)" />
             <DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
@@ -112,7 +112,7 @@
 
 
     <ComponentType name="baseBlockMechanism"
-        description="Base of any ComponentType which produces a varying scaling (or blockage) of synaptic strength of magnitude _scaling">
+                   description="Base of any ComponentType which produces a varying scaling (or blockage) of synaptic strength of magnitude _scaling">
 
         <Exposure name="blockFactor" dimension="none"/>
 
@@ -120,8 +120,8 @@
 
 
     <ComponentType name="voltageConcDepBlockMechanism"
-       extends="baseBlockMechanism"
-       description="Synaptic blocking mechanism which varys with membrane potential across the synapse, e.g. in NMDA receptor mediated synapses">
+                   extends="baseBlockMechanism"
+                   description="Synaptic blocking mechanism which varys with membrane potential across the synapse, e.g. in NMDA receptor mediated synapses">
 
         <Parameter name="blockConcentration" dimension="concentration" />
         <Parameter name="scalingConc" dimension="concentration" />
@@ -139,124 +139,124 @@
 
 
     <ComponentType name="basePlasticityMechanism"
-		   description="Base plasticity mechanism.">
-      <EventPort name="in" direction="in" description="This is where the plasticity mechanism receives spike events from the parent synapse."/>
-      <Exposure name="plasticityFactor" dimension="none"/>
+                   description="Base plasticity mechanism.">
+        <EventPort name="in" direction="in" description="This is where the plasticity mechanism receives spike events from the parent synapse."/>
+        <Exposure name="plasticityFactor" dimension="none"/>
     </ComponentType>
 
 
     <ComponentType name="tsodyksMarkramDepMechanism"
-		   extends="basePlasticityMechanism"
-		   description="Depression-only Tsodyks-Markram model, as in Tsodyks and Markram 1997.">
-      <Parameter name="initReleaseProb" dimension="none" />
-      <Parameter name="tauRec" dimension="time" />
+                   extends="basePlasticityMechanism"
+                   description="Depression-only Tsodyks-Markram model, as in Tsodyks and Markram 1997.">
+        <Parameter name="initReleaseProb" dimension="none" />
+        <Parameter name="tauRec" dimension="time" />
 
-      <Dynamics>
-	<StateVariable name="R" dimension="none"/>
+        <Dynamics>
+            <StateVariable name="R" dimension="none"/>
 
-	<DerivedVariable name="U" dimension="none" value="initReleaseProb"/>
-	<DerivedVariable name="plasticityFactor" dimension="none" exposure="plasticityFactor" value="R * U" />
+            <DerivedVariable name="U" dimension="none" value="initReleaseProb"/>
+            <DerivedVariable name="plasticityFactor" dimension="none" exposure="plasticityFactor" value="R * U" />
 
-	<TimeDerivative variable="R" value="(1 - R) / tauRec"/>
+            <TimeDerivative variable="R" value="(1 - R) / tauRec"/>
 
-	<OnStart>
-	  <StateAssignment variable="R" value="1" />
-	</OnStart>
+            <OnStart>
+                <StateAssignment variable="R" value="1" />
+            </OnStart>
 
-	<OnEvent port="in">
-	  <StateAssignment variable="R" value="R * (1 - U)" />
-	</OnEvent>
-      </Dynamics>
+            <OnEvent port="in">
+                <StateAssignment variable="R" value="R * (1 - U)" />
+            </OnEvent>
+        </Dynamics>
 
-      <Structure>
-	<With instance="parent" as="a"/>
-	<With instance="this" as="b"/>
-	<EventConnection from="a" to="b"/>
-      </Structure>
+        <Structure>
+            <With instance="parent" as="a"/>
+            <With instance="this" as="b"/>
+            <EventConnection from="a" to="b"/>
+        </Structure>
 
     </ComponentType>
 
 
     <ComponentType name="tsodyksMarkramDepFacMechanism"
-		   extends="basePlasticityMechanism"
-		   description="Full Tsodyks-Markram STP model with both depression and facilitation, as in Tsodyks, Pawelzik and Markram 1998.">
-      <Parameter name="initReleaseProb" dimension="none" />
-      <Parameter name="tauRec" dimension="time" />
-      <Parameter name="tauFac" dimension="time" />
+                   extends="basePlasticityMechanism"
+                   description="Full Tsodyks-Markram STP model with both depression and facilitation, as in Tsodyks, Pawelzik and Markram 1998.">
+        <Parameter name="initReleaseProb" dimension="none" />
+        <Parameter name="tauRec" dimension="time" />
+        <Parameter name="tauFac" dimension="time" />
 
-      <Dynamics>
-	<StateVariable name="R" dimension="none"/>
-	<StateVariable name="U" dimension="none"/>
+        <Dynamics>
+            <StateVariable name="R" dimension="none"/>
+            <StateVariable name="U" dimension="none"/>
 
-	<DerivedVariable name="plasticityFactor" dimension="none" exposure="plasticityFactor" value="R * U" />
+            <DerivedVariable name="plasticityFactor" dimension="none" exposure="plasticityFactor" value="R * U" />
 
-	<TimeDerivative variable="R" value="(1 - R) / tauRec"/>
-	<TimeDerivative variable="U" value="(initReleaseProb - U) / tauFac"/>
+            <TimeDerivative variable="R" value="(1 - R) / tauRec"/>
+            <TimeDerivative variable="U" value="(initReleaseProb - U) / tauFac"/>
 
-	<OnStart>
-	  <StateAssignment variable="R" value="1" />
-	  <StateAssignment variable="U" value="initReleaseProb" />
-	</OnStart>
+            <OnStart>
+                <StateAssignment variable="R" value="1" />
+                <StateAssignment variable="U" value="initReleaseProb" />
+            </OnStart>
 
-	<OnEvent port="in">
-	  <StateAssignment variable="R" value="R * (1 - U)" />
-	  <StateAssignment variable="U" value="U + initReleaseProb * (1 - U)" />
-	</OnEvent>
-      </Dynamics>
+            <OnEvent port="in">
+                <StateAssignment variable="R" value="R * (1 - U)" />
+                <StateAssignment variable="U" value="U + initReleaseProb * (1 - U)" />
+            </OnEvent>
+        </Dynamics>
 
-      <Structure>
-	<With instance="parent" as="a"/>
-	<With instance="this" as="b"/>
-	<EventConnection from="a" to="b"/>
-      </Structure>
+        <Structure>
+            <With instance="parent" as="a"/>
+            <With instance="this" as="b"/>
+            <EventConnection from="a" to="b"/>
+        </Structure>
 
     </ComponentType>
 
     <ComponentType name="blockingPlasticSynapse"
-		   extends="expTwoSynapse"
-		   description="Biexponential synapse that allows for
+                   extends="expTwoSynapse"
+                   description="Biexponential synapse that allows for
 				optional block and plasticity
 				mechanisms, which can be expressed as
 				child elements.">
-      <Child name="plasticityMechanism" type="basePlasticityMechanism"/>
-      <Child name="blockMechanism" type="baseBlockMechanism"/>
-      <EventPort name="relay" direction="out" description="Used to relay incoming spikes to child plasticity mechanism"/>
-      <Dynamics>
-	<StateVariable name="A" dimension="none"/>
-	<StateVariable name="B" dimension="none"/>
+        <Child name="plasticityMechanism" type="basePlasticityMechanism"/>
+        <Child name="blockMechanism" type="baseBlockMechanism"/>
+        <EventPort name="relay" direction="out" description="Used to relay incoming spikes to child plasticity mechanism"/>
+        <Dynamics>
+            <StateVariable name="A" dimension="none"/>
+            <StateVariable name="B" dimension="none"/>
 
-	<DerivedVariable name="plasticityFactor" dimension="none"
-			 select="plasticityMechanism/plasticityFactor"
-			 reduce="multiply" required="false"/>
-	<DerivedVariable name="blockFactor" dimension="none"
-			 select="blockMechanism/blockFactor"
-			 reduce="multiply" required="false"/>
-	<DerivedVariable name="g" dimension="conductance" exposure="g"
-			 value="blockFactor * gbase * (B - A)" />
-	<DerivedVariable name="i" exposure="i" dimension="current"
-			 value="g * (erev - v)" />
+            <DerivedVariable name="plasticityFactor" dimension="none"
+                             select="plasticityMechanism/plasticityFactor"
+                             reduce="multiply" required="false"/>
+            <DerivedVariable name="blockFactor" dimension="none"
+                             select="blockMechanism/blockFactor"
+                             reduce="multiply" required="false"/>
+            <DerivedVariable name="g" dimension="conductance" exposure="g"
+                             value="blockFactor * gbase * (B - A)" />
+            <DerivedVariable name="i" exposure="i" dimension="current"
+                             value="g * (erev - v)" />
 
-	<TimeDerivative variable="A" value="-A / tauRise" />
-	<TimeDerivative variable="B" value="-B / tauDecay" />
+            <TimeDerivative variable="A" value="-A / tauRise" />
+            <TimeDerivative variable="B" value="-B / tauDecay" />
 
-	<OnStart>
-	  <StateAssignment variable="A" value="0" />
-	  <StateAssignment variable="B" value="0" />
-	</OnStart>
+            <OnStart>
+                <StateAssignment variable="A" value="0" />
+                <StateAssignment variable="B" value="0" />
+            </OnStart>
 
-	<OnEvent port="in">
-	  <StateAssignment variable="A" value="A + plasticityFactor * waveformFactor" />
-	  <StateAssignment variable="B" value="B + plasticityFactor * waveformFactor" />
-	  <EventOut port="relay"/>
-	</OnEvent>
-      </Dynamics>
+            <OnEvent port="in">
+                <StateAssignment variable="A" value="A + plasticityFactor * waveformFactor" />
+                <StateAssignment variable="B" value="B + plasticityFactor * waveformFactor" />
+                <EventOut port="relay"/>
+            </OnEvent>
+        </Dynamics>
     </ComponentType>
 
-  <!--- -->
+    <!--- -->
 
     <ComponentType name="stdpSynapse"
-       extends="expTwoSynapse"
-       description="Spike timing dependent plasticity mechanism,  NOTE: EXAMPLE NOT YET WORKING!!!! cno_0000034">
+                   extends="expTwoSynapse"
+                   description="Spike timing dependent plasticity mechanism,  NOTE: EXAMPLE NOT YET WORKING!!!! cno_0000034">
 
         <Constant name="tsinceRate" dimension="none" value="1"/>
         <Constant name="longTime" dimension="time" value="1000s"/>
