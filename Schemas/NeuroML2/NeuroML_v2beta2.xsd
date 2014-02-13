@@ -321,16 +321,17 @@
         <xs:sequence>
             <xs:element name="cell" type="Cell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="baseCell" type="BaseCell" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="iafTauCell" type="IaFTauCell"
+            <xs:element name="iafTauCell" type="IafTauCell"
 			minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="iafTauRefCell" type="IaFTauRefCell"
+            <xs:element name="iafTauRefCell" type="IafTauRefCell"
 			minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="iafCell" type="IaFCell" minOccurs="0"
+            <xs:element name="iafCell" type="IafCell" minOccurs="0"
 			maxOccurs="unbounded"/>
-            <xs:element name="iafRefCell" type="IaFRefCell" minOccurs="0"
+            <xs:element name="iafRefCell" type="IafRefCell" minOccurs="0"
 			maxOccurs="unbounded"/>
             <xs:element name="izhikevichCell" type="IzhikevichCell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="adExIaFCell" type="AdExIaFCell" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="fitzHughNagumoCell" type="FitzHughNagumoCell" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:group>
 
@@ -743,7 +744,7 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="IaFTauCell">
+    <xs:complexType name="IafTauCell">
         <xs:complexContent>
             <xs:extension base="BaseCell">
                 <xs:attribute name="leakReversal" type="Nml2Quantity_voltage" use="required"/>
@@ -754,15 +755,15 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="IaFTauRefCell">
+    <xs:complexType name="IafTauRefCell">
       <xs:complexContent>
-	<xs:extension base="IaFTauCell">
+	<xs:extension base="IafTauCell">
 	  <xs:attribute name="refract" type="Nml2Quantity_time" use="required"/>
 	</xs:extension>
       </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="IaFCell">
+    <xs:complexType name="IafCell">
         <xs:complexContent>
             <xs:extension base="BaseCell">
                 <xs:attribute name="leakReversal" type="Nml2Quantity_voltage" use="required"/>
@@ -774,9 +775,9 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="IaFRefCell">
+    <xs:complexType name="IafRefCell">
       <xs:complexContent>
-	<xs:extension base="IaFCell">
+	<xs:extension base="IafCell">
 	  <xs:attribute name="refract" type="Nml2Quantity_time" use="required"/>
 	</xs:extension>
       </xs:complexContent>
@@ -791,9 +792,6 @@
                 <xs:attribute name="b" type="Nml2Quantity_none" use="required"/>
                 <xs:attribute name="c" type="Nml2Quantity_none" use="required"/>
                 <xs:attribute name="d" type="Nml2Quantity_none" use="required"/>
-                <!--<xs:attribute name="Iamp" type="Nml2Quantity_none" use="required"/>
-                <xs:attribute name="Idel" type="Nml2Quantity_time" use="required"/>
-                <xs:attribute name="Idur" type="Nml2Quantity_time" use="required"/>-->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -812,9 +810,15 @@
                 <xs:attribute name="refract" type="Nml2Quantity_time" use="required"/>
                 <xs:attribute name="a" type="Nml2Quantity_conductance" use="required"/>
                 <xs:attribute name="b" type="Nml2Quantity_current" use="required"/>
-                <!--<xs:attribute name="Iamp" type="Nml2Quantity_current" use="required"/>
-                <xs:attribute name="Idel" type="Nml2Quantity_time" use="required"/>
-                <xs:attribute name="Idur" type="Nml2Quantity_time" use="required"/>-->
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="FitzHughNagumoCell">
+        <xs:complexContent>
+            <xs:extension base="BaseCell">
+                <xs:attribute name="I" type="Nml2Quantity_none" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
