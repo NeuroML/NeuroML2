@@ -105,6 +105,7 @@
 
         <Path name="preCellId"/>
         <Path name="postCellId"/>
+        <Text name="destination"/>
 
         <Structure>
             <With instance="preCellId" as="a"/>
