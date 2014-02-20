@@ -123,12 +123,12 @@
 
 	<OnStart>
 	  <StateAssignment variable="tsince" value="0"/>
-	  <StateAssignment variable="isi" value="- averageIsi * ln(1 - random(1))"/>
+	  <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
 	</OnStart>
 
 	<OnCondition test="tsince .geq. isi">
 	  <StateAssignment variable="tsince" value="0"/>
-	  <StateAssignment variable="isi" value="- averageIsi * ln(1 - random(1))"/>
+	  <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
 	  <EventOut port="spike"/>
 	</OnCondition>
       </Dynamics>

@@ -82,7 +82,7 @@
         <Parameter name="tauRise" dimension="time" />
         <Parameter name="tauDecay" dimension="time" />
         
-        <DerivedParameter name="peakTime" dimension="time" value="ln(tauDecay / tauRise) * (tauRise * tauDecay)/(tauDecay - tauRise)"/>
+        <DerivedParameter name="peakTime" dimension="time" value="log(tauDecay / tauRise) * (tauRise * tauDecay)/(tauDecay - tauRise)"/>
         <DerivedParameter name="waveformFactor" dimension="none" value="1 / (-exp(-peakTime / tauRise) + exp(-peakTime / tauDecay))"/>
 
         <Dynamics>

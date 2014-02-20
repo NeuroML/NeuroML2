@@ -97,7 +97,7 @@
             <DerivedVariable name="singleChannelConductance" dimension="conductance" select="ionChannel/g"/>
             <DerivedVariable name="totalConductance" dimension="conductance" value="singleChannelConductance * number"/>
 
-            <DerivedVariable name="erev" dimension="voltage" exposure="erev" value="(R * temperature / (zCa * F)) * ln(caConcExt / caConc)"/>
+            <DerivedVariable name="erev" dimension="voltage" exposure="erev" value="(R * temperature / (zCa * F)) * log(caConcExt / caConc)"/>
 
             <!--TODO: see if the check on caconcext needed: DerivedVariable name="i" dimension="current" exposure="i" value="totalConductance * (erev - v)" valueCondition="caConcExt .gt. 0" valueIfFalse="0"/>  -->
             <DerivedVariable name="i" dimension="current" exposure="i" value="totalConductance * (erev - v)"/>
@@ -232,7 +232,7 @@
             </ConditionalDerivedVariable>
   
             <ConditionalDerivedVariable name="erev" dimension="voltage" exposure="erev">
-            	<Case condition="caConcExt .gt. 0" value="(R * temperature / (zCa * F)) * ln(caConcExt / caConc)"/>
+            	<Case condition="caConcExt .gt. 0" value="(R * temperature / (zCa * F)) * log(caConcExt / caConc)"/>
             	<Case condition="caConcExt .leq. 0" value="0"/>
             </ConditionalDerivedVariable>
 
@@ -385,25 +385,25 @@
 
 
     <ComponentType name="distal"
-        extends="pointDiam"
+        extends="point3DWithDiam"
         description="Point furthest from the soma in a segment">
         <Dynamics>
             <DerivedVariable name="radius" dimension="length" exposure="radius" value="0.000001 * diameter / 2"/>
-            <DerivedVariable name="x" dimension="length" exposure="x" value="0.000001 * x"/>  <!-- conversion to SI units... -->
-            <DerivedVariable name="y" dimension="length" exposure="y" value="0.000001 * y"/>  <!-- conversion to SI units... -->
-            <DerivedVariable name="z" dimension="length" exposure="z" value="0.000001 * z"/>  <!-- conversion to SI units... -->
+            <DerivedVariable name="xLength" dimension="length" exposure="xLength" value="0.000001 * x"/>  <!-- conversion to SI units... -->
+            <DerivedVariable name="yLength" dimension="length" exposure="yLength" value="0.000001 * y"/>  <!-- conversion to SI units... -->
+            <DerivedVariable name="zLength" dimension="length" exposure="zLength" value="0.000001 * z"/>  <!-- conversion to SI units... -->
         </Dynamics>
     </ComponentType>
 
 
     <ComponentType name="proximal"
-        extends="pointDiam"
+        extends="point3DWithDiam"
         description="Point closest to the soma in a segment. Note, if the proximal point is equal to the distal point of the parent segment, proximal can be omitted.">
         <Dynamics>
             <DerivedVariable name="radius" dimension="length" exposure="radius" value="0.000001 * diameter / 2"/>
-            <DerivedVariable name="x" dimension="length" exposure="x" value="0.000001 * x"/>  <!-- conversion to SI units... -->
-            <DerivedVariable name="y" dimension="length" exposure="y" value="0.000001 * y"/>  <!-- conversion to SI units... -->
-            <DerivedVariable name="z" dimension="length" exposure="z" value="0.000001 * z"/>  <!-- conversion to SI units... -->
+            <DerivedVariable name="xLength" dimension="length" exposure="xLength" value="0.000001 * x"/>  <!-- conversion to SI units... -->
+            <DerivedVariable name="yLength" dimension="length" exposure="yLength" value="0.000001 * y"/>  <!-- conversion to SI units... -->
+            <DerivedVariable name="zLength" dimension="length" exposure="zLength" value="0.000001 * z"/>  <!-- conversion to SI units... -->
         </Dynamics>
     </ComponentType>
 
@@ -432,12 +432,12 @@
             <!-- TODO: make all of these derived params!! -->
             <DerivedVariable name="radDist" dimension="length" exposure="radDist" select = "distal/radius"/>
 
-            <DerivedVariable name="dx" dimension="length" select = "distal/x"/>
-            <DerivedVariable name="dy" dimension="length" select = "distal/y"/>
-            <DerivedVariable name="dz" dimension="length" select = "distal/z"/>
-            <DerivedVariable name="px" dimension="length" select = "proximal/x"/>
-            <DerivedVariable name="py" dimension="length" select = "proximal/y"/>
-            <DerivedVariable name="pz" dimension="length" select = "proximal/z"/>
+            <DerivedVariable name="dx" dimension="length" select = "distal/xLength"/>
+            <DerivedVariable name="dy" dimension="length" select = "distal/yLength"/>
+            <DerivedVariable name="dz" dimension="length" select = "distal/zLength"/>
+            <DerivedVariable name="px" dimension="length" select = "proximal/xLength"/>
+            <DerivedVariable name="py" dimension="length" select = "proximal/yLength"/>
+            <DerivedVariable name="pz" dimension="length" select = "proximal/zLength"/>
 
             <DerivedVariable name="length" dimension="length" exposure="length" value = "sqrt(((dx - px) * (dx - px) + (dy - py) * (dy - py) + (dz - pz) * (dz - pz))/(LEN * LEN)) * LEN"/>
 
