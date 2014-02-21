@@ -358,7 +358,7 @@
     <ComponentType name="spikeArray" extends="baseSpikeSource"
         description="Set of spike ComponentTypes, each emitting one spike at a certain time. Can be used to feed a predetermined spike train into a cell">
 
-        <Children name="spike" type="spike"/>
+        <Children name="spikes" type="spike"/>
         <EventPort name="in" direction="in" description="This will receive events from the children"/>
 
         <Dynamics>
