@@ -10,8 +10,7 @@ v2beta2 / 2013-12-11
 
 * Ordering of channelDensity
 
-
-
+* Using log as opposed to ln 
 
 
 v2beta1 / 2013-09-03

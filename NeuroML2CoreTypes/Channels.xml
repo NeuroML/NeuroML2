@@ -377,11 +377,6 @@
 
     </ComponentType>
 
-    <ComponentType name="ionChannel"
-        extends="baseIonChannel"
-        description="Temporary ComponentTypes extending _baseIonChannel_. This is needed since many existing examples use the name ionChannel. Should be removed.">
-
-    </ComponentType>
 
     <ComponentType name="ionChannelPassive" 
         extends="ionChannel"
@@ -396,17 +391,14 @@
         </Dynamics>
     </ComponentType>
 
-    <!--<ComponentType name="parameter">
-        <Parameter name="value" dimension="none"/>
-    </ComponentType>-->
 
-    <ComponentType name="ionChannelHH" 
-        extends="ionChannel"
-        description="Ion channel according to the Hodgkin Huxley formalism, with a number of gates (of type _gateHH_)">
+    <ComponentType name="ionChannel" 
+        extends="baseIonChannel"
+        description="Note _ionChannel_ and _ionChannelHH_ are currently functionally identical. This is needed since many existing examples use ionChannel, some use ionChannelHH. NeuroML v2beta3 will remove one of these, probably ionChannelHH.">
         <Child name="notes" type="notes"/>
         <Child name="annotation" type="annotation"/>
         <Child name="conductanceScaling" type="baseConductanceScaling"/>
-        <!--<Children name="parameters" type="parameter"/>-->
+        
         <Children name="gatesHHrates" type="gateHHrates"/>
         <Children name="gatesHHtauInf" type="gateHHtauInf"/>
         <Children name="gatesHHratesTau" type="gateHHratesTau"/>
@@ -427,6 +419,22 @@
         </Dynamics>
     </ComponentType>
 
+    <ComponentType name="ionChannelHH"
+        extends="ionChannel"
+        description="Note _ionChannel_ and _ionChannelHH_ are currently functionally identical. This is needed since many existing examples use ionChannel, some use ionChannelHH. NeuroML v2beta3 will remove one of these, probably ionChannelHH.">
+        
+        <Dynamics>
+            <!--TODO: put this back in!! <DerivedVariable name="conductanceScale" dimension="none" select="conductanceScaling/factor" reduce="multiply" required="false"/>-->
+            <DerivedVariable name="conductanceScale" dimension="none" value="1"/>
+            <DerivedVariable name="fopenHHrates" dimension="none" select="gatesHHrates[*]/fcond" reduce="multiply"/>
+            <DerivedVariable name="fopenHHtauInf" dimension="none" select="gatesHHtauInf[*]/fcond" reduce="multiply"/>
+            <DerivedVariable name="fopenHHratesTau" dimension="none" select="gatesHHratesTau[*]/fcond" reduce="multiply"/>
+            <DerivedVariable name="fopenHHratesInf" dimension="none" select="gatesHHratesInf[*]/fcond" reduce="multiply"/>
+            <DerivedVariable name="fopen" exposure="fopen" dimension="none" value="conductanceScale * fopenHHrates * fopenHHtauInf * fopenHHratesTau * fopenHHratesInf"/>
+            <DerivedVariable name="g" exposure="g" value="conductance * fopen" dimension="conductance"/>
+        </Dynamics>
+
+    </ComponentType>
  
 
     <ComponentType name="KSState"

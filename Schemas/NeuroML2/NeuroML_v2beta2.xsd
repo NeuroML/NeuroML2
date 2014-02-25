@@ -277,7 +277,11 @@
 
                     <xs:element name="morphology" type="Morphology" minOccurs="0" maxOccurs="unbounded"/>
 
+                    <!-- Note: requires type = ionChannelHH -->
                     <xs:element name="ionChannel" type="IonChannel" minOccurs="0" maxOccurs="unbounded"/>
+                    
+                    <!-- This will be the only supported form from v2beta3 ionChannelHH 
+                    <xs:element name="ionChannelHH" type="IonChannelHH" minOccurs="0" maxOccurs="unbounded"/>-->
 
                     <xs:group ref="ConcentrationModelTypes"/>
 
@@ -432,6 +436,10 @@
 
     <xs:complexType name="IonChannel">
 
+        <xs:annotation>
+            <xs:documentation>Note ionChannel and ionChannelHH are currently functionally identical. This is needed since many existing examples use ionChannel, some use ionChannelHH. 
+                NeuroML v2beta3 will remove one of these, probably ionChannelHH.</xs:documentation>
+        </xs:annotation>
         <xs:complexContent>
             <xs:extension base="Standalone">
                 <xs:choice>
@@ -451,12 +459,21 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <xs:complexType name="IonChannelHH">
+        <xs:annotation>
+            <xs:documentation>Note ionChannel and ionChannelHH are currently functionally identical. This is needed since many existing examples use ionChannel, some use ionChannelHH. 
+                NeuroML v2beta3 will remove one of these, probably ionChannelHH.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="IonChannel"/>
+        </xs:complexContent>
+    </xs:complexType>
 
     <xs:simpleType name="channelTypes">
         <xs:restriction base="xs:string">
             <xs:enumeration value="ionChannelPassive"/>
             <xs:enumeration value="ionChannelHH"/>
-            <xs:enumeration value="ionChannelKS"/>
         </xs:restriction>
     </xs:simpleType>
 

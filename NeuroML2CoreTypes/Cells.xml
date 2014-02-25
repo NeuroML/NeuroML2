@@ -17,11 +17,18 @@
     </ComponentType>
 
 
-    <ComponentType name="baseCellMembPot"
+    <ComponentType name="baseSpikingCell"
         extends="baseCell"
-        description="Any cell which has a membrane potential _v with voltage units. These will emit _spike events.">
+        description="Base type of any cell which can emit _spike events.">
 
         <EventPort name="spike" direction="out" description="Spike event"/>
+
+    </ComponentType>
+    
+
+    <ComponentType name="baseCellMembPot"
+        extends="baseSpikingCell"
+        description="Any spiking cell which has a membrane potential _v with voltage units.">
 
         <Exposure name="v" dimension="voltage" description="Membrane potential"/>
 
@@ -29,10 +36,8 @@
 
 
     <ComponentType name="baseCellMembPotDL"
-        extends="baseCell"
-        description="Any cell which has a dimensioness membrane potential, _V. These will emit _spike events.">
-
-        <EventPort name="spike" direction="out" description="Spike event"/>
+        extends="baseSpikingCell"
+        description="Any spiking cell which has a dimensioness membrane potential, _V.">
 
         <Exposure name="V" dimension="none" description="Membrane potential"/>
 
