@@ -104,7 +104,7 @@ compTypeDesc = {}
 for file in files:
     fullfile = "%s/%s.xml"%(nml_src,file)
     print "\n----------  Reading LEMS file: "+fullfile
-    model = Model()
+    model = Model(include_includes=False)
     model.import_from_file(fullfile)
     
     for compType in model.component_types:
@@ -173,7 +173,7 @@ for file in files:
     fullfile = "%s/%s.xml"%(nml_src,file)
     print "\n----------  Reading LEMS file: "+fullfile
 
-    model = Model()
+    model = Model(include_includes=False)
     model.import_from_file(fullfile)
 
     #contents = HTMLgen.Simplecontentsument(title=file)
@@ -215,12 +215,16 @@ for file in files:
 
     if len(model.dimensions) > 0:
         contents += "      <b>Dimensions</b><br/>\n"
-    for dim in model.dimensions:
-        contents += "      &nbsp;&nbsp"+dimension(dim.name)+"<br/>\n"
+        dimensions = model.dimensions
+        dimensions = sorted(dimensions, key=lambda dim: dim.name)
+        for dim in dimensions:
+            contents += "      &nbsp;&nbsp"+dimension(dim.name)+"<br/>\n"
     if len(model.units) > 0:
         contents += "      <br/><b>Units</b><br/>\n"
-    for unit in model.units:
-        contents += "      &nbsp;&nbsp"+dimension(unit.symbol)+"<br/>\n"
+        units = model.units
+        units = sorted(units, key=lambda unit: unit.symbol)
+        for unit in units:
+            contents += "      &nbsp;&nbsp"+dimension(unit.symbol)+"<br/>\n"
 
     if len(model.component_types) > 0:
         contents += "      <b>Component Types</b><br/>\n"
@@ -248,7 +252,9 @@ for file in files:
 
     if "Dimensions" in file:
 
-        for dim in model.dimensions:
+        dimensions = model.dimensions
+        dimensions = sorted(dimensions, key=lambda dim: dim.name)
+        for dim in dimensions:
 
             contents += "<a name=\""+dim.name+"\">&nbsp;</a>\n"
             contents += "<table class=\"table table-bordered\">\n"
@@ -273,8 +279,10 @@ for file in files:
             contents += "    </td>\n"
             contents += "  </tr>\n"
             contents += "</table>\n"
-
-        for unit in model.units:
+            
+        units = model.units
+        units = sorted(units, key=lambda unit: unit.symbol)
+        for unit in units:
 
 
             contents += "<a name=\""+unit.symbol+"\">&nbsp;</a>\n"
@@ -317,7 +325,7 @@ for file in files:
 
 
     for compType in model.component_types:
-        print "ComponentType %s is %s"%(compType.name, compType.description)
+        #print "ComponentType %s is %s"%(compType.name, compType.description)
 
         ext = "" if compType.extends is None else "<p>%sextends %s</p>"%(spacer4,compTypeLink(compType.extends))
         #ext = "" if compType.extends is None else "%s<small>extends <a href=\"#%s\">%s</a></small>"%(spacer4,compType.extends,compType.extends)
@@ -397,7 +405,7 @@ for file in files:
             contents += "  <tr>\n"
             contents += category("Parameters", len(params), type="label-success")
             keysort = sorted(params.keys(), key=lambda param: param.name)
-            print keysort
+            #print keysort
             for param in keysort:
                 ct = params[param]
                 origin = formatDescriptionSmall(param)
