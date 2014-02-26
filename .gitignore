@@ -21,3 +21,5 @@ NeuroML2CoreTypes/*.sedml
 NeuroML2CoreTypes/*.m
 NeuroML2CoreTypes/*.json
 NeuroML2CoreTypes/results/*.dat
+
+docs/*.html
