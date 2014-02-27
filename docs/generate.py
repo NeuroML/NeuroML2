@@ -3,6 +3,11 @@ A script for generating HTML docs from LEMS descriptions of the core NeuroML 2 C
 """
 
 from lems.model.model import Model
+from lems.model.dynamics import OnStart
+from lems.model.dynamics import OnCondition
+from lems.model.dynamics import OnEvent
+from lems.model.dynamics import StateAssignment
+from lems.model.dynamics import EventOut
 
 nml2_version = "beta2"
 nml2_branch = "development"
@@ -132,7 +137,7 @@ def get_extended_from_comp_type(comp_type_name):
         return None
     return comp_types[extCompTypeName]
 
-def add_comp_type_and_related(comp_type,added, indent, pre, nameInfo=""):
+def add_comp_type_and_related(comp_type, added, indent, pre, nameInfo=""):
     name = comp_type.name
     extender_pre = "<span %s><b>></b> </span>"%grey_style
     child_pre = "<span %s><b>+</b> </span>"%grey_style
@@ -146,26 +151,16 @@ def add_comp_type_and_related(comp_type,added, indent, pre, nameInfo=""):
         for ct in model.component_types:
             if ct.extends == name:
                 contents += add_comp_type_and_related(ct, added, indent+spacer3, extender_pre)
-        '''
-            for child in comp_type.getChild():
-                if ct.name == child.type:
-                    contents += add_comp_type_and_related(ct, added, indent+spacer4, child_pre)
-            for children in comp_type.children:
-                if ct.name == children.type:
-                    contents += add_comp_type_and_related(ct, added, indent+spacer4, children_pre)'''
+
         '''
         for child in comp_type.getChild():
             nameInfo= "" if child.name == child.type else child.name+" "
             contents += add_comp_type_and_related(comp_types[child.type], added, indent+spacer3, child_pre, nameInfo=nameInfo)
         '''
-        for children in comp_type.children:
-            nameInfo= "" if children.name == children.type else children.name+" "
-            contents += add_comp_type_and_related(comp_types[children.type], added, indent+spacer3, children_pre, nameInfo=nameInfo)
-
-            '''contents += indent+indent+child_pre+child.name+" "+comp_type_link(child.type)+"<br/>\n  \n"
-            contents += add_comp_type_and_related(ct, added, indent+spacer4, )'''
-    '''else:
-        contents += indent+pre+name+" ("+nameInfo+") already added...<br/>\n  \n"'''
+        for child_or_children in comp_type.children:
+            nameInfo= "" if child_or_children.name == child_or_children.type else child_or_children.name+" "
+            pre = children_pre if child_or_children.multiple else child_pre
+            contents += add_comp_type_and_related(comp_types[child_or_children.type], added, indent+spacer3, pre, nameInfo=nameInfo)
 
     return contents
 
@@ -276,6 +271,12 @@ for file in files:
             if dim.k is not None and dim.k != 0: contents += format%("K",dim.k)
             if dim.n is not None and dim.n != 0: contents += format%("N",dim.n)
 
+            contents += "<br/>"
+            
+            for unit in units:
+                if unit.dimension == dim.name:
+                    contents += "<br/>"+spacer4+"Defined unit: <a href='#%s'>%s</a>"%(unit.symbol,unit.symbol)+"\n"
+                    
             contents += "    </td>\n"
             contents += "  </tr>\n"
             contents += "</table>\n"
@@ -304,7 +305,7 @@ for file in files:
             if unit.scale is not None and unit.scale != 1:
                 scale = "<br/>"+spacer4+"Scale: "+str(unit.scale)
 
-            contents += spacer4+"Dimension: "+dimension(unit.dimension, "", "")+"<br/>"+spacer4+"Power of 10: "+str(unit.power)+offset+scale+"\n"
+            contents += spacer4+"Dimension: "+dimension(unit.dimension, "", "")+"<br/>"+spacer4+"Power of 10: "+str(unit.power)+offset+scale+"<br/>\n"
 
             for unit2 in model.units:
                 if unit.symbol != unit2.symbol and unit.dimension == unit2.dimension:
@@ -447,20 +448,28 @@ for file in files:
             for cr in comp_type.component_references:
                 contents += "    <td><b>"+cr.name+"</b></td>\n    <td width=\""+col_width_right+"\">"+comp_type_link(cr.type)+"</td>\n  </tr>\n"
 
-        '''
-        #TODO: check if Childs are inherited...
-        if len(comp_type.getChild()) > 0:
-            contents += "  <tr>\n"
-            contents += category("Child elements", len(comp_type.getChild()), type="label-success")
-            for child in comp_type.getChild():
-                contents += "    <td><b>"+child.name+"</b></td>\n    <td width=\""+col_width_right+"\">"+comp_type_link(child.type)+"</td>\n  </tr>\n"
-        '''
         #TODO: check if Childrens are inherited...
         if len(comp_type.children) > 0:
             contents += "  <tr>\n"
-            contents += category("Children elements", len(comp_type.children), type="label-success")
-            for children in comp_type.children:
-                contents += "    <td><b>"+children.name+"</b></td>\n    <td width=\""+col_width_right+"\">"+comp_type_link(children.type)+"</td>\n  </tr>\n"
+            child_contents = ""
+            children_contents = ""
+            child_count = 0
+            children_count = 0
+            #contents += category("Children elements", len(comp_type.children), type="label-success")
+            for child_or_children in comp_type.children:
+                if not child_or_children.multiple:
+                    child_count+=1
+                    child_contents += "    <td><b>"+child_or_children.name+"</b></td>\n    <td width=\""+col_width_right+"\">"+comp_type_link(child_or_children.type)+"</td>\n  </tr>\n"
+                else:
+                    children_count+=1
+                    children_contents += "    <td><b>"+child_or_children.name+"</b></td>\n    <td width=\""+col_width_right+"\">"+comp_type_link(child_or_children.type)+"</td>\n  </tr>\n"
+                
+            if child_count>0:
+                contents += category("Child elements", child_count, type="label-success")
+                contents += child_contents
+            if children_count>0:
+                contents += category("Children elements", children_count, type="label-success")
+                contents += children_contents
 
 
         if len(comp_type.constants) > 0:
@@ -525,7 +534,10 @@ for file in files:
                 if comp_type.structure is not None:
                     structure = comp_type.structure
 
-                if structure is not None:
+                if structure is not None and \
+                    len(structure.withs)+len(structure.child_instances)+ \
+                    len(structure.multi_instantiates)+len(structure.event_connections)>0:
+                        
                     contents += "<span class=\"label\">Structure</span><br/><br/>\n"
                     for w in structure.withs:
                         contents += spacer4+"WITH <b>"+w.instance+"</b> AS <b>"+w.as_+"</b><br/>\n"
@@ -550,6 +562,51 @@ for file in files:
                         contents += spacer4+"<b>"+sv.name+"</b>"+spacer4+dimension(sv.dimension)+exposed_as(sv.exposure)+"<br/>\n"
                     if len(dynamics.state_variables) > 0: contents += "<br/>\n"
 
+                if dynamics.event_handlers is not None:
+                    os_content = ""
+                    oc_content = ""
+                    oe_content = ""
+                    for eh in dynamics.event_handlers:
+                        if isinstance(eh, OnStart):
+                            if len(os_content)==0: os_content += "<span class=\"label\">On Start</span><br/><br/>\n"
+                            
+                            os = eh
+                            for ac in os.actions:
+                                if isinstance(ac, StateAssignment):
+                                    os_content += spacer4+"<b>"+ac.variable+"</b> = "+ac.value+"<br/>\n"
+                            os_content += "<br/>\n"
+                            
+                        if isinstance(eh, OnCondition):
+                            if len(oc_content)==0: oc_content += "<span class=\"label\">On Conditions</span><br/><br/>\n"
+                            
+                            oc = eh
+                            test = format_expression(oc.test)
+                            oc_content += spacer4+"IF "+test+" THEN<br/>\n"
+                            
+                            for ac in oc.actions:
+                                if isinstance(ac, StateAssignment):
+                                    oc_content += spacer4+spacer4+"<b>"+ac.variable+"</b> = "+ac.value+"<br/>\n"
+                                if isinstance(ac, EventOut):
+                                    oc_content += spacer4+spacer4+"EVENT OUT on port <b>"+ac.port+"</b><br/>\n"
+                            oc_content += "<br/>\n"
+                            
+                        if isinstance(eh, OnEvent):
+                            if len(oe_content)==0: oe_content += "<span class=\"label\">On Events</span><br/><br/>\n"
+                            
+                            oe = eh
+                            oe_content += spacer4+"EVENT IN on port: <b>"+oe.port+"</b><br/>\n"
+                            
+                            for ac in oe.actions:
+                                if isinstance(ac, StateAssignment):
+                                    oe_content += spacer4+spacer4+"<b>"+ac.variable+"</b> = "+ac.value+"<br/>\n"
+                                if isinstance(ac, EventOut):
+                                    oe_content += spacer4+spacer4+"EVENT OUT on port <b>"+ac.port+"</b><br/>\n"
+                                
+                            oe_content += "<br/>\n"
+                            
+                    contents += os_content
+                    contents += oc_content
+                    contents += oe_content
 
                 '''
                 if dynamics.on_start is not None:
