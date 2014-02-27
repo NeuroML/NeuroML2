@@ -7,32 +7,32 @@ from lems.model.model import Model
 nml2_version = "beta2"
 nml2_branch = "development"
 
-colWidthLeft = "70"
-colWidthRight = "100"
+col_width_left = "70"
+col_width_right = "100"
 
 spacer2 = "&nbsp;&nbsp;"
 spacer3 = "&nbsp;&nbsp;&nbsp;"
 spacer4 = "&nbsp;&nbsp;&nbsp;&nbsp;"
 spacer8 = spacer4+spacer4
 
-greyStyle = " style=\"color:darkgrey\""
-greySmallStyle = " style=\"color:darkgrey;font-size:12px\""
-greyStyleDark = " style=\"color:dimgrey\""
-greyStyleDarkItal = " style=\"color:dimgrey;font-style:italic\""
-greyBlueStyle = " style=\"color:#85ACE1;font-style:italic\""
-greySmallStyleDark = " style=\"color:dimgrey;font-size:12px\""
+grey_style = " style=\"color:darkgrey\""
+grey_small_style = " style=\"color:darkgrey;font-size:12px\""
+grey_style_dark = " style=\"color:dimgrey\""
+grey_style_dark_ital = " style=\"color:dimgrey;font-style:italic\""
+grey_blue_style = " style=\"color:#85ACE1;font-style:italic\""
+grey_small_style_dark = " style=\"color:dimgrey;font-size:12px\""
 
-lemsXmlUrl = "https://github.com/NeuroML/NeuroML2/blob/%s/NeuroML2CoreTypes/"%nml2_branch
-bioportalUrl = "http://bioportal.bioontology.org/ontologies/46856/?p=terms&conceptid=cno:"
+lems_xml_url = "https://github.com/NeuroML/NeuroML2/blob/%s/NeuroML2CoreTypes/"%nml2_branch
+bioportal_url = "http://bioportal.bioontology.org/ontologies/46856/?p=terms&conceptid=cno:"
 
 nml_src = "../NeuroML2CoreTypes"
 
 def category(name, rows=1, type="label-info"):
     return ("  <td width=\"%s\" rowspan='%i'>\n"+ \
            "    <span class=\"label %s\">%s</span>\n"+ \
-           "  </td>\n")%(colWidthLeft, rows, type, name)
+           "  </td>\n")%(col_width_left, rows, type, name)
 
-def exposedAs(name):
+def exposed_as(name):
     if name is None:
         return ""
     return " (exposed as <b>"+name+"</b>)\n"
@@ -42,7 +42,7 @@ def dimension(name, pre="",post=""):
         return ""+pre+"Dimensionless"+post
     return ""+pre+"<a href=\"NeuroMLCoreDimensions.html#"+name+"\">"+name+"</a>"+post+""
 
-def formatExpression(expr):
+def format_expression(expr):
     expr2 = expr.replace(".gt.", "&gt;")
     expr2 = expr2.replace(".geq.", "&gt;=")
     expr2 = expr2.replace(".lt.", "&lt;")
@@ -52,7 +52,7 @@ def formatExpression(expr):
 
     return expr2
 
-def replaceUnderscoresAndUrls(text, useHtml=True):
+def replace_underscores_and_urls(text, useHtml=True):
     words = text.split(" ")
     text2 = ""
     for word in words:
@@ -65,7 +65,7 @@ def replaceUnderscoresAndUrls(text, useHtml=True):
                 ct = word[word.find('_')+1:word.rfind('_')]
                 post = word[word.rfind('_')+1:]
                 if useHtml:
-                    word = pre+""+compTypeLink(ct)+""+post
+                    word = pre+""+comp_type_link(ct)+""+post
                 else:
                     word = pre+ct+post
             elif word[0]=='_':
@@ -77,28 +77,28 @@ def replaceUnderscoresAndUrls(text, useHtml=True):
         text2 = text2+word+" "
     return text2
 
-def formatDescription(element):
+def format_description(element):
     if element.description is None:
         return ""
     desc = element.description
-    desc2 = replaceUnderscoresAndUrls(desc, useHtml=True)
-    return "<span %s><i>%s</i></span>"%(greyStyleDark, desc2)
+    desc2 = replace_underscores_and_urls(desc, useHtml=True)
+    return "<span %s><i>%s</i></span>"%(grey_style_dark, desc2)
 
-def formatDescriptionSmall(element):
+def format_description_small(element):
     if isinstance(element, str):
         desc = element
     elif element.description is None:
         return ""
     else:
         desc = element.description
-    return "<br/>%s<span %s><i>%s</i></span>"%(spacer4,greySmallStyleDark, desc)
+    return "<br/>%s<span %s><i>%s</i></span>"%(spacer4,grey_small_style_dark, desc)
 
 
 files = ["Cells", "Synapses", "Channels", "Inputs", "Networks", "PyNN", "NeuroMLCoreDimensions", "NeuroMLCoreCompTypes"]
 
-compTypes = {}
-compTypeSrc = {}
-compTypeDesc = {}
+comp_types = {}
+comp_type_src = {}
+comp_type_desc = {}
 
 
 for file in files:
@@ -107,63 +107,63 @@ for file in files:
     model = Model(include_includes=False)
     model.import_from_file(fullfile)
     
-    for compType in model.component_types:
-        compTypes[compType.name] = compType
-        compTypeSrc[compType.name] = file
-        compTypeDesc[compType.name] = compType.description if compType.description is not None else "ComponentType: "+compType.name
+    for comp_type in model.component_types:
+        comp_types[comp_type.name] = comp_type
+        comp_type_src[comp_type.name] = file
+        comp_type_desc[comp_type.name] = comp_type.description if comp_type.description is not None else "ComponentType: "+comp_type.name
 
 print("Read in all files")
-print compTypeSrc
+print comp_type_src
 
 
-def compTypeLink(name):
-    if name is None or name == "none" or not compTypeSrc.has_key(name):
+def comp_type_link(name):
+    if name is None or name == "none" or not comp_type_src.has_key(name):
         return "???"
     compName = name
-    if name.startswith("base"): compName = "<span %s>%s</span>"% (greyBlueStyle, name)
-    desc= replaceUnderscoresAndUrls(compTypeDesc[name], False)
-    return "<a href=\"%s.html#%s\" title=\"%s\">%s</a>"%(compTypeSrc[name],name,desc,compName)
+    if name.startswith("base"): compName = "<span %s>%s</span>"% (grey_blue_style, name)
+    desc= replace_underscores_and_urls(comp_type_desc[name], False)
+    return "<a href=\"%s.html#%s\" title=\"%s\">%s</a>"%(comp_type_src[name],name,desc,compName)
 
-def getExtendedFromCompType(compTypeName):
-    if not compTypes.has_key(compTypeName):
+def get_extended_from_comp_type(comp_type_name):
+    if not comp_types.has_key(comp_type_name):
         return None
-    extCompTypeName = compTypes[compTypeName].extends
+    extCompTypeName = comp_types[comp_type_name].extends
     if extCompTypeName is None:
         return None
-    return compTypes[extCompTypeName]
+    return comp_types[extCompTypeName]
 
-def addCompTypeAndRelated(compType,added, indent, pre, nameInfo=""):
-    name = compType.name
-    extenderPre = "<span %s><b>></b> </span>"%greyStyle
-    childPre = "<span %s><b>+</b> </span>"%greyStyle
-    childrenPre = "<span %s><b>++</b> </span>"%greyStyle
+def add_comp_type_and_related(comp_type,added, indent, pre, nameInfo=""):
+    name = comp_type.name
+    extender_pre = "<span %s><b>></b> </span>"%grey_style
+    child_pre = "<span %s><b>+</b> </span>"%grey_style
+    children_pre = "<span %s><b>++</b> </span>"%grey_style
 
     contents = ""
     if name not in added or nameInfo!="":
-        contents += indent+pre+nameInfo+compTypeLink(name)+"<br/>\n  \n"
+        contents += indent+pre+nameInfo+comp_type_link(name)+"<br/>\n  \n"
         added.append(name)
 
         for ct in model.component_types:
             if ct.extends == name:
-                contents += addCompTypeAndRelated(ct, added, indent+spacer3, extenderPre)
+                contents += add_comp_type_and_related(ct, added, indent+spacer3, extender_pre)
         '''
-            for child in compType.getChild():
+            for child in comp_type.getChild():
                 if ct.name == child.type:
-                    contents += addCompTypeAndRelated(ct, added, indent+spacer4, childPre)
-            for children in compType.children:
+                    contents += add_comp_type_and_related(ct, added, indent+spacer4, child_pre)
+            for children in comp_type.children:
                 if ct.name == children.type:
-                    contents += addCompTypeAndRelated(ct, added, indent+spacer4, childrenPre)'''
+                    contents += add_comp_type_and_related(ct, added, indent+spacer4, children_pre)'''
         '''
-        for child in compType.getChild():
+        for child in comp_type.getChild():
             nameInfo= "" if child.name == child.type else child.name+" "
-            contents += addCompTypeAndRelated(compTypes[child.type], added, indent+spacer3, childPre, nameInfo=nameInfo)
+            contents += add_comp_type_and_related(comp_types[child.type], added, indent+spacer3, child_pre, nameInfo=nameInfo)
         '''
-        for children in compType.children:
+        for children in comp_type.children:
             nameInfo= "" if children.name == children.type else children.name+" "
-            contents += addCompTypeAndRelated(compTypes[children.type], added, indent+spacer3, childrenPre, nameInfo=nameInfo)
+            contents += add_comp_type_and_related(comp_types[children.type], added, indent+spacer3, children_pre, nameInfo=nameInfo)
 
-            '''contents += indent+indent+childPre+child.name+" "+compTypeLink(child.type)+"<br/>\n  \n"
-            contents += addCompTypeAndRelated(ct, added, indent+spacer4, )'''
+            '''contents += indent+indent+child_pre+child.name+" "+comp_type_link(child.type)+"<br/>\n  \n"
+            contents += add_comp_type_and_related(ct, added, indent+spacer4, )'''
     '''else:
         contents += indent+pre+name+" ("+nameInfo+") already added...<br/>\n  \n"'''
 
@@ -229,8 +229,8 @@ for file in files:
     if len(model.component_types) > 0:
         contents += "      <b>Component Types</b><br/>\n"
     added = []
-    for compType in model.component_types:
-        contents += addCompTypeAndRelated(compType, added, "", "")
+    for comp_type in model.component_types:
+        contents += add_comp_type_and_related(comp_type, added, "", "")
 
     contents += "    </div><!--/.well -->\n"+ \
                 "    </div><!--/span-->\n"+ \
@@ -244,7 +244,7 @@ for file in files:
                     "    <tr><td>%s</td></tr>\n"+ \
                     "    <tr><td>Original LEMS ComponentType definitions: <a href=\"%s%s.xml\">%s.xml</a><br/>"+ \
                     "    Schema against which NeuroML based on these should be valid: <a href=\"https://github.com/NeuroML/NeuroML2/tree/%s/Schemas/NeuroML2/NeuroML_v2%s.xsd\">NeuroML_v2%s.xsd</a></td></tr>\n"+ \
-                    "    </table><br/>\n")%(nml2_version,file,formatDescription(lemscontents),lemsXmlUrl,file,file, nml2_branch, nml2_version, nml2_version)
+                    "    </table><br/>\n")%(nml2_version,file,format_description(lemscontents),lems_xml_url,file,file, nml2_branch, nml2_version, nml2_version)
 
     '''
     for inc in model.getInclude():
@@ -324,36 +324,36 @@ for file in files:
 
 
 
-    for compType in model.component_types:
-        #print "ComponentType %s is %s"%(compType.name, compType.description)
+    for comp_type in model.component_types:
+        #print "ComponentType %s is %s"%(comp_type.name, comp_type.description)
 
-        ext = "" if compType.extends is None else "<p>%sextends %s</p>"%(spacer4,compTypeLink(compType.extends))
-        #ext = "" if compType.extends is None else "%s<small>extends <a href=\"#%s\">%s</a></small>"%(spacer4,compType.extends,compType.extends)
+        ext = "" if comp_type.extends is None else "<p>%sextends %s</p>"%(spacer4,comp_type_link(comp_type.extends))
+        #ext = "" if comp_type.extends is None else "%s<small>extends <a href=\"#%s\">%s</a></small>"%(spacer4,comp_type.extends,comp_type.extends)
 
 
-        contents += "<a name=\""+compType.name+"\">&nbsp;</a>\n"
+        contents += "<a name=\""+comp_type.name+"\">&nbsp;</a>\n"
         contents += "<table class=\"table table-bordered\">\n"
 
         contents += "  <tr>\n"
         contents += "    <td colspan='3'>\n"
         classInfo = ""
 
-        if compType.name.startswith("base"):
-            contents += "       <b><span "+greyStyleDarkItal+">"+  compType.name+"</span></b>\n"
+        if comp_type.name.startswith("base"):
+            contents += "       <b><span "+grey_style_dark_ital+">"+  comp_type.name+"</span></b>\n"
         else:
-            contents += "       <b>"+  compType.name+"</b>\n"
+            contents += "       <b>"+  comp_type.name+"</b>\n"
         contents += ext
         contents += "    </td>\n"
         contents += "  </tr>\n"
 
-        desc = "<i>--- no description yet ---</i>" if compType.description is None else formatDescription(compType)
+        desc = "<i>--- no description yet ---</i>" if comp_type.description is None else format_description(comp_type)
         cnoLink = ""
         
-        if " cno_00" in str(compType.description):
-           cno = compType.description.split(" ")[-1]
+        if " cno_00" in str(comp_type.description):
+           cno = comp_type.description.split(" ")[-1]
            desc = desc.replace(cno, "")
-           title = "Link to Bioportal entry for Computational Neuroscience Ontology related to: "+compType.name
-           cnoLink = "<br/><br/><a class=\"btn\" title=\"%s\" href=\"%s%s\" target=\"CNO\">%s</a>"%(title,bioportalUrl,cno,cno)
+           title = "Link to Bioportal entry for Computational Neuroscience Ontology related to: "+comp_type.name
+           cnoLink = "<br/><br/><a class=\"btn\" title=\"%s\" href=\"%s%s\" target=\"CNO\">%s</a>"%(title,bioportal_url,cno,cno)
         
         contents += "  <tr>\n"
         contents += "    <td colspan='3'>\n"
@@ -369,20 +369,20 @@ for file in files:
         requirements = {}
         eventPorts = {}
 
-        for param in compType.parameters:
-            params[param] = compType.name
-        for text in compType.texts:
-            texts[text] = compType.name
-        for path in compType.paths:
-            paths[path] = compType.paths
-        for exp in compType.exposures:
-            exposures[exp] = compType.name
-        for req in compType.requirements:
-            requirements[req] = compType.name
-        for ep in compType.event_ports:
-            eventPorts[ep] = compType.name
+        for param in comp_type.parameters:
+            params[param] = comp_type.name
+        for text in comp_type.texts:
+            texts[text] = comp_type.name
+        for path in comp_type.paths:
+            paths[path] = comp_type.paths
+        for exp in comp_type.exposures:
+            exposures[exp] = comp_type.name
+        for req in comp_type.requirements:
+            requirements[req] = comp_type.name
+        for ep in comp_type.event_ports:
+            eventPorts[ep] = comp_type.name
 
-        extdCompType = getExtendedFromCompType(compType.name)
+        extdCompType = get_extended_from_comp_type(comp_type.name)
 
         while extdCompType is not None:
             for param in extdCompType.parameters:
@@ -398,7 +398,7 @@ for file in files:
             for ep in extdCompType.event_ports:
                 eventPorts[ep] = extdCompType.name
                 
-            extdCompType = getExtendedFromCompType(extdCompType.name)
+            extdCompType = get_extended_from_comp_type(extdCompType.name)
 
 
         if len(params) > 0:
@@ -408,122 +408,122 @@ for file in files:
             #print keysort
             for param in keysort:
                 ct = params[param]
-                origin = formatDescriptionSmall(param)
+                origin = format_description_small(param)
                 style = ""
-                if ct is not compType.name:
-                    origin = spacer4+"(from "+compTypeLink(ct)+")"
-                    style = greyStyle
-                contents += "    <td"+style+"><b>"+param.name+"</b>"+origin+"</td>\n    <td width=\""+colWidthRight+"\">"+dimension(param.dimension)+"</td>\n  </tr>\n"
+                if ct is not comp_type.name:
+                    origin = spacer4+"(from "+comp_type_link(ct)+")"
+                    style = grey_style
+                contents += "    <td"+style+"><b>"+param.name+"</b>"+origin+"</td>\n    <td width=\""+col_width_right+"\">"+dimension(param.dimension)+"</td>\n  </tr>\n"
                 
                 
-        if len(compType.derived_parameters) > 0:
+        if len(comp_type.derived_parameters) > 0:
             contents += "  <tr>\n"
-            contents += category("Derived Parameters", len(compType.derived_parameters), type="label-success")
-            for dp in compType.derived_parameters:
-                origin = formatDescriptionSmall(dp.name)
+            contents += category("Derived Parameters", len(comp_type.derived_parameters), type="label-success")
+            for dp in comp_type.derived_parameters:
+                origin = format_description_small(dp.name)
                 style = ""
-                if ct is not compType.name:
-                    origin = spacer4+"(from "+compTypeLink(ct)+")"
-                    style = greyStyle
-                contents += "    <td"+style+"><b>"+dp.name+" = "+dp.value+"</b>"+origin+"</td>\n    <td width=\""+colWidthRight+"\">"+dimension(dp.dimension)+"</td>\n  </tr>\n"
+                if ct is not comp_type.name:
+                    origin = spacer4+"(from "+comp_type_link(ct)+")"
+                    style = grey_style
+                contents += "    <td"+style+"><b>"+dp.name+" = "+dp.value+"</b>"+origin+"</td>\n    <td width=\""+col_width_right+"\">"+dimension(dp.dimension)+"</td>\n  </tr>\n"
 
 
-        if len(compType.texts) > 0: # TODO: Check if Text elements are inherited...
+        if len(comp_type.texts) > 0: # TODO: Check if Text elements are inherited...
             contents += "  <tr>\n"
-            contents += category("Text fields", len(compType.texts), type="label-success")
-            for text in compType.texts:
+            contents += category("Text fields", len(comp_type.texts), type="label-success")
+            for text in comp_type.texts:
                 contents += "    <td colspan='2'><b>"+text.name+"</b></td>\n  </tr>\n"
 
-        if len(compType.paths) > 0: # TODO: Check if Path elements are inherited...
+        if len(comp_type.paths) > 0: # TODO: Check if Path elements are inherited...
             contents += "  <tr>\n"
-            contents += category("Paths", len(compType.paths), type="label-success")
-            for path in compType.paths:
+            contents += category("Paths", len(comp_type.paths), type="label-success")
+            for path in comp_type.paths:
                 contents += "    <td colspan='2'><b>"+path.name+"</b></td>\n  </tr>\n"
 
         #TODO: check if ComponentRef are inherited...
-        if len(compType.component_references) > 0:
+        if len(comp_type.component_references) > 0:
             contents += "  <tr>\n"
-            contents += category("Component References", len(compType.component_references), type="label-success")
-            for cr in compType.component_references:
-                contents += "    <td><b>"+cr.name+"</b></td>\n    <td width=\""+colWidthRight+"\">"+compTypeLink(cr.type)+"</td>\n  </tr>\n"
+            contents += category("Component References", len(comp_type.component_references), type="label-success")
+            for cr in comp_type.component_references:
+                contents += "    <td><b>"+cr.name+"</b></td>\n    <td width=\""+col_width_right+"\">"+comp_type_link(cr.type)+"</td>\n  </tr>\n"
 
         '''
         #TODO: check if Childs are inherited...
-        if len(compType.getChild()) > 0:
+        if len(comp_type.getChild()) > 0:
             contents += "  <tr>\n"
-            contents += category("Child elements", len(compType.getChild()), type="label-success")
-            for child in compType.getChild():
-                contents += "    <td><b>"+child.name+"</b></td>\n    <td width=\""+colWidthRight+"\">"+compTypeLink(child.type)+"</td>\n  </tr>\n"
+            contents += category("Child elements", len(comp_type.getChild()), type="label-success")
+            for child in comp_type.getChild():
+                contents += "    <td><b>"+child.name+"</b></td>\n    <td width=\""+col_width_right+"\">"+comp_type_link(child.type)+"</td>\n  </tr>\n"
         '''
         #TODO: check if Childrens are inherited...
-        if len(compType.children) > 0:
+        if len(comp_type.children) > 0:
             contents += "  <tr>\n"
-            contents += category("Children elements", len(compType.children), type="label-success")
-            for children in compType.children:
-                contents += "    <td><b>"+children.name+"</b></td>\n    <td width=\""+colWidthRight+"\">"+compTypeLink(children.type)+"</td>\n  </tr>\n"
+            contents += category("Children elements", len(comp_type.children), type="label-success")
+            for children in comp_type.children:
+                contents += "    <td><b>"+children.name+"</b></td>\n    <td width=\""+col_width_right+"\">"+comp_type_link(children.type)+"</td>\n  </tr>\n"
 
 
-        if len(compType.constants) > 0:
+        if len(comp_type.constants) > 0:
             contents += "  <tr>\n"
-            contents += category("Constants", len(compType.constants))
-            for const in compType.constants:
-                contents += "    <td><b>"+const.name+"</b> = "+const.value+formatDescriptionSmall(const)+"</td>\n    <td width=\""+colWidthRight+"\">"+dimension(const.dimension)+"</td>\n  </tr>\n"
+            contents += category("Constants", len(comp_type.constants))
+            for const in comp_type.constants:
+                contents += "    <td><b>"+const.name+"</b> = "+const.value+format_description_small(const)+"</td>\n    <td width=\""+col_width_right+"\">"+dimension(const.dimension)+"</td>\n  </tr>\n"
 
         if len(exposures) > 0:
             contents += "  <tr>\n"
             contents += category("Exposures", len(exposures))
             for exp in sorted(exposures, key=lambda entry: entry.name):
                 ct = exposures[exp]
-                origin = formatDescriptionSmall(exp)
+                origin = format_description_small(exp)
                 style = ""
-                if ct is not compType.name:
-                    origin = spacer4+"(from "+compTypeLink(ct)+")"
-                    style = greyStyle
-                contents += "    <td"+style+"><b>"+exp.name+"</b>"+origin+"</td>\n    <td width=\""+colWidthRight+"\">"+dimension(exp.dimension)+"</td>\n  </tr>\n"
+                if ct is not comp_type.name:
+                    origin = spacer4+"(from "+comp_type_link(ct)+")"
+                    style = grey_style
+                contents += "    <td"+style+"><b>"+exp.name+"</b>"+origin+"</td>\n    <td width=\""+col_width_right+"\">"+dimension(exp.dimension)+"</td>\n  </tr>\n"
 
         if len(requirements) > 0:
             contents += "  <tr>\n"
             contents += category("Requirements", len(requirements))
             for req in sorted(requirements, key=lambda entry: entry.name):
                 ct = requirements[req]
-                origin = formatDescriptionSmall(req)
+                origin = format_description_small(req)
                 style = ""
-                if ct is not compType.name:
-                    origin = spacer4+"(from "+compTypeLink(ct)+")"
-                    style = greyStyle
-                contents += "    <td"+style+"><b>"+req.name+"</b>"+origin+"</td>\n    <td width=\""+colWidthRight+"\">"+dimension(req.dimension)+"</td>\n  </tr>\n"
+                if ct is not comp_type.name:
+                    origin = spacer4+"(from "+comp_type_link(ct)+")"
+                    style = grey_style
+                contents += "    <td"+style+"><b>"+req.name+"</b>"+origin+"</td>\n    <td width=\""+col_width_right+"\">"+dimension(req.dimension)+"</td>\n  </tr>\n"
 
         if len(eventPorts) > 0:
             contents += "  <tr>\n"
             contents += category("Event Ports", len(eventPorts))
             for ep in sorted(eventPorts, key=lambda entry: entry.name):
                 ct = eventPorts[ep]
-                origin = formatDescriptionSmall(ep)
+                origin = format_description_small(ep)
                 style = ""
-                if ct is not compType.name:
-                    origin = spacer4+"(from "+compTypeLink(ct)+")"
-                    style = greyStyle
-                contents += "    <td"+style+"><b>"+ep.name+"</b>"+origin+"</td>\n    <td width=\""+colWidthRight+"\">Direction: "+ep.direction+"</td>\n  </tr>\n"
+                if ct is not comp_type.name:
+                    origin = spacer4+"(from "+comp_type_link(ct)+")"
+                    style = grey_style
+                contents += "    <td"+style+"><b>"+ep.name+"</b>"+origin+"</td>\n    <td width=\""+col_width_right+"\">Direction: "+ep.direction+"</td>\n  </tr>\n"
 
 
         #TODO: check if Attachments are inherited...
-        if len(compType.attachments) > 0:
+        if len(comp_type.attachments) > 0:
             contents += "  <tr>\n"
-            contents += category("Attachments", len(compType.attachments))
-            for att in compType.attachments:
-                contents += "    <td><b>"+att.name+"</b></td>\n    <td width=\""+colWidthRight+"\">"+compTypeLink(att.type)+"</td>\n  </tr>\n"
+            contents += category("Attachments", len(comp_type.attachments))
+            for att in comp_type.attachments:
+                contents += "    <td><b>"+att.name+"</b></td>\n    <td width=\""+col_width_right+"\">"+comp_type_link(att.type)+"</td>\n  </tr>\n"
 
 
 
-        if compType.dynamics:
-                dynamics = compType.dynamics
+        if comp_type.dynamics:
+                dynamics = comp_type.dynamics
                 contents += "<tr>\n"
                 contents += category("Dynamics", type="")
                 contents += "<td colspan='2'>\n"
 
                 structure = None
-                if compType.structure is not None:
-                    structure = compType.structure
+                if comp_type.structure is not None:
+                    structure = comp_type.structure
 
                 if structure is not None:
                     contents += "<span class=\"label\">Structure</span><br/><br/>\n"
@@ -547,7 +547,7 @@ for file in files:
                 if len(dynamics.state_variables) > 0:
                     contents += "<span class=\"label\">State Variables</span><br/><br/>\n"
                     for sv in dynamics.state_variables:
-                        contents += spacer4+"<b>"+sv.name+"</b>"+spacer4+dimension(sv.dimension)+exposedAs(sv.exposure)+"<br/>\n"
+                        contents += spacer4+"<b>"+sv.name+"</b>"+spacer4+dimension(sv.dimension)+exposed_as(sv.exposure)+"<br/>\n"
                     if len(dynamics.state_variables) > 0: contents += "<br/>\n"
 
 
@@ -562,7 +562,7 @@ for file in files:
                 if len(dynamics.on_conditions) > 0:
                     contents += "<span class=\"label\">On Conditions</span><br/><br/>\n"
                     for oc in dynamics.on_conditions:
-                        test = formatExpression(oc.test)
+                        test = format_expression(oc.test)
                         contents += spacer4+"IF "+test+" THEN<br/>\n"
                         for sa in oc.state_assignments:
                             contents += spacer4+spacer4+"<b>"+sa.variable+"</b> = "+sa.value+"<br/>\n"
@@ -588,7 +588,7 @@ for file in files:
                         res = dv.value
                         if res is None:
                             res = dv.select
-                        contents += spacer4+"<b>"+dv.name+"</b> = "+res+spacer4+exposedAs(dv.exposure)+"<br/>\n"
+                        contents += spacer4+"<b>"+dv.name+"</b> = "+res+spacer4+exposed_as(dv.exposure)+"<br/>\n"
                         ''' TODO:
                         if dv.getOnAbsent() is not None:
                             contents += spacer4+spacer4+spacer4+"IF "+dv.select+" IS ABSENT: <b>"+dv.name+"</b> = "+dv.getOnAbsent()+"<br/>\n"'''
@@ -620,7 +620,7 @@ for file in files:
                         if len(rg.on_conditions) > 0:
                             contents += spacer8+"<span class=\"label\">On Conditions</span><br/><br/>\n"
                             for oc in rg.on_conditions:
-                                test = formatExpression(oc.test)
+                                test = format_expression(oc.test)
                                 contents += spacer8+spacer4+"IF "+test+" THEN<br/>\n"
                                 for sa in oc.state_assignments:
                                     contents += spacer8+spacer4+spacer4+"<b>"+sa.variable+"</b> = "+sa.value+"<br/>\n"
