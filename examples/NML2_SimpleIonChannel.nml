@@ -7,7 +7,7 @@
 
     <!-- Example of a simple Na+ ion channel in NeuroML 2 -->
     
-    <ionChannel id="na" type="ionChannelHH" conductance="10pS" species="na">
+    <ionChannelHH id="na" conductance="10pS" species="na">
 
         <gateHHrates id="m" instances="3">
             <forwardRate type="HHExpLinearRate" rate="1per_ms" midpoint="-40mV" scale="10mV"/>
@@ -19,6 +19,6 @@
             <reverseRate type="HHSigmoidRate" rate="1per_ms" midpoint="-35mV" scale="10mV"/>
         </gateHHrates>
 
-    </ionChannel>
+    </ionChannelHH>
 
 </neuroml>

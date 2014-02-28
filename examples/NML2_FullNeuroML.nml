@@ -30,11 +30,11 @@
 <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 <!-- Ion channel specification -->
 
-    <ionChannel id="HH_Na" type="ionChannelHH" conductance="10pS" species="na">  <!-- see SimpleIonChannel.xml for more details -->
+    <ionChannelHH id="HH_Na" conductance="10pS" species="na">  <!-- see SimpleIonChannel.xml for more details -->
 
         <!-- more needed -->
 
-    </ionChannel>
+    </ionChannelHH>
 
 
 

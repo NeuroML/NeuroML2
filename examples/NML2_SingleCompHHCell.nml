@@ -10,12 +10,12 @@
     <!-- This is a "pure" NeuroML 2 file. It can be included in a LEMS file for use in a simulaton 
     by the LEMS interpreter, see LEMS_NML2_Ex5_DetCell.xml -->     
 
-    <ionChannel id="passiveChan" type="ionChannelPassive" conductance="10pS">
+    <ionChannelHH id="passiveChan" conductance="10pS">
         <notes>Leak conductance</notes>
-    </ionChannel>
+    </ionChannelHH>
 
 
-    <ionChannel id="naChan" type="ionChannelHH" conductance="10pS" species="na">
+    <ionChannelHH id="naChan" conductance="10pS" species="na">
         <notes>Na channel</notes>
 
         <gateHHrates id="m" instances="3">
@@ -28,17 +28,17 @@
             <reverseRate type="HHSigmoidRate" rate="1per_ms" midpoint="-35mV" scale="10mV"/>
         </gateHHrates>
 
-    </ionChannel>
+    </ionChannelHH>
 
 
-    <ionChannel id="kChan" type="ionChannelHH" conductance="10pS" species="k">
+    <ionChannelHH id="kChan" conductance="10pS" species="k">
 
         <gateHHrates id="n" instances="4">
             <forwardRate type="HHExpLinearRate" rate="0.1per_ms" midpoint="-55mV" scale="10mV"/>
             <reverseRate type="HHExpRate" rate="0.125per_ms" midpoint="-65mV" scale="-80mV"/>
         </gateHHrates>
             
-    </ionChannel>
+    </ionChannelHH>
 
 
 
