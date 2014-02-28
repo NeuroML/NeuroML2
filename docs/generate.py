@@ -6,6 +6,8 @@ from lems.model.model import Model
 from lems.model.dynamics import OnStart
 from lems.model.dynamics import OnCondition
 from lems.model.dynamics import OnEvent
+from lems.model.dynamics import OnEntry
+from lems.model.dynamics import Transition
 from lems.model.dynamics import StateAssignment
 from lems.model.dynamics import EventOut
 
@@ -83,7 +85,7 @@ def replace_underscores_and_urls(text, useHtml=True):
     return text2
 
 def format_description(element):
-    if element.description is None:
+    if element.description is None or len(element.description)==0:
         return ""
     desc = element.description
     desc2 = replace_underscores_and_urls(desc, useHtml=True)
@@ -96,6 +98,9 @@ def format_description_small(element):
         return ""
     else:
         desc = element.description
+        
+    if len(desc)==0:
+        return ""
     return "<br/>%s<span %s><i>%s</i></span>"%(spacer4,grey_small_style_dark, desc)
 
 
@@ -364,6 +369,7 @@ for file in files:
 
 
         params = {}
+        derived_params = {}
         texts = {}
         paths = {}
         exposures = {}
@@ -372,6 +378,8 @@ for file in files:
 
         for param in comp_type.parameters:
             params[param] = comp_type.name
+        for derived_param in comp_type.derived_parameters:
+            derived_params[derived_param] = comp_type.name
         for text in comp_type.texts:
             texts[text] = comp_type.name
         for path in comp_type.paths:
@@ -383,23 +391,25 @@ for file in files:
         for ep in comp_type.event_ports:
             eventPorts[ep] = comp_type.name
 
-        extdCompType = get_extended_from_comp_type(comp_type.name)
+        extd_comp_type = get_extended_from_comp_type(comp_type.name)
 
-        while extdCompType is not None:
-            for param in extdCompType.parameters:
-                params[param] = extdCompType.name
-            for text in extdCompType.texts:
-                texts[text] = extdCompType.name
-            for path in extdCompType.paths:
-                paths[path] = extdCompType.paths
-            for exp in extdCompType.exposures:
-                exposures[exp] = extdCompType.name
-            for req in extdCompType.requirements:
-                requirements[req] = extdCompType.name
-            for ep in extdCompType.event_ports:
-                eventPorts[ep] = extdCompType.name
+        while extd_comp_type is not None:
+            for param in extd_comp_type.parameters:
+                params[param] = extd_comp_type.name
+            for derived_param in extd_comp_type.derived_parameters:
+                derived_params[derived_param] = extd_comp_type.name
+            for text in extd_comp_type.texts:
+                texts[text] = extd_comp_type.name
+            for path in extd_comp_type.paths:
+                paths[path] = extd_comp_type.paths
+            for exp in extd_comp_type.exposures:
+                exposures[exp] = extd_comp_type.name
+            for req in extd_comp_type.requirements:
+                requirements[req] = extd_comp_type.name
+            for ep in extd_comp_type.event_ports:
+                eventPorts[ep] = extd_comp_type.name
                 
-            extdCompType = get_extended_from_comp_type(extdCompType.name)
+            extd_comp_type = get_extended_from_comp_type(extd_comp_type.name)
 
 
         if len(params) > 0:
@@ -417,11 +427,13 @@ for file in files:
                 contents += "    <td"+style+"><b>"+param.name+"</b>"+origin+"</td>\n    <td width=\""+col_width_right+"\">"+dimension(param.dimension)+"</td>\n  </tr>\n"
                 
                 
-        if len(comp_type.derived_parameters) > 0:
+        if len(derived_params) > 0:
             contents += "  <tr>\n"
-            contents += category("Derived Parameters", len(comp_type.derived_parameters), type="label-success")
-            for dp in comp_type.derived_parameters:
-                origin = format_description_small(dp.name)
+            contents += category("Derived Parameters", len(derived_params), type="label-success")
+            keysort = sorted(derived_params.keys(), key=lambda derived_param: derived_param.name)
+            for dp in keysort:
+                ct = derived_params[dp]
+                origin = ""
                 style = ""
                 if ct is not comp_type.name:
                     origin = spacer4+"(from "+comp_type_link(ct)+")"
@@ -608,47 +620,16 @@ for file in files:
                     contents += oc_content
                     contents += oe_content
 
-                '''
-                if dynamics.on_start is not None:
-                    contents += "<span class=\"label\">On Start</span><br/><br/>\n"
-                    os = dynamics.on_start
-                    for sa in os.state_assignments:
-                        contents += spacer4+"<b>"+sa.variable+"</b> = "+sa.value+"<br/>\n"
-                    contents += "<br/>\n"
-
-                if len(dynamics.on_conditions) > 0:
-                    contents += "<span class=\"label\">On Conditions</span><br/><br/>\n"
-                    for oc in dynamics.on_conditions:
-                        test = format_expression(oc.test)
-                        contents += spacer4+"IF "+test+" THEN<br/>\n"
-                        for sa in oc.state_assignments:
-                            contents += spacer4+spacer4+"<b>"+sa.variable+"</b> = "+sa.value+"<br/>\n"
-                        for eo in oc.event_outs:
-                            contents += spacer4+spacer4+"EVENT OUT on port <b>"+eo.port+"</b><br/>\n"
-                        contents += "<br/>\n"
-
-
-                if len(dynamics.on_events) > 0:
-                    contents += "<span class=\"label\">On Events</span><br/><br/>\n"
-                    for oe in dynamics.on_events:
-                        contents += spacer4+"EVENT IN on port: <b>"+oe.port+"</b><br/>\n"
-                        for sa in oe.state_assignments:
-                            contents += spacer4+spacer4+"<b>"+sa.variable+"</b> = "+sa.value+"<br/>\n"
-                        for eo in oe.event_outs:
-                            contents += spacer4+spacer4+"EVENT OUT on port <b>"+eo.port+"</b><br/>\n"
-                        contents += "<br/>\n"'''
-
 
                 if len(dynamics.derived_variables) > 0:
                     contents += "<span class=\"label\">Derived Variables</span><br/><br/>\n"
                     for dv in dynamics.derived_variables:
                         res = dv.value
                         if res is None:
-                            res = dv.select
+                            res = str.replace(dv.select, '/', '->')
+                            if dv.reduce:
+                                res=res+" (reduce method: "+dv.reduce+")"
                         contents += spacer4+"<b>"+dv.name+"</b> = "+res+spacer4+exposed_as(dv.exposure)+"<br/>\n"
-                        ''' TODO:
-                        if dv.getOnAbsent() is not None:
-                            contents += spacer4+spacer4+spacer4+"IF "+dv.select+" IS ABSENT: <b>"+dv.name+"</b> = "+dv.getOnAbsent()+"<br/>\n"'''
                     if len(dynamics.derived_variables) > 0: contents += "<br/>\n"
                 
 
@@ -666,27 +647,35 @@ for file in files:
                         initial = "" if rg.initial== None or rg.initial== "false" else " (initial)"
                         contents += "<span class=\"label\">Regime: "+rg.name+initial+"</span><br/><br/>\n"
 
-                        '''
-                        if rg.on_entry is not None:
-                            contents += spacer8+"<span class=\"label\">On Entry</span><br/><br/>\n"
-                            oe = rg.on_entry
-                            for sa in oe.state_assignments:
-                                contents += spacer8+spacer4+"<b>"+sa.variable+"</b> = "+sa.value+"<br/>\n"
-                            contents += "<br/>\n"
-
-                        if len(rg.on_conditions) > 0:
-                            contents += spacer8+"<span class=\"label\">On Conditions</span><br/><br/>\n"
-                            for oc in rg.on_conditions:
-                                test = format_expression(oc.test)
-                                contents += spacer8+spacer4+"IF "+test+" THEN<br/>\n"
-                                for sa in oc.state_assignments:
-                                    contents += spacer8+spacer4+spacer4+"<b>"+sa.variable+"</b> = "+sa.value+"<br/>\n"
-                                for eo in oc.event_outs:
-                                    contents += spacer8+spacer4+spacer4+"EVENT OUT on port <b>"+eo.port+"</b><br/>\n"
-                                if oc.getTransition() != None:
-                                    contents += spacer8+spacer4+spacer4+"TRANSITION to REGIME <b>"+oc.getTransition().regimes+"</b><br/>\n"
+                        oc_content = ""
+                        for eh in rg.event_handlers:
+                            if isinstance(eh, OnEntry):
+                                contents += spacer8+"<span class=\"label\">On Entry</span><br/><br/>\n"
+                                oe = eh
+                                for ac in oe.actions:
+                                    if isinstance(ac, StateAssignment):
+                                        contents += spacer8+spacer4+"<b>"+ac.variable+"</b> = "+ac.value+"<br/>\n"
+                                    
                                 contents += "<br/>\n"
-                        '''
+                                
+                            if isinstance(eh, OnCondition):
+                                if len(oc_content)==0: oc_content += spacer8+"<span class=\"label\">On Conditions</span><br/><br/>\n"
+
+                                oc = eh
+                                test = format_expression(oc.test)
+                                oc_content += spacer8+spacer4+"IF "+test+" THEN<br/>\n"
+
+                                for ac in oc.actions:
+                                    if isinstance(ac, StateAssignment):
+                                        oc_content += spacer8+spacer4+spacer4+"<b>"+ac.variable+"</b> = "+ac.value+"<br/>\n"
+                                    if isinstance(ac, EventOut):
+                                        oc_content += spacer8+spacer4+spacer4+"EVENT OUT on port <b>"+ac.port+"</b><br/>\n"
+                                    if isinstance(ac, Transition):
+                                        oc_content += spacer8+spacer4+spacer4+"TRANSITION to REGIME <b>"+ac.regime+"</b><br/>\n"
+                                oc_content += "<br/>\n"
+                                
+                        contents += oc_content
+                            
                         if len(rg.time_derivatives) > 0:
                             contents += spacer8+ "<span class=\"label\">Time Derivatives</span><br/><br/>\n"
                             for td in rg.time_derivatives:
@@ -695,8 +684,6 @@ for file in files:
                             if len(rg.time_derivatives) > 0: contents += "<br/>\n"
 
                     if len(dynamics.regimes) > 0: contents += "<br/>\n"
-
-
 
 
                 contents += "</td>\n"

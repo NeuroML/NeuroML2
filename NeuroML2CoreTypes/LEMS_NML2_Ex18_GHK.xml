@@ -12,10 +12,10 @@
 
   <!-- Membrane mechanisms -->
 
-  <ionChannel id="leak" type="ionChannelPassive" conductance="10pS" species="non_specific"/>
+  <ionChannelPassive id="leak" conductance="10pS" species="non_specific"/>
   
 
-  <ionChannel id="na_chan" type="ionChannelHH" conductance="10pS" species="na">
+  <ionChannelHH id="na_chan" conductance="10pS" species="na">
 
     <gateHHrates id="m" instances="3">
       <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="6.3 degC"/>
@@ -29,10 +29,10 @@
       <reverseRate type="HHSigmoidRate" rate="1per_ms" midpoint="-35mV" scale="10mV"/>
     </gateHHrates>
 
-  </ionChannel>
+  </ionChannelHH>
 
 
-  <ionChannel id="k_chan" type="ionChannelHH" conductance="10pS" species="k">
+  <ionChannelHH id="k_chan" conductance="10pS" species="k">
 
     <gateHHrates id="n" instances="4">
       <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="6.3 degC"/>
@@ -40,10 +40,10 @@
       <reverseRate type="HHExpRate" rate="0.125per_ms" midpoint="-65mV" scale="-80mV"/>
     </gateHHrates>
 
-  </ionChannel>
+  </ionChannelHH>
 
 
-  <ionChannel id="ca_chan" type="ionChannelHH" conductance="10pS" species="ca">
+  <ionChannelHH id="ca_chan" conductance="10pS" species="ca">
 
     <gateHHrates id="p" instances="2">
       <!-- the nrn example uses a hardcoded "taufactor", disregarding the q10 calculations -->
@@ -52,7 +52,7 @@
       <reverseRate type="HHExpRate" rate="4per_ms" midpoint="-65mV" scale="-18mV"/>
     </gateHHrates>
 
-  </ionChannel>
+  </ionChannelHH>
   
   <!-- Intracellular Calcium dynamics -->
   <concentrationModel id="simple_decay" type="fixedFactorConcentrationModel"

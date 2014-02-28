@@ -392,7 +392,7 @@
     </ComponentType>
 
 
-    <ComponentType name="ionChannel" 
+    <ComponentType name="ionChannelHH" 
         extends="baseIonChannel"
         description="Note _ionChannel_ and _ionChannelHH_ are currently functionally identical. This is needed since many existing examples use ionChannel, some use ionChannelHH. NeuroML v2beta3 will remove one of these, probably ionChannelHH.">
         <Child name="notes" type="notes"/>
@@ -419,8 +419,8 @@
         </Dynamics>
     </ComponentType>
 
-    <ComponentType name="ionChannelHH"
-        extends="ionChannel"
+    <ComponentType name="ionChannel"
+        extends="ionChannelHH"
         description="Note _ionChannel_ and _ionChannelHH_ are currently functionally identical. This is needed since many existing examples use ionChannel, some use ionChannelHH. NeuroML v2beta3 will remove one of these, probably ionChannelHH.">
         
         <Dynamics>

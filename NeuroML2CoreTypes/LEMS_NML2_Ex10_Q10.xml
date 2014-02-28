@@ -18,9 +18,9 @@
             <!-- Main NeuroML2 content -->
     
     
-    <ionChannel id="passive" type="ionChannelPassive" conductance="10pS"/>
+    <ionChannelPassive id="passive" conductance="10pS"/>
     
-    <ionChannel id="na" type="ionChannelHH" conductance="10pS">
+    <ionChannelHH id="na" conductance="10pS">
     
        <gateHHrates id="m" instances="3">
             <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="32degC" /> 
@@ -35,7 +35,7 @@
     
        </gateHHrates>
     
-    </ionChannel>
+    </ionChannelHH>
     
     
     <ComponentType name="newExpRate" extends="baseVoltageDepRate">
@@ -48,7 +48,7 @@
     </ComponentType>
     
     
-    <ionChannel id="k" type="ionChannelHH" conductance="10pS">
+    <ionChannelHH id="k" conductance="10pS">
     
         <gateHHrates id="n" instances="4">
     
@@ -58,7 +58,7 @@
             <reverseRate type="newExpRate"/>
         </gateHHrates>
     
-    </ionChannel>
+    </ionChannelHH>
     
     
     
