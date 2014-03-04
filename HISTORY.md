@@ -1,3 +1,8 @@
+History of changes in the official releases of NeuroML 2
+========================================================
+
+Note, this records major changes/updates in not just the [NeuroML Schemas](https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2) and [LEMS](https://github.com/LEMS/LEMS), but also the Python ([libNeuroML](https://github.com/NeuralEnsemble/libNeuroML) and [PyLEMS](https://github.com/LEMS/pylems)) and Java ([jLEMS](https://github.com/LEMS/jLEMS), [org.neuroml.model](https://github.com/NeuroML/org.neuroml.model), [jNeuroML](https://github.com/NeuroML/jNeuroML), etc.) libraries.
+
 v2beta2 / 2014-3-5
 ------------------
 
@@ -35,7 +40,7 @@ v2beta2 / 2014-3-5
 
 * **Ordering of channelDensity more restrictive.**
     In this release, the order of `<channelPopulation>`, `<channelDensity>`, `<channelDensityNernst>`, 
-    `<channelDensityGHK>` in `<membraneProperties>` is more restricyive; they have to appear in that order. 
+    `<channelDensityGHK>` in `<membraneProperties>` is more restrictive; they have to appear in that order. 
     This is due to the previous flexibility in the ordering in the last Schema producing some difficult to 
     understand constructs in the generated code for libNeuroML (Python) & org.neuroml.model (Java).
 
@@ -51,7 +56,7 @@ v2beta2 / 2014-3-5
 
 
 v2beta1 / 2013-09-03
---------------------
+====================
 
 * Renamed the main Schema from NeuroML_v2beta.xsd to NeuroML_v2beta1.xsd. Changes outlined below reflected in the schema
 
