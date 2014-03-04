@@ -1,42 +1,43 @@
 v2beta2 / 2014-3-5
+------------------
 
 * Renamed the main Schema from NeuroML_v2beta1.xsd to NeuroML_v2beta2.xsd. Changes outlined below are reflected in 
   the new schema
 
-* Better support for GHK & Nernst 
-    There is better support for Goldman Hodgkin Katz currents, as well as conductances whose reversal potentials
-    are determined by the Nernst equation. See http://www.opensourcebrain.org/projects/ghk-nernst for more details
+* **Better support for GHK & Nernst:**
+    There is better support for Goldman Hodgkin Katz currents (using the `<channelDensityGHK>` element), as well as conductances whose reversal potentials
+    are determined by the Nernst equation (`<channelDensityNernst>`). See http://www.opensourcebrain.org/projects/ghk-nernst for more details
     and some working examples in LEMS/NeuroML2 which can be run & compared against NEURON versions. 
     Thanks to Boris Marin for making up these examples & checking through the implementations in NeuroML.
 
-* Much better support in PyLEMS for NeuroML 2/LEMS models
+* **Much better support in PyLEMS for NeuroML 2/LEMS models**
     With this release PyLEMS is a much stabler option for simulating LEMS models in general & NeuroML 2 example models.
     See https://github.com/LEMS/pylems/blob/master/README.md for the latest details on PyLEMS support.
     PyLEMS has also been put on the Python Package Index and can be installed with: pip install PyLEMS
 
-* Better import & export of many formats using jNeuroML
+* **Better import & export of many formats using jNeuroML**
     There have been significant improvements in the export & import options for a number of formats, 
     including export of NEURON and import of SBML. See here: 
     https://github.com/NeuroML/jNeuroML/blob/master/src/main/java/org/neuroml/JNeuroML.java
     for the range of export & import formats currently supported.
 
-* Update to fixedFactorConc
+* **Update to fixedFactorConc**
     There has been a
 
-* Ordering of channelDensity more restrictive.
+* **Ordering of channelDensity more restrictive.**
     In this release, the order of channelPopulation, channelDensity, channelDensityNernst, channelDensityGHK in
 
-* Using log as opposed to ln in Channel.xml
+* **Using log as opposed to ln in Channel.xml**
     Since ln is preferred to log for natural log in Python, Java & most programming languages, using this by default,
     see: https://github.com/NeuroML/NeuroML2/commit/89e600acb8e21ff0c511606156dc3d0197ed8959
     Using ln in expressions will still be supported by jLEMS/jNeuroML, but is discouraged. 
 
-* Updated the names used in <xs:complexType> definitions in the Schema for some I&F cells
+* **Updated the names used in complexType definitions in the Schema for some I&F cells**
     For example IaFTauCell -> IafTauCell (note small f); this is more consistent with the NeuroML 2 element,
     iafTauCell, which is unchanged. However, the classes in the generated Python & Java APIs are updated to the 
     new form, e.g. IafTauCell iaf = new IafTauCell();
 
-* Added baseSpikingCell
+* **Added baseSpikingCell**
     Adding the ComponentType definition for ...
 
 
@@ -52,7 +53,8 @@ v2beta1 / 2013-09-03
 
 * Connections with segment ids & fraction along.
     Added option to specify preSegmentId, preFractionAlong, etc. on connections, e.g.
-    `<connection id="0" preCellId="../popA/0/dendCell" preSegmentId="0" preFractionAlong="0.5" postCellId="../popB/0/dendCell" postSegmentId="1" postFractionAlong="1"/>`
+    `<connection id="0" preCellId="../popA/0/dendCell" preSegmentId="0" preFractionAlong="0.5"
+postCellId="../popB/0/dendCell" postSegmentId="1" postFractionAlong="1"/>`
     to allow detailed connectivity between multicompartmental cells. See examples/NML2_SegmentConnections.nml for valid example
 
 * Restructure of NMDA/STP synapses.
