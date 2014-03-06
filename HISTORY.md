@@ -1,17 +1,20 @@
 History of changes in the official releases of NeuroML 2
-========================================================
+--------------------------------------------------------
 
 Note, this records major changes/updates in not just the [NeuroML Schemas](https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2) and [LEMS](https://github.com/LEMS/LEMS), but also the Python ([libNeuroML](https://github.com/NeuralEnsemble/libNeuroML) and [PyLEMS](https://github.com/LEMS/pylems)) and Java ([jLEMS](https://github.com/LEMS/jLEMS), [org.neuroml.model](https://github.com/NeuroML/org.neuroml.model), [jNeuroML](https://github.com/NeuroML/jNeuroML), etc.) libraries.
 
 v2beta2 / 2014-3-5
 ------------------
 
-* **Renamed the main Schema from NeuroML_v2beta1.xsd to NeuroML_v2beta2.xsd.** Changes outlined below are reflected in 
-  the new schema
+* **Renamed the main Schema from NeuroML_v2beta1.xsd to [NeuroML_v2beta2.xsd](https://github.com/NeuroML/NeuroML2/blob/master/Schemas/NeuroML2/NeuroML_v2beta2.xsd).** 
+  Changes outlined below are reflected in the new schema
 
 * **Better support for GHK & Nernst.**
-    There is better support for Goldman Hodgkin Katz currents (using the `<channelDensityGHK>` element), as well as conductances whose reversal potentials
-    are determined by the Nernst equation (`<channelDensityNernst>`). See XXX. See http://www.opensourcebrain.org/projects/ghk-nernst for more details
+    There is better support for Goldman Hodgkin Katz currents (using the 
+    [channelDensityGHK](http://www.neuroml.org/NeuroML2CoreTypes/Cells.html#channelDensityGHK) element), 
+    as well as conductances whose reversal potentials are determined by the Nernst equation 
+    [channelDensityNernst](http://www.neuroml.org/NeuroML2CoreTypes/Cells.html#channelDensityNernst). 
+    See http://www.opensourcebrain.org/projects/ghk-nernst for more details
     and some working examples in LEMS/NeuroML2 which can be run & compared against NEURON versions. 
     Thanks to Boris Marin for making up these examples & checking through the implementations in NeuroML.
 
