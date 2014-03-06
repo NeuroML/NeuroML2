@@ -12,7 +12,7 @@ from lems.model.dynamics import StateAssignment
 from lems.model.dynamics import EventOut
 
 nml2_version = "beta2"
-nml2_branch = "development"
+nml2_branch = "master"
 
 col_width_left = "70"
 col_width_right = "100"
@@ -256,13 +256,13 @@ for file in files:
     if model.description:
         desc = model.description
     contents += ("   <div class=\"alert alert-error\">Note: these descriptions have been updated to the latest "
-                     "   <a href=\"https://github.com/NeuroML/NeuroML2/tree/development/Schemas/NeuroML2\">NeuroML v2%s</a> definitions, using "
+                     "   <a href=\"https://github.com/NeuroML/NeuroML2/tree/%s/Schemas/NeuroML2\">NeuroML v2%s</a> definitions, using "
                      "   <a href=\"https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS\">the latest version of LEMS</a>!</div>\n"+ \
                     "    <table class=\"table table-bordered\"><tr><td ><h3>%s</h3></td></tr>\n"+ \
                     "    <tr><td>%s</td></tr>\n"+ \
                     "    <tr><td>Original LEMS ComponentType definitions: <a href=\"%s%s.xml\">%s.xml</a><br/>"+ \
                     "    Schema against which NeuroML based on these should be valid: <a href=\"https://github.com/NeuroML/NeuroML2/tree/%s/Schemas/NeuroML2/NeuroML_v2%s.xsd\">NeuroML_v2%s.xsd</a></td></tr>\n"+ \
-                    "    </table><br/>\n")%(nml2_version,file,format_description(desc),lems_xml_url,file,file, nml2_branch, nml2_version, nml2_version)
+                    "    </table><br/>\n")%(nml2_branch,nml2_version,file,format_description(desc),lems_xml_url,file,file, nml2_branch, nml2_version, nml2_version)
 
     '''
     for inc in model.getInclude():
