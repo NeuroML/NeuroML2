@@ -26,7 +26,7 @@
     <spikeGenerator id="spikeGen55ms" period="75ms" />
 
     <baseCell id="passiveCell" type="pointCellCondBased" C="10pF"  v0="-55mV" thresh="20mV">
-        <channelPopulation id="leak" ionChannel="passive" number="300" erev="-54.3mV"/>
+        <channelPopulation id="leak" ionChannel="passiveChan" number="300" erev="-54.3mV"/>
     </baseCell>
 
     <blockingPlasticSynapse id="nmdaSyn1" gbase="0.5nS"
@@ -36,7 +36,7 @@
 			scalingConc="1.920544 mM" scalingVolt="16.129
 							       mV"/>
     </blockingPlasticSynapse>
-
+    
     <pulseGenerator id="pulseGen2" delay="200ms" duration="10000ms" amplitude="0.065nA"/>
 
     <network id="net2">
@@ -73,7 +73,7 @@
         </Display>
         
         <Display id="d3" title="Ex6: Cells with NMDA mediated synapse: spike generator" timeScale="1ms" xmin="0" xmax="400" ymin="-10" ymax="90">
-            <Line id ="l1" quantity="srcPop[0]/tsince" scale="1ms"  color="#aaaaaa" timeScale="1ms"/>
+            <Line id ="time since spike" quantity="srcPop[0]/tsince" scale="1ms"  color="#aaaaaa" timeScale="1ms"/>
         </Display>
         
     </Simulation>

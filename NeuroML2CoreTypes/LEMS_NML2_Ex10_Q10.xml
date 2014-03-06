@@ -18,9 +18,9 @@
             <!-- Main NeuroML2 content -->
     
     
-    <ionChannel id="passive" type="ionChannelPassive" conductance="10pS"/>
+    <ionChannelPassive id="passive" conductance="10pS"/>
     
-    <ionChannel id="na" type="ionChannelHH" conductance="10pS">
+    <ionChannelHH id="na" conductance="10pS">
     
        <gateHHrates id="m" instances="3">
             <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="32degC" /> 
@@ -35,7 +35,7 @@
     
        </gateHHrates>
     
-    </ionChannel>
+    </ionChannelHH>
     
     
     <ComponentType name="newExpRate" extends="baseVoltageDepRate">
@@ -48,7 +48,7 @@
     </ComponentType>
     
     
-    <ionChannel id="k" type="ionChannelHH" conductance="10pS">
+    <ionChannelHH id="k" conductance="10pS">
     
         <gateHHrates id="n" instances="4">
     
@@ -58,7 +58,7 @@
             <reverseRate type="newExpRate"/>
         </gateHHrates>
     
-    </ionChannel>
+    </ionChannelHH>
     
     
     
@@ -86,18 +86,19 @@
     <Simulation id="sim1" length="300ms" step="0.01ms" target="net1">
     
         <Display id="d1" title="Ex10: HH example with Q10 rate adjustments: Voltage" timeScale="1ms" xmin="0" xmax="300" ymin="-90" ymax="60">
-            <Line id="l1" quantity="hhpop[0]/v" scale="1mV"  color="#ffffff" timeScale="1ms"/>
+            <Line id="v" quantity="hhpop[0]/v" scale="1mV"  color="#ffffff" timeScale="1ms"/>
         </Display>
         
         <Display id="d2" title="Ex10: HH example with Q10 rate adjustments: rate variables" timeScale="1ms" xmin="0" xmax="300" ymin="-0.1" ymax="1.1">
             
-            <Line id="l2" quantity="hhpop[0]/naChans/na/m/q" scale="1"  color="#000000" timeScale="1ms"/>
-            <Line id="l3" quantity="hhpop[0]/naChans/na/h/q" scale="1"  color="#ff0000" timeScale="1ms"/>
-            <Line id="l4" quantity="hhpop[0]/kChans/k/n/q" scale="1"  color="#0000ff" timeScale="1ms"/>
+            <Line id="m" quantity="hhpop[0]/naChans/na/m/q" scale="1"  color="#000000" timeScale="1ms"/>
+            <Line id="h" quantity="hhpop[0]/naChans/na/h/q" scale="1"  color="#ff0000" timeScale="1ms"/>
+            <Line id="n" quantity="hhpop[0]/kChans/k/n/q" scale="1"  color="#0000ff" timeScale="1ms"/>
+            <Line id="q10 scaling" quantity="hhpop[0]/kChans/k/n/rateScale" scale="1"  color="#00ffff" timeScale="1ms"/>
         </Display>
     
         <Display id="d3" title="Ex10: HH example with Q10 rate adjustments: currents" timeScale="1ms" xmin="0" xmax="300" ymin="-0.01" ymax="0.1">
-            <Line id="li1" quantity="hhpop[0]/pulseGen1/i" scale="1nA"  color="#000000" timeScale="1ms"/>
+            <Line id="i" quantity="hhpop[0]/pulseGen1/i" scale="1nA"  color="#000000" timeScale="1ms"/>
         </Display>
     
         <OutputFile id="of0" fileName="results/hhq10_v.dat">

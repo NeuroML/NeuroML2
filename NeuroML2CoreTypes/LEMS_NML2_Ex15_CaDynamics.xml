@@ -15,10 +15,10 @@
 
 <!-- Main NeuroML2 content -->
 
-    <ionChannel id="GranPassiveCond" conductance="10pS" type="ionChannelPassive"/>
+    <ionChannelPassive id="GranPassiveCond" conductance="10pS"/>
 
 
-    <ionChannel id="Gran_NaF_98" conductance="10pS" type="ionChannelHH" species="na">
+    <ionChannelHH id="Gran_NaF_98" conductance="10pS" species="na">
         <notes>Fast inactivating Na+ channel</notes>
 
         <gateHHratesTau id="m" instances="3">
@@ -35,7 +35,7 @@
             <reverseRate type="HHExpRate" rate="120per_s" scale="0.01123596V" midpoint="-0.04V"/>
             <timeCourse type="Gran_NaF_98_h_tau_tau"/>
         </gateHHratesTau>
-    </ionChannel>
+    </ionChannelHH>
 
     <ComponentType name="Gran_NaF_98_m_tau_tau" extends="baseVoltageDepTime">
         <Constant name="TIME_SCALE" dimension="time" value="1 s"/>
@@ -71,7 +71,7 @@
 
 
 
-    <ionChannel id="Gran_KDr_98" conductance="10pS" type="ionChannelHH" species="k">
+    <ionChannelHH id="Gran_KDr_98" conductance="10pS" species="k">
         <notes>Delayed rectifyer K channel</notes>
         <gateHHrates id="m" instances="4">
             <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="17.350264793 degC"/>
@@ -85,7 +85,7 @@
             <forwardRate type="Gran_KDr_98_h_alpha_rate"/>
             <reverseRate type="Gran_KDr_98_h_beta_rate"/>
         </gateHHrates>
-    </ionChannel>
+    </ionChannelHH>
 
     <ComponentType name="Gran_KDr_98_m_alpha_rate" extends="baseVoltageDepRate">
         <Constant name="TIME_SCALE" dimension="time" value="1 s"/>
@@ -132,7 +132,7 @@
 
 
 
-    <ionChannel id="Gran_H_98" conductance="10pS" type="ionChannelHH" species="h">
+    <ionChannelHH id="Gran_H_98" conductance="10pS" species="h">
         <notes>Anomalous inward rectifying H conductance</notes>
         <gateHHrates id="n" instances="1">
             <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="17.350264793 degC"/>
@@ -140,11 +140,11 @@
             <forwardRate type="HHExpRate" rate="0.8per_s" scale="-0.01100110011V" midpoint="-0.065V"/>
             <reverseRate  type="HHExpRate" rate="0.8per_s" scale="0.01100110011V" midpoint="-0.065V"/>
         </gateHHrates>
-    </ionChannel>
+    </ionChannelHH>
 
 
 
-    <ionChannel id = "ca" conductance = "10pS" type = "ionChannelHH">
+    <ionChannelHH id = "ca" conductance = "10pS" species="h">
         <notes>A High Voltage Activated Ca2+ channel</notes>
         <gateHHrates id="m" instances = "2">
             <q10Settings type = "q10ExpTemp" q10Factor = "3" experimentalTemp = "17.350264793 degC"/>
@@ -158,10 +158,10 @@
             <forwardRate type = "Gran_CaHVA_98_h_alpha_rate"/>
             <reverseRate type = "Gran_CaHVA_98_h_beta_rate"/>
         </gateHHrates>
-    </ionChannel>
+    </ionChannelHH>
 
 
-    <ionChannel id="Gran_CaHVA_98" conductance="10pS" type="ionChannelHH" species="ca">
+    <ionChannelHH id="Gran_CaHVA_98" conductance="10pS" species="ca">
         <notes>A High Voltage Activated Ca2+ channel</notes>
         <gateHHrates id="m" instances="2">
             <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="17.350264793 degC"/>
@@ -175,7 +175,7 @@
             <forwardRate type="Gran_CaHVA_98_h_alpha_rate"/>
             <reverseRate type="Gran_CaHVA_98_h_beta_rate"/>
         </gateHHrates>
-    </ionChannel>
+    </ionChannelHH>
 
     <ComponentType name="Gran_CaHVA_98_h_alpha_rate" extends="baseVoltageDepRate">
         <Constant name="TIME_SCALE" dimension="time" value="1 s"/>
@@ -206,7 +206,7 @@
     </ComponentType>
 
 
-    <ionChannel id="Gran_KA_98" conductance="10pS" type="ionChannelHH" species="k">
+    <ionChannelHH id="Gran_KA_98" conductance="10pS" species="k">
         <notes>A-type K channel, with rate equations expressed in tau and inf form</notes>
         <gateHHtauInf id="m" instances="3">
             <q10Settings type="q10ExpTemp" q10Factor="1" experimentalTemp="17.350264793 degC"/>
@@ -220,7 +220,7 @@
             <timeCourse type="Gran_KA_98_h_tau_tau"/>
             <steadyState type="HHSigmoidVariable" rate="1" scale="-0.0084V" midpoint="-0.0688V"/>
         </gateHHtauInf>
-    </ionChannel>
+    </ionChannelHH>
 
     <ComponentType name="Gran_KA_98_m_tau_tau" extends="baseVoltageDepTime">
         <Constant name="TIME_SCALE" dimension="time" value="1 s"/>
@@ -245,7 +245,7 @@
 
 
 
-    <ionChannel id = "Gran_KCa_98" conductance = "10pS" type = "ionChannelHH" species = "k">
+    <ionChannelHH id = "Gran_KCa_98" conductance = "10pS" species = "k">
         <notes>Calcium dependent K+ channel</notes>
         <gateHHrates id="m" instances = "1">
             <q10Settings type = "q10ExpTemp" q10Factor = "3" experimentalTemp = "17.350264793 degC"/>
@@ -253,7 +253,7 @@
             <forwardRate type = "Gran_KCa_98_m_alpha_rate"/>
             <reverseRate type = "Gran_KCa_98_m_beta_rate"/>
         </gateHHrates>
-    </ionChannel>
+    </ionChannelHH>
 
     <ComponentType name = "Gran_KCa_98_m_alpha_rate" extends = "baseVoltageConcDepRate">
         <Constant name = "TIME_SCALE" dimension = "time" value = "1 s"/>

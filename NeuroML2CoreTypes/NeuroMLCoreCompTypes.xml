@@ -52,7 +52,7 @@
     </ComponentType>
 
 
-    <ComponentType name="pointDiam"
+    <ComponentType name="point3DWithDiam"
         description="Base type for ComponentTypes which specify an ( _x, _y, _z ) coordinate along with a _diameter. Note: no dimension used in the attributes for these coordinates! These are assumed to have dimension micrometer (10^-6 m). This is due to micrometers being the default option for the majority of neuronal morphology formats, and dimensions are omitted here to facilitate reading and writing of morphologies in NeuroML.">
         <Parameter name="x" dimension="none" description="x coordinate of point. Note: no dimension used, see note above!"/>
         <Parameter name="y" dimension="none" description="y coordinate of point. Note: no dimension used, see note above!"/>
@@ -64,15 +64,15 @@
         <DerivedParameter name="radius" dimension="length" value="0.000001 * diameter / 2"/>-->
         <Exposure name="radius" dimension="length"/>
 
-        <Exposure name="x" dimension="length"/>
-        <Exposure name="y" dimension="length"/>
-        <Exposure name="z" dimension="length"/>
+        <Exposure name="xLength" dimension="length"/>
+        <Exposure name="yLength" dimension="length"/>
+        <Exposure name="zLength" dimension="length"/>
 
         <Dynamics>
             <DerivedVariable name="radius" dimension="length" exposure="radius" value="0.000001 * diameter / 2"/>  <!-- conversion to SI units... -->
-            <DerivedVariable name="x" dimension="length" exposure="x" value="0.000001 * x"/>  <!-- conversion to SI units... -->
-            <DerivedVariable name="y" dimension="length" exposure="y" value="0.000001 * y"/>  <!-- conversion to SI units... -->
-            <DerivedVariable name="z" dimension="length" exposure="z" value="0.000001 * z"/>  <!-- conversion to SI units... -->
+            <DerivedVariable name="xLength" dimension="length" exposure="xLength" value="0.000001 * x"/>  <!-- conversion to SI units... -->
+            <DerivedVariable name="yLength" dimension="length" exposure="yLength" value="0.000001 * y"/>  <!-- conversion to SI units... -->
+            <DerivedVariable name="zLength" dimension="length" exposure="zLength" value="0.000001 * z"/>  <!-- conversion to SI units... -->
         </Dynamics>
 
     </ComponentType>

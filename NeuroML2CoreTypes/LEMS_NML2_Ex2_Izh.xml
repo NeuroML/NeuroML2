@@ -50,21 +50,21 @@
 <Simulation id="sim1" length="200ms" step="0.005ms" target="net1">
 
     <Display id="d1" title="Ex2: Bursting Izhikevich cell in LEMS" timeScale="1ms" xmin="0" xmax="200" ymin="-90" ymax="50">
-        <Line id ="iz1" quantity="izpopBurst[0]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
-        <Line id ="iz2" quantity="izpopBurst[0]/U" scale="1"  color="#BBA0AA" timeScale="1ms"/>
-        <Line id ="i0" quantity="izpopBurst[0]/i0/I" scale="1"  color="#222222" timeScale="1ms"/>
+        <Line id ="v" quantity="izpopBurst[0]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
+        <Line id ="U" quantity="izpopBurst[0]/U" scale="1"  color="#BBA0AA" timeScale="1ms"/>
+        <Line id ="i" quantity="izpopBurst[0]/i0/I" scale="1"  color="#222222" timeScale="1ms"/>
     </Display>
 
     <Display id="d2" title="Ex2: Tonic spiking Izhikevich cell in LEMS" timeScale="1ms" xmin="0" xmax="200" ymin="-90" ymax="50">
-        <Line id ="iz1" quantity="izpopTonic[0]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
-        <Line id ="iz2" quantity="izpopTonic[0]/U" scale="1V"  color="#BBA0AA" timeScale="1ms"/>
-        <Line id ="i0" quantity="izpopTonic[0]/i1/I" scale="1"  color="#222222" timeScale="1ms"/>
+        <Line id ="v" quantity="izpopTonic[0]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
+        <Line id ="U" quantity="izpopTonic[0]/U" scale="1V"  color="#BBA0AA" timeScale="1ms"/>
+        <Line id ="i" quantity="izpopTonic[0]/i1/I" scale="1"  color="#222222" timeScale="1ms"/>
     </Display>
 
     <Display id="d3" title="Ex2: Mixed mode Izhikevich cell in LEMS" timeScale="1ms" xmin="0" xmax="200" ymin="-90" ymax="50">
-        <Line id ="iz1" quantity="izpopMixed[0]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
-        <Line id ="iz2" quantity="izpopMixed[0]/U" scale="1V"  color="#BBA0AA" timeScale="1ms"/>
-        <Line id ="i0" quantity="izpopMixed[0]/i2/I" scale="1"  color="#222222" timeScale="1ms"/>
+        <Line id ="v" quantity="izpopMixed[0]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
+        <Line id ="U" quantity="izpopMixed[0]/U" scale="1V"  color="#BBA0AA" timeScale="1ms"/>
+        <Line id ="i" quantity="izpopMixed[0]/i2/I" scale="1"  color="#222222" timeScale="1ms"/>
     </Display>
     
     <!-- See other examples for saving of data traces -->

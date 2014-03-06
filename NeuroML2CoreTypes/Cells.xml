@@ -9,10 +9,6 @@
     <Include file="Channels.xml"/>
     <Include file="Synapses.xml"/>
     <Include file="Inputs.xml"/>
-     
-    <!-- These dimensions/units are added here since it's unlikely that the units for phi in fixedFactorConcentrationModel will be needed anywhere else-->
-    <Dimension name="phi_factor" l="-3" n="1" i="-1" t="-1"/>
-    <Unit symbol="mol_per_m3_per_A_per_s" dimension="phi_factor" power="0"/> <!-- SI -->
 
 
     <ComponentType name="baseCell"
@@ -21,11 +17,18 @@
     </ComponentType>
 
 
-    <ComponentType name="baseCellMembPot"
+    <ComponentType name="baseSpikingCell"
         extends="baseCell"
-        description="Any cell which has a membrane potential _v with voltage units. These will emit _spike events.">
+        description="Base type of any cell which can emit _spike events.">
 
         <EventPort name="spike" direction="out" description="Spike event"/>
+
+    </ComponentType>
+    
+
+    <ComponentType name="baseCellMembPot"
+        extends="baseSpikingCell"
+        description="Any spiking cell which has a membrane potential _v with voltage units.">
 
         <Exposure name="v" dimension="voltage" description="Membrane potential"/>
 
@@ -33,10 +36,8 @@
 
 
     <ComponentType name="baseCellMembPotDL"
-        extends="baseCell"
-        description="Any cell which has a dimensioness membrane potential, _V. These will emit _spike events.">
-
-        <EventPort name="spike" direction="out" description="Spike event"/>
+        extends="baseSpikingCell"
+        description="Any spiking cell which has a dimensioness membrane potential, _V.">
 
         <Exposure name="V" dimension="none" description="Membrane potential"/>
 
@@ -101,7 +102,7 @@
             <DerivedVariable name="singleChannelConductance" dimension="conductance" select="ionChannel/g"/>
             <DerivedVariable name="totalConductance" dimension="conductance" value="singleChannelConductance * number"/>
 
-            <DerivedVariable name="erev" dimension="voltage" exposure="erev" value="(R * temperature / (zCa * F)) * ln(caConcExt / caConc)"/>
+            <DerivedVariable name="erev" dimension="voltage" exposure="erev" value="(R * temperature / (zCa * F)) * log(caConcExt / caConc)"/>
 
             <!--TODO: see if the check on caconcext needed: DerivedVariable name="i" dimension="current" exposure="i" value="totalConductance * (erev - v)" valueCondition="caConcExt .gt. 0" valueIfFalse="0"/>  -->
             <DerivedVariable name="i" dimension="current" exposure="i" value="totalConductance * (erev - v)"/>
@@ -115,7 +116,7 @@
     </ComponentType>
 
     <!-- Not yet tested...
-    <ComponentType name="channelPopulationGHK"
+    <Component Type name="channelPopulationGHK"
         extends="baseChannelPopulation"
         description="Population of channels producing GHK current. Hard coded for Ca only! In progress!!">
 
@@ -236,7 +237,7 @@
             </ConditionalDerivedVariable>
   
             <ConditionalDerivedVariable name="erev" dimension="voltage" exposure="erev">
-            	<Case condition="caConcExt .gt. 0" value="(R * temperature / (zCa * F)) * ln(caConcExt / caConc)"/>
+            	<Case condition="caConcExt .gt. 0" value="(R * temperature / (zCa * F)) * log(caConcExt / caConc)"/>
             	<Case condition="caConcExt .leq. 0" value="0"/>
             </ConditionalDerivedVariable>
 
@@ -278,40 +279,17 @@
 
         <Text name="ion"/> <!-- TODO: Ideally this needs to be a property of ionChannel only!
                                 But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
-
         <Dynamics>
 
-            <!-- From GENESIS: http://www.genesis-sim.org/GENESIS/gum-tutorials/beeman/Hyperdoc/Manual-26.html#ss26.30
-                                    Cin * exp(K * Vm) - Cout
-            Ik    =  -p * F * K * Vm  - - - - - - - - - - - -
-                                       exp(K * Vm) - 1
-
-                  This looks like it's wrong...
-             -->
-             <!-- From Steuber et al DCN model:
-
-             A = exp(-23.20764929 * v / T) = exp((-z * F * (0.001) * v) / (R * T))
-
-             ical = perm * m*m * h * (4.47814e6 * v / T) * ((cali/1000) - (calo/1000) * A) / (1 - A)
-
-                                     (z^2 * F^2 * (0.001) * v) / (R * T)
-
-             -->
-             <!-- From Wikipedia:
-
-             Idensity = P * z^2 * ( (V * F^2)/(R * T) ) * ( concInt - ( concExt * exp(-z * V * F /(R * T)) ) ) / (1 - exp(-z * V * F /(R * T)) )
-
-             -->
-
-            <!-- TODO: check if needed <DerivedVariable name="K" dimension="per_voltage"  value="(zCa * F) / (R * temperature)" valueCondition="temperature .gt. 0" valueIfFalse="0.1"/>-->
             <DerivedVariable name="K" dimension="per_voltage"  value="(zCa * F) / (R * temperature)"/>
-
             <DerivedVariable name="expKv" dimension="none"  value="exp(-1 * K * v)"/>
-
             <DerivedVariable name="channelf" dimension="none" select="ionChannel/fopen"/>
 
-            <!-- TODO check if needed: <DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" value="-1 * channelf * permeability * zCa * F * K * v * ( caConc - (caConcExt * expKv) ) / (1 - expKv)" valueCondition="expKv .neq. 1" valueIfFalse="0"/>-->
-          <DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" value="-1 * channelf * permeability * zCa * F * K * v * ( caConc - (caConcExt * expKv) ) / (1 - expKv)"/>
+	    <!--TODO: used conditional var, just as in nernst above, to circumvent problems with initialization.  -->
+            <ConditionalDerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity">
+	            <Case condition="caConcExt .gt. 0" value="-1 * channelf * permeability * zCa * F * K * v * ( caConc - (caConcExt * expKv) ) / (1 - expKv)"/>
+	            <Case condition="caConcExt .leq. 0" value="0"/>
+	    </ConditionalDerivedVariable>
 
         </Dynamics>
         <Structure>
@@ -412,26 +390,24 @@
 
 
     <ComponentType name="distal"
-        extends="pointDiam"
+        extends="point3DWithDiam"
         description="Point furthest from the soma in a segment">
-        <Dynamics>
-            <DerivedVariable name="radius" dimension="length" exposure="radius" value="0.000001 * diameter / 2"/>
-            <DerivedVariable name="x" dimension="length" exposure="x" value="0.000001 * x"/>  <!-- conversion to SI units... -->
-            <DerivedVariable name="y" dimension="length" exposure="y" value="0.000001 * y"/>  <!-- conversion to SI units... -->
-            <DerivedVariable name="z" dimension="length" exposure="z" value="0.000001 * z"/>  <!-- conversion to SI units... -->
-        </Dynamics>
+        <DerivedParameter name="radius" dimension="length" value="0.000001 * diameter / 2"/>
+        <DerivedParameter name="xLength" dimension="length" value="0.000001 * x"/>  <!-- conversion to SI units... -->
+        <DerivedParameter name="yLength" dimension="length" value="0.000001 * y"/>  <!-- conversion to SI units... -->
+        <DerivedParameter name="zLength" dimension="length" value="0.000001 * z"/>  <!-- conversion to SI units... -->
     </ComponentType>
 
 
     <ComponentType name="proximal"
-        extends="pointDiam"
+        extends="point3DWithDiam"
         description="Point closest to the soma in a segment. Note, if the proximal point is equal to the distal point of the parent segment, proximal can be omitted.">
-        <Dynamics>
-            <DerivedVariable name="radius" dimension="length" exposure="radius" value="0.000001 * diameter / 2"/>
-            <DerivedVariable name="x" dimension="length" exposure="x" value="0.000001 * x"/>  <!-- conversion to SI units... -->
-            <DerivedVariable name="y" dimension="length" exposure="y" value="0.000001 * y"/>  <!-- conversion to SI units... -->
-            <DerivedVariable name="z" dimension="length" exposure="z" value="0.000001 * z"/>  <!-- conversion to SI units... -->
-        </Dynamics>
+
+        <DerivedParameter name="radius" dimension="length" value="0.000001 * diameter / 2"/>
+        <DerivedParameter name="xLength" dimension="length" value="0.000001 * x"/>  <!-- conversion to SI units... -->
+        <DerivedParameter name="yLength" dimension="length" value="0.000001 * y"/>  <!-- conversion to SI units... -->
+        <DerivedParameter name="zLength" dimension="length" value="0.000001 * z"/>  <!-- conversion to SI units... -->
+
     </ComponentType>
 
 
@@ -459,12 +435,12 @@
             <!-- TODO: make all of these derived params!! -->
             <DerivedVariable name="radDist" dimension="length" exposure="radDist" select = "distal/radius"/>
 
-            <DerivedVariable name="dx" dimension="length" select = "distal/x"/>
-            <DerivedVariable name="dy" dimension="length" select = "distal/y"/>
-            <DerivedVariable name="dz" dimension="length" select = "distal/z"/>
-            <DerivedVariable name="px" dimension="length" select = "proximal/x"/>
-            <DerivedVariable name="py" dimension="length" select = "proximal/y"/>
-            <DerivedVariable name="pz" dimension="length" select = "proximal/z"/>
+            <DerivedVariable name="dx" dimension="length" select = "distal/xLength"/>
+            <DerivedVariable name="dy" dimension="length" select = "distal/yLength"/>
+            <DerivedVariable name="dz" dimension="length" select = "distal/zLength"/>
+            <DerivedVariable name="px" dimension="length" select = "proximal/xLength"/>
+            <DerivedVariable name="py" dimension="length" select = "proximal/yLength"/>
+            <DerivedVariable name="pz" dimension="length" select = "proximal/zLength"/>
 
             <DerivedVariable name="length" dimension="length" exposure="length" value = "sqrt(((dx - px) * (dx - px) + (dy - py) * (dy - py) + (dz - pz) * (dz - pz))/(LEN * LEN)) * LEN"/>
 
@@ -708,14 +684,16 @@
 
     <ComponentType name="fixedFactorConcentrationModel"
         extends="concentrationModel"
-        description="Model of buffering of concentration of an ion (currently hard coded to be calcium, due to requirement for _iCa) which has a baseline level _restingConc and tends to this value with time course _decayConstant. A fixed factor _phi is used to scale the incoming current INDEPENDENTLY OF THE SIZE OF THE COMPARTMENT to produce a concentration change.">
+        description="Model of buffering of concentration of an ion (currently hard coded to be calcium, due to requirement for _iCa) which has a baseline level _restingConc and tends to this value with time course _decayConstant. A fixed factor _rho is used to scale the incoming current INDEPENDENTLY OF THE SIZE OF THE COMPARTMENT to produce a concentration change.">
 
         <Parameter name="restingConc" dimension="concentration"/>
         <Parameter name="decayConstant" dimension="time"/>
         
-        <Parameter name="phi" dimension="phi_factor"/>
+        <Parameter name="rho" dimension="rho_factor"/>
         
         <Requirement name="iCa" dimension="current"/>
+        <Requirement name="surfaceArea" dimension="area"/>
+        
 
         <Text name="species"/> <!-- TODO: check why this isn't inherited from concentrationModel -->
 
@@ -724,8 +702,8 @@
             <StateVariable name="concentration" exposure="concentration" dimension="concentration"/>
             <StateVariable name="extConcentration" exposure="extConcentration" dimension="concentration"/>
             
-            <TimeDerivative variable="concentration" value="iCa * phi - ((concentration - restingConc) / decayConstant)"/>
-            
+	    <TimeDerivative variable="concentration" value="(iCa/surfaceArea) * rho - ((concentration - restingConc) / decayConstant)"/>
+
             <OnStart>
                 <StateAssignment variable="concentration" value="initialConcentration"/>
                 <StateAssignment variable="extConcentration" value="initialExtConcentration"/>
@@ -1144,7 +1122,7 @@
             <StateVariable name="V" dimension="none" exposure="V"/>
             <StateVariable name="W" dimension="none" exposure="W"/>
 
-            <TimeDerivative variable="V" value="(V - (V^3) / 3 - W + I) / SEC"/>
+            <TimeDerivative variable="V" value="( (V - ((V^3) / 3)) - W + I) / SEC"/>
             <TimeDerivative variable="W" value="(0.08 * (V + 0.7 - 0.8 * W)) / SEC"/>
 
         </Dynamics>

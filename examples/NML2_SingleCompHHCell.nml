@@ -2,7 +2,7 @@
 
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta1.xsd"
+         xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta2.xsd"
          id="NML2_SingleCompHHCell">
 
     <!-- Single compartment cell with HH channels -->
@@ -10,12 +10,12 @@
     <!-- This is a "pure" NeuroML 2 file. It can be included in a LEMS file for use in a simulaton 
     by the LEMS interpreter, see LEMS_NML2_Ex5_DetCell.xml -->     
 
-    <ionChannel id="passive" type="ionChannelPassive" conductance="10pS">
+    <ionChannelHH id="passiveChan" conductance="10pS">
         <notes>Leak conductance</notes>
-    </ionChannel>
+    </ionChannelHH>
 
 
-    <ionChannel id="na" type="ionChannelHH" conductance="10pS" species="na">
+    <ionChannelHH id="naChan" conductance="10pS" species="na">
         <notes>Na channel</notes>
 
         <gateHHrates id="m" instances="3">
@@ -28,17 +28,17 @@
             <reverseRate type="HHSigmoidRate" rate="1per_ms" midpoint="-35mV" scale="10mV"/>
         </gateHHrates>
 
-    </ionChannel>
+    </ionChannelHH>
 
 
-    <ionChannel id="k" type="ionChannelHH" conductance="10pS" species="k">
+    <ionChannelHH id="kChan" conductance="10pS" species="k">
 
         <gateHHrates id="n" instances="4">
             <forwardRate type="HHExpLinearRate" rate="0.1per_ms" midpoint="-55mV" scale="10mV"/>
             <reverseRate type="HHExpRate" rate="0.125per_ms" midpoint="-65mV" scale="-80mV"/>
         </gateHHrates>
             
-    </ionChannel>
+    </ionChannelHH>
 
 
 
@@ -60,9 +60,9 @@
 
             <membraneProperties>
                         
-                <channelDensity id="leak" ionChannel="passive" condDensity="3.0 S_per_m2" erev="-54.3mV"/>
-                <channelDensity id="naChans" ionChannel="na" condDensity="120.0 mS_per_cm2" erev="50.0 mV"/>
-                <channelDensity id="kChans" ionChannel="k" condDensity="360 S_per_m2" erev="-77mV"/>
+                <channelDensity id="leak" ionChannel="passiveChan" condDensity="3.0 S_per_m2" erev="-54.3mV"/>
+                <channelDensity id="naChans" ionChannel="naChan" condDensity="120.0 mS_per_cm2" erev="50.0 mV" ion="na"/>
+                <channelDensity id="kChans" ionChannel="kChan" condDensity="360 S_per_m2" erev="-77mV" ion="k"/>
 
                 <spikeThresh value="-20mV"/>
                 <specificCapacitance value="1.0 uF_per_cm2"/>

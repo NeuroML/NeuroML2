@@ -576,6 +576,8 @@
         <Parameter name="start" dimension="time"/>
         <Parameter name="duration" dimension="time"/>
         <Parameter name="rate" dimension="per_time"/>
+        
+        <DerivedParameter name="end" dimension="time" value="start + duration"/>
 
         <Child name="notes" type="notes"/>
 
@@ -595,7 +597,7 @@
             </OnStart>
 
 
-            <OnCondition test="tsince .gt. nextSpike .and. t .leq. (start + duration)">
+            <OnCondition test="tsince .gt. nextSpike .and. t .leq. end">
                 <StateAssignment variable="nextSpike" value="exp(-1*random(1))/rate"/>
                 <StateAssignment variable="tsince" value="0"/>
                 <EventOut port="spike"/>

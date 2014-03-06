@@ -105,6 +105,7 @@
 
         <Path name="preCellId"/>
         <Path name="postCellId"/>
+        <Text name="destination"/>
 
         <Structure>
             <With instance="preCellId" as="a"/>
@@ -165,15 +166,16 @@
 
     <!--   Not yet stable...
 
-    <ComponentType name="EventConnectivity">
+    <Component Type name="EventConnectivity">
         <Child name="Connections" type="ConnectionPattern"/>
         <Link name="source" type="population"/>
         <Link name="target" type="population"/>
     </ComponentType>
 
-    <ComponentType name="ConnectionPattern">
+    <Component Type name="ConnectionPattern">
     </ComponentType>
-    <ComponentType name="AllAll" extends="ConnectionPattern">
+    
+    <Component Type name="AllAll" extends="ConnectionPattern">
         <Dynamics>
             <Build>
                 <ForEach instances="../source" as="a">

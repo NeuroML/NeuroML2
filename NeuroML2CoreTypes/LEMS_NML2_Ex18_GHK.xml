@@ -1,0 +1,164 @@
+<Lems>
+
+  <!-- Simple cell with Sodium, Potassium and Calcium channels and an
+       exponentially decaying Calcium pool. The Calcium current due to
+       the channels is calculated using the GHK field equation -->
+
+  <Target component="sim1"/>
+
+  <Include file="Cells.xml"/>
+  <Include file="Networks.xml"/>
+  <Include file="Simulation.xml"/>
+
+  <!-- Membrane mechanisms -->
+
+  <ionChannelPassive id="leak" conductance="10pS" species="non_specific"/>
+  
+
+  <ionChannelHH id="na_chan" conductance="10pS" species="na">
+
+    <gateHHrates id="m" instances="3">
+      <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="6.3 degC"/>
+      <forwardRate type="HHExpLinearRate" rate="1per_ms" midpoint="-40mV" scale="10mV"/>
+      <reverseRate type="HHExpRate" rate="4per_ms" midpoint="-65mV" scale="-18mV"/>
+    </gateHHrates>
+    
+    <gateHHrates id="h" instances="1">
+      <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="6.3 degC"/>
+      <forwardRate type="HHExpRate" rate="0.07per_ms" midpoint="-65mV" scale="-20mV"/>
+      <reverseRate type="HHSigmoidRate" rate="1per_ms" midpoint="-35mV" scale="10mV"/>
+    </gateHHrates>
+
+  </ionChannelHH>
+
+
+  <ionChannelHH id="k_chan" conductance="10pS" species="k">
+
+    <gateHHrates id="n" instances="4">
+      <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="6.3 degC"/>
+      <forwardRate type="HHExpLinearRate" rate="0.1per_ms" midpoint="-55mV" scale="10mV"/>
+      <reverseRate type="HHExpRate" rate="0.125per_ms" midpoint="-65mV" scale="-80mV"/>
+    </gateHHrates>
+
+  </ionChannelHH>
+
+
+  <ionChannelHH id="ca_chan" conductance="10pS" species="ca">
+
+    <gateHHrates id="p" instances="2">
+      <!-- the nrn example uses a hardcoded "taufactor", disregarding the q10 calculations -->
+      <q10Settings type="q10Fixed" fixedQ10="0.5" experimentalTemp="6.3 degC"/>
+      <forwardRate type="HHExpLinearRate" rate="1per_ms" midpoint="-40mV" scale="10mV"/>
+      <reverseRate type="HHExpRate" rate="4per_ms" midpoint="-65mV" scale="-18mV"/>
+    </gateHHrates>
+
+  </ionChannelHH>
+  
+  <!-- Intracellular Calcium dynamics -->
+  <concentrationModel id="simple_decay" type="fixedFactorConcentrationModel"
+                      ion="ca"
+                      restingConc="3e-6 mM"
+                      decayConstant="1.0 ms"
+                      rho="3e-1 mol_per_m_per_A_per_s"/>
+
+  <!-- Cellular properties -->
+  <cell id="na_k_ca">
+
+    <notes>Sample cell with HH Na+/K+ and Ca++ channel/buffer to test the GHK ComponentType</notes>
+
+    <morphology id="just_a_cylinder">
+
+      <segment id="0" name="Soma">
+        <proximal x="0.0" y="0.0" z="0.0" diameter="1.0"/>
+        <distal x="0.0" y="0.0" z="10.0" diameter="1.0"/>
+      </segment>
+
+      <segmentGroup id="Soma">
+        <member segment="0"/>
+      </segmentGroup>
+
+      <segmentGroup id="all">
+        <include segmentGroup="Soma"/>
+      </segmentGroup>
+
+      <segmentGroup id="soma_group">
+        <include segmentGroup="Soma"/>
+      </segmentGroup>
+
+    </morphology>
+
+
+    <biophysicalProperties id="biophys">
+
+      <membraneProperties>
+
+        <channelDensity condDensity="0.12 S_per_cm2" id="na_all" ionChannel="na_chan" erev="50.799202 mV" ion="na"/>
+        <channelDensity condDensity="0.036 S_per_cm2" id="k_all" ionChannel="k_chan" erev="-77.0 mV" ion="k"/>
+        <channelDensity condDensity="0.0003 S_per_cm2" id="passive" ionChannel="leak" erev="-53.1 mV" ion="non_specific"/>
+        <channelDensityGHK permeability="2.5e-7 m_per_s" id="ca_all" ionChannel="ca_chan" ion="ca"/>
+
+        <specificCapacitance value="1.0 uF_per_cm2"/>
+        <initMembPotential value="-65.0 mV"/>
+        <spikeThresh value="0 mV"/>
+
+      </membraneProperties>
+
+
+      <intracellularProperties>
+
+        <species id="ca"
+                 ion="ca"
+                 concentrationModel="simple_decay"
+                 initialConcentration="5e-6 mM"
+                 initialExtConcentration="2 mM"/>
+
+        <resistivity value="0.1 kohm_cm"/>
+
+      </intracellularProperties>
+
+    </biophysicalProperties>
+
+  </cell>
+
+  <!-- Point process: Current clamp -->
+  <pulseGenerator id="IClamp" delay="4ms" duration="6.0ms" amplitude="0.005nA" />
+
+  <!-- Create a single-cell network -->
+  <network id="net1" type="networkWithTemperature" temperature = "16.3 degC">
+    <population id="pop" component="na_k_ca" type="populationList" size="1">
+      <instance id="0">
+        <location x="0" y="0" z="0"/>
+      </instance>
+    </population>
+
+    <inputList id="IClamp" component="IClamp" population="pop">
+      <input id="0" target="../pop/0/na_k_ca" destination="synapses"/>
+    </inputList>
+  </network>
+
+
+  <!-- Simulation specifications -->
+  <Simulation id="sim1" length="50ms" step="0.001ms" target="net1">
+
+    <Display id="d1" title="Membrane Potential (mV)" timeScale="1ms" xmin="0" xmax="50" ymin="-80" ymax="40">
+      <Line id="V" quantity="pop/0/na_k_ca/v" scale="1mV"  color="#ffffff" timeScale="1ms"/>
+    </Display>
+
+    <Display id="d2" title="Ca current density (uA_per_cm2)" timeScale="1ms" xmin="0" xmax="50" ymin="0" ymax="25">
+      <Line id="Ca iDensity" quantity="pop/0/na_k_ca/biophys/membraneProperties/ca_all/iDensity" scale="1uA_per_cm2"  color="#00ff00" timeScale="1ms"/>
+    </Display>
+
+    <Display id="d3" title="Internal Ca concentration (mM)" timeScale="1ms" xmin="0" xmax="50" ymin="0" ymax="30">
+      <Line id="caConc" quantity="pop/0/na_k_ca/caConc" scale="1e-6 mM"  color="#ff0000" timeScale="1ms"/>
+    </Display>
+
+    <OutputFile id="of0" fileName="/tmp/lems_ghk.dat">
+      <OutputColumn id="v" quantity="pop/0/na_k_ca/v"/>
+      <OutputColumn id="ica" quantity="pop/0/na_k_ca/biophys/membraneProperties/ca_all/iDensity"/>
+      <OutputColumn id="ca" quantity="pop/0/na_k_ca/caConc"/>
+    </OutputFile>
+    
+  </Simulation>
+
+
+</Lems>

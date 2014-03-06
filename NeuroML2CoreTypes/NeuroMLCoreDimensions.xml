@@ -34,11 +34,16 @@
 
     <Dimension name="concentration" l="-3" n="1"/>
 
+    <Dimension name="substance" n="1"/>
+
     <Dimension name="permeability" l="1" t="-1"/>
 
     <Dimension name="temperature" k="1"/>
 
     <Dimension name="idealGasConstantDims" m="1" l="2" t="-2" k="-1" n="-1"/>
+    
+    <!-- Note: it's unlikely that this dimension/unit for rho in fixedFactorConcentrationModel will be needed anywhere else-->
+    <Dimension name="rho_factor" l="-1" n="1" i="-1" t="-1"/>
 
     <!-- The core units as used in NeuroML version 2.0.   -->
     <!-- Will be used in Component definitions, e.g. duration="60ms" amplitude="0.2 nA" -->
@@ -49,6 +54,11 @@
     <Unit symbol="Hz" dimension="per_time" power="0"/>          
     <Unit symbol="ms" dimension="time" power="-3"/>                <!-- Physiological Units -->
     <Unit symbol="per_ms" dimension="per_time" power="3"/>         <!-- Physiological Units -->
+    
+    <Unit symbol="min" dimension="time" power="0" scale="60"/>
+    <Unit symbol="per_min" dimension="per_time" power="0" scale="0.01666666667"/>
+    <Unit symbol="hour" dimension="time" power="0" scale="3600"/>
+    <Unit symbol="per_hour" dimension="per_time" power="0" scale="0.00027777777778"/>
 
     <Unit symbol="m" dimension="length" power="0"/>
     <Unit symbol="cm" dimension="length" power="-2"/>              <!-- Physiological Units -->
@@ -60,6 +70,7 @@
     
     <Unit symbol="m3" dimension="volume" power="0"/>
     <Unit symbol="cm3" dimension="volume" power="-6"/>             <!-- Physiological Units -->
+    <Unit symbol="litre" dimension="volume" power="-3"/>
     <Unit symbol="um3" dimension="volume" power="-18"/>
 
     <Unit symbol="V" dimension="voltage" power="0"/>
@@ -90,7 +101,7 @@
     <Unit symbol="uF_per_cm2" dimension="specificCapacitance" power="-2"/>  <!-- Physiological Units -->
 
     <Unit symbol="ohm_m" dimension="resistivity" power="0"/>
-    <Unit symbol="kohm_cm" dimension="resistivity" power="-1"/>    <!-- Physiological Units -->
+    <Unit symbol="kohm_cm" dimension="resistivity" power="1"/>    <!-- Physiological Units -->
 
     <Unit symbol="C" dimension="charge" power="0"/>
 
@@ -110,9 +121,13 @@
     <Unit symbol="mol_per_cm3" dimension="concentration" power="6"/>  <!-- Physiological Units -->
     <Unit symbol="M" dimension="concentration" power="3"/>
     <Unit symbol="mM" dimension="concentration" power="0"/>
+    
+    <Unit symbol="mol" dimension="substance" power="0"/>
 
     <Unit symbol="m_per_s" dimension="permeability" power="0"/>
     <Unit symbol="cm_per_s" dimension="permeability" power="-2"/>
+    <Unit symbol="um_per_ms" dimension="permeability" power="-3"/>
+    <Unit symbol="cm_per_ms" dimension="permeability" power="1"/>
 
  
     <Unit symbol="degC" dimension="temperature" offset="273.15"/>
@@ -121,5 +136,7 @@
 
     <Unit symbol="J_per_K_per_mol" dimension="idealGasConstantDims" power="0"/>
  
+    <!-- Note: it's unlikely that this dimension/unit for rho in fixedFactorConcentrationModel will be needed anywhere else-->
+    <Unit symbol="mol_per_m_per_A_per_s" dimension="rho_factor" power="0"/> <!-- SI -->
 
 </Lems>

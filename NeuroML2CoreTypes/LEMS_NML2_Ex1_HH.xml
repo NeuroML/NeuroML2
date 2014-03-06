@@ -21,10 +21,10 @@
             <!-- Main NeuroML2 content -->
     
     
-    <ionChannel id="passive" type="ionChannelPassive" conductance="10pS"/>
+    <ionChannelPassive id="passive" conductance="10pS"/>
     
     
-    <ionChannel id="na" type="ionChannelHH" conductance="10pS">
+    <ionChannelHH id="na" conductance="10pS">
     
        <gateHHrates id="m" instances="3">
             <forwardRate type="HHExpLinearRate" rate="1per_ms" midpoint="-40mV" scale="10mV"/>
@@ -37,26 +37,26 @@
            <!--<steadyState type="HHSigmoidVariable" rate="1" midpoint="-40mV" scale="10mV"/>-->
        </gateHHrates>
     
-    </ionChannel>
+    </ionChannelHH>
     
     
     
-    <ionChannel id="k" type="ionChannelHH" conductance="10pS">
+    <ionChannelHH id="k" conductance="10pS">
         <gateHHrates id="n" instances="4">
             <forwardRate type="HHExpLinearRate" rate="0.1per_ms" midpoint="-55mV" scale="10mV"/>
             <reverseRate type="HHExpRate" rate="0.125per_ms" midpoint="-65mV" scale="-80mV"/>
         </gateHHrates>
-    </ionChannel>
+    </ionChannelHH>
     
     
     
-    <baseCell id="hhcell" type="pointCellCondBased" C="10pF"  v0="-65mV" thresh="20mV">
+    <pointCellCondBased id="hhcell" C="10pF"  v0="-65mV" thresh="20mV">
     
         <channelPopulation id="leak" ionChannel="passive" number="300" erev="-54.3mV"/>
         <channelPopulation id="naChans" ionChannel="na" number="120000" erev="50mV"/><!-- -->
         <channelPopulation id="kChans" ionChannel="k" number="36000" erev="-77mV"/>
     
-    </baseCell>
+    </pointCellCondBased>
     
     <pulseGenerator id="pulseGen1" delay="50ms" duration="50ms" amplitude="0.08 nA" />
     

@@ -33,9 +33,9 @@
 
         <Display id="d1" title="Ex9: FitzHugh-Nagumo cell model in LEMS"
             timeScale="1s" xmin="0" xmax="200" ymin="-2.5" ymax="2.5">
-            <Line id="fn1" quantity="fnPop1[0]/V" scale="1" color="#ee40FF"
+            <Line id="V" quantity="fnPop1[0]/V" scale="1" color="#ee40FF"
                 timeScale="1s" />
-            <Line id="fn2" quantity="fnPop1[0]/W" scale="1" color="#BBA0AA"
+            <Line id="W" quantity="fnPop1[0]/W" scale="1" color="#BBA0AA"
                 timeScale="1s" />
         </Display>
     
