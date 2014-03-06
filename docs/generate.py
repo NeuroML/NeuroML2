@@ -85,9 +85,12 @@ def replace_underscores_and_urls(text, useHtml=True):
     return text2
 
 def format_description(element):
-    if element.description is None or len(element.description)==0:
+    if element is None or (not isinstance(element, str) and (element.description is None or len(element.description)==0)):
         return ""
-    desc = element.description
+    if isinstance(element, str):
+        desc = element
+    else:
+        desc = element.description
     desc2 = replace_underscores_and_urls(desc, useHtml=True)
     return "<span %s><i>%s</i></span>"%(grey_style_dark, desc2)
 
@@ -249,15 +252,17 @@ for file in files:
                 "    </div><!--/span-->\n"+ \
                 "    <div class=\"span7\">\n"
 
-    if model.description is not None:
-        contents += ("   <div class=\"alert alert-error\">Note: these descriptions have been updated to the latest "
+    desc = "NeuroML2 ComponentType definitions from %s.xml"%file
+    if model.description:
+        desc = model.description
+    contents += ("   <div class=\"alert alert-error\">Note: these descriptions have been updated to the latest "
                      "   <a href=\"https://github.com/NeuroML/NeuroML2/tree/development/Schemas/NeuroML2\">NeuroML v2%s</a> definitions, using "
                      "   <a href=\"https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS\">the latest version of LEMS</a>!</div>\n"+ \
                     "    <table class=\"table table-bordered\"><tr><td ><h3>%s</h3></td></tr>\n"+ \
                     "    <tr><td>%s</td></tr>\n"+ \
                     "    <tr><td>Original LEMS ComponentType definitions: <a href=\"%s%s.xml\">%s.xml</a><br/>"+ \
                     "    Schema against which NeuroML based on these should be valid: <a href=\"https://github.com/NeuroML/NeuroML2/tree/%s/Schemas/NeuroML2/NeuroML_v2%s.xsd\">NeuroML_v2%s.xsd</a></td></tr>\n"+ \
-                    "    </table><br/>\n")%(nml2_version,file,format_description(lemscontents),lems_xml_url,file,file, nml2_branch, nml2_version, nml2_version)
+                    "    </table><br/>\n")%(nml2_version,file,format_description(desc),lems_xml_url,file,file, nml2_branch, nml2_version, nml2_version)
 
     '''
     for inc in model.getInclude():
