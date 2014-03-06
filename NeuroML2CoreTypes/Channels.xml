@@ -308,8 +308,6 @@
             <DerivedVariable name="fcond" exposure="fcond" dimension="none" value="q^instances"/>
 
             <DerivedVariable name="inf" dimension="none" exposure="inf" value="alpha/(alpha+beta)"/>
-
-            <!-- TODO<DerivedVariable name="tau" dimension="time" exposure="tau" value="1/((alpha+beta) * rateScale)"/>-->
             
             <DerivedVariable name="tauUnscaled" dimension="time" select="timeCourse/t"/>
             <DerivedVariable name="tau" dimension="time" exposure="tau" value="tauUnscaled / rateScale"/>

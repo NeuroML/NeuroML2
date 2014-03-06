@@ -109,6 +109,7 @@ files = ["Cells", "Synapses", "Channels", "Inputs", "Networks", "PyNN", "NeuroML
 comp_types = {}
 comp_type_src = {}
 comp_type_desc = {}
+ordered_comp_types = {}
 
 
 for file in files:
@@ -121,9 +122,18 @@ for file in files:
         comp_types[comp_type.name] = comp_type
         comp_type_src[comp_type.name] = file
         comp_type_desc[comp_type.name] = comp_type.description if comp_type.description is not None else "ComponentType: "+comp_type.name
+    ordered_comp_type_list = []
+    with open(fullfile) as fp:
+        for line in fp:
+            s = '<ComponentType name='
+            if s in line:
+                i = line.index(s)
+                e = line.find('"', i+len(s)+1)
+                comp_type_defined = line[i+len(s)+1: e]
+                ordered_comp_type_list.append(comp_type_defined)
+    ordered_comp_types[file] = ordered_comp_type_list
 
 print("Read in all files")
-print comp_type_src
 
 
 def comp_type_link(name):
@@ -229,7 +239,10 @@ for file in files:
     if len(model.component_types) > 0:
         contents += "      <b>Component Types</b><br/>\n"
     added = []
-    for comp_type in model.component_types:
+    
+    
+    for o_comp_type in ordered_comp_types[file]:
+        comp_type = model.component_types[o_comp_type]
         contents += add_comp_type_and_related(comp_type, added, "", "")
 
     contents += "    </div><!--/.well -->\n"+ \
@@ -330,7 +343,8 @@ for file in files:
 
 
 
-    for comp_type in model.component_types:
+    for o_comp_type in ordered_comp_types[file]:
+        comp_type = model.component_types[o_comp_type]
         #print "ComponentType %s is %s"%(comp_type.name, comp_type.description)
 
         ext = "" if comp_type.extends is None else "<p>%sextends %s</p>"%(spacer4,comp_type_link(comp_type.extends))
@@ -536,7 +550,7 @@ for file in files:
 
 
 
-        if comp_type.dynamics:
+        if comp_type.dynamics and comp_type.dynamics.has_content():
                 dynamics = comp_type.dynamics
                 contents += "<tr>\n"
                 contents += category("Dynamics", type="")
