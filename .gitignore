@@ -24,3 +24,5 @@ NeuroML2CoreTypes/*.json
 NeuroML2CoreTypes/results/*.dat
 
 docs/*.html
+
+examples/NeuroML2_To_HTML/*.html
