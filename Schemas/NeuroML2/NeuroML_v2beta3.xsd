@@ -1051,7 +1051,8 @@
 
             <xs:element name="initMembPotential" type="InitMembPotential" minOccurs="0" maxOccurs="unbounded"/>
 
-            <xs:element name="reversalPotential" type="ReversalPotential" minOccurs="0" maxOccurs="unbounded"/>
+            <!-- Taking this out until confirmation it's needed 
+            <xs:element name="reversalPotential" type="ReversalPotential" minOccurs="0" maxOccurs="unbounded"/>-->
         </xs:sequence>
 
     </xs:complexType>
@@ -1108,8 +1109,7 @@
 
                 <xs:attribute name="ionChannel" type="NmlId" use="required"/>
                 <xs:attribute name="number" type="xs:nonNegativeInteger" use="required"/>
-
-                <xs:attribute name="erev" type="Nml2Quantity_voltage" use="optional"/>
+                <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>     <!-- Required in v2beta3 -->
 
                 <!-- Note: only one of the following should be used!! -->
                 <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
@@ -1141,8 +1141,7 @@
 
                 <xs:attribute name="ionChannel" type="NmlId" use="required"/>
                 <xs:attribute name="condDensity" type="Nml2Quantity_conductanceDensity" use="optional"/>
-
-                <xs:attribute name="erev" type="Nml2Quantity_voltage" use="optional"/>
+                <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>     <!-- Required in v2beta3 -->
 
                 <!-- Note: only one of the following should be used!! -->
                 <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
@@ -1247,7 +1246,7 @@
         <xs:attribute name="value" type="xs:string" use="required"/>
     </xs:complexType>
 
-
+    <!-- Taking out for now...
     <xs:complexType name="ReversalPotential">
 
         <xs:complexContent>
@@ -1256,7 +1255,7 @@
             </xs:extension>
         </xs:complexContent>
 
-    </xs:complexType>
+    </xs:complexType> -->
 
 
     <xs:complexType name="Species">
