@@ -3,7 +3,7 @@
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:xi="http://www.w3.org/2001/XInclude"
-      xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta2.xsd"
+      xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta3.xsd"
     id="NML2_FullCell">
         
 
@@ -81,17 +81,15 @@
 
             <membraneProperties> 
 
-                <channelPopulation id="naChansDend" ionChannel="NaConductance" segment="2" number="120000"/>   <!-- Use population instead of density -->
+                <channelPopulation id="naChansDend" ionChannel="NaConductance" segment="2" number="120000" erev="50mV"/>   <!-- Use population instead of density -->
 
-                <channelDensity id="pasChans" ionChannel="pas" condDensity="3.0 S_per_m2"/> <!-- no segmentGroup => all segments! -->
+                <channelDensity id="pasChans" ionChannel="pas" condDensity="3.0 S_per_m2" erev="-70mV"/> <!-- no segmentGroup => all segments! -->
 
-                <channelDensity id="naChansSoma" ionChannel="NaConductance" segmentGroup="soma_group" condDensity="120.0 mS_per_cm2"/>
+                <channelDensity id="naChansSoma" ionChannel="NaConductance" segmentGroup="soma_group" condDensity="120.0 mS_per_cm2" erev="50mV"/>
 
                 <specificCapacitance segmentGroup="soma_group" value="1.0 uF_per_cm2"/>
 
                 <specificCapacitance segmentGroup="dendrite_group" value="2.0 uF_per_cm2"/>
-
-                <reversalPotential species="na" value="55mV"/>
 
             </membraneProperties>
 

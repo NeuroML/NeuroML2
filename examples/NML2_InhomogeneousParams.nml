@@ -2,7 +2,7 @@
 
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  ../Schemas/NeuroML2/NeuroML_v2beta2.xsd"
+    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  ../Schemas/NeuroML2/NeuroML_v2beta3.xsd"
     id="NML2_SimpleMorphology">
 
 
@@ -63,7 +63,7 @@
         
         <biophysicalProperties id="biophys">
             <membraneProperties>
-                <channelDensity id="nonuniform_na_chans" ionChannel="naf">
+                <channelDensity id="nonuniform_na_chans" ionChannel="naf" erev="50mV">
                     <variableParameter parameter="condDensity" segmentGroup="dendrite_group">
                         <inhomogeneousValue inhomogeneousParam="dendrite_group_x1" value="5e-7 * exp(-p/200)"/>  <!-- value is in SI units-->
                     </variableParameter>

@@ -3,7 +3,7 @@
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:xi="http://www.w3.org/2001/XInclude"
-    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  ../Schemas/NeuroML2/NeuroML_v2beta2.xsd"
+    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  ../Schemas/NeuroML2/NeuroML_v2beta3.xsd"
     id="NML2_CellVariableParams">
         
 <!-- Example showing parameter values which vary across the cell membrane -->
@@ -71,9 +71,9 @@
 
             <membraneProperties> 
 
-                <channelDensity id="pasChans" ionChannel="pas" condDensity="3.0 S_per_m2"/> <!-- no segmentGroup => all segments! -->
+                <channelDensity id="pasChans" ionChannel="pas" condDensity="3.0 S_per_m2" erev="-65mV"/> <!-- no segmentGroup => all segments! -->
 
-                <channelDensity id="naChansSoma" ionChannel="NaConductance">
+                <channelDensity id="naChansSoma" ionChannel="NaConductance" erev="50mV">
 
                     <variableParameter parameter="condDensity" segmentGroup="dendrite_group">
                         <!-- Will result in a condDensity of 0.2 at soma end, 0.1 at other end-->
@@ -83,8 +83,6 @@
                 </channelDensity>
 
                 <specificCapacitance segmentGroup="soma_group" value="1.0 uF_per_cm2"/>
-
-                <reversalPotential species="na" value="55mV"/>
 
             </membraneProperties>
 
