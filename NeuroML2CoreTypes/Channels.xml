@@ -539,12 +539,13 @@
         extends="KSTransition"
         description="A forward only _KSTransition_ for a _gateKS_ which specifies a _rate (type _baseHHRate_) which follows one of the standard Hodgkin Huxley forms (e.g. _HHExpRate_, _HHSigmoidRate_, _HHExpLinearRate_">
 
+        <Constant name="SEC" dimension="time" value="1s"/>
         <Child name="rate" type="baseHHRate"/>
    
         <Dynamics>
             <DerivedVariable name="rf0" dimension="per_time" select="rate/r"/>
             <DerivedVariable name="rf" exposure="rf" dimension="per_time" value="rf0"/>
-            <DerivedVariable name="rr" exposure="rr" dimension="per_time" value="0"/>
+            <DerivedVariable name="rr" exposure="rr" dimension="per_time" value="0/SEC"/>
         </Dynamics>
 
     </ComponentType>
@@ -553,12 +554,13 @@
         extends="KSTransition"
         description="A reverse only _KSTransition_ for a _gateKS_ which specifies a _rate (type _baseHHRate_) which follows one of the standard Hodgkin Huxley forms (e.g. _HHExpRate_, _HHSigmoidRate_, _HHExpLinearRate_">
 
+        <Constant name="SEC" dimension="time" value="1s"/>
         <Child name="rate" type="baseHHRate"/>
 
         <Dynamics>
             <DerivedVariable name="rr0" dimension="per_time" select="rate/r"/>
             <DerivedVariable name="rr" exposure="rr" dimension="per_time" value="rr0"/>
-            <DerivedVariable name="rf" exposure="rf" dimension="per_time" value="0"/>
+            <DerivedVariable name="rf" exposure="rf" dimension="per_time" value="0/SEC"/>
         </Dynamics>
     </ComponentType>
  
