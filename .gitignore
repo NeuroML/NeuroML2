@@ -23,6 +23,20 @@ NeuroML2CoreTypes/*.m
 NeuroML2CoreTypes/*.json
 NeuroML2CoreTypes/results/*.dat
 
+LEMSexamples/*.ode
+LEMSexamples/*.sbml
+LEMSexamples/*.py
+LEMSexamples/*.gv
+LEMSexamples/*.png
+LEMSexamples/x86_64
+LEMSexamples/*.mod
+LEMSexamples/*.sedml
+LEMSexamples/*.9ml
+LEMSexamples/*.spineml
+LEMSexamples/*.m
+LEMSexamples/*.json
+LEMSexamples/results/*.dat
+
 docs/*.html
 
 examples/NeuroML2_To_HTML/*.html

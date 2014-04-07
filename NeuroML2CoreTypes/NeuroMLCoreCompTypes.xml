@@ -27,7 +27,10 @@
 
     <ComponentType name="rdf_Description" description="Work in progress...">
         <Child name="bqbiol:isVersionOf" type="bqbiol_isVersionOf"/>
+        <Child name="bqbiol:hasTaxon" type="bqbiol_hasTaxon"/>
+        <Child name="bqmodel:is" type="bqmodel_is"/>
         <Child name="bqmodel:isDescribedBy" type="bqmodel_isDescribedBy"/>
+        <Child name="bqmodel:isDerivedFrom" type="bqmodel_isDerivedFrom"/>
         <Dynamics/>
     </ComponentType>
 
@@ -36,7 +39,22 @@
         <Dynamics/>
     </ComponentType>
 
+    <ComponentType name="bqbiol_hasTaxon" description="Work in progress...">
+        <Child name="rdf:Bag" type="rdf_Bag"/>
+        <Dynamics/>
+    </ComponentType>
+    
+    <ComponentType name="bqmodel_is" description="Work in progress...">
+        <Child name="rdf:Bag" type="rdf_Bag"/>
+        <Dynamics/>
+    </ComponentType>
+
     <ComponentType name="bqmodel_isDescribedBy" description="Work in progress...">
+        <Child name="rdf:Bag" type="rdf_Bag"/>
+        <Dynamics/>
+    </ComponentType>
+   
+    <ComponentType name="bqmodel_isDerivedFrom" description="Work in progress...">
         <Child name="rdf:Bag" type="rdf_Bag"/>
         <Dynamics/>
     </ComponentType>
