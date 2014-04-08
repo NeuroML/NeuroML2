@@ -215,6 +215,14 @@
         <xs:restriction base="xs:string"/>
     </xs:simpleType>
 
+    
+    <xs:complexType name="Property">
+        <xs:annotation>
+            <xs:documentation>Generic property with a tag and value</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="tag" type="xs:string" use="required"/>
+        <xs:attribute name="value" type="xs:string" use="required"/>
+    </xs:complexType>
 
     <xs:complexType name="Annotation">
         <xs:annotation>
@@ -224,6 +232,7 @@
             <xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/> <!-- Further elements will be specified!! -->
         </xs:sequence>
     </xs:complexType>
+    
 
     <xs:complexType name="ComponentType">
         <xs:annotation>
