@@ -31,7 +31,9 @@
     </ComponentType>
 
 
-    <ComponentType name="basePopulation" description="A population of cells (anything which extends _baseCell_)">
+    <ComponentType name="basePopulation" description="A population of cells (anything which extends _baseCell_)">        
+        <Child name="notes" type="notes"/>
+        <Child name="annotation" type="annotation"/>
         <ComponentReference name="component" type="baseCell"/>
     </ComponentType>
 

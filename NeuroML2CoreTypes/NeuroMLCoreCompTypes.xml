@@ -16,7 +16,14 @@
     </ComponentType>
     
     <ComponentType name="annotation" description="Annotation...">
+        <Child name="property" type="property"/>
         <Child name="rdf:RDF" type="rdf_RDF"/>
+        <Dynamics/>
+    </ComponentType>
+    
+    <ComponentType name="property" description="Property in Annotation...">
+        <Text name="tag"/>
+        <Text name="value"/>
         <Dynamics/>
     </ComponentType>
 
