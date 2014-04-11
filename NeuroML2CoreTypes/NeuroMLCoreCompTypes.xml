@@ -33,38 +33,55 @@
     </ComponentType>
 
     <ComponentType name="rdf_Description" description="Work in progress...">
+        
+        <Child name="bqbiol:encodes" type="bqbiol_encodes"/>
+        <Child name="bqbiol:hasPart" type="bqbiol_hasPart"/>
+        <Child name="bqbiol:hasProperty" type="bqbiol_hasProperty"/>
+        <Child name="bqbiol:hasVersion" type="bqbiol_hasVersion"/>
+        <Child name="bqbiol:is" type="bqbiol_is"/>
+        <Child name="bqbiol:isDescribedBy" type="bqbiol_isDescribedBy"/>
+        <Child name="bqbiol:isEncodedBy" type="bqbiol_isEncodedBy"/>
+        <Child name="bqbiol:isHomologTo" type="bqbiol_isHomologTo"/>
+        <Child name="bqbiol:isPartOf" type="bqbiol_isPartOf"/>
+        <Child name="bqbiol:isPropertyOf" type="bqbiol_isPropertyOf"/>
         <Child name="bqbiol:isVersionOf" type="bqbiol_isVersionOf"/>
+        <Child name="bqbiol:occursIn" type="bqbiol_occursIn"/>
         <Child name="bqbiol:hasTaxon" type="bqbiol_hasTaxon"/>
+        
         <Child name="bqmodel:is" type="bqmodel_is"/>
         <Child name="bqmodel:isDescribedBy" type="bqmodel_isDescribedBy"/>
         <Child name="bqmodel:isDerivedFrom" type="bqmodel_isDerivedFrom"/>
+        
         <Dynamics/>
     </ComponentType>
 
-    <ComponentType name="bqbiol_isVersionOf" description="Work in progress...">
-        <Child name="rdf:Bag" type="rdf_Bag"/>
-        <Dynamics/>
-    </ComponentType>
-
-    <ComponentType name="bqbiol_hasTaxon" description="Work in progress...">
+    <ComponentType name="baseBqbiol" description="Work in progress...">
         <Child name="rdf:Bag" type="rdf_Bag"/>
         <Dynamics/>
     </ComponentType>
     
-    <ComponentType name="bqmodel_is" description="Work in progress...">
-        <Child name="rdf:Bag" type="rdf_Bag"/>
-        <Dynamics/>
-    </ComponentType>
-
-    <ComponentType name="bqmodel_isDescribedBy" description="Work in progress...">
-        <Child name="rdf:Bag" type="rdf_Bag"/>
-        <Dynamics/>
-    </ComponentType>
+    <ComponentType name="bqbiol_encodes" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_hasPart" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_hasProperty" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_hasVersion" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_is" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_isDescribedBy" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_isEncodedBy" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_isHomologTo" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_isPartOf" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_isPropertyOf" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_isVersionOf" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_occursIn" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_hasTaxon" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
    
-    <ComponentType name="bqmodel_isDerivedFrom" description="Work in progress...">
-        <Child name="rdf:Bag" type="rdf_Bag"/>
-        <Dynamics/>
-    </ComponentType>
+    
+    
+    <ComponentType name="bqmodel_is" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    
+    <ComponentType name="bqmodel_isDescribedBy" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    
+    <ComponentType name="bqmodel_isDerivedFrom" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    
 
     <ComponentType name="rdf_Bag" description="Work in progress...">
         <Child name="rdf:li" type="rdf_li"/>
