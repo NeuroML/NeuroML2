@@ -29,7 +29,10 @@ LEMSexamples/*.py
 LEMSexamples/*.gv
 LEMSexamples/*.png
 LEMSexamples/x86_64
+LEMSexamples/*.log
+LEMSexamples/*.hoc
 LEMSexamples/*.mod
+LEMSexamples/*.dat
 LEMSexamples/*.sedml
 LEMSexamples/*.9ml
 LEMSexamples/*.spineml
