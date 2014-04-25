@@ -35,6 +35,7 @@ LEMSexamples/*.mod
 LEMSexamples/*.dat
 LEMSexamples/*.sedml
 LEMSexamples/*.9ml
+LEMSexamples/*.cellml
 LEMSexamples/*.spineml
 LEMSexamples/*.m
 LEMSexamples/*.json
