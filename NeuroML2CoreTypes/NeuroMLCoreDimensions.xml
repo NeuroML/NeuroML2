@@ -102,6 +102,7 @@
 
     <Unit symbol="ohm_m" dimension="resistivity" power="0"/>
     <Unit symbol="kohm_cm" dimension="resistivity" power="1"/>    <!-- Physiological Units -->
+    <Unit symbol="ohm_cm" dimension="resistivity" power="-2"/>    <!-- NEURON preferred Units -->
 
     <Unit symbol="C" dimension="charge" power="0"/>
 
