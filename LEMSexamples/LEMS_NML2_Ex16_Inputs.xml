@@ -35,7 +35,7 @@
 <rampGenerator id="rg0" delay="50ms" duration="200ms" startAmplitude="0.5nA" finishAmplitude="2nA" baselineAmplitude="0nA"/>
 
 <voltageClamp id="vClamp0" delay="50ms" duration="200ms"
-	      targetVoltage="-50mV" seriesResistance="10ohm"/>
+	      targetVoltage="-50mV" simpleSeriesResistance="1e6ohm"/>
 
 <spikeArray id="spkArr">
   <spike id="0" time="100 ms"/>

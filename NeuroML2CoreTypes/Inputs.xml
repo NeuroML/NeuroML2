@@ -323,7 +323,9 @@
         <Parameter name="delay" dimension="time" description="Delay before change in current. Current is zero  prior to this."/>
         <Parameter name="duration" dimension="time" description="Duration for attempting to keep parent at targetVoltage. Current is zero after delay + duration."/>
         <Parameter name="targetVoltage" dimension="voltage" description="Current will be applied to try to get parent to this target voltage"/>
-        <Parameter name="seriesResistance" dimension="resistance" description="Current will be calculated by the difference in voltage between the target and parent, divided by this value"/>
+        
+        <!-- seriesResistance renamed to simpleSeriesResistance & factor of 1e-5 removed from calculation of current. Still being tested... -->
+        <Parameter name="simpleSeriesResistance" dimension="resistance" description="Current will be calculated by the difference in voltage between the target and parent, divided by this value"/>
 
     <!--TODO: remove! Only required as EventConnection is used in explicitInput to
     connect inputs to cells. Events aren't passed! ... -->
@@ -342,7 +344,8 @@
             </OnCondition>
 
             <OnCondition test="t .geq. delay">
-                <StateAssignment variable="i" value="1e-5 * (targetVoltage - v) / seriesResistance"/>
+                <!-- seriesResistance renamed to simpleSeriesResistance & factor of 1e-5 removed from calculation of current. Still being tested... -->
+                <StateAssignment variable="i" value="(targetVoltage - v) / simpleSeriesResistance"/>
             </OnCondition>
 
             <OnCondition test="t .gt. duration + delay">

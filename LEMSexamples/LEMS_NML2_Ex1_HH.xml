@@ -17,9 +17,7 @@
     <Include file="Simulation.xml"/>
     
     
-    
             <!-- Main NeuroML2 content -->
-    
     
     <ionChannelPassive id="passive" conductance="10pS"/>
     
@@ -40,7 +38,6 @@
     </ionChannelHH>
     
     
-    
     <ionChannelHH id="k" conductance="10pS">
         <gateHHrates id="n" instances="4">
             <forwardRate type="HHExpLinearRate" rate="0.1per_ms" midpoint="-55mV" scale="10mV"/>
@@ -49,23 +46,18 @@
     </ionChannelHH>
     
     
-    
     <pointCellCondBased id="hhcell" C="10pF"  v0="-65mV" thresh="20mV">
-    
         <channelPopulation id="leak" ionChannel="passive" number="300" erev="-54.3mV"/>
         <channelPopulation id="naChans" ionChannel="na" number="120000" erev="50mV"/><!-- -->
         <channelPopulation id="kChans" ionChannel="k" number="36000" erev="-77mV"/>
-    
     </pointCellCondBased>
     
     <pulseGenerator id="pulseGen1" delay="50ms" duration="50ms" amplitude="0.08 nA" />
-    
-    <voltageClamp id="vClamp1" delay="150ms" duration="50ms" targetVoltage="0mV" seriesResistance="10ohm"/>
+  
     
     <network id="net1">
         <population id="hhpop" component="hhcell" size="1"/>
         <explicitInput target="hhpop[0]" input="pulseGen1" destination="synapses"/>
-        <explicitInput target="hhpop[0]" input="vClamp1" destination="synapses"/>
     </network>
     
     
