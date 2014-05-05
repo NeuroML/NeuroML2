@@ -1447,7 +1447,7 @@
 	      <xs:attribute name="targetVoltage"
 			    type="Nml2Quantity_voltage"
 			    use="required"/>
-	      <xs:attribute name="seriesResistance"
+	      <xs:attribute name="simpleSeriesResistance"
 			    type="Nml2Quantity_resistance"
 			    use="required"/>
             </xs:extension>
