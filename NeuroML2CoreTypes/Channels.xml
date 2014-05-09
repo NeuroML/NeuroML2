@@ -440,8 +440,8 @@
         description="Note _ionChannel_ and _ionChannelHH_ are currently functionally identical. This is needed since many existing examples use ionChannel, some use ionChannelHH. NeuroML v2beta3 will remove one of these, probably ionChannelHH.">
         <Child name="notes" type="notes"/>
         <Child name="annotation" type="annotation"/>
-        <Child name="conductanceScaling" type="baseConductanceScaling"/>
         
+        <Children name="conductanceScaling" type="baseConductanceScaling"/>
         <Children name="gatesHHrates" type="gateHHrates"/>
         <Children name="gatesHHtauInf" type="gateHHtauInf"/>
         <Children name="gatesHHratesTau" type="gateHHratesTau"/>
@@ -452,8 +452,7 @@
         <Text name="species"/>
     
         <Dynamics>
-            <!--TODO: put this back in!! <DerivedVariable name="conductanceScale" dimension="none" select="conductanceScaling/factor" reduce="multiply" required="false"/>-->
-            <DerivedVariable name="conductanceScale" dimension="none" value="1"/>
+            <DerivedVariable name="conductanceScale" dimension="none" select="conductanceScaling[*]/factor" reduce="multiply"/>
             <DerivedVariable name="fopenHHrates" dimension="none" select="gatesHHrates[*]/fcond" reduce="multiply"/>
             <DerivedVariable name="fopenHHtauInf" dimension="none" select="gatesHHtauInf[*]/fcond" reduce="multiply"/>
             <DerivedVariable name="fopenHHratesTau" dimension="none" select="gatesHHratesTau[*]/fcond" reduce="multiply"/>
@@ -469,8 +468,7 @@
         description="Note _ionChannel_ and _ionChannelHH_ are currently functionally identical. This is needed since many existing examples use ionChannel, some use ionChannelHH. NeuroML v2beta3 will remove one of these, probably ionChannelHH.">
         
         <Dynamics>
-            <!--TODO: put this back in!! <DerivedVariable name="conductanceScale" dimension="none" select="conductanceScaling/factor" reduce="multiply" required="false"/>-->
-            <DerivedVariable name="conductanceScale" dimension="none" value="1"/>
+            <DerivedVariable name="conductanceScale" dimension="none" select="conductanceScaling[*]/factor" reduce="multiply"/>
             <DerivedVariable name="fopenHHrates" dimension="none" select="gatesHHrates[*]/fcond" reduce="multiply"/>
             <DerivedVariable name="fopenHHtauInf" dimension="none" select="gatesHHtauInf[*]/fcond" reduce="multiply"/>
             <DerivedVariable name="fopenHHratesTau" dimension="none" select="gatesHHratesTau[*]/fcond" reduce="multiply"/>
