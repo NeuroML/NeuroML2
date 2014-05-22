@@ -490,7 +490,7 @@
 
     <ComponentType name="morphology" description="The collection of _segment_s which specify the 3D structure of the cell, along with a number of _segmentGroup_s">
 
-        <Child name="segment" type="segment"/>  <!-- Only one child allowed for now...-->
+        <Children name="segments" type="segment"/>
 
         <Children name="segmentGroups" type="segmentGroup"/>
 
@@ -768,7 +768,10 @@
             <DerivedVariable name="thresh" dimension="voltage" select="biophysicalProperties/membraneProperties/spikeThresh/value"/>
 
             <DerivedVariable name="debug" dimension="none" select="biophysicalProperties/membraneProperties/totChanCurrent"/>
-            <DerivedVariable name="surfaceArea" exposure="surfaceArea" dimension="area" select="morphology/segment/surfaceArea"/>
+            
+            <!--TODO replace this with just using first segment!!-->
+            <DerivedVariable name="surfaceArea" exposure="surfaceArea" dimension="area" select="morphology/segments[*]/surfaceArea" reduce="add"/>
+            
             <DerivedVariable name="totSpecCap" dimension="specificCapacitance" exposure="totSpecCap" select="biophysicalProperties/totSpecCap"/>
             <DerivedVariable name="totCap" dimension="capacitance" value="totSpecCap * surfaceArea "/>
 
