@@ -79,7 +79,7 @@
     <Unit symbol="per_mV" dimension="per_voltage" power="3"/>
 
     <Unit symbol="ohm" dimension="resistance" power="0"/>
-    <Unit symbol="Kohm" dimension="resistance" power="3"/>         <!-- Physiological Units -->
+    <Unit symbol="kohm" dimension="resistance" power="3"/>         <!-- Physiological Units -->
     <Unit symbol="Mohm" dimension="resistance" power="6"/>
 
     <Unit symbol="S" dimension="conductance" power="0"/>
