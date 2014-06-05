@@ -55,7 +55,12 @@
         description="Exponential linear form for rate equation. Linear for large positive _v, exponentially decays for large negative _v.">
         <Dynamics>
             <DerivedVariable name="x" value="(v - midpoint) / scale" dimension="none"/>
-            <DerivedVariable name="r" exposure="r" value="rate * x / (1 - exp(0 - x))" dimension="per_time"/>
+            <!--<DerivedVariable name="r" exposure="r" value="rate * x / (1 - exp(0 - x))" dimension="per_time"/>-->
+
+            <ConditionalDerivedVariable name="r" exposure="r" dimension="per_time">
+            	<Case condition="x .neq. 0" value="rate * x / (1 - exp(0 - x))"/>
+            	<Case condition="x .eq. 0" value="rate"/>
+            </ConditionalDerivedVariable>
         </Dynamics>
     </ComponentType>
 

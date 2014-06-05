@@ -62,7 +62,7 @@
     <xs:simpleType name="Nml2Quantity_resistance">
 
         <xs:restriction base="xs:string">
-            <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(ohm|Kohm|Mohm)"/> <!-- Based on set of defined Units in NeuroMLCoreDimensions.xml -->
+            <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(ohm|kohm|Mohm)"/> <!-- Based on set of defined Units in NeuroMLCoreDimensions.xml -->
         </xs:restriction>
 
     </xs:simpleType>
