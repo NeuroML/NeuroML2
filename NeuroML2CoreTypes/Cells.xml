@@ -454,7 +454,7 @@
         <Children name="paths" type="path"/>
         <Children name="subTrees" type="subTree"/>
         <Children name="includes" type="include"/> <!-- TODO deal with <include> used also for including ext NML files... -->
-        <Text name="id"/>
+        <Text name="neuroLexId"/>
     </ComponentType>
 
 
@@ -740,7 +740,10 @@
     <ComponentType name="cell"
         extends="baseCellMembPot"
         description="Cell with _segment_s specified in a _morphology_ element along with details on its _biophysicalProperties_. NOTE: this can only be correctly simulated using LEMS when there is a single segment in the cell, and _v of this cell represents the membrane potential in that isopotential segment!!!">
-
+        
+        <Child name="notes" type="notes"/>
+        <Child name="annotation" type="annotation"/>
+        
         <Child name="morphology" type="morphology"/>
 
         <Child name="biophysicalProperties" type="biophysicalProperties"/>

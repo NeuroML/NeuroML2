@@ -29,6 +29,7 @@
 
     <ComponentType name="rdf_RDF" description="Work in progress...">
         <Child name="rdf:Description" type="rdf_Description"/>
+        <Text name="xmlns:rdf"/>
         <Dynamics/>
     </ComponentType>
 
@@ -51,6 +52,7 @@
         <Child name="bqmodel:is" type="bqmodel_is"/>
         <Child name="bqmodel:isDescribedBy" type="bqmodel_isDescribedBy"/>
         <Child name="bqmodel:isDerivedFrom" type="bqmodel_isDerivedFrom"/>
+        <Text name="rdf:about"/>
         
         <Dynamics/>
     </ComponentType>
@@ -70,7 +72,9 @@
     <ComponentType name="bqbiol_isHomologTo" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
     <ComponentType name="bqbiol_isPartOf" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
     <ComponentType name="bqbiol_isPropertyOf" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
-    <ComponentType name="bqbiol_isVersionOf" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_isVersionOf" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol">
+        <Text name="xmlns:bqbiol"/>
+    </ComponentType>
     <ComponentType name="bqbiol_occursIn" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
     <ComponentType name="bqbiol_hasTaxon" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
    
@@ -78,7 +82,9 @@
     
     <ComponentType name="bqmodel_is" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
     
-    <ComponentType name="bqmodel_isDescribedBy" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqmodel_isDescribedBy" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol">
+        <Text name="xmlns:bqmodel"/>
+    </ComponentType>
     
     <ComponentType name="bqmodel_isDerivedFrom" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
     

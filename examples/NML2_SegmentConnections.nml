@@ -51,7 +51,7 @@
             </instance>
         </population>
         
-        <population id="popB" type="populationList" component="SegmentConnections">
+        <population id="popB" type="populationList" component="dendCell">
             <instance id="0">
                 <location x="100" y="100" z="100"/>
             </instance>
