@@ -1769,6 +1769,8 @@
         <xs:attribute name="id" type="xs:nonNegativeInteger"/>
         <xs:attribute name="target" type="xs:string"/>
         <xs:attribute name="destination" type="NmlId"/>
+        <xs:attribute name="segmentId" type="SegmentId"/>
+        <xs:attribute name="fractionAlong" type="ZeroToOne"/>
     </xs:complexType>
 
 

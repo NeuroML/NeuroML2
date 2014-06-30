@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta3.xsd"
+    id="NML2_MultiCompCellNetwork">
+
+<!-- Example of a network with connections between multicompartmental cells --> 
+
+    <expOneSynapse id="syn1" gbase="5nS" erev="0mV" tauDecay="3ms"/>
+
+    <cell id="MultiCompCell">
+
+        <notes>Multicompartmental cell</notes>
+
+        <morphology id="MultiCompCell_morphology">
+
+            <segment id ="0" name="Soma">
+                <proximal x="0" y="0" z="0" diameter="10"/>
+                <distal x="10" y="0" z="0" diameter="10"/>
+            </segment>
+
+            <segment id ="1" name="Dendrite1">
+                <parent segment="0"/>
+                <distal x="20" y="0" z="0" diameter="3"/>
+            </segment>
+
+            <segment id ="2" name="Dendrite2">
+                <parent segment="1"/>
+                <distal x="30" y="0" z="0" diameter="1"/>
+            </segment>
+            
+            <segmentGroup id="soma_group"> 
+                <member segment="0"/>
+            </segmentGroup>
+
+            <segmentGroup id="dendrite_group">  
+                <member segment="1"/>
+                <member segment="2"/>
+            </segmentGroup>
+            
+            <!-- No biophysical properties to keep example simple -->
+
+        </morphology>
+    </cell>
+    
+    <pulseGenerator id="pulseGen1" delay="100ms" duration="100ms" amplitude="0.3nA"/>
+
+    <network id="MultiCompCellNetwork">
+
+        <population id="pop0" type="populationList" component="MultiCompCell">
+            <instance id="0">
+                <location x="0" y="0" z="0"/>
+            </instance>
+            <instance id="1">
+                <location x="100" y="0" z="0"/>
+            </instance>
+            <instance id="2">
+                <location x="200" y="0" z="0"/>
+            </instance>
+        </population>
+
+        <projection id="internal1" presynapticPopulation="pop0" postsynapticPopulation="pop0" synapse="syn1">
+            <!--TODO: Fix! want to use preCellId="0" etc. -->
+            <connection id="0" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="2" postFractionAlong="0.5"/>
+            <connection id="1" preCellId="../pop0/1/MultiCompCell" postCellId="../pop0/2/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="1" postFractionAlong="0.5"/>
+            <connection id="2" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/0/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="2" postFractionAlong="0.5"/>
+        </projection>
+
+        <inputList id="stimInput" component="pulseGen1" population="pop0">
+            <!--TODO: Fix! want to use target="0" etc. -->
+            <input id="0" target="../pop0/0/MultiCompCell" segmentId="0" fractionAlong="0.5" destination="synapses"/>
+        </inputList>
+        
+    </network>
+
+</neuroml>
+
+
+
+
+
+
+
+
