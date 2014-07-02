@@ -135,7 +135,7 @@
     
     
     <ComponentType name="poissonFiringSynapse"
-                   description="Synapse which fires at a specified frequency"
+                   description="Poisson spike generator connected to single synapse providing an input current"
                    extends="baseVoltageDepPointCurrent">
         
         <Parameter name="averageRate" dimension="per_time"/>
@@ -167,14 +167,15 @@
             <OnCondition test="tsince .geq. isi">
                 <StateAssignment variable="tsince" value="0"/>
                 <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
+                <EventOut port="spike"/>
             </OnCondition>
             
         </Dynamics>
         
         <Structure>
             <With instance="this" as="a"/>
-            <With instance="synapse" as="b"/>
-            <EventConnection from="a" to="synapse"/>
+            <With instance="this/synapse" as="b"/>
+            <EventConnection from="a" to="b"/>
         </Structure>
 
     </ComponentType>
