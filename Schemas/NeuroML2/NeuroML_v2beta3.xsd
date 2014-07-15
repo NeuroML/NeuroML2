@@ -1196,6 +1196,10 @@
         <xs:complexContent>
             <xs:extension base="Base">
 
+                <xs:sequence>
+                    <xs:element name="variableParameter" type="VariableParameter" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+
                 <xs:attribute name="ionChannel" type="NmlId" use="required"/>
                 <xs:attribute name="condDensity" type="Nml2Quantity_conductanceDensity" use="optional"/>
 
@@ -1224,6 +1228,10 @@
 
         <xs:complexContent>
             <xs:extension base="Base">
+
+                <xs:sequence>
+                    <xs:element name="variableParameter" type="VariableParameter" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
 
                 <xs:attribute name="ionChannel" type="NmlId" use="required"/>
                 <xs:attribute name="permeability" type="Nml2Quantity_permeability" use="required"/>
