@@ -405,6 +405,7 @@
     <ComponentType name="parent"
         description="Specifies the segment which is this segment's parent">
         <Text name="segment"/>
+        <Text name="fractionAlong"/>
     </ComponentType>
 
 
@@ -454,6 +455,7 @@
         <Children name="paths" type="path"/>
         <Children name="subTrees" type="subTree"/>
         <Children name="includes" type="include"/> <!-- TODO deal with <include> used also for including ext NML files... -->
+        <Children name="inhomogeneousParam" type="inhomogeneousParam"/>
         <Text name="neuroLexId"/>
     </ComponentType>
 
@@ -485,6 +487,22 @@
 
     <ComponentType name="subTree" description="Include all the segments distal to that specified by _from_ in the _segmentGroup_">
         <Child name="from" type="from"/>
+    </ComponentType>
+    
+    
+    <ComponentType name="inhomogeneousParam" description="An inhomogeneous parameter specified across the _segmentGroup_">
+        <Text name="variable"/>
+        <Text name="metric"/>
+        <Child name="proximal" type="proximalProperties"/>
+        <Child name="distal" type="distalProperties"/>
+    </ComponentType>
+    
+    <ComponentType name="proximalProperties" description="What to do at the proximal point when creating an inhomogeneous parameter">
+        <Text name="translationStart"/>
+    </ComponentType>
+    
+    <ComponentType name="distalProperties" description="What to do at the distal point when creating an inhomogeneous parameter">
+        <Text name="normalizationEnd"/>
     </ComponentType>
 
 
@@ -600,7 +618,7 @@
 
 
     <ComponentType name="concentrationModel"
-        description="Base for any model of an ion concentration which changes with time. Internal, _concentration, and external, _extConcentration, values for the concentration of the ion (specified by _species) are given.">
+        description="Base for any model of an _ion concentration which changes with time. Internal, _concentration, and external, _extConcentration, values for the concentration of the ion are given.">
 
         <Exposure name="concentration" dimension="concentration"/>
         <Exposure name="extConcentration" dimension="concentration"/>
@@ -610,7 +628,7 @@
         <Requirement name="initialConcentration" dimension="concentration"/>
         <Requirement name="initialExtConcentration" dimension="concentration"/>
 
-        <Text name="species"/>
+        <Text name="ion"/>
 
         <Dynamics>
             <StateVariable name="concentration" exposure="concentration" dimension="concentration"/>
@@ -627,7 +645,7 @@
 
     <ComponentType name="decayingPoolConcentrationModel"
         extends="concentrationModel"
-        description="Model of buffering of concentration of an ion (currently hard coded to be calcium, due to requirement for _iCa) which has a baseline level _restingConc and tends to this value with time course _decayConstant. The ion is assumed to occupy a shell inside the membrane of thickness _shellThickness.">
+        description="Model of buffering of concentration of an _ion (currently hard coded to be calcium, due to requirement for _iCa) which has a baseline level _restingConc and tends to this value with time course _decayConstant. The ion is assumed to occupy a shell inside the membrane of thickness _shellThickness.">
 
         <Parameter name="restingConc" dimension="concentration"/>
         <Parameter name="decayConstant" dimension="time"/>
@@ -641,7 +659,7 @@
 
         <Requirement name="iCa" dimension="current"/>
 
-        <Text name="species"/> <!-- TODO: check why this isn't inherited from concentrationModel -->
+        <Text name="ion"/> <!-- TODO: check why this isn't inherited from concentrationModel -->
 
         <Dynamics>
 
@@ -761,6 +779,8 @@
         <Exposure name="iCa" dimension="current"/>
         <Exposure name="caConc" dimension="concentration"/>
         <Exposure name="caConcExt" dimension="concentration"/>
+        
+        <Text name="neuroLexId"/>
 
         <Dynamics>
             <StateVariable name="v" exposure="v" dimension="voltage"/>

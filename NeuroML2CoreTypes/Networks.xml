@@ -49,6 +49,7 @@
 
     <ComponentType name="populationList" extends="basePopulation" description="An explicit list of the cells in the population. Work in progress...">
 
+        <Parameter name="size" dimension="none" description="Number of instances of this Component to create when the population is instantiated. This must match the number of _instance_ elements."/>
         <Children name="instances" type="instance"/>
     
         <ComponentReference name="component" type="baseCell"/>
