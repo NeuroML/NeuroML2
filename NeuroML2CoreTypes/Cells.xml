@@ -491,10 +491,10 @@
     
     
     <ComponentType name="inhomogeneousParam" description="An inhomogeneous parameter specified across the _segmentGroup_">
-        <Text name="variable"/>
-        <Text name="metric"/>
         <Child name="proximal" type="proximalProperties"/>
         <Child name="distal" type="distalProperties"/>
+        <Text name="variable"/>
+        <Text name="metric"/>
     </ComponentType>
     
     <ComponentType name="proximalProperties" description="What to do at the proximal point when creating an inhomogeneous parameter">
