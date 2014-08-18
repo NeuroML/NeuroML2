@@ -9,18 +9,20 @@ v2beta3 / 2014-8-20
 * **Renamed the main Schema from NeuroML_v2beta2.xsd to [NeuroML_v2beta3.xsd](https://github.com/NeuroML/NeuroML2/blob/master/Schemas/NeuroML2/NeuroML_v2beta3.xsd).** 
   Changes outlined below are reflected in the new schema
 
-* **Inhomogeneous channel densities** The elements for expressing non uniform channel densities (which were taken 
+* **Inhomogeneous channel densities.** The elements for expressing non uniform channel densities (which were taken 
   directly from NeuroML v1.8.1) have been retested and improved
 
-* **NEURON export via jNeuroML improved** 
+* **NEURON export via jNeuroML improved.** A number of improvements to the export of NEURON code from NeuroML 2 models
+  have been made, including: better saving of data (matching jLEMS saved data files); initial support for multicompartmental
+  cells; improved handling of channel densities with Nernst based reversal potential; option to automatically compile
+  generated mod files and/or run without NEURON GUI, e.g. `jnml MyLEMS.xml -neuron -nogui -run` (Linux only).
 
-* **Export compatibility check** There is now an explicit check in jNeuroML when a NeuroML 2 model is exported to a 
+* **Export compatibility check.** There is now an explicit check in jNeuroML when a NeuroML 2 model is exported to a 
   specific format (e.g. Brian, MATLAB, XPP) to see whether the model features present are supported in the export, 
   e.g. MATLAB does not support networks but running with jLEMS does, Brain export does not support multicompartmental 
   neurons but NEURON does, etc. A detailed error will be thrown by jnml, e.g. `jnml LEMS_NML2_Ex3_Net.xml -xpp`.
 
-
-* **Restructured NeuroML2 repository** with folders: [examples](https://github.com/NeuroML/NeuroML2/tree/master/examples) 
+* **Restructured NeuroML2 repository.** with folders: [examples](https://github.com/NeuroML/NeuroML2/tree/master/examples) 
   (for pure NML2 files), [LEMSexamples](https://github.com/NeuroML/NeuroML2/tree/master/LEMSexamples)  (for LEMS files using 
   NML2 definitions) and [NeuroML2CoreTypes](https://github.com/NeuroML/NeuroML2/tree/master/NeuroML2CoreTypes)  (for the NML2 
   ComponentType definitions)
@@ -28,6 +30,9 @@ v2beta3 / 2014-8-20
 * Allows a `<property>` element with tag/value attributes (as in NeuroML v1.8.1) in `<annotation>` element
 
 * Updated & improved `<simpleSeriesResistance>` element & works now also exported to NEURON
+
+* Added `<gateHHratesTauInf>` for gates which use alpha and beta, but also have generic expressions for tau and inf using alpha 
+  and beta in non standard ways.
 
 * Changed Kohm to kohm in standard unit definitions.
 
