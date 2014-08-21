@@ -63,11 +63,11 @@
         
         <biophysicalProperties id="biophys">
             <membraneProperties>
-                <channelDensity id="nonuniform_na_chans" ionChannel="naf" erev="50mV">
+                <channelDensityNonUniform id="nonuniform_na_chans" ionChannel="naf" erev="50mV">
                     <variableParameter parameter="condDensity" segmentGroup="dendrite_group">
                         <inhomogeneousValue inhomogeneousParam="dendrite_group_x1" value="5e-7 * exp(-p/200)"/>  <!-- value is in SI units-->
                     </variableParameter>
-                </channelDensity>
+                </channelDensityNonUniform>
             </membraneProperties>
         </biophysicalProperties>
 

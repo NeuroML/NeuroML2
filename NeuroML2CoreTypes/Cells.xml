@@ -179,6 +179,31 @@
     </ComponentType>
 
 
+
+
+
+    <ComponentType name="channelDensityNonUniform"
+        extends="baseChannelDensity"
+        description="Specifies a time varying ohmic conductance density, which is distributed on a region of the cell. The conductance density of the channel is not uniform, but is set using the _variableParameter_. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON">
+
+        <Parameter name="erev" dimension="voltage"/>
+
+        <!-- TODO: Ensure Text elements are inherited from base type -->
+        <Text name="segmentGroup"/>
+        <Text name="ion"/> <!-- TODO: Ideally this needs to be a property of ionChannel only!
+                                But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
+
+        <Dynamics>
+
+        </Dynamics>
+
+        <Structure>
+            <ChildInstance component="ionChannel"/>
+        </Structure>
+
+    </ComponentType>
+    
+
     <ComponentType name="channelDensity"
         extends="baseChannelDensityCond"
         description="Specifies a time varying ohmic conductance density, _gDensity, which is distributed on an area of the cell with fixed reversal potential _erev producing a current density _iDensity">
