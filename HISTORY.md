@@ -4,13 +4,15 @@ History of changes in the official releases of NeuroML 2/LEMS
 Note, this records major changes/updates in not just the [NeuroML Schemas](https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2) and [LEMS](https://github.com/LEMS/LEMS), but also the Python ([libNeuroML](https://github.com/NeuralEnsemble/libNeuroML) and [PyLEMS](https://github.com/LEMS/pylems)) and Java ([jLEMS](https://github.com/LEMS/jLEMS), [org.neuroml.model](https://github.com/NeuroML/org.neuroml.model), [jNeuroML](https://github.com/NeuroML/jNeuroML), etc.) libraries.
 
 v2beta3 / 2014-8-20
-------------------
+-------------------
 
 * **Renamed the main Schema from NeuroML_v2beta2.xsd to [NeuroML_v2beta3.xsd](https://github.com/NeuroML/NeuroML2/blob/master/Schemas/NeuroML2/NeuroML_v2beta3.xsd).** 
   Changes outlined below are reflected in the new schema
 
-* **Inhomogeneous channel densities.** The elements for expressing non uniform channel densities (which were taken 
-  directly from NeuroML v1.8.1) have been retested and improved
+* **Inhomogeneous channel densities.** The elements for expressing non uniform channel densities (`<inhomogeneousParam>`, 
+  `<variableParameter>`, `<inhomogeneousValue>`, etc. which were based on those used in NeuroML v1.8.1) have been retested 
+  and improved. See https://raw.githubusercontent.com/OpenSourceBrain/L5bPyrCellHayEtAl2011/master/neuroConstruct/generatedNeuroML2/L5PC.cell.nml
+  for example.
 
 * **NEURON export via jNeuroML improved.** A number of improvements to the export of NEURON code from NeuroML 2 models
   have been made, including: better saving of data (matching jLEMS saved data files); initial support for multicompartmental
