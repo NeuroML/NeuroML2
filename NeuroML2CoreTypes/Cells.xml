@@ -179,6 +179,24 @@
     </ComponentType>
 
 
+    <ComponentType name="variableParameter"
+        description="Specifies a parameter which can vary its value across a _segmentGroup">
+
+        <Child name="inhomogeneousValue" type="inhomogeneousValue"/>
+
+        <Text name="parameter"/> 
+        <Text name="segmentGroup"/>
+
+    </ComponentType>
+    
+    
+    <ComponentType name="inhomogeneousValue"
+        description="Specifies the value of a _variableParameter_">
+
+        <Text name="inhomogeneousParameter"/> 
+        <Text name="value"/>
+
+    </ComponentType>
 
 
 
@@ -187,6 +205,8 @@
         description="Specifies a time varying ohmic conductance density, which is distributed on a region of the cell. The conductance density of the channel is not uniform, but is set using the _variableParameter_. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON">
 
         <Parameter name="erev" dimension="voltage"/>
+        
+        <Child name="variableParameter" type="variableParameter"/>
 
         <!-- TODO: Ensure Text elements are inherited from base type -->
         <Text name="segmentGroup"/>
@@ -194,7 +214,7 @@
                                 But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
 
         <Dynamics>
-
+            <!--<DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" value="0"/>-->
         </Dynamics>
 
         <Structure>
@@ -476,11 +496,14 @@
 
 
     <ComponentType name="segmentGroup" description="A method to describe a group of _segment_s in a _morphology_">
+        
+        <Child name="notes" type="notes"/>
+        <Child name="annotation" type="annotation"/>
         <Children name="members" type="member"/>
         <Children name="paths" type="path"/>
         <Children name="subTrees" type="subTree"/>
         <Children name="includes" type="include"/> <!-- TODO deal with <include> used also for including ext NML files... -->
-        <Children name="inhomogeneousParam" type="inhomogeneousParam"/>
+        <Children name="inhomogeneousParameter" type="inhomogeneousParameter"/>
         <Text name="neuroLexId"/>
     </ComponentType>
 
@@ -515,7 +538,7 @@
     </ComponentType>
     
     
-    <ComponentType name="inhomogeneousParam" description="An inhomogeneous parameter specified across the _segmentGroup_">
+    <ComponentType name="inhomogeneousParameter" description="An inhomogeneous parameter specified across the _segmentGroup_">
         <Child name="proximal" type="proximalProperties"/>
         <Child name="distal" type="distalProperties"/>
         <Text name="variable"/>

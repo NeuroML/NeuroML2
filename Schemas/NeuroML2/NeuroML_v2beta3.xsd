@@ -962,17 +962,17 @@
 
     <xs:complexType name="SegmentGroup">
 
-
-        <!--.... dendrite_group  ...-->
         <xs:complexContent>
             <xs:extension base="Base">
 
                 <xs:sequence>
+                    <xs:element name="notes" type="Notes" minOccurs="0"/>
+                    <xs:element name="annotation" type="Annotation" minOccurs="0"/>
                     <xs:element name="member" type="Member" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="include" type="Include" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="path" type="Path" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="subTree" type="SubTree" minOccurs="0" maxOccurs="unbounded"/>
-                    <xs:element name="inhomogeneousParam" type="InhomogeneousParam" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="inhomogeneousParameter" type="InhomogeneousParameter" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
 
             </xs:extension>
@@ -980,7 +980,7 @@
     </xs:complexType>
 
 
-    <xs:complexType name="InhomogeneousParam">
+    <xs:complexType name="InhomogeneousParameter">
         <xs:complexContent>
             <xs:extension base="Base">
                 <xs:sequence>
@@ -1310,7 +1310,7 @@
     </xs:complexType>
 
     <xs:complexType name="InhomogeneousValue">
-        <xs:attribute name="inhomogeneousParam" type="xs:string" use="required"/>
+        <xs:attribute name="inhomogeneousParameter" type="xs:string" use="required"/>
         <xs:attribute name="value" type="xs:string" use="required"/>
     </xs:complexType>
 
