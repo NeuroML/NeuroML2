@@ -50,12 +50,12 @@
                 <member segment="1"/>
                 <member segment="2"/>
                 
-                <inhomogeneousParam id="dendrite_group_x1" variable="p" metric="Path Length from root"/>
+                <inhomogeneousParameter id="dendrite_group_x1" variable="p" metric="Path Length from root"/>
  
-                <inhomogeneousParam id="dendrite_group_x2" variable="r" metric="Path Length from root">
+                <inhomogeneousParameter id="dendrite_group_x2" variable="r" metric="Path Length from root">
                         <proximal translationStart="0"/>
                         <distal normalizationEnd="1"/>
-                </inhomogeneousParam>
+                </inhomogeneousParameter>
                 
             </segmentGroup>
 
@@ -63,12 +63,20 @@
         
         <biophysicalProperties id="biophys">
             <membraneProperties>
-                <channelDensity id="nonuniform_na_chans" ionChannel="naf" erev="50mV">
+                <channelDensityNonUniform id="nonuniform_na_chans" ionChannel="naf" erev="50mV">
                     <variableParameter parameter="condDensity" segmentGroup="dendrite_group">
-                        <inhomogeneousValue inhomogeneousParam="dendrite_group_x1" value="5e-7 * exp(-p/200)"/>  <!-- value is in SI units-->
+                        <inhomogeneousValue inhomogeneousParameter="dendrite_group_x1" value="5e-7 * exp(-p/200)"/>  <!-- value is in SI units-->
                     </variableParameter>
-                </channelDensity>
+                </channelDensityNonUniform>
+
+                <specificCapacitance segmentGroup="soma_group" value="1.0 uF_per_cm2"/>
             </membraneProperties>
+
+            <intracellularProperties>
+
+                <resistivity value="0.1 kohm_cm"/>  <!-- Used for specific axial resistance -->
+
+            </intracellularProperties>
         </biophysicalProperties>
 
     </cell>
