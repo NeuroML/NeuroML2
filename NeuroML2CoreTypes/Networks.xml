@@ -13,12 +13,11 @@
 
         <Children name="regions" type="region"/>
         <Children name="populations" type="basePopulation"/>
+        
         <Children name="projections" type="projection"/>
-
         <Children name="synapticConnections" type="explicitConnection"/>  <!-- Connection either directly between cells or to synapse attachment on post cell-->
 
         <Children name="explicitInputs" type="explicitInput"/>
-
         <Children name="inputs" type="inputList"/>
 
     </ComponentType>
@@ -62,6 +61,7 @@
 
     </ComponentType>
 
+
     <ComponentType name="location" description="Initial attempt to specify instances in populations. Work in progress...">
         <Parameter name="x" dimension="none"/>
         <Parameter name="y" dimension="none"/>
@@ -82,7 +82,6 @@
         <Parameter name="yLength" dimension="none"/>
         <Parameter name="zLength" dimension="none"/>
     </ComponentType>
-
 
 
     <ComponentType name="projection"
@@ -116,6 +115,7 @@
 
     </ComponentType>
 
+
     <ComponentType name="explicitConnection"
         description="Explicit event connection between components">
         <Path name="from"/>
@@ -143,14 +143,13 @@
 
 
     <ComponentType name="synapticConnectionWD"
-    description="Explicit event connection between named components, which gets processed via a new instance of a _synapse component which is created on the target component, includes setting of _weight and _delay for the synaptic connection"
-    extends="synapticConnection">
+                   description="Explicit event connection between named components, which gets processed via a new instance of a _synapse component which is created on the target component, includes setting of _weight and _delay for the synaptic connection"
+                   extends="synapticConnection">
 
         <Parameter name="weight" dimension="none"/>
         <Parameter name="delay" dimension="time"/>
         <Path name="from"/>
         <Path name="to"/>
-
 
         <Structure>
             <With instance="from" as="a"/>
@@ -203,7 +202,6 @@
             <With instance="target" as="a"/>
             <With instance="target" as="b"/>
 
-            <!--<EventConnection from="a" to="b" receiver="input" receiverContainer="destination" sourcePort="sourcePort" targetPort="targetPort"/>-->
             <EventConnection from="a" to="b" receiver="input" receiverContainer="destination"/>
         </Structure>
     </ComponentType>

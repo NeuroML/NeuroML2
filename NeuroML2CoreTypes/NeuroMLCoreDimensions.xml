@@ -117,7 +117,6 @@
     <Unit symbol="uA_per_cm2" dimension="currentDensity" power="-2"/>         <!-- Physiological Units -->
     <Unit symbol="mA_per_cm2" dimension="currentDensity" power="1"/>          <!-- NEURON preferred Units -->
 
-
     <Unit symbol="mol_per_m3" dimension="concentration" power="0"/>
     <Unit symbol="mol_per_cm3" dimension="concentration" power="6"/>  <!-- Physiological Units -->
     <Unit symbol="M" dimension="concentration" power="3"/>

@@ -3,11 +3,11 @@
       xsi:schemaLocation="http://www.neuroml.org/lems/0.7.1 ../../LEMS/Schemas/LEMS/LEMS_v0.7.1.xsd"
       description="A number of ComponentTypes for providing spiking and current inputs to other ComponentTypes">
 
-
     <Include file="NeuroMLCoreDimensions.xml"/>
 
+    
     <ComponentType name="basePointCurrent"
-        description="Base type for all ComponentTypes which produce a current _i (with dimension current)">
+                   description="Base type for all ComponentTypes which produce a current _i (with dimension current)">
 
         <Exposure name="i" dimension="current" description="The total (time varying) current produced by this ComponentType"/>
 
@@ -15,8 +15,8 @@
 
 
     <ComponentType name="baseVoltageDepPointCurrent"
-        extends="basePointCurrent"
-        description="Base type for all ComponentTypes which produce a current _i (with dimension current) and require a membrane potential _v exposed on the parent Component">
+                   extends="basePointCurrent"
+                   description="Base type for all ComponentTypes which produce a current _i (with dimension current) and require a membrane potential _v exposed on the parent Component">
 
         <Requirement name="v" dimension="voltage" description="The current may vary with the voltage exposed by the ComponentType on which this is placed"/>
 
@@ -24,7 +24,7 @@
 
 
     <ComponentType name="basePointCurrentDL"
-        description="Base type for all ComponentTypes which produce a dimensionless current _I. There will eventually be dimensionless equivalents of all the core current producing ComponentTypes such as _pulseGenerator_, _sineGenerator_ and _rampGenerator_">
+                   description="Base type for all ComponentTypes which produce a dimensionless current _I. There will eventually be dimensionless equivalents of all the core current producing ComponentTypes such as _pulseGenerator_, _sineGenerator_ and _rampGenerator_">
 
         <Exposure name="I" dimension="none" description="The total (time varying) current produced by this ComponentType"/>
 
@@ -32,8 +32,8 @@
 
 
     <ComponentType name="baseVoltageDepPointCurrentDL"
-        extends="basePointCurrentDL"
-        description="Base type for all ComponentTypes which produce a dimensionless current _I and require a dimensionless membrane potential _V exposed on the parent Component">
+                   extends="basePointCurrentDL"
+                   description="Base type for all ComponentTypes which produce a dimensionless current _I and require a dimensionless membrane potential _V exposed on the parent Component">
 
         <Requirement name="V" dimension="none" description="The current may vary with the voltage exposed by the ComponentType on which this is placed"/>
 
@@ -41,22 +41,22 @@
 
 
     <ComponentType name="baseSpikeSource"
-        description="Base for any ComponentType whose main purpose is to emit spikes. The exposed variable _tsince can be used for plotting the time since the Component has spiked last">
+                   description="Base for any ComponentType whose main purpose is to emit spikes. The exposed variable _tsince can be used for plotting the time since the Component has spiked last">
 
         <EventPort name="spike"
-            direction="out"
-            description="Port on which spikes are emitted"/>
+                   direction="out"
+                   description="Port on which spikes are emitted"/>
 
         <Exposure name="tsince"
-            dimension="time"
-            description="Time since the last spike was emitted"/>
+                  dimension="time"
+                  description="Time since the last spike was emitted"/>
 
     </ComponentType>
 
 
     <ComponentType name="spikeGenerator"
-        extends="baseSpikeSource"
-        description="Simple generator of spikes at a regular interval set by _period.">
+                   extends="baseSpikeSource"
+                   description="Simple generator of spikes at a regular interval set by _period.">
 
         <Parameter name="period" dimension="time" description="Time between spikes. First spike will be emitted after this time."/>
         <Dynamics>
@@ -78,9 +78,8 @@
     </ComponentType>
 
 
-
     <ComponentType name="spikeGeneratorRandom" extends="baseSpikeSource"
-        description="Generator of spikes with a random interspike interval of at least _minISI and at most _maxISI">
+                   description="Generator of spikes with a random interspike interval of at least _minISI and at most _maxISI">
 
         <Parameter name="maxISI" dimension="time" description="Maximum interspike interval"/>
         <Parameter name="minISI" dimension="time" description="Minimum interspike interval"/>
@@ -111,38 +110,40 @@
         </Dynamics>
     </ComponentType>
 
+
     <ComponentType name="spikeGeneratorPoisson" extends="baseSpikeSource"
-		   description="Generator of spikes whose ISI is distributed according to an exponential pdf with scale 1/_averageRate">
-      <Parameter name="averageRate" dimension="per_time"/>
-      <DerivedParameter name="averageIsi" dimension="time" value="1 / averageRate"/>
-      <Dynamics>
-	<StateVariable name="tsince" dimension="time" exposure="tsince"/>
-	<StateVariable name="isi" dimension="time"/>
+                   description="Generator of spikes whose ISI is distributed according to an exponential pdf with scale 1/_averageRate">
+        <Parameter name="averageRate" dimension="per_time"/>
+        <DerivedParameter name="averageIsi" dimension="time" value="1 / averageRate"/>
+        <Dynamics>
+            <StateVariable name="tsince" dimension="time" exposure="tsince"/>
+            <StateVariable name="isi" dimension="time"/>
 
-	<TimeDerivative variable="tsince" value="1"/>
+            <TimeDerivative variable="tsince" value="1"/>
 
-	<OnStart>
-	  <StateAssignment variable="tsince" value="0"/>
-	  <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
-	</OnStart>
+            <OnStart>
+                <StateAssignment variable="tsince" value="0"/>
+                <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
+            </OnStart>
 
-	<OnCondition test="tsince .geq. isi">
-	  <StateAssignment variable="tsince" value="0"/>
-	  <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
-	  <EventOut port="spike"/>
-	</OnCondition>
-      </Dynamics>
+            <OnCondition test="tsince .geq. isi">
+                <StateAssignment variable="tsince" value="0"/>
+                <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
+                <EventOut port="spike"/>
+            </OnCondition>
+        </Dynamics>
     </ComponentType>
 
+
     <ComponentType name="pulseGenerator" extends="basePointCurrent"
-        description="Generates a constant current pulse of a certain _amplitude for a specified _duration after a _delay"> <!-- Note: a synpase also extends basePointCurrent -->
+                   description="Generates a constant current pulse of a certain _amplitude for a specified _duration after a _delay"> <!-- Note: a synpase also extends basePointCurrent -->
 
         <Parameter name="delay" dimension="time" description="Delay before change in current. Current is zero  prior to this."/>
         <Parameter name="duration" dimension="time" description="Duration for holding current at amplitude. Current is zero after delay + duration."/>
         <Parameter name="amplitude" dimension="current" description="Amplitude of current pulse"/>
 
-    <!--TODO: remove! Only required as EventConnection is used in explicitInput to
-    connect inputs to cells. Events aren't passed! ... -->
+        <!--TODO: remove! Only required as EventConnection is used in explicitInput to
+        connect inputs to cells. Events aren't passed! ... -->
         <EventPort name="in" direction="in" description="Note this is not used here. Will be removed in future"/>
 
         <Dynamics>
@@ -170,22 +171,21 @@
 
 
     <ComponentType name="pulseGeneratorDL" extends="basePointCurrentDL"
-        description="Dimensionless equivalent of _pulseGenerator_. Generates a constant current pulse of a certain _amplitude for a specified _duration after a _delay"> <!-- Note: a synpase also extends basePointCurrent -->
+                   description="Dimensionless equivalent of _pulseGenerator_. Generates a constant current pulse of a certain _amplitude for a specified _duration after a _delay"> <!-- Note: a synpase also extends basePointCurrent -->
 
         <Parameter name="delay" dimension="time" description="Delay before change in current. Current is zero  prior to this."/>
         <Parameter name="duration" dimension="time" description="Duration for holding current at amplitude. Current is zero after delay + duration."/>
         <Parameter name="amplitude" dimension="none" description="Amplitude of current pulse"/>
 
-    <!--TODO: remove! Only required as EventConnection is used in explicitInput to
-    connect inputs to cells. Events aren't passed! ... -->
+        <!--TODO: remove! Only required as EventConnection is used in explicitInput to
+        connect inputs to cells. Events aren't passed! ... -->
         <EventPort name="in" direction="in" description="Note this is not used here. Will be removed in future"/>
 
         <Dynamics>
 
             <StateVariable name="I" exposure="I" dimension="none"/>
 
-            <OnEvent port="in"><!--TODO: remove, see above...
-            <StateAssignment variable="i" value="0"/>-->
+            <OnEvent port="in"><!--TODO: remove, see above...-->
             </OnEvent>
 
             <OnCondition test="t .lt. delay">
@@ -204,9 +204,8 @@
     </ComponentType>
 
 
-
     <ComponentType name="sineGenerator" extends="basePointCurrent"
-        description="Generates a sinusoidally varying current after a time _delay, for a fixed _duration. The _period and maximum _amplitude of the current can be set as well as the _phase at which to start.">
+                   description="Generates a sinusoidally varying current after a time _delay, for a fixed _duration. The _period and maximum _amplitude of the current can be set as well as the _phase at which to start.">
 
         <Parameter name="phase" dimension="none"/>
         <Parameter name="delay" dimension="time"/>
@@ -239,9 +238,8 @@
     </ComponentType>
 
 
-
     <ComponentType name="rampGenerator" extends="basePointCurrent"
-        description="Generates a ramping current after a time _delay, for a fixed _duration. During this time the current steadily changes from _startAmplitude to _finishAmplitude.">
+                   description="Generates a ramping current after a time _delay, for a fixed _duration. During this time the current steadily changes from _startAmplitude to _finishAmplitude.">
 
         <Parameter name="delay" dimension="time"/>
         <Parameter name="duration" dimension="time"/>
@@ -262,7 +260,6 @@
             <OnEvent port="in"><!--TODO: remove-->
             </OnEvent>
 
-
             <OnCondition test="t .lt. delay">
                 <StateAssignment variable="i" value="baselineAmplitude"/>
             </OnCondition>
@@ -280,7 +277,7 @@
 
 
     <ComponentType name="rampGeneratorDL" extends="basePointCurrentDL"
-        description="Generates a ramping current after a time _delay, for a fixed _duration. During this time the dimensionless current steadily changes from _startAmplitude to _finishAmplitude.">
+                   description="Generates a ramping current after a time _delay, for a fixed _duration. During this time the dimensionless current steadily changes from _startAmplitude to _finishAmplitude.">
 
         <Parameter name="delay" dimension="time"/>
         <Parameter name="duration" dimension="time"/>
@@ -318,7 +315,7 @@
 
 
     <ComponentType name="voltageClamp" extends="baseVoltageDepPointCurrent"
-        description="Voltage clamp. Applies a variable current _i to try to keep parent at _targetVoltage. Not yet fully tested!!!">
+                   description="Voltage clamp. Applies a variable current _i to try to keep parent at _targetVoltage. Not yet fully tested!!!">
 
         <Parameter name="delay" dimension="time" description="Delay before change in current. Current is zero  prior to this."/>
         <Parameter name="duration" dimension="time" description="Duration for attempting to keep parent at targetVoltage. Current is zero after delay + duration."/>
@@ -327,8 +324,8 @@
         <!-- seriesResistance renamed to simpleSeriesResistance & factor of 1e-5 removed from calculation of current. Still being tested... -->
         <Parameter name="simpleSeriesResistance" dimension="resistance" description="Current will be calculated by the difference in voltage between the target and parent, divided by this value"/>
 
-    <!--TODO: remove! Only required as EventConnection is used in explicitInput to
-    connect inputs to cells. Events aren't passed! ... -->
+        <!--TODO: remove! Only required as EventConnection is used in explicitInput to
+        connect inputs to cells. Events aren't passed! ... -->
         <EventPort name="in" direction="in" description="Note this is not used here. Will be removed in future"/>
 
         <Dynamics>
@@ -357,9 +354,8 @@
     </ComponentType>
 
 
-
     <ComponentType name="spikeArray" extends="baseSpikeSource"
-        description="Set of spike ComponentTypes, each emitting one spike at a certain time. Can be used to feed a predetermined spike train into a cell">
+                   description="Set of spike ComponentTypes, each emitting one spike at a certain time. Can be used to feed a predetermined spike train into a cell">
 
         <Children name="spikes" type="spike"/>
         <EventPort name="in" direction="in" description="This will receive events from the children"/>
@@ -384,7 +380,7 @@
 
 
     <ComponentType name="spike" extends="baseSpikeSource"
-         description="Emits a single spike at the specified time">
+                   description="Emits a single spike at the specified time">
 
         <Parameter name="time" dimension="time" description="Time at which to emit one spike event"/>
         <Exposure name="spiked" dimension="none" description="0 signals not yet spiked, 1 signals has spiked"/>

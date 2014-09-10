@@ -14,14 +14,14 @@
 
 
     <ComponentType name="basePyNNCell"
-        description="Base type of any PyNN standard cell model. Note: membrane potential _v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels" extends="baseCellMembPot">
+                   description="Base type of any PyNN standard cell model. Note: membrane potential _v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels" extends="baseCellMembPot">
 
         <Parameter name="cm" dimension="none"/>
         <Parameter name="i_offset" dimension="none"/>
         <Parameter name="tau_syn_E" dimension="none"/>
         <Parameter name="tau_syn_I" dimension="none"/>
         
-    <!-- Temp parameter for initial value while LEMS support for setting these is updated -->
+        <!-- Temp parameter for initial value while LEMS support for setting these is updated -->
         <Parameter name="v_init" dimension="none"/>
         
         <EventPort name="spike_in_E" direction="in"/>
@@ -33,7 +33,7 @@
 
 
     <ComponentType name="basePyNNIaFCell" extends="basePyNNCell"
-        description="Base type of any PyNN standard integrate and fire model">
+                   description="Base type of any PyNN standard integrate and fire model">
 
         <Parameter name="tau_refrac" dimension="none"/>
         <Parameter name="v_thresh" dimension="none"/>
@@ -45,7 +45,7 @@
 
 
     <ComponentType name="basePyNNIaFCondCell" extends="basePyNNIaFCell"
-        description="Base type of conductance based PyNN IaF cell models">
+                   description="Base type of conductance based PyNN IaF cell models">
 
         <Parameter name="e_rev_E" dimension="none"/>
         <Parameter name="e_rev_I" dimension="none"/>
@@ -53,9 +53,8 @@
     </ComponentType>
 
 
-
     <ComponentType name="IF_curr_alpha" extends="basePyNNIaFCell"
-        description="Leaky integrate and fire model with fixed threshold and alpha-function-shaped post-synaptic current">
+                   description="Leaky integrate and fire model with fixed threshold and alpha-function-shaped post-synaptic current">
 
         <Constant name="SEC" dimension="time" value="1s"/>
         <Constant name="MSEC" dimension="time" value="1ms"/>
@@ -99,7 +98,7 @@
 
 
     <ComponentType name="IF_curr_exp" extends="basePyNNIaFCell"
-        description="Leaky integrate and fire model with fixed threshold and decaying-exponential post-synaptic current">
+                   description="Leaky integrate and fire model with fixed threshold and decaying-exponential post-synaptic current">
 
         <Constant name="SEC" dimension="time" value="1s"/>
         <Constant name="MSEC" dimension="time" value="1ms"/>
@@ -143,7 +142,7 @@
 
 
     <ComponentType name="IF_cond_alpha" extends="basePyNNIaFCondCell"
-        description="Leaky integrate and fire model with fixed threshold and alpha-function-shaped post-synaptic conductance">
+                   description="Leaky integrate and fire model with fixed threshold and alpha-function-shaped post-synaptic conductance">
 
         <Constant name="SEC" dimension="time" value="1s"/>
         <Constant name="MSEC" dimension="time" value="1ms"/>
@@ -185,11 +184,9 @@
 
     </ComponentType>
     
-    
-
 
     <ComponentType name="IF_cond_exp" extends="basePyNNIaFCondCell"
-        description="Leaky integrate and fire model with fixed threshold and exponentially-decaying post-synaptic conductance">
+                   description="Leaky integrate and fire model with fixed threshold and exponentially-decaying post-synaptic conductance">
 
         <Constant name="SEC" dimension="time" value="1s"/>
         <Constant name="MSEC" dimension="time" value="1ms"/>
@@ -232,9 +229,8 @@
     </ComponentType>
 
 
-
     <ComponentType name="EIF_cond_exp_isfa_ista" extends="basePyNNIaFCondCell"
-        description="Adaptive exponential integrate and fire neuron according to Brette R and Gerstner W (2005) with exponentially-decaying post-synaptic conductance">
+                   description="Adaptive exponential integrate and fire neuron according to Brette R and Gerstner W (2005) with exponentially-decaying post-synaptic conductance">
 
         <Parameter name="v_rest" dimension="none"/>
         <Parameter name="v_spike" dimension="none"/>
@@ -302,9 +298,10 @@
         </Dynamics>
 
     </ComponentType>
+    
 
     <ComponentType name="EIF_cond_alpha_isfa_ista" extends="basePyNNIaFCondCell"
-        description="Adaptive exponential integrate and fire neuron according to Brette R and Gerstner W (2005) with alpha-function-shaped post-synaptic conductance">
+                   description="Adaptive exponential integrate and fire neuron according to Brette R and Gerstner W (2005) with alpha-function-shaped post-synaptic conductance">
 
         <Parameter name="v_rest" dimension="none"/>
         <Parameter name="v_spike" dimension="none"/>
@@ -376,7 +373,7 @@
 
     <!-- Based on equations used for specifying cell behaviour for Brian in PyNN -->
     <ComponentType name="HH_cond_exp" extends="basePyNNCell"
-        description="Single-compartment Hodgkin-Huxley-type neuron with transient sodium and delayed-rectifier potassium currents using the ion channel models from Traub.">
+                   description="Single-compartment Hodgkin-Huxley-type neuron with transient sodium and delayed-rectifier potassium currents using the ion channel models from Traub.">
       
         <Parameter name="gbar_K" dimension="none"/>
         <Parameter name="gbar_Na" dimension="none"/>
@@ -438,13 +435,10 @@
     </ComponentType>
 
 
-
-    <!--   
-        Synapses
-    -->
+    <!--  Synapses   -->
 
     <ComponentType name="basePynnSynapse"
-        description="Base type for all PyNN synapses. Note, the current _I produced is dimensionless, but it requires a membrane potential _v with dimension voltage">
+                   description="Base type for all PyNN synapses. Note, the current _I produced is dimensionless, but it requires a membrane potential _v with dimension voltage">
 
         <Parameter name="tau_syn" dimension="none"/>
 
@@ -465,7 +459,6 @@
 
         <Exposure name="g" dimension="none"/>
 
-
         <Dynamics>
             <StateVariable name="g" dimension="none" exposure="g"/>
 
@@ -480,6 +473,7 @@
         </Dynamics>
 
     </ComponentType>
+
 
     <ComponentType name="expCurrSynapse" extends="basePynnSynapse" description="Current based synapse with instantaneous rise and single exponential decay (with time constant tau_syn)">
 
@@ -539,6 +533,7 @@
         </Dynamics>
 
     </ComponentType>
+    
 
     <ComponentType name="alphaCurrSynapse" extends="basePynnSynapse" description="Alpha synapse: rise time and decay time are both tau_syn. Current based synapse.">
 
@@ -565,13 +560,10 @@
     </ComponentType>
 
 
-
-    <!--
-        Spike sources
-    -->
+    <!--  Spike sources  -->
 
     <ComponentType name="SpikeSourcePoisson" extends="baseSpikeSource"
-        description="Spike source, generating spikes according to a Poisson process.">
+                   description="Spike source, generating spikes according to a Poisson process.">
 
         <Parameter name="start" dimension="time"/>
         <Parameter name="duration" dimension="time"/>
