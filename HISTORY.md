@@ -20,7 +20,9 @@ v2beta3 / 2014-9-11
 * **Export compatibility check.** There is now an explicit check in jNeuroML when a NeuroML 2 model is exported to a 
   specific format (e.g. Brian, MATLAB, XPP) to see whether the model features present are supported in the export, 
   e.g. MATLAB does not support networks but running with jLEMS does, Brain export does not support multicompartmental 
-  neurons but NEURON does, etc. A detailed error will be thrown by jnml, e.g. `jnml LEMS_NML2_Ex3_Net.xml -xpp`.
+  neurons but NEURON does, etc. A detailed error will be thrown by jnml, e.g. `jnml LEMS_NML2_Ex3_Net.xml -xpp`. See
+  [here](https://github.com/NeuroML/org.neuroml.export/blob/development/src/main/java/org/neuroml/export/ModelFeature.java) 
+  for more on current model features.
 
 * **NEURON export via jNeuroML improved.** A number of improvements to the export of NEURON code from NeuroML 2 models
   have been made, including: much improved support for mapping multicompartmental cells in NeuroML 2 to NEURON simulations; 
@@ -41,6 +43,8 @@ v2beta3 / 2014-9-11
   and beta in non standard ways.
 
 * Changed Kohm to kohm in standard unit definitions.
+
+* Licences have been added to each of the repositories on https://github.com/NeuroML and https://github.com/LEMS. 
 
 
 
