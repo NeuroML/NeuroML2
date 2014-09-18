@@ -31,21 +31,15 @@
 
     <Simulation id="sim1" length="200s" step="0.05s" target="net1">
 
-        <Display id="d1" title="Ex9: FitzHugh-Nagumo cell model in LEMS"
-            timeScale="1s" xmin="0" xmax="200" ymin="-2.5" ymax="2.5">
-            <Line id="V" quantity="fnPop1[0]/V" scale="1" color="#ee40FF"
-                timeScale="1s" />
-            <Line id="W" quantity="fnPop1[0]/W" scale="1" color="#BBA0AA"
-                timeScale="1s" />
+        <Display id="d1" title="Ex9: FitzHugh-Nagumo cell model in LEMS" timeScale="1s" xmin="0" xmax="200" ymin="-2.5" ymax="2.5">
+            <Line id="V" quantity="fnPop1[0]/V" scale="1" color="#ee40FF" timeScale="1s" />
+            <Line id="W" quantity="fnPop1[0]/W" scale="1" color="#BBA0AA" timeScale="1s" />
         </Display>
     
         <OutputFile id="of1" fileName="results/fn.dat">
             <OutputColumn id="V" quantity="fnPop1[0]/V"/> 
             <OutputColumn id="W" quantity="fnPop1[0]/W"/> 
-        </OutputFile>    
-        
-        <!-- report="examples/simReport.txt" save="examples/testResults/fn2_v.dat 
-            examples/testResults/fn_w.dat -->
+        </OutputFile> 
 
     </Simulation>
 

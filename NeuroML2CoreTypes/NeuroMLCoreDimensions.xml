@@ -79,7 +79,7 @@
     <Unit symbol="per_mV" dimension="per_voltage" power="3"/>
 
     <Unit symbol="ohm" dimension="resistance" power="0"/>
-    <Unit symbol="Kohm" dimension="resistance" power="3"/>         <!-- Physiological Units -->
+    <Unit symbol="kohm" dimension="resistance" power="3"/>         <!-- Physiological Units -->
     <Unit symbol="Mohm" dimension="resistance" power="6"/>
 
     <Unit symbol="S" dimension="conductance" power="0"/>
@@ -102,6 +102,7 @@
 
     <Unit symbol="ohm_m" dimension="resistivity" power="0"/>
     <Unit symbol="kohm_cm" dimension="resistivity" power="1"/>    <!-- Physiological Units -->
+    <Unit symbol="ohm_cm" dimension="resistivity" power="-2"/>    <!-- NEURON preferred Units -->
 
     <Unit symbol="C" dimension="charge" power="0"/>
 
@@ -115,7 +116,6 @@
     <Unit symbol="A_per_m2" dimension="currentDensity" power="0"/>
     <Unit symbol="uA_per_cm2" dimension="currentDensity" power="-2"/>         <!-- Physiological Units -->
     <Unit symbol="mA_per_cm2" dimension="currentDensity" power="1"/>          <!-- NEURON preferred Units -->
-
 
     <Unit symbol="mol_per_m3" dimension="concentration" power="0"/>
     <Unit symbol="mol_per_cm3" dimension="concentration" power="6"/>  <!-- Physiological Units -->

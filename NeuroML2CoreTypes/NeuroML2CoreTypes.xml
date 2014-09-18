@@ -3,7 +3,6 @@
       xsi:schemaLocation="http://www.neuroml.org/lems/0.7.1 ../../LEMS/Schemas/LEMS/LEMS_v0.7.1.xsd"
       description="All NeuroML2 Component Types">
 
-
     <Include file="Cells.xml"/>
     <Include file="Networks.xml"/>
     

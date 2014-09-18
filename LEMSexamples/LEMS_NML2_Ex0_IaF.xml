@@ -56,7 +56,10 @@
         </Display>
 
         <OutputFile id="of0" fileName="results/iaf_v.dat">
-            <OutputColumn id="v" quantity="iafTauPop[0]/v" />
+            <OutputColumn id="iafTauPop0" quantity="iafTauPop[0]/v" />
+            <OutputColumn id="iafTauRefPop0" quantity="iafTauRefPop[0]/v" />
+            <OutputColumn id="iafPop0" quantity="iafPop[0]/v" />
+            <OutputColumn id="iafRefPop0" quantity="iafRefPop[0]/v" />
         </OutputFile>
 
     </Simulation>

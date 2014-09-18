@@ -40,7 +40,17 @@
                 <Line id="gk" quantity="hhpop[0]/bioPhys1/membraneProperties/kChans/gDensity" scale="1"  color="#ff0000" timeScale="1ms"/>
         </Display>
     
-        <!-- See other examples for saving of data traces -->
+    
+        <OutputFile id="of0" fileName="results/hh_v.dat">
+            <OutputColumn id="v" quantity="hhpop[0]/v"/> 
+        </OutputFile>  
+        
+        <OutputFile id="of1" fileName="results/hh_vars.dat">
+            <OutputColumn id="m" quantity="hhpop[0]/bioPhys1/membraneProperties/naChans/naChan/m/q"/> 
+            <OutputColumn id="h" quantity="hhpop[0]/bioPhys1/membraneProperties/naChans/naChan/h/q"/> 
+            <OutputColumn id="n" quantity="hhpop[0]/bioPhys1/membraneProperties/kChans/kChan/n/q"/> 
+        </OutputFile>  
+    
         
     </Simulation>
 
