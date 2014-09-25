@@ -1,0 +1,9 @@
+system: Test Ex0
+
+experiments:
+    iafTauPop0:
+        expected:
+            spike times: [40.98, 82.57, 124.16, 165.75, 207.34, 248.93, 290.52]
+    iafTauRefPop0:
+        expected:
+            spike times: [40.99, 87.58, 134.18, 180.77, 227.36, 273.95]
