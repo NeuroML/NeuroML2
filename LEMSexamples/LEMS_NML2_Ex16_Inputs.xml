@@ -107,6 +107,7 @@
         <Line id ="adEx8 v" quantity="adExPop[8]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
         <Line id ="poison firing synapse g" quantity="adExPop[8]/poissonFiringSyn/synapse/g" scale="1nS"  color="#eeeeee" timeScale="1ms"/>
         <Line id ="poison firing synapse i" quantity="adExPop[8]/poissonFiringSyn/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
+        <Line id ="poison firing synapse time since" quantity="adExPop[8]/poissonFiringSyn/tsince" scale="1ms"  color="#3fffaa" timeScale="1ms"/>
     </Display>
     
 </Simulation>

@@ -173,12 +173,12 @@
             </OnCondition>
             
         </Dynamics>
-        
+        <!--
         <Structure>
             <With instance="this" as="a"/>
-            <With instance="this/synapse" as="b"/>
+            <With instance="../synapse" as="b"/>
             <EventConnection from="a" to="b"/>
-        </Structure>
+        </Structure>-->
 
     </ComponentType>
     
