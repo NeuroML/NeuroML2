@@ -44,12 +44,10 @@
     <ComponentType name="baseSpikeSource"
                    description="Base for any ComponentType whose main purpose is to emit spikes. The exposed variable _tsince can be used for plotting the time since the Component has spiked last">
 
-        <EventPort name="spike" direction="out"
         <EventPort name="spike"
                    direction="out"
                    description="Port on which spikes are emitted"/>
 
-        <Exposure name="tsince" dimension="time"
         <Exposure name="tsince"
                   dimension="time"
                   description="Time since the last spike was emitted"/>
@@ -79,7 +77,6 @@
         </Dynamics>
 
     </ComponentType>
-
 
 
     <ComponentType name="spikeGeneratorRandom" extends="baseSpikeSource"
@@ -255,7 +252,6 @@
     </ComponentType>
 
 
-
     <ComponentType name="sineGenerator" extends="basePointCurrent"
                    description="Generates a sinusoidally varying current after a time _delay, for a fixed _duration. The _period and maximum _amplitude of the current can be set as well as the _phase at which to start.">
 
@@ -288,7 +284,6 @@
 
         </Dynamics>
     </ComponentType>
-
 
 
     <ComponentType name="rampGenerator" extends="basePointCurrent"
@@ -406,7 +401,6 @@
         </Dynamics>
 
     </ComponentType>
-
 
 
     <ComponentType name="spikeArray" extends="baseSpikeSource"
