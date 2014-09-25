@@ -1,0 +1,12 @@
+language: python
+python: 2.7
+
+env:
+    - OMV_ENGINE=jNeuroML
+
+install: 
+    - pip install git+https://github.com/OpenSourceBrain/osb-model-validation
+
+script:
+    - omv all -V
+    

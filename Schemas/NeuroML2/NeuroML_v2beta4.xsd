@@ -290,7 +290,7 @@
                     <xs:element name="ionChannel" type="IonChannel" minOccurs="0" maxOccurs="unbounded"/>
                     
                     <!-- Note ionChannel and _ionChannelHH are currently functionally identical. This is needed 
-                    since many existing examples use ionChannel, some use ionChannelHH. NeuroML v2beta3 will 
+                    since many existing examples use ionChannel, some use ionChannelHH. NeuroML v2beta4 should 
                     remove one of these -->
                     <xs:element name="ionChannelHH" type="IonChannelHH" minOccurs="0" maxOccurs="unbounded"/>
 
@@ -449,7 +449,7 @@
 
         <xs:annotation>
             <xs:documentation>Note ionChannel and ionChannelHH are currently functionally identical. This is needed since many existing examples use ionChannel, some use ionChannelHH. 
-                NeuroML v2beta3 will remove one of these, probably ionChannelHH.</xs:documentation>
+                NeuroML v2beta4 should remove one of these, probably ionChannelHH.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="Standalone">
@@ -475,7 +475,7 @@
     <xs:complexType name="IonChannelHH">
         <xs:annotation>
             <xs:documentation>Note ionChannel and ionChannelHH are currently functionally identical. This is needed since many existing examples use ionChannel, some use ionChannelHH. 
-                NeuroML v2beta3 will remove one of these, probably ionChannelHH.</xs:documentation>
+                NeuroML v2beta4 should remove one of these, probably ionChannelHH.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="IonChannel"/>
@@ -1141,7 +1141,7 @@
 
                 <xs:attribute name="ionChannel" type="NmlId" use="required"/>
                 <xs:attribute name="number" type="xs:nonNegativeInteger" use="required"/>
-                <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>     <!-- Required in v2beta3 -->
+                <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/> 
 
                 <!-- Note: only one of the following should be used!! -->
                 <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
@@ -1172,7 +1172,7 @@
                 </xs:sequence>
 
                 <xs:attribute name="ionChannel" type="NmlId" use="required"/>
-                <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>     <!-- Required in v2beta3 -->
+                <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>  
 
                 <xs:attribute name="ion" type="NmlId" use="optional">
                     <xs:annotation>
@@ -1227,7 +1227,7 @@
 
                 <xs:attribute name="ionChannel" type="NmlId" use="required"/>
                 <xs:attribute name="condDensity" type="Nml2Quantity_conductanceDensity" use="optional"/>
-                <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>     <!-- Required in v2beta3 -->
+                <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>    
 
                 <!-- Note: only one of the following should be used!! -->
                 <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>

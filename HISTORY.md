@@ -1,7 +1,63 @@
-History of changes in the official releases of NeuroML 2
---------------------------------------------------------
+History of changes in the official releases of NeuroML 2/LEMS
+-------------------------------------------------------------
 
-Note, this records major changes/updates in not just the [NeuroML Schemas](https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2) and [LEMS](https://github.com/LEMS/LEMS), but also the Python ([libNeuroML](https://github.com/NeuralEnsemble/libNeuroML) and [PyLEMS](https://github.com/LEMS/pylems)) and Java ([jLEMS](https://github.com/LEMS/jLEMS), [org.neuroml.model](https://github.com/NeuroML/org.neuroml.model), [jNeuroML](https://github.com/NeuroML/jNeuroML), etc.) libraries.
+Note, this records major changes/updates in not just the [NeuroML Schemas](https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2) 
+and [LEMS](https://github.com/LEMS/LEMS), but also the Python ([libNeuroML](https://github.com/NeuralEnsemble/libNeuroML) and 
+[PyLEMS](https://github.com/LEMS/pylems)) and Java ([jLEMS](https://github.com/LEMS/jLEMS), 
+[org.neuroml.model](https://github.com/NeuroML/org.neuroml.model), [jNeuroML](https://github.com/NeuroML/jNeuroML), etc.) libraries.
+
+v2beta4 / 2014-XX-XX
+-------------------
+
+* **Renamed the main Schema from NeuroML_v2beta3.xsd to [NeuroML_v2beta4.xsd](https://github.com/NeuroML/NeuroML2/blob/master/Schemas/NeuroML2/NeuroML_v2beta4.xsd).** 
+  Changes outlined below are reflected in the new schema
+
+*
+
+* 
+
+v2beta3 / 2014-9-11
+-------------------
+
+* **Renamed the main Schema from NeuroML_v2beta2.xsd to [NeuroML_v2beta3.xsd](https://github.com/NeuroML/NeuroML2/blob/master/Schemas/NeuroML2/NeuroML_v2beta3.xsd).** 
+  Changes outlined below are reflected in the new schema
+
+* **Inhomogeneous channel densities.** The elements for expressing non uniform channel densities (`<inhomogeneousParam>`, 
+  `<variableParameter>`, `<inhomogeneousValue>`, etc. which were based on those used in NeuroML v1.8.1) have been updated, retested 
+  and improved. See https://raw.githubusercontent.com/OpenSourceBrain/L5bPyrCellHayEtAl2011/master/neuroConstruct/generatedNeuroML2/L5PC.cell.nml
+  for an example.
+
+* **Export compatibility check.** There is now an explicit check in jNeuroML when a NeuroML 2 model is exported to a 
+  specific format (e.g. Brian, MATLAB, XPP) to see whether the model features present are supported in the export, 
+  e.g. MATLAB does not support networks but running with jLEMS does, Brain export does not support multicompartmental 
+  neurons but NEURON does, etc. A detailed error will be thrown by jnml, e.g. `jnml LEMS_NML2_Ex3_Net.xml -xpp`. See
+  [here](https://github.com/NeuroML/org.neuroml.export/blob/development/src/main/java/org/neuroml/export/ModelFeature.java) 
+  for more on current model features.
+
+* **NEURON export via jNeuroML improved.** A number of improvements to the export of NEURON code from NeuroML 2 models
+  have been made, including: much improved support for mapping multicompartmental cells in NeuroML 2 to NEURON simulations; 
+  improved handling of channel densities with Nernst based reversal potential; handling of inhomogeneous channel densities
+  mentioned above; better saving of data (matching jLEMS saved data files); option to automatically compile the generated 
+  mod files and/or run without NEURON GUI, e.g. `jnml MyLEMS.xml -neuron -nogui -run` (Linux only so far).
+
+* **Restructured NeuroML2 repository.** with folders: [examples](https://github.com/NeuroML/NeuroML2/tree/master/examples) 
+  (for pure NML2 files), [LEMSexamples](https://github.com/NeuroML/NeuroML2/tree/master/LEMSexamples)  (for LEMS files using 
+  NML2 definitions) and [NeuroML2CoreTypes](https://github.com/NeuroML/NeuroML2/tree/master/NeuroML2CoreTypes)  (for the NML2 
+  ComponentType definitions)
+
+* Allows a `<property>` element with tag/value attributes (as in NeuroML v1.8.1) in `<annotation>` element
+
+* Updated & improved `<simpleSeriesResistance>` element & also works now when exported to NEURON
+
+* Added `<gateHHratesTauInf>` for gates which use alpha and beta, but also have generic expressions for tau and inf using alpha 
+  and beta in non standard ways.
+
+* Changed Kohm to kohm in standard unit definitions.
+
+* Licences have been added to each of the repositories on https://github.com/NeuroML and https://github.com/LEMS. 
+
+
+
 
 v2beta2 / 2014-3-5
 ------------------

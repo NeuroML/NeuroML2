@@ -45,9 +45,13 @@
                    description="Base for any ComponentType whose main purpose is to emit spikes. The exposed variable _tsince can be used for plotting the time since the Component has spiked last">
 
         <EventPort name="spike" direction="out"
+        <EventPort name="spike"
+                   direction="out"
                    description="Port on which spikes are emitted"/>
 
         <Exposure name="tsince" dimension="time"
+        <Exposure name="tsince"
+                  dimension="time"
                   description="Time since the last spike was emitted"/>
 
     </ComponentType>
@@ -75,6 +79,7 @@
         </Dynamics>
 
     </ComponentType>
+
 
 
     <ComponentType name="spikeGeneratorRandom" extends="baseSpikeSource"
@@ -133,7 +138,7 @@
         </Dynamics>
     </ComponentType>
     
-    
+
     <ComponentType name="poissonFiringSynapse"
                    description="Poisson spike generator connected to single synapse providing an input current"
                    extends="baseVoltageDepPointCurrent">
@@ -231,8 +236,7 @@
 
             <StateVariable name="I" exposure="I" dimension="none"/>
 
-            <OnEvent port="in"><!--TODO: remove, see above...
-            <StateAssignment variable="i" value="0"/>-->
+            <OnEvent port="in"><!--TODO: remove, see above...-->
             </OnEvent>
 
             <OnCondition test="t .lt. delay">
@@ -249,6 +253,7 @@
 
         </Dynamics>
     </ComponentType>
+
 
 
     <ComponentType name="sineGenerator" extends="basePointCurrent"
@@ -285,6 +290,7 @@
     </ComponentType>
 
 
+
     <ComponentType name="rampGenerator" extends="basePointCurrent"
                    description="Generates a ramping current after a time _delay, for a fixed _duration. During this time the current steadily changes from _startAmplitude to _finishAmplitude.">
 
@@ -306,6 +312,7 @@
 
             <OnEvent port="in"><!--TODO: remove-->
             </OnEvent>
+
 
             <OnCondition test="t .lt. delay">
                 <StateAssignment variable="i" value="baselineAmplitude"/>
@@ -399,6 +406,7 @@
         </Dynamics>
 
     </ComponentType>
+
 
 
     <ComponentType name="spikeArray" extends="baseSpikeSource"

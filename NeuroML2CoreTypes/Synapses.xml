@@ -24,15 +24,14 @@
 
         <EventPort name="in" direction="in"/>
 
-
     </ComponentType>
+
 
     <ComponentType name="baseSynapseDL"
                    extends="baseVoltageDepPointCurrentDL"
                    description="Base type for all synapses, i.e. ComponentTypes which produce a dimensionless current and change Dynamics in response to an incoming event. cno_0000009"> <!-- http://bioportal.bioontology.org/ontologies/46856/?p=terms&conceptid=cno%3Acno_0000009 -->
 
         <EventPort name="in" direction="in"/>
-
 
     </ComponentType>
 
@@ -211,6 +210,7 @@
         </Structure>
 
     </ComponentType>
+    
 
     <ComponentType name="blockingPlasticSynapse"
                    extends="expTwoSynapse"
@@ -252,7 +252,6 @@
         </Dynamics>
     </ComponentType>
 
-    <!--- -->
 
     <ComponentType name="stdpSynapse"
                    extends="expTwoSynapse"
@@ -300,7 +299,6 @@
                 <StateAssignment variable="B" value="B + waveformFactor" />
                 <StateAssignment variable="tsince" value="0" />
             </OnEvent>
-
 
         </Dynamics>
 

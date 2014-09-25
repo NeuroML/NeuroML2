@@ -4,16 +4,13 @@
 
     <!-- A number of common component types for use in NeuroML 2 documents  -->
 
-
     <!-- Including standard unit definitions for NeuroML v2.0 -->
     <Include file="NeuroMLCoreDimensions.xml"/>
 
-
     <!-- Potentially needed for any NeuroML 2 file...-->
-
-
     <ComponentType name="notes" description="Human readable notes on a Component">
     </ComponentType>
+    
     
     <ComponentType name="annotation" description="Annotation...">
         <Child name="property" type="property"/>
@@ -21,17 +18,20 @@
         <Dynamics/>
     </ComponentType>
     
+    
     <ComponentType name="property" description="Property in Annotation...">
         <Text name="tag"/>
         <Text name="value"/>
         <Dynamics/>
     </ComponentType>
+    
 
     <ComponentType name="rdf_RDF" description="Work in progress...">
         <Child name="rdf:Description" type="rdf_Description"/>
         <Text name="xmlns:rdf"/>
         <Dynamics/>
     </ComponentType>
+    
 
     <ComponentType name="rdf_Description" description="Work in progress...">
         
@@ -48,38 +48,48 @@
         <Child name="bqbiol:isVersionOf" type="bqbiol_isVersionOf"/>
         <Child name="bqbiol:occursIn" type="bqbiol_occursIn"/>
         <Child name="bqbiol:hasTaxon" type="bqbiol_hasTaxon"/>
-        
         <Child name="bqmodel:is" type="bqmodel_is"/>
         <Child name="bqmodel:isDescribedBy" type="bqmodel_isDescribedBy"/>
         <Child name="bqmodel:isDerivedFrom" type="bqmodel_isDerivedFrom"/>
         <Text name="rdf:about"/>
-        
         <Dynamics/>
     </ComponentType>
+
 
     <ComponentType name="baseBqbiol" description="Work in progress...">
         <Child name="rdf:Bag" type="rdf_Bag"/>
         <Dynamics/>
     </ComponentType>
     
+    
     <ComponentType name="bqbiol_encodes" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    
     <ComponentType name="bqbiol_hasPart" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    
     <ComponentType name="bqbiol_hasProperty" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    
     <ComponentType name="bqbiol_hasVersion" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    
     <ComponentType name="bqbiol_is" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    
     <ComponentType name="bqbiol_isDescribedBy" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    
     <ComponentType name="bqbiol_isEncodedBy" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    
     <ComponentType name="bqbiol_isHomologTo" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    
     <ComponentType name="bqbiol_isPartOf" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    
     <ComponentType name="bqbiol_isPropertyOf" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    
     <ComponentType name="bqbiol_isVersionOf" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol">
         <Text name="xmlns:bqbiol"/>
     </ComponentType>
+    
     <ComponentType name="bqbiol_occursIn" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    
     <ComponentType name="bqbiol_hasTaxon" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
    
-    
-    
     <ComponentType name="bqmodel_is" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
     
     <ComponentType name="bqmodel_isDescribedBy" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol">
@@ -88,11 +98,12 @@
     
     <ComponentType name="bqmodel_isDerivedFrom" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
     
-
+    
     <ComponentType name="rdf_Bag" description="Work in progress...">
         <Child name="rdf:li" type="rdf_li"/>
         <Dynamics/>
     </ComponentType>
+
 
     <ComponentType name="rdf_li" description="Annotation...">
         <Text name="rdf:resource"/>
@@ -101,13 +112,12 @@
 
 
     <ComponentType name="point3DWithDiam"
-        description="Base type for ComponentTypes which specify an ( _x, _y, _z ) coordinate along with a _diameter. Note: no dimension used in the attributes for these coordinates! These are assumed to have dimension micrometer (10^-6 m). This is due to micrometers being the default option for the majority of neuronal morphology formats, and dimensions are omitted here to facilitate reading and writing of morphologies in NeuroML.">
+                   description="Base type for ComponentTypes which specify an ( _x, _y, _z ) coordinate along with a _diameter. Note: no dimension used in the attributes for these coordinates! These are assumed to have dimension micrometer (10^-6 m). This is due to micrometers being the default option for the majority of neuronal morphology formats, and dimensions are omitted here to facilitate reading and writing of morphologies in NeuroML.">
         <Parameter name="x" dimension="none" description="x coordinate of point. Note: no dimension used, see note above!"/>
         <Parameter name="y" dimension="none" description="y coordinate of point. Note: no dimension used, see note above!"/>
         <Parameter name="z" dimension="none" description="z coordinate of point. Note: no dimension used, see note above!"/>
         <Parameter name="diameter" dimension="none" description="Diameter at point. Note: no dimension used, see note above!"/> <!-- TODO decide whether this or radius should be default input field!!! -->
         
-    
         <DerivedParameter name="radius" dimension="length" value="MICRON * diameter / 2"/>
         <DerivedParameter name="xLength" dimension="length" value="MICRON * x"/>  <!-- conversion to SI units... -->
         <DerivedParameter name="yLength" dimension="length" value="MICRON * y"/>  <!-- conversion to SI units... -->

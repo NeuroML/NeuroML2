@@ -7,8 +7,7 @@
     <!-- Including standard unit definitions for NeuroML v2.0 -->
     
     <Include file="NeuroMLCoreDimensions.xml"/>
-
-
+  
 
     <ComponentType name="Display">
         <Parameter name="xmin" dimension="none"/>
@@ -26,8 +25,6 @@
     </ComponentType>
         
 
-
-
     <ComponentType name="Line">
         <Parameter name="scale" dimension="*"/>
          <Parameter name="timeScale" dimension="*"/>
@@ -38,7 +35,6 @@
         </Simulation>
     </ComponentType>
 
-    
     
     <ComponentType name="Simulation">
         <Parameter name="length" dimension="time"/>
@@ -58,6 +54,7 @@
             <Run component="target" variable="t" increment="step" total="length"/>
         </Simulation>
     </ComponentType>
+    
     
     <ComponentType name="OutputFile">
     	
@@ -137,7 +134,7 @@
 
 
 
-<!-- In development... Might lead to SED-ML descriptions being natively used by LEMS...
+<!-- In development... *Might* lead to SED-ML descriptions being natively used by LEMS...
 
     <ComponentType name="listOfSimulations">
         <Children name="uniformTimeCourse" type="uniformTimeCourse"/>
@@ -193,18 +190,18 @@
         
         <Parameter name="length" dimension="time"/>
         <Parameter name="step" dimension="time"/>
-        
-        <Dynamics>
-            <StateVariable name="t" dimension="time"/>-->
 
-            <!--<ExternalVariable name="length" dimension="time" select="uniformTimeCourse/outputEndTime"/>-->
-            <!--<ExternalVariable name="length" dimension="time" select="listOfSimulations/uniformTimeCourse/outputEndTime"/>-->
-            <!--<DerivedVariable name="length" value="listOfSimulations/uniformTimeCourse/outputEndTime"/>-->
+    <Dynamics>
+        <StateVariable name="t" dimension="time"/>-->
 
-            <!--<Run component="target" variable="t" increment="step" total="length"/>-->
-            <!--<Run component="target" variable="t" increment="0.01" total="300"/>
-            <Show src="displays"/>
-        </Dynamics>
-    </ComponentType>-->
+        <!--<ExternalVariable name="length" dimension="time" select="uniformTimeCourse/outputEndTime"/>-->
+        <!--<ExternalVariable name="length" dimension="time" select="listOfSimulations/uniformTimeCourse/outputEndTime"/>-->
+        <!--<DerivedVariable name="length" value="listOfSimulations/uniformTimeCourse/outputEndTime"/>-->
+
+        <!--<Run component="target" variable="t" increment="step" total="length"/>-->
+        <!--<Run component="target" variable="t" increment="0.01" total="300"/>
+                <Show src="displays"/>
+            </Dynamics>
+        </ComponentType>-->
 
 </Lems>
