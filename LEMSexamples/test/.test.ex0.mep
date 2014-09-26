@@ -7,3 +7,9 @@ experiments:
     iafTauRefPop0:
         expected:
             spike times: [40.99, 87.59, 134.2, 180.81, 227.420, 274.03]
+    iafPop0:
+        expected:
+            spike times: [33.46, 67.72, 101.98, 136.24, 170.5, 204.76, 239.02, 273.28]
+    iafRefPop0:
+        expected:
+            spike times: [33.46, 72.72, 111.99, 151.26, 190.53, 229.8, 269.07]
