@@ -255,11 +255,10 @@
                    description="Gate which follows the general Hodgkin Huxley formalism">
 
         <Child name="notes" type="notes"/>
-        <Child name="q10Settings" type="baseQ10Settings"/>
 
         <Child name="timeCourse" type="baseVoltageDepTime" />
-
         <Child name="steadyState" type="baseVoltageDepVariable" />
+        <Children name="q10Settings" type="baseQ10Settings"/>
 
         <Exposure name="tau" dimension="time"/>
         <Exposure name="inf" dimension="none"/>
@@ -293,11 +292,11 @@
                    description="Gate which follows the general Hodgkin Huxley formalism">
 
         <Child name="notes" type="notes"/>
-        <Child name="q10Settings" type="baseQ10Settings"/>
 
         <Child name="forwardRate" type="baseVoltageDepRate"/>
         <Child name="reverseRate" type="baseVoltageDepRate"/>
         <Child name="timeCourse" type="baseVoltageDepTime" />
+        <Children name="q10Settings" type="baseQ10Settings"/>
 
         <Exposure name="alpha" dimension="per_time"/>
         <Exposure name="beta" dimension="per_time"/>
@@ -337,11 +336,11 @@
                    description="Gate which follows the general Hodgkin Huxley formalism">
 
         <Child name="notes" type="notes"/>
-        <Child name="q10Settings" type="baseQ10Settings"/>
 
         <Child name="forwardRate" type="baseVoltageDepRate"/>
         <Child name="reverseRate" type="baseVoltageDepRate"/>
         <Child name="steadyState" type="baseVoltageDepVariable" />
+        <Children name="q10Settings" type="baseQ10Settings"/>
 
 
         <Exposure name="alpha" dimension="per_time"/>
@@ -377,12 +376,12 @@
                    description="Gate which follows the general Hodgkin Huxley formalism">
 
         <Child name="notes" type="notes"/>
-        <Child name="q10Settings" type="baseQ10Settings"/>
 
         <Child name="forwardRate" type="baseVoltageDepRate"/>
         <Child name="reverseRate" type="baseVoltageDepRate"/>
         <Child name="timeCourse" type="baseVoltageDepTime" />
         <Child name="steadyState" type="baseVoltageDepVariable" />
+        <Children name="q10Settings" type="baseQ10Settings"/>
 
         <Exposure name="alpha" dimension="per_time"/>
         <Exposure name="beta" dimension="per_time"/>
