@@ -14,7 +14,7 @@ experiments:
         spike detection: 
           method: threshold
           threshold: -55.1
-        tolerance: 0
+        tolerance: 5e-4
   iafTauRefPop0:
     observables:
       spike times:
@@ -26,3 +26,25 @@ experiments:
           method: threshold
           threshold: -55.1
         tolerance: 5e-4
+  iafPop0:
+    observables:
+      spike times:
+        file: 
+          path: ../results/iaf_v.dat
+          columns: [0,3]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: -55.1
+        tolerance: 0.0009
+  iafRefPop0:
+    observables:
+      spike times:
+        file: 
+          path: ../results/iaf_v.dat
+          columns: [0,4]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: -55.1
+        tolerance: 0.0009

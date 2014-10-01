@@ -211,10 +211,10 @@
                    description="Gate which follows the general Hodgkin Huxley formalism">
 
         <Child name="notes" type="notes"/>
-        <Child name="q10Settings" type="baseQ10Settings"/>
 
         <Child name="forwardRate" type="baseVoltageDepRate"/>
         <Child name="reverseRate" type="baseVoltageDepRate"/>
+        <Children name="q10Settings" type="baseQ10Settings"/>
 
 
         <Exposure name="alpha" dimension="per_time"/>
@@ -228,7 +228,7 @@
         <Dynamics>
             <StateVariable name="q" exposure="q" dimension="none"/>
 
-            <DerivedVariable name="rateScale" exposure="rateScale" dimension="none" select="q10Settings/q10" reduce="multiply" required="false"/>
+            <DerivedVariable name="rateScale" exposure="rateScale" dimension="none" select="q10Settings[*]/q10" reduce="multiply"/>
 
             <DerivedVariable name="alpha" dimension="per_time" exposure="alpha" select="forwardRate/r"/>
             <DerivedVariable name="beta" dimension="per_time" exposure="beta" select="reverseRate/r"/>
@@ -255,11 +255,10 @@
                    description="Gate which follows the general Hodgkin Huxley formalism">
 
         <Child name="notes" type="notes"/>
-        <Child name="q10Settings" type="baseQ10Settings"/>
 
         <Child name="timeCourse" type="baseVoltageDepTime" />
-
         <Child name="steadyState" type="baseVoltageDepVariable" />
+        <Children name="q10Settings" type="baseQ10Settings"/>
 
         <Exposure name="tau" dimension="time"/>
         <Exposure name="inf" dimension="none"/>
@@ -269,7 +268,7 @@
         <Dynamics>
             <StateVariable name="q" exposure="q" dimension="none"/>
 
-            <DerivedVariable name="rateScale" exposure="rateScale" dimension="none" select="q10Settings/q10" reduce="multiply" required="false"/>
+            <DerivedVariable name="rateScale" exposure="rateScale" dimension="none" select="q10Settings[*]/q10" reduce="multiply"/>
 
             <DerivedVariable name="fcond" exposure="fcond" dimension="none" value="q^instances"/>
 
@@ -293,11 +292,11 @@
                    description="Gate which follows the general Hodgkin Huxley formalism">
 
         <Child name="notes" type="notes"/>
-        <Child name="q10Settings" type="baseQ10Settings"/>
 
         <Child name="forwardRate" type="baseVoltageDepRate"/>
         <Child name="reverseRate" type="baseVoltageDepRate"/>
         <Child name="timeCourse" type="baseVoltageDepTime" />
+        <Children name="q10Settings" type="baseQ10Settings"/>
 
         <Exposure name="alpha" dimension="per_time"/>
         <Exposure name="beta" dimension="per_time"/>
@@ -310,7 +309,7 @@
         <Dynamics>
             <StateVariable name="q" exposure="q" dimension="none"/>
 
-            <DerivedVariable name="rateScale" exposure="rateScale" dimension="none" select="q10Settings/q10" reduce="multiply" required="false"/>
+            <DerivedVariable name="rateScale" exposure="rateScale" dimension="none" select="q10Settings[*]/q10" reduce="multiply"/>
 
             <DerivedVariable name="alpha" dimension="per_time" exposure="alpha" select="forwardRate/r"/>
             <DerivedVariable name="beta" dimension="per_time" exposure="beta" select="reverseRate/r"/>
@@ -337,11 +336,11 @@
                    description="Gate which follows the general Hodgkin Huxley formalism">
 
         <Child name="notes" type="notes"/>
-        <Child name="q10Settings" type="baseQ10Settings"/>
 
         <Child name="forwardRate" type="baseVoltageDepRate"/>
         <Child name="reverseRate" type="baseVoltageDepRate"/>
         <Child name="steadyState" type="baseVoltageDepVariable" />
+        <Children name="q10Settings" type="baseQ10Settings"/>
 
 
         <Exposure name="alpha" dimension="per_time"/>
@@ -355,7 +354,7 @@
         <Dynamics>
             <StateVariable name="q" exposure="q" dimension="none"/>
 
-            <DerivedVariable name="rateScale" exposure="rateScale" dimension="none" select="q10Settings/q10" reduce="multiply" required="false"/>
+            <DerivedVariable name="rateScale" exposure="rateScale" dimension="none" select="q10Settings[*]/q10" reduce="multiply"/>
             <DerivedVariable name="alpha" dimension="per_time" exposure="alpha" select="forwardRate/r"/>
             <DerivedVariable name="beta" dimension="per_time" exposure="beta" select="reverseRate/r"/>
             <DerivedVariable name="fcond" exposure="fcond" dimension="none" value="q^instances"/>
@@ -377,12 +376,12 @@
                    description="Gate which follows the general Hodgkin Huxley formalism">
 
         <Child name="notes" type="notes"/>
-        <Child name="q10Settings" type="baseQ10Settings"/>
 
         <Child name="forwardRate" type="baseVoltageDepRate"/>
         <Child name="reverseRate" type="baseVoltageDepRate"/>
         <Child name="timeCourse" type="baseVoltageDepTime" />
         <Child name="steadyState" type="baseVoltageDepVariable" />
+        <Children name="q10Settings" type="baseQ10Settings"/>
 
         <Exposure name="alpha" dimension="per_time"/>
         <Exposure name="beta" dimension="per_time"/>
@@ -395,7 +394,7 @@
         <Dynamics>
             <StateVariable name="q" exposure="q" dimension="none"/>
 
-            <DerivedVariable name="rateScale" exposure="rateScale" dimension="none" select="q10Settings/q10" reduce="multiply" required="false"/>
+            <DerivedVariable name="rateScale" exposure="rateScale" dimension="none" select="q10Settings[*]/q10" reduce="multiply"/>
             <DerivedVariable name="alpha" dimension="per_time" exposure="alpha" select="forwardRate/r"/>
             <DerivedVariable name="beta" dimension="per_time" exposure="beta" select="reverseRate/r"/>
             <DerivedVariable name="inf" dimension="none" exposure="inf" select="steadyState/x"/>
