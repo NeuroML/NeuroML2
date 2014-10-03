@@ -166,6 +166,8 @@
 
         <Parameter name="erev" dimension="voltage"/>
         
+        <Constant name="ZERO_CURR_DENS" dimension="currentDensity" value="0 A_per_m2"/>
+        
         <Child name="variableParameter" type="variableParameter"/>
 
         <!-- TODO: Ensure Text elements are inherited from base type -->
@@ -174,7 +176,9 @@
                                 But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
 
         <Dynamics>
-            <!--<DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" value="0"/>-->
+            <!--NOTE: channelDensityNonUniform is not used by jLEMS, only when jNeuroML maps NML2 cells with this element to 
+                a multicompartmental format in another simulator, e.g. NEURON-->
+            <DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" value="ZERO_CURR_DENS"/>
         </Dynamics>
 
         <Structure>
@@ -188,7 +192,10 @@
         extends="baseChannelDensity"
         description="Specifies a time varying conductance density, which is distributed on a region of the cell, and whose reversal potential is calculated from the Nernst equation. Hard coded for Ca only!. The conductance density of the channel is not uniform, but is set using the _variableParameter_. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON">
         
+        <Constant name="ZERO_CURR_DENS" dimension="currentDensity" value="0 A_per_m2"/>
+  
         <Child name="variableParameter" type="variableParameter"/>
+        
 
         <!-- TODO: Ensure Text elements are inherited from base type -->
         <Text name="segmentGroup"/>
@@ -196,7 +203,9 @@
                                 But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
 
         <Dynamics>
-            <!--<DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" value="0"/>-->
+            <!--NOTE: channelDensityNonUniform is not used by jLEMS, only when jNeuroML maps NML2 cells with this element to 
+                a multicompartmental format in another simulator, e.g. NEURON-->
+            <DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" value="ZERO_CURR_DENS"/>
         </Dynamics>
 
         <Structure>
