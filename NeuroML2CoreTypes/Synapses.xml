@@ -218,19 +218,23 @@
 				optional block and plasticity
 				mechanisms, which can be expressed as
 				child elements.">
-        <Child name="plasticityMechanism" type="basePlasticityMechanism"/>
-        <Child name="blockMechanism" type="baseBlockMechanism"/>
+        
+        <Children name="plasticityMechanisms" type="basePlasticityMechanism"/>
+        <Children name="blockMechanisms" type="baseBlockMechanism"/>
+        
         <EventPort name="relay" direction="out" description="Used to relay incoming spikes to child plasticity mechanism"/>
         <Dynamics>
             <StateVariable name="A" dimension="none"/>
             <StateVariable name="B" dimension="none"/>
 
             <DerivedVariable name="plasticityFactor" dimension="none"
-                             select="plasticityMechanism/plasticityFactor"
-                             reduce="multiply" required="false"/>
+                             select="plasticityMechanisms[*]/plasticityFactor"
+                             reduce="multiply"/>
+            
             <DerivedVariable name="blockFactor" dimension="none"
-                             select="blockMechanism/blockFactor"
-                             reduce="multiply" required="false"/>
+                             select="blockMechanisms[*]/blockFactor"
+                             reduce="multiply"/>
+            
             <DerivedVariable name="g" dimension="conductance" exposure="g"
                              value="blockFactor * gbase * (B - A)" />
             <DerivedVariable name="i" exposure="i" dimension="current"
