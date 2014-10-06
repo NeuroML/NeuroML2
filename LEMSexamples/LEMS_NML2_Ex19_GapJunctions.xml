@@ -1,0 +1,42 @@
+<Lems>
+  
+    <Target component="sim1" />
+
+
+    <Include file="Cells.xml" />
+    <Include file="Networks.xml" />
+    <Include file="Simulation.xml" />
+    
+
+    <iafCell id="iafSpont" leakConductance="0.2nS" leakReversal="-54mV" thresh="-55mV" reset="-70mV" C="3.2pF"/>
+    <iafCell id="iaf" leakConductance="0.2nS" leakReversal="-70mV" thresh="-55mV" reset="-70mV" C="3.2pF"/>
+    
+    <pulseGenerator id="pulseGen1" delay="50ms" duration="200ms" amplitude="0.0032nA" />
+   
+    <gapJunction id="gj1" g="10pS"/>
+   
+    
+    <network id="net1">
+        <population id="iafPop1" component="iafSpont" size="2" />
+        <population id="iafPop2" component="iaf" size="2" />
+        
+        <electricalConnections id ="testGJconn" presynapticPopulation="iafPop1" postsynapticPopulation="iafPop2">
+            <gapJunctionConnection sourceIndex="0" targetIndex="0" connector="gj1"/>
+        </electricalConnections>
+        
+    </network>
+    
+    
+    <Simulation id="sim1" length="300ms" step="0.02ms" target="net1">
+
+        <Display id="d0" title="Ex19: GJ in LEMS" timeScale="1ms" xmin="0"  xmax="300" ymin="-75" ymax="-50">
+            <Line id="iafCell1_0" quantity="iafPop1[0]/v" scale="1mV" color="#FF0000" timeScale="1ms" />
+            <Line id="iafCell1_1" quantity="iafPop1[1]/v" scale="1mV" color="#FF00FF" timeScale="1ms" />
+            <Line id="iafCell2_0" quantity="iafPop2[0]/v" scale="1mV" color="#FFFF00" timeScale="1ms" />
+            <Line id="iafCell2_1" quantity="iafPop2[1]/v" scale="1mV" color="#FFFFFF" timeScale="1ms" />
+        </Display>
+
+
+    </Simulation>
+    
+</Lems>

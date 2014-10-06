@@ -223,6 +223,14 @@
         <xs:attribute name="tag" type="xs:string" use="required"/>
         <xs:attribute name="value" type="xs:string" use="required"/>
     </xs:complexType>
+    
+    <xs:complexType name="property">
+        <xs:annotation>
+            <xs:documentation>Generic property with a tag and value. Note: lowercase alternative to ensure APIs can use name</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="tag" type="xs:string" use="required"/>
+        <xs:attribute name="value" type="xs:string" use="required"/>
+    </xs:complexType>
 
     <xs:complexType name="Annotation">
         <xs:annotation>

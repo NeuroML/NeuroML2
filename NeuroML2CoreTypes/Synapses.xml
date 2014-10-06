@@ -307,5 +307,22 @@
         </Dynamics>
 
     </ComponentType>
+    
+    
+    <ComponentType name="gapJunction"
+                   description="Gap junction/single electrical connection, NOTE: STILL IN DEVELOPMENT!!!!">
+        <Parameter name="g" dimension="conductance" exposure="g"/>
+        <Requirement name="v" dimension="voltage"/>
+
+        <Exposure name="i" dimension="current"/>
+
+        <InstanceRequirement name="peer" type="gapJunction"/>
+
+        <Dynamics>
+            <DerivedVariable name="vpeer" dimension="voltage" select="peer/v"/>
+            <DerivedVariable name="i" exposure="i"  value="g * (vpeer - v)"/>
+        </Dynamics>
+    </ComponentType>
+
 
 </Lems>

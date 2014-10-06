@@ -16,6 +16,8 @@
         
         <Children name="projections" type="projection"/>
         <Children name="synapticConnections" type="explicitConnection"/>  <!-- Connection either directly between cells or to synapse attachment on post cell-->
+        
+        <Children name="electricalConnections" type="electricalConnections"/>
 
         <Children name="explicitInputs" type="explicitInput"/>
         <Children name="inputs" type="inputList"/>
@@ -161,6 +163,33 @@
             </EventConnection>
         </Structure>
 
+    </ComponentType>
+    
+    
+    <ComponentType name="gapJunctionConnection"
+                   description="To enable Gap junctions, NOTE: STILL IN DEVELOPMENT!!!!">
+        <IndexParameter name="sourceIndex"/>
+        <IndexParameter name="targetIndex"/>
+
+        <ComponentRequirement name="presynapticPopulation"/>
+        <ComponentRequirement name="postsynapticPopulation"/>
+
+        <ComponentReference name="connector" type="gapJunction"/>
+
+        <Structure>
+            <With list="presynapticPopulation" index="sourceIndex" as="a"/>
+            <With list="postsynapticPopulation" index="targetIndex" as="b"/>
+            <Tunnel name="peer" from="a" to="b" component="connector"/>
+        </Structure>
+
+    </ComponentType>
+    
+    
+    <ComponentType name="electricalConnections"
+                   description="To enable Gap junctions, NOTE: STILL IN DEVELOPMENT!!!!">
+        <ComponentReference name="presynapticPopulation" type="population" local="true"/>
+        <ComponentReference name="postsynapticPopulation" type="population" local="true"/>
+        <Children name="connections" type="gapJunctionConnection"/>
     </ComponentType>
 
 
