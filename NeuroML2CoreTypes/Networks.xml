@@ -17,7 +17,7 @@
         <Children name="projections" type="projection"/>
         <Children name="synapticConnections" type="explicitConnection"/>  <!-- Connection either directly between cells or to synapse attachment on post cell-->
         
-        <Children name="electricalConnections" type="electricalConnections"/>
+        <Children name="electricalProjection" type="electricalProjection"/>
 
         <Children name="explicitInputs" type="explicitInput"/>
         <Children name="inputs" type="inputList"/>
@@ -34,6 +34,7 @@
 
     <ComponentType name="basePopulation" description="A population of cells (anything which extends _baseCell_)">        
         <Child name="notes" type="notes"/>
+        <Child name="property" type="property"/>
         <Child name="annotation" type="annotation"/>
         <ComponentReference name="component" type="baseCell"/>
     </ComponentType>
@@ -166,30 +167,31 @@
     </ComponentType>
     
     
-    <ComponentType name="gapJunctionConnection"
+    <ComponentType name="electricalConnection"
                    description="To enable Gap junctions, NOTE: STILL IN DEVELOPMENT!!!!">
-        <IndexParameter name="sourceIndex"/>
-        <IndexParameter name="targetIndex"/>
+        
+        <IndexParameter name="preCell"/>
+        <IndexParameter name="postCell"/>
 
         <ComponentRequirement name="presynapticPopulation"/>
         <ComponentRequirement name="postsynapticPopulation"/>
 
-        <ComponentReference name="connector" type="gapJunction"/>
+        <ComponentReference name="synapse" type="gapJunction"/>
 
         <Structure>
-            <With list="presynapticPopulation" index="sourceIndex" as="a"/>
-            <With list="postsynapticPopulation" index="targetIndex" as="b"/>
-            <Tunnel name="peer" from="a" to="b" component="connector"/>
+            <With list="presynapticPopulation" index="preCell" as="a"/>
+            <With list="postsynapticPopulation" index="postCell" as="b"/>
+            <Tunnel name="peer" from="a" to="b" component="synapse"/>
         </Structure>
 
     </ComponentType>
     
     
-    <ComponentType name="electricalConnections"
+    <ComponentType name="electricalProjection"
                    description="To enable Gap junctions, NOTE: STILL IN DEVELOPMENT!!!!">
         <ComponentReference name="presynapticPopulation" type="population" local="true"/>
         <ComponentReference name="postsynapticPopulation" type="population" local="true"/>
-        <Children name="connections" type="gapJunctionConnection"/>
+        <Children name="connections" type="electricalConnection"/>
     </ComponentType>
 
 

@@ -8,23 +8,12 @@
     <Include file="Simulation.xml" />
     
 
-    <iafCell id="iafSpont" leakConductance="0.2nS" leakReversal="-54mV" thresh="-55mV" reset="-70mV" C="3.2pF"/>
-    <iafCell id="iaf" leakConductance="0.2nS" leakReversal="-70mV" thresh="-55mV" reset="-70mV" C="3.2pF"/>
-    
-    <pulseGenerator id="pulseGen1" delay="50ms" duration="200ms" amplitude="0.0032nA" />
-   
-    <gapJunction id="gj1" g="10pS"/>
-   
-    
-    <network id="net1">
-        <population id="iafPop1" component="iafSpont" size="2" />
-        <population id="iafPop2" component="iaf" size="2" />
-        
-        <electricalConnections id ="testGJconn" presynapticPopulation="iafPop1" postsynapticPopulation="iafPop2">
-            <gapJunctionConnection sourceIndex="0" targetIndex="0" connector="gj1"/>
-        </electricalConnections>
-        
-    </network>
+    <!-- Main NeuroML2 content. -->
+
+    <!-- Including file with a <neuroml> root, a "real" NeuroML 2 file -->
+    <Include file="../examples/NML2_GapJunctions.nml"/>
+
+    <!-- End of NeuroML2 content -->
     
     
     <Simulation id="sim1" length="300ms" step="0.02ms" target="net1">

@@ -223,14 +223,7 @@
         <xs:attribute name="tag" type="xs:string" use="required"/>
         <xs:attribute name="value" type="xs:string" use="required"/>
     </xs:complexType>
-    
-    <xs:complexType name="property">
-        <xs:annotation>
-            <xs:documentation>Generic property with a tag and value. Note: lowercase alternative to ensure APIs can use name</xs:documentation>
-        </xs:annotation>
-        <xs:attribute name="tag" type="xs:string" use="required"/>
-        <xs:attribute name="value" type="xs:string" use="required"/>
-    </xs:complexType>
+
 
     <xs:complexType name="Annotation">
         <xs:annotation>
@@ -384,8 +377,8 @@
         <xs:sequence>
             <xs:element name="expOneSynapse" type="ExpOneSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="expTwoSynapse" type="ExpTwoSynapse" minOccurs="0" maxOccurs="unbounded"/>
-	    <xs:element name="blockingPlasticSynapse" type="BlockingPlasticSynapse"
-			minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="blockingPlasticSynapse" type="BlockingPlasticSynapse" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="gapJunction" type="GapJunction" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:group>
 
@@ -712,6 +705,18 @@
 
                 <xs:attribute name="gbase" type="Nml2Quantity_conductance" use="required"/>
                 <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>
+
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="GapJunction">
+
+        <xs:complexContent>
+            <xs:extension base="BaseSynapse">
+
+                <xs:attribute name="conductance" type="Nml2Quantity_conductance" use="required"/>
 
             </xs:extension>
         </xs:complexContent>
@@ -1605,6 +1610,7 @@
 
                     <xs:element name="synapticConnection" type="SynapticConnection" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
                     <xs:element name="projection" type="Projection" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
+                    <xs:element name="electricalProjection" type="ElectricalProjection" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
 
                     <xs:element name="explicitInput" type="ExplicitInput" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
                     <xs:element name="inputList" type="InputList" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
@@ -1803,6 +1809,7 @@
         </xs:complexContent>
     </xs:complexType>
 
+
     <xs:complexType name="Connection">
         <xs:annotation>
             <xs:documentation>Subject to change as it gets tested with LEMS!!</xs:documentation>
@@ -1815,7 +1822,33 @@
         <xs:attribute name="postSegmentId" type="SegmentId"/>
         <xs:attribute name="postFractionAlong" type="ZeroToOne"/>
     </xs:complexType>
+    
+    
+    <xs:complexType name="ElectricalProjection">
+        <xs:annotation>
+            <xs:documentation>Subject to change as it gets tested with LEMS</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="Base">
+                <xs:sequence>
+                    <xs:element name="electricalConnection" type="ElectricalConnection" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+                <xs:attribute name="presynapticPopulation" type="NmlId"/>
+                <xs:attribute name="postsynapticPopulation" type="NmlId"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
 
+    <xs:complexType name="ElectricalConnection">
+        <xs:annotation>
+            <xs:documentation>Subject to change as it gets tested with LEMS!!</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="id" type="xs:nonNegativeInteger"/>
+        <xs:attribute name="preCell" type="xs:string"/>
+        <xs:attribute name="postCell" type="xs:string"/>
+        <xs:attribute name="synapse" type="NmlId"/>
+    </xs:complexType>
 
 
     <xs:complexType name="ExplicitInput">
@@ -2093,6 +2126,7 @@
             <xs:extension base="Base">
                 <xs:sequence>
                     <xs:element name="notes" type="Notes" minOccurs="0"/> <!-- More metadata needed -->
+                    <xs:element name="property" type="Property" minOccurs="0" maxOccurs="unbounded"/> <!-- More metadata needed -->
                     <xs:element name="annotation" type="Annotation" minOccurs="0"/> <!-- More metadata needed -->
                 </xs:sequence>
 
