@@ -224,6 +224,7 @@
         <xs:attribute name="value" type="xs:string" use="required"/>
     </xs:complexType>
 
+
     <xs:complexType name="Annotation">
         <xs:annotation>
             <xs:documentation>Placeholder for MIRIAM related metadata, among others.</xs:documentation>
@@ -1795,6 +1796,7 @@
         </xs:complexContent>
     </xs:complexType>
 
+
     <xs:complexType name="Connection">
         <xs:annotation>
             <xs:documentation>Subject to change as it gets tested with LEMS!!</xs:documentation>
@@ -2085,6 +2087,7 @@
             <xs:extension base="Base">
                 <xs:sequence>
                     <xs:element name="notes" type="Notes" minOccurs="0"/> <!-- More metadata needed -->
+                    <xs:element name="property" type="Property" minOccurs="0" maxOccurs="unbounded"/> <!-- More metadata needed -->
                     <xs:element name="annotation" type="Annotation" minOccurs="0"/> <!-- More metadata needed -->
                 </xs:sequence>
 
