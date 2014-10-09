@@ -48,8 +48,8 @@
 
 <spikeGeneratorPoisson id="spikeGenPoisson" averageRate="50 Hz"/>
 
-<poissonFiringSynapse id="poissonFiringSyn" averageRate="150 Hz">
-    <synapse id="synapse" type="expTwoSynapse" gbase="10nS" erev="20mV" tauRise="0.1ms" tauDecay="2ms"/>
+<poissonFiringSynapse id="poissonFiringSyn" averageRate="150 Hz" firingSynapse="./syn0">
+    <synapse id="syn0" type="expTwoSynapse" gbase="10nS" erev="20mV" tauRise="0.1ms" tauDecay="2ms"/>
 </poissonFiringSynapse>
 
 <network id="net1">

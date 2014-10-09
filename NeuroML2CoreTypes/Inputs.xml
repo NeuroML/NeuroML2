@@ -146,6 +146,8 @@
         
         <Child name="synapse" type="baseSynapse"/>
         
+        <Path name="firingSynapse"/>
+        
         <EventPort name="spike" direction="out" description="Port on which spikes are emitted"/>
         <!--TODO: remove! Only required as EventConnection is used in explicitInput to
         connect inputs to cells. Events aren't passed! ... -->
@@ -173,12 +175,13 @@
             </OnCondition>
             
         </Dynamics>
-        <!--
+        
         <Structure>
             <With instance="this" as="a"/>
-            <With instance="../synapse" as="b"/>
+            <With instance="firingSynapse" as="b"/>
+            
             <EventConnection from="a" to="b"/>
-        </Structure>-->
+        </Structure>
 
     </ComponentType>
     

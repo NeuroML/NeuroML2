@@ -181,7 +181,7 @@
         <Structure>
             <With list="presynapticPopulation" index="preCell" as="a"/>
             <With list="postsynapticPopulation" index="postCell" as="b"/>
-            <Tunnel name="peer" from="a" to="b" component="synapse"/>
+            <Tunnel name="peer" endA="a" endB="b" componentA="synapse" componentB="synapse"/>
         </Structure>
 
     </ComponentType>
