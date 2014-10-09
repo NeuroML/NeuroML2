@@ -3,6 +3,7 @@
       xsi:schemaLocation="http://www.neuroml.org/lems/0.7.1 ../../LEMS/Schemas/LEMS/LEMS_v0.7.1.xsd"
       description="A number of ComponentTypes for providing spiking and current inputs to other ComponentTypes">
 
+
     <Include file="NeuroMLCoreDimensions.xml"/>
 
     
@@ -109,7 +110,7 @@
 
         </Dynamics>
     </ComponentType>
-
+    
 
     <ComponentType name="spikeGeneratorPoisson" extends="baseSpikeSource"
                    description="Generator of spikes whose ISI is distributed according to an exponential pdf with scale 1/_averageRate">
@@ -133,7 +134,54 @@
             </OnCondition>
         </Dynamics>
     </ComponentType>
+    
 
+    <ComponentType name="poissonFiringSynapse"
+                   description="Poisson spike generator connected to single synapse providing an input current"
+                   extends="baseVoltageDepPointCurrent">
+        
+        <Parameter name="averageRate" dimension="per_time"/>
+        
+        <DerivedParameter name="averageIsi" dimension="time" value="1 / averageRate"/>
+        
+        <Child name="synapse" type="baseSynapse"/>
+        
+        <EventPort name="spike" direction="out" description="Port on which spikes are emitted"/>
+        <!--TODO: remove! Only required as EventConnection is used in explicitInput to
+        connect inputs to cells. Events aren't passed! ... -->
+        <EventPort name="in" direction="in" description="Note this is not used here. Will be removed in future"/>
+
+        <Exposure name="tsince" dimension="time" description="Time since the last spike was emitted"/>
+        
+        <Dynamics>
+            <StateVariable name="tsince" dimension="time" exposure="tsince"/>
+            <StateVariable name="isi" dimension="time"/>
+            
+            <DerivedVariable name="i" dimension="current" exposure="i" select="synapse/i"/>
+
+            <TimeDerivative variable="tsince" value="1"/>
+
+            <OnStart>
+                <StateAssignment variable="tsince" value="0"/>
+                <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
+            </OnStart>
+
+            <OnCondition test="tsince .geq. isi">
+                <StateAssignment variable="tsince" value="0"/>
+                <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
+                <EventOut port="spike"/>
+            </OnCondition>
+            
+        </Dynamics>
+        <!--
+        <Structure>
+            <With instance="this" as="a"/>
+            <With instance="../synapse" as="b"/>
+            <EventConnection from="a" to="b"/>
+        </Structure>-->
+
+    </ComponentType>
+    
 
     <ComponentType name="pulseGenerator" extends="basePointCurrent"
                    description="Generates a constant current pulse of a certain _amplitude for a specified _duration after a _delay"> <!-- Note: a synpase also extends basePointCurrent -->
@@ -259,6 +307,7 @@
 
             <OnEvent port="in"><!--TODO: remove-->
             </OnEvent>
+
 
             <OnCondition test="t .lt. delay">
                 <StateAssignment variable="i" value="baselineAmplitude"/>
