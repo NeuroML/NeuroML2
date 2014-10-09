@@ -49,7 +49,7 @@
     </ComponentType>
 
 
-    <ComponentType name="populationList" extends="basePopulation" description="An explicit list of the cells in the population. Work in progress...">
+    <ComponentType name="populationList" extends="basePopulation" description="An explicit list of the cells in the population. Work in progress...">        
         <Children name="instances" type="instance"/>
     
         <ComponentReference name="component" type="baseCell"/>
@@ -193,6 +193,33 @@
         <ComponentReference name="postsynapticPopulation" type="population" local="true"/>
         <Children name="connections" type="electricalConnection"/>
     </ComponentType>
+    
+    <!--
+    <ComponentType name="projection2"
+                   description="...">
+        <ComponentReference name="presynapticPopulation" type="population" local="true"/>
+        <ComponentReference name="postsynapticPopulation" type="population" local="true"/>
+        <Children name="connections" type="connection2"/>
+    </ComponentType>
+    
+    <ComponentType name="connection2"
+                   description="...">
+        
+        <IndexParameter name="preCell"/>
+        <IndexParameter name="postCell"/>
+
+        <ComponentRequirement name="presynapticPopulation"/>
+        <ComponentRequirement name="postsynapticPopulation"/>
+
+        <ComponentReference name="synapse" type="baseSynapse"/>
+
+        <Structure>
+            <With list="presynapticPopulation" index="preCell" as="a"/>
+            <With list="postsynapticPopulation" index="postCell" as="b"/>
+            <EventConnection from="a" to="b" receiver="synapse" receiverContainer="destination"/>
+        </Structure>
+
+    </ComponentType>-->
 
 
     <!--   Not yet stable...
