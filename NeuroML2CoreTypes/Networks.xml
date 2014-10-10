@@ -18,6 +18,7 @@
         <Children name="synapticConnections" type="explicitConnection"/>  <!-- Connection either directly between cells or to synapse attachment on post cell-->
         
         <Children name="electricalProjection" type="electricalProjection"/>
+        <!--<Children name="continuousProjection" type="continuousProjection"/>-->
 
         <Children name="explicitInputs" type="explicitInput"/>
         <Children name="inputs" type="inputList"/>
@@ -193,6 +194,35 @@
         <ComponentReference name="postsynapticPopulation" type="population" local="true"/>
         <Children name="connections" type="electricalConnection"/>
     </ComponentType>
+    
+    <!--
+    <ComponentType name="continuousConnection"
+                   description="STILL IN DEVELOPMENT!!!!">
+        
+        <IndexParameter name="preCell"/>
+        <IndexParameter name="postCell"/>
+
+        <ComponentRequirement name="presynapticPopulation"/>
+        <ComponentRequirement name="postsynapticPopulation"/>
+
+        <ComponentReference name="synapse" type="gradedSynapse"/>
+        <ComponentReference name="dummy" type="silentEndpoint"/>
+
+        <Structure>
+            <With list="presynapticPopulation" index="preCell" as="a"/>
+            <With list="postsynapticPopulation" index="postCell" as="b"/>
+            <Tunnel name="peer" endA="a" endB="b" componentA="dummy" componentB="synapse"/>
+        </Structure>
+
+    </ComponentType>
+    
+    
+    <ComponentType name="continuousProjection"
+                   description="STILL IN DEVELOPMENT!!!!">
+        <ComponentReference name="presynapticPopulation" type="population" local="true"/>
+        <ComponentReference name="postsynapticPopulation" type="population" local="true"/>
+        <Children name="connections" type="continuousConnection"/>
+    </ComponentType>-->
     
     <!--
     <ComponentType name="projection2"
