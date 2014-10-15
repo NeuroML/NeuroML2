@@ -73,6 +73,14 @@
             <Line id ="time since spike" quantity="srcPop[0]/tsince" scale="1ms"  color="#aaaaaa" timeScale="1ms"/>
         </Display>
         
+        <OutputFile id="of0" fileName="results/ex6_v.dat">
+            <OutputColumn id="v" quantity="pasPop1[0]/v"/> 
+        </OutputFile>  
+        
+        <OutputFile id="of1" fileName="results/ex6_g.dat">
+            <OutputColumn id ="g" quantity="pasPop1[0]/nmdaSyn1/g"/> 
+        </OutputFile>  
+        
     </Simulation>
 
 </Lems>

@@ -454,7 +454,7 @@
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="Standalone">
-                <xs:choice>
+                <xs:sequence>
                     <!-- 
                         Note: one of gateHHrates, gateHHratesTau etc. should be used as the element name as opposed to <gate type="gateHHratesTau" ...>
                         See https://github.com/NeuroML/NeuroML2/issues/38
@@ -466,7 +466,7 @@
                     <xs:element name="gateHHtauInf" type="GateHHTauInf" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="gateHHratesInf" type="GateHHRatesInf" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="gateHHratesTauInf" type="GateHHRatesTauInf" minOccurs="0" maxOccurs="unbounded"/>
-                </xs:choice>
+                </xs:sequence>
 
                 <xs:attribute name="species" type="NmlId" use="optional"/>
 
