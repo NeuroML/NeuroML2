@@ -1,6 +1,6 @@
-<Lems xmlns="http://www.neuroml.org/lems/0.7.1"
+<Lems xmlns="http://www.neuroml.org/lems/0.7.3"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.1 ../../LEMS/Schemas/LEMS/LEMS_v0.7.1.xsd"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.3 ../../LEMS/Schemas/LEMS/LEMS_v0.7.3.xsd"
       description="A number of ComponentTypes for providing spiking and current inputs to other ComponentTypes">
 
 
@@ -146,14 +146,16 @@
         
         <Child name="synapse" type="baseSynapse"/>
         
-        <Path name="firingSynapse"/>
         
         <EventPort name="spike" direction="out" description="Port on which spikes are emitted"/>
+        
         <!--TODO: remove! Only required as EventConnection is used in explicitInput to
         connect inputs to cells. Events aren't passed! ... -->
         <EventPort name="in" direction="in" description="Note this is not used here. Will be removed in future"/>
 
         <Exposure name="tsince" dimension="time" description="Time since the last spike was emitted"/>
+        
+        <Path name="firingSynapse"/>
         
         <Dynamics>
             <StateVariable name="tsince" dimension="time" exposure="tsince"/>

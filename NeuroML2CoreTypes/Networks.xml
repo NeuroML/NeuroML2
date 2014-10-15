@@ -1,6 +1,6 @@
-<Lems xmlns="http://www.neuroml.org/lems/0.7.1"
+<Lems xmlns="http://www.neuroml.org/lems/0.7.3"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.1 ../../LEMS/Schemas/LEMS/LEMS_v0.7.1.xsd"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.3 ../../LEMS/Schemas/LEMS/LEMS_v0.7.3.xsd"
       description="Network descriptions in NeuroML 2. Describes _network_ elements containing _population_s ">
 
     <!-- A number of network elements for use in NeuroML 2 documents  -->
@@ -174,10 +174,10 @@
         <IndexParameter name="preCell"/>
         <IndexParameter name="postCell"/>
 
+        <ComponentReference name="synapse" type="gapJunction"/>
+
         <ComponentRequirement name="presynapticPopulation"/>
         <ComponentRequirement name="postsynapticPopulation"/>
-
-        <ComponentReference name="synapse" type="gapJunction"/>
 
         <Structure>
             <With list="presynapticPopulation" index="preCell" as="a"/>
@@ -190,9 +190,9 @@
     
     <ComponentType name="electricalProjection"
                    description="To enable Gap junctions, NOTE: STILL IN DEVELOPMENT!!!!">
+        <Children name="connections" type="electricalConnection"/>
         <ComponentReference name="presynapticPopulation" type="population" local="true"/>
         <ComponentReference name="postsynapticPopulation" type="population" local="true"/>
-        <Children name="connections" type="electricalConnection"/>
     </ComponentType>
     
     <!--

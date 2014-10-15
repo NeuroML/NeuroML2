@@ -1,6 +1,6 @@
-<Lems xmlns="http://www.neuroml.org/lems/0.7.1"
+<Lems xmlns="http://www.neuroml.org/lems/0.7.3"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.1 ../../LEMS/Schemas/LEMS/LEMS_v0.7.1.xsd"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.3 ../../LEMS/Schemas/LEMS/LEMS_v0.7.3.xsd"
       description="Defines voltage (and concentration) gated ion channel models. Ion channels will generally extend _baseIonChannel_. The most commonly used voltage dependent gate will extend _baseGate_.">
 
     <!-- A number of channel types for use in NeuroML 2 documents  -->

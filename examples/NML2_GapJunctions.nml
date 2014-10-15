@@ -9,9 +9,9 @@
 
     <gapJunction id="gj1" conductance="10pS"/>
     
-    <silentEndpoint id="silent"/>
+    <!--<silentEndpoint id="silent"/>
     
-    <gradedSynapse id="gs1" conductance="5pS"/>
+    <gradedSynapse id="gs1" conductance="5pS"/>-->
     
     <!--<iafCell id="iafSpont" leakConductance="0.2nS" leakReversal="-54mV" thresh="-55mV" reset="-70mV" C="3.2pF"/>-->
     <iafCell id="iaf" leakConductance="0.2nS" leakReversal="-70mV" thresh="-55mV" reset="-70mV" C="3.2pF"/>
@@ -46,16 +46,16 @@
         <electricalProjection id ="testGJconn" presynapticPopulation="iafPop1" postsynapticPopulation="iafPop2">
             <electricalConnection preCell="0" postCell="0" synapse="gj1"/>
         </electricalProjection>
-        <!--
-        <continuousProjection id ="testGradedConn" presynapticPopulation="iafPop1" postsynapticPopulation="iafPop2">
+        
+        <!--<continuousProjection id ="testGradedConn" presynapticPopulation="iafPop1" postsynapticPopulation="iafPop2">
             <continuousConnection preCell="1" postCell="1" synapse="gs1" dummy="silent"/>
         </continuousProjection>-->
         
         
         <explicitInput target="iafPop1[0]" input="pulseGen1" destination="synapses"/>
         <explicitInput target="iafPop2[0]" input="pulseGen2" destination="synapses"/>
-        <!--
-        <explicitInput target="iafPop1[1]" input="pulseGen1" destination="synapses"/>
+        
+        <!--<explicitInput target="iafPop1[1]" input="pulseGen1" destination="synapses"/>
         <explicitInput target="iafPop2[1]" input="pulseGen2" destination="synapses"/>-->
         
     </network>
