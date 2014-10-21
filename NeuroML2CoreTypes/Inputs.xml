@@ -144,7 +144,7 @@
         
         <DerivedParameter name="averageIsi" dimension="time" value="1 / averageRate"/>
         
-        <Child name="synapse" type="baseSynapse"/>
+        <ComponentReference name="synapse" type="baseSynapse"/>
         
         
         <EventPort name="spike" direction="out" description="Port on which spikes are emitted"/>
@@ -155,7 +155,7 @@
 
         <Exposure name="tsince" dimension="time" description="Time since the last spike was emitted"/>
         
-        <Path name="firingSynapse"/>
+        <Path name="spikeTarget"/>
         
         <Dynamics>
             <StateVariable name="tsince" dimension="time" exposure="tsince"/>
@@ -177,10 +177,11 @@
             </OnCondition>
             
         </Dynamics>
-        
         <Structure>
+            <ChildInstance component="synapse"/>
+            
             <With instance="this" as="a"/>
-            <With instance="firingSynapse" as="b"/>
+            <With instance="spikeTarget" as="b"/>
             
             <EventConnection from="a" to="b"/>
         </Structure>

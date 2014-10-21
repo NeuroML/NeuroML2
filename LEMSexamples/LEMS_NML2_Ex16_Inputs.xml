@@ -26,6 +26,8 @@
 
 <expTwoSynapse id="syn1" gbase="1nS" erev="20mV" tauRise="0.1ms" tauDecay="3ms"/>
 
+<expTwoSynapse id="synInput" gbase="10nS" erev="20mV" tauRise="0.1ms" tauDecay="2ms"/>
+
 
 <pulseGenerator id="pulseGen0" delay="50ms" duration="200ms" amplitude="0.8 nA" />
 
@@ -48,9 +50,7 @@
 
 <spikeGeneratorPoisson id="spikeGenPoisson" averageRate="50 Hz"/>
 
-<poissonFiringSynapse id="poissonFiringSyn" averageRate="150 Hz" firingSynapse="./syn0">
-    <synapse id="syn0" type="expTwoSynapse" gbase="10nS" erev="20mV" tauRise="0.1ms" tauDecay="2ms"/>
-</poissonFiringSynapse>
+<poissonFiringSynapse id="poissonFiringSyn" averageRate="150 Hz" synapse="synInput" spikeTarget="./synInput"/>
 
 <network id="net1">
     <population id="adExPop" component="adExBurst4" size="9"/>
@@ -105,7 +105,7 @@
     </Display>
     <Display id="d5" title="Ex16: Adaptive exponential cell, poison firing synapse" timeScale="1ms" xmin="-20" xmax="320" ymin="-80" ymax="30">
         <Line id ="adEx8 v" quantity="adExPop[8]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
-        <Line id ="poison firing synapse g" quantity="adExPop[8]/poissonFiringSyn/synapse/g" scale="1nS"  color="#eeeeee" timeScale="1ms"/>
+        <Line id ="poison firing synapse g" quantity="adExPop[8]/poissonFiringSyn/synInput/g" scale="1nS"  color="#eeeeee" timeScale="1ms"/>
         <Line id ="poison firing synapse i" quantity="adExPop[8]/poissonFiringSyn/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
         <Line id ="poison firing synapse time since" quantity="adExPop[8]/poissonFiringSyn/tsince" scale="1ms"  color="#3fffaa" timeScale="1ms"/>
     </Display>
