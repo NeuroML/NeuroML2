@@ -1141,7 +1141,7 @@
 
     <ComponentType name="fitzHughNagumoCell"
                    extends="baseCellMembPotDL"
-                   description="Simple dimensionless model of spiking cell from FitzHugh and Nagumo. Based on http://www.scholarpedia.org/article/FitzHugh-Nagumo_model">
+                   description="Simple dimensionless model of spiking cell from FitzHugh and Nagumo. Based on http://www.scholarpedia.org/article/FitzHugh-Nagumo_model. Note: should be updated, see https://github.com/NeuroML/NeuroML2/issues/42">
 
         <Parameter name="I" dimension="none"/>
 

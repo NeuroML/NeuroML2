@@ -1,28 +1,28 @@
 # Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
  
-target: ../LEMS_NML2_Ex6_NMDA.xml 
-engine: PyLEMS_NeuroML2
-mep: .test.ex6.mep
+target: ../LEMS_NML2_Ex9_FN.xml 
+engine: jNeuroML
+mep: .test.ex9.mep
 experiments:
-  v:
+  V:
     observables:
       spike times:
         file: 
-          path: ../results/ex6_v.dat
+          path: ../results/ex9.dat
           columns: [0,1]
           scaling: [1000, 1000]
         spike detection: 
           method: threshold
-          threshold: -32
-        tolerance: 0.0155
-  g:
+          threshold: 0
+        tolerance: 0
+  W:
     observables:
       spike times:
         file: 
-          path: ../results/ex6_g.dat
-          columns: [0,1]
+          path: ../results/ex9.dat
+          columns: [0,2]
           scaling: [1000, 1]
         spike detection: 
           method: threshold
-          threshold: 1e-11
-        tolerance: 0.00742
+          threshold: 0.9
+        tolerance: 0
