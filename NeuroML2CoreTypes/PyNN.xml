@@ -1,6 +1,6 @@
-<Lems xmlns="http://www.neuroml.org/lems/0.7.1"
+<Lems xmlns="http://www.neuroml.org/lems/0.7.3"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.1 ../../LEMS/Schemas/LEMS/LEMS_v0.7.1.xsd"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.3 ../../LEMS/Schemas/LEMS/LEMS_v0.7.3.xsd"
       description="A number of ComponentType description of PyNN standard cells. All of the cells extend _basePyNNCell_, and the synapses extend _basePynnSynapse_.">
 
     <!-- Set of definitions in LEMS for PyNN standard cell types & synapses  -->

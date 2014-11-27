@@ -24,8 +24,9 @@
 	     delT="2mV" tauw="40ms"  a ="4nS"   b = "0.08nA"
 	     refract="0ms"/>
 
-<expTwoSynapse id="syn1" gbase="1nS" erev="20mV" tauRise="0.1ms"
-	       tauDecay="5ms"/>
+<expTwoSynapse id="syn1" gbase="1nS" erev="20mV" tauRise="0.1ms" tauDecay="3ms"/>
+
+<expTwoSynapse id="synInput" gbase="10nS" erev="20mV" tauRise="1ms" tauDecay="2ms"/>
 
 
 <pulseGenerator id="pulseGen0" delay="50ms" duration="200ms" amplitude="0.8 nA" />
@@ -49,8 +50,10 @@
 
 <spikeGeneratorPoisson id="spikeGenPoisson" averageRate="50 Hz"/>
 
+<poissonFiringSynapse id="poissonFiringSyn" averageRate="50 Hz" synapse="synInput" spikeTarget="./synInput"/>
+
 <network id="net1">
-    <population id="adExPop" component="adExBurst4" size="8"/>
+    <population id="adExPop" component="adExBurst4" size="9"/>
 
     <population id="spikeArrPop" component="spkArr" size="1"/>
     <population id="spikeGenPop" component="spikeGen" size="1"/>
@@ -61,6 +64,7 @@
     <explicitInput target="adExPop[1]" input="sg0" destination="synapses"/>
     <explicitInput target="adExPop[2]" input="rg0" destination="synapses"/>
     <explicitInput target="adExPop[3]" input="vClamp0" destination="synapses"/>
+    <explicitInput target="adExPop[8]" input="poissonFiringSyn" destination="synapses"/>
     
     <synapticConnection from="spikeArrPop[0]" to="adExPop[4]" synapse="syn1" destination="synapses"/>
     <synapticConnection from="spikeGenPop[0]" to="adExPop[5]" synapse="syn1" destination="synapses"/>
@@ -71,26 +75,25 @@
         <!-- End of NeuroML2 content -->
         
 
-<Simulation id="sim1" length="300ms" step="0.05ms" target="net1">
+<Simulation id="sim1" length="300ms" step="0.02ms" target="net1">
 
-    <Display id="d0" title="Ex16: Adaptive exponential cell, current clamp input" timeScale="1ms" xmin="0" xmax="300" ymin="-80" ymax="20">
-        <Line id ="adEx0" quantity="adExPop[0]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
-        <Line id ="adEx0i" quantity="adExPop[0]/pulseGen0/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
+    <Display id="d0" title="Ex16: Adaptive exponential cell, current clamp input" timeScale="1ms" xmin="-20" xmax="320" ymin="-80" ymax="20">
+        <Line id ="adEx0 v" quantity="adExPop[0]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
+        <Line id ="current clamp i" quantity="adExPop[0]/pulseGen0/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
     </Display>
-    <Display id="d1" title="Ex16: Adaptive exponential cell, sine wave input" timeScale="1ms" xmin="0" xmax="300" ymin="-120" ymax="25">
-        <Line id ="adEx1" quantity="adExPop[1]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
-        <Line id ="adEx1i" quantity="adExPop[1]/sg0/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
+    <Display id="d1" title="Ex16: Adaptive exponential cell, sine wave input" timeScale="1ms" xmin="-20" xmax="320" ymin="-120" ymax="25">
+        <Line id ="adEx1 v" quantity="adExPop[1]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
+        <Line id ="sine wave i" quantity="adExPop[1]/sg0/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
     </Display>
-    <Display id="d2" title="Ex16: Adaptive exponential cell, ramp current input" timeScale="1ms" xmin="0" xmax="300" ymin="-110" ymax="30">
-        <Line id ="adEx2" quantity="adExPop[2]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
-        <Line id ="adEx2i" quantity="adExPop[2]/rg0/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
+    <Display id="d2" title="Ex16: Adaptive exponential cell, ramp current input" timeScale="1ms" xmin="-20" xmax="320" ymin="-110" ymax="30">
+        <Line id ="adEx2 v" quantity="adExPop[2]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
+        <Line id ="ramp current i" quantity="adExPop[2]/rg0/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
     </Display>
-    <Display id="d3" title="Ex16: Adaptive exponential cell, voltage clamp" timeScale="1ms" xmin="0" xmax="300" ymin="-110" ymax="35">
-        <Line id ="adEx3" quantity="adExPop[3]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
-        <Line id ="adEx3i" quantity="adExPop[3]/vClamp0/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
+    <Display id="d3" title="Ex16: Adaptive exponential cell, voltage clamp" timeScale="1ms" xmin="-20" xmax="320" ymin="-110" ymax="35">
+        <Line id ="adEx3 v" quantity="adExPop[3]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
+        <Line id ="voltage clamp i" quantity="adExPop[3]/vClamp0/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
     </Display>
-    <Display id="d4" title="Ex16: Adaptive exponential cell, spiking inputs" timeScale="1ms" xmin="0"
-	     xmax="300" ymin="-74" ymax="-65">
+    <Display id="d4" title="Ex16: Adaptive exponential cell, spiking inputs" timeScale="1ms" xmin="-20" xmax="320" ymin="-74" ymax="-65">
       <Line id="spike array" quantity="adExPop[4]/v" scale="1mV"
 	    color="#DBA901" timeScale="1ms"/>
       <Line id="regular spike gen" quantity="adExPop[5]/v" scale="1mV"
@@ -100,7 +103,18 @@
       <Line id="poisson spike gen" quantity="adExPop[7]/v" scale="1mV"
 	    color="#8000FF" timeScale="1ms"/>
     </Display>
+    <Display id="d5" title="Ex16: Adaptive exponential cell, poison firing synapse" timeScale="1ms" xmin="-20" xmax="320" ymin="-80" ymax="30">
+        <Line id ="adEx8 v" quantity="adExPop[8]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
+        <Line id ="poison firing synapse g" quantity="adExPop[8]/poissonFiringSyn/synInput/g" scale="1nS"  color="#eeeeee" timeScale="1ms"/>
+        <Line id ="poison firing synapse i" quantity="adExPop[8]/poissonFiringSyn/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
+        <Line id ="poison firing synapse time since" quantity="adExPop[8]/poissonFiringSyn/tsince" scale="1ms"  color="#3fffaa" timeScale="1ms"/>
+    </Display>
     
+
+    <OutputFile id="of0" fileName="results/ex16_g.dat">
+        <OutputColumn id="syn1exp_g" quantity="adExPop[8]/poissonFiringSyn/synInput/g" />
+    </OutputFile>
+
 </Simulation>
 
 </Lems>

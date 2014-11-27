@@ -1,6 +1,6 @@
-<Lems xmlns="http://www.neuroml.org/lems/0.7.1"
+<Lems xmlns="http://www.neuroml.org/lems/0.7.3"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.1 ../../LEMS/Schemas/LEMS/LEMS_v0.7.1.xsd"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.3 ../../LEMS/Schemas/LEMS/LEMS_v0.7.3.xsd"
       description="A number of synaptic ComponentTypes for use in NeuroML 2 documents. These generally extend the _baseSynapse_ ComponentType.">
 
 
@@ -307,5 +307,62 @@
         </Dynamics>
 
     </ComponentType>
+    
+    
+    <ComponentType name="gapJunction"
+                   extends="baseSynapse"
+                   description="Gap junction/single electrical connection, NOTE: STILL IN DEVELOPMENT!!!!">
+        
+        <Parameter name="conductance" dimension="conductance"/>
+        
+        <Exposure name="i" dimension="current"/>
+        
+        <Requirement name="v" dimension="voltage"/>
+
+        <InstanceRequirement name="peer" type="gapJunction"/>
+
+        <Dynamics>
+            <DerivedVariable name="vpeer" dimension="voltage" select="peer/v"/>
+            <DerivedVariable name="i" exposure="i"  value="conductance * (vpeer - v)"/>
+        </Dynamics>
+    </ComponentType>
+    
+    <!--
+    <ComponentType name="silentEndpoint"
+                   extends="baseSynapse"
+                   description="STILL IN DEVELOPMENT!!!!">
+        
+        <Exposure name="i" dimension="current"/>
+        
+        <Requirement name="v" dimension="voltage"/>
+
+        <InstanceRequirement name="peer" type="gapJunction"/>
+
+        <Dynamics>
+            <DerivedVariable name="vpeer" dimension="voltage" select="peer/v"/>
+            <DerivedVariable name="i" exposure="i"  value="v-v"/>
+        </Dynamics>
+        
+    </ComponentType>
+    
+    
+    <ComponentType name="gradedSynapse"
+                   extends="baseSynapse"
+                   description="STILL IN DEVELOPMENT!!!!">
+        
+        <Parameter name="conductance" dimension="conductance"/>
+        
+        <Exposure name="i" dimension="current"/>
+        
+        <Requirement name="v" dimension="voltage"/>
+
+        <InstanceRequirement name="peer" type="gapJunction"/>
+
+        <Dynamics>
+            <DerivedVariable name="vpeer" dimension="voltage" select="peer/v"/>
+            <DerivedVariable name="i" exposure="i"  value="conductance * (vpeer - v)"/>
+        </Dynamics>
+    </ComponentType>-->
+
 
 </Lems>

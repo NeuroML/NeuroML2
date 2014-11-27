@@ -1,0 +1,31 @@
+<Lems>
+  
+    <Target component="sim1" />
+
+
+    <Include file="Cells.xml" />
+    <Include file="Networks.xml" />
+    <Include file="Simulation.xml" />
+    
+
+    <!-- Main NeuroML2 content. -->
+
+    <!-- Including file with a <neuroml> root, a "real" NeuroML 2 file -->
+    <Include file="../examples/NML2_GapJunctions.nml"/>
+
+    <!-- End of NeuroML2 content -->
+    
+    
+    <Simulation id="sim1" length="700ms" step="0.02ms" target="net1">
+
+        <Display id="d0" title="Ex19: GJ in LEMS" timeScale="1ms" xmin="-50"  xmax="750" ymin="-75" ymax="-50">
+            <Line id="iafCell1_0" quantity="iafPop1[0]/v" scale="1mV" color="#FF0000" timeScale="1ms" />
+            <Line id="iafCell1_1" quantity="iafPop1[1]/v" scale="1mV" color="#FF00FF" timeScale="1ms" />
+            <Line id="iafCell2_0" quantity="iafPop2[0]/v" scale="1mV" color="#FFFF00" timeScale="1ms" />
+            <Line id="iafCell2_1" quantity="iafPop2[1]/v" scale="1mV" color="#FFFFFF" timeScale="1ms" />
+        </Display>
+
+
+    </Simulation>
+    
+</Lems>
