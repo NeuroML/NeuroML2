@@ -26,7 +26,7 @@
 
 <expTwoSynapse id="syn1" gbase="1nS" erev="20mV" tauRise="0.1ms" tauDecay="3ms"/>
 
-<expTwoSynapse id="synInput" gbase="10nS" erev="20mV" tauRise="0.1ms" tauDecay="2ms"/>
+<expTwoSynapse id="synInput" gbase="10nS" erev="20mV" tauRise="1ms" tauDecay="2ms"/>
 
 
 <pulseGenerator id="pulseGen0" delay="50ms" duration="200ms" amplitude="0.8 nA" />
@@ -50,7 +50,7 @@
 
 <spikeGeneratorPoisson id="spikeGenPoisson" averageRate="50 Hz"/>
 
-<poissonFiringSynapse id="poissonFiringSyn" averageRate="150 Hz" synapse="synInput" spikeTarget="./synInput"/>
+<poissonFiringSynapse id="poissonFiringSyn" averageRate="50 Hz" synapse="synInput" spikeTarget="./synInput"/>
 
 <network id="net1">
     <population id="adExPop" component="adExBurst4" size="9"/>
@@ -75,7 +75,7 @@
         <!-- End of NeuroML2 content -->
         
 
-<Simulation id="sim1" length="300ms" step="0.05ms" target="net1">
+<Simulation id="sim1" length="300ms" step="0.02ms" target="net1">
 
     <Display id="d0" title="Ex16: Adaptive exponential cell, current clamp input" timeScale="1ms" xmin="-20" xmax="320" ymin="-80" ymax="20">
         <Line id ="adEx0 v" quantity="adExPop[0]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
@@ -110,6 +110,11 @@
         <Line id ="poison firing synapse time since" quantity="adExPop[8]/poissonFiringSyn/tsince" scale="1ms"  color="#3fffaa" timeScale="1ms"/>
     </Display>
     
+
+    <OutputFile id="of0" fileName="results/ex16_g.dat">
+        <OutputColumn id="syn1exp_g" quantity="adExPop[8]/poissonFiringSyn/synInput/g" />
+    </OutputFile>
+
 </Simulation>
 
 </Lems>
