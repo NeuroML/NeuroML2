@@ -40,7 +40,7 @@ LEMSexamples/*.spineml
 LEMSexamples/*.m
 LEMSexamples/*.json
 LEMSexamples/results/*.dat
-
+LEMSexamples/output
 docs/*.html
 
 examples/NeuroML2_To_HTML/*.html
