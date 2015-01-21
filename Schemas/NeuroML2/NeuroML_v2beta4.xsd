@@ -454,19 +454,14 @@
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="Standalone">
-                <xs:sequence>
-                    <!-- 
-                        Note: one of gateHHrates, gateHHratesTau etc. should be used as the element name as opposed to <gate type="gateHHratesTau" ...>
-                        See https://github.com/NeuroML/NeuroML2/issues/38
-                    -->
+                <xs:choice>
                     <xs:element name="gate" type="GateHHUndetermined" minOccurs="0" maxOccurs="unbounded"/>   
-                    
                     <xs:element name="gateHHrates" type="GateHHRates" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="gateHHratesTau" type="GateHHRatesTau" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="gateHHtauInf" type="GateHHTauInf" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="gateHHratesInf" type="GateHHRatesInf" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="gateHHratesTauInf" type="GateHHRatesTauInf" minOccurs="0" maxOccurs="unbounded"/>
-                </xs:sequence>
+                </xs:choice>
 
                 <xs:attribute name="species" type="NmlId" use="optional"/>
 
@@ -537,7 +532,7 @@
                     <xs:element name="reverseRate" type="HHRate" minOccurs="1"/>
                 </xs:all>
                 <xs:attribute name="instances" type="xs:integer" use="optional" default="1"/>
-                <!-- <xs:attribute name="type" type="gateTypes" use="optional"/> No longer options, as it could conflict with the element definition -->
+                <!-- <xs:attribute name="type" type="gateTypes" use="optional"/> No longer allowed as it could conflict with the element definition -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -553,7 +548,7 @@
                     <xs:element name="steadyState" type="HHVariable" minOccurs="1"/>
                 </xs:all>
                 <xs:attribute name="instances" type="xs:integer" use="optional" default="1"/>
-                <!-- <xs:attribute name="type" type="gateTypes" use="optional"/> No longer options, as it could conflict with the element definition -->
+                <!-- <xs:attribute name="type" type="gateTypes" use="optional"/> No longer allowed as it could conflict with the element definition -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -570,7 +565,7 @@
                     <xs:element name="steadyState" type="HHVariable" minOccurs="1"/>
                 </xs:all>
                 <xs:attribute name="instances" type="xs:integer" use="optional" default="1"/>
-                <!-- <xs:attribute name="type" type="gateTypes" use="optional"/> No longer options, as it could conflict with the element definition -->
+                <!-- <xs:attribute name="type" type="gateTypes" use="optional"/> No longer allowed as it could conflict with the element definition -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -586,7 +581,7 @@
                     <xs:element name="timeCourse" type="HHTime"  minOccurs="1"/>
                 </xs:all>
                 <xs:attribute name="instances" type="xs:integer" use="optional" default="1"/>
-                <!-- <xs:attribute name="type" type="gateTypes" use="optional"/> No longer options, as it could conflict with the element definition -->
+                <!-- <xs:attribute name="type" type="gateTypes" use="optional"/> No longer allowed as it could conflict with the element definition -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -602,7 +597,7 @@
                     <xs:element name="steadyState" type="HHVariable" minOccurs="1"/>
                 </xs:all>
                 <xs:attribute name="instances" type="xs:integer" use="optional" default="1"/>
-                <!-- <xs:attribute name="type" type="gateTypes" use="optional"/> No longer options, as it could conflict with the element definition -->
+                <!-- <xs:attribute name="type" type="gateTypes" use="optional"/> No longer allowed as it could conflict with the element definition -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
