@@ -44,7 +44,7 @@
         -->
         
         <electricalProjection id ="testGJconn" presynapticPopulation="iafPop1" postsynapticPopulation="iafPop2">
-            <electricalConnection preCell="0" postCell="0" synapse="gj1"/>
+            <electricalConnection id="0" preCell="0" postCell="0" synapse="gj1"/>
         </electricalProjection>
         
         <!--<continuousProjection id ="testGradedConn" presynapticPopulation="iafPop1" postsynapticPopulation="iafPop2">

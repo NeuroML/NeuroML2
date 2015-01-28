@@ -1790,16 +1790,16 @@
 
     <xs:complexType name="Projection">
         <xs:annotation>
-            <xs:documentation>Subject to change as it gets tested with LEMS</xs:documentation>
+            <xs:documentation>Projection (set of synaptic connections) between two populations</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="Base">
                 <xs:sequence>
                     <xs:element name="connection" type="Connection" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="presynapticPopulation" type="NmlId"/>
-                <xs:attribute name="postsynapticPopulation" type="NmlId"/>
-                <xs:attribute name="synapse" type="NmlId"/>
+                <xs:attribute name="presynapticPopulation" type="NmlId" use="required"/>
+                <xs:attribute name="postsynapticPopulation" type="NmlId" use="required"/>
+                <xs:attribute name="synapse" type="NmlId" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -1807,29 +1807,32 @@
 
     <xs:complexType name="Connection">
         <xs:annotation>
-            <xs:documentation>Subject to change as it gets tested with LEMS!!</xs:documentation>
+            <xs:documentation>Individual synaptic connection</xs:documentation>
         </xs:annotation>
-        <xs:attribute name="id" type="xs:nonNegativeInteger"/>
-        <xs:attribute name="preCellId" type="xs:string"/>
-        <xs:attribute name="preSegmentId" type="SegmentId"/>
-        <xs:attribute name="preFractionAlong" type="ZeroToOne"/>
-        <xs:attribute name="postCellId" type="xs:string"/>
-        <xs:attribute name="postSegmentId" type="SegmentId"/>
-        <xs:attribute name="postFractionAlong" type="ZeroToOne"/>
+        <xs:complexContent>
+            <xs:extension base="Base">
+                <xs:attribute name="preCellId" type="xs:string" use="required"/>
+                <xs:attribute name="preSegmentId" type="SegmentId"/>
+                <xs:attribute name="preFractionAlong" type="ZeroToOne"/>
+                <xs:attribute name="postCellId" type="xs:string" use="required"/>
+                <xs:attribute name="postSegmentId" type="SegmentId"/>
+                <xs:attribute name="postFractionAlong" type="ZeroToOne"/>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
     
     <xs:complexType name="ElectricalProjection">
         <xs:annotation>
-            <xs:documentation>Subject to change as it gets tested with LEMS</xs:documentation>
+            <xs:documentation>Projection between two populations consisting of electrical connections (gap junctions)</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="Base">
                 <xs:sequence>
                     <xs:element name="electricalConnection" type="ElectricalConnection" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="presynapticPopulation" type="NmlId"/>
-                <xs:attribute name="postsynapticPopulation" type="NmlId"/>
+                <xs:attribute name="presynapticPopulation" type="NmlId" use="required"/>
+                <xs:attribute name="postsynapticPopulation" type="NmlId" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -1837,12 +1840,19 @@
 
     <xs:complexType name="ElectricalConnection">
         <xs:annotation>
-            <xs:documentation>Subject to change as it gets tested with LEMS!!</xs:documentation>
+            <xs:documentation>Individual electrical synaptic connection</xs:documentation>
         </xs:annotation>
-        <xs:attribute name="id" type="xs:nonNegativeInteger"/>
-        <xs:attribute name="preCell" type="xs:string"/>
-        <xs:attribute name="postCell" type="xs:string"/>
-        <xs:attribute name="synapse" type="NmlId"/>
+        <xs:complexContent>
+            <xs:extension base="Base">
+                <xs:attribute name="preCell" type="xs:string" use="required"/>
+                <xs:attribute name="preSegment" type="SegmentId"/>
+                <xs:attribute name="preFractionAlong" type="ZeroToOne"/>
+                <xs:attribute name="postCell" type="xs:string" use="required"/>
+                <xs:attribute name="postSegment" type="SegmentId"/>
+                <xs:attribute name="postFractionAlong" type="ZeroToOne"/>
+                <xs:attribute name="synapse" type="NmlId" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
 
