@@ -21,8 +21,8 @@
    
     
     <network id="net1">
-        <population id="iafPop1" component="iaf" size="2" />
-        <population id="iafPop2" component="iaf" size="2" />
+        <population id="iafPop1" component="iaf" size="1" />
+        <population id="iafPop2" component="iaf" size="1" />
         <!--
         
         <population id="iafPop1" type="populationList" component="iafSpont">
@@ -44,7 +44,7 @@
         -->
         
         <electricalProjection id ="testGJconn" presynapticPopulation="iafPop1" postsynapticPopulation="iafPop2">
-            <electricalConnection id="0" preCell="0" postCell="0" synapse="gj1"/>
+            <electricalConnection preCell="0" postCell="0" synapse="gj1"/>
         </electricalProjection>
         
         <!--<continuousProjection id ="testGradedConn" presynapticPopulation="iafPop1" postsynapticPopulation="iafPop2">
