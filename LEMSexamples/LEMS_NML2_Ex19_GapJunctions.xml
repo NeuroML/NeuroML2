@@ -24,6 +24,12 @@
             <Line id="iafCell2_0" quantity="iafPop2[0]/v" scale="1mV" color="#FFFF00" timeScale="1ms" />
             <!--<Line id="iafCell2_1" quantity="iafPop2[1]/v" scale="1mV" color="#FFFFFF" timeScale="1ms" />-->
         </Display>
+        
+        
+        <OutputFile id="of0" fileName="results/ex19_v.dat">
+            <OutputColumn id="iafCell1_0" quantity="iafPop1[0]/v" />
+            <OutputColumn id="iafCell2_0" quantity="iafPop2[0]/v" />
+        </OutputFile>
 
 
     </Simulation>
