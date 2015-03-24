@@ -1,3 +1,4 @@
+/examples/NML2_SimpleMorphology.svg
 /docs/update.sh
 /updateExamples.sh
 /updateSchemas.sh
@@ -41,6 +42,7 @@ LEMSexamples/*.m
 LEMSexamples/*.json
 LEMSexamples/results/*.dat
 LEMSexamples/output
+LEMSexamples/old
 docs/*.html
 
 examples/NeuroML2_To_HTML/*.html

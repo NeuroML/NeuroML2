@@ -43,12 +43,9 @@
 <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 <!-- Synaptic mechanism specification -->
 
-    <expTwoSynapse id="AMPA" gbase="0.5nS" erev="0mV" tauRise="1ms" tauDecay="2ms" >
+    <expTwoSynapse id="AMPA" gbase="0.5nS" erev="0mV" tauRise="1ms" tauDecay="2ms" />
 
-
-    </expTwoSynapse>
-
-
+    
 
 <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 <!-- Biophysical properties of cell incl membrane, e.g. conductance densities, specific capacitance, etc. -->
@@ -102,19 +99,11 @@
         <!-- see NestedNetwork.xml for a more detailed network containing these elements -->
 
         <population id="Population1" 
-                    cell="PyrCell"
+                    component="PyrCell"
                     extracellularProperties="extracellular"
                     size="9"> <!-- Population is "placed" in medium -->
-                    <!--
-            <layout space="Grid_2D">
-                <grid xSize="3" ySize="3"/>
-            </layout>-->
 
         </population>
-
-        <!--<cellSet id="AllExcitatoryCells" select="Population1">
-             ... 
-        </cellSet>-->
 
 
         <projection id="Proj1" presynapticPopulation="Population1" postsynapticPopulation="Population1" synapse="AMPA">

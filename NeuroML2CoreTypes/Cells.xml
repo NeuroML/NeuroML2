@@ -559,10 +559,11 @@
     <ComponentType name="specificCapacitance"
         description="Capacitance per unit area">
         <Parameter name="value" dimension="specificCapacitance"/>
-        <Exposure name="totSpecCap" dimension="specificCapacitance"/>
+        <Exposure name="specCap" dimension="specificCapacitance"/>
+        <Text name="segmentGroup"/>
 
         <Dynamics>
-            <DerivedVariable name="totSpecCap" dimension="specificCapacitance" exposure="totSpecCap" value="value"/>
+            <DerivedVariable name="specCap" dimension="specificCapacitance" exposure="specCap" value="value"/>
         </Dynamics>
 
     </ComponentType>
@@ -586,9 +587,10 @@
 
     <ComponentType name="membraneProperties"
        description="Properties specific to the membrane, such as the _populations of channels, _channelDensities, _specificCapacitance, etc.">
-        <Child name="specificCapacitance" type="specificCapacitance"/>
+        
         <Child name="initMembPotential" type="initMembPotential"/>      <!--TEMP: needs to be removed... -->
         <Child name="spikeThresh" type="spikeThresh"/>
+        <Children name="specificCapacitances" type="specificCapacitance"/>
         <Children name="populations" type="baseChannelPopulation"/>
         <Children name="channelDensities" type="baseChannelDensity"/>
 
@@ -601,7 +603,9 @@
         <Requirement name="surfaceArea" dimension="area"/>
 
         <Dynamics>
-            <DerivedVariable name="totSpecCap" dimension="specificCapacitance" exposure="totSpecCap" select="specificCapacitance/totSpecCap"/>
+            <!-- Note this is not ideal, but for a single compartment cell (which is all this Dynamics should be used for) there should 
+                 be only one specificCapacitance, referring to this compartment -->
+            <DerivedVariable name="totSpecCap" dimension="specificCapacitance" exposure="totSpecCap" select="specificCapacitances[*]/specCap" reduce="add"/>
 
             <DerivedVariable name="totChanPopCurrent" dimension="current" select="populations[*]/i" reduce="add"/>
             <DerivedVariable name="totChanDensCurrentDensity" dimension="currentDensity" select="channelDensities[*]/iDensity" reduce="add"/>
@@ -635,7 +639,7 @@
     <ComponentType name="intracellularProperties"
         description="Biophysical properties related to the intracellular space within the _cell_, such as the _resistivity_ and the list of _species_ present. _caConc and _caConcExt are explicitly exposed here to facilitate accessing these values from other Components, even though _caConcExt is clearly not an intracellular property">
 
-        <Child name="resistivity" type="resistivity"/>
+        <Children name="resistivity" type="resistivity"/>
         <Children name="speciesList" type="species"/>
 
         <Exposure name="caConc" dimension="concentration"/>
@@ -652,6 +656,7 @@
        description="The resistivity, or specific axial resistance, of the cytoplasm">
 
         <Parameter name="value" dimension="resistivity"/>
+        <Text name="segmentGroup"/>
 
     </ComponentType>
 
