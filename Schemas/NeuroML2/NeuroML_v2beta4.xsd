@@ -395,30 +395,30 @@
     </xs:group>
     
     <xs:group name="InputTypes">
-      <xs:annotation>
-	<xs:documentation>
-	  Various types of inputs which are defined in NeuroML2. This
-	  list will be expanded...
-	</xs:documentation>
-      </xs:annotation>
-      <xs:sequence>
-	<xs:element name="pulseGenerator" type="PulseGenerator"
-		    minOccurs="0" maxOccurs="unbounded"/>
-	<xs:element name="sineGenerator" type="SineGenerator"
-		    minOccurs="0" maxOccurs="unbounded"/>
-	<xs:element name="rampGenerator" type="RampGenerator"
-		    minOccurs="0" maxOccurs="unbounded"/>
-	<xs:element name="voltageClamp" type="VoltageClamp"
-		    minOccurs="0" maxOccurs="unbounded"/>
-	<xs:element name="spikeArray" type="SpikeArray" minOccurs="0"
-		    maxOccurs="unbounded"/>
-	<xs:element name="spikeGenerator" type="SpikeGenerator" 
-		    minOccurs="0" maxOccurs="unbounded"/>
-	<xs:element name="spikeGeneratorRandom" type="SpikeGeneratorRandom"
-		    minOccurs="0" maxOccurs="unbounded"/>
-	<xs:element name="spikeGeneratorPoisson" type="SpikeGeneratorPoisson" 
-		    minOccurs="0" maxOccurs="unbounded"/>
-      </xs:sequence>
+        <xs:annotation>
+            <xs:documentation>
+                Various types of inputs which are defined in NeuroML2. This
+                list will be expanded...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="pulseGenerator" type="PulseGenerator"
+                    minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="sineGenerator" type="SineGenerator"
+                    minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="rampGenerator" type="RampGenerator"
+                    minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="voltageClamp" type="VoltageClamp"
+                    minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="spikeArray" type="SpikeArray" minOccurs="0"
+                    maxOccurs="unbounded"/>
+            <xs:element name="spikeGenerator" type="SpikeGenerator" 
+                    minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="spikeGeneratorRandom" type="SpikeGeneratorRandom"
+                    minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="spikeGeneratorPoisson" type="SpikeGeneratorPoisson" 
+                    minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
     </xs:group>
     
     <xs:group name="PyNNInputTypes">
@@ -1401,7 +1401,7 @@
 
     -->
 
- <!-- TODO: remove -->
+    <!-- TODO: remove -->
     <xs:complexType name="ConcentrationModel_D">
 
         <xs:complexContent>
@@ -1465,18 +1465,18 @@
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
 
-<!--Will be updated in line with LEMS ComponentType definitions -->
+    <!--Will be updated in line with LEMS ComponentType definitions -->
 
     <xs:complexType name="PulseGenerator">
         <xs:complexContent>
             <xs:extension base="Standalone">
-              <xs:attribute name="delay" type="Nml2Quantity_time"
-			    use="required"/>
-              <xs:attribute name="duration" type="Nml2Quantity_time"
-			    use="required"/>
-              <xs:attribute name="amplitude"
-			    type="Nml2Quantity_current"
-			    use="required"/>
+                <xs:attribute name="delay" type="Nml2Quantity_time"
+                              use="required"/>
+                <xs:attribute name="duration" type="Nml2Quantity_time"
+                              use="required"/>
+                <xs:attribute name="amplitude"
+                              type="Nml2Quantity_current"
+                              use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -1484,17 +1484,17 @@
     <xs:complexType name="SineGenerator">
         <xs:complexContent>
             <xs:extension base="Standalone">
-              <xs:attribute name="delay" type="Nml2Quantity_time"
-			    use="required"/>
-	      <xs:attribute name="phase" type="Nml2Quantity_none"
-			    use="required"/>
-              <xs:attribute name="duration" type="Nml2Quantity_time"
-			    use="required"/>
-              <xs:attribute name="amplitude"
-			    type="Nml2Quantity_current"
-			    use="required"/>
-	      <xs:attribute name="period" type="Nml2Quantity_time"
-			    use="required"/>
+                <xs:attribute name="delay" type="Nml2Quantity_time"
+                              use="required"/>
+                <xs:attribute name="phase" type="Nml2Quantity_none"
+                              use="required"/>
+                <xs:attribute name="duration" type="Nml2Quantity_time"
+                              use="required"/>
+                <xs:attribute name="amplitude"
+                              type="Nml2Quantity_current"
+                              use="required"/>
+                <xs:attribute name="period" type="Nml2Quantity_time"
+                              use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -1502,19 +1502,19 @@
     <xs:complexType name="RampGenerator">
         <xs:complexContent>
             <xs:extension base="Standalone">
-              <xs:attribute name="delay" type="Nml2Quantity_time"
-			    use="required"/>
-              <xs:attribute name="duration" type="Nml2Quantity_time"
-			    use="required"/>
-              <xs:attribute name="startAmplitude"
-			    type="Nml2Quantity_current"
-			    use="required"/>
-              <xs:attribute name="finishAmplitude"
-			    type="Nml2Quantity_current"
-			    use="required"/>
-              <xs:attribute name="baselineAmplitude"
-			    type="Nml2Quantity_current"
-			    use="required"/>
+                <xs:attribute name="delay" type="Nml2Quantity_time"
+                              use="required"/>
+                <xs:attribute name="duration" type="Nml2Quantity_time"
+                              use="required"/>
+                <xs:attribute name="startAmplitude"
+                              type="Nml2Quantity_current"
+                              use="required"/>
+                <xs:attribute name="finishAmplitude"
+                              type="Nml2Quantity_current"
+                              use="required"/>
+                <xs:attribute name="baselineAmplitude"
+                              type="Nml2Quantity_current"
+                              use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -1522,67 +1522,67 @@
     <xs:complexType name="VoltageClamp">
         <xs:complexContent>
             <xs:extension base="Standalone">
-              <xs:attribute name="delay" type="Nml2Quantity_time"
-			    use="required"/>
-              <xs:attribute name="duration" type="Nml2Quantity_time"
-			    use="required"/>
-	      <xs:attribute name="targetVoltage"
-			    type="Nml2Quantity_voltage"
-			    use="required"/>
-	      <xs:attribute name="simpleSeriesResistance"
-			    type="Nml2Quantity_resistance"
-			    use="required"/>
+                <xs:attribute name="delay" type="Nml2Quantity_time"
+                              use="required"/>
+                <xs:attribute name="duration" type="Nml2Quantity_time"
+                              use="required"/>
+                <xs:attribute name="targetVoltage"
+                              type="Nml2Quantity_voltage"
+                              use="required"/>
+                <xs:attribute name="simpleSeriesResistance"
+                              type="Nml2Quantity_resistance"
+                              use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
     <xs:complexType name="Spike">
-      <xs:complexContent>
-	<xs:extension base="Standalone">
-	  <xs:attribute name="time" type="Nml2Quantity_time"
-			use="required"/>
-	</xs:extension>
-      </xs:complexContent>
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+                <xs:attribute name="time" type="Nml2Quantity_time"
+                              use="required"/>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
     <xs:complexType name="SpikeArray">
-      <xs:complexContent>
-	<xs:extension base="Standalone">
-          <xs:sequence>
-            <xs:element name="spike" type="Spike" minOccurs="0"
-			maxOccurs="unbounded"/>
-	  </xs:sequence>
-	</xs:extension>
-      </xs:complexContent>
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+                <xs:sequence>
+                    <xs:element name="spike" type="Spike" minOccurs="0"
+                                maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
     <xs:complexType name="SpikeGenerator">
-      <xs:complexContent>
-	<xs:extension base="Standalone">
-	  <xs:attribute name="period" type="Nml2Quantity_time"
-			use="required"/>
-	</xs:extension>
-      </xs:complexContent>
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+                <xs:attribute name="period" type="Nml2Quantity_time"
+                              use="required"/>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
     <xs:complexType name="SpikeGeneratorRandom">
-      <xs:complexContent>
-	<xs:extension base="Standalone">
-	  <xs:attribute name="maxISI" type="Nml2Quantity_time"
-			use="required"/>
-	  <xs:attribute name="minISI" type="Nml2Quantity_time"
-			use="required"/>
-	</xs:extension>
-      </xs:complexContent>
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+                <xs:attribute name="maxISI" type="Nml2Quantity_time"
+                              use="required"/>
+                <xs:attribute name="minISI" type="Nml2Quantity_time"
+                              use="required"/>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
     <xs:complexType name="SpikeGeneratorPoisson">
-      <xs:complexContent>
-	<xs:extension base="Standalone">
-	  <xs:attribute name="averageRate" type="Nml2Quantity_pertime"
-			use="required"/>
-	</xs:extension>
-      </xs:complexContent>
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+                <xs:attribute name="averageRate" type="Nml2Quantity_pertime"
+                              use="required"/>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
 
@@ -1780,7 +1780,7 @@
     <xs:complexType name="SynapticConnection">
         <xs:annotation>
             <xs:documentation>Single explicit connection. Introduced to test connections in LEMS. Will probably be removed in favour of
-            connections wrapped in projection element</xs:documentation>
+                connections wrapped in projection element</xs:documentation>
         </xs:annotation>
         <xs:attribute name="from" type="xs:string"/>
         <xs:attribute name="to" type="xs:string"/>
@@ -1859,7 +1859,7 @@
     <xs:complexType name="ExplicitInput">
         <xs:annotation>
             <xs:documentation>Single explicit input. Introduced to test inputs in LEMS. Will probably be removed in favour of
-            inputs wrapped in inputList element</xs:documentation>
+                inputs wrapped in inputList element</xs:documentation>
         </xs:annotation>
         <xs:attribute name="target" type="xs:string"/>
         <xs:attribute name="input" type="xs:string"/>
@@ -2091,7 +2091,7 @@
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
     <!--NOTE: Base and Standalone definitions moved to end of file, as some XML language binding
-        generators, e.g. generateDS.py, require superclasses to be defined after the subclasses... -->
+    generators, e.g. generateDS.py, require superclasses to be defined after the subclasses... -->
 
     <xs:complexType name="BaseWithoutId">
 
