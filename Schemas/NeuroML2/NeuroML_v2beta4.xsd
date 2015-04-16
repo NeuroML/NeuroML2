@@ -323,12 +323,14 @@
         </xs:complexContent>
 
     </xs:complexType>
+    
 
     <!-- A small subset of XLInclude from: http://www.w3.org/2001/XInclude.xsd
          Will be sufficient for now... -->
     <xs:complexType name="IncludeType" mixed="true">
         <xs:attribute name="href" use="optional" type="xs:anyURI"/>
     </xs:complexType>
+    
 
     <xs:group name="CellTypes">
         <xs:annotation>
@@ -369,7 +371,6 @@
     </xs:group>
 
 
-
     <xs:group name="SynapseTypes">
         <xs:annotation>
             <xs:documentation>Various types of synapse which are defined in NeuroML 2. This list will be expanded...</xs:documentation>
@@ -381,6 +382,7 @@
             <xs:element name="gapJunction" type="GapJunction" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:group>
+    
 
     <xs:group name="PyNNSynapseTypes">
         <xs:annotation>
@@ -396,10 +398,7 @@
     
     <xs:group name="InputTypes">
         <xs:annotation>
-            <xs:documentation>
-                Various types of inputs which are defined in NeuroML2. This
-                list will be expanded...
-            </xs:documentation>
+            <xs:documentation>Various types of inputs which are defined in NeuroML2. This list will be expanded...</xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:element name="pulseGenerator" type="PulseGenerator"
@@ -417,6 +416,8 @@
             <xs:element name="spikeGeneratorRandom" type="SpikeGeneratorRandom"
                     minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="spikeGeneratorPoisson" type="SpikeGeneratorPoisson" 
+                    minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="poissonFiringSynapse" type="PoissonFiringSynapse" 
                     minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:group>
@@ -1480,6 +1481,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
 
     <xs:complexType name="SineGenerator">
         <xs:complexContent>
@@ -1498,6 +1500,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
 
     <xs:complexType name="RampGenerator">
         <xs:complexContent>
@@ -1518,6 +1521,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
 
     <xs:complexType name="VoltageClamp">
         <xs:complexContent>
@@ -1536,6 +1540,7 @@
         </xs:complexContent>
     </xs:complexType>
 
+
     <xs:complexType name="Spike">
         <xs:complexContent>
             <xs:extension base="Standalone">
@@ -1544,6 +1549,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+
 
     <xs:complexType name="SpikeArray">
         <xs:complexContent>
@@ -1555,6 +1561,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
 
     <xs:complexType name="SpikeGenerator">
         <xs:complexContent>
@@ -1564,6 +1571,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
 
     <xs:complexType name="SpikeGeneratorRandom">
         <xs:complexContent>
@@ -1576,10 +1584,24 @@
         </xs:complexContent>
     </xs:complexType>
 
+
     <xs:complexType name="SpikeGeneratorPoisson">
         <xs:complexContent>
             <xs:extension base="Standalone">
                 <xs:attribute name="averageRate" type="Nml2Quantity_pertime"
+                              use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="PoissonFiringSynapse">
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+                <xs:attribute name="averageRate" type="Nml2Quantity_pertime"
+                              use="required"/>
+                <xs:attribute name="synapse" type="xs:string"
+                              use="required"/>
+                <xs:attribute name="spikeTarget" type="xs:string"
                               use="required"/>
             </xs:extension>
         </xs:complexContent>
