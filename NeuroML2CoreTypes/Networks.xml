@@ -56,6 +56,8 @@
         <Children name="instances" type="instance"/>
     
         <ComponentReference name="component" type="baseCell"/>
+        
+        <Text name="size"/> <!--Note: Text, not Parameter, as this is not actually used by LEMS, the <instance> elements determine the size, this attribute is really just metadata, though the two should be consistent-->
     </ComponentType>
 
 
@@ -112,6 +114,10 @@
         <Path name="preCellId"/>
         <Path name="postCellId"/>
         <Text name="destination"/>
+        <Text name="preFractionAlong"/>
+        <Text name="postFractionAlong"/>
+        <Text name="preSegmentId"/>
+        <Text name="postSegmentId"/>
 
         <Structure>
             <With instance="preCellId" as="a"/>
