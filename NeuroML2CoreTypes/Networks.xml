@@ -29,8 +29,8 @@
     
     <ComponentType name="networkWithTemperature" description="Network containing _population_s, _projection_s and lists of _explicitConnection_s (either directly between components of the populations or via synapses), and an explicit temperature" extends="network">
 
-        <Child name="notes" type="notes"/>
         <Parameter name="temperature" dimension="temperature"/>
+        <Child name="notes" type="notes"/>
 
     </ComponentType>
 

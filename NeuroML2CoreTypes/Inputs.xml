@@ -22,6 +22,21 @@
         <Requirement name="v" dimension="voltage" description="The current may vary with the voltage exposed by the ComponentType on which this is placed"/>
 
     </ComponentType>
+    
+
+    <ComponentType name="baseVoltageDepPointCurrentSpiking"
+                   extends="baseVoltageDepPointCurrent"
+                   description="Base type for all ComponentTypes which produce a current _i, require a membrane potential _v exposed on the parent and emit spikes (on a port _spike). The exposed variable _tsince can be used for plotting the time since the Component has spiked last">
+
+        <EventPort name="spike"
+                   direction="out"
+                   description="Port on which spikes are emitted"/>
+
+        <Exposure name="tsince"
+                  dimension="time"
+                  description="Time since the last spike was emitted"/>
+    </ComponentType>
+    
 
 
     <ComponentType name="basePointCurrentDL"
@@ -42,7 +57,7 @@
 
 
     <ComponentType name="baseSpikeSource"
-                   description="Base for any ComponentType whose main purpose is to emit spikes. The exposed variable _tsince can be used for plotting the time since the Component has spiked last">
+                   description="Base for any ComponentType whose main purpose is to emit spikes (on a port _spike). The exposed variable _tsince can be used for plotting the time since the Component has spiked last">
 
         <EventPort name="spike"
                    direction="out"
@@ -138,7 +153,7 @@
 
     <ComponentType name="poissonFiringSynapse"
                    description="Poisson spike generator connected to single synapse providing an input current"
-                   extends="baseVoltageDepPointCurrent">
+                   extends="baseVoltageDepPointCurrentSpiking">
         
         <Parameter name="averageRate" dimension="per_time"/>
         
