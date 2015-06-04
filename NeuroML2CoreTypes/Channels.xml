@@ -190,9 +190,11 @@
 
         <Parameter name="q10Factor" dimension="none"/>
         <Parameter name="experimentalTemp" dimension="temperature"/>
+        <Constant name="TENDEGREES" dimension="temperature" value="10K"/>
+
 
         <Dynamics>
-            <DerivedVariable name="factor" exposure="factor" dimension="none" value="q10Factor^((temperature - experimentalTemp)/10)"/>
+            <DerivedVariable name="factor" exposure="factor" dimension="none" value="q10Factor^((temperature - experimentalTemp)/TENDEGREES)"/>
         </Dynamics>
     </ComponentType>
 
