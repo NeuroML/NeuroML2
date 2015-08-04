@@ -240,13 +240,87 @@
             <xs:documentation>Contains an extension to NeuroML by creating custom LEMS ComponentType.</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/> <!-- Further elements will be specified!! -->
+            <xs:element name="Constant" type="Constant" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Requirement" type="Requirement" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Dynamics" type="Dynamics" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
 
         <xs:attribute name="name" type="xs:string" use="required"/>
         <xs:attribute name="extends" type="xs:string" use="optional"/>
         <xs:attribute name="description" type="xs:string" use="optional"/>
 
+    </xs:complexType>
+    
+    
+    <xs:complexType name="Constant">
+        <xs:annotation>
+            <xs:documentation>LEMS ComponentType for Constant.</xs:documentation>
+        </xs:annotation>
+
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="dimension" type="xs:string" use="required"/>
+        <xs:attribute name="value" type="Nml2Quantity" use="required"/>
+        <xs:attribute name="description" type="xs:string" use="optional"/>
+
+    </xs:complexType>
+    
+
+    <!-- for Parameter, StateVariable etc. -->
+    <xs:complexType name="NamedDimensionalType">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="dimension" type="xs:string" use="optional" default="none"/>
+        <xs:attribute name="description" type="xs:string" use="optional"/>
+    </xs:complexType>
+    
+    <xs:complexType name="Requirement"> <!-- For language binding generators, so there will be a class of this name... -->
+        <xs:complexContent>
+            <xs:extension base="NamedDimensionalType"/>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="Dynamics">
+        <xs:annotation>
+            <xs:documentation>LEMS ComponentType for Dynamics</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="DerivedVariable" type="DerivedVariable" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="ConditionalDerivedVariable" type="ConditionalDerivedVariable" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+
+    </xs:complexType>
+    
+    <xs:complexType name="DerivedVariable">
+        <xs:annotation>
+            <xs:documentation>LEMS ComponentType for DerivedVariable</xs:documentation>
+        </xs:annotation>
+
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="dimension" type="xs:string" use="required"/>
+        <xs:attribute name="value" type="xs:string" use="required"/>
+        <xs:attribute name="exposure" type="xs:string" use="optional"/>
+
+    </xs:complexType>
+    
+    <xs:complexType name="ConditionalDerivedVariable">
+        <xs:annotation>
+            <xs:documentation>LEMS ComponentType for ConditionalDerivedVariable</xs:documentation>
+        </xs:annotation>
+
+        <xs:sequence>
+            <xs:element name="Case" type="Case" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="dimension" type="xs:string" use="optional" default="none"/>
+        <xs:attribute name="exposure" type="xs:string" use="optional"/>
+
+    </xs:complexType>
+    
+
+    <xs:complexType name="Case">
+
+        <xs:attribute name="condition" type="xs:string" use="optional"/>
+        <xs:attribute name="value" type="xs:string" use="required"/>
     </xs:complexType>
 
 
