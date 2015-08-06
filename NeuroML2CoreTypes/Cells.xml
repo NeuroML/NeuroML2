@@ -1144,6 +1144,48 @@
     </ComponentType>
 
 
+    <ComponentType  name="fitzHughNagumo1969Cell"
+                   extends="baseCellMembPotDL"
+                   description=" The Fitzhugh Nagumo model is a two-dimensional simplification of the Hodgkin-Huxley model of spike generation in squid giant axons.  This system was suggested by FitzHugh (FitzHugh R. [1961]: Impulses and physiological states in theoretical models of nerve membrane.  Biophysical J.  1:445-466), who called it &quot; Bonhoeffer-van der Pol model &quot;, and the equivalent circuit by Nagumo et al.  (Nagumo J., Arimoto S., and Yoshizawa S. [1962] An active pulse transmission line simulating nerve axon. Proc IRE. 50:2061–2070.1962). This version corresponds to the one described in FitzHugh R.[1969]: Mathematical models of excitation and propagation in nerve.  Chapter 1 (pp. 1–85 in H.P. Schwan, ed.  Biological Engineering, McGraw–Hill Book Co., N.Y.)">
+
+       <Parameter name="a" dimension="none"/>
+       <Parameter name="b" dimension="none"/>
+       <Parameter name="I" dimension="none" description="plays the role of an external injected current"/>
+       <Parameter name="phi" dimension="none"/>
+
+       <!-- Initial Conditions -->
+       <Parameter name="V0" dimension="none"/>
+       <Parameter name="W0" dimension="none"/>
+
+       <Constant name="TS" dimension="time" value="1ms"/>
+
+       <!-- <Exposure name="V" dimension="none"/> --> <!-- Already exposed from baseCellMembPotDL -->
+       <Exposure name="W" dimension="none"/>
+       <Exposure name="F" dimension="none"/>
+
+       <Dynamics>
+
+           <StateVariable name="V" dimension="none" exposure="V"
+               description="V plays the role of the membrane potential"/>
+           <StateVariable name="W" dimension="none" exposure="W"
+               description="W plays the role of a recovery variable"/>
+
+           <DerivedVariable name="F" dimension="none" exposure="F" value="V - V^3 / 3"
+               description="F must be a cubic polynomial in V"/>
+
+           <TimeDerivative variable="V" value="(F - W + I) / TS"/>
+           <TimeDerivative variable="W" value="phi * (V + a - b * W) / TS"/>
+
+           <OnStart>
+               <StateAssignment variable="V" value="V0"/>
+               <StateAssignment variable="W" value="W0"/>
+           </OnStart>
+
+       </Dynamics>
+
+    </ComponentType>
+
+
     <ComponentType name="fitzHughNagumoCell"
                    extends="baseCellMembPotDL"
                    description="Simple dimensionless model of spiking cell from FitzHugh and Nagumo. Based on http://www.scholarpedia.org/article/FitzHugh-Nagumo_model. Note: should be updated, see https://github.com/NeuroML/NeuroML2/issues/42">

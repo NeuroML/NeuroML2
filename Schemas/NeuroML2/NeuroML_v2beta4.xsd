@@ -424,6 +424,8 @@
             <xs:element name="izhikevichCell" type="IzhikevichCell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="adExIaFCell" type="AdExIaFCell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="fitzHughNagumoCell" type="FitzHughNagumoCell" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="fitzHughNagumo1969Cell" type="FitzHughNagumo1969Cell" minOccurs="0" maxOccurs="unbounded"/>
+
         </xs:sequence>
     </xs:group>
 
@@ -955,6 +957,20 @@
         <xs:complexContent>
             <xs:extension base="BaseCell">
                 <xs:attribute name="I" type="Nml2Quantity_none" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <xs:complexType name="FitzHughNagumo1969Cell">
+        <xs:complexContent>
+            <xs:extension base="BaseCell">
+                <xs:attribute name="a" type="Nml2Quantity_none" use="required"/>
+                <xs:attribute name="b" type="Nml2Quantity_none" use="required"/>
+                <xs:attribute name="I" type="Nml2Quantity_none" use="required"/>
+                <xs:attribute name="phi" type="Nml2Quantity_none" use="required"/>
+                <xs:attribute name="v0" type="Nml2Quantity_none" use="required"/>
+                <xs:attribute name="w0" type="Nml2Quantity_none" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
