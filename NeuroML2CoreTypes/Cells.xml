@@ -1146,7 +1146,7 @@
 
     <ComponentType  name="fitzHughNagumo1969Cell"
                    extends="baseCellMembPotDL"
-                   description=" The Fitzhugh Nagumo model is a two-dimensional simplification of the Hodgkin-Huxley model of spike generation in squid giant axons.  This system was suggested by FitzHugh (FitzHugh R. [1961]: Impulses and physiological states in theoretical models of nerve membrane.  Biophysical J.  1:445-466), who called it &quot; Bonhoeffer-van der Pol model &quot;, and the equivalent circuit by Nagumo et al.  (Nagumo J., Arimoto S., and Yoshizawa S. [1962] An active pulse transmission line simulating nerve axon. Proc IRE. 50:2061–2070.1962). This version corresponds to the one described in FitzHugh R.[1969]: Mathematical models of excitation and propagation in nerve.  Chapter 1 (pp. 1–85 in H.P. Schwan, ed.  Biological Engineering, McGraw–Hill Book Co., N.Y.)">
+                   description="The Fitzhugh Nagumo model is a two-dimensional simplification of the Hodgkin-Huxley model of spike generation in squid giant axons.  This system was suggested by FitzHugh (FitzHugh R. [1961]: Impulses and physiological states in theoretical models of nerve membrane.  Biophysical J.  1:445-466), who called it &quot; Bonhoeffer-van der Pol model &quot;, and the equivalent circuit by Nagumo et al.  (Nagumo J., Arimoto S., and Yoshizawa S. [1962] An active pulse transmission line simulating nerve axon. Proc IRE. 50:2061–2070.1962). This version corresponds to the one described in FitzHugh R.[1969]: Mathematical models of excitation and propagation in nerve.  Chapter 1 (pp. 1–85 in H.P. Schwan, ed.  Biological Engineering, McGraw–Hill Book Co., N.Y.)">
 
        <Parameter name="a" dimension="none"/>
        <Parameter name="b" dimension="none"/>
@@ -1170,8 +1170,8 @@
            <StateVariable name="W" dimension="none" exposure="W"
                description="W plays the role of a recovery variable"/>
 
-           <DerivedVariable name="F" dimension="none" exposure="F" value="V - V^3 / 3"
-               description="F must be a cubic polynomial in V"/>
+           <!-- F must be a cubic polynomial in V -->
+           <DerivedVariable name="F" dimension="none" exposure="F" value="V - V^3 / 3"/>
 
            <TimeDerivative variable="V" value="(F - W + I) / TS"/>
            <TimeDerivative variable="W" value="phi * (V + a - b * W) / TS"/>
