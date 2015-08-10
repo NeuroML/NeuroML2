@@ -1,0 +1,35 @@
+<Lems>
+  
+    <Target component="sim1" />
+
+
+    <Include file="Cells.xml" />
+    <Include file="Networks.xml" />
+    <Include file="Simulation.xml" />
+    
+
+    <!-- Main NeuroML2 content. -->
+
+    <!-- Including file with a <neuroml> root, a "real" NeuroML 2 file -->
+    <Include file="../examples/NML2_AnalogSynapses.nml"/>
+
+    <!-- End of NeuroML2 content -->
+    
+    
+    <Simulation id="sim1" length="700ms" step="0.02ms" target="net1">
+
+        <Display id="d0" title="Ex20: AnalogSynapses in LEMS" timeScale="1ms" xmin="-50"  xmax="750" ymin="-75" ymax="-50">
+            <Line id="iafCell1_0" quantity="iafPop1[0]/v" scale="1mV" color="#FF0000" timeScale="1ms" />
+            <Line id="iafCell2_0" quantity="iafPop2[0]/v" scale="1mV" color="#FFFF00" timeScale="1ms" />
+        </Display>
+        
+        
+        <OutputFile id="of0" fileName="results/ex20_v.dat">
+            <OutputColumn id="iafCell1_0" quantity="iafPop1[0]/v" />
+            <OutputColumn id="iafCell2_0" quantity="iafPop2[0]/v" />
+        </OutputFile>
+
+
+    </Simulation>
+    
+</Lems>

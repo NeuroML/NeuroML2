@@ -19,8 +19,8 @@
         <Children name="synapticConnections" type="explicitConnection"/>  <!-- Connection either directly between cells or to synapse attachment on post cell-->
         
         <Children name="electricalProjection" type="electricalProjection"/>
-        <!--<Children name="continuousProjection" type="continuousProjection"/>-->
-
+        <Children name="continuousProjection" type="continuousProjection"/>
+        
         <Children name="explicitInputs" type="explicitInput"/>
         <Children name="inputs" type="inputList"/>
 
@@ -203,7 +203,7 @@
         <ComponentReference name="postsynapticPopulation" type="population" local="true"/>
     </ComponentType>
     
-    <!--
+    
     <ComponentType name="continuousConnection"
                    description="STILL IN DEVELOPMENT!!!!">
         
@@ -230,7 +230,7 @@
         <ComponentReference name="presynapticPopulation" type="population" local="true"/>
         <ComponentReference name="postsynapticPopulation" type="population" local="true"/>
         <Children name="connections" type="continuousConnection"/>
-    </ComponentType>-->
+    </ComponentType>
     
     <!--
     <ComponentType name="projection2"

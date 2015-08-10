@@ -327,7 +327,7 @@
         </Dynamics>
     </ComponentType>
     
-    <!--
+    
     <ComponentType name="silentEndpoint"
                    extends="baseSynapse"
                    description="STILL IN DEVELOPMENT!!!!">
@@ -362,7 +362,7 @@
             <DerivedVariable name="vpeer" dimension="voltage" select="peer/v"/>
             <DerivedVariable name="i" exposure="i"  value="conductance * (vpeer - v)"/>
         </Dynamics>
-    </ComponentType>-->
+    </ComponentType>
 
 
 </Lems>
