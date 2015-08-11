@@ -363,6 +363,33 @@
             <DerivedVariable name="i" exposure="i"  value="conductance * (vpeer - v)"/>
         </Dynamics>
     </ComponentType>-->
+    
+    
+
+    <ComponentType name="expOneCurrentSynapseDL"
+                   extends="baseSynapseDL"
+                   description="Dimensionless synapse whose current injection level rises instantaneously by _ibase on receiving an event, and which decays exponentially to zero with time course _tauDecay">
+
+        <Parameter name="tauDecay" dimension="time" description="Time course of decay"/>
+
+        <Parameter name="ibase" dimension="none" description="Baseline current, the maximum current following a single spike"/>
+        
+        <Dynamics>
+            
+            <StateVariable name="I" exposure="I" dimension="none"/>
+
+          <TimeDerivative variable="I" value="-I / tauDecay" />
+
+            <OnStart>
+                <StateAssignment variable="I" value="0" />
+            </OnStart>
+
+            <OnEvent port="in">
+                <StateAssignment variable="I" value="I + ibase" />
+            </OnEvent>
+
+        </Dynamics>
+    </ComponentType>
 
 
 </Lems>
