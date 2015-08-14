@@ -107,6 +107,7 @@
     <Unit symbol="C" dimension="charge" power="0"/>
 
     <Unit symbol="C_per_mol" dimension="charge_per_mole" power="0"/>
+    <Unit symbol="nA_ms_per_amol" dimension="charge_per_mole" power="6"/>   <!-- NEURON preferred Units -->
 
     <Unit symbol="A" dimension="current" power="0"/>
     <Unit symbol="uA" dimension="current" power="-6"/>             <!-- Physiological Units -->
