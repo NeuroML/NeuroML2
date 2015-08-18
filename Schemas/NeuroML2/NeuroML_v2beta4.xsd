@@ -311,7 +311,7 @@
         </xs:sequence>
 
         <xs:attribute name="name" type="xs:string" use="required"/>
-        <xs:attribute name="dimension" type="xs:string" use="optional" default="none"/>
+        <xs:attribute name="dimension" type="xs:string" use="required"/>
         <xs:attribute name="exposure" type="xs:string" use="optional"/>
 
     </xs:complexType>
@@ -987,7 +987,7 @@
                 </xs:sequence>
 
 
-                <xs:attribute name="morphology" type="NmlId" use="optional" default="1">
+                <xs:attribute name="morphology" type="NmlId" use="optional">
                     <xs:annotation>
                         <xs:documentation>Should only be used if morphology element is outside the cell.
                                           This points to the id of the morphology
@@ -995,7 +995,7 @@
                     </xs:annotation>
                 </xs:attribute>
 
-                <xs:attribute name="biophysicalProperties" type="NmlId" use="optional" default="1">
+                <xs:attribute name="biophysicalProperties" type="NmlId" use="optional">
                     <xs:annotation>
                         <xs:documentation>Should only be used if biophysicalProperties element is outside the cell.
                                           This points to the id of the biophysicalProperties
