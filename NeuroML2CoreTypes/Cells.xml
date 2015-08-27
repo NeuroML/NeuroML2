@@ -485,6 +485,7 @@
     <ComponentType name="segmentGroup" description="A method to describe a group of _segment_s in a _morphology_">
         
         <Child name="notes" type="notes"/>
+        <Child name="property" type="property"/>
         <Child name="annotation" type="annotation"/>
         <Children name="members" type="member"/>
         <Children name="paths" type="path"/>
@@ -778,6 +779,7 @@
         <Exposure name="extConcentration" dimension="concentration"/>
 
         <Text name="ion"/> <!-- TODO: this should be in id!!! -->
+        <Text name="segmentGroup"/> 
 
         <Dynamics>
 

@@ -19,7 +19,7 @@
         </xs:annotation>
 
         <xs:restriction base="xs:string">
-            <xs:pattern value="[a-zA-Z0-9_]*"/>
+            <xs:pattern value="[a-zA-Z_][a-zA-Z0-9_]*"/>
         </xs:restriction>
 
     </xs:simpleType>
@@ -184,9 +184,9 @@
     </xs:simpleType>
 
 
-    <xs:simpleType name="SegmentId">
+    <xs:simpleType name="NonNegativeInteger">
         <xs:annotation>
-            <xs:documentation>An id attribute for segments: integer >=0 only!</xs:documentation>
+            <xs:documentation>An attribute useful as id of segments, connections, etc: integer >=0 only!</xs:documentation>
             <xs:appinfo >
                 <!-- This tells JAXB to use an int for this attribute instead of BigInteger-->
                <jxb:javaType name="int" parseMethod="javax.xml.bind.DatatypeConverter.parseInt" printMethod="javax.xml.bind.DatatypeConverter.printInt" />
@@ -194,6 +194,20 @@
         </xs:annotation>
 
         <xs:restriction base="xs:nonNegativeInteger">
+        </xs:restriction>
+
+    </xs:simpleType>
+    
+    <xs:simpleType name="PositiveInteger">
+        <xs:annotation>
+            <xs:documentation>Integer >=1 only!</xs:documentation>
+            <xs:appinfo >
+                <!-- This tells JAXB to use an int for this attribute instead of BigInteger-->
+               <jxb:javaType name="int" parseMethod="javax.xml.bind.DatatypeConverter.parseInt" printMethod="javax.xml.bind.DatatypeConverter.printInt" />
+            </xs:appinfo>
+        </xs:annotation>
+
+        <xs:restriction base="xs:positiveInteger">
         </xs:restriction>
 
     </xs:simpleType>
@@ -593,7 +607,7 @@
                     <xs:element name="timeCourse" type="HHTime"  minOccurs="0"/>
                     <xs:element name="steadyState" type="HHVariable" minOccurs="0"/>
                 </xs:all>
-                <xs:attribute name="instances" type="xs:integer" use="required"/>
+                <xs:attribute name="instances" type="PositiveInteger" use="required"/>
                 <xs:attribute name="type" type="gateTypes" use="required"/>  <!-- Required, as it must specify type="gateHHratesTau" etc. -->
             </xs:extension>
         </xs:complexContent>
@@ -608,7 +622,7 @@
                     <xs:element name="forwardRate" type="HHRate" minOccurs="1"/>
                     <xs:element name="reverseRate" type="HHRate" minOccurs="1"/>
                 </xs:all>
-                <xs:attribute name="instances" type="xs:integer" use="required"/>
+                <xs:attribute name="instances" type="PositiveInteger" use="required"/>
                 <!-- <xs:attribute name="type" type="gateTypes" use="optional"/> No longer allowed as it could conflict with the element definition -->
             </xs:extension>
         </xs:complexContent>
@@ -624,7 +638,7 @@
                     <xs:element name="timeCourse" type="HHTime"  minOccurs="1"/>
                     <xs:element name="steadyState" type="HHVariable" minOccurs="1"/>
                 </xs:all>
-                <xs:attribute name="instances" type="xs:integer" use="required"/>
+                <xs:attribute name="instances" type="PositiveInteger" use="required"/>
                 <!-- <xs:attribute name="type" type="gateTypes" use="optional"/> No longer allowed as it could conflict with the element definition -->
             </xs:extension>
         </xs:complexContent>
@@ -641,7 +655,7 @@
                     <xs:element name="timeCourse" type="HHTime"  minOccurs="1"/>
                     <xs:element name="steadyState" type="HHVariable" minOccurs="1"/>
                 </xs:all>
-                <xs:attribute name="instances" type="xs:integer" use="required"/>
+                <xs:attribute name="instances" type="PositiveInteger" use="required"/>
                 <!-- <xs:attribute name="type" type="gateTypes" use="optional"/> No longer allowed as it could conflict with the element definition -->
             </xs:extension>
         </xs:complexContent>
@@ -657,7 +671,7 @@
                     <xs:element name="reverseRate" type="HHRate" minOccurs="1"/>
                     <xs:element name="timeCourse" type="HHTime"  minOccurs="1"/>
                 </xs:all>
-                <xs:attribute name="instances" type="xs:integer" use="required"/>
+                <xs:attribute name="instances" type="PositiveInteger" use="required"/>
                 <!-- <xs:attribute name="type" type="gateTypes" use="optional"/> No longer allowed as it could conflict with the element definition -->
             </xs:extension>
         </xs:complexContent>
@@ -673,7 +687,7 @@
                     <xs:element name="reverseRate" type="HHRate" minOccurs="1"/>
                     <xs:element name="steadyState" type="HHVariable" minOccurs="1"/>
                 </xs:all>
-                <xs:attribute name="instances" type="xs:integer" use="required"/>
+                <xs:attribute name="instances" type="PositiveInteger" use="required"/>
                 <!-- <xs:attribute name="type" type="gateTypes" use="optional"/> No longer allowed as it could conflict with the element definition -->
             </xs:extension>
         </xs:complexContent>
@@ -1031,7 +1045,7 @@
 
     <xs:complexType name="Segment">
         <xs:complexContent>
-            <xs:extension base="BaseWithoutId">  <!-- Don't want to allow string value as with NmlId, want just non negative integer-->
+            <xs:extension base="BaseNonNegativeIntegerId">  <!-- Don't want to allow string value as with NmlId, want just non negative integer-->
 
                 <xs:sequence>
                     <xs:element name="parent" type="SegmentParent" minOccurs="0"/>
@@ -1039,7 +1053,6 @@
                     <xs:element name="distal" type="Point3DWithDiam" minOccurs="1"/>
                 </xs:sequence>
 
-                <xs:attribute name="id" type="SegmentId" use="required"/>
                 <xs:attribute name="name" type="xs:string" use="optional"/>
 
             </xs:extension>
@@ -1048,7 +1061,7 @@
     </xs:complexType>
 
     <xs:complexType name="SegmentParent">
-        <xs:attribute name="segment" type="SegmentId" use="required"/>
+        <xs:attribute name="segment" type="NonNegativeInteger" use="required"/>
         <xs:attribute name="fractionAlong" type="ZeroToOne" use="optional" default="1"/>
     </xs:complexType>
 
@@ -1071,6 +1084,7 @@
 
                 <xs:sequence>
                     <xs:element name="notes" type="Notes" minOccurs="0"/>
+                    <xs:element name="property" type="Property" minOccurs="0" maxOccurs="unbounded"/> 
                     <xs:element name="annotation" type="Annotation" minOccurs="0"/>
                     <xs:element name="member" type="Member" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="include" type="Include" minOccurs="0" maxOccurs="unbounded"/>
@@ -1117,7 +1131,7 @@
     </xs:complexType>
 
     <xs:complexType name="Member">
-        <xs:attribute name="segment" type="SegmentId" use="required"/>
+        <xs:attribute name="segment" type="NonNegativeInteger" use="required"/>
     </xs:complexType>
 
     <xs:complexType name="Include">
@@ -1139,7 +1153,7 @@
     </xs:complexType>
 
     <xs:complexType name="SegmentEndPoint">
-        <xs:attribute name="segment" type="SegmentId" use="required"/>
+        <xs:attribute name="segment" type="NonNegativeInteger" use="required"/>
     </xs:complexType>
 
 
@@ -1244,12 +1258,12 @@
                 </xs:sequence>
 
                 <xs:attribute name="ionChannel" type="NmlId" use="required"/>
-                <xs:attribute name="number" type="xs:nonNegativeInteger" use="required"/>
+                <xs:attribute name="number" type="NonNegativeInteger" use="required"/>
                 <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/> 
 
                 <!-- Note: only one of the following should be used!! -->
                 <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
-                <xs:attribute name="segment" type="NmlId" use="optional"/>
+                <xs:attribute name="segment" type="NonNegativeInteger" use="optional"/>
 
                 <xs:attribute name="ion" type="NmlId" use="optional">
                     <xs:annotation>
@@ -1336,7 +1350,7 @@
                 <!-- Note: only one of the following should be used!! -->
                 <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
 
-                <xs:attribute name="segment" type="NmlId" use="optional"/>
+                <xs:attribute name="segment" type="NonNegativeInteger" use="optional"/>
 
                 <xs:attribute name="ion" type="NmlId" use="optional">
                     <xs:annotation>
@@ -1633,7 +1647,7 @@
 
     <xs:complexType name="Spike">
         <xs:complexContent>
-            <xs:extension base="Standalone">
+            <xs:extension base="BaseNonNegativeIntegerId">
                 <xs:attribute name="time" type="Nml2Quantity_time"
                               use="required"/>
             </xs:extension>
@@ -1802,7 +1816,7 @@
 
                 <xs:attribute name="component" type="NmlId" use="required"/> 
 
-                <xs:attribute name="size" type="xs:integer" use="optional"/>    <!-- Temp!!! -->
+                <xs:attribute name="size" type="NonNegativeInteger" use="optional"/>   
 
                 <xs:attribute name="type" type="populationTypes" use="optional"/>
 
@@ -1920,12 +1934,12 @@
             <xs:documentation>Individual synaptic connection</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="Base">
+            <xs:extension base="BaseNonNegativeIntegerId">
                 <xs:attribute name="preCellId" type="xs:string" use="required"/>
-                <xs:attribute name="preSegmentId" type="SegmentId"/>
+                <xs:attribute name="preSegmentId" type="NonNegativeInteger"/>
                 <xs:attribute name="preFractionAlong" type="ZeroToOne"/>
                 <xs:attribute name="postCellId" type="xs:string" use="required"/>
-                <xs:attribute name="postSegmentId" type="SegmentId"/>
+                <xs:attribute name="postSegmentId" type="NonNegativeInteger"/>
                 <xs:attribute name="postFractionAlong" type="ZeroToOne"/>
             </xs:extension>
         </xs:complexContent>
@@ -1953,12 +1967,12 @@
             <xs:documentation>Individual electrical synaptic connection</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="Base">
+            <xs:extension base="BaseNonNegativeIntegerId">
                 <xs:attribute name="preCell" type="xs:string" use="required"/>
-                <xs:attribute name="preSegment" type="SegmentId"/>
+                <xs:attribute name="preSegment" type="NonNegativeInteger"/>
                 <xs:attribute name="preFractionAlong" type="ZeroToOne"/>
                 <xs:attribute name="postCell" type="xs:string" use="required"/>
-                <xs:attribute name="postSegment" type="SegmentId"/>
+                <xs:attribute name="postSegment" type="NonNegativeInteger"/>
                 <xs:attribute name="postFractionAlong" type="ZeroToOne"/>
                 <xs:attribute name="synapse" type="NmlId" use="required"/>
             </xs:extension>
@@ -1996,10 +2010,10 @@
         <xs:annotation>
             <xs:documentation>Subject to change as it gets tested with LEMS</xs:documentation>
         </xs:annotation>
-        <xs:attribute name="id" type="xs:nonNegativeInteger"/>
+        <xs:attribute name="id" type="NonNegativeInteger"/>
         <xs:attribute name="target" type="xs:string"/>
         <xs:attribute name="destination" type="NmlId"/>
-        <xs:attribute name="segmentId" type="SegmentId"/>
+        <xs:attribute name="segmentId" type="NonNegativeInteger"/>
         <xs:attribute name="fractionAlong" type="ZeroToOne"/>
     </xs:complexType>
 
@@ -2210,6 +2224,23 @@
         </xs:annotation>
 
         <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
+
+    </xs:complexType>
+    
+    
+    <xs:complexType name="BaseNonNegativeIntegerId">
+
+        <xs:annotation>
+            <xs:documentation>Anything which can have a unique (within its parent) id, which must be an integer zero or greater.</xs:documentation>
+        </xs:annotation>
+        
+        <xs:complexContent>
+            <xs:extension base="BaseWithoutId">
+
+                <xs:attribute name="id" type="NonNegativeInteger" use="required"/>
+                
+            </xs:extension>
+        </xs:complexContent>
 
     </xs:complexType>
     

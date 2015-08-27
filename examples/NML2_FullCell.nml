@@ -12,7 +12,9 @@
 <!-- This is a "pure" NeuroML 2 file. It cannot currently used for simulations with 
      jLEMS/jNeuroML however, as jLEMS does not yet support multicompartmental cells -->    
 
-    <include href="SimpleIonChannel.xml"/> <!-- Contains ionChannel NaConductance -->
+    <include href="NML2_SimpleIonChannel.nml"/> <!-- Contains ionChannel NaConductance -->
+    
+    <ionChannelHH id="pas" conductance="10pS"/> <!--For use in example cell below-->
 
     <!-- Note, no <cells> element...  -->
     
