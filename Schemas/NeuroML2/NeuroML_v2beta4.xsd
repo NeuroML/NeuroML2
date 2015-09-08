@@ -444,7 +444,7 @@
             <xs:element name="iafRefCell" type="IafRefCell" minOccurs="0"
 			maxOccurs="unbounded"/>
             <xs:element name="izhikevichCell" type="IzhikevichCell" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="izhikevichCell2007" type="IzhikevichCell2007" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="izhikevich2007Cell" type="Izhikevich2007Cell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="adExIaFCell" type="AdExIaFCell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="fitzHughNagumoCell" type="FitzHughNagumoCell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="fitzHughNagumo1969Cell" type="FitzHughNagumo1969Cell" minOccurs="0" maxOccurs="unbounded"/>
@@ -975,7 +975,7 @@
     </xs:complexType>
     
     
-    <xs:complexType name="IzhikevichCell2007">
+    <xs:complexType name="Izhikevich2007Cell">
         <xs:complexContent>
             <xs:extension base="BaseCellMembPotCap">
                 <xs:attribute name="v0" type="Nml2Quantity_voltage" use="required"/>

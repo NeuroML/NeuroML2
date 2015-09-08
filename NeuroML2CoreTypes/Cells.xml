@@ -1080,7 +1080,7 @@
 
     </ComponentType>
     
-    <ComponentType name="izhikevichCell2007"
+    <ComponentType name="izhikevich2007Cell"
         extends="baseCellMembPotCap"
         description="Cell based on the modified Izhikevich model in Izhikevich 2007, Dynamical systems in neuroscience, MIT Press">
 
