@@ -22,7 +22,7 @@
     <izhikevichCell id="izBurst" v0 = "-70mV" thresh = "30mV" a="0.02"
 		    b = "0.2" c = "-50.0" d = "2"/>
     
-    <izhikevich2007Cell id="RS" v0 = "-60mV" C="100 pF" k = "0.7 nS_per_mV"
+    <izhikevich2007Cell id="iz2007RS" v0 = "-60mV" C="100 pF" k = "0.7 nS_per_mV"
                         vr = "-60 mV" vt = "-40 mV" vpeak = "35 mV" 
                         a = "0.03 per_ms" b = "-2 nS" c = "-50 mV" d = "100 pA"/>
 
@@ -33,7 +33,6 @@
     
     <fitzHughNagumoCell id="fn1" I="0.8" />
     
-    <fitzHughNagumo1969Cell id="fn1" a="0.7" b="0.08" I="1.0" phi="0.08"
-    v0="0.0" w0="0.0"/>
+    <fitzHughNagumo1969Cell id="fn1969" a="0.7" b="0.08" I="1.0" phi="0.08" V0="0.0" W0="0.0"/>
 
 </neuroml>
