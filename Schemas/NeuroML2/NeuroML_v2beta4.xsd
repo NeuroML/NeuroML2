@@ -157,6 +157,14 @@
 
     </xs:simpleType>
 
+    <xs:simpleType name="Nml2Quantity_conductancePerVoltage">
+
+        <xs:restriction base="xs:string">
+            <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(S_per_V|nS_per_mV)"/> 
+        </xs:restriction>
+
+    </xs:simpleType>
+
 
     <xs:simpleType name="MetaId">
         <xs:annotation>
@@ -436,6 +444,7 @@
             <xs:element name="iafRefCell" type="IafRefCell" minOccurs="0"
 			maxOccurs="unbounded"/>
             <xs:element name="izhikevichCell" type="IzhikevichCell" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="izhikevichCell2007" type="IzhikevichCell2007" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="adExIaFCell" type="AdExIaFCell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="fitzHughNagumoCell" type="FitzHughNagumoCell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="fitzHughNagumo1969Cell" type="FitzHughNagumo1969Cell" minOccurs="0" maxOccurs="unbounded"/>
@@ -929,11 +938,12 @@
 
     <xs:complexType name="IafRefCell">
       <xs:complexContent>
-	<xs:extension base="IafCell">
-	  <xs:attribute name="refract" type="Nml2Quantity_time" use="required"/>
-	</xs:extension>
+        <xs:extension base="IafCell">
+          <xs:attribute name="refract" type="Nml2Quantity_time" use="required"/>
+        </xs:extension>
       </xs:complexContent>
     </xs:complexType>
+
 
     <xs:complexType name="IzhikevichCell">
         <xs:complexContent>
@@ -947,11 +957,44 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    
+    <xs:complexType name="BaseCellMembPotCap">
+        <xs:complexContent>
+            <xs:extension base="BaseCell">
+                <xs:attribute name="C" type="Nml2Quantity_capacitance" use="required">
+                    <xs:annotation>
+                        <xs:documentation>This is to prevent it conflicting with attribute c (lowercase) e.g. in izhikevichCell2007</xs:documentation>
+                        <xs:appinfo>
+                            <jxb:property name="Cap"/>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="IzhikevichCell2007">
+        <xs:complexContent>
+            <xs:extension base="BaseCellMembPotCap">
+                <xs:attribute name="v0" type="Nml2Quantity_voltage" use="required"/>
+                <xs:attribute name="k" type="Nml2Quantity_conductancePerVoltage" use="required"/>
+                <xs:attribute name="vr" type="Nml2Quantity_voltage" use="required"/>
+                <xs:attribute name="vt" type="Nml2Quantity_voltage" use="required"/>
+                <xs:attribute name="vpeak" type="Nml2Quantity_voltage" use="required"/>
+                <xs:attribute name="a" type="Nml2Quantity_pertime" use="required"/>
+                <xs:attribute name="b" type="Nml2Quantity_conductance" use="required"/>
+                <xs:attribute name="c" type="Nml2Quantity_voltage" use="required"/>
+                <xs:attribute name="d" type="Nml2Quantity_current" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
 
     <xs:complexType name="AdExIaFCell">
         <xs:complexContent>
-            <xs:extension base="BaseCell">
-                <xs:attribute name="C" type="Nml2Quantity_capacitance" use="required"/>
+            <xs:extension base="BaseCellMembPotCap">
                 <xs:attribute name="gL" type="Nml2Quantity_conductance" use="required"/>
                 <xs:attribute name="EL" type="Nml2Quantity_voltage" use="required"/>
                 <xs:attribute name="reset" type="Nml2Quantity_voltage" use="required"/>
