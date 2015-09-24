@@ -380,6 +380,7 @@
         <Parameter name="delta" dimension="voltage" description="Slope of the activation curve"/>
         <Parameter name="k" dimension="per_time" description="Rate constant for transmitter-receptor dissociation rate"/>
         <Parameter name="Vth" dimension="voltage" description="The half-activation voltage of the synapse"/>
+        <Parameter name="erev" dimension="voltage" description="The reversal potential of the synapse"/>
         
         <Exposure name="i" dimension="current"/>
         <Exposure name="inf" dimension="none"/>
@@ -397,7 +398,7 @@
             <DerivedVariable name="inf" dimension="none" value="1/(1 + exp((Vth - vpeer)/delta))" exposure="inf"/>
             <DerivedVariable name="tau" dimension="time" value="(1-inf)/k" exposure="tau"/>
             
-            <DerivedVariable name="i" exposure="i"  value="conductance * s * (vpeer - v)"/>
+            <DerivedVariable name="i" exposure="i"  value="conductance * s * (erev-v)"/>
             
             <TimeDerivative variable="s" value="(inf - s)/tau" />
             

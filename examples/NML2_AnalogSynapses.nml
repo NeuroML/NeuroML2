@@ -15,7 +15,7 @@
     <linearGradedSynapse id="gs1" conductance="5pS"/>
     
     <!--Based on synapse in Methods of http://www.nature.com/neuro/journal/v7/n12/abs/nn1352.html-->
-    <gradedSynapse id="gs2" conductance="5pS" delta="5mV" Vth="-60mV" k="0.025per_ms"/>
+    <gradedSynapse id="gs2" conductance="5pS" delta="5mV" Vth="-55mV" k="0.025per_ms" erev="0mV"/>
     
     <iafCell id="iaf" leakConductance="0.2nS" leakReversal="-70mV" thresh="-55mV" reset="-70mV" C="3.2pF"/>
     

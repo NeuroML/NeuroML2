@@ -24,7 +24,7 @@
             <Line id="iafCell3 v" quantity="iafPop3[0]/v" scale="1mV" color="#FFFFFF" timeScale="1ms" />
         </Display>
         
-        <Display id="d1" title="Ex20: AnalogSynapses in LEMS: currents" timeScale="1ms" xmin="-50"  xmax="1050" ymin="-0.01" ymax="0.1">
+        <Display id="d1" title="Ex20: AnalogSynapses in LEMS: currents" timeScale="1ms" xmin="-50"  xmax="1050" ymin="-0.01" ymax="0.15">
             <Line id="i linear" quantity="iafPop2[0]/gs1/i" scale="1pA" color="#FF0000" timeScale="1ms" />
             <Line id="i linear pre" quantity="iafPop1[0]/silent1/i" scale="1pA" color="#222222" timeScale="1ms" />
             

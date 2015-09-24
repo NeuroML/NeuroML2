@@ -861,6 +861,7 @@
                 <xs:attribute name="delta" type="Nml2Quantity_voltage" use="required"/>
                 <xs:attribute name="Vth" type="Nml2Quantity_voltage" use="required"/>
                 <xs:attribute name="k" type="Nml2Quantity_pertime" use="required"/>
+                <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>
 
             </xs:extension>
         </xs:complexContent>
