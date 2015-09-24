@@ -327,9 +327,16 @@
         </Dynamics>
     </ComponentType>
     
+
+
+    
+    <ComponentType name="baseGradedSynapse"
+                   extends="baseSynapse"
+                   description="STILL IN DEVELOPMENT!!!!">
+    </ComponentType>
     
     <ComponentType name="silentEndpoint"
-                   extends="baseSynapse"
+                   extends="baseGradedSynapse"
                    description="STILL IN DEVELOPMENT!!!!">
         
         <Exposure name="i" dimension="current"/>
@@ -340,14 +347,14 @@
 
         <Dynamics>
             <DerivedVariable name="vpeer" dimension="voltage" select="peer/v"/>
-            <DerivedVariable name="i" exposure="i"  value="v-v"/>
+            <DerivedVariable name="i" exposure="i"  value="0"/>
         </Dynamics>
         
     </ComponentType>
     
     
-    <ComponentType name="gradedSynapse"
-                   extends="baseSynapse"
+    <ComponentType name="linearGradedSynapse"
+                   extends="baseGradedSynapse"
                    description="STILL IN DEVELOPMENT!!!!">
         
         <Parameter name="conductance" dimension="conductance"/>
@@ -363,6 +370,5 @@
             <DerivedVariable name="i" exposure="i"  value="conductance * (vpeer - v)"/>
         </Dynamics>
     </ComponentType>
-
 
 </Lems>

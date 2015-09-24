@@ -10,12 +10,12 @@
     
     <silentEndpoint id="silent"/>
     
-    <gradedSynapse id="gs1" conductance="5pS"/>
+    <linearGradedSynapse id="gs1" conductance="5pS"/>
     
     <iafCell id="iaf" leakConductance="0.2nS" leakReversal="-70mV" thresh="-55mV" reset="-70mV" C="3.2pF"/>
     
     <pulseGenerator id="pulseGen1" delay="50ms" duration="200ms" amplitude="0.0032nA" />
-    <pulseGenerator id="pulseGen2" delay="400ms" duration="200ms" amplitude="0.0032nA" />
+    <pulseGenerator id="pulseGen2" delay="400ms" duration="200ms" amplitude="0.0020nA" />
    
     
     <network id="net1">
@@ -29,9 +29,12 @@
         
         
         <explicitInput target="iafPop1[0]" input="pulseGen1" destination="synapses"/>
+        <explicitInput target="iafPop1[0]" input="pulseGen2" destination="synapses"/>
         
         
     </network>
+    
+    
 
 </neuroml>
 

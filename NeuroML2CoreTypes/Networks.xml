@@ -213,7 +213,7 @@
         <ComponentRequirement name="presynapticPopulation"/>
         <ComponentRequirement name="postsynapticPopulation"/>
 
-        <ComponentReference name="synapse" type="gradedSynapse"/>
+        <ComponentReference name="synapse" type="baseGradedSynapse"/>
         <ComponentReference name="dummy" type="silentEndpoint"/>
 
         <Structure>
