@@ -213,13 +213,13 @@
         <ComponentRequirement name="presynapticPopulation"/>
         <ComponentRequirement name="postsynapticPopulation"/>
 
-        <ComponentReference name="synapse" type="baseGradedSynapse"/>
-        <ComponentReference name="dummy" type="silentEndpoint"/>
+        <ComponentReference name="preComponent" type="baseGradedSynapse"/>
+        <ComponentReference name="postComponent" type="baseGradedSynapse"/>
 
         <Structure>
             <With list="presynapticPopulation" index="preCell" as="a"/>
             <With list="postsynapticPopulation" index="postCell" as="b"/>
-            <Tunnel name="peer" endA="a" endB="b" componentA="dummy" componentB="synapse"/>
+            <Tunnel name="peer" endA="a" endB="b" componentA="preComponent" componentB="postComponent"/>
         </Structure>
 
     </ComponentType>

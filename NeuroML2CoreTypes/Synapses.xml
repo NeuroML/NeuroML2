@@ -355,7 +355,7 @@
     
     <ComponentType name="linearGradedSynapse"
                    extends="baseGradedSynapse"
-                   description="STILL IN DEVELOPMENT!!!!">
+                   description="Behaves just like a one way gap junction. STILL IN DEVELOPMENT!!!!">
         
         <Parameter name="conductance" dimension="conductance"/>
         
@@ -368,6 +368,39 @@
         <Dynamics>
             <DerivedVariable name="vpeer" dimension="voltage" select="peer/v"/>
             <DerivedVariable name="i" exposure="i"  value="conductance * (vpeer - v)"/>
+        </Dynamics>
+    </ComponentType>
+    
+    <ComponentType name="gradedSynapse"
+                   extends="baseGradedSynapse"
+                   description="STILL IN DEVELOPMENT!!!! Based on synapse in Methods of http://www.nature.com/neuro/journal/v7/n12/abs/nn1352.html">
+        
+        <Parameter name="conductance" dimension="conductance"/>
+        
+        <Parameter name="delta" dimension="voltage" description="Slope of the activation curve"/>
+        <Parameter name="k" dimension="per_time" description="Rate constant for transmitter-receptor dissociation rate"/>
+        <Parameter name="Vth" dimension="voltage" description="The half-activation voltage of the synapse"/>
+        
+        <Exposure name="i" dimension="current"/>
+        <Exposure name="inf" dimension="none"/>
+        <Exposure name="tau" dimension="time"/>
+        
+        <Requirement name="v" dimension="voltage"/>
+
+        <InstanceRequirement name="peer" type="gapJunction"/>
+
+        <Dynamics>
+            <StateVariable name="s" dimension="none"/>
+            
+            <DerivedVariable name="vpeer" dimension="voltage" select="peer/v"/>
+            
+            <DerivedVariable name="inf" dimension="none" value="1/(1 + exp((Vth - vpeer)/delta))" exposure="inf"/>
+            <DerivedVariable name="tau" dimension="time" value="(1-inf)/k" exposure="tau"/>
+            
+            <DerivedVariable name="i" exposure="i"  value="conductance * s * (vpeer - v)"/>
+            
+            <TimeDerivative variable="s" value="(inf - s)/tau" />
+            
         </Dynamics>
     </ComponentType>
 
