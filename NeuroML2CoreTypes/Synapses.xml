@@ -311,7 +311,7 @@
     
     <ComponentType name="gapJunction"
                    extends="baseSynapse"
-                   description="Gap junction/single electrical connection, NOTE: STILL IN DEVELOPMENT!!!!">
+                   description="Gap junction/single electrical connection">
         
         <Parameter name="conductance" dimension="conductance"/>
         
@@ -335,15 +335,15 @@
                    description="STILL IN DEVELOPMENT!!!!">
     </ComponentType>
     
-    <ComponentType name="silentEndpoint"
+    <ComponentType name="silentSynapse"
                    extends="baseGradedSynapse"
-                   description="STILL IN DEVELOPMENT!!!!">
+                   description="Dummy synapse which emits no current. Used as presynaptic endpoint for analog synaptic connection. STILL IN DEVELOPMENT!!!!">
         
         <Exposure name="i" dimension="current"/>
         
         <Requirement name="v" dimension="voltage"/>
 
-        <InstanceRequirement name="peer" type="gapJunction"/>
+        <InstanceRequirement name="peer" type="baseGradedSynapse"/>
 
         <Dynamics>
             <DerivedVariable name="vpeer" dimension="voltage" select="peer/v"/>

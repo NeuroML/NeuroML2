@@ -479,6 +479,9 @@
             <xs:element name="expTwoSynapse" type="ExpTwoSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="blockingPlasticSynapse" type="BlockingPlasticSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="gapJunction" type="GapJunction" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="silentSynapse" type="SilentSynapse" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="linearGradedSynapse" type="LinearGradedSynapse" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="gradedSynapse" type="GradedSynapse" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:group>
     
@@ -809,9 +812,55 @@
     <xs:complexType name="GapJunction">
 
         <xs:complexContent>
+            <xs:annotation>
+                <xs:documentation>Gap junction/single electrical connection</xs:documentation>
+            </xs:annotation>
             <xs:extension base="BaseSynapse">
 
                 <xs:attribute name="conductance" type="Nml2Quantity_conductance" use="required"/>
+
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="SilentSynapse">
+        <xs:complexContent>
+            <xs:annotation>
+                <xs:documentation>Dummy synapse which emits no current. Used as presynaptic endpoint for analog synaptic connection (continuousConnection).</xs:documentation>
+            </xs:annotation>
+            <xs:extension base="BaseSynapse">
+
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="LinearGradedSynapse">
+
+        <xs:complexContent>
+            <xs:annotation>
+                <xs:documentation>Behaves just like a one way gap junction.</xs:documentation>
+            </xs:annotation>
+            <xs:extension base="BaseSynapse">
+
+                <xs:attribute name="conductance" type="Nml2Quantity_conductance" use="required"/>
+
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="GradedSynapse">
+
+        <xs:complexContent>
+            <xs:annotation>
+                <xs:documentation>Based on synapse in Methods of http://www.nature.com/neuro/journal/v7/n12/abs/nn1352.html.</xs:documentation>
+            </xs:annotation>
+            <xs:extension base="BaseSynapse">
+                
+                <xs:attribute name="conductance" type="Nml2Quantity_conductance" use="required"/>
+                <xs:attribute name="delta" type="Nml2Quantity_voltage" use="required"/>
+                <xs:attribute name="Vth" type="Nml2Quantity_voltage" use="required"/>
+                <xs:attribute name="k" type="Nml2Quantity_pertime" use="required"/>
 
             </xs:extension>
         </xs:complexContent>
@@ -1774,7 +1823,8 @@
 
                     <xs:element name="synapticConnection" type="SynapticConnection" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
                     <xs:element name="projection" type="Projection" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
-                    <xs:element name="electricalProjection" type="ElectricalProjection" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
+                    <xs:element name="electricalProjection" type="ElectricalProjection" minOccurs="0" maxOccurs="unbounded"/> 
+                    <xs:element name="continuousProjection" type="ContinuousProjection" minOccurs="0" maxOccurs="unbounded"/> 
 
                     <xs:element name="explicitInput" type="ExplicitInput" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
                     <xs:element name="inputList" type="InputList" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
@@ -2018,6 +2068,41 @@
                 <xs:attribute name="postSegment" type="NonNegativeInteger"/>
                 <xs:attribute name="postFractionAlong" type="ZeroToOne"/>
                 <xs:attribute name="synapse" type="NmlId" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    
+    <xs:complexType name="ContinuousProjection">
+        <xs:annotation>
+            <xs:documentation>Projection between two populations consisting of analog connections (e.g. graded synapses)</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="Base">
+                <xs:sequence>
+                    <xs:element name="continuousConnection" type="ContinuousConnection" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+                <xs:attribute name="presynapticPopulation" type="NmlId" use="required"/>
+                <xs:attribute name="postsynapticPopulation" type="NmlId" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="ContinuousConnection">
+        <xs:annotation>
+            <xs:documentation>Individual continuous/analog synaptic connection</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="BaseNonNegativeIntegerId">
+                <xs:attribute name="preCell" type="xs:string" use="required"/>
+                <xs:attribute name="preSegment" type="NonNegativeInteger"/>
+                <xs:attribute name="preFractionAlong" type="ZeroToOne"/>
+                <xs:attribute name="postCell" type="xs:string" use="required"/>
+                <xs:attribute name="postSegment" type="NonNegativeInteger"/>
+                <xs:attribute name="postFractionAlong" type="ZeroToOne"/>
+                <xs:attribute name="preComponent" type="NmlId" use="required"/>
+                <xs:attribute name="postComponent" type="NmlId" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>

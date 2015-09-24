@@ -7,9 +7,9 @@
 
 <!-- Example of a network containing analog synapses in NeuroML 2 --> 
 
-    
-    <silentEndpoint id="silent1"/>
-    <silentEndpoint id="silent2"/>
+    <!--Dummy synapse which emits no current. Used as presynaptic endpoint for analog synaptic connection.-->
+    <silentSynapse id="silent1"/>
+    <silentSynapse id="silent2"/>
     
     <!--Behaves just like a one way gap junction-->
     <linearGradedSynapse id="gs1" conductance="5pS"/>
@@ -30,11 +30,11 @@
         <population id="iafPop3" component="iaf" size="1" />
    
         <continuousProjection id ="testLinearGradedConn" presynapticPopulation="iafPop1" postsynapticPopulation="iafPop2">
-            <continuousConnection preCell="0" postCell="0" preComponent="silent1" postComponent="gs1"/>
+            <continuousConnection id="0" preCell="0" postCell="0" preComponent="silent1" postComponent="gs1"/>
         </continuousProjection>
         
         <continuousProjection id ="testGradedConn" presynapticPopulation="iafPop1" postsynapticPopulation="iafPop3">
-            <continuousConnection preCell="0" postCell="0" preComponent="silent2" postComponent="gs2"/>
+            <continuousConnection id="0" preCell="0" postCell="0" preComponent="silent2" postComponent="gs2"/>
         </continuousProjection>
         
         <explicitInput target="iafPop1[0]" input="pulseGen1" destination="synapses"/>
