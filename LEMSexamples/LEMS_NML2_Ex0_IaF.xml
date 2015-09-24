@@ -41,7 +41,7 @@
     <!-- End of NeuroML2 content -->
 
 
-    <Simulation id="sim1" length="300ms" step="0.01ms" target="net1">
+    <Simulation id="sim1" length="300ms" step="0.005ms" target="net1">
 
         <Display id="d0" title="Ex0: Simple Integrate and Fire cells in LEMS" timeScale="1ms" xmin="0"
                  xmax="300" ymin="-75" ymax="-50">

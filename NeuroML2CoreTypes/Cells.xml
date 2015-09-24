@@ -485,6 +485,7 @@
     <ComponentType name="segmentGroup" description="A method to describe a group of _segment_s in a _morphology_">
         
         <Child name="notes" type="notes"/>
+        <Child name="property" type="property"/>
         <Child name="annotation" type="annotation"/>
         <Children name="members" type="member"/>
         <Children name="paths" type="path"/>
@@ -778,6 +779,7 @@
         <Exposure name="extConcentration" dimension="concentration"/>
 
         <Text name="ion"/> <!-- TODO: this should be in id!!! -->
+        <Text name="segmentGroup"/> 
 
         <Dynamics>
 
@@ -1036,7 +1038,7 @@
 
     <ComponentType name="izhikevichCell"
         extends="baseCellMembPot"
-        description="Cell based on the model of Izhikevich, see http://izhikevich.org/publications/spikes.htm">
+        description="Cell based on the 2003 model of Izhikevich, see http://izhikevich.org/publications/spikes.htm">
 
         <Parameter name="v0" dimension="voltage"/>  <!--TEMP: needs to be removed... -->
         <Parameter name="a" dimension="none"/>
@@ -1074,6 +1076,58 @@
                 <EventOut port="spike"/>
             </OnCondition>
 
+        </Dynamics>
+
+    </ComponentType>
+    
+    <ComponentType name="izhikevich2007Cell"
+        extends="baseCellMembPotCap"
+        description="Cell based on the modified Izhikevich model in Izhikevich 2007, Dynamical systems in neuroscience, MIT Press">
+
+        <Parameter name="v0" dimension="voltage"/>  
+        
+        <!--
+        Defined in baseCellMembPotCap:
+        <Parameter name="C" dimension="capacitance"/>
+        -->
+        <Parameter name="k" dimension="conductance_per_voltage"/>
+        
+        <Parameter name="vr" dimension="voltage"/> 
+        <Parameter name="vt" dimension="voltage"/> 
+        <Parameter name="vpeak" dimension="voltage"/> 
+        
+        <Parameter name="a" dimension="per_time"/>
+        <Parameter name="b" dimension="conductance"/>
+        <Parameter name="c" dimension="voltage"/>
+        <Parameter name="d" dimension="current"/>
+        
+        <Attachments name="synapses" type="basePointCurrent"/>
+
+        <Exposure name="u" dimension="current"/>
+
+        <Dynamics>
+
+            <StateVariable name="v" dimension="voltage" exposure="v"/>
+            <StateVariable name="u" dimension="current" exposure="u"/>
+
+            <DerivedVariable name="iSyn"  dimension="current" exposure="iSyn" select="synapses[*]/i" reduce="add" />
+            
+            <DerivedVariable name="iMemb" dimension="current" exposure="iMemb" value="k * (v-vr) * (v-vt) + iSyn - u"/>
+            
+            <TimeDerivative variable="v" value="iMemb / C"/>
+            <TimeDerivative variable="u" value="a * (b * (v-vr) - u)"/>
+
+            <OnStart>
+                <StateAssignment variable="v" value="v0"/>
+                <StateAssignment variable="u" value="0"/>
+            </OnStart>
+
+            <OnCondition test="v .gt. vpeak">
+                <StateAssignment variable="v" value="c"/>
+                <StateAssignment variable="u" value="u + d"/>
+                <EventOut port="spike"/>
+            </OnCondition>
+            
         </Dynamics>
 
     </ComponentType>

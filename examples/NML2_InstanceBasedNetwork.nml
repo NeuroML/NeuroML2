@@ -17,7 +17,7 @@
 
     <network id="InstanceBasedNetwork">
 
-        <population id="iafCells" type="populationList" component="iaf">
+        <population id="iafCells" type="populationList" component="iaf" size="3">
             <instance id="0">
                 <location x="120" y="230" z="567"/>
             </instance>
