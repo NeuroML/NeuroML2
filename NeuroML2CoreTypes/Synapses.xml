@@ -400,7 +400,18 @@
             
             <DerivedVariable name="i" exposure="i"  value="conductance * s * (erev-v)"/>
             
-            <TimeDerivative variable="s" value="(inf - s)/tau" />
+            <!-- To catch case where tau ~ 0 => too fast a change in s => numerical instability -->
+            <ConditionalDerivedVariable name="s_rate" dimension="per_time">
+                <Case condition="(1-inf) .gt. 1e-4" value="(inf - s)/tau"/>
+                <Case value="0"/>
+            </ConditionalDerivedVariable>
+            
+            <TimeDerivative variable="s" value="s_rate" />
+            
+            <!-- To catch case where tau ~ 0 => too fast a change in s => numerical instability -->
+            <OnCondition test="(1-inf) .lt. 1e-4">
+                <StateAssignment variable="s" value="inf"/>
+            </OnCondition>
             
         </Dynamics>
     </ComponentType>

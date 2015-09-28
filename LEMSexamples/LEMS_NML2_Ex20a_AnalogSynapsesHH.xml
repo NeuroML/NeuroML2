@@ -1,0 +1,51 @@
+<Lems>
+  
+    <Target component="sim1" />
+
+
+    <Include file="Cells.xml" />
+    <Include file="Networks.xml" />
+    <Include file="Simulation.xml" />
+    
+
+    <!-- Main NeuroML2 content. -->
+
+    <!-- Including file with a <neuroml> root, a "real" NeuroML 2 file -->
+    <Include file="../examples/NML2_SingleCompHHCell.nml"/>
+    <Include file="../examples/NML2_AnalogSynapsesHH.nml"/>
+
+    <!-- End of NeuroML2 content -->
+    
+    
+    <Simulation id="sim1" length="300ms" step="0.01ms" target="net2">
+
+        <Display id="d0" title="Ex20a: AnalogSynapses in LEMS" timeScale="1ms" xmin="-20"  xmax="320" ymin="-90" ymax="50">
+            <Line id="hhCell1 v" quantity="hhPop1[0]/v" scale="1mV" color="#FF0000" timeScale="1ms" />
+            <Line id="hh2 v" quantity="hhPop2[0]/v" scale="1mV" color="#FFFF00" timeScale="1ms" />
+        </Display>
+        
+        <Display id="d1" title="Ex20a: AnalogSynapses in LEMS: currents" timeScale="1ms" xmin="-20"  xmax="320" ymin="-1" ymax="7">
+            <Line id="i linear" quantity="hhPop2[0]/gs1/i" scale="1pA" color="#FF0000" timeScale="1ms" />
+            
+        </Display>
+      
+        <Display id="d3" title="Ex20a: AnalogSynapses in LEMS: gradedSyn s" timeScale="1ms" xmin="-20"  xmax="320" ymin="-0.1" ymax="1.1">
+            <Line id="s" quantity="hhPop2[0]/gs1/s" scale="1" color="#FF0000" timeScale="1ms" />
+            <Line id="s inf" quantity="hhPop2[0]/gs1/inf" scale="1" color="#FFFF00" timeScale="1ms" />
+        </Display>
+        
+        <Display id="d4" title="Ex20a: AnalogSynapses in LEMS: gradedSyn tau" timeScale="1ms" xmin="-20"  xmax="320" ymin="-0.005" ymax="0.045">
+            <Line id="s tau" quantity="hhPop2[0]/gs1/tau" scale="1" color="#FF0000" timeScale="1ms" />
+        </Display>
+          <!--
+        
+        <OutputFile id="of0" fileName="results/ex20_v.dat">
+            <OutputColumn id="iafCell1" quantity="iafPop1[0]/v" />
+            <OutputColumn id="iafCell2" quantity="iafPop2[0]/v" />
+            <OutputColumn id="iafCell3" quantity="iafPop3[0]/v" />
+        </OutputFile>-->
+
+
+    </Simulation>
+    
+</Lems>
