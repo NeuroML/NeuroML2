@@ -210,11 +210,11 @@
         <IndexParameter name="preCell"/>
         <IndexParameter name="postCell"/>
 
-        <ComponentRequirement name="presynapticPopulation"/>
-        <ComponentRequirement name="postsynapticPopulation"/>
-
         <ComponentReference name="preComponent" type="baseGradedSynapse"/>
         <ComponentReference name="postComponent" type="baseGradedSynapse"/>
+        
+        <ComponentRequirement name="presynapticPopulation"/>
+        <ComponentRequirement name="postsynapticPopulation"/>
 
         <Structure>
             <With list="presynapticPopulation" index="preCell" as="a"/>
@@ -227,9 +227,12 @@
     
     <ComponentType name="continuousProjection"
                    description="STILL IN DEVELOPMENT!!!!">
+        
+        <Children name="connections" type="continuousConnection"/>
+        
         <ComponentReference name="presynapticPopulation" type="population" local="true"/>
         <ComponentReference name="postsynapticPopulation" type="population" local="true"/>
-        <Children name="connections" type="continuousConnection"/>
+        
     </ComponentType>
     
     <!--
