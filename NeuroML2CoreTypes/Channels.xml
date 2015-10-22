@@ -195,6 +195,15 @@
             <DerivedVariable name="factor" exposure="factor" dimension="none" value="q10Factor^((temperature - experimentalTemp)/10)"/>
         </Dynamics>
     </ComponentType>
+    
+
+    <ComponentType name="baseConductanceScalingCaDependent"
+                   extends="baseConductanceScaling"
+                   description="Base ComponentType for a scaling to apply to a gate's conductance which depends on Ca concentration. Usually a generic expression of _caConc (so no standard, non-base form here).">
+
+        <Requirement name="caConc" dimension="concentration"/>
+
+    </ComponentType>
 
 
     <ComponentType name="baseGate"

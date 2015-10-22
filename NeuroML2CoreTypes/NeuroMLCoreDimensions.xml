@@ -144,5 +144,6 @@
  
     <!-- Note: it's unlikely that this dimension/unit for rho in fixedFactorConcentrationModel will be needed anywhere else-->
     <Unit symbol="mol_per_m_per_A_per_s" dimension="rho_factor" power="0"/> <!-- SI -->
+    <Unit symbol="mol_per_cm_per_uA_per_ms" dimension="rho_factor" power="11"/> <!-- SI -->
 
 </Lems>
