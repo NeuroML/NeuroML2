@@ -753,7 +753,39 @@
             <StateVariable name="concentration" exposure="concentration" dimension="concentration"/>
             <StateVariable name="extConcentration" exposure="extConcentration" dimension="concentration"/>
             
-	    <TimeDerivative variable="concentration" value="(iCa/surfaceArea) * rho - ((concentration - restingConc) / decayConstant)"/>
+            <TimeDerivative variable="concentration" value="(iCa/surfaceArea) * rho - ((concentration - restingConc) / decayConstant)"/>
+
+            <OnStart>
+                <StateAssignment variable="concentration" value="initialConcentration"/>
+                <StateAssignment variable="extConcentration" value="initialExtConcentration"/>
+            </OnStart>
+            
+            <OnCondition test="concentration .lt. 0">
+                <StateAssignment variable="concentration" value="0"/>
+            </OnCondition>
+        </Dynamics>
+    </ComponentType>
+    
+    <ComponentType name="fixedFactorConcentrationModelTraub"
+        extends="concentrationModel"
+        description="Model of buffering of concentration of an ion (currently hard coded to be calcium, due to requirement for _iCa) which has a baseline level _restingConc and tends to this value with time course 1 / _beta. A fixed factor _phi is used to scale the incoming current INDEPENDENTLY OF THE SIZE OF THE COMPARTMENT to produce a concentration change. Not recommended for use in models other than Traub et al. 2005!">
+
+        <Parameter name="restingConc" dimension="concentration"/>
+        <Parameter name="beta" dimension="per_time"/>
+        
+        <Parameter name="phi" dimension="rho_factor"/>
+        
+        <Requirement name="iCa" dimension="current"/>
+        <Requirement name="surfaceArea" dimension="area"/>
+    
+        <Text name="species"/> <!-- TODO: check why this isn't inherited from concentrationModel -->
+
+        <Dynamics>
+
+            <StateVariable name="concentration" exposure="concentration" dimension="concentration"/>
+            <StateVariable name="extConcentration" exposure="extConcentration" dimension="concentration"/>
+            
+            <TimeDerivative variable="concentration" value="(iCa/surfaceArea) * 1e-9 * phi - ((concentration - restingConc) * beta)"/>
 
             <OnStart>
                 <StateAssignment variable="concentration" value="initialConcentration"/>
