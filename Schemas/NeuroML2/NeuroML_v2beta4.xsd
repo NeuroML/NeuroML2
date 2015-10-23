@@ -152,7 +152,7 @@
     <xs:simpleType name="Nml2Quantity_rhoFactor">
 
         <xs:restriction base="xs:string">
-            <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(mol_per_m_per_A_per_s)"/>  <!-- See Cells.xml-->
+            <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(mol_per_m_per_A_per_s|mol_per_cm_per_uA_per_ms)"/>  <!-- See Cells.xml-->
         </xs:restriction>
 
     </xs:simpleType>
