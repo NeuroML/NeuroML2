@@ -19,10 +19,9 @@
 
 
 
-<adExIaFCell id="adExBurst4"  C="281pF" gL="10nS" EL="-70.6mV"
-	     reset="-47.2mV" VT = "-50.4mV" thresh = "-40.4mV"
-	     delT="2mV" tauw="40ms"  a ="4nS"   b = "0.08nA"
-	     refract="0ms"/>
+<izhikevich2007Cell id="RS" v0 = "-60mV" C="100 pF" k = "0.7 nS_per_mV"
+                        vr = "-60 mV" vt = "-40 mV" vpeak = "35 mV" 
+                        a = "0.03 per_ms" b = "-2 nS" c = "-50 mV" d = "100 pA"/>
 
 <expTwoSynapse id="syn1" gbase="1nS" erev="20mV" tauRise="0.1ms" tauDecay="3ms"/>
 
@@ -53,23 +52,23 @@
 <poissonFiringSynapse id="poissonFiringSyn" averageRate="50 Hz" synapse="synInput" spikeTarget="./synInput"/>
 
 <network id="net1">
-    <population id="adExPop" component="adExBurst4" size="9"/>
+    <population id="izhPop" component="RS" size="9"/>
 
     <population id="spikeArrPop" component="spkArr" size="1"/>
     <population id="spikeGenPop" component="spikeGen" size="1"/>
     <population id="spikeGenRandomPop" component="spikeGenRandom" size="1"/>
     <population id="spikeGenPoissonPop" component="spikeGenPoisson" size="1"/>
 
-    <explicitInput target="adExPop[0]" input="pulseGen0" destination="synapses"/>
-    <explicitInput target="adExPop[1]" input="sg0" destination="synapses"/>
-    <explicitInput target="adExPop[2]" input="rg0" destination="synapses"/>
-    <explicitInput target="adExPop[3]" input="vClamp0" destination="synapses"/>
-    <explicitInput target="adExPop[8]" input="poissonFiringSyn" destination="synapses"/>
+    <explicitInput target="izhPop[0]" input="pulseGen0" destination="synapses"/>
+    <explicitInput target="izhPop[1]" input="sg0" destination="synapses"/>
+    <explicitInput target="izhPop[2]" input="rg0" destination="synapses"/>
+    <explicitInput target="izhPop[3]" input="vClamp0" destination="synapses"/>
+    <explicitInput target="izhPop[8]" input="poissonFiringSyn" destination="synapses"/>
     
-    <synapticConnection from="spikeArrPop[0]" to="adExPop[4]" synapse="syn1" destination="synapses"/>
-    <synapticConnection from="spikeGenPop[0]" to="adExPop[5]" synapse="syn1" destination="synapses"/>
-    <synapticConnection from="spikeGenRandomPop[0]" to="adExPop[6]" synapse="syn1" destination="synapses"/>
-    <synapticConnection from="spikeGenPoissonPop[0]" to="adExPop[7]" synapse="syn1" destination="synapses"/>
+    <synapticConnection from="spikeArrPop[0]" to="izhPop[4]" synapse="syn1" destination="synapses"/>
+    <synapticConnection from="spikeGenPop[0]" to="izhPop[5]" synapse="syn1" destination="synapses"/>
+    <synapticConnection from="spikeGenRandomPop[0]" to="izhPop[6]" synapse="syn1" destination="synapses"/>
+    <synapticConnection from="spikeGenPoissonPop[0]" to="izhPop[7]" synapse="syn1" destination="synapses"/>
 </network>
 
         <!-- End of NeuroML2 content -->
@@ -77,42 +76,42 @@
 
 <Simulation id="sim1" length="300ms" step="0.02ms" target="net1">
 
-    <Display id="d0" title="Ex16: Adaptive exponential cell, current clamp input" timeScale="1ms" xmin="-20" xmax="320" ymin="-80" ymax="20">
-        <Line id ="adEx0 v" quantity="adExPop[0]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
-        <Line id ="current clamp i" quantity="adExPop[0]/pulseGen0/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
+    <Display id="d0" title="Ex16: Izhikevich cell, current clamp input" timeScale="1ms" xmin="-20" xmax="320" ymin="-80" ymax="45">
+        <Line id ="izh0 v" quantity="izhPop[0]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
+        <Line id ="current clamp i" quantity="izhPop[0]/pulseGen0/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
     </Display>
-    <Display id="d1" title="Ex16: Adaptive exponential cell, sine wave input" timeScale="1ms" xmin="-20" xmax="320" ymin="-120" ymax="25">
-        <Line id ="adEx1 v" quantity="adExPop[1]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
-        <Line id ="sine wave i" quantity="adExPop[1]/sg0/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
+    <Display id="d1" title="Ex16: Izhikevich cell, sine wave input" timeScale="1ms" xmin="-20" xmax="320" ymin="-120" ymax="45">
+        <Line id ="izh1 v" quantity="izhPop[1]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
+        <Line id ="sine wave i" quantity="izhPop[1]/sg0/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
     </Display>
-    <Display id="d2" title="Ex16: Adaptive exponential cell, ramp current input" timeScale="1ms" xmin="-20" xmax="320" ymin="-110" ymax="30">
-        <Line id ="adEx2 v" quantity="adExPop[2]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
-        <Line id ="ramp current i" quantity="adExPop[2]/rg0/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
+    <Display id="d2" title="Ex16: Izhikevich cell, ramp current input" timeScale="1ms" xmin="-20" xmax="320" ymin="-110" ymax="45">
+        <Line id ="izh2 v" quantity="izhPop[2]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
+        <Line id ="ramp current i" quantity="izhPop[2]/rg0/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
     </Display>
-    <Display id="d3" title="Ex16: Adaptive exponential cell, voltage clamp" timeScale="1ms" xmin="-20" xmax="320" ymin="-110" ymax="35">
-        <Line id ="adEx3 v" quantity="adExPop[3]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
-        <Line id ="voltage clamp i" quantity="adExPop[3]/vClamp0/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
+    <Display id="d3" title="Ex16: Izhikevich cell, voltage clamp" timeScale="1ms" xmin="-20" xmax="320" ymin="-70" ymax="120">
+        <Line id ="izh3 v" quantity="izhPop[3]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
+        <Line id ="voltage clamp i" quantity="izhPop[3]/vClamp0/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
     </Display>
-    <Display id="d4" title="Ex16: Adaptive exponential cell, spiking inputs" timeScale="1ms" xmin="-20" xmax="320" ymin="-74" ymax="-65">
-      <Line id="spike array" quantity="adExPop[4]/v" scale="1mV"
+    <Display id="d4" title="Ex16: Izhikevich cell, spiking inputs" timeScale="1ms" xmin="-20" xmax="320" ymin="-61" ymax="-56">
+      <Line id="spike array" quantity="izhPop[4]/v" scale="1mV"
 	    color="#DBA901" timeScale="1ms"/>
-      <Line id="regular spike gen" quantity="adExPop[5]/v" scale="1mV"
+      <Line id="regular spike gen" quantity="izhPop[5]/v" scale="1mV"
 	    color="#80FF00" timeScale="1ms"/>
-      <Line id="random (uniform) spike gen" quantity="adExPop[6]/v" scale="1mV"
+      <Line id="random (uniform) spike gen" quantity="izhPop[6]/v" scale="1mV"
 	    color="#01A9DB" timeScale="1ms"/>
-      <Line id="poisson spike gen" quantity="adExPop[7]/v" scale="1mV"
+      <Line id="poisson spike gen" quantity="izhPop[7]/v" scale="1mV"
 	    color="#8000FF" timeScale="1ms"/>
     </Display>
-    <Display id="d5" title="Ex16: Adaptive exponential cell, poison firing synapse" timeScale="1ms" xmin="-20" xmax="320" ymin="-80" ymax="30">
-        <Line id ="adEx8 v" quantity="adExPop[8]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
-        <Line id ="poison firing synapse g" quantity="adExPop[8]/poissonFiringSyn/synInput/g" scale="1nS"  color="#eeeeee" timeScale="1ms"/>
-        <Line id ="poison firing synapse i" quantity="adExPop[8]/poissonFiringSyn/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
-        <Line id ="poison firing synapse time since" quantity="adExPop[8]/poissonFiringSyn/tsince" scale="1ms"  color="#3fffaa" timeScale="1ms"/>
+    <Display id="d5" title="Ex16: Izhikevich cell, poison firing synapse" timeScale="1ms" xmin="-20" xmax="320" ymin="-80" ymax="45">
+        <Line id ="izh8 v" quantity="izhPop[8]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
+        <Line id ="poison firing synapse g" quantity="izhPop[8]/poissonFiringSyn/synInput/g" scale="1nS"  color="#eeeeee" timeScale="1ms"/>
+        <Line id ="poison firing synapse i" quantity="izhPop[8]/poissonFiringSyn/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
+        <Line id ="poison firing synapse time since" quantity="izhPop[8]/poissonFiringSyn/tsince" scale="1ms"  color="#3fffaa" timeScale="1ms"/>
     </Display>
     
 
     <OutputFile id="of0" fileName="results/ex16_g.dat">
-        <OutputColumn id="syn1exp_g" quantity="adExPop[8]/poissonFiringSyn/synInput/g" />
+        <OutputColumn id="syn1exp_g" quantity="izhPop[8]/poissonFiringSyn/synInput/g" />
     </OutputFile>
 
 </Simulation>
