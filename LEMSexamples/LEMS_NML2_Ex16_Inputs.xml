@@ -42,7 +42,7 @@
   <spike id="1" time="130 ms"/>
 </spikeArray>
 
-<spikeGenerator id="spikeGen" period="20 ms"/>
+<spikeGenerator id="spikeGenRegular" period="20 ms"/>
 
 <spikeGeneratorRandom id="spikeGenRandom" minISI="10 ms"
 		      maxISI="30 ms"/>
@@ -54,34 +54,34 @@
 <network id="net1">
     <population id="izhPop" component="RS" size="9"/>
 
-   <!-- <population id="spikeArrPop" component="spkArr" size="1"/>
-    <population id="spikeGenPop" component="spikeGen" size="1"/>
-    <population id="spikeGenPoissonPop" component="spikeGenPoisson" size="1"/>-->
+   <!-- <population id="spikeArrPop" component="spkArr" size="1"/>-->
+    <population id="spikeGenRegularPop" component="spikeGenRegular" size="1"/>
+    <!--<population id="spikeGenPoissonPop" component="spikeGenPoisson" size="1"/>-->
     <population id="spikeGenRandomPop" component="spikeGenRandom" size="1"/>
 
     <explicitInput target="izhPop[0]" input="pulseGen0" destination="synapses"/>
-    <!-- <explicitInput target="izhPop[1]" input="sg0" destination="synapses"/>
+    <explicitInput target="izhPop[1]" input="sg0" destination="synapses"/>
     <explicitInput target="izhPop[2]" input="rg0" destination="synapses"/>
     <explicitInput target="izhPop[3]" input="vClamp0" destination="synapses"/>
-    <explicitInput target="izhPop[8]" input="poissonFiringSyn" destination="synapses"/>
+    <!-- <explicitInput target="izhPop[8]" input="poissonFiringSyn" destination="synapses"/>-->
     
-    <synapticConnection from="spikeArrPop[0]" to="izhPop[4]" synapse="syn1" destination="synapses"/>
-    <synapticConnection from="spikeGenPop[0]" to="izhPop[5]" synapse="syn1" destination="synapses"/>
+    <!--<synapticConnection from="spikeArrPop[0]" to="izhPop[4]" synapse="syn1" destination="synapses"/>-->
+    <synapticConnection from="spikeGenRegularPop[0]" to="izhPop[5]" synapse="syn1" destination="synapses"/>
     <synapticConnection from="spikeGenRandomPop[0]" to="izhPop[6]" synapse="syn1" destination="synapses"/>
-    <synapticConnection from="spikeGenPoissonPop[0]" to="izhPop[7]" synapse="syn1" destination="synapses"/>-->
+    <!--<synapticConnection from="spikeGenPoissonPop[0]" to="izhPop[7]" synapse="syn1" destination="synapses"/>-->
 </network>
 
         <!-- End of NeuroML2 content -->
         
 
-<Simulation id="sim1" length="300ms" step="0.01ms" target="net1">
+<Simulation id="sim1" length="300ms" step="0.02ms" target="net1">
 
     <Display id="d0" title="Ex16: Izhikevich cell, current clamp input" timeScale="1ms" xmin="-20" xmax="320" ymin="-80" ymax="45">
         <Line id ="izh0 v (mV)" quantity="izhPop[0]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
         <Line id ="current clamp i (nA)" quantity="izhPop[0]/pulseGen0/i" scale="1nA"  color="#333333" timeScale="1ms"/>
     </Display>
     
-   <!--<Display id="d1" title="Ex16: Izhikevich cell, sine wave input" timeScale="1ms" xmin="-20" xmax="320" ymin="-120" ymax="45">
+   <Display id="d1" title="Ex16: Izhikevich cell, sine wave input" timeScale="1ms" xmin="-20" xmax="320" ymin="-120" ymax="45">
         <Line id ="izh1 v (mV)" quantity="izhPop[1]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
         <Line id ="sine wave i (nA)" quantity="izhPop[1]/sg0/i" scale="1nA"  color="#333333" timeScale="1ms"/>
     </Display>
@@ -94,10 +94,11 @@
     <Display id="d3" title="Ex16: Izhikevich cell, voltage clamp" timeScale="1ms" xmin="-20" xmax="320" ymin="-70" ymax="120">
         <Line id ="izh3 v (mV)" quantity="izhPop[3]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
         <Line id ="voltage clamp i (pA)" quantity="izhPop[3]/vClamp0/i" scale="1pA"  color="#333333" timeScale="1ms"/>
-    </Display>-->
+    </Display><!---->
     
     <Display id="d40" title="Ex16: Izhikevich cell, spiking inputs, time since spikes" timeScale="1ms" xmin="-20" xmax="320" ymin="-5" ymax="45">
-        <Line id ="poisson spike gen time since" quantity="spikeGenRandomPop[0]/tsince" scale="1ms"  color="#3fffaa" timeScale="1ms"/>
+        <Line id ="Regular spike gen t since" quantity="spikeGenRegularPop[0]/tsince" scale="1ms"  color="#3fffaa" timeScale="1ms"/>
+        <Line id ="Poisson spike gen t since" quantity="spikeGenRandomPop[0]/tsince" scale="1ms"  color="#3ff9999" timeScale="1ms"/>
     </Display>
     
     <Display id="d4" title="Ex16: Izhikevich cell, spiking inputs" timeScale="1ms" xmin="-20" xmax="320" ymin="-61" ymax="-56">
