@@ -39,10 +39,10 @@
 
 <spikeArray id="spkArr">
   <spike id="0" time="50 ms"/>
-  <spike id="1" time="100 ms"/><!--
+  <spike id="1" time="100 ms"/>
   <spike id="2" time="150 ms"/>
   <spike id="3" time="155 ms"/>
-  <spike id="4" time="250 ms"/>-->
+  <spike id="4" time="250 ms"/>
 </spikeArray>
 
 <spikeGenerator id="spikeGenRegular" period="20 ms"/>
@@ -68,7 +68,7 @@
     <explicitInput target="izhPop[3]" input="vClamp0" destination="synapses"/>
     <explicitInput target="izhPop[8]" input="poissonFiringSyn" destination="synapses"/>-->
     
-    <!--<synapticConnection from="spikeArrPop[0]" to="izhPop[4]" synapse="syn1" destination="synapses"/>-->
+    <synapticConnection from="spikeArrPop[0]" to="izhPop[4]" synapse="syn1" destination="synapses"/>
     <synapticConnection from="spikeGenRegularPop[0]" to="izhPop[5]" synapse="syn1" destination="synapses"/>
     <synapticConnection from="spikeGenRandomPop[0]" to="izhPop[6]" synapse="syn1" destination="synapses"/>
     <!--<synapticConnection from="spikeGenPoissonPop[0]" to="izhPop[7]" synapse="syn1" destination="synapses"/>-->
