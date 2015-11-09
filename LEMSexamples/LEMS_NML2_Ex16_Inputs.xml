@@ -59,19 +59,19 @@
 
     <population id="spikeArrPop" component="spkArr" size="1"/>
     <population id="spikeGenRegularPop" component="spikeGenRegular" size="1"/>
-    <!--<population id="spikeGenPoissonPop" component="spikeGenPoisson" size="1"/>-->
+    <population id="spikeGenPoissonPop" component="spikeGenPoisson" size="1"/>
     <population id="spikeGenRandomPop" component="spikeGenRandom" size="1"/>
 
     <explicitInput target="izhPop[0]" input="pulseGen0" destination="synapses"/>
     <!-- <explicitInput target="izhPop[1]" input="sg0" destination="synapses"/>
     <explicitInput target="izhPop[2]" input="rg0" destination="synapses"/>
-    <explicitInput target="izhPop[3]" input="vClamp0" destination="synapses"/>
-    <explicitInput target="izhPop[8]" input="poissonFiringSyn" destination="synapses"/>-->
+    <explicitInput target="izhPop[3]" input="vClamp0" destination="synapses"/>-->
+    <explicitInput target="izhPop[8]" input="poissonFiringSyn" destination="synapses"/>
     
     <synapticConnection from="spikeArrPop[0]" to="izhPop[4]" synapse="syn1" destination="synapses"/>
     <synapticConnection from="spikeGenRegularPop[0]" to="izhPop[5]" synapse="syn1" destination="synapses"/>
     <synapticConnection from="spikeGenRandomPop[0]" to="izhPop[6]" synapse="syn1" destination="synapses"/>
-    <!--<synapticConnection from="spikeGenPoissonPop[0]" to="izhPop[7]" synapse="syn1" destination="synapses"/>-->
+    <synapticConnection from="spikeGenPoissonPop[0]" to="izhPop[7]" synapse="syn1" destination="synapses"/>
 </network>
 
         <!-- End of NeuroML2 content -->
@@ -116,7 +116,7 @@
 	    color="#8000FF" timeScale="1ms"/>
     </Display>
     
-    <!-- <Display id="d5" title="Ex16: Izhikevich cell, poison firing synapse" timeScale="1ms" xmin="-20" xmax="320" ymin="-80" ymax="45">
+    <Display id="d5" title="Ex16: Izhikevich cell, poison firing synapse" timeScale="1ms" xmin="-20" xmax="320" ymin="-80" ymax="45">
         <Line id ="izh8 v (mV)" quantity="izhPop[8]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
         <Line id ="poison firing synapse g" quantity="izhPop[8]/poissonFiringSyn/synInput/g" scale="1nS"  color="#eeeeee" timeScale="1ms"/>
         <Line id ="poison firing synapse i" quantity="izhPop[8]/poissonFiringSyn/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
@@ -124,7 +124,7 @@
     </Display>
     
 
-    <OutputFile id="of1" fileName="results/ex16_g.dat">
+    <!-- <OutputFile id="of1" fileName="results/ex16_g.dat">
         <OutputColumn id="syn1exp_g" quantity="izhPop[8]/poissonFiringSyn/synInput/g" />
     </OutputFile>-->
     
