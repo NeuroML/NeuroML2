@@ -23,36 +23,10 @@
                         vr = "-60 mV" vt = "-40 mV" vpeak = "35 mV" 
                         a = "0.03 per_ms" b = "-2 nS" c = "-50 mV" d = "100 pA"/>
 
-<expTwoSynapse id="syn1" gbase="1nS" erev="20mV" tauRise="0.1ms" tauDecay="3ms"/>
+<expTwoSynapse id="syn1" gbase="1nS" erev="20mV" tauRise="0.1ms" tauDecay="3ms"/>\
 
-<expTwoSynapse id="synInput" gbase="8nS" erev="20mV" tauRise="1ms" tauDecay="5ms"/>
-
-
-<pulseGenerator id="pulseGen0" delay="50ms" duration="200ms" amplitude="1 nA" />
-
-<sineGenerator id="sg0" phase="0" delay="50ms" duration="200ms" amplitude="1.4nA" period="50ms"/>
-
-<rampGenerator id="rg0" delay="50ms" duration="200ms" startAmplitude="0.5nA" finishAmplitude="4nA" baselineAmplitude="0nA"/>
-
-<voltageClamp id="vClamp0" delay="50ms" duration="200ms"
-	      targetVoltage="-50mV" simpleSeriesResistance="1e6ohm"/>
-
-<spikeArray id="spkArr">
-  <spike id="0" time="50 ms"/>
-  <spike id="1" time="100 ms"/>
-  <spike id="2" time="150 ms"/>
-  <spike id="3" time="155 ms"/>
-  <spike id="4" time="250 ms"/>
-</spikeArray>
-
-<spikeGenerator id="spikeGenRegular" period="20 ms"/>
-
-<spikeGeneratorRandom id="spikeGenRandom" minISI="10 ms"
-		      maxISI="30 ms"/>
-
-<spikeGeneratorPoisson id="spikeGenPoisson" averageRate="50 Hz"/>
-
-<poissonFiringSynapse id="poissonFiringSyn" averageRate="10 Hz" synapse="synInput" spikeTarget="./synInput"/>
+<!-- Including file with a <neuroml> root, a "real" NeuroML 2 file -->
+<Include file="../examples/NML2_Inputs.nml"/>
 
 <network id="net1">
     <population id="izhPop" component="RS" size="9"/>
