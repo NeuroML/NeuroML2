@@ -2030,11 +2030,11 @@
         <xs:complexContent>
             <xs:extension base="BaseNonNegativeIntegerId">
                 <xs:attribute name="preCellId" type="xs:string" use="required"/>
-                <xs:attribute name="preSegmentId" type="NonNegativeInteger"/>
-                <xs:attribute name="preFractionAlong" type="ZeroToOne"/>
+                <xs:attribute name="preSegmentId" type="NonNegativeInteger" default="0"/>
+                <xs:attribute name="preFractionAlong" type="ZeroToOne" default="0.5"/>
                 <xs:attribute name="postCellId" type="xs:string" use="required"/>
-                <xs:attribute name="postSegmentId" type="NonNegativeInteger"/>
-                <xs:attribute name="postFractionAlong" type="ZeroToOne"/>
+                <xs:attribute name="postSegmentId" type="NonNegativeInteger" default="0"/>
+                <xs:attribute name="postFractionAlong" type="ZeroToOne" default="0.5"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2063,11 +2063,11 @@
         <xs:complexContent>
             <xs:extension base="BaseNonNegativeIntegerId">
                 <xs:attribute name="preCell" type="xs:string" use="required"/>
-                <xs:attribute name="preSegment" type="NonNegativeInteger"/>
-                <xs:attribute name="preFractionAlong" type="ZeroToOne"/>
+                <xs:attribute name="preSegment" type="NonNegativeInteger" default="0"/>
+                <xs:attribute name="preFractionAlong" type="ZeroToOne" default="0.5"/>
                 <xs:attribute name="postCell" type="xs:string" use="required"/>
-                <xs:attribute name="postSegment" type="NonNegativeInteger"/>
-                <xs:attribute name="postFractionAlong" type="ZeroToOne"/>
+                <xs:attribute name="postSegment" type="NonNegativeInteger" default="0"/>
+                <xs:attribute name="postFractionAlong" type="ZeroToOne" default="0.5"/>
                 <xs:attribute name="synapse" type="NmlId" use="required"/>
             </xs:extension>
         </xs:complexContent>
@@ -2097,11 +2097,11 @@
         <xs:complexContent>
             <xs:extension base="BaseNonNegativeIntegerId">
                 <xs:attribute name="preCell" type="xs:string" use="required"/>
-                <xs:attribute name="preSegment" type="NonNegativeInteger"/>
-                <xs:attribute name="preFractionAlong" type="ZeroToOne"/>
+                <xs:attribute name="preSegment" type="NonNegativeInteger" default="0"/>
+                <xs:attribute name="preFractionAlong" type="ZeroToOne" default="0.5"/>
                 <xs:attribute name="postCell" type="xs:string" use="required"/>
-                <xs:attribute name="postSegment" type="NonNegativeInteger"/>
-                <xs:attribute name="postFractionAlong" type="ZeroToOne"/>
+                <xs:attribute name="postSegment" type="NonNegativeInteger" default="0"/>
+                <xs:attribute name="postFractionAlong" type="ZeroToOne" default="0.5"/>
                 <xs:attribute name="preComponent" type="NmlId" use="required"/>
                 <xs:attribute name="postComponent" type="NmlId" use="required"/>
             </xs:extension>
