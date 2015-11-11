@@ -549,6 +549,18 @@
     <!--      IonChannel element                                  -->
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
+    <xs:complexType name="IonChannelScalable">
+
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+                <xs:sequence>
+                    <xs:element name="q10ConductanceScaling" type="Q10ConductanceScaling" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
     <xs:complexType name="IonChannel">
 
         <xs:annotation>
@@ -556,7 +568,7 @@
                 NeuroML v2beta4 should remove one of these, probably ionChannelHH.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="Standalone">
+            <xs:extension base="IonChannelScalable">
                 <xs:choice>
                     <xs:element name="gate" type="GateHHUndetermined" minOccurs="0" maxOccurs="unbounded"/>   
                     <xs:element name="gateHHrates" type="GateHHRates" minOccurs="0" maxOccurs="unbounded"/>
@@ -564,6 +576,7 @@
                     <xs:element name="gateHHtauInf" type="GateHHTauInf" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="gateHHratesInf" type="GateHHRatesInf" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="gateHHratesTauInf" type="GateHHRatesTauInf" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="gateHHInstantaneous" type="GateHHInstantaneous" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:choice>
 
                 <xs:attribute name="species" type="NmlId" use="optional"/>
@@ -593,6 +606,13 @@
             <xs:enumeration value="ionChannelHH"/>
         </xs:restriction>
     </xs:simpleType>
+    
+    
+
+    <xs:complexType name="Q10ConductanceScaling">
+        <xs:attribute name="q10Factor" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="experimentalTemp" type="Nml2Quantity_temperature" use="required"/>
+    </xs:complexType>
 
 
     <xs:simpleType name="gateTypes">
@@ -602,6 +622,7 @@
             <xs:enumeration value="gateHHtauInf"/>
             <xs:enumeration value="gateHHratesInf"/>
             <xs:enumeration value="gateHHratesTauInf"/>
+            <xs:enumeration value="gateHHInstantaneous"/>
             <xs:enumeration value="gateKS"/>
         </xs:restriction>
     </xs:simpleType>
@@ -697,6 +718,19 @@
                     <xs:element name="q10Settings" type="Q10Settings" minOccurs="0"/>
                     <xs:element name="forwardRate" type="HHRate" minOccurs="1"/>
                     <xs:element name="reverseRate" type="HHRate" minOccurs="1"/>
+                    <xs:element name="steadyState" type="HHVariable" minOccurs="1"/>
+                </xs:all>
+                <xs:attribute name="instances" type="PositiveInteger" use="required"/>
+                <!-- <xs:attribute name="type" type="gateTypes" use="optional"/> No longer allowed as it could conflict with the element definition -->
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="GateHHInstantaneous">
+        <xs:complexContent>
+            <xs:extension base="Base">
+                <xs:all>
+                    <xs:element name="notes" type="Notes" minOccurs="0"/>
                     <xs:element name="steadyState" type="HHVariable" minOccurs="1"/>
                 </xs:all>
                 <xs:attribute name="instances" type="PositiveInteger" use="required"/>
