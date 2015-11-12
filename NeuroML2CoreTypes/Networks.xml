@@ -318,6 +318,10 @@
     <ComponentType name="input" description="Initial attempt to specify input lists. Work in progress...">
 
         <Path name="target"/>
+        
+        <Text name="segmentId"/>
+        <Text name="fractionAlong"/>
+        
         <Text name="destination"/>
         <Structure>
 
