@@ -746,7 +746,7 @@
         <Requirement name="iCa" dimension="current"/>
         <Requirement name="surfaceArea" dimension="area"/>
     
-        <Text name="species"/> <!-- TODO: check why this isn't inherited from concentrationModel -->
+        <Text name="ion"/> <!-- TODO: check why this isn't inherited from concentrationModel -->
 
         <Dynamics>
 
