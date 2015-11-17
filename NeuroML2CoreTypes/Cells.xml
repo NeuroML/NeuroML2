@@ -1042,7 +1042,7 @@
             <DerivedVariable name="iMemb" dimension="current" exposure="iMemb" value="leakConductance * (leakReversal - v) + iSyn"/>
 
             <OnStart>
-                <StateAssignment variable="v" value="reset"/>
+                <StateAssignment variable="v" value="leakReversal"/>
             </OnStart>
 
             <Regime name="refractory">
