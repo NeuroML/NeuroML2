@@ -1894,6 +1894,7 @@
                     <xs:element name="cellSet" type="CellSet" minOccurs="0" maxOccurs="unbounded"/>
 
                     <xs:element name="synapticConnection" type="SynapticConnection" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
+                    <xs:element name="synapticCurrentWeightDelay" type="SynapticCurrentWeightDelay" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
                     <xs:element name="projection" type="Projection" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
                     <xs:element name="electricalProjection" type="ElectricalProjection" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="continuousProjection" type="ContinuousProjection" minOccurs="0" maxOccurs="unbounded"/>
