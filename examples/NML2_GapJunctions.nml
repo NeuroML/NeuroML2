@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta4.xsd"
+    id="NML2_GapJunctions">
+
+<!-- Example of a network containing electrical synapses (gap junctions) in NeuroML 2 --> 
+
+    <gapJunction id="gj1" conductance="10pS"/>
+    
+    <iafCell id="iaf" leakConductance="0.2nS" leakReversal="-70mV" thresh="-55mV" reset="-70mV" C="3.2pF"/>
+    
+    <pulseGenerator id="pulseGen1" delay="50ms" duration="200ms" amplitude="0.0032nA" />
+    <pulseGenerator id="pulseGen2" delay="400ms" duration="200ms" amplitude="0.0032nA" />
+   
+    
+    <network id="net1">
+        <population id="iafPop1" component="iaf" size="1" />
+        <population id="iafPop2" component="iaf" size="1" />
+        
+        <electricalProjection id ="testGJconn" presynapticPopulation="iafPop1" postsynapticPopulation="iafPop2">
+            <electricalConnection id="0" preCell="0" postCell="0" synapse="gj1"/>
+        </electricalProjection>
+        
+        <explicitInput target="iafPop1[0]" input="pulseGen1" destination="synapses"/>
+        <explicitInput target="iafPop2[0]" input="pulseGen2" destination="synapses"/>
+        
+    </network>
+
+</neuroml>
+
+
+
+
+
+
+
+

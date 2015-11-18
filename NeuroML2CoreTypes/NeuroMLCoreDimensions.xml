@@ -1,6 +1,6 @@
-<Lems xmlns="http://www.neuroml.org/lems/0.7.1"
+<Lems xmlns="http://www.neuroml.org/lems/0.7.3"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.1 ../../LEMS/Schemas/LEMS/LEMS_v0.7.1.xsd">
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.3 ../../LEMS/Schemas/LEMS/LEMS_v0.7.3.xsd">
 
     <!-- The core dimensional quantities as used in NeuroML version 2.0 -->
     <!-- Will be used in Type definitions, e.g. <StateVariable name="v" dimension="voltage"/> -->
@@ -41,6 +41,8 @@
     <Dimension name="temperature" k="1"/>
 
     <Dimension name="idealGasConstantDims" m="1" l="2" t="-2" k="-1" n="-1"/>
+    
+    <Dimension name="conductance_per_voltage" m="-2" l="-4" t="6" i="3"/>
     
     <!-- Note: it's unlikely that this dimension/unit for rho in fixedFactorConcentrationModel will be needed anywhere else-->
     <Dimension name="rho_factor" l="-1" n="1" i="-1" t="-1"/>
@@ -107,6 +109,7 @@
     <Unit symbol="C" dimension="charge" power="0"/>
 
     <Unit symbol="C_per_mol" dimension="charge_per_mole" power="0"/>
+    <Unit symbol="nA_ms_per_amol" dimension="charge_per_mole" power="6"/>   <!-- NEURON preferred Units -->
 
     <Unit symbol="A" dimension="current" power="0"/>
     <Unit symbol="uA" dimension="current" power="-6"/>             <!-- Physiological Units -->
@@ -135,8 +138,12 @@
     <Unit symbol="K" dimension="temperature" power="0"/>
 
     <Unit symbol="J_per_K_per_mol" dimension="idealGasConstantDims" power="0"/>
+    
+    <Unit symbol="S_per_V" dimension="conductance_per_voltage" power="0"/>
+    <Unit symbol="nS_per_mV" dimension="conductance_per_voltage" power="-6"/>       <!-- NEURON preferred Units -->
  
     <!-- Note: it's unlikely that this dimension/unit for rho in fixedFactorConcentrationModel will be needed anywhere else-->
     <Unit symbol="mol_per_m_per_A_per_s" dimension="rho_factor" power="0"/> <!-- SI -->
+    <Unit symbol="mol_per_cm_per_uA_per_ms" dimension="rho_factor" power="11"/> <!-- SI -->
 
 </Lems>

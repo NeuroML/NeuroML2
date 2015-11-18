@@ -2,7 +2,7 @@
 
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta3.xsd"
+      xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta4.xsd"
     id="NML2_InstanceBasedNetwork">
 
 <!-- Example of a network specified as a set of location and connection instances in NeuroML 2 --> 
@@ -17,7 +17,7 @@
 
     <network id="InstanceBasedNetwork">
 
-        <population id="iafCells" type="populationList" component="iaf">
+        <population id="iafCells" type="populationList" component="iaf" size="3">
             <instance id="0">
                 <location x="120" y="230" z="567"/>
             </instance>

@@ -2,34 +2,37 @@
 
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  ../Schemas/NeuroML2/NeuroML_v2beta3.xsd"
+    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  ../Schemas/NeuroML2/NeuroML_v2beta4.xsd"
     id="NML2_Inputs">
 
     <!-- Some examples of the currently supported input types -->
 
-    <pulseGenerator id="pulseGen" delay="10 ms" duration="100 ms"
-		    amplitude="50 pA"/>
+    <expTwoSynapse id="synInput" gbase="8nS" erev="20mV" tauRise="1ms" tauDecay="5ms"/><!-- Will be used below... -->
 
-    <sineGenerator id="sineGen" phase="0" delay="50ms"
-		   duration="200ms" amplitude="1.2nA" period="50ms"/>
+    <pulseGenerator id="pulseGen0" delay="50ms" duration="200ms" amplitude="1 nA" />
 
-    <rampGenerator id="rampGen" delay="50ms" duration="200ms"
-		   startAmplitude="0.5nA" finishAmplitude="2nA"
-		   baselineAmplitude="0nA"/>
+    <sineGenerator id="sg0" phase="0" delay="50ms" duration="200ms" amplitude="1.4nA" period="50ms"/>
 
-    <voltageClamp id="vClamp" delay="50ms" duration="200ms"
-		  targetVoltage="-50mV" simpleSeriesResistance="10ohm"/>
+    <rampGenerator id="rg0" delay="50ms" duration="200ms" startAmplitude="0.5nA" finishAmplitude="4nA" baselineAmplitude="0nA"/>
+
+    <voltageClamp id="vClamp0" delay="50ms" duration="200ms"
+              targetVoltage="-50mV" simpleSeriesResistance="1e6ohm"/>
 
     <spikeArray id="spkArr">
-      <spike id="0" time="20 ms"/>
-      <spike id="1" time="30 ms"/>
+      <spike id="0" time="50 ms"/>
+      <spike id="1" time="100 ms"/>
+      <spike id="2" time="150 ms"/>
+      <spike id="3" time="155 ms"/>
+      <spike id="4" time="250 ms"/>
     </spikeArray>
 
-    <spikeGenerator id="spikeGen" period="20 ms"/>
+    <spikeGenerator id="spikeGenRegular" period="20 ms"/>
 
     <spikeGeneratorRandom id="spikeGenRandom" minISI="10 ms"
-			  maxISI="30 ms"/>
+                  maxISI="30 ms"/>
 
     <spikeGeneratorPoisson id="spikeGenPoisson" averageRate="50 Hz"/>
+
+    <poissonFiringSynapse id="poissonFiringSyn" averageRate="10 Hz" synapse="synInput" spikeTarget="./synInput"/>
 
 </neuroml>

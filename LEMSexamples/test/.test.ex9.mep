@@ -1,0 +1,9 @@
+system: Test Ex9
+
+experiments:
+    V:
+        expected:
+            spike times: [36650.0, 73200.0, 109800.0, 146350.0, 182900.0]
+    W:
+        expected:
+            spike times: [5800.0, 42350.0, 78950.0, 115500.0, 152050.0, 188650.0]

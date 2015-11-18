@@ -1,0 +1,9 @@
+system: Test Ex20a
+
+experiments:
+    cell0:
+        expected:
+            spike times: [102.21, 118.45, 134.49, 150.51, 166.54, 182.57, 198.59]
+    cell1:
+        expected:
+            spike times: [103.34, 119.94, 136.15, 152.18, 168.21, 184.24, 200.26]

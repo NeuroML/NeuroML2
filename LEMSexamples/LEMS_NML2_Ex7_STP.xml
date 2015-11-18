@@ -34,11 +34,11 @@
     <expTwoSynapse id="noStpSyn" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="40ms"/>
 
     <blockingPlasticSynapse id="stpSynDep" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="40ms">
-            <plasticityMechanism type="tsodyksMarkramDepMechanism" initReleaseProb = "0.5" tauRec = "300 ms"/>
+            <tsodyksMarkramDepMechanism id="depMech" initReleaseProb = "0.5" tauRec = "300 ms"/>
     </blockingPlasticSynapse>
 
     <blockingPlasticSynapse id="stpSynDepFac" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="40ms">
-            <plasticityMechanism type="tsodyksMarkramDepFacMechanism" initReleaseProb = "0.5" tauFac = "200 ms" tauRec = "300 ms"/>
+            <tsodyksMarkramDepFacMechanism id="depFacMech" initReleaseProb = "0.5" tauFac = "200 ms" tauRec = "300 ms"/>
     </blockingPlasticSynapse>
 
 
@@ -55,23 +55,23 @@
 
 
     <Simulation id="sim1" length="300ms" step="0.01ms" target="net2">
-        <Display id="d1" title="Ex7: Cells with STP synapse: voltage" timeScale="1ms" xmin="0" xmax="300" ymin="-56" ymax="-35">
+        <Display id="d1" title="Ex7: Cells with STP synapse: voltage" timeScale="1ms" xmin="-20" xmax="320" ymin="-56" ymax="-35">
                 <Line id="v_noStp" quantity="pasPop[0]/v" scale="1mV" color="#000000" timeScale="1ms"/>
                 <Line id="v_stpSynDep" quantity="pasPop[1]/v" scale="1mV" color="#0000FF" timeScale="1ms"/>
                 <Line id="v_stpSynDepFac" quantity="pasPop[2]/v" scale="1mV" color="#ff0000" timeScale="1ms"/>
         </Display>
 
-        <Display id="d2" title="Ex7: Cells with STP synapse: synaptic conductances" timeScale="1ms" xmin="0" xmax="300" ymin="-0.1" ymax="2.0">
+        <Display id="d2" title="Ex7: Cells with STP synapse: synaptic conductances" timeScale="1ms" xmin="-20" xmax="320" ymin="-0.1" ymax="2.0">
                 <Line id ="g_noStp" quantity="pasPop[0]/noStpSyn/g" scale="1nS"  color="#000000" timeScale="1ms"/>
                 <Line id ="g_stpSynDep" quantity="pasPop[1]/stpSynDep/g" scale="1nS"  color="#0000FF" timeScale="1ms"/>
                 <Line id ="g_stpSynDepFac" quantity="pasPop[2]/stpSynDepFac/g" scale="1nS"  color="#ff0000" timeScale="1ms"/>
         </Display>
 
-        <Display id="d4" title="Ex7: Cells with STP synapse: scaling variables" timeScale="1ms" xmin="0" xmax="300" ymin="-0.1" ymax="1.1">
-                <Line id ="R_Dep" quantity="pasPop[1]/stpSynDep/plasticityMechanism/R" scale="1"  color="#00ffff" timeScale="1ms"/>
-                <Line id ="U_Dep" quantity="pasPop[1]/stpSynDep/plasticityMechanism/U" scale="1"  color="#0000ff" timeScale="1ms"/>
-                <Line id ="R_DepFac" quantity="pasPop[2]/stpSynDepFac/plasticityMechanism/R" scale="1"  color="#ffffff" timeScale="1ms"/>
-                <Line id ="U_DepFac" quantity="pasPop[2]/stpSynDepFac/plasticityMechanism/U" scale="1"  color="#0055ff" timeScale="1ms"/>
+        <Display id="d4" title="Ex7: Cells with STP synapse: scaling variables" timeScale="1ms" xmin="-20" xmax="320" ymin="-0.1" ymax="1.1">
+                <Line id ="R_Dep" quantity="pasPop[1]/stpSynDep/depMech/R" scale="1"  color="#00ffff" timeScale="1ms"/>
+                <Line id ="U_Dep" quantity="pasPop[1]/stpSynDep/depMech/U" scale="1"  color="#0000ff" timeScale="1ms"/>
+                <Line id ="R_DepFac" quantity="pasPop[2]/stpSynDepFac/depFacMech/R" scale="1"  color="#ffffff" timeScale="1ms"/>
+                <Line id ="U_DepFac" quantity="pasPop[2]/stpSynDepFac/depFacMech/U" scale="1"  color="#0055ff" timeScale="1ms"/>
         </Display>
     </Simulation>
 
