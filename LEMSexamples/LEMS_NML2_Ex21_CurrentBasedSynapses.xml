@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<Lems>
+  <Target component="sim1"/>
+
+  <Include file="Synapses.xml"/>
+  <Include file="Cells.xml"/>
+  <Include file="Networks.xml"/>
+  <Include file="Simulation.xml"/>
+  <Include file="Inputs.xml"/>
+
+
+  <iafRefCell id="iaf" C="250pF" thresh="1mV" reset="-1mV" leakConductance="12.5nS" leakReversal="0mV" refract="2ms"/>
+
+  <alphaCurrentSynapse id="alphaSyn" tauSyn="1.0ms"/>
+
+  <spikeArray id="spks">
+    <spike id="0" time="100 ms"/>
+    <spike id="1" time="120 ms"/>
+    <spike id="2" time="126 ms"/>
+    <spike id="3" time="135 ms"/>
+  </spikeArray>
+
+  <network id="net">
+    <population component="iaf" id="iafPop" size="1"/>
+    <population id="spksPop" component="spks" size="1"/>
+    <synapticCurrentWeightDelay from="spksPop[0]" to="iafPop[0]" synapse="alphaSyn" destination="synapses" weight="0.05 nA" delay="1ms"/>
+  </network>
+
+  <Simulation id="sim1" length="1000ms" step="0.005ms" target="net">
+    <Display id="display_0" timeScale="1ms" title="IafRef cell: Vm" xmin="0" xmax="1000" ymin="-1" ymax="1">
+      <Line color="#000000" id="iaf_v" quantity="iafPop[0]/v" scale="1mV" timeScale="1ms"/>
+    </Display>
+    <Display id="display_1" timeScale="1ms" title="Spike array: tsince" xmin="0" xmax="1000" ymin="0" ymax="50">
+      <Line color="#0000FF" id="spikes_t" quantity="spksPop[0]/tsince" scale="1ms" timeScale="1ms"/>
+    </Display>
+    <OutputFile id="of0" fileName="./results/nml_v.dat">
+      <OutputColumn id="iaf_v" quantity="iafPop[0]/v"/>
+    </OutputFile>
+  </Simulation>
+
+
+</Lems>
