@@ -18,11 +18,19 @@
 
 
     <ComponentType name="baseSynapse"
-                   extends="baseVoltageDepPointCurrent"
+                   extends="basePointCurrent"
                    description="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009"> <!-- http://bioportal.bioontology.org/ontologies/46856/?p=terms&conceptid=cno%3Acno_0000009 -->
         <Child name="notes" type="notes"/>
-
         <EventPort name="in" direction="in"/>
+
+    </ComponentType>
+
+
+    <ComponentType name="baseVoltageDepSynapse"
+                   extends="baseSynapse"
+                   description="Base type for synapses with a dependence on membrane potential"> <!-- http://bioportal.bioontology.org/ontologies/46856/?p=terms&conceptid=cno%3Acno_0000009 -->
+        <Child name="notes" type="notes"/>
+        <Requirement name="v" dimension="voltage" description="The current may vary with the voltage exposed by the ComponentType on which this is placed"/>
 
     </ComponentType>
 
@@ -31,16 +39,12 @@
                    extends="baseVoltageDepPointCurrentDL"
                    description="Base type for all synapses, i.e. ComponentTypes which produce a dimensionless current and change Dynamics in response to an incoming event. cno_0000009"> <!-- http://bioportal.bioontology.org/ontologies/46856/?p=terms&conceptid=cno%3Acno_0000009 -->
 
-        <EventPort name="in" direction="in"/>
-
     </ComponentType>
 
 
     <ComponentType name="baseCurrentBasedSynapse"
                    extends="baseSynapse"
-                   description="Synapse model which exposes producing a current.">
-
-        <Exposure name="i" dimension="current" description="Total synaptic current"/>
+                   description="Synapse model which produces a synaptic current.">
 
     </ComponentType>
 
@@ -73,7 +77,7 @@
 
 
     <ComponentType name="baseConductanceBasedSynapse"
-                   extends="baseSynapse"
+                   extends="baseVoltageDepSynapse"
                    description="Synapse model which exposes a conductance _g in addition to producing a current. Not necessarily ohmic!! cno_0000027">
 
         <Parameter name="gbase" dimension="conductance" description="Baseline conductance, generally the maximum conductance following a single spike"/>
