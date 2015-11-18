@@ -160,7 +160,7 @@
     <xs:simpleType name="Nml2Quantity_conductancePerVoltage">
 
         <xs:restriction base="xs:string">
-            <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(S_per_V|nS_per_mV)"/> 
+            <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(S_per_V|nS_per_mV)"/>
         </xs:restriction>
 
     </xs:simpleType>
@@ -205,7 +205,7 @@
         </xs:restriction>
 
     </xs:simpleType>
-    
+
     <xs:simpleType name="PositiveInteger">
         <xs:annotation>
             <xs:documentation>Integer >=1 only!</xs:documentation>
@@ -237,7 +237,7 @@
         <xs:restriction base="xs:string"/>
     </xs:simpleType>
 
-    
+
     <xs:complexType name="Property">
         <xs:annotation>
             <xs:documentation>Generic property with a tag and value</xs:documentation>
@@ -255,7 +255,7 @@
             <xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/> <!-- Further elements will be specified!! -->
         </xs:sequence>
     </xs:complexType>
-    
+
 
     <xs:complexType name="ComponentType">
         <xs:annotation>
@@ -272,8 +272,8 @@
         <xs:attribute name="description" type="xs:string" use="optional"/>
 
     </xs:complexType>
-    
-    
+
+
     <xs:complexType name="Constant">
         <xs:annotation>
             <xs:documentation>LEMS ComponentType for Constant.</xs:documentation>
@@ -285,7 +285,7 @@
         <xs:attribute name="description" type="xs:string" use="optional"/>
 
     </xs:complexType>
-    
+
 
     <!-- for Parameter, StateVariable etc. -->
     <xs:complexType name="NamedDimensionalType">
@@ -293,13 +293,13 @@
         <xs:attribute name="dimension" type="xs:string" use="optional" default="none"/>
         <xs:attribute name="description" type="xs:string" use="optional"/>
     </xs:complexType>
-    
+
     <xs:complexType name="Requirement"> <!-- For language binding generators, so there will be a class of this name... -->
         <xs:complexContent>
             <xs:extension base="NamedDimensionalType"/>
         </xs:complexContent>
     </xs:complexType>
-    
+
     <xs:complexType name="Dynamics">
         <xs:annotation>
             <xs:documentation>LEMS ComponentType for Dynamics</xs:documentation>
@@ -310,7 +310,7 @@
         </xs:sequence>
 
     </xs:complexType>
-    
+
     <xs:complexType name="DerivedVariable">
         <xs:annotation>
             <xs:documentation>LEMS ComponentType for DerivedVariable</xs:documentation>
@@ -322,7 +322,7 @@
         <xs:attribute name="exposure" type="xs:string" use="optional"/>
 
     </xs:complexType>
-    
+
     <xs:complexType name="ConditionalDerivedVariable">
         <xs:annotation>
             <xs:documentation>LEMS ComponentType for ConditionalDerivedVariable</xs:documentation>
@@ -337,7 +337,7 @@
         <xs:attribute name="exposure" type="xs:string" use="optional"/>
 
     </xs:complexType>
-    
+
 
     <xs:complexType name="Case">
 
@@ -385,9 +385,9 @@
 
                     <!-- Note: requires type = ionChannelHH -->
                     <xs:element name="ionChannel" type="IonChannel" minOccurs="0" maxOccurs="unbounded"/>
-                    
-                    <!-- Note ionChannel and _ionChannelHH are currently functionally identical. This is needed 
-                    since many existing examples use ionChannel, some use ionChannelHH. NeuroML v2beta4 should 
+
+                    <!-- Note ionChannel and _ionChannelHH are currently functionally identical. This is needed
+                    since many existing examples use ionChannel, some use ionChannelHH. NeuroML v2beta4 should
                     remove one of these -->
                     <xs:element name="ionChannelHH" type="IonChannelHH" minOccurs="0" maxOccurs="unbounded"/>
 
@@ -401,7 +401,7 @@
                     <xs:group ref="CellTypes"/>
 
                     <xs:group ref="InputTypes"/>
-                    
+
                     <xs:group ref="PyNNCellTypes"/>
 
                     <xs:group ref="PyNNSynapseTypes"/>
@@ -419,14 +419,14 @@
         </xs:complexContent>
 
     </xs:complexType>
-    
+
 
     <!-- A small subset of XLInclude from: http://www.w3.org/2001/XInclude.xsd
          Will be sufficient for now... -->
     <xs:complexType name="IncludeType" mixed="true">
         <xs:attribute name="href" use="optional" type="xs:anyURI"/>
     </xs:complexType>
-    
+
 
     <xs:group name="CellTypes">
         <xs:annotation>
@@ -475,6 +475,7 @@
             <xs:documentation>Various types of synapse which are defined in NeuroML 2. This list will be expanded...</xs:documentation>
         </xs:annotation>
         <xs:sequence>
+            <xs:element name="alphaCurrentSynapse" type="AlphaCurrentSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="expOneSynapse" type="ExpOneSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="expTwoSynapse" type="ExpTwoSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="blockingPlasticSynapse" type="BlockingPlasticSynapse" minOccurs="0" maxOccurs="unbounded"/>
@@ -484,7 +485,7 @@
             <xs:element name="gradedSynapse" type="GradedSynapse" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:group>
-    
+
 
     <xs:group name="PyNNSynapseTypes">
         <xs:annotation>
@@ -497,7 +498,7 @@
             <xs:element name="alphaCurrSynapse" type="AlphaCurrSynapse" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:group>
-    
+
     <xs:group name="InputTypes">
         <xs:annotation>
             <xs:documentation>Various types of inputs which are defined in NeuroML2. This list will be expanded...</xs:documentation>
@@ -513,17 +514,17 @@
                     minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="spikeArray" type="SpikeArray" minOccurs="0"
                     maxOccurs="unbounded"/>
-            <xs:element name="spikeGenerator" type="SpikeGenerator" 
+            <xs:element name="spikeGenerator" type="SpikeGenerator"
                     minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="spikeGeneratorRandom" type="SpikeGeneratorRandom"
                     minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="spikeGeneratorPoisson" type="SpikeGeneratorPoisson" 
+            <xs:element name="spikeGeneratorPoisson" type="SpikeGeneratorPoisson"
                     minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="poissonFiringSynapse" type="PoissonFiringSynapse" 
+            <xs:element name="poissonFiringSynapse" type="PoissonFiringSynapse"
                     minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:group>
-    
+
     <xs:group name="PyNNInputTypes">
         <xs:annotation>
             <xs:documentation>Various types of input which are defined in NeuroML 2 based on PyNN standard cell/synapse models. </xs:documentation>
@@ -559,18 +560,18 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
-    
+
+
     <xs:complexType name="IonChannel">
 
         <xs:annotation>
-            <xs:documentation>Note ionChannel and ionChannelHH are currently functionally identical. This is needed since many existing examples use ionChannel, some use ionChannelHH. 
+            <xs:documentation>Note ionChannel and ionChannelHH are currently functionally identical. This is needed since many existing examples use ionChannel, some use ionChannelHH.
                 NeuroML v2beta4 should remove one of these, probably ionChannelHH.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="IonChannelScalable">
                 <xs:choice>
-                    <xs:element name="gate" type="GateHHUndetermined" minOccurs="0" maxOccurs="unbounded"/>   
+                    <xs:element name="gate" type="GateHHUndetermined" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="gateHHrates" type="GateHHRates" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="gateHHratesTau" type="GateHHRatesTau" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="gateHHtauInf" type="GateHHTauInf" minOccurs="0" maxOccurs="unbounded"/>
@@ -588,17 +589,17 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
+
     <xs:complexType name="IonChannelHH">
         <xs:annotation>
-            <xs:documentation>Note ionChannel and ionChannelHH are currently functionally identical. This is needed since many existing examples use ionChannel, some use ionChannelHH. 
+            <xs:documentation>Note ionChannel and ionChannelHH are currently functionally identical. This is needed since many existing examples use ionChannel, some use ionChannelHH.
                 NeuroML v2beta4 should remove one of these, probably ionChannelHH.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="IonChannel"/>
         </xs:complexContent>
     </xs:complexType>
-    
+
 
     <xs:simpleType name="channelTypes">
         <xs:restriction base="xs:string">
@@ -606,8 +607,8 @@
             <xs:enumeration value="ionChannelHH"/>
         </xs:restriction>
     </xs:simpleType>
-    
-    
+
+
 
     <xs:complexType name="Q10ConductanceScaling">
         <xs:attribute name="q10Factor" type="Nml2Quantity_none" use="required"/>
@@ -796,7 +797,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
+
     <xs:complexType name="FixedFactorConcentrationModel">
 
         <xs:complexContent>
@@ -830,10 +831,31 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="BaseConductanceBasedSynapse">
+
+    <xs:complexType name="BaseVoltageDepSynapse">
 
         <xs:complexContent>
             <xs:extension base="BaseSynapse">
+
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <xs:complexType name="BaseCurrentBasedSynapse">
+
+        <xs:complexContent>
+            <xs:extension base="BaseSynapse">
+
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <xs:complexType name="BaseConductanceBasedSynapse">
+
+        <xs:complexContent>
+            <xs:extension base="BaseVoltageDepSynapse">
 
                 <xs:attribute name="gbase" type="Nml2Quantity_conductance" use="required"/>
                 <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>
@@ -841,8 +863,8 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
-    
+
+
     <xs:complexType name="GapJunction">
 
         <xs:complexContent>
@@ -856,7 +878,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
+
     <xs:complexType name="SilentSynapse">
         <xs:complexContent>
             <xs:annotation>
@@ -867,8 +889,8 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
-    
+
+
     <xs:complexType name="LinearGradedSynapse">
 
         <xs:complexContent>
@@ -882,7 +904,8 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
+
+
     <xs:complexType name="GradedSynapse">
 
         <xs:complexContent>
@@ -890,12 +913,24 @@
                 <xs:documentation>Based on synapse in Methods of http://www.nature.com/neuro/journal/v7/n12/abs/nn1352.html.</xs:documentation>
             </xs:annotation>
             <xs:extension base="BaseSynapse">
-                
+
                 <xs:attribute name="conductance" type="Nml2Quantity_conductance" use="required"/>
                 <xs:attribute name="delta" type="Nml2Quantity_voltage" use="required"/>
                 <xs:attribute name="Vth" type="Nml2Quantity_voltage" use="required"/>
                 <xs:attribute name="k" type="Nml2Quantity_pertime" use="required"/>
                 <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>
+
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <xs:complexType name="AlphaCurrentSynapse">
+
+        <xs:complexContent>
+            <xs:extension base="BaseCurrentBasedSynapse">
+
+                <xs:attribute name="tauSyn" type="Nml2Quantity_time" use="required"/>
 
             </xs:extension>
         </xs:complexContent>
@@ -948,6 +983,7 @@
         </xs:restriction>
     </xs:simpleType>
 
+
     <xs:complexType name="BlockMechanism">
       <xs:attribute name="type" type="BlockTypes"
 		    use="required"/>
@@ -959,6 +995,7 @@
       <xs:attribute name="scalingVolt" type="Nml2Quantity_voltage"
 		    use="required"/>
     </xs:complexType>
+
 
     <xs:simpleType name="PlasticityTypes">
         <xs:restriction base="xs:string">
@@ -1041,8 +1078,8 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
-    
+
+
     <xs:complexType name="BaseCellMembPotCap">
         <xs:complexContent>
             <xs:extension base="BaseCell">
@@ -1057,8 +1094,8 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
-    
+
+
     <xs:complexType name="Izhikevich2007Cell">
         <xs:complexContent>
             <xs:extension base="BaseCellMembPotCap">
@@ -1092,8 +1129,8 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
-    
+
+
     <xs:complexType name="FitzHughNagumoCell">
         <xs:complexContent>
             <xs:extension base="BaseCell">
@@ -1211,7 +1248,7 @@
 
                 <xs:sequence>
                     <xs:element name="notes" type="Notes" minOccurs="0"/>
-                    <xs:element name="property" type="Property" minOccurs="0" maxOccurs="unbounded"/> 
+                    <xs:element name="property" type="Property" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="annotation" type="Annotation" minOccurs="0"/>
                     <xs:element name="member" type="Member" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="include" type="Include" minOccurs="0" maxOccurs="unbounded"/>
@@ -1314,27 +1351,27 @@
 
         <xs:sequence>
             <xs:element name="channelPopulation" type="ChannelPopulation" minOccurs="0" maxOccurs="unbounded"/>
-            
+
             <xs:element name="channelDensity" type="ChannelDensity" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="channelDensityNernst" type="ChannelDensityNernst" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="channelDensityGHK" type="ChannelDensityGHK" minOccurs="0" maxOccurs="unbounded"/>
-            
+
             <xs:element name="channelDensityNonUniform" type="ChannelDensityNonUniform" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="channelDensityNonUniformNernst" type="ChannelDensityNonUniformNernst" minOccurs="0" maxOccurs="unbounded"/>
-        
+
             <xs:element name="spikeThresh" type="SpikeThresh" minOccurs="0" maxOccurs="unbounded"/>
-            
+
             <xs:element name="specificCapacitance" type="SpecificCapacitance" minOccurs="0" maxOccurs="unbounded"/>
 
             <xs:element name="initMembPotential" type="InitMembPotential" minOccurs="0" maxOccurs="unbounded"/>
 
-            <!-- Taking this out until confirmation it's needed 
+            <!-- Taking this out until confirmation it's needed
             <xs:element name="reversalPotential" type="ReversalPotential" minOccurs="0" maxOccurs="unbounded"/>-->
         </xs:sequence>
 
     </xs:complexType>
-    
-    
+
+
     <xs:complexType name="SpikeThresh">
         <xs:annotation>
             <xs:documentation>Using a thin extension of ValueAcrossSegOrSegGroup to facilitate library generation (e.g. libNeuroML)</xs:documentation>
@@ -1344,7 +1381,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
+
     <xs:complexType name="SpecificCapacitance">
         <xs:annotation>
             <xs:documentation>Using a thin extension of ValueAcrossSegOrSegGroup to facilitate library generation (e.g. libNeuroML)</xs:documentation>
@@ -1354,7 +1391,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
+
     <xs:complexType name="InitMembPotential">
         <xs:annotation>
             <xs:documentation>Using a thin extension of ValueAcrossSegOrSegGroup to facilitate library generation (e.g. libNeuroML)</xs:documentation>
@@ -1364,7 +1401,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
+
     <xs:complexType name="Resistivity">
         <xs:annotation>
             <xs:documentation>Using a thin extension of ValueAcrossSegOrSegGroup to facilitate library generation (e.g. libNeuroML)</xs:documentation>
@@ -1386,7 +1423,7 @@
 
                 <xs:attribute name="ionChannel" type="NmlId" use="required"/>
                 <xs:attribute name="number" type="NonNegativeInteger" use="required"/>
-                <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/> 
+                <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>
 
                 <!-- Note: only one of the following should be used!! -->
                 <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
@@ -1417,7 +1454,7 @@
                 </xs:sequence>
 
                 <xs:attribute name="ionChannel" type="NmlId" use="required"/>
-                <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>  
+                <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>
 
                 <xs:attribute name="ion" type="NmlId" use="optional">
                     <xs:annotation>
@@ -1472,7 +1509,7 @@
 
                 <xs:attribute name="ionChannel" type="NmlId" use="required"/>
                 <xs:attribute name="condDensity" type="Nml2Quantity_conductanceDensity" use="optional"/>
-                <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>    
+                <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>
 
                 <!-- Note: only one of the following should be used!! -->
                 <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
@@ -1493,9 +1530,9 @@
         </xs:complexContent>
 
     </xs:complexType>
-    
-    
-    
+
+
+
 
     <xs:complexType name="ChannelDensityNernst">
 
@@ -1712,7 +1749,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
+
 
     <xs:complexType name="SineGenerator">
         <xs:complexContent>
@@ -1731,7 +1768,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
+
 
     <xs:complexType name="RampGenerator">
         <xs:complexContent>
@@ -1752,7 +1789,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
+
 
     <xs:complexType name="VoltageClamp">
         <xs:complexContent>
@@ -1792,7 +1829,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
+
 
     <xs:complexType name="SpikeGenerator">
         <xs:complexContent>
@@ -1802,7 +1839,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
+
 
     <xs:complexType name="SpikeGeneratorRandom">
         <xs:complexContent>
@@ -1824,7 +1861,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
+
     <xs:complexType name="PoissonFiringSynapse">
         <xs:complexContent>
             <xs:extension base="Standalone">
@@ -1858,22 +1895,22 @@
 
                     <xs:element name="synapticConnection" type="SynapticConnection" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
                     <xs:element name="projection" type="Projection" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
-                    <xs:element name="electricalProjection" type="ElectricalProjection" minOccurs="0" maxOccurs="unbounded"/> 
-                    <xs:element name="continuousProjection" type="ContinuousProjection" minOccurs="0" maxOccurs="unbounded"/> 
+                    <xs:element name="electricalProjection" type="ElectricalProjection" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="continuousProjection" type="ContinuousProjection" minOccurs="0" maxOccurs="unbounded"/>
 
                     <xs:element name="explicitInput" type="ExplicitInput" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
                     <xs:element name="inputList" type="InputList" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
                 </xs:sequence>
-                
+
                 <xs:attribute name="type" type="networkTypes" use="optional"/>
                 <xs:attribute name="temperature" type="Nml2Quantity_temperature" use="optional"/>  <!-- TODO: put check that type=networkWithTemperature -->
-                
+
             </xs:extension>
         </xs:complexContent>
 
     </xs:complexType>
-    
-    
+
+
     <xs:simpleType name="networkTypes">
         <xs:restriction base="xs:string">
             <xs:enumeration value="network"/>
@@ -1942,9 +1979,9 @@
                     <xs:element name="instance" type="Instance" maxOccurs="unbounded"/>
                 </xs:choice>
 
-                <xs:attribute name="component" type="NmlId" use="required"/> 
+                <xs:attribute name="component" type="NmlId" use="required"/>
 
-                <xs:attribute name="size" type="NonNegativeInteger" use="optional"/>   
+                <xs:attribute name="size" type="NonNegativeInteger" use="optional"/>
 
                 <xs:attribute name="type" type="populationTypes" use="optional"/>
 
@@ -2072,8 +2109,8 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
-    
+
+
     <xs:complexType name="ElectricalProjection">
         <xs:annotation>
             <xs:documentation>Projection between two populations consisting of electrical connections (gap junctions)</xs:documentation>
@@ -2088,7 +2125,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
+
 
     <xs:complexType name="ElectricalConnection">
         <xs:annotation>
@@ -2106,9 +2143,9 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
-    
-    
+
+
+
     <xs:complexType name="ContinuousProjection">
         <xs:annotation>
             <xs:documentation>Projection between two populations consisting of analog connections (e.g. graded synapses)</xs:documentation>
@@ -2123,7 +2160,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
+
     <xs:complexType name="ContinuousConnection">
         <xs:annotation>
             <xs:documentation>Individual continuous/analog synaptic connection</xs:documentation>
@@ -2389,40 +2426,40 @@
         <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
 
     </xs:complexType>
-    
-    
+
+
     <xs:complexType name="BaseNonNegativeIntegerId">
 
         <xs:annotation>
             <xs:documentation>Anything which can have a unique (within its parent) id, which must be an integer zero or greater.</xs:documentation>
         </xs:annotation>
-        
+
         <xs:complexContent>
             <xs:extension base="BaseWithoutId">
 
                 <xs:attribute name="id" type="NonNegativeInteger" use="required"/>
-                
+
             </xs:extension>
         </xs:complexContent>
 
     </xs:complexType>
-    
+
     <xs:complexType name="Base">
 
         <xs:annotation>
             <xs:documentation>Anything which can have a unique (within its parent) id of the form NmlId (spaceless combination of letters, numbers and underscore).</xs:documentation>
         </xs:annotation>
-        
+
         <xs:complexContent>
             <xs:extension base="BaseWithoutId">
 
                 <xs:attribute name="id" type="NmlId" use="required"/>
-                
+
             </xs:extension>
         </xs:complexContent>
 
     </xs:complexType>
-    
+
 
 
     <xs:complexType name="Standalone">
