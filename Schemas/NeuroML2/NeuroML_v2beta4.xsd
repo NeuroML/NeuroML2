@@ -2077,6 +2077,21 @@
         <xs:attribute name="destination" type="NmlId" use="optional"/>
     </xs:complexType>
 
+
+    <xs:complexType name="SynapticCurrentWeightDelay">
+        <xs:annotation>
+            <xs:documentation>Single explicit connection via a weighed/delayed currents. Introduced to test connections in LEMS. Will probably be removed in favour of
+                connections wrapped in projection element</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="SynapticConnection">
+                <xs:attribute name="weight" type="Nml2Quantity_current" use="required"/>
+                <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
     <xs:complexType name="Projection">
         <xs:annotation>
             <xs:documentation>Projection (set of synaptic connections) between two populations</xs:documentation>
