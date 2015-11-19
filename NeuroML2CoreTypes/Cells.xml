@@ -932,7 +932,7 @@
             <TimeDerivative variable="v" value="(leakReversal - v) / tau"/>
 
             <OnStart>
-                <StateAssignment variable="v" value="reset"/>
+                <StateAssignment variable="v" value="leakReversal"/>
             </OnStart>
 
             <OnCondition test="v .gt. thresh">
@@ -956,7 +956,7 @@
             <StateVariable name="lastSpikeTime" dimension="time"/>
 
             <OnStart>
-                <StateAssignment variable="v" value="reset"/>
+                <StateAssignment variable="v" value="leakReversal"/>
             </OnStart>
 
             <Regime name="refractory">
@@ -1012,7 +1012,7 @@
             <TimeDerivative variable="v" value="iMemb / C"/>
 
             <OnStart>
-                <StateAssignment variable="v" value="reset"/>
+                <StateAssignment variable="v" value="leakReversal"/>
             </OnStart>
 
             <OnCondition test="v .gt. thresh">
