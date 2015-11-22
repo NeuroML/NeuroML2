@@ -11,12 +11,24 @@
   <version>0.1-SNAPSHOT</version>
 
   <build>
+    <resources>
+     <resource>
+       <directory>${project.basedir}</directory>
+       <includes>
+         <include>NeuroML2CoreTypes/*.xml</include>
+         <include>Schemas/**/*.xsd</include>
+         <include>examples/*.nml</include>
+         <include>LEMSexamples/*.xml</include>
+       </includes>
+     </resource>
+    </resources> 
     <plugins>
       <plugin>
         <artifactId>maven-remote-resources-plugin</artifactId>
         <version>1.5</version>
         <executions>
           <execution>
+          <phase>process-resources</phase>
             <goals>
               <goal>bundle</goal>
             </goals>
