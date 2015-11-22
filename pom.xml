@@ -26,6 +26,8 @@
                 <include>NeuroML2CoreTypes/*.xml</include>
                 <include>Schemas/NeuroML2/*.xsd</include>
                 <include>Schemas/LEMS/*.xsd</include>
+                <include>examples/*.nml</include>
+                <include>LEMSexamples/*.xml</include>
               </includes>
             </configuration>
           </execution>
