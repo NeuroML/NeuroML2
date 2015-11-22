@@ -5,6 +5,7 @@
 /updateSchemas.sh
 /.pydevproject
 .project
+target/
 
 *~
 *.pyc
