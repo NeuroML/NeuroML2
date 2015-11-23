@@ -21,8 +21,10 @@ install:
     - git checkout $main_repo_branch
     
     - python getNeuroML.py $main_repo_branch  # will call mvn install on this & other repos
+    - ls -alt
     
     - export PATH=$PATH:$TRAVIS_BUILD_DIR/jNeuroML
+    - export JNML_HOME=$TRAVIS_BUILD_DIR/jNeuroML
     - cd
     - pip install git+https://github.com/OpenSourceBrain/osb-model-validation
     
