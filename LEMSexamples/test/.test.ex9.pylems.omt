@@ -13,7 +13,7 @@ experiments:
           scaling: [1000, 1000]
         spike detection: 
           method: derivative
-        tolerance: 0.00137
+        tolerance: 0.004099
   W:
     observables:
       spike times:
@@ -23,4 +23,4 @@ experiments:
           scaling: [1000, 1]
         spike detection: 
           method: derivative
-        tolerance: 0.00863
+        tolerance: 0.000616
