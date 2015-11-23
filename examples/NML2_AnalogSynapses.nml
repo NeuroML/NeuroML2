@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta4.xsd"
+    id="NML2_AnalogSynapses">
+
+<!-- Example of a network containing analog synapses in NeuroML 2 --> 
+
+    <!--Dummy synapse which emits no current. Used as presynaptic endpoint for analog synaptic connection.-->
+    <silentSynapse id="silent1"/>
+    <silentSynapse id="silent2"/>
+    
+    <!--Behaves just like a one way gap junction-->
+    <linearGradedSynapse id="gs1" conductance="5pS"/>
+    
+    <!--Based on synapse in Methods of http://www.nature.com/neuro/journal/v7/n12/abs/nn1352.html-->
+    <gradedSynapse id="gs2" conductance="5pS" delta="5mV" Vth="-55mV" k="0.025per_ms" erev="0mV"/>
+    
+    <iafCell id="iaf" leakConductance="0.2nS" leakReversal="-70mV" thresh="-55mV" reset="-70mV" C="3.2pF"/>
+    
+    <pulseGenerator id="pulseGen1" delay="50ms" duration="200ms" amplitude="0.0032nA" />
+    <pulseGenerator id="pulseGen2" delay="400ms" duration="200ms" amplitude="0.0020nA" />
+    <pulseGenerator id="pulseGen3" delay="700ms" duration="200ms" amplitude="0.0010nA" />
+   
+    
+    <network id="net1">
+        <population id="iafPop1" component="iaf" size="1" />
+        <population id="iafPop2" component="iaf" size="1" />
+        <population id="iafPop3" component="iaf" size="1" />
+   
+        <continuousProjection id ="testLinearGradedConn" presynapticPopulation="iafPop1" postsynapticPopulation="iafPop2">
+            <continuousConnection id="0" preCell="0" postCell="0" preComponent="silent1" postComponent="gs1"/>
+        </continuousProjection>
+        
+        <continuousProjection id ="testGradedConn" presynapticPopulation="iafPop1" postsynapticPopulation="iafPop3">
+            <continuousConnection id="0" preCell="0" postCell="0" preComponent="silent2" postComponent="gs2"/>
+        </continuousProjection>
+        
+        <explicitInput target="iafPop1[0]" input="pulseGen1" destination="synapses"/>
+        <explicitInput target="iafPop1[0]" input="pulseGen2" destination="synapses"/>
+        <explicitInput target="iafPop1[0]" input="pulseGen3" destination="synapses"/>
+        
+    </network>
+    
+    
+
+</neuroml>
+
+
+
+
+
+
+
+

@@ -2,10 +2,16 @@
 
     <!-- Example with FitzHugh-Nagumo model -->
 
-    <!-- This is a file which can be read and executed by the LEMS Interpreter. 
-        It imports the LEMS definitions of the core NeuroML 2 Components, creates 
-        a model in "pure" NeuroML 2 and contains some LEMS elements for running a 
-        simulation -->
+    <!-- 
+    
+    
+    
+    
+    Needs to be updated, see https://github.com/NeuroML/NeuroML2/issues/42
+    
+    
+    
+    -->
 
 
     <!-- Specify which component to run -->
@@ -36,7 +42,7 @@
             <Line id="W" quantity="fnPop1[0]/W" scale="1" color="#BBA0AA" timeScale="1s" />
         </Display>
     
-        <OutputFile id="of1" fileName="results/fn.dat">
+        <OutputFile id="of1" fileName="results/ex9.dat">
             <OutputColumn id="V" quantity="fnPop1[0]/V"/> 
             <OutputColumn id="W" quantity="fnPop1[0]/W"/> 
         </OutputFile> 

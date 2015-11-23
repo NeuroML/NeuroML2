@@ -6,6 +6,16 @@ and [LEMS](https://github.com/LEMS/LEMS), but also the Python ([libNeuroML](http
 [PyLEMS](https://github.com/LEMS/pylems)) and Java ([jLEMS](https://github.com/LEMS/jLEMS), 
 [org.neuroml.model](https://github.com/NeuroML/org.neuroml.model), [jNeuroML](https://github.com/NeuroML/jNeuroML), etc.) libraries.
 
+v2beta4 / 2014-XX-XX
+-------------------
+
+* **Renamed the main Schema from NeuroML_v2beta3.xsd to [NeuroML_v2beta4.xsd](https://github.com/NeuroML/NeuroML2/blob/master/Schemas/NeuroML2/NeuroML_v2beta4.xsd).** 
+  Changes outlined below are reflected in the new schema
+
+*
+
+* 
+
 v2beta3 / 2014-9-11
 -------------------
 

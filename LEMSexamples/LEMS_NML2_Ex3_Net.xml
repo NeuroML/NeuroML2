@@ -88,7 +88,7 @@
     </network>
     
     
-    <Simulation id="sim1" length="100ms" step="0.01ms" target="net1">
+    <Simulation id="sim1" length="100ms" step="0.005ms" target="net1">
     
         <Display id="d1" title="Ex3: Network connection between HH cells: voltage traces" timeScale="1ms" xmin="0" xmax="100" ymin="-90" ymax="60">
             <Line id ="v_pop1_0" quantity="hh1pop[0]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
@@ -101,7 +101,10 @@
             <Line id ="syn2exp_g" quantity="hh2pop[1]/syn2exp/g" scale="1nS"  color="#aaaaFF" timeScale="1ms"/>
         </Display>
     
-        <!-- See other examples for saving of data traces -->
+        <OutputFile id="of0" fileName="results/ex3_g.dat">
+            <OutputColumn id="syn1exp_g" quantity="hh2pop[0]/syn1exp/g" />
+            <OutputColumn id="syn2exp_g" quantity="hh2pop[1]/syn2exp/g" />
+        </OutputFile>
     
     </Simulation>
 

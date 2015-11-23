@@ -1,14 +1,18 @@
-<Lems xmlns="http://www.neuroml.org/lems/0.7.1"
+<Lems xmlns="http://www.neuroml.org/lems/0.7.3"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.1 ../../LEMS/Schemas/LEMS/LEMS_v0.7.1.xsd"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.3 ../../LEMS/Schemas/LEMS/LEMS_v0.7.3.xsd"
       description="A number of ComponentTypes for providing spiking and current inputs to other ComponentTypes">
+
 
     <Include file="NeuroMLCoreDimensions.xml"/>
 
     
     <ComponentType name="basePointCurrent"
                    description="Base type for all ComponentTypes which produce a current _i (with dimension current)">
-
+        
+        <Child name="notes" type="notes"/>
+        <Child name="annotation" type="annotation"/>
+        
         <Exposure name="i" dimension="current" description="The total (time varying) current produced by this ComponentType"/>
 
     </ComponentType>
@@ -21,6 +25,21 @@
         <Requirement name="v" dimension="voltage" description="The current may vary with the voltage exposed by the ComponentType on which this is placed"/>
 
     </ComponentType>
+    
+
+    <ComponentType name="baseVoltageDepPointCurrentSpiking"
+                   extends="baseVoltageDepPointCurrent"
+                   description="Base type for all ComponentTypes which produce a current _i, require a membrane potential _v exposed on the parent and emit spikes (on a port _spike). The exposed variable _tsince can be used for plotting the time since the Component has spiked last">
+
+        <EventPort name="spike"
+                   direction="out"
+                   description="Port on which spikes are emitted"/>
+
+        <Exposure name="tsince"
+                  dimension="time"
+                  description="Time since the last spike was emitted"/>
+    </ComponentType>
+    
 
 
     <ComponentType name="basePointCurrentDL"
@@ -41,7 +60,7 @@
 
 
     <ComponentType name="baseSpikeSource"
-                   description="Base for any ComponentType whose main purpose is to emit spikes. The exposed variable _tsince can be used for plotting the time since the Component has spiked last">
+                   description="Base for any ComponentType whose main purpose is to emit spikes (on a port _spike). The exposed variable _tsince can be used for plotting the time since the Component has spiked last">
 
         <EventPort name="spike"
                    direction="out"
@@ -101,7 +120,7 @@
             </OnStart>
 
 
-            <OnCondition test="tsince .geq. isi">
+            <OnCondition test="tsince .gt. isi">
                 <StateAssignment variable="isi" value="minISI + MSEC * random((maxISI - minISI) / MSEC)"/>
                 <StateAssignment variable="tsince" value="0"/>
                 <EventOut port="spike"/>
@@ -109,7 +128,7 @@
 
         </Dynamics>
     </ComponentType>
-
+    
 
     <ComponentType name="spikeGeneratorPoisson" extends="baseSpikeSource"
                    description="Generator of spikes whose ISI is distributed according to an exponential pdf with scale 1/_averageRate">
@@ -126,14 +145,67 @@
                 <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
             </OnStart>
 
-            <OnCondition test="tsince .geq. isi">
+            <OnCondition test="tsince .gt. isi">
                 <StateAssignment variable="tsince" value="0"/>
                 <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
                 <EventOut port="spike"/>
             </OnCondition>
         </Dynamics>
     </ComponentType>
+    
 
+    <ComponentType name="poissonFiringSynapse"
+                   description="Poisson spike generator connected to single synapse providing an input current"
+                   extends="baseVoltageDepPointCurrentSpiking">
+        
+        <Parameter name="averageRate" dimension="per_time"/>
+        
+        <DerivedParameter name="averageIsi" dimension="time" value="1 / averageRate"/>
+        
+        <ComponentReference name="synapse" type="baseSynapse"/>
+        
+        
+        <EventPort name="spike" direction="out" description="Port on which spikes are emitted"/>
+        
+        <!--TODO: remove! Only required as EventConnection is used in explicitInput to
+        connect inputs to cells. Events aren't passed! ... -->
+        <EventPort name="in" direction="in" description="Note this is not used here. Will be removed in future"/>
+
+        <Exposure name="tsince" dimension="time" description="Time since the last spike was emitted"/>
+        
+        <Path name="spikeTarget"/>
+        
+        <Dynamics>
+            <StateVariable name="tsince" dimension="time" exposure="tsince"/>
+            <StateVariable name="isi" dimension="time"/>
+            
+            <DerivedVariable name="i" dimension="current" exposure="i" select="synapse/i"/>
+
+            <TimeDerivative variable="tsince" value="1"/>
+
+            <OnStart>
+                <StateAssignment variable="tsince" value="0"/>
+                <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
+            </OnStart>
+
+            <OnCondition test="tsince .gt. isi">
+                <StateAssignment variable="tsince" value="0"/>
+                <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
+                <EventOut port="spike"/>
+            </OnCondition>
+            
+        </Dynamics>
+        <Structure>
+            <ChildInstance component="synapse"/>
+            
+            <With instance="this" as="a"/>
+            <With instance="spikeTarget" as="b"/>
+            
+            <EventConnection from="a" to="b"/>
+        </Structure>
+
+    </ComponentType>
+    
 
     <ComponentType name="pulseGenerator" extends="basePointCurrent"
                    description="Generates a constant current pulse of a certain _amplitude for a specified _duration after a _delay"> <!-- Note: a synpase also extends basePointCurrent -->
@@ -259,6 +331,7 @@
 
             <OnEvent port="in"><!--TODO: remove-->
             </OnEvent>
+
 
             <OnCondition test="t .lt. delay">
                 <StateAssignment variable="i" value="baselineAmplitude"/>

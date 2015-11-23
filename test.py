@@ -36,7 +36,7 @@ lems_def_list=os.listdir(lems_def_dir)
 lems_exs_dir="LEMSexamples"
 lems_exs_list=os.listdir(lems_exs_dir)
 
-lems_schema = "../LEMS/Schemas/LEMS/LEMS_v0.7.1.xsd"
+lems_schema = "../LEMS/Schemas/LEMS/LEMS_v0.7.3.xsd"
 lems_schema_file = urlopen(lems_schema)
 
 lems_xmlschema_doc = etree.parse(lems_schema_file)
@@ -45,7 +45,7 @@ lems_xmlschema = etree.XMLSchema(lems_xmlschema_doc)
 lems_master_ex_dir="../LEMS/examples"
 lems_master_ex_list=os.listdir(lems_master_ex_dir)
 
-nml2_schema_name = "NeuroML_v2beta3.xsd"
+nml2_schema_name = "NeuroML_v2beta4.xsd"
 nml2_schema = "Schemas/NeuroML2/%s"%nml2_schema_name
 nml2_schema_file = urlopen(nml2_schema)
 
