@@ -9,8 +9,27 @@ env:
     - OMV_ENGINE=jNeuroML_validate
 
 install: 
+    
+    - export main_repo_branch=$TRAVIS_BRANCH
+    - echo $main_repo_branch
+    - if [[ ${main_repo_branch} != "master" && ${main_repo_branch} != "development" && ${main_repo_branch} != "experimental" ]]; then main_repo_branch=development ; fi
+    
+    - mvn install
+    
+    - git clone https://github.com/NeuroML/jNeuroML.git
+    - cd jNeuroML
+    - git checkout $main_repo_branch
+    
+    - python getNeuroML.py $main_repo_branch  # will call mvn install on this & other repos
+    - ls -alt
+    
+    - export PATH=$PATH:$TRAVIS_BUILD_DIR/jNeuroML
+    - export JNML_HOME=$TRAVIS_BUILD_DIR/jNeuroML
+    - cd
     - pip install git+https://github.com/OpenSourceBrain/osb-model-validation
+    
 
 script:
+    - jnml -v
     - omv all -V
     

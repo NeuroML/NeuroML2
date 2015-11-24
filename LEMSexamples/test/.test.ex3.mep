@@ -3,7 +3,7 @@ system: Test Ex0
 experiments:
     syn1:
         expected:
-            spike times: [27.605, 45.745, 63.885]
+            spike times: [27.61, 45.75, 63.89]
     syn2:
         expected:
-            spike times: [28.44, 46.58, 64.72]
+            spike times: [28.445, 46.585, 64.725]

@@ -932,7 +932,7 @@
             <TimeDerivative variable="v" value="(leakReversal - v) / tau"/>
 
             <OnStart>
-                <StateAssignment variable="v" value="reset"/>
+                <StateAssignment variable="v" value="leakReversal"/>
             </OnStart>
 
             <OnCondition test="v .gt. thresh">
@@ -956,7 +956,7 @@
             <StateVariable name="lastSpikeTime" dimension="time"/>
 
             <OnStart>
-                <StateAssignment variable="v" value="reset"/>
+                <StateAssignment variable="v" value="leakReversal"/>
             </OnStart>
 
             <Regime name="refractory">
@@ -1012,7 +1012,7 @@
             <TimeDerivative variable="v" value="iMemb / C"/>
 
             <OnStart>
-                <StateAssignment variable="v" value="reset"/>
+                <StateAssignment variable="v" value="leakReversal"/>
             </OnStart>
 
             <OnCondition test="v .gt. thresh">
@@ -1037,12 +1037,12 @@
             <StateVariable name="v" exposure="v" dimension="voltage"/>
             <StateVariable name="lastSpikeTime" dimension="time"/>
 
-            <!-- iSyn and iMemb value is meaningless in the refractory regime -->
+            <!-- iSyn and iMemb value are meaningless in the refractory regime -->
             <DerivedVariable name="iSyn" dimension="current" exposure="iSyn" select="synapses[*]/i" reduce="add" />
             <DerivedVariable name="iMemb" dimension="current" exposure="iMemb" value="leakConductance * (leakReversal - v) + iSyn"/>
 
             <OnStart>
-                <StateAssignment variable="v" value="reset"/>
+                <StateAssignment variable="v" value="leakReversal"/>
             </OnStart>
 
             <Regime name="refractory">

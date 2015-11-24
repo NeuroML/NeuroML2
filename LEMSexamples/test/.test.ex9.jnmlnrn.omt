@@ -12,8 +12,7 @@ experiments:
           columns: [0,1]
           scaling: [1000, 1000]
         spike detection: 
-          method: threshold
-          threshold: 0
+          method: derivative 
         tolerance: 0
   W:
     observables:
@@ -23,6 +22,5 @@ experiments:
           columns: [0,2]
           scaling: [1000, 1]
         spike detection: 
-          method: threshold
-          threshold: 0.9
+          method: derivative
         tolerance: 0
