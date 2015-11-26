@@ -1,0 +1,70 @@
+
+<Lems>
+
+    <!-- Example with simple network, recording spike times-->
+
+    <!-- This is a file which can be read and executed by the LEMS Interpreter.
+    It imports the LEMS definitions of the core NeuroML 2 Components, creates
+    a model in "pure" NeuroML 2 and contains some LEMS elements for running a
+    simulation -->
+
+    <!-- Specify which component to run -->
+    <Target component="sim1" />
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+
+    <Include file="Cells.xml" />
+    <!-- The above file includes NeuroMLCoreDimensions.xml, Channels.xml,
+    Synapses.xml and Inputs.xml -->
+    <Include file="Networks.xml" />
+    <Include file="Simulation.xml" />
+
+
+
+    <!-- Main NeuroML2 content -->
+    <iafCell id="iaf" leakConductance="0.2nS" leakReversal="-65mV"
+             thresh="-55mV" reset="-70mV" C="3.2pF"/>
+    
+    <expTwoSynapse id="syn_exc" erev="0mV" gbase="0.1nS" tauDecay="10ms" tauRise="0.5ms"/>
+    
+    <poissonFiringSynapse id="poissonFiringSyn" synapse="syn_exc" averageRate="50 Hz" spikeTarget="./syn_exc"/>
+
+    <network id="net1">
+        <population id="iafPop" component="iaf" size="5" />
+        
+        <explicitInput input="poissonFiringSyn" destination="synapses" target="iafPop[0]"/>
+        <explicitInput input="poissonFiringSyn" destination="synapses" target="iafPop[1]"/>
+        <explicitInput input="poissonFiringSyn" destination="synapses" target="iafPop[2]"/>
+        <explicitInput input="poissonFiringSyn" destination="synapses" target="iafPop[3]"/>
+        <explicitInput input="poissonFiringSyn" destination="synapses" target="iafPop[4]"/>
+    </network>
+
+    <!-- End of NeuroML2 content -->
+
+
+    <Simulation id="sim1" length="300ms" step="0.01ms" target="net1" seed="123"> <!-- Note seed: ensures same random numbers used every run -->
+
+        <Display id="d0" title="Ex22: Recording spike times in LEMS" timeScale="1ms" xmin="0"
+                 xmax="300" ymin="-75" ymax="-50">
+            <Line id="iaf0" quantity="iafPop[0]/v" scale="1mV" color="#000000" timeScale="1ms" />
+            <Line id="iaf1" quantity="iafPop[1]/v" scale="1mV" color="#ff2222" timeScale="1ms" />
+            <Line id="iaf2" quantity="iafPop[2]/v" scale="1mV" color="#eeee44" timeScale="1ms" />
+            <Line id="iaf3" quantity="iafPop[3]/v" scale="1mV" color="#666111" timeScale="1ms" />
+            <Line id="iaf4" quantity="iafPop[4]/v" scale="1mV" color="#882228" timeScale="1ms" />
+        </Display>
+
+        <OutputFile id="of0" fileName="results/ex22_v.dat">
+            <OutputColumn id="i0" quantity="iafPop[0]/v" />
+            <OutputColumn id="i1" quantity="iafPop[1]/v" />
+            <OutputColumn id="i2" quantity="iafPop[2]/v" />
+            <OutputColumn id="i3" quantity="iafPop[3]/v" />
+            <OutputColumn id="i4" quantity="iafPop[4]/v" />
+        </OutputFile>
+        <!--
+        <EventOutputFile id="spikes" fileName="results/iaf_v.dat" select="iafTauPop[*]" eventPort="spike"/>-->
+
+        
+    </Simulation>
+
+
+</Lems>

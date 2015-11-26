@@ -51,7 +51,7 @@
         <!-- End of NeuroML2 content -->
         
 
-<Simulation id="sim1" length="300ms" step="0.01ms" target="net1" seed="123">
+<Simulation id="sim1" length="300ms" step="0.01ms" target="net1" seed="123"> <!-- Note seed: ensures same random numbers used every run -->
 
     <Display id="d0" title="Ex16: Izhikevich cell, current clamp input" timeScale="1ms" xmin="-20" xmax="320" ymin="-80" ymax="45">
         <Line id ="izh0 v (mV)" quantity="izhPop[0]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
