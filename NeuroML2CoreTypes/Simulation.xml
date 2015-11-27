@@ -42,6 +42,7 @@
         
         <Children name="displays" type="Display"/>
         <Children name="outputs" type="OutputFile"/>
+        <Children name="events" type="EventOutputFile"/>
         
         <ComponentReference name="target" type="Component"/>
     
@@ -65,6 +66,19 @@
     	
     	<Simulation>
     		<DataWriter path="path" fileName="fileName"/>
+    	</Simulation>
+    
+    </ComponentType>
+    
+    <ComponentType name="EventOutputFile">
+    	
+        <Text name="path"/>
+        <Text name="fileName"/>
+        <Text name="select"/>
+        <Text name="eventPort"/>
+    	
+    	<Simulation>
+    		<EventWriter path="path" fileName="fileName" select="select" eventPort="eventPort"/>
     	</Simulation>
     
     </ComponentType>
