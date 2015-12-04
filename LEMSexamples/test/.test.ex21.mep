@@ -3,4 +3,4 @@ system: Test Ex21
 experiments:
     spikes:
         expected:
-            spike times: [103.95, 122.28]
+            spike times: [103.952, 122.271]
