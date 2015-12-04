@@ -188,8 +188,8 @@
         <Structure>
             <With instance="from" as="a"/>
             <With instance="to" as="b"/>
-            <!--<EventConnection from="a" to="b" receiver="synapse" receiverContainer="destination" sourcePort="sourcePort" targetPort="targetPort" delay="delay">-->
-            <EventConnection from="a" to="b" receiver="synapse" delay="delay">
+            <EventConnection from="a" to="b" receiver="synapse" receiverContainer="destination" sourcePort="sourcePort" targetPort="targetPort" delay="delay">
+            <!--<EventConnection from="a" to="b" receiver="synapse" delay="delay">-->
                 <!--TODO: put back in! -->
                 <Assign property="weight" value="weight"/>
             </EventConnection>
