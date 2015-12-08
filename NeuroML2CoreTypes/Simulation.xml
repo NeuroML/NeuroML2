@@ -70,24 +70,32 @@
     
     </ComponentType>
     
-    <ComponentType name="EventOutputFile">
-    	
-        <Text name="path"/>
-        <Text name="fileName"/>
-        <Text name="select"/>
-        <Text name="eventPort"/>
-    	
-    	<Simulation>
-    		<EventWriter path="path" fileName="fileName" select="select" eventPort="eventPort"/>
-    	</Simulation>
-    
+    <ComponentType name="OutputColumn">
+        <Path name="quantity"/>
+        <Simulation>
+            <Record quantity="quantity"/>
+        </Simulation>
     </ComponentType>
     
     
-    <ComponentType name="OutputColumn">
-         <Path name="quantity"/>
-    	 <Simulation>
-            <Record quantity="quantity"/>
+    <ComponentType name="EventOutputFile">
+    	
+        <Children name="eventSelection" type="EventSelection"/>
+        
+        <Text name="path"/>
+        <Text name="fileName"/>
+    	
+        <Simulation>
+            <EventWriter path="path" fileName="fileName"/>
+        </Simulation>
+    
+    </ComponentType>
+    
+    <ComponentType name="EventSelection">
+        <Path name="select"/>
+        <Text name="eventPort"/>
+        <Simulation>
+            <EventRecord quantity="select" eventPort="eventPort"/>
         </Simulation>
     </ComponentType>
 

@@ -61,7 +61,10 @@
             <OutputColumn id="i4" quantity="iafPop[4]/v" />
         </OutputFile>
 
-        <EventOutputFile id="spikes" fileName="results/iaf_v.dat" path="iafTauPop[*]" eventPort="spike"/>
+        <EventOutputFile id="spikes" fileName="results/ex22.spikes">
+            <EventSelection id="s0" select="iafPop[0]/v" eventPort="spike"/>
+            <EventSelection id="s1" select="iafPop[1]/v" eventPort="spike"/>
+        </EventOutputFile>
 
         
     </Simulation>
