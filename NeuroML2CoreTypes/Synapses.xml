@@ -53,8 +53,9 @@
                    extends="baseCurrentBasedSynapse"
                    description="Alpha current synapse: rise time and decay time are both tauSyn.">
 
-        <Property name="weight" dimension="current" />
+        <Property name="weight" dimension="none" />
         <Parameter name="tauSyn" dimension="time" description="Time course for rise and decay"/>
+        <Parameter name="ibase" dimension="current" description="Baseline current increase after receiving a spike"/>
 
         <Dynamics>
             <DerivedVariable name="i" exposure="i" dimension="current" value="I" />
@@ -71,7 +72,7 @@
             </OnStart>
 
             <OnEvent port="in">
-                <StateAssignment variable="J" value="J + weight" />
+                <StateAssignment variable="J" value="J + weight * ibase" />
             </OnEvent>
             
         </Dynamics>
