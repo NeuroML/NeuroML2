@@ -931,6 +931,7 @@
             <xs:extension base="BaseCurrentBasedSynapse">
 
                 <xs:attribute name="tauSyn" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="ibase" type="Nml2Quantity_current" use="required"/>
 
             </xs:extension>
         </xs:complexContent>
@@ -1894,7 +1895,6 @@
                     <xs:element name="cellSet" type="CellSet" minOccurs="0" maxOccurs="unbounded"/>
 
                     <xs:element name="synapticConnection" type="SynapticConnection" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
-                    <xs:element name="synapticCurrentWeightDelay" type="SynapticCurrentWeightDelay" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
                     <xs:element name="projection" type="Projection" minOccurs="0" maxOccurs="unbounded"/> <!--Will be updated in line with LEMS ComponentType definitions -->
                     <xs:element name="electricalProjection" type="ElectricalProjection" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="continuousProjection" type="ContinuousProjection" minOccurs="0" maxOccurs="unbounded"/>
@@ -2076,20 +2076,6 @@
         <xs:attribute name="to" type="xs:string"/>
         <xs:attribute name="synapse" type="xs:string"/>
         <xs:attribute name="destination" type="NmlId" use="optional"/>
-    </xs:complexType>
-
-
-    <xs:complexType name="SynapticCurrentWeightDelay">
-        <xs:annotation>
-            <xs:documentation>Single explicit connection via a weighed/delayed currents. Introduced to test connections in LEMS. Will probably be removed in favour of
-                connections wrapped in projection element</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="SynapticConnection">
-                <xs:attribute name="weight" type="Nml2Quantity_current" use="required"/>
-                <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
-            </xs:extension>
-        </xs:complexContent>
     </xs:complexType>
 
 
