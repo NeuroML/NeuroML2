@@ -58,6 +58,7 @@
         <Parameter name="ibase" dimension="current" description="Baseline current increase after receiving a spike"/>
 
         <Dynamics>
+            
             <DerivedVariable name="i" exposure="i" dimension="current" value="I" />
 
             <StateVariable name="I" dimension="current"/>

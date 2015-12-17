@@ -506,6 +506,8 @@
         <xs:sequence>
             <xs:element name="pulseGenerator" type="PulseGenerator"
                     minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="pulseGeneratorDL" type="PulseGeneratorDL"
+                    minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="sineGenerator" type="SineGenerator"
                     minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="rampGenerator" type="RampGenerator"
@@ -1738,6 +1740,10 @@
     <!--Will be updated in line with LEMS ComponentType definitions -->
 
     <xs:complexType name="PulseGenerator">
+        
+        <xs:annotation>
+            <xs:documentation>Generates a constant current pulse of a certain amplitude (with dimensions for current) for a specified duration after a delay.</xs:documentation>
+        </xs:annotation>
         <xs:complexContent>
             <xs:extension base="Standalone">
                 <xs:attribute name="delay" type="Nml2Quantity_time"
@@ -1746,6 +1752,23 @@
                               use="required"/>
                 <xs:attribute name="amplitude"
                               type="Nml2Quantity_current"
+                              use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="PulseGeneratorDL">
+        <xs:annotation>
+            <xs:documentation>Generates a constant current pulse of a certain amplitude (non dimensional) for a specified duration after a delay.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+                <xs:attribute name="delay" type="Nml2Quantity_time"
+                              use="required"/>
+                <xs:attribute name="duration" type="Nml2Quantity_time"
+                              use="required"/>
+                <xs:attribute name="amplitude"
+                              type="Nml2Quantity_none"
                               use="required"/>
             </xs:extension>
         </xs:complexContent>

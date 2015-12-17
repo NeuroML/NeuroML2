@@ -85,14 +85,19 @@
     
     <Simulation id="sim1" length="300ms" step="0.01ms" target="net1">
     
-        <Display title="Ex4: Kinetic scheme description for K+ channel: voltage" timeScale="1ms" xmin="0" xmax="300" ymin="-90" ymax="60">
+        <Display title="Ex4: Kinetic scheme description for K+ channel: voltage" timeScale="1ms" xmin="-30" xmax="330" ymin="-90" ymax="60">
             <Line id="v" quantity="hhpop[0]/v" scale="1mV"  color="#ff4040" timeScale="1ms"/>
         </Display>
         
-        <Display title="Ex4: Kinetic scheme description for K+ channel: channel variables" timeScale="1ms" xmin="0" xmax="300" ymin="-0.1" ymax="1.1">
+        <Display title="Ex4: Kinetic scheme description for K+ channel: channel variables" timeScale="1ms" xmin="-30" xmax="330" ymin="-0.1" ymax="1.1">
             <Line id="m" quantity="hhpop[0]/na_chans/na/m/q" scale="1"  color="#ff00ff" timeScale="1ms"/>
             <Line id="h" quantity="hhpop[0]/na_chans/na/h/q" scale="1"  color="#ffffff" timeScale="1ms"/>
             <Line id="n" quantity="hhpop[0]/k_chans/k_vh/n/q" scale="1"  color="#ffff00" timeScale="1ms"/>
+        </Display>
+        
+        <Display title="Ex4: Kinetic scheme description for K+ channel: states of k" timeScale="1ms" xmin="-30" xmax="330" ymin="-0.1" ymax="1.1">
+            <Line id="c1" quantity="hhpop[0]/k_chans/k_vh/n/c1/occupancy" scale="1"  color="#ffff00" timeScale="1ms"/>
+            <Line id="o1" quantity="hhpop[0]/k_chans/k_vh/n/o1/occupancy" scale="1"  color="#ff0000" timeScale="1ms"/>
         </Display>
     
         <!-- See other examples for saving of data traces -->
