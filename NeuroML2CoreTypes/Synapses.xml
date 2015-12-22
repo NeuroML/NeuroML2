@@ -59,10 +59,10 @@
 
         <Dynamics>
             
-            <DerivedVariable name="i" exposure="i" dimension="current" value="I" />
-
             <StateVariable name="I" dimension="current"/>
             <StateVariable name="J" dimension="current"/>
+            
+            <DerivedVariable name="i" exposure="i" dimension="current" value="I" />
 
             <TimeDerivative variable="I" value="(2.7182818284590451*J - I)/tauSyn" />
             <TimeDerivative variable="J" value="-J/tauSyn" />
