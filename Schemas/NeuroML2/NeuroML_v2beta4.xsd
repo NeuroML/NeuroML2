@@ -262,6 +262,7 @@
             <xs:documentation>Contains an extension to NeuroML by creating custom LEMS ComponentType.</xs:documentation>
         </xs:annotation>
         <xs:sequence>
+            <xs:element name="Parameter" type="Parameter" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="Constant" type="Constant" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="Requirement" type="Requirement" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="Dynamics" type="Dynamics" minOccurs="0" maxOccurs="unbounded"/>
@@ -292,6 +293,12 @@
         <xs:attribute name="name" type="xs:string" use="required"/>
         <xs:attribute name="dimension" type="xs:string" use="optional" default="none"/>
         <xs:attribute name="description" type="xs:string" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="Parameter"> <!-- For language binding generators, so there will be a class of this name... -->
+        <xs:complexContent>
+            <xs:extension base="NamedDimensionalType"/>
+        </xs:complexContent>
     </xs:complexType>
 
     <xs:complexType name="Requirement"> <!-- For language binding generators, so there will be a class of this name... -->
@@ -390,6 +397,8 @@
                     since many existing examples use ionChannel, some use ionChannelHH. NeuroML v2beta4 should
                     remove one of these -->
                     <xs:element name="ionChannelHH" type="IonChannelHH" minOccurs="0" maxOccurs="unbounded"/>
+                    
+                    <xs:element name="ionChannelKS" type="IonChannelKS" minOccurs="0" maxOccurs="unbounded"/>
 
                     <xs:group ref="ConcentrationModelTypes"/>
 
@@ -565,6 +574,27 @@
     </xs:complexType>
 
 
+    <xs:complexType name="IonChannelKS">
+
+        <xs:annotation>
+            <xs:documentation>Kinetic scheme based ion channel.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+               
+                <xs:sequence>
+                    <xs:element name="gateKS" type="GateKS" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            
+                <xs:attribute name="species" type="NmlId" use="optional"/>
+
+                <xs:attribute name="conductance" type="Nml2Quantity_conductance" use="optional"/>
+
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+
     <xs:complexType name="IonChannel">
 
         <xs:annotation>
@@ -608,6 +638,7 @@
         <xs:restriction base="xs:string">
             <xs:enumeration value="ionChannelPassive"/>
             <xs:enumeration value="ionChannelHH"/>
+            <!--<xs:enumeration value="ionChannelKS"/> use an explicit <ionChannelKS ... > element, not <ionChannel type="ionChannelKS" ..> -->
         </xs:restriction>
     </xs:simpleType>
 
@@ -631,6 +662,75 @@
         </xs:restriction>
     </xs:simpleType>
 
+
+    <xs:complexType name="ClosedState">
+        <xs:complexContent>
+            <xs:extension base="Base">
+                <!-- Only has id...-->
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="OpenState">
+        <xs:complexContent>
+            <xs:extension base="Base">
+                <!-- Only has id...-->
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="ForwardTransition">
+        <xs:complexContent>
+            <xs:extension base="Base">
+                <xs:sequence>
+                    <xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/> <!-- Further elements will be specified!! -->
+                </xs:sequence>
+                <xs:attribute name="from" type="NmlId" use="required"/>
+                <xs:attribute name="to" type="NmlId" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="ReverseTransition">
+        <xs:complexContent>
+            <xs:extension base="Base">
+                <xs:sequence>
+                    <xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/> <!-- Further elements will be specified!! -->
+                </xs:sequence>
+                <xs:attribute name="from" type="NmlId" use="required"/>
+                <xs:attribute name="to" type="NmlId" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:group name="ForwardReverseTransition">
+        <xs:sequence>
+            <xs:element name="forwardTransition" type="ForwardTransition"/>
+            <xs:element name="reverseTransition" type="ReverseTransition"/>
+        </xs:sequence>
+    </xs:group>
+
+    <xs:complexType name="GateKS">
+        <xs:complexContent>
+            <xs:extension base="Base">
+                <xs:sequence>
+                    <xs:element name="notes" type="Notes" minOccurs="0"/>
+                    <xs:element name="q10Settings" type="Q10Settings" minOccurs="0"/>
+                    
+                    <xs:element name="closedState" type="ClosedState" minOccurs="1" maxOccurs="unbounded"/>
+                    <xs:element name="openState" type="OpenState" minOccurs="1"  maxOccurs="unbounded"/>
+                    
+                    <xs:group ref="ForwardReverseTransition" minOccurs="1"  maxOccurs="unbounded"/>
+                    
+                </xs:sequence>
+                
+                <xs:attribute name="instances" type="PositiveInteger" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
 
     <xs:complexType name="GateHHUndetermined">
