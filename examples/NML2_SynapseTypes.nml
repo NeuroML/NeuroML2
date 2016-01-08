@@ -7,6 +7,11 @@
 
     <!-- Some examples of the currently supported synapse types -->
 
+    
+    <alphaSynapse id="synalpha" gbase="0.5nS" erev="0mV" tau="2ms" >
+      <notes>An alpha synapse with time for rise equal to decay.</notes>
+    </alphaSynapse>
+    
     <expOneSynapse id="sy1" gbase="0.5nS" erev="0mV" tauDecay="3ms" >
       <notes>A simple monoexponential synapse.</notes>
     </expOneSynapse>

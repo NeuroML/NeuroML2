@@ -476,6 +476,7 @@
         </xs:annotation>
         <xs:sequence>
             <xs:element name="alphaCurrentSynapse" type="AlphaCurrentSynapse" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="alphaSynapse" type="AlphaSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="expOneSynapse" type="ExpOneSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="expTwoSynapse" type="ExpTwoSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="blockingPlasticSynapse" type="BlockingPlasticSynapse" minOccurs="0" maxOccurs="unbounded"/>
@@ -932,8 +933,19 @@
         <xs:complexContent>
             <xs:extension base="BaseCurrentBasedSynapse">
 
-                <xs:attribute name="tauSyn" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="tau" type="Nml2Quantity_time" use="required"/>
                 <xs:attribute name="ibase" type="Nml2Quantity_current" use="required"/>
+
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="AlphaSynapse">
+
+        <xs:complexContent>
+            <xs:extension base="BaseConductanceBasedSynapse">
+
+                <xs:attribute name="tau" type="Nml2Quantity_time" use="required"/>
 
             </xs:extension>
         </xs:complexContent>
@@ -1432,10 +1444,12 @@
                 <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
                 <xs:attribute name="segment" type="NonNegativeInteger" use="optional"/>
 
-                <xs:attribute name="ion" type="NmlId" use="optional">
+                <xs:attribute name="ion" type="NmlId" use="required">
                     <xs:annotation>
-                        <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel. It is added here
-                        TEMPORARILY as selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
+                        <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel definition. It is added here
+                        TEMPORARILY since selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
+                        Also, it will make it easier to set the correct native simulator value for erev (e.g. ek for ion = k in NEURON).
+                        Currently a required attribute.
                         It should be removed in the longer term, due to possible inconsistencies in this value and that in the ionChannel
                         element. TODO: remove.
                         </xs:documentation>
@@ -1459,10 +1473,12 @@
                 <xs:attribute name="ionChannel" type="NmlId" use="required"/>
                 <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>
 
-                <xs:attribute name="ion" type="NmlId" use="optional">
+                <xs:attribute name="ion" type="NmlId" use="required">
                     <xs:annotation>
-                        <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel. It is added here
-                        TEMPORARILY as selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
+                        <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel definition. It is added here
+                        TEMPORARILY since selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
+                        Also, it will make it easier to set the correct native simulator value for erev (e.g. ek for ion = k in NEURON).
+                        Currently a required attribute.
                         It should be removed in the longer term, due to possible inconsistencies in this value and that in the ionChannel
                         element. TODO: remove.
                         </xs:documentation>
@@ -1485,10 +1501,12 @@
 
                 <xs:attribute name="ionChannel" type="NmlId" use="required"/>
 
-                <xs:attribute name="ion" type="NmlId" use="optional">
+                <xs:attribute name="ion" type="NmlId" use="required">
                     <xs:annotation>
-                        <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel. It is added here
-                        TEMPORARILY as selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
+                        <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel definition. It is added here
+                        TEMPORARILY since selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
+                        Also, it will make it easier to set the correct native simulator value for erev (e.g. ek for ion = k in NEURON).
+                        Currently a required attribute.
                         It should be removed in the longer term, due to possible inconsistencies in this value and that in the ionChannel
                         element. TODO: remove.
                         </xs:documentation>
@@ -1519,10 +1537,12 @@
 
                 <xs:attribute name="segment" type="NonNegativeInteger" use="optional"/>
 
-                <xs:attribute name="ion" type="NmlId" use="optional">
+                <xs:attribute name="ion" type="NmlId" use="required">
                     <xs:annotation>
-                        <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel. It is added here
-                        TEMPORARILY as selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
+                        <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel definition. It is added here
+                        TEMPORARILY since selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
+                        Also, it will make it easier to set the correct native simulator value for erev (e.g. ek for ion = k in NEURON).
+                        Currently a required attribute.
                         It should be removed in the longer term, due to possible inconsistencies in this value and that in the ionChannel
                         element. TODO: remove.
                         </xs:documentation>
@@ -1554,10 +1574,12 @@
 
                 <xs:attribute name="segment" type="NmlId" use="optional"/>
 
-                <xs:attribute name="ion" type="NmlId" use="optional">
+                <xs:attribute name="ion" type="NmlId" use="required">
                     <xs:annotation>
-                        <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel. It is added here
-                        TEMPORARILY as selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
+                        <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel definition. It is added here
+                        TEMPORARILY since selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
+                        Also, it will make it easier to set the correct native simulator value for erev (e.g. ek for ion = k in NEURON).
+                        Currently a required attribute.
                         It should be removed in the longer term, due to possible inconsistencies in this value and that in the ionChannel
                         element. TODO: remove.
                         </xs:documentation>
@@ -1587,10 +1609,12 @@
 
                 <xs:attribute name="segment" type="NmlId" use="optional"/>
 
-                <xs:attribute name="ion" type="NmlId" use="optional">
+                <xs:attribute name="ion" type="NmlId" use="required">
                     <xs:annotation>
-                        <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel. It is added here
-                        TEMPORARILY as selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
+                        <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel definition. It is added here
+                        TEMPORARILY since selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
+                        Also, it will make it easier to set the correct native simulator value for erev (e.g. ek for ion = k in NEURON).
+                        Currently a required attribute.
                         It should be removed in the longer term, due to possible inconsistencies in this value and that in the ionChannel
                         element. TODO: remove.
                         </xs:documentation>

@@ -14,6 +14,8 @@
          has not yet been tested in the jNeuroML NEURON export, but is valid NeuroML2
          
     -->
+    
+    <include href="NML2_SimpleIonChannel.nml"/>
 
     <cell id="SimpleCell">
 
@@ -63,7 +65,7 @@
         
         <biophysicalProperties id="biophys">
             <membraneProperties>
-                <channelDensityNonUniform id="nonuniform_na_chans" ionChannel="naf" erev="50mV">
+                <channelDensityNonUniform id="nonuniform_na_chans" ionChannel="NaConductance" erev="50mV" ion="na">
                     <variableParameter parameter="condDensity" segmentGroup="dendrite_group">
                         <inhomogeneousValue inhomogeneousParameter="dendrite_group_x1" value="5e-7 * exp(-p/200)"/>  <!-- value is in SI units-->
                     </variableParameter>

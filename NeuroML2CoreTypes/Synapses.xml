@@ -51,10 +51,10 @@
 
     <ComponentType name="alphaCurrentSynapse"
                    extends="baseCurrentBasedSynapse"
-                   description="Alpha current synapse: rise time and decay time are both tauSyn.">
+                   description="Alpha current synapse: rise time and decay time are both _tau.">
 
         <Property name="weight" dimension="none" />
-        <Parameter name="tauSyn" dimension="time" description="Time course for rise and decay"/>
+        <Parameter name="tau" dimension="time" description="Time course for rise and decay"/>
         <Parameter name="ibase" dimension="current" description="Baseline current increase after receiving a spike"/>
 
         <Dynamics>
@@ -64,8 +64,8 @@
             
             <DerivedVariable name="i" exposure="i" dimension="current" value="I" />
 
-            <TimeDerivative variable="I" value="(2.7182818284590451*J - I)/tauSyn" />
-            <TimeDerivative variable="J" value="-J/tauSyn" />
+            <TimeDerivative variable="I" value="(2.7182818284590451*J - I)/tau" />
+            <TimeDerivative variable="J" value="-J/tau" />
 
             <OnStart>
                 <StateAssignment variable="I" value="0" />
@@ -113,6 +113,34 @@
 
             <OnEvent port="in">
                 <StateAssignment variable="g" value="g + gbase" />
+            </OnEvent>
+
+        </Dynamics>
+    </ComponentType>
+
+    <ComponentType name="alphaSynapse"
+                   extends="baseConductanceBasedSynapse"
+                   description="Ohmic synapse model where rise time and decay time are both _tau. Max conductance reached during this time (assuming zero conductance before) is _gbase.">
+
+        <Parameter name="tau" dimension="time" description="Time course of rise/decay"/>
+
+        <Dynamics>
+
+            <StateVariable name="g" dimension="conductance" exposure="g"/>
+            <StateVariable name="A" dimension="conductance"/>
+
+            <DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
+
+            <TimeDerivative variable="g" value="(2.7182818284590451 * A - g)/tau" />
+            <TimeDerivative variable="A" value="-A / tau" />
+
+            <OnStart>
+                <StateAssignment variable="g" value="0" />
+                <StateAssignment variable="A" value="0" />
+            </OnStart>
+
+            <OnEvent port="in">
+                <StateAssignment variable="A" value="A + gbase" />
             </OnEvent>
 
         </Dynamics>

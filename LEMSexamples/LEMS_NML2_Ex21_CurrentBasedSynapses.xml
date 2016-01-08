@@ -11,7 +11,7 @@
 
   <iafRefCell id="iaf" C="250pF" thresh="1mV" reset="-1mV" leakConductance="12.5nS" leakReversal="0mV" refract="2ms"/>
 
-  <alphaCurrentSynapse id="alphaSyn" tauSyn="1.0ms" ibase="1nA"/>
+  <alphaCurrentSynapse id="alphaSyn" tau="1.0ms" ibase="1nA"/>
 
   <spikeArray id="spks">
     <spike id="0" time="100 ms"/>
