@@ -629,11 +629,16 @@
                    description="A gate which consists of multiple _KSState_s and _KSTransition_s giving the rates of transition between them">
         <Children name="states" type="KSState"/>
         <Children name="transitions" type="KSTransition"/>
+        <Children name="q10Settings" type="baseQ10Settings"/>
 
+        <Exposure name="rateScale" dimension="none"/>
+    
         <Dynamics>
 
             <DerivedVariable name="q" exposure="q" dimension="none" select="states[*]/q" reduce="add"/>
             <DerivedVariable name="fopen" exposure="fcond" dimension="none" value="q^instances"/>
+            
+            <DerivedVariable name="rateScale" exposure="rateScale" dimension="none" select="q10Settings[*]/q10" reduce="multiply"/>
 
             <KineticScheme name="ks" nodes="states" stateVariable="occupancy"
                            edges="transitions" edgeSource="from" edgeTarget="to"
