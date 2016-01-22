@@ -1305,35 +1305,11 @@
     <xs:complexType name="Cell2CaPools">
 
         <xs:complexContent>
-            <xs:extension base="BaseCell">
-
+            <xs:extension base="Cell">
                 
                 <xs:sequence>
-                    <xs:element name="morphology" type="Morphology" minOccurs="0"/>
                     <xs:element name="biophysicalProperties2CaPools" type="BiophysicalProperties2CaPools" minOccurs="0"/>
                 </xs:sequence>
-
-                <!--
-                
-                Put back in as and when needed. Note: attribute morphology here can cause problems when generating
-                the Java API. See src/main/resources/bindings/NeuroML_v2beta4.xjb
-                
-                <xs:attribute name="morphology" type="NmlId" use="optional">
-                    <xs:annotation>
-                        <xs:documentation>Should only be used if morphology element is outside the cell.
-                                          This points to the id of the morphology
-                        </xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-
-                <xs:attribute name="biophysicalProperties2CaPools" type="NmlId" use="optional">
-                    <xs:annotation>
-                        <xs:documentation>Should only be used if biophysicalProperties element is outside the cell.
-                                          This points to the id of the biophysicalProperties2CaPools
-                        </xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>-->
-
 
             </xs:extension>
         </xs:complexContent>
@@ -1545,29 +1521,16 @@
 
     <xs:complexType name="MembraneProperties2CaPools">
 
-        <xs:sequence>
-            <xs:element name="channelPopulation" type="ChannelPopulation" minOccurs="0" maxOccurs="unbounded"/>
-
-            <xs:element name="channelDensity" type="ChannelDensity" minOccurs="0" maxOccurs="unbounded"/>
-            
-            <xs:element name="channelDensityNernst" type="ChannelDensityNernst" minOccurs="0" maxOccurs="unbounded"/>
-            <!-- Only difference from above, ion="ca2" should be used -->
-            <xs:element name="channelDensityNernstCa2" type="ChannelDensityNernstCa2" minOccurs="0" maxOccurs="unbounded"/>
-            
-            <xs:element name="channelDensityGHK" type="ChannelDensityGHK" minOccurs="0" maxOccurs="unbounded"/>
-
-            <xs:element name="channelDensityNonUniform" type="ChannelDensityNonUniform" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="channelDensityNonUniformNernst" type="ChannelDensityNonUniformNernst" minOccurs="0" maxOccurs="unbounded"/>
-
-            <xs:element name="spikeThresh" type="SpikeThresh" minOccurs="0" maxOccurs="unbounded"/>
-
-            <xs:element name="specificCapacitance" type="SpecificCapacitance" minOccurs="0" maxOccurs="unbounded"/>
-
-            <xs:element name="initMembPotential" type="InitMembPotential" minOccurs="0" maxOccurs="unbounded"/>
-
-            <!-- Taking this out until confirmation it's needed
-            <xs:element name="reversalPotential" type="ReversalPotential" minOccurs="0" maxOccurs="unbounded"/>-->
-        </xs:sequence>
+        
+        <xs:complexContent>
+            <xs:extension base="MembraneProperties">
+                <xs:sequence>
+                    <!-- Only difference from channelDensityNernst, ion="ca2" should be used -->
+                    <xs:element name="channelDensityNernstCa2" type="ChannelDensityNernstCa2" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+        
 
     </xs:complexType>
 

@@ -1030,18 +1030,19 @@
     
     
     <ComponentType name="cell2CaPools"
-                   extends="baseCellMembPot"
+                   extends="cell"
                    description="Variant of cell with 2 independnet Ca pools. Cell with _segment_s specified in a _morphology_ element along with details on its _biophysicalProperties_. NOTE: this can only be correctly simulated using LEMS when there is a single segment in the cell, and _v of this cell represents the membrane potential in that isopotential segment!!!">
         
-        <Child name="notes" type="notes"/>
+        <!--<Child name="notes" type="notes"/>
         <Child name="annotation" type="annotation"/>
         
-        <Child name="morphology" type="morphology"/>
+        <Child name="morphology" type="morphology"/>-->
 
         <Child name="biophysicalProperties2CaPools" type="biophysicalProperties2CaPools"/>
 
         <Attachments name="synapses" type="basePointCurrent"/>
 
+        <!-- These are inherited from cell
         <Exposure name="spiking" dimension="none"/>
         <Exposure name="debugVal" dimension="none"/>
         <Exposure name="iChannels" dimension="current"/>
@@ -1052,7 +1053,7 @@
 
         <Exposure name="iCa" dimension="current"/>
         <Exposure name="caConc" dimension="concentration"/>
-        <Exposure name="caConcExt" dimension="concentration"/>
+        <Exposure name="caConcExt" dimension="concentration"/> -->
 
         <Exposure name="iCa2" dimension="current"/>
         <Exposure name="caConc2" dimension="concentration"/>
