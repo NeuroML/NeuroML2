@@ -100,7 +100,7 @@
     
     
     <ComponentType name="rdf_Bag" description="Work in progress...">
-        <Child name="rdf:li" type="rdf_li"/>
+        <Children name="rdf:li" type="rdf_li"/>
         <Dynamics/>
     </ComponentType>
 

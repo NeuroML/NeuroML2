@@ -443,6 +443,7 @@
         </xs:annotation>
         <xs:sequence>
             <xs:element name="cell" type="Cell" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="cell2CaPools" type="Cell2CaPools" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="baseCell" type="BaseCell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="iafTauCell" type="IafTauCell"
 			minOccurs="0" maxOccurs="unbounded"/>
@@ -1301,6 +1302,43 @@
         </xs:complexContent>
     </xs:complexType>
 
+    <xs:complexType name="Cell2CaPools">
+
+        <xs:complexContent>
+            <xs:extension base="BaseCell">
+
+                
+                <xs:sequence>
+                    <xs:element name="morphology" type="Morphology" minOccurs="0"/>
+                    <xs:element name="biophysicalProperties2CaPools" type="BiophysicalProperties2CaPools" minOccurs="0"/>
+                </xs:sequence>
+
+                <!--
+                
+                Put back in as and when needed. Note: attribute morphology here can cause problems when generating
+                the Java API. See src/main/resources/bindings/NeuroML_v2beta4.xjb
+                
+                <xs:attribute name="morphology" type="NmlId" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>Should only be used if morphology element is outside the cell.
+                                          This points to the id of the morphology
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+
+                <xs:attribute name="biophysicalProperties2CaPools" type="NmlId" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>Should only be used if biophysicalProperties element is outside the cell.
+                                          This points to the id of the biophysicalProperties2CaPools
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>-->
+
+
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
 
     <xs:complexType name="Morphology">
         <xs:annotation>
@@ -1461,6 +1499,25 @@
         </xs:complexContent>
     </xs:complexType>
 
+    <xs:complexType name="BiophysicalProperties2CaPools">
+        <xs:annotation>
+            <xs:documentation>Standalone element which is usually inside a single cell, but could be outside and
+                              referenced by id.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+
+                <xs:sequence>
+                    <xs:element name="membraneProperties2CaPools" type="MembraneProperties2CaPools"/>
+                    <xs:element name="intracellularProperties2CaPools" type="IntracellularProperties2CaPools" minOccurs="0"/>
+                    <xs:element name="extracellularProperties" type="ExtracellularProperties" minOccurs="0"/>
+                </xs:sequence>
+
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
 
     <xs:complexType name="MembraneProperties">
 
@@ -1469,6 +1526,34 @@
 
             <xs:element name="channelDensity" type="ChannelDensity" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="channelDensityNernst" type="ChannelDensityNernst" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="channelDensityGHK" type="ChannelDensityGHK" minOccurs="0" maxOccurs="unbounded"/>
+
+            <xs:element name="channelDensityNonUniform" type="ChannelDensityNonUniform" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="channelDensityNonUniformNernst" type="ChannelDensityNonUniformNernst" minOccurs="0" maxOccurs="unbounded"/>
+
+            <xs:element name="spikeThresh" type="SpikeThresh" minOccurs="0" maxOccurs="unbounded"/>
+
+            <xs:element name="specificCapacitance" type="SpecificCapacitance" minOccurs="0" maxOccurs="unbounded"/>
+
+            <xs:element name="initMembPotential" type="InitMembPotential" minOccurs="0" maxOccurs="unbounded"/>
+
+            <!-- Taking this out until confirmation it's needed
+            <xs:element name="reversalPotential" type="ReversalPotential" minOccurs="0" maxOccurs="unbounded"/>-->
+        </xs:sequence>
+
+    </xs:complexType>
+
+    <xs:complexType name="MembraneProperties2CaPools">
+
+        <xs:sequence>
+            <xs:element name="channelPopulation" type="ChannelPopulation" minOccurs="0" maxOccurs="unbounded"/>
+
+            <xs:element name="channelDensity" type="ChannelDensity" minOccurs="0" maxOccurs="unbounded"/>
+            
+            <xs:element name="channelDensityNernst" type="ChannelDensityNernst" minOccurs="0" maxOccurs="unbounded"/>
+            <!-- Only difference from above, ion="ca2" should be used -->
+            <xs:element name="channelDensityNernstCa2" type="ChannelDensityNernstCa2" minOccurs="0" maxOccurs="unbounded"/>
+            
             <xs:element name="channelDensityGHK" type="ChannelDensityGHK" minOccurs="0" maxOccurs="unbounded"/>
 
             <xs:element name="channelDensityNonUniform" type="ChannelDensityNonUniform" minOccurs="0" maxOccurs="unbounded"/>
@@ -1690,6 +1775,16 @@
         </xs:complexContent>
 
     </xs:complexType>
+    
+    <xs:complexType name="ChannelDensityNernstCa2">
+
+        <xs:complexContent>
+            <xs:extension base="ChannelDensityNernst">
+                <!-- No difference in structure. Specifying an independent complexType ensures generated APIs create a class for this-->
+            </xs:extension>
+        </xs:complexContent>
+
+    </xs:complexType>
 
 
     <xs:complexType name="ChannelDensityGHK">
@@ -1790,12 +1885,7 @@
     </xs:complexType>
 
 
-    <!--
-    <xs:complexType name="FixedConcentration">
-        <xs:attribute name="concentration" type="Nml2Quantity_concentration" use="required"/>
-    </xs:complexType>
-
-    -->
+ 
 
     <!-- TODO: remove -->
     <xs:complexType name="ConcentrationModel_D">
@@ -1815,6 +1905,16 @@
             <xs:element name="species" type="Species" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="resistivity" type="Resistivity" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
+
+    </xs:complexType>
+    
+    <xs:complexType name="IntracellularProperties2CaPools">
+
+        <xs:complexContent>
+            <xs:extension base="IntracellularProperties">
+                <!-- No difference in structure. Specifying an independent complexType ensures generated APIs create a class for this-->
+            </xs:extension>
+        </xs:complexContent>
 
     </xs:complexType>
 
