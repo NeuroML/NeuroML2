@@ -2331,6 +2331,7 @@
             <xs:extension base="Base">
                 <xs:sequence>
                     <xs:element name="electricalConnection" type="ElectricalConnection" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="electricalConnectionInstance" type="ElectricalConnectionInstance" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
                 <xs:attribute name="presynapticPopulation" type="NmlId" use="required"/>
                 <xs:attribute name="postsynapticPopulation" type="NmlId" use="required"/>
@@ -2346,13 +2347,22 @@
         <xs:complexContent>
             <xs:extension base="BaseNonNegativeIntegerId">
                 <xs:attribute name="preCell" type="xs:string" use="required"/>
-                <xs:attribute name="preSegment" type="NonNegativeInteger" default="0"/>
+                <xs:attribute name="preSegmentId" type="NonNegativeInteger" default="0"/>
                 <xs:attribute name="preFractionAlong" type="ZeroToOne" default="0.5"/>
                 <xs:attribute name="postCell" type="xs:string" use="required"/>
-                <xs:attribute name="postSegment" type="NonNegativeInteger" default="0"/>
+                <xs:attribute name="postSegmentId" type="NonNegativeInteger" default="0"/>
                 <xs:attribute name="postFractionAlong" type="ZeroToOne" default="0.5"/>
                 <xs:attribute name="synapse" type="NmlId" use="required"/>
             </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="ElectricalConnectionInstance">
+        <xs:annotation>
+            <xs:documentation>Projection between two populations consisting of analog connections (e.g. graded synapses)</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ElectricalConnection"/>
         </xs:complexContent>
     </xs:complexType>
 
