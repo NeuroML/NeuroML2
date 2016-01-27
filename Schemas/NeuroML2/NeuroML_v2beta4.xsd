@@ -2347,10 +2347,10 @@
         <xs:complexContent>
             <xs:extension base="BaseNonNegativeIntegerId">
                 <xs:attribute name="preCell" type="xs:string" use="required"/>
-                <xs:attribute name="preSegmentId" type="NonNegativeInteger" default="0"/>
+                <xs:attribute name="preSegment" type="NonNegativeInteger" default="0"/>
                 <xs:attribute name="preFractionAlong" type="ZeroToOne" default="0.5"/>
                 <xs:attribute name="postCell" type="xs:string" use="required"/>
-                <xs:attribute name="postSegmentId" type="NonNegativeInteger" default="0"/>
+                <xs:attribute name="postSegment" type="NonNegativeInteger" default="0"/>
                 <xs:attribute name="postFractionAlong" type="ZeroToOne" default="0.5"/>
                 <xs:attribute name="synapse" type="NmlId" use="required"/>
             </xs:extension>

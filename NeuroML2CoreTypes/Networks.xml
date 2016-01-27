@@ -204,12 +204,12 @@
         <ComponentRequirement name="postsynapticPopulation"/>
         
         <Path name="preCell"/>
-        <Path name="postCellId"/>
+        <Path name="postCell"/>
 
         <Text name="preFractionAlong"/>
         <Text name="postFractionAlong"/>
-        <Text name="preSegmentId"/>
-        <Text name="postSegmentId"/>
+        <Text name="preSegment"/>
+        <Text name="postSegment"/>
 
         <Structure>
             <With instance="preCell" as="a"/>

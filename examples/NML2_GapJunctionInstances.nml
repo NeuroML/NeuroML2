@@ -32,7 +32,7 @@
  
 
         <electricalProjection id ="testGJconn" presynapticPopulation="iafPop1" postsynapticPopulation="iafPop2">
-            <electricalConnectionInstance id="0" preCell="../iafPop1/0/iaf" postCell="../iafPop2/0/iaf" preSegmentId="0" preFractionAlong="0.5" postSegmentId="0" postFractionAlong="0.5" synapse="gj1"/>
+            <electricalConnectionInstance id="0" preCell="../iafPop1/0/iaf" postCell="../iafPop2/0/iaf" preSegment="0" preFractionAlong="0.5" postSegment="0" postFractionAlong="0.5" synapse="gj1"/>
         </electricalProjection>
         
         
