@@ -34,5 +34,11 @@
     <fitzHughNagumoCell id="fn1" I="0.8" />
     
     <fitzHughNagumo1969Cell id="fn1969" a="0.7" b="0.08" I="1.0" phi="0.08" V0="0.0" W0="0.0"/>
+    
+    <pinskyRinzelCA3Cell id="pr2A" iSoma="0.75 uA_per_cm2" iDend="0 uA_per_cm2" gc="2.1 mS_per_cm2" qd0="0"
+                         gLs="0.1 mS_per_cm2" gLd="0.1 mS_per_cm2" gNa="30 mS_per_cm2" gKdr="15 mS_per_cm2"
+                         gCa="10 mS_per_cm2" gKahp="0.8 mS_per_cm2" gKC="15 mS_per_cm2" eNa="60 mV" eCa="80 mV" eK="-75 mV" eL="-60 mV"
+                         pp="0.5" cm="3 uF_per_cm2" alphac="2" betac="0.1"
+                         gNmda="0 mS_per_cm2" gAmpa="0 mS_per_cm2" />
 
 </neuroml>

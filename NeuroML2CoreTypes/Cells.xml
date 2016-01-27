@@ -1518,7 +1518,9 @@
                extends="baseCellMembPot"
                description="Reduced CA3 cell model from Pinsky and Rinzel 1994. See https://github.com/OpenSourceBrain/PinskyRinzelModel">
 
-        <Parameter name="Is" dimension="currentDensity"/>
+        <Parameter name="iSoma" dimension="currentDensity"/>
+        <Parameter name="iDend" dimension="currentDensity"/>
+        
         <Parameter name="gLs" dimension="conductanceDensity"/>
         <Parameter name="gLd" dimension="conductanceDensity"/>
         <Parameter name="gNa" dimension="conductanceDensity"/>
@@ -1526,19 +1528,20 @@
         <Parameter name="gCa" dimension="conductanceDensity"/>
         <Parameter name="gKahp" dimension="conductanceDensity"/>
         <Parameter name="gKC" dimension="conductanceDensity"/>
-        <Parameter name="VNa" dimension="voltage"/>
-        <Parameter name="VCa" dimension="voltage"/>
-        <Parameter name="VK" dimension="voltage"/>
-        <Parameter name="VL" dimension="voltage"/>
         <Parameter name="gc" dimension="conductanceDensity"/>
+        
+        <Parameter name="eNa" dimension="voltage"/>
+        <Parameter name="eCa" dimension="voltage"/>
+        <Parameter name="eK" dimension="voltage"/>
+        <Parameter name="eL" dimension="voltage"/>
+        
         <Parameter name="pp" dimension="none"/>
-        <Parameter name="Cm" dimension="specificCapacitance"/>
+        <Parameter name="cm" dimension="specificCapacitance"/>
         <Parameter name="alphac" dimension="none"/>
         <Parameter name="betac" dimension="none"/>
 
-        <Parameter name="Id" dimension="currentDensity"/>
-        <Parameter name="gnmda" dimension="conductanceDensity"/>
-        <Parameter name="gampa" dimension="conductanceDensity"/>
+        <Parameter name="gNmda" dimension="conductanceDensity"/>
+        <Parameter name="gAmpa" dimension="conductanceDensity"/>
         <Parameter name="qd0" dimension="none"/>
     
         <!-- Normalizing Constants -->
@@ -1585,7 +1588,7 @@
             
             <!-- baseCellMembPot compatibility -->
             <DerivedVariable name="v" dimension="voltage" value="Vs" exposure="v"/>
-            <DerivedVariable name="ICad" dimension="currentDensity" exposure="ICad" value="gCa*sd*sd*(Vd-VCa)"/>
+            <DerivedVariable name="ICad" dimension="currentDensity" exposure="ICad" value="gCa*sd*sd*(Vd-eCa)"/>
         
         
 
@@ -1603,8 +1606,8 @@
             <DerivedVariable name="betasd_Vd" dimension="none" value="0.02*(Vd/MVOLT+8.9)/(exp((Vd/MVOLT+8.9)/5.0)-1.0)"/>
 
             
-            <DerivedVariable name="Iampa" dimension="currentDensity" value="gampa*Wi*(Vd-Vsyn)"/>
-            <DerivedVariable name="Inmda" dimension="currentDensity" value="gnmda*Sisat*(Vd-Vsyn)/(1.0+0.28*exp(-0.062*(Vd/MVOLT-60.0)))"/>
+            <DerivedVariable name="Iampa" dimension="currentDensity" value="gAmpa*Wi*(Vd-Vsyn)"/>
+            <DerivedVariable name="Inmda" dimension="currentDensity" value="gNmda*Sisat*(Vd-Vsyn)/(1.0+0.28*exp(-0.062*(Vd/MVOLT-60.0)))"/>
             <DerivedVariable name="Isyn" dimension="currentDensity" value="Iampa+Inmda"/>
             
             
@@ -1635,8 +1638,8 @@
             </ConditionalDerivedVariable>
 
 
-            <TimeDerivative variable="Vs" value="(-gLs*(Vs-VL)-gNa*(Minfs_Vs^2)*hs*(Vs-VNa)-gKdr*ns*(Vs-VK)+(gc/pp)*(Vd-Vs)+Is/pp) / Cm"/>
-            <TimeDerivative variable="Vd" value="(Id/(1.0-pp)-Isyn/(1.0-pp)-gLd*(Vd-VL)-ICad-gKahp*qd*(Vd-VK)-gKC*cd*chid*(Vd-VK)+(gc*(Vs-Vd))/(1.0-pp)) / Cm"/>
+            <TimeDerivative variable="Vs" value="(-gLs*(Vs-eL)-gNa*(Minfs_Vs^2)*hs*(Vs-eNa)-gKdr*ns*(Vs-eK)+(gc/pp)*(Vd-Vs)+iSoma/pp) / cm"/>
+            <TimeDerivative variable="Vd" value="(iDend/(1.0-pp)-Isyn/(1.0-pp)-gLd*(Vd-eL)-ICad-gKahp*qd*(Vd-eK)-gKC*cd*chid*(Vd-eK)+(gc*(Vs-Vd))/(1.0-pp)) / cm"/>
             <TimeDerivative variable="Cad" value="(-0.13*ICad/UAMP_PER_CM2-0.075*Cad) / MSEC"/>
             <TimeDerivative variable="hs" value="(alphahs_Vs-(alphahs_Vs+betahs_Vs)*hs) / MSEC"/>
             <TimeDerivative variable="ns" value="(alphans_Vs-(alphans_Vs+betans_Vs)*ns) / MSEC"/>
@@ -1650,8 +1653,8 @@
 	
 
             <OnStart>
-                <StateAssignment variable="Vs" value="VL"/>
-                <StateAssignment variable="Vd" value="VL"/>
+                <StateAssignment variable="Vs" value="eL"/>
+                <StateAssignment variable="Vd" value="eL"/>
                 <StateAssignment variable="qd" value="qd0" />
             </OnStart>
 

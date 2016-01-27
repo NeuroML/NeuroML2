@@ -13,23 +13,20 @@
     <Include file="Simulation.xml"/>
 
 
+    <Include file="../examples/NML2_AbstractCells.nml"/>
+ 
 
-    <pinskyRinzelCA3Cell id="pr2A" Is="0.75 uA_per_cm2" Id="0 uA_per_cm2" gc="2.1 mS_per_cm2" qd0="0"
-                         gLs="0.1 mS_per_cm2" gLd="0.1 mS_per_cm2" gNa="30 mS_per_cm2" gKdr="15 mS_per_cm2"
-                         gCa="10 mS_per_cm2" gKahp="0.8 mS_per_cm2" gKC="15 mS_per_cm2" VNa="60 mV" VCa="80 mV" VK="-75 mV" VL="-60 mV"
-                         pp="0.5" Cm="3 uF_per_cm2" alphac="2" betac="0.1"
-                         gnmda="0 mS_per_cm2" gampa="0 mS_per_cm2" />
-
+    <!--
     <pinskyRinzelCA3Cell id="pr2B" Is="-0.5 uA_per_cm2" Id="2.49 uA_per_cm2" gc="2.1 mS_per_cm2" qd0="0"
                          gLs="0.1 mS_per_cm2" gLd="0.1 mS_per_cm2" gNa="30 mS_per_cm2" gKdr="15 mS_per_cm2"
                          gCa="10 mS_per_cm2" gKahp="0.8 mS_per_cm2" gKC="15 mS_per_cm2" VNa="60 mV" VCa="80 mV" VK="-75 mV" VL="-60 mV"
                          pp="0.5" Cm="3 uF_per_cm2" alphac="2" betac="0.1"
-                         gnmda="0 mS_per_cm2" gampa="0 mS_per_cm2" />
+                         gnmda="0 mS_per_cm2" gampa="0 mS_per_cm2" />-->
 
 
     <network id="net1">
         <population id="prApop" component="pr2A" size="1"/>
-        <population id="prBpop" component="pr2B" size="1"/>
+        <!--<population id="prBpop" component="pr2B" size="1"/>-->
     </network>
 
 
@@ -49,7 +46,7 @@
             <OutputColumn id="Vs" quantity="prApop[0]/Vs" />
             <OutputColumn id="Vd" quantity="prApop[0]/Vd" />
         </OutputFile>
-
+        <!--
         <Display id="Fig2BVs"  title="Figure 2B dendritic input, left: Vs" timeScale="1ms"        xmin="-100" xmax="1600" ymin="-70" ymax="40">
             <Line id="Vs" quantity="prBpop[0]/Vs" scale="0.001"  color="#000000" timeScale="1ms"/>            
             <Line id="Vd" quantity="prBpop[0]/Vd" scale="0.001"  color="#FF0000" timeScale="1ms"/>
@@ -63,7 +60,7 @@
         <OutputFile id="Fig2B_Vs" fileName="results/ex22_v.dat">
             <OutputColumn id="Vs" quantity="prBpop[0]/Vs" />
             <OutputColumn id="Vd" quantity="prBpop[0]/Vd" />
-        </OutputFile>
+        </OutputFile>-->
 
 
     </Simulation>

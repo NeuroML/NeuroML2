@@ -140,6 +140,15 @@
         </xs:restriction>
 
     </xs:simpleType>
+    
+    
+    <xs:simpleType name="Nml2Quantity_currentDensity">
+
+        <xs:restriction base="xs:string">
+            <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(A_per_m2|uA_per_cm2|mA_per_cm2)"/> <!-- Based on set of defined Units in NeuroMLCoreDimensions.xml -->
+        </xs:restriction>
+
+    </xs:simpleType>
 
     <xs:simpleType name="Nml2Quantity_temperature">
 
@@ -458,6 +467,7 @@
             <xs:element name="adExIaFCell" type="AdExIaFCell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="fitzHughNagumoCell" type="FitzHughNagumoCell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="fitzHughNagumo1969Cell" type="FitzHughNagumo1969Cell" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="pinskyRinzelCA3Cell" type="PinskyRinzelCA3Cell" minOccurs="0" maxOccurs="unbounded"/>
 
         </xs:sequence>
     </xs:group>
@@ -1265,6 +1275,41 @@
                 <xs:attribute name="phi" type="Nml2Quantity_none" use="required"/>
                 <xs:attribute name="V0" type="Nml2Quantity_none" use="required"/>
                 <xs:attribute name="W0" type="Nml2Quantity_none" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <xs:complexType name="PinskyRinzelCA3Cell">
+        <xs:complexContent>
+            <xs:extension base="BaseCell">
+                <xs:attribute name="iSoma" type="Nml2Quantity_currentDensity" use="required"/>
+                <xs:attribute name="iDend" type="Nml2Quantity_currentDensity" use="required"/>
+                
+                <xs:attribute name="gc" type="Nml2Quantity_conductanceDensity" use="required"/>
+                <xs:attribute name="gLs" type="Nml2Quantity_conductanceDensity" use="required"/>
+                <xs:attribute name="gLd" type="Nml2Quantity_conductanceDensity" use="required"/>
+                <xs:attribute name="gNa" type="Nml2Quantity_conductanceDensity" use="required"/>
+                <xs:attribute name="gKdr" type="Nml2Quantity_conductanceDensity" use="required"/>
+                <xs:attribute name="gCa" type="Nml2Quantity_conductanceDensity" use="required"/>
+                <xs:attribute name="gKahp" type="Nml2Quantity_conductanceDensity" use="required"/>
+                <xs:attribute name="gKC" type="Nml2Quantity_conductanceDensity" use="required"/>
+                
+                <xs:attribute name="gNmda" type="Nml2Quantity_conductanceDensity" use="required"/>
+                <xs:attribute name="gAmpa" type="Nml2Quantity_conductanceDensity" use="required"/>
+                
+                <xs:attribute name="eNa" type="Nml2Quantity_voltage" use="required"/>
+                <xs:attribute name="eCa" type="Nml2Quantity_voltage" use="required"/>
+                <xs:attribute name="eK" type="Nml2Quantity_voltage" use="required"/>
+                <xs:attribute name="eL" type="Nml2Quantity_voltage" use="required"/>
+                
+                <xs:attribute name="qd0" type="Nml2Quantity_none" use="required"/>
+                <xs:attribute name="pp" type="Nml2Quantity_none" use="required"/>
+                <xs:attribute name="alphac" type="Nml2Quantity_none" use="required"/>
+                <xs:attribute name="betac" type="Nml2Quantity_none" use="required"/>
+                
+                <xs:attribute name="cm" type="Nml2Quantity_specificCapacitance" use="required"/>
+                
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
