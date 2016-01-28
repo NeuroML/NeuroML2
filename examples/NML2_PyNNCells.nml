@@ -34,6 +34,8 @@
     
     <expCondSynapse id="ps1" tau_syn="5" e_rev="0"/>
     <alphaCondSynapse id="ps2" tau_syn="5" e_rev="0"/>
+    <expCurrSynapse id="ps3" tau_syn="5"/>
+    <alphaCurrSynapse id="ps4" tau_syn="5"/>
     
     <SpikeSourcePoisson id="spikes1" start="50ms" duration="400ms" rate="50Hz"/>
     <SpikeSourcePoisson id="spikes2" start="50ms" duration="400ms" rate="80Hz"/>

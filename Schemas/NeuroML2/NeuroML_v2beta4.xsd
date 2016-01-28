@@ -2301,9 +2301,9 @@
     </xs:complexType>
 
     <xs:complexType name="Location">
-        <xs:attribute name="x" type="xs:float"/>
-        <xs:attribute name="y" type="xs:float"/>
-        <xs:attribute name="z" type="xs:float"/>
+        <xs:attribute name="x" type="xs:float" use="required"/>
+        <xs:attribute name="y" type="xs:float" use="required"/>
+        <xs:attribute name="z" type="xs:float" use="required"/>
     </xs:complexType>
 
 
@@ -2327,9 +2327,9 @@
             <xs:documentation>Single explicit connection. Introduced to test connections in LEMS. Will probably be removed in favour of
                 connections wrapped in projection element</xs:documentation>
         </xs:annotation>
-        <xs:attribute name="from" type="xs:string"/>
-        <xs:attribute name="to" type="xs:string"/>
-        <xs:attribute name="synapse" type="xs:string"/>
+        <xs:attribute name="from" type="xs:string" use="required"/>
+        <xs:attribute name="to" type="xs:string" use="required"/>
+        <xs:attribute name="synapse" type="xs:string" use="required"/>
         <xs:attribute name="destination" type="NmlId" use="optional"/>
     </xs:complexType>
 
@@ -2452,8 +2452,8 @@
             <xs:documentation>Single explicit input. Introduced to test inputs in LEMS. Will probably be removed in favour of
                 inputs wrapped in inputList element</xs:documentation>
         </xs:annotation>
-        <xs:attribute name="target" type="xs:string"/>
-        <xs:attribute name="input" type="xs:string"/>
+        <xs:attribute name="target" type="xs:string" use="required"/>
+        <xs:attribute name="input" type="xs:string" use="required"/>
         <xs:attribute name="destination" type="xs:string"/>
     </xs:complexType>
 
@@ -2467,8 +2467,8 @@
                 <xs:sequence>
                     <xs:element name="input" type="Input" minOccurs="1" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="population" type="NmlId"/>
-                <xs:attribute name="component" type="NmlId"/>
+                <xs:attribute name="population" type="NmlId" use="required"/>
+                <xs:attribute name="component" type="NmlId" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2477,9 +2477,9 @@
         <xs:annotation>
             <xs:documentation>Subject to change as it gets tested with LEMS</xs:documentation>
         </xs:annotation>
-        <xs:attribute name="id" type="NonNegativeInteger"/>
-        <xs:attribute name="target" type="xs:string"/>
-        <xs:attribute name="destination" type="NmlId"/>
+        <xs:attribute name="id" type="NonNegativeInteger" use="required"/>
+        <xs:attribute name="target" type="xs:string" use="required"/>
+        <xs:attribute name="destination" type="NmlId" use="required"/>
         <xs:attribute name="segmentId" type="NonNegativeInteger"/>
         <xs:attribute name="fractionAlong" type="ZeroToOne"/>
     </xs:complexType>
@@ -2494,11 +2494,11 @@
 
         <xs:complexContent>
             <xs:extension base="BaseCell">
-                <xs:attribute name="cm" type="xs:double"/>
-                <xs:attribute name="i_offset" type="xs:double"/>
-                <xs:attribute name="tau_syn_E" type="xs:double"/>
-                <xs:attribute name="tau_syn_I" type="xs:double"/>
-                <xs:attribute name="v_init" type="xs:double"/>
+                <xs:attribute name="cm" type="xs:double" use="required"/>
+                <xs:attribute name="i_offset" type="xs:double" use="required"/>
+                <xs:attribute name="tau_syn_E" type="xs:double" use="required"/>
+                <xs:attribute name="tau_syn_I" type="xs:double" use="required"/>
+                <xs:attribute name="v_init" type="xs:double" use="required"/>
             </xs:extension>
         </xs:complexContent>
 
@@ -2508,11 +2508,11 @@
 
         <xs:complexContent>
             <xs:extension base="basePyNNCell">
-                <xs:attribute name="tau_m" type="xs:double"/>
-                <xs:attribute name="tau_refrac" type="xs:double"/>
-                <xs:attribute name="v_reset" type="xs:double"/>
-                <xs:attribute name="v_rest" type="xs:double"/>
-                <xs:attribute name="v_thresh" type="xs:double"/>
+                <xs:attribute name="tau_m" type="xs:double" use="required"/>
+                <xs:attribute name="tau_refrac" type="xs:double" use="required"/>
+                <xs:attribute name="v_reset" type="xs:double" use="required"/>
+                <xs:attribute name="v_rest" type="xs:double" use="required"/>
+                <xs:attribute name="v_thresh" type="xs:double" use="required"/>
             </xs:extension>
         </xs:complexContent>
 
@@ -2522,8 +2522,8 @@
 
         <xs:complexContent>
             <xs:extension base="basePyNNIaFCell">
-                <xs:attribute name="e_rev_E" type="xs:double"/>
-                <xs:attribute name="e_rev_I" type="xs:double"/>
+                <xs:attribute name="e_rev_E" type="xs:double" use="required"/>
+                <xs:attribute name="e_rev_I" type="xs:double" use="required"/>
             </xs:extension>
         </xs:complexContent>
 
@@ -2571,11 +2571,11 @@
 
         <xs:complexContent>
             <xs:extension base="basePyNNIaFCondCell">
-                <xs:attribute name="a" type="xs:double"/>
-                <xs:attribute name="b" type="xs:double"/>
-                <xs:attribute name="delta_T" type="xs:double"/>
-                <xs:attribute name="tau_w" type="xs:double"/>
-                <xs:attribute name="v_spike" type="xs:double"/>
+                <xs:attribute name="a" type="xs:double" use="required"/>
+                <xs:attribute name="b" type="xs:double" use="required"/>
+                <xs:attribute name="delta_T" type="xs:double" use="required"/>
+                <xs:attribute name="tau_w" type="xs:double" use="required"/>
+                <xs:attribute name="v_spike" type="xs:double" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2584,11 +2584,11 @@
 
         <xs:complexContent>
             <xs:extension base="basePyNNIaFCondCell">
-                <xs:attribute name="a" type="xs:double"/>
-                <xs:attribute name="b" type="xs:double"/>
-                <xs:attribute name="delta_T" type="xs:double"/>
-                <xs:attribute name="tau_w" type="xs:double"/>
-                <xs:attribute name="v_spike" type="xs:double"/>
+                <xs:attribute name="a" type="xs:double" use="required"/>
+                <xs:attribute name="b" type="xs:double" use="required"/>
+                <xs:attribute name="delta_T" type="xs:double" use="required"/>
+                <xs:attribute name="tau_w" type="xs:double" use="required"/>
+                <xs:attribute name="v_spike" type="xs:double" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2598,15 +2598,15 @@
 
         <xs:complexContent>
             <xs:extension base="basePyNNCell">
-                <xs:attribute name="v_offset" type="xs:double"/>
-                <xs:attribute name="e_rev_E" type="xs:double"/>
-                <xs:attribute name="e_rev_I" type="xs:double"/>
-                <xs:attribute name="e_rev_K" type="xs:double"/>
-                <xs:attribute name="e_rev_Na" type="xs:double"/>
-                <xs:attribute name="e_rev_leak" type="xs:double"/>
-                <xs:attribute name="g_leak" type="xs:double"/>
-                <xs:attribute name="gbar_K" type="xs:double"/>
-                <xs:attribute name="gbar_Na" type="xs:double"/>
+                <xs:attribute name="v_offset" type="xs:double" use="required"/>
+                <xs:attribute name="e_rev_E" type="xs:double" use="required"/>
+                <xs:attribute name="e_rev_I" type="xs:double" use="required"/>
+                <xs:attribute name="e_rev_K" type="xs:double" use="required"/>
+                <xs:attribute name="e_rev_Na" type="xs:double" use="required"/>
+                <xs:attribute name="e_rev_leak" type="xs:double" use="required"/>
+                <xs:attribute name="g_leak" type="xs:double" use="required"/>
+                <xs:attribute name="gbar_K" type="xs:double" use="required"/>
+                <xs:attribute name="gbar_Na" type="xs:double" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2616,7 +2616,7 @@
 
         <xs:complexContent>
             <xs:extension base="BaseSynapse">
-                <xs:attribute name="tau_syn" type="xs:double"/>
+                <xs:attribute name="tau_syn" type="xs:double" use="required"/>
             </xs:extension>
         </xs:complexContent>
 
@@ -2626,7 +2626,7 @@
 
         <xs:complexContent>
             <xs:extension base="BasePynnSynapse">
-                <xs:attribute name="e_rev" type="xs:double"/>
+                <xs:attribute name="e_rev" type="xs:double" use="required"/>
             </xs:extension>
         </xs:complexContent>
 
@@ -2636,7 +2636,7 @@
 
         <xs:complexContent>
             <xs:extension base="BasePynnSynapse">
-                <xs:attribute name="e_rev" type="xs:double"/>
+                <xs:attribute name="e_rev" type="xs:double" use="required"/>
             </xs:extension>
         </xs:complexContent>
 
