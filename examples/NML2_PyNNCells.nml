@@ -40,5 +40,31 @@
     <SpikeSourcePoisson id="spikes1" start="50ms" duration="400ms" rate="50Hz"/>
     <SpikeSourcePoisson id="spikes2" start="50ms" duration="400ms" rate="80Hz"/>
     
+    
+    
+    <network id="netAll">
+        <population component="IF_curr_alpha_pop_IF_curr_alpha" id="pop_IF_curr_alpha" size="1"/>
+        <population component="IF_curr_exp_pop_IF_curr_exp" id="pop_IF_curr_exp" size="1"/>
+        <population component="IF_cond_alpha_pop_IF_cond_alpha" id="pop_IF_cond_alpha" size="1"/>
+        <population component="IF_cond_exp_pop_IF_cond_exp" id="pop_IF_cond_exp" size="1"/>
+        <population component="EIF_cond_exp_isfa_ista_pop_EIF_cond_exp_isfa_ista" id="pop_EIF_cond_exp_isfa_ista" size="1"/>
+        <population component="HH_cond_exp_pop_HH_cond_exp" id="pop_HH_cond_exp" size="1"/>
+    
+        <population component="silent_cell_2" id="pop_target_1" size="1"/>
+        <population component="silent_cell_2" id="pop_target_2" size="1"/>
+        
+        <population component="spikes1" id="pop_spikes1" size="1"/>
+        <population component="spikes2" id="pop_spikes2" size="1"/>
+         
+        <projection id="proj1" presynapticPopulation="pop_EIF_cond_exp_isfa_ista" postsynapticPopulation="pop_target_1" synapse="ps1">
+            <connectionWD id="0" preCellId="../pop_EIF_cond_exp_isfa_ista[0]" postCellId="../pop_target_1[0]" weight="0.01" delay="10ms"/>
+        </projection>
+        
+        <projection id="proj1" presynapticPopulation="pop_EIF_cond_exp_isfa_ista" postsynapticPopulation="pop_target_2" synapse="ps2">
+            <connectionWD id="0" preCellId="../pop_EIF_cond_exp_isfa_ista[0]" postCellId="../pop_target_2[0]" weight="0.005" delay="20ms"/>
+        </projection>
+        
+    </network>
+    
    
 </neuroml>

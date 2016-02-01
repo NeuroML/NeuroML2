@@ -2342,6 +2342,7 @@
             <xs:extension base="Base">
                 <xs:sequence>
                     <xs:element name="connection" type="Connection" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="connectionWD" type="ConnectionWD" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
                 <xs:attribute name="presynapticPopulation" type="NmlId" use="required"/>
                 <xs:attribute name="postsynapticPopulation" type="NmlId" use="required"/>
@@ -2363,6 +2364,24 @@
                 <xs:attribute name="postCellId" type="xs:string" use="required"/>
                 <xs:attribute name="postSegmentId" type="NonNegativeInteger" default="0"/>
                 <xs:attribute name="postFractionAlong" type="ZeroToOne" default="0.5"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="ConnectionWD">
+        <xs:annotation>
+            <xs:documentation>Individual synaptic connection with weight and delay</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="BaseNonNegativeIntegerId">
+                <xs:attribute name="preCellId" type="xs:string" use="required"/>
+                <xs:attribute name="preSegmentId" type="NonNegativeInteger" default="0"/>
+                <xs:attribute name="preFractionAlong" type="ZeroToOne" default="0.5"/>
+                <xs:attribute name="postCellId" type="xs:string" use="required"/>
+                <xs:attribute name="postSegmentId" type="NonNegativeInteger" default="0"/>
+                <xs:attribute name="postFractionAlong" type="ZeroToOne" default="0.5"/>
+                <xs:attribute name="weight" type="xs:float" default="1" use="required"/>
+                <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
