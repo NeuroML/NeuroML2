@@ -2380,7 +2380,7 @@
                 <xs:attribute name="postCellId" type="xs:string" use="required"/>
                 <xs:attribute name="postSegmentId" type="NonNegativeInteger" default="0"/>
                 <xs:attribute name="postFractionAlong" type="ZeroToOne" default="0.5"/>
-                <xs:attribute name="weight" type="xs:float" default="1" use="required"/>
+                <xs:attribute name="weight" type="xs:float" use="required"/>
                 <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
             </xs:extension>
         </xs:complexContent>

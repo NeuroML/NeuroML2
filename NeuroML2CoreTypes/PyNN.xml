@@ -14,8 +14,8 @@
 
 
     <ComponentType name="basePyNNCell"
-                   extends="baseCell"
-                   description="Base type of any PyNN standard cell model. Note: membrane potential _v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels" extends="baseCellMembPot">
+                   description="Base type of any PyNN standard cell model. Note: membrane potential _v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels" 
+                   extends="baseCellMembPot">
 
         <Parameter name="cm" dimension="none"/>
         <Parameter name="i_offset" dimension="none"/>
