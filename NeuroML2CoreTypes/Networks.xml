@@ -177,7 +177,7 @@
 
     <ComponentType name="connectionWD"
                    description="Event connection between named components, which gets processed via a new instance of a synapse component which is created on the target component, includes setting of _weight and _delay for the synaptic connection"
-                   extends="synapticConnection">
+                   extends="connection">
 
         <Parameter name="weight" dimension="none"/>
         <Parameter name="delay" dimension="time"/>

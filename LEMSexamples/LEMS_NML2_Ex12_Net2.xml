@@ -91,7 +91,7 @@
         
         <projection id="projection6" presynapticPopulation="spikersPop" postsynapticPopulation="iafPop" synapse="synNmdaW">
             <connectionWD preCellId="../spikersPop[0]" postCellId="../iafPop[7]" weight="0.5"  delay="10ms" />
-            <connectionWD preCellId="../spikersPop[0]" postCellId="../iafPop[8]" weight="1" delay="15ms" />
+            <connectionWD preCellId="../spikersPop[0]" postCellId="../iafPop[8]" weight="0.25" delay="15ms" />
         </projection>
         
 
