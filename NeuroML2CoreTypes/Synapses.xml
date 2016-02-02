@@ -358,7 +358,6 @@
 				mechanisms, which can be expressed as
 				child elements.">
         
-        <Property name="weight" dimension="none"/> 
         <Children name="plasticityMechanisms" type="basePlasticityMechanism"/>
         <Children name="blockMechanisms" type="baseBlockMechanism"/>
         
@@ -376,7 +375,7 @@
                              reduce="multiply"/>
             
             <DerivedVariable name="g" dimension="conductance" exposure="g"
-                             value="weight * blockFactor * gbase * (B - A)" />
+                             value="blockFactor * gbase * (B - A)" />
             <DerivedVariable name="i" exposure="i" dimension="current"
                              value="g * (erev - v)" />
 
@@ -404,6 +403,8 @@
 				mechanisms, which can be expressed as
 				child elements.">
         
+        <Property name="weight" dimension="none"/> 
+        
         <Children name="plasticityMechanisms" type="basePlasticityMechanism"/>
         <Children name="blockMechanisms" type="baseBlockMechanism"/>
         
@@ -421,7 +422,7 @@
                              reduce="multiply"/>
             
             <DerivedVariable name="g" dimension="conductance" exposure="g"
-                             value="blockFactor * gbase * (B - A)" />
+                             value="weight * blockFactor * gbase * (B - A)" />
             <DerivedVariable name="i" exposure="i" dimension="current"
                              value="g * (erev - v)" />
 

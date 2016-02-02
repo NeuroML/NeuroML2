@@ -31,8 +31,8 @@
     </spikeArray>
 
 
-    <iafCell id="iaf1" leakReversal="-60mV" thresh="-55mV" reset="-65mV" C="1e-5uF" leakConductance="5e-7mS"/>
-    <iafCell id="iaf2" leakReversal="-60mV" thresh="-55mV" reset="-70mV" C="1e-5uF" leakConductance="5.2e-7mS"/>
+    <iafCell id="iaf1" leakReversal="-60mV" thresh="-35mV" reset="-65mV" C="1e-5uF" leakConductance="5e-7mS"/>
+    <iafCell id="iaf2" leakReversal="-60mV" thresh="-35mV" reset="-70mV" C="1e-5uF" leakConductance="5.2e-7mS"/>
 
 
     <expOneSynapse id="syn1" gbase="0.1nS" erev="0mV" tauDecay="2ms"/>
@@ -43,13 +43,18 @@
     
     <expTwoSynapseW id="syn2W" gbase="0.1nS" erev="0mV" tauDecay="2ms" tauRise="0.05ms"/>
     
-    <!--
-    <blockingPlasticSynapse id="synNmda" gbase="0.1nS" tauDecay="2ms" tauRise="0.05ms" erev="0V">
+    
+    <blockingPlasticSynapse id="synNmda" gbase="5nS" tauDecay="10ms" tauRise="1ms" erev="0V">
         
         <blockMechanism type="voltageConcDepBlockMechanism" species="mg" blockConcentration="1.2mM" scalingConc="1.9205441817997078mM" scalingVolt="0.016129032258064516V"/>
 
+    </blockingPlasticSynapse>
+    
+    <blockingPlasticSynapseW id="synNmdaW" gbase="5nS" tauDecay="10ms" tauRise="1ms" erev="0V">
+        
+        <blockMechanism type="voltageConcDepBlockMechanism" species="mg" blockConcentration="1.2mM" scalingConc="1.9205441817997078mM" scalingVolt="0.016129032258064516V"/>
 
-    </blockingPlasticSynapse>-->
+    </blockingPlasticSynapseW>
 
 
     <network id="net2">
@@ -79,10 +84,15 @@
             <connectionWD preCellId="../spikeArrayPop[0]" postCellId="../iafPop[4]" weight="0.5"  delay="10ms" />
             <connectionWD preCellId="../spikeArrayPop[0]" postCellId="../iafPop[5]" weight="0.25" delay="15ms" />
         </projection>
-        <!--
-        <projection id="projection5" presynapticPopulation="spikeArrayPop" postsynapticPopulation="iafPop" synapse="synNmda">
-            <connection preCellId="../spikeArrayPop[0]" postCellId="../iafPop[6]"/>
-        </projection>-->
+        
+        <projection id="projection5" presynapticPopulation="spikersPop" postsynapticPopulation="iafPop" synapse="synNmda">
+            <connection preCellId="../spikersPop[0]" postCellId="../iafPop[6]"/>
+        </projection>
+        
+        <projection id="projection6" presynapticPopulation="spikersPop" postsynapticPopulation="iafPop" synapse="synNmdaW">
+            <connectionWD preCellId="../spikersPop[0]" postCellId="../iafPop[7]" weight="0.5"  delay="10ms" />
+            <connectionWD preCellId="../spikersPop[0]" postCellId="../iafPop[8]" weight="1" delay="15ms" />
+        </projection>
         
 
     </network>
@@ -112,10 +122,12 @@
             <Line id="Weight:0.5;delay=10ms" quantity="iafPop[4]/v" scale="1mV" color="#00ff00" timeScale="1ms"/>
             <Line id="Weight:0.25;delay=15ms" quantity="iafPop[5]/v" scale="1mV" color="#ff0000" timeScale="1ms"/>
         </Display>
-<!--
-        <Display id="d4" title="Ex12: NMDA Syns" timeScale="1ms" xmin="0" xmax="300" ymin="-61" ymax="-58">
+
+        <Display id="d4" title="Ex12: NMDA Syns" timeScale="1ms" xmin="0" xmax="300" ymin="-62" ymax="-33">
             <Line id="No weight/delay" quantity="iafPop[6]/v" scale="1mV" color="#000000" timeScale="1ms"/>
-        </Display>-->
+            <Line id="Weight:0.5;delay=10ms" quantity="iafPop[7]/v" scale="1mV" color="#00ff00" timeScale="1ms"/>
+            <Line id="Weight:0.25;delay=15ms" quantity="iafPop[8]/v" scale="1mV" color="#ff0000" timeScale="1ms"/>
+        </Display>
 
     </Simulation>
 
