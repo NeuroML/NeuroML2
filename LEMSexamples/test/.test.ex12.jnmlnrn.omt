@@ -1,7 +1,7 @@
 # Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
  
 target: ../LEMS_NML2_Ex12_Net2.xml
-engine: jNeuroML
+engine: jNeuroML_NEURON
 mep: .test.ex12.mep
 experiments:
   v0:
@@ -14,7 +14,7 @@ experiments:
         spike detection: 
           method: threshold
           threshold: -59.83
-        tolerance: 0.0001496
+        tolerance: 0
   v1:
     observables:
       spike times:
@@ -25,7 +25,7 @@ experiments:
         spike detection: 
           method: threshold
           threshold: -59.83
-        tolerance: 0.000136
+        tolerance: 0
   v3:
     observables:
       spike times:
@@ -36,7 +36,7 @@ experiments:
         spike detection: 
           method: threshold
           threshold: -59.53
-        tolerance: 0.0001962
+        tolerance: 0
   v4:
     observables:
       spike times:
@@ -47,7 +47,7 @@ experiments:
         spike detection: 
           method: threshold
           threshold: -59.53
-        tolerance: 0.000159
+        tolerance: 0
   v6:
     observables:
       spike times:
@@ -58,7 +58,7 @@ experiments:
         spike detection: 
           method: threshold
           threshold: -42
-        tolerance: 0.000258
+        tolerance: 0
   v7:
     observables:
       spike times:
@@ -69,4 +69,4 @@ experiments:
         spike detection: 
           method: threshold
           threshold: -55
-        tolerance: 0.000267
+        tolerance: 0

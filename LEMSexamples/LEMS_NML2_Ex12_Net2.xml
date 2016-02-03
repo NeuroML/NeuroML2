@@ -37,11 +37,7 @@
 
     <expOneSynapse id="syn1" gbase="0.1nS" erev="0mV" tauDecay="2ms"/>
 
-    <expOneSynapseW id="syn1W" gbase="0.1nS" erev="0mV" tauDecay="2ms"/>
-
     <expTwoSynapse id="syn2" gbase="0.1nS" erev="0mV" tauDecay="2ms" tauRise="0.05ms"/>
-    
-    <expTwoSynapseW id="syn2W" gbase="0.1nS" erev="0mV" tauDecay="2ms" tauRise="0.05ms"/>
     
     
     <blockingPlasticSynapse id="synNmda" gbase="5nS" tauDecay="10ms" tauRise="1ms" erev="0V">
@@ -49,12 +45,6 @@
         <blockMechanism type="voltageConcDepBlockMechanism" species="mg" blockConcentration="1.2mM" scalingConc="1.9205441817997078mM" scalingVolt="0.016129032258064516V"/>
 
     </blockingPlasticSynapse>
-    
-    <blockingPlasticSynapseW id="synNmdaW" gbase="5nS" tauDecay="10ms" tauRise="1ms" erev="0V">
-        
-        <blockMechanism type="voltageConcDepBlockMechanism" species="mg" blockConcentration="1.2mM" scalingConc="1.9205441817997078mM" scalingVolt="0.016129032258064516V"/>
-
-    </blockingPlasticSynapseW>
 
 
     <network id="net2">
@@ -71,7 +61,7 @@
             <connection preCellId="../spike100Pop[0]" postCellId="../iafPop[0]"/>
         </projection>
         
-        <projection id="projection2" presynapticPopulation="spike100Pop" postsynapticPopulation="iafPop" synapse="syn1W">
+        <projection id="projection2" presynapticPopulation="spike100Pop" postsynapticPopulation="iafPop" synapse="syn1">
             <connectionWD preCellId="../spike100Pop[0]" postCellId="../iafPop[1]" weight="0.5"  delay="10ms" />
             <connectionWD preCellId="../spike100Pop[0]" postCellId="../iafPop[2]" weight="0.25" delay="15ms" />
         </projection>
@@ -80,7 +70,7 @@
             <connection preCellId="../spikeArrayPop[0]" postCellId="../iafPop[3]"/>
         </projection>
         
-        <projection id="projection4" presynapticPopulation="spikeArrayPop" postsynapticPopulation="iafPop" synapse="syn2W">
+        <projection id="projection4" presynapticPopulation="spikeArrayPop" postsynapticPopulation="iafPop" synapse="syn2">
             <connectionWD preCellId="../spikeArrayPop[0]" postCellId="../iafPop[4]" weight="0.5"  delay="10ms" />
             <connectionWD preCellId="../spikeArrayPop[0]" postCellId="../iafPop[5]" weight="0.25" delay="15ms" />
         </projection>
@@ -89,7 +79,7 @@
             <connection preCellId="../spikersPop[0]" postCellId="../iafPop[6]"/>
         </projection>
         
-        <projection id="projection6" presynapticPopulation="spikersPop" postsynapticPopulation="iafPop" synapse="synNmdaW">
+        <projection id="projection6" presynapticPopulation="spikersPop" postsynapticPopulation="iafPop" synapse="synNmda">
             <connectionWD preCellId="../spikersPop[0]" postCellId="../iafPop[7]" weight="0.5"  delay="10ms" />
             <connectionWD preCellId="../spikersPop[0]" postCellId="../iafPop[8]" weight="0.25" delay="15ms" />
         </projection>
@@ -103,13 +93,11 @@
 
     <Simulation id="sim1" length="300ms" step="0.005ms" target="net2">
 
-
         <Display id="d1" title="Ex12: Spiking elements" timeScale="1ms" xmin="0" xmax="300" ymin="-5" ymax="105">
             <Line id="30ms period spiker" quantity="spikersPop[0]/tsince" scale="1ms" color="#000000" timeScale="1ms"/>
             <Line id="Single spike at 100ms" quantity="spike100Pop[0]/tsince" scale="1ms" color="#ffff00" timeScale="1ms"/>
             <Line id="3 spikes" quantity="spikeArrayPop[0]/tsince" scale="1ms" color="#ff0000" timeScale="1ms"/>
         </Display>
-
 
         <Display id="d2" title="Ex12: Single Exp Syns" timeScale="1ms" xmin="0" xmax="300" ymin="-61" ymax="-58">
             <Line id="No weight/delay" quantity="iafPop[0]/v" scale="1mV" color="#000000" timeScale="1ms"/>
@@ -128,6 +116,19 @@
             <Line id="Weight:0.5;delay=10ms" quantity="iafPop[7]/v" scale="1mV" color="#00ff00" timeScale="1ms"/>
             <Line id="Weight:0.25;delay=15ms" quantity="iafPop[8]/v" scale="1mV" color="#ff0000" timeScale="1ms"/>
         </Display>
+        
+        
+        <OutputFile id="of0" fileName="results/ex12.dat">
+            <OutputColumn id="0" quantity="iafPop[0]/v" />
+            <OutputColumn id="1" quantity="iafPop[1]/v" />
+            <OutputColumn id="2" quantity="iafPop[2]/v" />
+            <OutputColumn id="3" quantity="iafPop[3]/v" />
+            <OutputColumn id="4" quantity="iafPop[4]/v" />
+            <OutputColumn id="5" quantity="iafPop[5]/v" />
+            <OutputColumn id="6" quantity="iafPop[6]/v" />
+            <OutputColumn id="7" quantity="iafPop[7]/v" />
+            <OutputColumn id="8" quantity="iafPop[8]/v" />
+        </OutputFile>
 
     </Simulation>
 

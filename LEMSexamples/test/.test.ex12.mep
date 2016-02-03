@@ -1,0 +1,22 @@
+system: Test Ex0
+
+experiments:
+    v0:
+        expected:
+            spike times: [100.32]
+    v1:
+        expected:
+            spike times: [110.695]
+    v3:
+        expected:
+            spike times: [50.975, 100.705, 130.26]
+    v4:
+        expected:
+            spike times: [63.16, 112.33, 141.38]
+    v6:
+        expected:
+            spike times: [97.055, 124.68, 153.71, 183.23, 212.985, 242.855, 272.79]
+    v7:
+        expected:
+            spike times: [75.115, 102.76, 132.045, 161.8, 191.725, 221.705, 251.7, 281.7]
+
