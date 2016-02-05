@@ -29,7 +29,7 @@
 <Include file="../examples/NML2_Inputs.nml"/>
 
 <network id="net1">
-    <population id="izhPop" component="RS" size="9"/>
+    <population id="izhPop" component="RS" size="11"/>
 
     <population id="spikeArrPop" component="spkArr" size="1"/>
     <population id="spikeGenRegularPop" component="spikeGenRegular" size="1"/>
@@ -41,6 +41,8 @@
     <explicitInput target="izhPop[2]" input="rg0" destination="synapses"/>
     <explicitInput target="izhPop[3]" input="vClamp0" destination="synapses"/>
     <explicitInput target="izhPop[8]" input="poissonFiringSyn" destination="synapses"/>
+    <explicitInput target="izhPop[9]" input="ci0" destination="synapses"/>
+    <!--<explicitInput target="izhPop[10]" input="transPoissonFiringSyn" destination="synapses"/>-->
     
     <synapticConnection from="spikeArrPop[0]" to="izhPop[4]" synapse="syn1" destination="synapses"/>
     <synapticConnection from="spikeGenRegularPop[0]" to="izhPop[5]" synapse="syn1" destination="synapses"/>
@@ -77,6 +79,7 @@
         <Line id ="Regular spike gen t since" quantity="spikeGenRegularPop[0]/tsince" scale="1ms"  color="#3fffaa" timeScale="1ms"/>
         <Line id ="Poisson spike gen t since" quantity="spikeGenRandomPop[0]/tsince" scale="1ms"  color="#3ff9999" timeScale="1ms"/>
         <Line id ="Spike array t since" quantity="spikeArrPop[0]/tsince" scale="1ms"  color="#3faa99" timeScale="1ms"/>
+        <!--<Line id ="Transient poisson spike gen" quantity="izhPop[10]/transPoissonFiringSyn/tsince" scale="1ms"  color="#000000" timeScale="1ms"/>-->
     </Display>
     
     <Display id="d4" title="Ex16: Izhikevich cell, spiking inputs" timeScale="1ms" xmin="-20" xmax="320" ymin="-61" ymax="-56">
@@ -88,6 +91,8 @@
 	    color="#01A9DB" timeScale="1ms"/>
       <Line id="poisson spike gen" quantity="izhPop[7]/v" scale="1mV"
 	    color="#8000FF" timeScale="1ms"/>
+      <!--<Line id="transient poisson spike gen" quantity="izhPop[10]/v" scale="1mV"
+	    color="#ff00FF" timeScale="1ms"/>-->
     </Display>
     
     <Display id="d5" title="Ex16: Izhikevich cell, poison firing synapse" timeScale="1ms" xmin="-20" xmax="320" ymin="-80" ymax="45">
@@ -96,6 +101,11 @@
         <Line id ="poison firing synapse i" quantity="izhPop[8]/poissonFiringSyn/i" scale="0.1nA"  color="#333333" timeScale="1ms"/>
         <Line id ="poison firing synapse time since" quantity="izhPop[8]/poissonFiringSyn/tsince" scale="1ms"  color="#3fffaa" timeScale="1ms"/>
     </Display>
+    
+    <!--<Display id="d6" title="Ex16: Izhikevich cell, compound input" timeScale="1ms" xmin="-20" xmax="320" ymin="-110" ymax="45">
+        <Line id ="izh9 v (mV)" quantity="izhPop[9]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
+        <Line id ="compound i (nA)" quantity="izhPop[9]/ci0/i" scale="1nA"  color="#333333" timeScale="1ms"/>
+    </Display>-->
     
 
     <!-- <OutputFile id="of1" fileName="results/ex16_g.dat">
@@ -106,11 +116,13 @@
         <OutputColumn id="v0" quantity="izhPop[0]/v" />
         <OutputColumn id="v1" quantity="izhPop[1]/v" />
         <OutputColumn id="v2" quantity="izhPop[2]/v" />
-        <OutputColumn id="v2" quantity="izhPop[3]/v" />
-        <OutputColumn id="v2" quantity="izhPop[4]/v" />
-        <OutputColumn id="v2" quantity="izhPop[5]/v" />
-        <OutputColumn id="v2" quantity="izhPop[6]/v" />
-        <OutputColumn id="v2" quantity="izhPop[7]/v" />
+        <OutputColumn id="v3" quantity="izhPop[3]/v" />
+        <OutputColumn id="v4" quantity="izhPop[4]/v" />
+        <OutputColumn id="v5" quantity="izhPop[5]/v" />
+        <OutputColumn id="v6" quantity="izhPop[6]/v" />
+        <OutputColumn id="v7" quantity="izhPop[7]/v" />
+        <OutputColumn id="v8" quantity="izhPop[8]/v" />
+        <OutputColumn id="v9" quantity="izhPop[9]/v" />
     </OutputFile>
 
 </Simulation>
