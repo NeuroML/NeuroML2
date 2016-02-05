@@ -206,6 +206,64 @@
 
     </ComponentType>
     
+    
+    <ComponentType name="transientPoissonFiringSynapse"
+                   description="Poisson spike generator with delay and duration connected to single synapse providing an input current
+                              .Similar to ComponentType poissonFiringSynapse."
+                   extends="baseVoltageDepPointCurrentSpiking">
+        
+        <Parameter name="averageRate" dimension="per_time"/>
+        
+        <Parameter name="delay" dimension="time"/>
+        <Parameter name="duration" dimension="time" />
+        
+        <DerivedParameter name="averageIsi" dimension="time" value="1 / averageRate"/>
+        
+        <ComponentReference name="synapse" type="baseSynapse"/>
+        
+        
+        <EventPort name="spike" direction="out" description="Port on which spikes are emitted"/>
+        
+        <!--TODO: remove! Only required as EventConnection is used in explicitInput to
+        connect inputs to cells. Events aren't passed! ... -->
+        <EventPort name="in" direction="in" description="Note this is not used here. Will be removed in future"/>
+
+        <Exposure name="tsince" dimension="time" description="Time since the last spike was emitted"/>
+        
+        <Path name="spikeTarget"/>
+        
+        <Dynamics>
+            <StateVariable name="tsince" dimension="time" exposure="tsince"/>
+            <StateVariable name="isi" dimension="time"/>
+            
+            <DerivedVariable name="i" dimension="current" exposure="i" select="synapse/i"/>
+
+            <TimeDerivative variable="tsince" value="1"/>
+
+            <OnStart>
+                <StateAssignment variable="tsince" value="0"/>
+                <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
+            </OnStart>
+            
+           
+              <OnCondition test="tsince .gt. isi .and. t .geq. delay .and. t .lt. duration + delay">
+                   <StateAssignment variable="tsince" value="0"/>
+                   <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
+                   <EventOut port="spike"/>
+              </OnCondition>
+          
+        </Dynamics>
+        <Structure>
+            <ChildInstance component="synapse"/>
+            
+            <With instance="this" as="a"/>
+            <With instance="spikeTarget" as="b"/>
+            
+            <EventConnection from="a" to="b"/>
+        </Structure>
+
+    </ComponentType>
+    
 
     <ComponentType name="pulseGenerator" extends="basePointCurrent"
                    description="Generates a constant current pulse of a certain _amplitude for a specified _duration after a _delay"> <!-- Note: a synpase also extends basePointCurrent -->
