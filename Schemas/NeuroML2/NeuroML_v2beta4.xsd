@@ -531,7 +531,15 @@
                     minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="sineGenerator" type="SineGenerator"
                     minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="sineGeneratorDL" type="SineGeneratorDL"
+                    minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="rampGenerator" type="RampGenerator"
+                    minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="rampGeneratorDL" type="RampGeneratorDL"
+                    minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="compoundInput" type="CompoundInput"
+                    minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="compoundInputDL" type="CompoundInputDL"
                     minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="voltageClamp" type="VoltageClamp"
                     minOccurs="0" maxOccurs="unbounded"/>
@@ -544,6 +552,8 @@
             <xs:element name="spikeGeneratorPoisson" type="SpikeGeneratorPoisson"
                     minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="poissonFiringSynapse" type="PoissonFiringSynapse"
+                    minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="transientPoissonFiringSynapse" type="TransientPoissonFiringSynapse"
                     minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:group>
@@ -2025,6 +2035,24 @@
         </xs:complexContent>
     </xs:complexType>
 
+    <xs:complexType name="SineGeneratorDL">
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+                <xs:attribute name="delay" type="Nml2Quantity_time"
+                              use="required"/>
+                <xs:attribute name="phase" type="Nml2Quantity_none"
+                              use="required"/>
+                <xs:attribute name="duration" type="Nml2Quantity_time"
+                              use="required"/>
+                <xs:attribute name="amplitude"
+                              type="Nml2Quantity_none"
+                              use="required"/>
+                <xs:attribute name="period" type="Nml2Quantity_time"
+                              use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
 
     <xs:complexType name="RampGenerator">
         <xs:complexContent>
@@ -2042,6 +2070,58 @@
                 <xs:attribute name="baselineAmplitude"
                               type="Nml2Quantity_current"
                               use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="RampGeneratorDL">
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+                <xs:attribute name="delay" type="Nml2Quantity_time"
+                              use="required"/>
+                <xs:attribute name="duration" type="Nml2Quantity_time"
+                              use="required"/>
+                <xs:attribute name="startAmplitude"
+                              type="Nml2Quantity_none"
+                              use="required"/>
+                <xs:attribute name="finishAmplitude"
+                              type="Nml2Quantity_none"
+                              use="required"/>
+                <xs:attribute name="baselineAmplitude"
+                              type="Nml2Quantity_none"
+                              use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+
+    <xs:complexType name="CompoundInput">
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+                <xs:sequence>
+                    <xs:element name="pulseGenerator" type="PulseGenerator"
+                                minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="sineGenerator" type="SineGenerator"
+                        minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="rampGenerator" type="RampGenerator"
+                        minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+
+    <xs:complexType name="CompoundInputDL">
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+                <xs:sequence>
+                    <xs:element name="pulseGeneratorDL" type="PulseGeneratorDL"
+                                minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="sineGeneratorDL" type="SineGeneratorDL"
+                        minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="rampGeneratorDL" type="RampGeneratorDL"
+                        minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>

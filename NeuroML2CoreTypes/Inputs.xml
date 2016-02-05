@@ -187,13 +187,13 @@
                 <StateAssignment variable="tsince" value="0"/>
                 <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
             </OnStart>
-
-            <OnCondition test="tsince .gt. isi">
-                <StateAssignment variable="tsince" value="0"/>
-                <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
-                <EventOut port="spike"/>
-            </OnCondition>
             
+            <OnCondition test="tsince .gt. isi">
+                   <StateAssignment variable="tsince" value="0"/>
+                   <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
+                   <EventOut port="spike"/>
+              </OnCondition>
+          
         </Dynamics>
         <Structure>
             <ChildInstance component="synapse"/>
@@ -208,8 +208,8 @@
     
     
     <ComponentType name="transientPoissonFiringSynapse"
-                   description="Poisson spike generator with delay and duration connected to single synapse providing an input current
-                              .Similar to ComponentType poissonFiringSynapse."
+                   description="Poisson spike generator with delay and duration connected to single synapse providing an input current. 
+                      Similar to ComponentType poissonFiringSynapse."
                    extends="baseVoltageDepPointCurrentSpiking">
         
         <Parameter name="averageRate" dimension="per_time"/>
@@ -298,6 +298,48 @@
 
         </Dynamics>
     </ComponentType>
+    
+    
+
+    <ComponentType name="compoundInput" extends="basePointCurrent"
+                   description="Generates a current which is the sum of all its child _basePointCurrent_ elements"> 
+
+        <Children name="currents" type="basePointCurrent"/>
+
+        <!--TODO: remove! Only required as EventConnection is used in explicitInput to
+        connect inputs to cells. Events aren't passed! ... -->
+        <EventPort name="in" direction="in" description="Note this is not used here. Will be removed in future"/>
+
+        <Dynamics>
+
+            <DerivedVariable name="i" dimension="current" exposure="i" select="currents[*]/i" reduce="add"/>
+
+            <OnEvent port="in"><!--TODO: remove, see above... -->
+            </OnEvent>
+
+
+        </Dynamics>
+    </ComponentType>
+
+    <ComponentType name="compoundInputDL" extends="basePointCurrentDL"
+                   description="Generates a current which is the sum of all its child _basePointCurrentDL_ elements"> 
+
+        <Children name="currents" type="basePointCurrentDL"/>
+
+        <!--TODO: remove! Only required as EventConnection is used in explicitInput to
+        connect inputs to cells. Events aren't passed! ... -->
+        <EventPort name="in" direction="in" description="Note this is not used here. Will be removed in future"/>
+
+        <Dynamics>
+
+            <DerivedVariable name="I" dimension="none" exposure="I" select="currents[*]/I" reduce="add"/>
+
+            <OnEvent port="in"><!--TODO: remove, see above... -->
+            </OnEvent>
+
+
+        </Dynamics>
+    </ComponentType>
 
 
     <ComponentType name="pulseGeneratorDL" extends="basePointCurrentDL"
@@ -362,6 +404,39 @@
 
             <OnCondition test="t .geq. duration+delay">
                 <StateAssignment variable="i" value="0"/>
+            </OnCondition>
+
+        </Dynamics>
+    </ComponentType>
+
+    <ComponentType name="sineGeneratorDL" extends="basePointCurrentDL"
+                   description="Generates a sinusoidally varying current after a time _delay, for a fixed _duration. The _period and maximum _amplitude of the current can be set as well as the _phase at which to start.">
+
+        <Parameter name="phase" dimension="none"/>
+        <Parameter name="delay" dimension="time"/>
+        <Parameter name="duration" dimension="time"/>
+        <Parameter name="amplitude" dimension="none"/>
+        <Parameter name="period" dimension="time"/>
+
+        <EventPort name="in" direction="in"/>
+
+        <Dynamics>
+
+            <StateVariable name="I" exposure="I" dimension="none"/>
+
+            <OnEvent port="in"><!--TODO: remove-->
+            </OnEvent>
+
+            <OnCondition test="t .lt. delay">
+                <StateAssignment variable="I" value="0"/>
+            </OnCondition>
+
+            <OnCondition test="t .geq. delay .and. t .lt. duration+delay">
+                <StateAssignment variable="I" value="amplitude * sin(phase + (2 * 3.14159265 * (t-delay)/period) )"/>
+            </OnCondition>
+
+            <OnCondition test="t .geq. duration+delay">
+                <StateAssignment variable="I" value="0"/>
             </OnCondition>
 
         </Dynamics>
