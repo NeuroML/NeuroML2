@@ -2131,6 +2131,24 @@
         </xs:complexContent>
     </xs:complexType>
 
+   <xs:complexType name="TransientPoissonFiringSynapse">
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+                <xs:attribute name="averageRate" type="Nml2Quantity_pertime"
+                              use="required"/>
+                <xs:attribute name="delay" type="Nml2Quantity_time"
+                              use="required"/>
+                <xs:attribute name="duration" type="Nml2Quantity_time"
+                              use="required"/>
+                <xs:attribute name="synapse" type="xs:string"
+                              use="required"/>
+                <xs:attribute name="spikeTarget" type="xs:string"
+                              use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
 
 
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
