@@ -240,17 +240,21 @@
 
             <TimeDerivative variable="tsince" value="1"/>
 
-            <OnStart>
+           <OnStart>
                 <StateAssignment variable="tsince" value="0"/>
-                <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
-            </OnStart>
+                <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))  +delay"/>
+           </OnStart>
             
+            
+           <OnCondition test="t .geq. delay+duration">
+                <StateAssignment variable="tsince" value="0"/>
+           </OnCondition>
            
-              <OnCondition test="tsince .gt. isi .and. t .geq. delay .and. t .lt. duration + delay">
-                   <StateAssignment variable="tsince" value="0"/>
-                   <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
+           <OnCondition test="tsince .gt. isi ">
+                   <StateAssignment variable="tsince" value="delay"/>
+                   <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1)) + delay"/>
                    <EventOut port="spike"/>
-              </OnCondition>
+           </OnCondition>
           
         </Dynamics>
         <Structure>
