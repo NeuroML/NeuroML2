@@ -83,11 +83,11 @@
 
             <membraneProperties> 
 
-                <channelPopulation id="naChansDend" ionChannel="NaConductance" segment="2" number="120000" erev="50mV"/>   <!-- Use population instead of density -->
+                <channelPopulation id="naChansDend" ionChannel="NaConductance" segment="2" number="120000" erev="50mV" ion="na"/>   <!-- Use population instead of density -->
 
-                <channelDensity id="pasChans" ionChannel="pas" condDensity="3.0 S_per_m2" erev="-70mV"/> <!-- no segmentGroup => all segments! -->
+                <channelDensity id="pasChans" ionChannel="pas" condDensity="3.0 S_per_m2" erev="-70mV" ion="non_specific"/> <!-- no segmentGroup => all segments! -->
 
-                <channelDensity id="naChansSoma" ionChannel="NaConductance" segmentGroup="soma_group" condDensity="120.0 mS_per_cm2" erev="50mV"/>
+                <channelDensity id="naChansSoma" ionChannel="NaConductance" segmentGroup="soma_group" condDensity="120.0 mS_per_cm2" erev="50mV" ion="na"/>
 
                 <specificCapacitance segmentGroup="soma_group" value="1.0 uF_per_cm2"/>
 

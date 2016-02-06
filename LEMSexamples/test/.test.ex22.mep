@@ -1,0 +1,11 @@
+system: Test Ex22
+
+experiments:
+    Vs:
+        expected:
+            spike times: [13.83, 92.53, 435.82, 933.57, 1431.36]
+
+    Vd:
+        expected:
+            spike times: [17.07, 96.88, 440.55, 938.3, 1436.09]
+    

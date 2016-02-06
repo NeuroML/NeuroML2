@@ -11,7 +11,7 @@
 
   <iafRefCell id="iaf" C="250pF" thresh="1mV" reset="-1mV" leakConductance="12.5nS" leakReversal="0mV" refract="2ms"/>
 
-  <alphaCurrentSynapse id="alphaSyn" tauSyn="1.0ms"/>
+  <alphaCurrentSynapse id="alphaSyn" tau="1.0ms" ibase="1nA"/>
 
   <spikeArray id="spks">
     <spike id="0" time="100 ms"/>
@@ -23,10 +23,10 @@
   <network id="net">
     <population component="iaf" id="iafPop" size="1"/>
     <population id="spksPop" component="spks" size="1"/>
-    <synapticCurrentWeightDelay from="spksPop[0]" to="iafPop[0]" synapse="alphaSyn" destination="synapses" weight="0.05 nA" delay="1ms"/>
+    <synapticConnectionWD from="spksPop[0]" to="iafPop[0]" synapse="alphaSyn" destination="synapses" weight="0.05"  delay="1ms"/>
   </network>
 
-  <Simulation id="sim1" length="300ms" step="0.01ms" target="net">
+  <Simulation id="sim1" length="300ms" step="0.001ms" target="net">
     <Display id="display_0" timeScale="1ms" title="IafRef cell: Vm" xmin="-20" xmax="320" ymin="-1" ymax="1">
       <Line color="#000000" id="iaf_v" quantity="iafPop[0]/v" scale="1mV" timeScale="1ms"/>
     </Display>

@@ -60,6 +60,7 @@
                             ionChannel="HH_Na"
                             segmentGroup="soma_group"
                             condDensity="120.0 mS_per_cm2"
+                            ion="na"
                             erev="50mV"/>  <!-- Temporarily specifying erev in the channelDensity element-->
 
             <!-- Ions present inside the cell. Note: a fixed reversal potential is specified here  

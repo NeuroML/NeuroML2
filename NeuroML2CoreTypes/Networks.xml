@@ -94,9 +94,10 @@
 
     <ComponentType name="projection"
         description="Projection from one population to another. Currently it's better to define an explicit list of connections, using _explicitConnection_. Work in progress...">
-        <!--TODO: allow more than one...-->
-        <Child name="synapseComponent" type="synapseComponent"/>
+        <!--TODO: allow more than one...
+        <Child name="synapseComponent" type="synapseComponent"/>-->
         <Children name="connections" type="connection"/>
+        <Children name="connectionsWD" type="connectionWD"/>
         <ComponentReference name="synapse" type="baseSynapse"/>
         <Path name="presynapticPopulation"/>
         <Path name="postsynapticPopulation"/>
@@ -108,8 +109,15 @@
     </ComponentType>
 
 
+    <ComponentType name="explicitConnection"
+        description="Explicit event connection between components">
+        <Path name="from"/>
+        <Path name="to"/>
+        <Text name="targetPort"/>
+    </ComponentType>
+
     <ComponentType name="connection"
-        description="Explicit event connection directly between named components, which gets processed via a new instance of a _synapse component which is created on the target component. Normally contained inside a _projection_ element.">
+        description="Event connection directly between named components, which gets processed via a new instance of a _synapse component which is created on the target component. Normally contained inside a _projection_ element.">
 
         <Path name="preCellId"/>
         <Path name="postCellId"/>
@@ -125,14 +133,6 @@
             <EventConnection from="a" to="b" receiver="../synapse" receiverContainer="destination" sourcePort="sourcePort" targetPort="targetPort"/>
         </Structure>
 
-    </ComponentType>
-
-
-    <ComponentType name="explicitConnection"
-        description="Explicit event connection between components">
-        <Path name="from"/>
-        <Path name="to"/>
-        <Text name="targetPort"/>
     </ComponentType>
 
 
@@ -175,29 +175,31 @@
 
     </ComponentType>
 
+    <ComponentType name="connectionWD"
+                   description="Event connection between named components, which gets processed via a new instance of a synapse component which is created on the target component, includes setting of _weight and _delay for the synaptic connection"
+                   extends="connection">
 
-    <ComponentType name="synapticCurrentWeightDelay"
-                   description="Explicit event connection between named components, which gets processed via a new instance of a _synapse component which is created on the target component, includes setting of _weight and _delay for the synaptic connection"
-                   extends="synapticConnection">
-
-        <Parameter name="weight" dimension="current"/>
+        <Parameter name="weight" dimension="none"/>
         <Parameter name="delay" dimension="time"/>
-        <Path name="from"/>
-        <Path name="to"/>
-
+        <Path name="preCellId"/>
+        <Path name="postCellId"/>
+        <Text name="destination"/>
+        <Text name="preFractionAlong"/>
+        <Text name="postFractionAlong"/>
+        <Text name="preSegmentId"/>
+        <Text name="postSegmentId"/>
+        
         <Structure>
-            <With instance="from" as="a"/>
-            <With instance="to" as="b"/>
-            <!--<EventConnection from="a" to="b" receiver="synapse" receiverContainer="destination" sourcePort="sourcePort" targetPort="targetPort" delay="delay">-->
-            <EventConnection from="a" to="b" receiver="synapse" delay="delay">
-                <!--TODO: put back in! -->
+            <With instance="preCellId" as="a"/>
+            <With instance="postCellId" as="b"/>
+            <EventConnection from="a" to="b" receiver="../synapse" delay="delay">
                 <Assign property="weight" value="weight"/>
             </EventConnection>
         </Structure>
 
     </ComponentType>
-    
-    
+
+
     <ComponentType name="electricalConnection"
                    description="To enable Gap junctions, NOTE: STILL IN DEVELOPMENT!!!!">
         
@@ -217,10 +219,34 @@
 
     </ComponentType>
     
+    <ComponentType name="electricalConnectionInstance"
+                   description="To enable Gap junctions, NOTE: STILL IN DEVELOPMENT!!!!">
+        
+        <ComponentReference name="synapse" type="gapJunction"/>
+
+        <ComponentRequirement name="presynapticPopulation"/>
+        <ComponentRequirement name="postsynapticPopulation"/>
+        
+        <Path name="preCell"/>
+        <Path name="postCell"/>
+
+        <Text name="preFractionAlong"/>
+        <Text name="postFractionAlong"/>
+        <Text name="preSegment"/>
+        <Text name="postSegment"/>
+
+        <Structure>
+            <With instance="preCell" as="a"/>
+            <With instance="postCell" as="b"/>
+            <Tunnel name="peer" endA="a" endB="b" componentA="synapse" componentB="synapse"/>
+        </Structure>
+
+    </ComponentType>
     
     <ComponentType name="electricalProjection"
                    description="To enable Gap junctions, NOTE: STILL IN DEVELOPMENT!!!!">
         <Children name="connections" type="electricalConnection"/>
+        <Children name="connections" type="electricalConnectionInstance"/>
         <ComponentReference name="presynapticPopulation" type="population" local="true"/>
         <ComponentReference name="postsynapticPopulation" type="population" local="true"/>
     </ComponentType>

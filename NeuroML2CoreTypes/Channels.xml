@@ -579,6 +579,9 @@
 
         <Constant name="SEC" dimension="time" value="1s"/>
         <Child name="rate" type="baseHHRate"/>
+        <!--Note these should be inherited from the base KSTransition, but they're not...-->
+        <Link name="from" type="KSState"/>
+        <Link name="to" type="KSState"/>
    
         <Dynamics>
             <DerivedVariable name="rf0" dimension="per_time" select="rate/r"/>
@@ -595,6 +598,9 @@
 
         <Constant name="SEC" dimension="time" value="1s"/>
         <Child name="rate" type="baseHHRate"/>
+        <!--Note these should be inherited from the base KSTransition, but they're not...-->
+        <Link name="from" type="KSState"/>
+        <Link name="to" type="KSState"/>
 
         <Dynamics>
             <DerivedVariable name="rr0" dimension="per_time" select="rate/r"/>
@@ -629,11 +635,16 @@
                    description="A gate which consists of multiple _KSState_s and _KSTransition_s giving the rates of transition between them">
         <Children name="states" type="KSState"/>
         <Children name="transitions" type="KSTransition"/>
+        <Children name="q10Settings" type="baseQ10Settings"/>
 
+        <Exposure name="rateScale" dimension="none"/>
+    
         <Dynamics>
 
             <DerivedVariable name="q" exposure="q" dimension="none" select="states[*]/q" reduce="add"/>
-            <DerivedVariable name="fopen" exposure="fcond" dimension="none" value="q^instances"/>
+            <DerivedVariable name="fcond" exposure="fcond" dimension="none" value="q^instances"/>
+            
+            <DerivedVariable name="rateScale" exposure="rateScale" dimension="none" select="q10Settings[*]/q10" reduce="multiply"/>
 
             <KineticScheme name="ks" nodes="states" stateVariable="occupancy"
                            edges="transitions" edgeSource="from" edgeTarget="to"

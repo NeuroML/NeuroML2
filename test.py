@@ -104,16 +104,6 @@ if __name__ == '__main__':
     else:
         print("NeuroML schemas in libNeuroML are in sync.")
 
-    if not check_same_file('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../org.neuroml.model/src/main/resources/Schemas/NeuroML2/NeuroML_v2alpha.xsd'):
-        print("FAIL: NeuroML alpha schemas in org.neuroml.model not in sync!")
-    else:
-        print("NeuroML alpha schemas in org.neuroml.model are in sync.")
-
-    if not check_same_file('Schemas/NeuroML2/%s'%nml2_schema_name,  '../org.neuroml.model/src/main/resources/Schemas/NeuroML2/%s'%nml2_schema_name):
-        print("FAIL: NeuroML beta schemas in org.neuroml.model not in sync!")
-    else:
-        print("NeuroML beta schemas in org.neuroml.model are in sync.")
-
 
     if os.path.isdir('../neuroConstruct') and not check_same_file('Schemas/NeuroML2/NeuroML_v2alpha.xsd', '../neuroConstruct/NeuroML2/Schemas/NeuroML2/NeuroML_v2alpha.xsd'):
         print("FAIL: NeuroML alpha schemas in neuroConstruct not in sync!")
@@ -125,44 +115,8 @@ if __name__ == '__main__':
         print("NeuroML beta schemas in neuroConstruct are in sync.")
 
     print "--------------------------------------------------"
-    print "    Checking local copies of Comp Type defs & examples"
-
-
-    are_files_identical_list = []
-    for filename in lems_def_list:
-        if filename.endswith("xml") and not filename.startswith("Ex"):
-            main_def = lems_def_dir+"/"+filename
-            copy_org_neuroml_model = "../org.neuroml.model/src/main/resources/"+lems_def_dir+"/"+filename
-            are_files_identical_list.append(check_same_file(main_def, copy_org_neuroml_model))
-    if not all(are_files_identical_list):
-        print("FAIL: NeuroML core component types definitions in org.neuroml.model are not in sync!")
-    else:
-        print("NeuroML core component types definitions in org.neuroml.model are in sync.")
-
-    are_files_identical_list = []
-    for filename in lems_exs_list:
-        if filename.endswith("xml") and not filename.startswith("Ex"):
-            main_def = lems_exs_dir+"/"+filename
-            copy_org_neuroml_model = "../org.neuroml.model/src/main/resources/"+lems_exs_dir+"/"+filename
-            are_files_identical_list.append(check_same_file(main_def, copy_org_neuroml_model))
-    if not all(are_files_identical_list):
-        print("FAIL: NeuroML/LEMS examples in org.neuroml.model are not in sync!")
-    else:
-        print("NeuroML/LEMS examples in org.neuroml.model are in sync.")
-        
-        
-
-    are_files_identical_list = []
-    for filename in nml2_ex_list:
-        if filename.endswith("nml"):
-            main_ex = nml2_ex_dir+"/"+filename
-            copy_org_neuroml_model = "../org.neuroml.model/src/main/resources/"+nml2_ex_dir+"/"+filename
-            are_files_identical_list.append(check_same_file(main_ex, copy_org_neuroml_model))
-    if not all(are_files_identical_list):
-        print("FAIL: NeuroML examples in org.neuroml.model are not in sync!")
-    else:
-        print("NeuroML examples in org.neuroml.model are in sync.")
-
+    print "    Checking local copies of examples"
+    
     are_files_identical_list = []
     for filename in lems_master_ex_list:
         if filename.endswith("xml"):

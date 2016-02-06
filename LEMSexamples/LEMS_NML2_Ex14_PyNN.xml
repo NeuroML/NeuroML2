@@ -17,57 +17,7 @@
     <Include file="Networks.xml"/>
     <Include file="Simulation.xml"/>
     
-    
-    
-    <IF_curr_alpha id="IF_curr_alpha_pop_IF_curr_alpha" cm="1.0" i_offset="0.9" tau_m="20.0" tau_refrac="10.0" 
-        tau_syn_E="0.5" tau_syn_I="0.5" v_init="-65" v_reset="-62.0" v_rest="-65.0" v_thresh="-52.0"/>
-    
-    <IF_curr_exp id="IF_curr_exp_pop_IF_curr_exp" cm="1.0" i_offset="1.0" tau_m="20.0" tau_refrac="8.0"
-    tau_syn_E="5.0" tau_syn_I="5.0" v_init="-65" v_reset="-70.0" v_rest="-65.0" v_thresh="-50.0"/>
-    
-    <IF_cond_alpha id="IF_cond_alpha_pop_IF_cond_alpha" cm="1.0" e_rev_E="0.0" e_rev_I="-70.0" i_offset="0.9"  
-        tau_m="20.0" tau_refrac="5.0" tau_syn_E="0.3" tau_syn_I="0.5" v_init="-65" v_reset="-65.0" v_rest="-65.0" v_thresh="-50.0"/>
-    
-    <IF_cond_exp id="IF_cond_exp_pop_IF_cond_exp" cm="1.0" e_rev_E="0.0" e_rev_I="-70.0" i_offset="1.0" 
-        tau_m="20.0" tau_refrac="5.0" tau_syn_E="5.0" tau_syn_I="5.0" v_init="-65" v_reset="-68.0" v_rest="-65.0" v_thresh="-52.0"/>
-    
-    <EIF_cond_exp_isfa_ista id="EIF_cond_exp_isfa_ista_pop_EIF_cond_exp_isfa_ista" a="0.0" b="0.0805" cm="0.281"
-        delta_T="2.0" e_rev_E="0.0" e_rev_I="-80.0" i_offset="0.6" tau_m="9.3667" tau_refrac="0.0" tau_syn_E="5.0"
-        tau_syn_I="5.0" tau_w="144.0" v_init="-65" v_reset="-68.0" v_rest="-70.6" v_spike="-40.0" v_thresh="-52.0"/>
-    
-    <HH_cond_exp id="HH_cond_exp_pop_HH_cond_exp" cm="0.2" e_rev_E="0.0" e_rev_I="-80.0" e_rev_K="-90.0"
-    e_rev_Na="50.0" e_rev_leak="-65.0" g_leak="0.01" gbar_K="6.0" gbar_Na="20.0" i_offset="0.2" tau_syn_E="0.2"
-    tau_syn_I="2.0" v_init="-65" v_offset="-63.0"/>
-    
-    <IF_cond_exp id="silent_cell_1" cm="1.0" e_rev_E="0.0" e_rev_I="-70.0" i_offset="0"
-        tau_m="20.0" tau_refrac="5.0" tau_syn_E="5" tau_syn_I="10" v_init="-65" v_reset="-65.0" v_rest="-65.0" v_thresh="-50.0"/>
-    
-    <IF_cond_alpha id="silent_cell_2" cm="1.0" e_rev_E="0.0" e_rev_I="-70.0" i_offset="0"
-        tau_m="20.0" tau_refrac="5.0" tau_syn_E="5" tau_syn_I="10" v_init="-65" v_reset="-65.0" v_rest="-65.0" v_thresh="-50.0"/>
-    
-    <expCondSynapse id="ps1" tau_syn="5" e_rev="0"/>
-    <alphaCondSynapse id="ps2" tau_syn="5" e_rev="0"/>
-    
-    <SpikeSourcePoisson id="spikes1" start="50ms" duration="400ms" rate="50Hz"/>
-    <SpikeSourcePoisson id="spikes2" start="50ms" duration="400ms" rate="80Hz"/>
-    
-    <network id="netAll">
-        <population component="IF_curr_alpha_pop_IF_curr_alpha" id="pop_IF_curr_alpha" size="1"/>
-        <population component="IF_curr_exp_pop_IF_curr_exp" id="pop_IF_curr_exp" size="1"/>
-        <population component="IF_cond_alpha_pop_IF_cond_alpha" id="pop_IF_cond_alpha" size="1"/>
-        <population component="IF_cond_exp_pop_IF_cond_exp" id="pop_IF_cond_exp" size="1"/>
-        <population component="EIF_cond_exp_isfa_ista_pop_EIF_cond_exp_isfa_ista" id="pop_EIF_cond_exp_isfa_ista" size="1"/>
-        <population component="HH_cond_exp_pop_HH_cond_exp" id="pop_HH_cond_exp" size="1"/>
-    
-        <population component="silent_cell_2" id="pop_target_1" size="1"/>
-        <population component="silent_cell_2" id="pop_target_2" size="1"/>
-        
-        <population component="spikes1" id="pop_spikes1" size="1"/>
-        <population component="spikes2" id="pop_spikes2" size="1"/>
-         
-        <synapticConnectionWD from="pop_EIF_cond_exp_isfa_ista[0]" to="pop_target_1[0]" synapse="ps1" weight="0.01" delay="10ms"/>
-        <synapticConnectionWD from="pop_EIF_cond_exp_isfa_ista[0]" to="pop_target_2[0]" synapse="ps2" weight="0.01" delay="20ms"/>
-    </network>
+    <Include file="../examples/NML2_PyNNCells.nml"/>
     
     
     <Simulation id="sim1" length="500.0ms" step="0.05ms" target="netAll">
@@ -88,8 +38,8 @@
             <Line color="#00aaFF" id="target2" quantity="pop_target_2[0]/v" scale="1mV" timeScale="1ms"/>
         </Display>
         <Display id="display_4" timeScale="1ms" title="PyNN Target syn conductances" xmin="0" xmax="500" ymin="-0.001" ymax="0.011">
-            <Line color="#0000FF" id="target1_syn_cond" quantity="pop_target_1[0]/ps1/g" scale="1" timeScale="1ms"/>
-            <Line color="#00aaFF" id="target2_syn_cond" quantity="pop_target_2[0]/ps2/g" scale="1" timeScale="1ms"/>
+            <Line color="#0000FF" id="Syn_cond: w=0.01 d=10ms" quantity="pop_target_1[0]/ps1/g" scale="1" timeScale="1ms"/>
+            <Line color="#00aaFF" id="Syn_cond: w=0.005 d=20ms" quantity="pop_target_2[0]/ps2/g" scale="1" timeScale="1ms"/>
         </Display> 
         <Display id="display_5" timeScale="1ms" title="PyNN Spike source" xmin="0" xmax="500" ymin="0" ymax="50">
             <Line color="#0000FF" id="spikes1" quantity="pop_spikes1[0]/tsince" scale="1ms" timeScale="1ms"/>

@@ -51,25 +51,29 @@
 
     <ComponentType name="alphaCurrentSynapse"
                    extends="baseCurrentBasedSynapse"
-                   description="Alpha current synapse: rise time and decay time are both tauSyn.">
+                   description="Alpha current synapse: rise time and decay time are both _tau.">
 
-        <Property name="weight" dimension="current" />
-        <Parameter name="tauSyn" dimension="time" description="Time course for rise and decay"/>
+        <Property name="weight" dimension="none" defaultValue="1"/>
+        <Parameter name="tau" dimension="time" description="Time course for rise and decay"/>
+        <Parameter name="ibase" dimension="current" description="Baseline current increase after receiving a spike"/>
 
         <Dynamics>
-            <StateVariable name="i" exposure="i" dimension="current"/>
-            <StateVariable name="y" dimension="current"/>
+            
+            <StateVariable name="I" dimension="current"/>
+            <StateVariable name="J" dimension="current"/>
+            
+            <DerivedVariable name="i" exposure="i" dimension="current" value="I" />
 
-            <TimeDerivative variable="i" value="(2.7182818284590451*y - i)/tauSyn" />
-            <TimeDerivative variable="y" value="-y/tauSyn" />
+            <TimeDerivative variable="I" value="(2.7182818284590451*J - I)/tau" />
+            <TimeDerivative variable="J" value="-J/tau" />
 
             <OnStart>
-                <StateAssignment variable="i" value="0" />
-                <StateAssignment variable="y" value="0" />
+                <StateAssignment variable="I" value="0" />
+                <StateAssignment variable="J" value="0" />
             </OnStart>
 
             <OnEvent port="in">
-                <StateAssignment variable="y" value="y + weight" />
+                <StateAssignment variable="J" value="J + weight * ibase" />
             </OnEvent>
             
         </Dynamics>
@@ -89,9 +93,12 @@
     </ComponentType>
 
 
+
     <ComponentType name="expOneSynapse"
                    extends="baseConductanceBasedSynapse"
-                   description="Ohmic synapse model whose conductance rises instantaneously by _gbase on receiving an event, and which decays exponentially to zero with time course _tauDecay">
+                   description="Ohmic synapse model whose conductance rises instantaneously by (_gbase * _weight) on receiving an event, and which decays exponentially to zero with time course _tauDecay">
+
+        <Property name="weight" dimension="none" defaultValue="1"/>
 
         <Parameter name="tauDecay" dimension="time" description="Time course of decay"/>
 
@@ -108,17 +115,51 @@
             </OnStart>
 
             <OnEvent port="in">
-                <StateAssignment variable="g" value="g + gbase" />
+                <StateAssignment variable="g" value="g + (weight * gbase)" />
             </OnEvent>
 
         </Dynamics>
     </ComponentType>
 
 
+    <ComponentType name="alphaSynapse"
+                   extends="baseConductanceBasedSynapse"
+                   description="Ohmic synapse model where rise time and decay time are both _tau. Max conductance reached during this time (assuming zero conductance before) is (_gbase * _weight).">
+
+        <Property name="weight" dimension="none" defaultValue="1"/> 
+
+        <Parameter name="tau" dimension="time" description="Time course of rise/decay"/>
+
+        <Dynamics>
+
+            <StateVariable name="g" dimension="conductance" exposure="g"/>
+            <StateVariable name="A" dimension="conductance"/>
+
+            <DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
+
+            <TimeDerivative variable="g" value="(2.7182818284590451 * A - g)/tau" />
+            <TimeDerivative variable="A" value="-A / tau" />
+
+            <OnStart>
+                <StateAssignment variable="g" value="0" />
+                <StateAssignment variable="A" value="0" />
+            </OnStart>
+
+            <OnEvent port="in">
+                <StateAssignment variable="A" value="A + (gbase*weight)" />
+            </OnEvent>
+
+        </Dynamics>
+    </ComponentType>
+
+
+
     <ComponentType name="expTwoSynapse"
                    extends="baseConductanceBasedSynapse"
-                   description="Ohmic synapse model whose conductance waveform on receiving an event has a rise time of _tauRise and a decay time of _tauDecay. Max conductance reached during this time (assuming zero conductance before) is _gbase.">
+                   description="Ohmic synapse model whose conductance waveform on receiving an event has a rise time of _tauRise and a decay time of _tauDecay. Max conductance reached during this time (assuming zero conductance before) is (_gbase * _weight).">
 
+        <Property name="weight" dimension="none" defaultValue="1"/> 
+        
         <Parameter name="tauRise" dimension="time" />
         <Parameter name="tauDecay" dimension="time" />
         
@@ -143,8 +184,8 @@
             </OnStart>
 
             <OnEvent port="in">
-                <StateAssignment variable="A" value="A + waveformFactor" />
-                <StateAssignment variable="B" value="B + waveformFactor" />
+                <StateAssignment variable="A" value="A + (weight * waveformFactor)" />
+                <StateAssignment variable="B" value="B + (weight * waveformFactor)" />
             </OnEvent>
 
         </Dynamics>
@@ -253,12 +294,15 @@
     </ComponentType>
     
 
+
     <ComponentType name="blockingPlasticSynapse"
                    extends="expTwoSynapse"
                    description="Biexponential synapse that allows for
 				optional block and plasticity
 				mechanisms, which can be expressed as
 				child elements.">
+        
+        <Property name="weight" dimension="none" defaultValue="1"/> 
         
         <Children name="plasticityMechanisms" type="basePlasticityMechanism"/>
         <Children name="blockMechanisms" type="baseBlockMechanism"/>
@@ -290,8 +334,8 @@
             </OnStart>
 
             <OnEvent port="in">
-                <StateAssignment variable="A" value="A + plasticityFactor * waveformFactor" />
-                <StateAssignment variable="B" value="B + plasticityFactor * waveformFactor" />
+                <StateAssignment variable="A" value="A + (weight * plasticityFactor * waveformFactor)" />
+                <StateAssignment variable="B" value="B + (weight * plasticityFactor * waveformFactor)" />
                 <EventOut port="relay"/>
             </OnEvent>
         </Dynamics>

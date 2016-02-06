@@ -292,6 +292,53 @@
         </Structure>
 
     </ComponentType>
+    
+    
+    <ComponentType name="channelDensityNernstCa2"
+                   extends="baseChannelDensityCond"
+                   description="This component is similar to the original component type _ channelDensityNernst _ but it is changed in order to have a reversal potential that depends on 2nd independent pool of Ca (ca2)">
+
+        <Constant name="R" dimension="idealGasConstantDims" value="8.3144621 J_per_K_per_mol" description="TODO: Make this a global constant!"/>
+        <Constant name="zCa" dimension="none" value="2" description="TODO: Make this a global constant!"/>
+        <Constant name="F" dimension="charge_per_mole" value="96485.3 C_per_mol" description="TODO: Make this a global constant!"/>
+
+        <ComponentReference name="ionChannel" type="baseIonChannel"/>
+
+        <Exposure name="erev" dimension="voltage"/> 
+        
+        <Requirement name="temperature" dimension="temperature"/>
+        <Requirement name="caConc2" dimension="concentration"/>
+        <Requirement name="caConcExt2" dimension="concentration"/>
+
+        <Text name="segmentGroup"/>
+        <Text name="ion"/> 
+        
+        <Dynamics>
+
+            <DerivedVariable name="channelf" dimension="none" select="ionChannel/fopen"/>
+
+            <ConditionalDerivedVariable name="gDensity" dimension="conductanceDensity" exposure="gDensity">
+                <Case condition="caConcExt2 .gt. 0" value="condDensity * channelf"/>
+                <Case condition="caConcExt2 .leq. 0" value="0"/>
+            </ConditionalDerivedVariable>
+  
+            <ConditionalDerivedVariable name="erev" dimension="voltage" exposure="erev">
+                <Case condition="caConcExt2 .gt. 0" value="(R * temperature / (zCa * F)) * log(caConcExt2 / caConc2)"/>
+                <Case condition="caConcExt2 .leq. 0" value="0"/>
+            </ConditionalDerivedVariable>
+
+            <ConditionalDerivedVariable name="iDensity" dimension="currentDensity" exposure="iDensity">
+                <Case condition="caConcExt2 .gt. 0" value="gDensity * (erev - v)"/>
+                <Case condition="caConcExt2 .leq. 0" value="0"/>
+            </ConditionalDerivedVariable>
+
+        </Dynamics>
+
+        <Structure>
+            <ChildInstance component="ionChannel"/>
+        </Structure>
+
+    </ComponentType>
 
 
     <ComponentType name="channelDensityGHK"
@@ -620,10 +667,51 @@
         </Dynamics>
 
     </ComponentType>
+    
+    
+    <ComponentType name="membraneProperties2CaPools" extends="membraneProperties"
+        description="Variant of membraneProperties with 2 independent Ca pools">
+        
+        <Child name="initMembPotential" type="initMembPotential"/>      
+        <Child name="spikeThresh" type="spikeThresh"/>
+        <Children name="specificCapacitances" type="specificCapacitance"/>
+        <Children name="populations" type="baseChannelPopulation"/>
+        <Children name="channelDensities" type="baseChannelDensity"/>
+          
+        <Exposure name="totChanCurrent" dimension="current"/>
+        <Exposure name="iCa" dimension="current"/>
+        <Exposure name="iCa2" dimension="current"/> 
+        <Exposure name="totSpecCap" dimension="specificCapacitance"/>
+
+        <Requirement name="surfaceArea" dimension="area"/>
+
+        <Dynamics>
+            
+            <DerivedVariable name="totSpecCap" dimension="specificCapacitance" exposure="totSpecCap" select="specificCapacitances[*]/specCap" reduce="add"/>
+
+            <DerivedVariable name="totChanPopCurrent" dimension="current" select="populations[*]/i" reduce="add"/>
+            <DerivedVariable name="totChanDensCurrentDensity" dimension="currentDensity" select="channelDensities[*]/iDensity" reduce="add"/>
+
+            <DerivedVariable name="totChanCurrent" dimension="current" exposure="totChanCurrent" value="totChanPopCurrent + (totChanDensCurrentDensity * surfaceArea)"/>
+
+            <DerivedVariable name="totChanPopCurrentCa" dimension="current" select="populations[ion='ca']/i" reduce="add"/>
+            <DerivedVariable name="totChanDensCurrentDensityCa" dimension="currentDensity" select="channelDensities[ion='ca']/iDensity" reduce="add"/>
+
+            <DerivedVariable name="iCa" dimension="current" exposure="iCa" value="totChanPopCurrentCa + (totChanDensCurrentDensityCa * surfaceArea)"/>
+
+            <DerivedVariable name="totChanPopCurrentCa2" dimension="current" select="populations[ion='ca2']/i" reduce="add"/>
+            <DerivedVariable name="totChanDensCurrentDensityCa2" dimension="currentDensity" select="channelDensities[ion='ca2']/iDensity" reduce="add"/>
+
+            <DerivedVariable name="iCa2" dimension="current" exposure="iCa2" value="totChanPopCurrentCa2 + (totChanDensCurrentDensityCa2 * surfaceArea)"/>
+
+        </Dynamics>
+
+    </ComponentType>
 
 
     <ComponentType name="biophysicalProperties"
         description="The biophysical properties of the _cell_, including the _membraneProperties_ and the _intracellularProperties_">
+        
         <Child name="membraneProperties" type="membraneProperties"/>
 
         <Child name="intracellularProperties" type="intracellularProperties"/>
@@ -637,6 +725,22 @@
     </ComponentType>
 
 
+    <ComponentType name="biophysicalProperties2CaPools"
+                   description="The biophysical properties of the _cell_, including the _membraneProperties2CaPools_ and the _intracellularProperties2CaPools_ for a cell with two Ca pools">
+
+        <Child name="membraneProperties2CaPools" type="membraneProperties2CaPools"/>
+
+        <Child name="intracellularProperties2CaPools" type="intracellularProperties2CaPools"/> 
+
+        <Exposure name="totSpecCap" dimension="specificCapacitance"/>
+
+        <Dynamics>
+            <DerivedVariable name="totSpecCap" dimension="specificCapacitance" exposure="totSpecCap" select="membraneProperties2CaPools/totSpecCap"/>
+        </Dynamics>
+
+    </ComponentType>
+    
+
     <ComponentType name="intracellularProperties"
         description="Biophysical properties related to the intracellular space within the _cell_, such as the _resistivity_ and the list of _species_ present. _caConc and _caConcExt are explicitly exposed here to facilitate accessing these values from other Components, even though _caConcExt is clearly not an intracellular property">
 
@@ -649,6 +753,29 @@
         <Dynamics>
             <DerivedVariable name="caConc" dimension="concentration" exposure="caConc" select="speciesList[ion='ca']/concentration" reduce="add" required="false"/>
             <DerivedVariable name="caConcExt" dimension="concentration" exposure="caConcExt" select="speciesList[ion='ca']/extConcentration" reduce="add" required="false"/>
+        </Dynamics>
+    </ComponentType>
+    
+    
+    <ComponentType name="intracellularProperties2CaPools" extends="intracellularProperties"
+        description="Variant of intracellularProperties with 2 independent Ca pools">
+
+        <Children name="speciesList" type="species"/>
+        <Children name="resistivity" type="resistivity"/>
+
+        <Exposure name="caConc2" dimension="concentration"/>
+        <Exposure name="caConcExt2" dimension="concentration"/>
+        <Exposure name="caConc" dimension="concentration"/>
+        <Exposure name="caConcExt" dimension="concentration"/>
+
+        <Dynamics>
+
+            <DerivedVariable name="caConc2" dimension="concentration" exposure="caConc2" select="speciesList[ion='ca2']/concentration" reduce="add" required="false"/>
+            <DerivedVariable name="caConcExt2" dimension="concentration" exposure="caConcExt2" select="speciesList[ion='ca2']/extConcentration" reduce="add" required="false"/>
+
+            <DerivedVariable name="caConc" dimension="concentration" exposure="caConc" select="speciesList[ion='ca']/concentration" reduce="add" required="false"/>
+            <DerivedVariable name="caConcExt" dimension="concentration" exposure="caConcExt" select="speciesList[ion='ca']/extConcentration" reduce="add" required="false"/>
+  
         </Dynamics>
     </ComponentType>
 
@@ -900,6 +1027,97 @@
         </Dynamics>
 
     </ComponentType>
+    
+    
+    <ComponentType name="cell2CaPools"
+                   extends="cell"
+                   description="Variant of cell with 2 independnet Ca pools. Cell with _segment_s specified in a _morphology_ element along with details on its _biophysicalProperties_. NOTE: this can only be correctly simulated using LEMS when there is a single segment in the cell, and _v of this cell represents the membrane potential in that isopotential segment!!!">
+        
+        <!--<Child name="notes" type="notes"/>
+        <Child name="annotation" type="annotation"/>
+        
+        <Child name="morphology" type="morphology"/>-->
+
+        <Child name="biophysicalProperties2CaPools" type="biophysicalProperties2CaPools"/>
+
+        <Attachments name="synapses" type="basePointCurrent"/>
+
+        <!-- These are inherited from cell
+        <Exposure name="spiking" dimension="none"/>
+        <Exposure name="debugVal" dimension="none"/>
+        <Exposure name="iChannels" dimension="current"/>
+        <Exposure name="iSyn" dimension="current"/>
+        <Exposure name="totSpecCap" dimension="specificCapacitance"/>
+
+        <Exposure name="surfaceArea" dimension="area"/>
+
+        <Exposure name="iCa" dimension="current"/>
+        <Exposure name="caConc" dimension="concentration"/>
+        <Exposure name="caConcExt" dimension="concentration"/> -->
+
+        <Exposure name="iCa2" dimension="current"/>
+        <Exposure name="caConc2" dimension="concentration"/>
+        <Exposure name="caConcExt2" dimension="concentration"/>
+
+        
+        <Text name="neuroLexId"/>
+
+        <Dynamics>
+            <StateVariable name="v" exposure="v" dimension="voltage"/>
+            <StateVariable name="spiking" exposure="spiking" dimension="none"/>
+            <StateVariable name="debugVal" exposure="debugVal" dimension="none"/>
+
+            <DerivedVariable name="initMembPot" dimension="voltage" select="biophysicalProperties2CaPools/membraneProperties2CaPools/initMembPotential/value"/>
+            <DerivedVariable name="thresh" dimension="voltage" select="biophysicalProperties2CaPools/membraneProperties2CaPools/spikeThresh/value"/>
+
+            <DerivedVariable name="debug" dimension="none" select="biophysicalProperties2CaPools/membraneProperties2CaPools/totChanCurrent"/>
+            
+            
+            <DerivedVariable name="surfaceArea" exposure="surfaceArea" dimension="area" select="morphology/segments[*]/surfaceArea" reduce="add"/>
+            
+            <DerivedVariable name="totSpecCap" dimension="specificCapacitance" exposure="totSpecCap" select="biophysicalProperties2CaPools/totSpecCap"/>
+            <DerivedVariable name="totCap" dimension="capacitance" value="totSpecCap * surfaceArea "/>
+
+            <DerivedVariable name="iChannels" dimension="current" exposure="iChannels" select="biophysicalProperties2CaPools/membraneProperties2CaPools/totChanCurrent"/>
+            <DerivedVariable name="iSyn" dimension="current" exposure="iSyn" select="synapses[*]/i" reduce="add" />
+
+            <DerivedVariable name="iCa" dimension="current" exposure="iCa" select="biophysicalProperties2CaPools/membraneProperties2CaPools/iCa"/>
+
+            <DerivedVariable name="caConc" dimension="concentration" exposure="caConc"  select="biophysicalProperties2CaPools/intracellularProperties2CaPools/caConc"/>
+            <DerivedVariable name="caConcExt" dimension="concentration" exposure="caConcExt"  select="biophysicalProperties2CaPools/intracellularProperties2CaPools/caConcExt"/>
+
+            <DerivedVariable name="iCa2" dimension="current" exposure="iCa2" select="biophysicalProperties2CaPools/membraneProperties2CaPools/iCa2"/>
+
+            <DerivedVariable name="caConc2" dimension="concentration" exposure="caConc2" select="biophysicalProperties2CaPools/intracellularProperties2CaPools/caConc2"/>
+
+            <DerivedVariable name="caConcExt2" dimension="concentration" exposure="caConcExt2" select="biophysicalProperties2CaPools/intracellularProperties2CaPools/caConcExt2"/>
+
+
+            <TimeDerivative variable="v" value="(iChannels + iSyn) / totCap"/>
+
+            <OnStart>
+                <StateAssignment variable="spiking" value="0"/>
+                <StateAssignment variable="v" value="initMembPot"/>
+            </OnStart>
+
+            <OnCondition test="v .gt. thresh .and. spiking .lt. 0.5">
+                <StateAssignment variable="spiking" value="1"/>
+                <EventOut port="spike"/>
+            </OnCondition>
+
+            <OnCondition test="v .lt. thresh">
+                <StateAssignment variable="spiking" value="0"/>
+            </OnCondition>
+
+            <OnCondition test="t .geq. 0">
+                <StateAssignment variable="debugVal" value="debug"/>
+            </OnCondition>
+
+        </Dynamics>
+
+    </ComponentType>
+
+  
 
 
     <ComponentType name="baseCellMembPotCap"
@@ -1294,5 +1512,156 @@
         </Dynamics>
 
     </ComponentType>
+    
+    
+    <ComponentType name="pinskyRinzelCA3Cell"
+               extends="baseCellMembPot"
+               description="Reduced CA3 cell model from Pinsky and Rinzel 1994. See https://github.com/OpenSourceBrain/PinskyRinzelModel">
+
+        <Parameter name="iSoma" dimension="currentDensity"/>
+        <Parameter name="iDend" dimension="currentDensity"/>
+        
+        <Parameter name="gLs" dimension="conductanceDensity"/>
+        <Parameter name="gLd" dimension="conductanceDensity"/>
+        <Parameter name="gNa" dimension="conductanceDensity"/>
+        <Parameter name="gKdr" dimension="conductanceDensity"/>
+        <Parameter name="gCa" dimension="conductanceDensity"/>
+        <Parameter name="gKahp" dimension="conductanceDensity"/>
+        <Parameter name="gKC" dimension="conductanceDensity"/>
+        <Parameter name="gc" dimension="conductanceDensity"/>
+        
+        <Parameter name="eNa" dimension="voltage"/>
+        <Parameter name="eCa" dimension="voltage"/>
+        <Parameter name="eK" dimension="voltage"/>
+        <Parameter name="eL" dimension="voltage"/>
+        
+        <Parameter name="pp" dimension="none"/>
+        <Parameter name="cm" dimension="specificCapacitance"/>
+        <Parameter name="alphac" dimension="none"/>
+        <Parameter name="betac" dimension="none"/>
+
+        <Parameter name="gNmda" dimension="conductanceDensity"/>
+        <Parameter name="gAmpa" dimension="conductanceDensity"/>
+        <Parameter name="qd0" dimension="none"/>
+    
+        <!-- Normalizing Constants -->
+        <Constant name="MSEC" dimension="time" value="1 ms"/>
+        <Constant name="MVOLT" dimension="voltage" value="1 mV"/>
+        <Constant name="UAMP_PER_CM2" dimension="currentDensity" value="1 uA_per_cm2"/>
+    
+        <!-- Model Constants -->
+        <Constant name="Smax" dimension="none" value="125.0"/>
+        <Constant name="Vsyn" dimension="voltage" value="60.0 mV"/>
+        <Constant name="betaqd" dimension="none" value="0.001"/>
+        
+        <Exposure name="Vs" dimension="voltage"/>
+        <Exposure name="Vd" dimension="voltage"/>
+        <Exposure name="ICad" dimension="currentDensity"/>
+        <Exposure name="Cad" dimension="none"/>
+        <Exposure name="hs" dimension="none"/>
+        <Exposure name="ns" dimension="none"/>
+        <Exposure name="sd" dimension="none"/>
+        <Exposure name="cd" dimension="none"/>
+        <Exposure name="qd" dimension="none"/>
+        <Exposure name="Si" dimension="none"/>
+        <Exposure name="Wi" dimension="none"/>
+    
+    
+        <Dynamics>
+        
+            <StateVariable name="Vs" dimension="voltage" exposure="Vs"/>
+            <StateVariable name="Vd" dimension="voltage" exposure="Vd"/>
+            <StateVariable name="Cad" dimension="none" exposure="Cad"/>
+            <StateVariable name="hs" dimension="none" exposure="hs"/>
+            <StateVariable name="ns" dimension="none" exposure="ns"/>
+            <StateVariable name="sd" dimension="none" exposure="sd"/>
+            <StateVariable name="cd" dimension="none" exposure="cd"/>
+            <StateVariable name="qd" dimension="none" exposure="qd"/>
+
+
+            <!-- Synaptic Dynamics -->
+            <StateVariable name="Si" dimension="none" exposure="Si"/>
+            <StateVariable name="Wi" dimension="none" exposure="Wi"/>
+            
+            <!-- Note Sisat is StateVariable & ConditionalDerivedVariable, see https://github.com/OpenSourceBrain/PinskyRinzelModel/issues/7 -->
+            <StateVariable name="Sisat" dimension="none"/>
+            
+            <!-- baseCellMembPot compatibility -->
+            <DerivedVariable name="v" dimension="voltage" value="Vs" exposure="v"/>
+            <DerivedVariable name="ICad" dimension="currentDensity" exposure="ICad" value="gCa*sd*sd*(Vd-eCa)"/>
+        
+        
+
+            <DerivedVariable name="alphams_Vs" dimension="none" value="0.32*(-46.9-Vs/MVOLT)/(exp((-46.9-Vs/MVOLT)/4.0)-1.0)"/>
+            <DerivedVariable name="betams_Vs" dimension="none" value="0.28*(Vs/MVOLT+19.9)/(exp((Vs/MVOLT+19.9)/5.0)-1.0)"/>
+            <DerivedVariable name="Minfs_Vs" dimension="none" value="alphams_Vs/(alphams_Vs+betams_Vs)"/>
+
+            <DerivedVariable name="alphans_Vs" dimension="none" value="0.016*(-24.9-Vs/MVOLT)/(exp((-24.9-Vs/MVOLT)/5.0)-1.0)"/>
+            <DerivedVariable name="betans_Vs" dimension="none" value="0.25*exp(-1.0-0.025*Vs/MVOLT)"/>
+
+            <DerivedVariable name="alphahs_Vs" dimension="none" value="0.128*exp((-43.0-Vs/MVOLT)/18.0)"/>
+            <DerivedVariable name="betahs_Vs" dimension="none" value="4.0/(1.0+exp((-20.0-Vs/MVOLT)/5.0))"/>
+
+            <DerivedVariable name="alphasd_Vd" dimension="none" value="1.6/(1.0+exp(-0.072*(Vd/MVOLT-5.0)))"/>
+            <DerivedVariable name="betasd_Vd" dimension="none" value="0.02*(Vd/MVOLT+8.9)/(exp((Vd/MVOLT+8.9)/5.0)-1.0)"/>
+
+            
+            <DerivedVariable name="Iampa" dimension="currentDensity" value="gAmpa*Wi*(Vd-Vsyn)"/>
+            <DerivedVariable name="Inmda" dimension="currentDensity" value="gNmda*Sisat*(Vd-Vsyn)/(1.0+0.28*exp(-0.062*(Vd/MVOLT-60.0)))"/>
+            <DerivedVariable name="Isyn" dimension="currentDensity" value="Iampa+Inmda"/>
+            
+            
+            <ConditionalDerivedVariable name="alphaqd" dimension="none">
+                <Case condition="0.00002*Cad .gt. 0.01" value="0.01"/>
+                <Case value="0.00002*Cad"/>
+            </ConditionalDerivedVariable>
+        
+            <ConditionalDerivedVariable name="chid" dimension="none">
+                <Case condition="Cad/250 .gt. 1" value="1"/>
+                <Case value="Cad/250"/>
+            </ConditionalDerivedVariable>
+
+            <ConditionalDerivedVariable name="alphacd_Vd" dimension="none">
+                <Case condition="Vd .lt. -10*MVOLT" value="exp((Vd/MVOLT+50.0)/11-(Vd/MVOLT+53.5)/27)/18.975"/>
+                <Case value="2.0*exp((-53.5-Vd/MVOLT)/27.0)"/>
+            </ConditionalDerivedVariable>
+        
+            <ConditionalDerivedVariable name="betacd_Vd" dimension="none">
+                <Case condition="Vd .lt. -10*MVOLT" value="(2.0*exp((-53.5-Vd/MVOLT)/27.0)-alphacd_Vd)"/>
+                <Case value="0"/>
+            </ConditionalDerivedVariable>
+
+            <!-- Note Sisat is StateVariable & ConditionalDerivedVariable, see https://github.com/OpenSourceBrain/PinskyRinzelModel/issues/7 -->
+            <ConditionalDerivedVariable name="Sisat" dimension="none">
+                <Case condition="Si .gt. Smax" value="Smax"/>
+                <Case value="Si"/>
+            </ConditionalDerivedVariable>
+
+
+            <TimeDerivative variable="Vs" value="(-gLs*(Vs-eL)-gNa*(Minfs_Vs^2)*hs*(Vs-eNa)-gKdr*ns*(Vs-eK)+(gc/pp)*(Vd-Vs)+iSoma/pp) / cm"/>
+            <TimeDerivative variable="Vd" value="(iDend/(1.0-pp)-Isyn/(1.0-pp)-gLd*(Vd-eL)-ICad-gKahp*qd*(Vd-eK)-gKC*cd*chid*(Vd-eK)+(gc*(Vs-Vd))/(1.0-pp)) / cm"/>
+            <TimeDerivative variable="Cad" value="(-0.13*ICad/UAMP_PER_CM2-0.075*Cad) / MSEC"/>
+            <TimeDerivative variable="hs" value="(alphahs_Vs-(alphahs_Vs+betahs_Vs)*hs) / MSEC"/>
+            <TimeDerivative variable="ns" value="(alphans_Vs-(alphans_Vs+betans_Vs)*ns) / MSEC"/>
+            <TimeDerivative variable="sd" value="(alphasd_Vd-(alphasd_Vd+betasd_Vd)*sd) / MSEC"/>
+            <TimeDerivative variable="cd" value="(alphacd_Vd-(alphacd_Vd+betacd_Vd)*cd) / MSEC"/>
+            <TimeDerivative variable="qd" value="(alphaqd-(alphaqd+betaqd)*qd) / MSEC"/>
+
+            <!-- Synaptic Dynamics -->
+            <TimeDerivative variable="Si" value="-Si/150.0" />
+            <TimeDerivative variable="Wi" value="-Wi/2.0" />
+	
+
+            <OnStart>
+                <StateAssignment variable="Vs" value="eL"/>
+                <StateAssignment variable="Vd" value="eL"/>
+                <StateAssignment variable="qd" value="qd0" />
+            </OnStart>
+
+        </Dynamics>
+    
+    </ComponentType>
+
+
 
 </Lems>

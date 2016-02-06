@@ -1,0 +1,68 @@
+<Lems>
+
+    <!--
+        For more detail on this model see https://github.com/OpenSourceBrain/PinskyRinzelModel
+    -->
+
+    <!-- Specify which component to run -->
+    <Target component="sim1"/>
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+
+
+    <Include file="../examples/NML2_AbstractCells.nml"/>
+ 
+
+    <!--
+    <pinskyRinzelCA3Cell id="pr2B" Is="-0.5 uA_per_cm2" Id="2.49 uA_per_cm2" gc="2.1 mS_per_cm2" qd0="0"
+                         gLs="0.1 mS_per_cm2" gLd="0.1 mS_per_cm2" gNa="30 mS_per_cm2" gKdr="15 mS_per_cm2"
+                         gCa="10 mS_per_cm2" gKahp="0.8 mS_per_cm2" gKC="15 mS_per_cm2" VNa="60 mV" VCa="80 mV" VK="-75 mV" VL="-60 mV"
+                         pp="0.5" Cm="3 uF_per_cm2" alphac="2" betac="0.1"
+                         gnmda="0 mS_per_cm2" gampa="0 mS_per_cm2" />-->
+
+
+    <network id="net1">
+        <population id="prApop" component="pr2A" size="1"/>
+        <!--<population id="prBpop" component="pr2B" size="1"/>-->
+    </network>
+
+
+    <Simulation id="sim1" length="1500ms" step="0.01ms" target="net1">
+	
+        <Display id="Fig2AVs"  title="Figure 2A somatic input, left: Vs" timeScale="1ms"        xmin="-100" xmax="1600" ymin="-70" ymax="40">
+            <Line id="Vs" quantity="prApop[0]/Vs" scale="0.001"  color="#000000" timeScale="1ms"/>
+            <Line id="Vd" quantity="prApop[0]/Vd" scale="0.001"  color="#FF0000" timeScale="1ms"/>
+        </Display>
+        
+        <Display id="Fig2ACaq" title="Figure 2A somatic input, right: Ca, q" timeScale="1ms"    xmin="-100" xmax="1600" ymin="-0.05" ymax=".6">
+            <Line id="Ca" quantity="prApop[0]/Cad" scale="666.7"  color="#000000" timeScale="1ms"/>
+            <Line id="q"  quantity="prApop[0]/qd" scale="1"  color="#FF0000" timeScale="1ms"/>
+        </Display>
+
+        <OutputFile id="Fig2A_Vs" fileName="results/ex22_v.dat">
+            <OutputColumn id="Vs" quantity="prApop[0]/Vs" />
+            <OutputColumn id="Vd" quantity="prApop[0]/Vd" />
+        </OutputFile>
+        <!--
+        <Display id="Fig2BVs"  title="Figure 2B dendritic input, left: Vs" timeScale="1ms"        xmin="-100" xmax="1600" ymin="-70" ymax="40">
+            <Line id="Vs" quantity="prBpop[0]/Vs" scale="0.001"  color="#000000" timeScale="1ms"/>            
+            <Line id="Vd" quantity="prBpop[0]/Vd" scale="0.001"  color="#FF0000" timeScale="1ms"/>
+        </Display>
+        
+        <Display id="Fig2BCaq" title="Figure 2B dendritic input, right: Ca, q" timeScale="1ms"    xmin="-100" xmax="1600" ymin="-0.05" ymax=".6">
+            <Line id="Ca" quantity="prBpop[0]/Cad" scale="666.7"  color="#000000" timeScale="1ms"/>
+            <Line id="q"  quantity="prBpop[0]/qd" scale="1"  color="#FF0000" timeScale="1ms"/>
+        </Display>
+
+        <OutputFile id="Fig2B_Vs" fileName="results/ex22_v.dat">
+            <OutputColumn id="Vs" quantity="prBpop[0]/Vs" />
+            <OutputColumn id="Vd" quantity="prBpop[0]/Vd" />
+        </OutputFile>-->
+
+
+    </Simulation>
+
+</Lems>
