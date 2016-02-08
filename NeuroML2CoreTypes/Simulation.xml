@@ -42,6 +42,7 @@
         
         <Children name="displays" type="Display"/>
         <Children name="outputs" type="OutputFile"/>
+        <Children name="events" type="EventOutputFile"/>
         
         <ComponentReference name="target" type="Component"/>
     
@@ -69,11 +70,32 @@
     
     </ComponentType>
     
-    
     <ComponentType name="OutputColumn">
-         <Path name="quantity"/>
-    	 <Simulation>
+        <Path name="quantity"/>
+        <Simulation>
             <Record quantity="quantity"/>
+        </Simulation>
+    </ComponentType>
+    
+    
+    <ComponentType name="EventOutputFile">
+    	
+        <Children name="eventSelection" type="EventSelection"/>
+        
+        <Text name="path"/>
+        <Text name="fileName"/>
+    	
+        <Simulation>
+            <EventWriter path="path" fileName="fileName"/>
+        </Simulation>
+    
+    </ComponentType>
+    
+    <ComponentType name="EventSelection">
+        <Path name="select"/>
+        <Text name="eventPort"/>
+        <Simulation>
+            <EventRecord quantity="select" eventPort="eventPort"/>
         </Simulation>
     </ComponentType>
 

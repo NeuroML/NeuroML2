@@ -27,7 +27,7 @@
     
     <expTwoSynapse id="syn_exc" erev="0mV" gbase="0.1nS" tauDecay="10ms" tauRise="0.5ms"/>
     
-    <poissonFiringSynapse id="poissonFiringSyn" synapse="syn_exc" averageRate="50 Hz" spikeTarget="./syn_exc"/>
+    <poissonFiringSynapse id="poissonFiringSyn" synapse="syn_exc" averageRate="150 Hz" spikeTarget="./syn_exc"/>
 
     <network id="net1">
         <population id="iafPop" component="iaf" size="5" />
@@ -42,9 +42,9 @@
     <!-- End of NeuroML2 content -->
 
 
-    <Simulation id="sim1" length="300ms" step="0.01ms" target="net1" seed="123"> <!-- Note seed: ensures same random numbers used every run -->
+    <Simulation id="sim1" length="10ms" step="0.05ms" target="net1" seed="123"> <!-- Note seed: ensures same random numbers used every run -->
 
-        <Display id="d0" title="Ex22: Recording spike times in LEMS" timeScale="1ms" xmin="0"
+        <Display id="d0" title="Ex23: Recording spike times in LEMS" timeScale="1ms" xmin="0"
                  xmax="300" ymin="-75" ymax="-50">
             <Line id="iaf0" quantity="iafPop[0]/v" scale="1mV" color="#000000" timeScale="1ms" />
             <Line id="iaf1" quantity="iafPop[1]/v" scale="1mV" color="#ff2222" timeScale="1ms" />
@@ -53,7 +53,7 @@
             <Line id="iaf4" quantity="iafPop[4]/v" scale="1mV" color="#882228" timeScale="1ms" />
         </Display>
 
-        <OutputFile id="of0" fileName="results/ex22_v.dat">
+        <OutputFile id="of0" fileName="results/ex23_v.dat">
             <OutputColumn id="i0" quantity="iafPop[0]/v" />
             <OutputColumn id="i1" quantity="iafPop[1]/v" />
             <OutputColumn id="i2" quantity="iafPop[2]/v" />
@@ -61,9 +61,12 @@
             <OutputColumn id="i4" quantity="iafPop[4]/v" />
         </OutputFile>
 
-        <EventOutputFile id="spikes" fileName="results/ex22.spikes">
+        <EventOutputFile id="spikes" fileName="results/ex23.spikes">
             <EventSelection id="s0" select="iafPop[0]/v" eventPort="spike"/>
             <EventSelection id="s1" select="iafPop[1]/v" eventPort="spike"/>
+            <EventSelection id="s2" select="iafPop[2]/v" eventPort="spike"/>
+            <EventSelection id="s3" select="iafPop[3]/v" eventPort="spike"/>
+            <EventSelection id="s4" select="iafPop[4]/v" eventPort="spike"/>
         </EventOutputFile>
 
         
