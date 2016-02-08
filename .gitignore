@@ -4,6 +4,8 @@
 /.pydevproject
 .project
 
+target
+
 *~
 *.pyc
 results

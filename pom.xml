@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>jar</packaging>
+
+  <name>NeuroML2 Base Definitions</name>
+  <url>https://neuroml.org/</url>
+
+  <artifactId>neuroml2-base-definitions</artifactId>
+  <groupId>org.neuroml.core</groupId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <build>
+    <resources>
+     <resource>
+       <directory>${project.basedir}</directory>
+       <includes>
+         <include>NeuroML2CoreTypes/*.xml</include>
+         <include>Schemas/**/*.xsd</include>
+         <include>examples/*.nml</include>
+         <include>LEMSexamples/*.xml</include>
+       </includes>
+     </resource>
+    </resources> 
+    <plugins>
+      <plugin>
+        <artifactId>maven-remote-resources-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+          <phase>process-resources</phase>
+            <goals>
+              <goal>bundle</goal>
+            </goals>
+            <configuration>
+              <resourcesDirectory>${project.basedir}</resourcesDirectory>
+              <includes>
+                <include>NeuroML2CoreTypes/*.xml</include>
+                <include>Schemas/NeuroML2/*.xsd</include>
+                <include>Schemas/LEMS/*.xsd</include>
+                <include>examples/*.nml</include>
+                <include>LEMSexamples/*.xml</include>
+              </includes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
