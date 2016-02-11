@@ -84,9 +84,10 @@
         
         <Text name="path"/>
         <Text name="fileName"/>
+        <Text name="format"/>
     	
         <Simulation>
-            <EventWriter path="path" fileName="fileName"/>
+            <EventWriter path="path" fileName="fileName" format="format"/>
         </Simulation>
     
     </ComponentType>
