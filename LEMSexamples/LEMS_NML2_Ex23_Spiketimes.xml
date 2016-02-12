@@ -68,7 +68,7 @@
             <Line id="hh0" quantity="hhpop[0]/v" scale="1mV" color="#000000" timeScale="1ms" />
         </Display>
 
-        <OutputFile id="of0" fileName="results/ex23.iaf.dat">
+        <OutputFile id="iaf_voltages" fileName="results/ex23.iaf.dat">
             <OutputColumn id="i0" quantity="iafPop[0]/v" />
             <OutputColumn id="i1" quantity="iafPop[1]/v" />
             <OutputColumn id="i2" quantity="iafPop[2]/v" />
@@ -76,11 +76,11 @@
             <OutputColumn id="i4" quantity="iafPop[4]/v" />
         </OutputFile>
 
-        <OutputFile id="of1" fileName="results/ex23.hh.dat">
+        <OutputFile id="hh_voltages" fileName="results/ex23.hh.dat">
             <OutputColumn id="i0" quantity="hhpop[0]/v" />
         </OutputFile>
 
-        <EventOutputFile id="iafspikes" fileName="results/ex23.iaf.spikes" format="TIME_ID">
+        <EventOutputFile id="iaf_spikes" fileName="results/ex23.iaf.spikes" format="TIME_ID">
             <EventSelection id="0" select="iafPop[0]" eventPort="spike"/>
             <EventSelection id="1" select="iafPop[1]" eventPort="spike"/>
             <EventSelection id="2" select="iafPop[2]" eventPort="spike"/>
@@ -88,7 +88,7 @@
             <EventSelection id="4" select="iafPop[4]" eventPort="spike"/>
         </EventOutputFile>
 
-        <EventOutputFile id="hhspikes" fileName="results/ex23.hh.spikes" format="ID_TIME">
+        <EventOutputFile id="hh_spikes" fileName="results/ex23.hh.spikes" format="ID_TIME">
             <EventSelection id="0" select="hhpop[0]" eventPort="spike"/>
         </EventOutputFile>
 
