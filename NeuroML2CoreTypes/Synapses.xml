@@ -93,6 +93,19 @@
     </ComponentType>
 
 
+   <ComponentType name="baseConductanceBasedSynapseTwo"
+                   extends="baseVoltageDepSynapse"
+                   description="Synapse model suited for a sum of two expTwoSynapses which exposes a conductance _g in addition to producing a current. Not necessarily ohmic!! cno_0000027">
+
+        <Parameter name="gbase1" dimension="conductance" description="Baseline conductance 1"/>
+        <Parameter name="gbase2" dimension="conductance" description="Baseline conductance 2"/>
+        <Parameter name="erev" dimension="voltage" description="Reversal potential of the synapse"/>
+
+        <Exposure name="g" dimension="conductance" description="Time varying conductance through the synapse"/>
+
+    </ComponentType>
+
+
 
     <ComponentType name="expOneSynapse"
                    extends="baseConductanceBasedSynapse"
@@ -186,6 +199,54 @@
             <OnEvent port="in">
                 <StateAssignment variable="A" value="A + (weight * waveformFactor)" />
                 <StateAssignment variable="B" value="B + (weight * waveformFactor)" />
+            </OnEvent>
+
+        </Dynamics>
+    </ComponentType>
+
+
+
+   <ComponentType name="expThreeSynapse"
+                   extends="baseConductanceBasedSynapseTwo"
+                   description="Ohmic synapse similar to expTwoSynapse but consisting of two components that can differ in decay times and max conductances but share the same rise time.">
+
+        <Property name="weight" dimension="none" defaultValue="1"/> 
+        
+        <Parameter name="tauRise" dimension="time" />
+        <Parameter name="tauDecay1" dimension="time" />
+        <Parameter name="tauDecay2" dimension="time" />
+        
+        <DerivedParameter name="peakTime1" dimension="time" value="log(tauDecay1 / tauRise) * (tauRise * tauDecay1)/(tauDecay1 - tauRise)"/>
+        <DerivedParameter name="waveformFactor1" dimension="none" value="1 / (-exp(-peakTime1 / tauRise) + exp(-peakTime1 / tauDecay1))"/>
+
+        <DerivedParameter name="peakTime2" dimension="time" value="log(tauDecay2 / tauRise) * (tauRise * tauDecay2)/(tauDecay2 - tauRise)"/>
+        <DerivedParameter name="waveformFactor2" dimension="none" value="1 / (-exp(-peakTime2 / tauRise) + exp(-peakTime2 / tauDecay2))"/>
+
+        <Dynamics>
+            <StateVariable name="A" dimension="none"/>
+            <StateVariable name="B" dimension="none"/>
+            <StateVariable name="C" dimension="none"/>
+
+
+            <DerivedVariable name="g" dimension="conductance" exposure="g" value="gbase1*(B - A) + gbase2*(C-A)" />
+            <DerivedVariable name="i" exposure="i" dimension="current" value="g * (erev - v)" />
+
+            <TimeDerivative variable="A" value="-A / tauRise" />
+            <TimeDerivative variable="B" value="-B / tauDecay1" />
+            <TimeDerivative variable="C" value="-C / tauDecay2" />
+
+            <OnStart>
+                <StateAssignment variable="A" value="0" />
+                <StateAssignment variable="B" value="0" />
+                <StateAssignment variable="C" value="0" />
+            </OnStart>
+
+            <OnEvent port="in">
+                <StateAssignment variable="A" value="A + (gbase1*weight * waveformFactor1 + gbase2*weight*waveformFactor2 )/(gbase1+gbase2)" />
+
+                <StateAssignment variable="B" value="B + (weight * waveformFactor1)" />
+                <StateAssignment variable="C" value="C + (weight * waveformFactor2)" />
+              
             </OnEvent>
 
         </Dynamics>

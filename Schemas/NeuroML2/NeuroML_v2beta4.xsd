@@ -989,6 +989,22 @@
     </xs:complexType>
 
 
+    <xs:complexType name="BaseConductanceBasedSynapseTwo">
+
+        <xs:complexContent>
+            <xs:extension base="BaseVoltageDepSynapse">
+
+                <xs:attribute name="gbase1" type="Nml2Quantity_conductance" use="required"/>
+                <xs:attribute name="gbase2" type="Nml2Quantity_conductance" use="required"/>
+                <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>
+
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+   
+
+
     <xs:complexType name="GapJunction">
 
         <xs:complexContent>
@@ -1091,6 +1107,20 @@
             <xs:extension base="BaseConductanceBasedSynapse">
 
                 <xs:attribute name="tauDecay" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="tauRise" type="Nml2Quantity_time" use="required"/>
+
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+   <xs:complexType name="ExpThreeSynapse">
+
+        <xs:complexContent>
+            <xs:extension base="BaseConductanceBasedSynapseTwo">
+
+                <xs:attribute name="tauDecay1" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="tauDecay2" type="Nml2Quantity_time" use="required"/>
                 <xs:attribute name="tauRise" type="Nml2Quantity_time" use="required"/>
 
             </xs:extension>
