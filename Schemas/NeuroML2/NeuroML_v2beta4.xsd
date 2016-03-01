@@ -1143,6 +1143,20 @@
         </xs:complexContent>
     </xs:complexType>
 
+    <xs:complexType name="BlockingSynapse">
+        <xs:complexContent>
+            <xs:extension base="ExpTwoSynapse">
+	      <xs:sequence>
+                
+		<xs:element name="blockMechanism"
+			    type="BlockMechanism"
+			    minOccurs="0"/>
+	      </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+
     <xs:simpleType name="BlockTypes">
         <xs:restriction base="xs:string">
             <xs:enumeration value="voltageConcDepBlockMechanism"/>
