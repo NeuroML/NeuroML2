@@ -61,13 +61,13 @@
         </Display>
         
         <Display id="d2" title="Ex6: Cells with NMDA mediated synapse: synaptic conductance" timeScale="1ms" xmin="-20" xmax="420" ymin="-0.02" ymax="0.1">
-            <Line id ="g(nmdaSyn1)" quantity="pasPop1[0]/nmdaSyn1/g" scale="1nS"
+            <Line id ="g(nmdaSyn1)" quantity="pasPop1[0]/nmdaSyn1not_plastic/g" scale="1nS"
 		  color="#01DF01" timeScale="1ms"/>
         </Display>
         
         <Display id="db" title="Ex6: Cells with NMDA mediated synapse: synaptic block factor" timeScale="1ms" xmin="-20" xmax="420" ymin="0" ymax="0.2">
             <Line id ="blockFactor(nmdaSyn1)"
-		  quantity="pasPop1[0]/nmdaSyn1/block/blockFactor"
+		  quantity="pasPop1[0]/nmdaSyn1not_plastic/block/blockFactor"
 		  scale="1"  color="#01DF01" timeScale="1ms"/>
         </Display>
         
@@ -80,7 +80,7 @@
         </OutputFile>  
         
         <OutputFile id="of1" fileName="results/ex6_g.dat">
-            <OutputColumn id ="g" quantity="pasPop1[0]/nmdaSyn1/g"/> 
+            <OutputColumn id ="g" quantity="pasPop1[0]/nmdaSyn1not_plastic/g"/> 
         </OutputFile>  
         
     </Simulation>
