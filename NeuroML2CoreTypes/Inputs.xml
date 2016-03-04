@@ -246,7 +246,7 @@
            </OnStart>
             
             
-           <OnCondition test="t .geq. delay+duration">
+           <OnCondition test="t .gt. delay+duration">
                 <StateAssignment variable="tsince" value="0"/>
            </OnCondition>
            
