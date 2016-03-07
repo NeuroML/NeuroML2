@@ -63,12 +63,12 @@
     </blockingPlasticSynapse>
 
 
-    <blockingSynapse id="blockingSyn" gbase="0.3nS" tauRise="3.4ms" tauDecay="44ms" erev="0mV"> 
+    <!--<blockingSynapse id="blockingSyn" gbase="0.3nS" tauRise="3.4ms" tauDecay="44ms" erev="0mV"> 
 
     <blockMechanism type="voltageConcDepBlockMechanism" species="mg"
 		      blockConcentration="1.0 mM"
 		      scalingConc="0.5128 mM" scalingVolt="65.33 mV"/>
    <notes>A biexponential blocking synapse.</notes>
-   </blockingSynapse>
+   </blockingSynapse>-->
 
 </neuroml>
