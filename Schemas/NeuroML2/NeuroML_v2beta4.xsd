@@ -499,6 +499,8 @@
             <xs:element name="alphaSynapse" type="AlphaSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="expOneSynapse" type="ExpOneSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="expTwoSynapse" type="ExpTwoSynapse" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="expThreeSynapse" type="ExpThreeSynapse" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="blockingSynapse" type="BlockingSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="blockingPlasticSynapse" type="BlockingPlasticSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="gapJunction" type="GapJunction" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="silentSynapse" type="SilentSynapse" minOccurs="0" maxOccurs="unbounded"/>

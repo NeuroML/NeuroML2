@@ -9,7 +9,7 @@
 
     <expTwoSynapse id="synInput" gbase="8nS" erev="20mV" tauRise="1ms" tauDecay="5ms"/><!-- Will be used below... -->
     <expTwoSynapse id="synInputFast" gbase="1nS" erev="20mV" tauRise="0.2ms" tauDecay="1ms"/><!-- Will be used below... -->
-   
+    <expThreeSynapse id="synInputFastTwo" gbase1="1.5nS" tauRise="0.1ms" tauDecay1="0.7ms" gbase2="0.5nS" tauDecay2="2.5ms"  erev="0mV"/> 
 
     <pulseGenerator id="pulseGen0" delay="50ms" duration="200ms" amplitude="1 nA" />
 
@@ -44,7 +44,8 @@
     <poissonFiringSynapse id="poissonFiringSyn" averageRate="10 Hz" synapse="synInput" spikeTarget="./synInput"/>
     
     <transientPoissonFiringSynapse id="transPoissonFiringSyn" delay="50ms" duration="50ms" averageRate="300 Hz" synapse="synInputFast" spikeTarget="./synInputFast"/>
+    <transientPoissonFiringSynapse id="transPoissonFiringSyn2" delay="50ms" duration="500ms" averageRate="10 Hz" synapse="synInputFastTwo" spikeTarget="./synInputFastTwo"/>
 
-  
+    
 
 </neuroml>
