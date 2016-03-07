@@ -507,7 +507,7 @@
             <xs:element name="linearGradedSynapse" type="LinearGradedSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="gradedSynapse" type="GradedSynapse" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
-    </xs:group>
+    </xs:group>       
 
 
     <xs:group name="PyNNSynapseTypes">
