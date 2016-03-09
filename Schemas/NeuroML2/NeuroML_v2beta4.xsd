@@ -1722,7 +1722,6 @@
 
     </xs:complexType>
 
-    </xs:complexType>
 
     <xs:complexType name="ChannelDensityNonUniformGHK">
 
