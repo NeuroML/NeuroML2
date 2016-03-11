@@ -745,7 +745,7 @@
                 <xs:attribute name="to" type="NmlId" use="required"/>
             </xs:extension>
         </xs:complexContent>
-    </xs:group>
+    </xs:complexType>
 
 
     <xs:complexType name="GateKS">
