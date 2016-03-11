@@ -33,11 +33,11 @@
             <openState id="o1"/>
             
             <forwardTransition id="ft" from="c1" to="o1" >
-                <rate id="r1" type="HHExpLinearRate" rate="0.1per_ms" midpoint="-55mV" scale="10mV"/>
+                <rate type="HHExpLinearRate" rate="0.1per_ms" midpoint="-55mV" scale="10mV"/>
             </forwardTransition>
     
             <reverseTransition id="rt" from="c1" to="o1" >
-                <rate id="r1" type="HHExpRate" rate="0.125per_ms" midpoint="-65mV" scale="-80mV"/>
+                <rate type="HHExpRate" rate="0.125per_ms" midpoint="-65mV" scale="-80mV"/>
             </reverseTransition>
         </gateKS>
     </ionChannelKS>
