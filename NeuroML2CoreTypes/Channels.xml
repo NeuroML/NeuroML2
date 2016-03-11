@@ -639,7 +639,7 @@
         <Link name="to" type="KSState"/>
 
         <Dynamics>
-            <DerivedVariable name="tau" dimension="per_time" select="timeCourse/t"/>
+            <DerivedVariable name="tau" dimension="time" select="timeCourse/t"/>
             <DerivedVariable name="inf" dimension="none" select="steadyState/x"/>
             <DerivedVariable name="rf" exposure="rf" dimension="per_time" value="inf/tau"/>
             <DerivedVariable name="rr" exposure="rr" dimension="per_time" value="(1-inf)/tau"/>
