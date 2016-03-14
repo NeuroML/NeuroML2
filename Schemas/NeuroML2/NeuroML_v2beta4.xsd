@@ -1607,6 +1607,7 @@
 
             <xs:element name="channelDensityNonUniform" type="ChannelDensityNonUniform" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="channelDensityNonUniformNernst" type="ChannelDensityNonUniformNernst" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="channelDensityNonUniformGHK" type="ChannelDensityNonUniformGHK" minOccurs="0" maxOccurs="unbounded"/>
 
             <xs:element name="spikeThresh" type="SpikeThresh" minOccurs="0" maxOccurs="unbounded"/>
 
@@ -1740,6 +1741,35 @@
     </xs:complexType>
 
     <xs:complexType name="ChannelDensityNonUniformNernst">
+
+        <xs:complexContent>
+            <xs:extension base="Base">
+
+                <xs:sequence>
+                    <xs:element name="variableParameter" type="VariableParameter" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+
+                <xs:attribute name="ionChannel" type="NmlId" use="required"/>
+
+                <xs:attribute name="ion" type="NmlId" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel definition. It is added here
+                        TEMPORARILY since selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
+                        Also, it will make it easier to set the correct native simulator value for erev (e.g. ek for ion = k in NEURON).
+                        Currently a required attribute.
+                        It should be removed in the longer term, due to possible inconsistencies in this value and that in the ionChannel
+                        element. TODO: remove.
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+
+            </xs:extension>
+        </xs:complexContent>
+
+    </xs:complexType>
+
+
+    <xs:complexType name="ChannelDensityNonUniformGHK">
 
         <xs:complexContent>
             <xs:extension base="Base">
