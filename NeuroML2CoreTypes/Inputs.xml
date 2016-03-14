@@ -219,8 +219,9 @@
         
         <DerivedParameter name="averageIsi" dimension="time" value="1 / averageRate"/>
         
-        <ComponentReference name="synapse" type="baseSynapse"/>
+        <Constant name="LONG_TIME" dimension="time" value="1e9hour"/>
         
+        <ComponentReference name="synapse" type="baseSynapse"/>
         
         <EventPort name="spike" direction="out" description="Port on which spikes are emitted"/>
         
@@ -234,27 +235,29 @@
         
         <Dynamics>
             <StateVariable name="tsince" dimension="time" exposure="tsince"/>
+            <StateVariable name="nextIsi" dimension="time"/>
             <StateVariable name="isi" dimension="time"/>
             
             <DerivedVariable name="i" dimension="current" exposure="i" select="synapse/i"/>
 
             <TimeDerivative variable="tsince" value="1"/>
 
-           <OnStart>
+            <OnStart>
                 <StateAssignment variable="tsince" value="0"/>
-                <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))  +delay"/>
-           </OnStart>
+                <StateAssignment variable="nextIsi" value="- averageIsi * log(1 - random(1))  +delay"/>
+                <StateAssignment variable="isi" value="nextIsi"/>
+            </OnStart>
             
-            
-           <OnCondition test="t .geq. delay+duration">
-                <StateAssignment variable="tsince" value="0"/>
-           </OnCondition>
            
-           <OnCondition test="tsince .gt. isi ">
-                   <StateAssignment variable="tsince" value="delay"/>
-                   <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1)) + delay"/>
-                   <EventOut port="spike"/>
-           </OnCondition>
+            <OnCondition test="tsince .gt. isi">
+                <StateAssignment variable="tsince" value="0"/>
+                <StateAssignment variable="nextIsi" value="- averageIsi * log(1 - random(1))"/>
+                <!--
+                Check to see whether current time + next ISI is greater than delay+duration and if so set is to a long time in future...
+                -->
+                <StateAssignment variable="isi" value="nextIsi + H(((t+nextIsi) - (delay+duration))/duration)*LONG_TIME"/>
+                <EventOut port="spike"/>
+            </OnCondition>
           
         </Dynamics>
         <Structure>
