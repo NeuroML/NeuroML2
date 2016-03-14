@@ -18,7 +18,7 @@
 
 
     <!-- that's just the classic HH potassium channel -->
-    <ionChannelHH conductance="10pS" id="k" species="k">
+    <ionChannelHH conductance="10pS" id="k_classic" species="k">
         <gateHHrates id="n" instances="4">
             <forwardRate midpoint="-55mV" rate="0.1per_ms" scale="10mV" type="HHExpLinearRate"/>
             <reverseRate midpoint="-65mV" rate="0.125per_ms" scale="-80mV" type="HHExpRate"/>
@@ -27,17 +27,17 @@
 
 
     <!-- that's the same channel as above, but expressed as a KS instead -->
-    <ionChannelKS conductance="10pS" id="k_fwd_rev">
+    <ionChannelKS conductance="10pS" id="k_fwd_rev" species="k">
         <gateKS id="n" instances="4">
             <closedState id="c1"/>
             <openState id="o1"/>
 
             <forwardTransition from="c1" id="ft" to="o1">
-                <rate id="f1" midpoint="-55mV" rate="0.1per_ms" scale="10mV" type="HHExpLinearRate"/>
+                <rate midpoint="-55mV" rate="0.1per_ms" scale="10mV" type="HHExpLinearRate"/>
             </forwardTransition>
 
             <reverseTransition from="c1" id="rt" to="o1">
-                <rate id="r1" midpoint="-65mV" rate="0.125per_ms" scale="-80mV" type="HHExpRate"/>
+                <rate midpoint="-65mV" rate="0.125per_ms" scale="-80mV" type="HHExpRate"/>
             </reverseTransition>
 
         </gateKS>
@@ -45,15 +45,15 @@
 
 
     <!-- that's the same channel as above, but its rates are expressed in terms of inf, tau (defined below) -->
-    <ionChannelKS conductance="10pS" id="k_tau_inf">
+    <ionChannelKS conductance="10pS" id="k_tau_inf" species="k">
         <gateKS id="n" instances="4">
 
             <closedState id="c1"/>
             <openState id="o1"/>
 
             <tauInfTransition from="c1" id="tauinf" to="o1">
-                <steadyState id="inf" type="n_inf"/>
-                <timeCourse id="tau" type="n_tau"/>
+                <steadyState type="n_inf"/>
+                <timeCourse type="n_tau"/>
             </tauInfTransition>
 
         </gateKS>
@@ -95,7 +95,7 @@
 
 
     <!-- that's just the classic HH sodium channel -->
-    <ionChannelHH conductance="10pS" id="na">
+    <ionChannelHH conductance="10pS" id="na_classic" species="na">
         <gateHHrates id="m" instances="3">
             <forwardRate midpoint="-40mV" rate="1.per_ms" scale="10mV" type="HHExpLinearRate"/>
             <reverseRate midpoint="-65mV" rate="4per_ms" scale="-18mV" type="HHExpRate"/>
@@ -116,24 +116,18 @@
     
     <cell id="hhcell_classic">
         <morphology id="just_a_cylinder">
-            <segment id="0" name="Soma">
+            <segment id="0" name="soma">
                 <proximal x="0.0" y="0.0" z="0.0" diameter="500.0"/>
                 <distal x="0.0" y="0.0" z="100.0" diameter="500.0"/>
             </segment>
-            <segmentGroup id="Soma">
-                <member segment="0"/>
-            </segmentGroup>
-            <segmentGroup id="all">
-                <include segmentGroup="Soma"/>
-            </segmentGroup>
             <segmentGroup id="soma_group">
-                <include segmentGroup="Soma"/>
+                <member segment="0"/>
             </segmentGroup>
         </morphology>
         <biophysicalProperties id="biophys">
             <membraneProperties>
-                <channelDensity condDensity="0.12 S_per_cm2" id="na_chans" ionChannel="na" erev="50.0 mV" ion="na"/>
-                <channelDensity condDensity="0.036 S_per_cm2" id="k_chans" ionChannel="k" erev="-77.0 mV" ion="k"/>
+                <channelDensity condDensity="0.12 S_per_cm2" id="na_chans" ionChannel="na_classic" erev="50.0 mV" ion="na"/>
+                <channelDensity condDensity="0.036 S_per_cm2" id="k_chans" ionChannel="k_classic" erev="-77.0 mV" ion="k"/>
                 <channelDensity condDensity="0.0003 S_per_cm2" id="passive" ionChannel="leak" erev="-54.3 mV" ion="non_specific"/>
                 <spikeThresh value="0 mV"/>
                 <specificCapacitance value="1.0 uF_per_cm2"/>
@@ -148,23 +142,17 @@
 
     <cell id="hhcell_KS_fwd_rev">
         <morphology id="just_a_cylinder">
-            <segment id="0" name="Soma">
+            <segment id="0" name="soma">
                 <proximal x="0.0" y="0.0" z="0.0" diameter="500.0"/>
                 <distal x="0.0" y="0.0" z="100.0" diameter="500.0"/>
             </segment>
-            <segmentGroup id="Soma">
-                <member segment="0"/>
-            </segmentGroup>
-            <segmentGroup id="all">
-                <include segmentGroup="Soma"/>
-            </segmentGroup>
             <segmentGroup id="soma_group">
-                <include segmentGroup="Soma"/>
+                <member segment="0"/>
             </segmentGroup>
         </morphology>
         <biophysicalProperties id="biophys">
             <membraneProperties>
-                <channelDensity condDensity="0.12 S_per_cm2" id="na_chans" ionChannel="na" erev="50.0 mV" ion="na"/>
+                <channelDensity condDensity="0.12 S_per_cm2" id="na_chans" ionChannel="na_classic" erev="50.0 mV" ion="na"/>
                 <channelDensity condDensity="0.036 S_per_cm2" id="k_chans" ionChannel="k_fwd_rev" erev="-77.0 mV" ion="k"/>
                 <channelDensity condDensity="0.0003 S_per_cm2" id="passive" ionChannel="leak" erev="-54.3 mV" ion="non_specific"/>
                 <spikeThresh value="0 mV"/>
@@ -177,26 +165,19 @@
         </biophysicalProperties>
     </cell>
    
-
     <cell id="hhcell_KS_tau_inf">
         <morphology id="just_a_cylinder">
-            <segment id="0" name="Soma">
+            <segment id="0" name="soma">
                 <proximal x="0.0" y="0.0" z="0.0" diameter="500.0"/>
                 <distal x="0.0" y="0.0" z="100.0" diameter="500.0"/>
             </segment>
-            <segmentGroup id="Soma">
-                <member segment="0"/>
-            </segmentGroup>
-            <segmentGroup id="all">
-                <include segmentGroup="Soma"/>
-            </segmentGroup>
             <segmentGroup id="soma_group">
-                <include segmentGroup="Soma"/>
+                <member segment="0"/>
             </segmentGroup>
         </morphology>
         <biophysicalProperties id="biophys">
             <membraneProperties>
-                <channelDensity condDensity="0.12 S_per_cm2" id="na_chans" ionChannel="na" erev="50.0 mV" ion="na"/>
+                <channelDensity condDensity="0.12 S_per_cm2" id="na_chans" ionChannel="na_classic" erev="50.0 mV" ion="na"/>
                 <channelDensity condDensity="0.036 S_per_cm2" id="k_chans" ionChannel="k_tau_inf" erev="-77.0 mV" ion="k"/>
                 <channelDensity condDensity="0.0003 S_per_cm2" id="passive" ionChannel="leak" erev="-54.3 mV" ion="non_specific"/>
                 <spikeThresh value="0 mV"/>
@@ -215,40 +196,38 @@
 
     <network id="net1">
         <population component="hhcell_classic" id="hh_classic_pop" size="1"/>
-        <explicitInput destination="synapses" input="pulseGen1" target="hh_classic_pop[0]"/>
+        <explicitInput input="pulseGen1" target="hh_classic_pop[0]"/>
 
         <population component="hhcell_KS_fwd_rev" id="hh_KS_fwd_rev_pop" size="1"/>
-        <explicitInput destination="synapses" input="pulseGen1" target="hh_KS_fwd_rev_pop[0]"/>
+        <explicitInput input="pulseGen1" target="hh_KS_fwd_rev_pop[0]"/>
 
         <population component="hhcell_KS_tau_inf" id="hh_KS_tau_inf_pop" size="1"/>
-        <explicitInput destination="synapses" input="pulseGen1" target="hh_KS_tau_inf_pop[0]"/>
+        <explicitInput input="pulseGen1" target="hh_KS_tau_inf_pop[0]"/>
     </network>
 
 
     <Simulation id="sim1" length="300ms" step="0.01ms" target="net1">
 
-        <Display timeScale="1ms" title="Ex4a: Kinetic scheme descriptions for K+ channel: voltage" xmax="330" xmin="-30" ymax="60" ymin="-90">
+        <Display timeScale="1ms" title="Ex4a: Kinetic scheme descriptions for K+ channel: voltage" xmax="330" xmin="-30" ymax="60" ymin="-90" id="2">
             <Line color="#ff0000" id="v" quantity="hh_classic_pop[0]/v" scale="1mV" timeScale="1ms"/>
             <Line color="#00ff00" id="v_fr" quantity="hh_KS_fwd_rev_pop[0]/v" scale="1mV" timeScale="1ms"/>
             <Line color="#0000ff" id="v_ti" quantity="hh_KS_tau_inf_pop[0]/v" scale="1mV" timeScale="1ms"/>
         </Display>
 
-        <Display timeScale="1ms" title="Ex4: Kinetic scheme description for K+ channels: channel variables" xmax="330" xmin="-30" ymax="1.1" ymin="-0.1">
-            <!-- <Line color="#ff00ff" id="m" quantity="hh_classic_pop[0]/na_chans/na/m/q" scale="1" timeScale="1ms"/> -->
-            <!-- <Line color="#ffffff" id="h" quantity="hh_classic_pop[0]/na_chans/na/h/q" scale="1" timeScale="1ms"/> -->
-            <Line color="#ff0000" id="n" quantity="hh_classic_pop[0]/biophysicalProperties/membraneProperties/k_chans/k/n/q" scale="1" timeScale="1ms"/>
+        <Display timeScale="1ms" title="Ex4: Kinetic scheme description for K+ channels: channel variables" xmax="330" xmin="-30" ymax="1.1" ymin="-0.1" id="0">
+            <!-- <Line color="#ff00ff" id="m" quantity="hh_classic_pop[0]/na_chans/na_classic/m/q" scale="1" timeScale="1ms"/> -->
+            <!-- <Line color="#ffffff" id="h" quantity="hh_classic_pop[0]/na_chans/na_classic/h/q" scale="1" timeScale="1ms"/> -->
+            <Line color="#ff0000" id="n" quantity="hh_classic_pop[0]/biophysicalProperties/membraneProperties/k_chans/k_classic/n/q" scale="1" timeScale="1ms"/>
             <Line color="#00ff00" id="n_fr" quantity="hh_KS_fwd_rev_pop[0]/biophysicalProperties/membraneProperties/k_chans/k_fwd_rev/n/q" scale="1" timeScale="1ms"/>
             <Line color="#0000ff" id="n_ti" quantity="hh_KS_tau_inf_pop[0]/biophysicalProperties/membraneProperties/k_chans/k_tau_inf/n/q" scale="1" timeScale="1ms"/>
         </Display>
 
-        <Display timeScale="1ms" title="Ex4: Kinetic scheme description for K+ channel: states of k" xmax="330" xmin="-30" ymax="1.1" ymin="-0.1">
+        <Display timeScale="1ms" title="Ex4: Kinetic scheme description for K+ channel: states of k" xmax="330" xmin="-30" ymax="1.1" ymin="-0.1" id="1">
             <Line color="#ff0000" id="c1_fr" quantity="hh_KS_fwd_rev_pop[0]/biophysicalProperties/membraneProperties/k_chans/k_fwd_rev/n/c1/occupancy" scale="1" timeScale="1ms"/>
             <Line color="#00ff00" id="o1_fr" quantity="hh_KS_fwd_rev_pop[0]/biophysicalProperties/membraneProperties/k_chans/k_fwd_rev/n/o1/occupancy" scale="1" timeScale="1ms"/>
-
             <Line color="#991111" id="c1_ti" quantity="hh_KS_tau_inf_pop[0]/biophysicalProperties/membraneProperties/k_chans/k_tau_inf/n/c1/occupancy" scale="1" timeScale="1ms"/>
             <Line color="#119911" id="o1_ti" quantity="hh_KS_tau_inf_pop[0]/biophysicalProperties/membraneProperties/k_chans/k_tau_inf/n/o1/occupancy" scale="1" timeScale="1ms"/>
         </Display>
-
     </Simulation>
 
 </Lems>
