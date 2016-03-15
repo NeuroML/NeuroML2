@@ -499,13 +499,14 @@
             <xs:element name="alphaSynapse" type="AlphaSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="expOneSynapse" type="ExpOneSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="expTwoSynapse" type="ExpTwoSynapse" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="expThreeSynapse" type="ExpThreeSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="blockingPlasticSynapse" type="BlockingPlasticSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="gapJunction" type="GapJunction" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="silentSynapse" type="SilentSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="linearGradedSynapse" type="LinearGradedSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="gradedSynapse" type="GradedSynapse" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
-    </xs:group>
+    </xs:group>       
 
 
     <xs:group name="PyNNSynapseTypes">
@@ -989,6 +990,22 @@
     </xs:complexType>
 
 
+    <xs:complexType name="BaseConductanceBasedSynapseTwo">
+
+        <xs:complexContent>
+            <xs:extension base="BaseVoltageDepSynapse">
+
+                <xs:attribute name="gbase1" type="Nml2Quantity_conductance" use="required"/>
+                <xs:attribute name="gbase2" type="Nml2Quantity_conductance" use="required"/>
+                <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>
+
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+   
+
+
     <xs:complexType name="GapJunction">
 
         <xs:complexContent>
@@ -1098,6 +1115,20 @@
     </xs:complexType>
 
 
+   <xs:complexType name="ExpThreeSynapse">
+
+        <xs:complexContent>
+            <xs:extension base="BaseConductanceBasedSynapseTwo">
+
+                <xs:attribute name="tauDecay1" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="tauDecay2" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="tauRise" type="Nml2Quantity_time" use="required"/>
+
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
     <xs:complexType name="BlockingPlasticSynapse">
         <xs:complexContent>
             <xs:extension base="ExpTwoSynapse">
@@ -1112,6 +1143,9 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+
+    
+    
 
     <xs:simpleType name="BlockTypes">
         <xs:restriction base="xs:string">

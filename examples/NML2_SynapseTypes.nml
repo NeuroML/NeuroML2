@@ -21,6 +21,12 @@
       <notes>A biexponential synapse.</notes>
     </expTwoSynapse>
 
+
+    <expThreeSynapse id="SynapseTwo" gbase1="1.5nS" tauRise="0.1ms" tauDecay1="0.7ms" 
+    gbase2="0.5nS" tauDecay2="2.5ms"  erev="0mV">
+    <notes>A synapse consisting of two biexponential components.</notes>
+    </expThreeSynapse> 
+
     <blockingPlasticSynapse id="stpSynDep" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="2ms">
       <notes>A biexponential synapse exhibiting STD.</notes>
       <plasticityMechanism type="tsodyksMarkramDepMechanism"
@@ -55,5 +61,8 @@
 		      blockConcentration="1.2 mM"
 		      scalingConc="1.920544 mM" scalingVolt="16.129 mV"/>
     </blockingPlasticSynapse>
+
+
+    
 
 </neuroml>
