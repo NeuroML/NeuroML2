@@ -405,47 +405,7 @@
 
 
 
-   <ComponentType name="blockingSynapse"
-                   extends="expTwoSynapse"
-                   description="Biexponential synapse that allows for
-				optional block">
-        
-        <Property name="weight" dimension="none" defaultValue="1"/> 
-        
-        
-        <Children name="blockMechanisms" type="baseBlockMechanism"/>
-        
-        <EventPort name="relay" direction="out" description="Used to relay incoming spikes to child plasticity mechanism"/>
-        <Dynamics>
-            <StateVariable name="A" dimension="none"/>
-            <StateVariable name="B" dimension="none"/>
-
-            
-            
-            <DerivedVariable name="blockFactor" dimension="none"
-                             select="blockMechanisms[*]/blockFactor"
-                             reduce="multiply"/>
-            
-            <DerivedVariable name="g" dimension="conductance" exposure="g"
-                             value="blockFactor * gbase * (B - A)" />
-            <DerivedVariable name="i" exposure="i" dimension="current"
-                             value="g * (erev - v)" />
-
-            <TimeDerivative variable="A" value="-A / tauRise" />
-            <TimeDerivative variable="B" value="-B / tauDecay" />
-
-            <OnStart>
-                <StateAssignment variable="A" value="0" />
-                <StateAssignment variable="B" value="0" />
-            </OnStart>
-
-            <OnEvent port="in">
-                <StateAssignment variable="A" value="A + (weight * waveformFactor)" />
-                <StateAssignment variable="B" value="B + (weight * waveformFactor)" />
-                <EventOut port="relay"/>
-            </OnEvent>
-        </Dynamics>
-    </ComponentType>
+   
 
 
 

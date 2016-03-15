@@ -501,7 +501,6 @@
             <xs:element name="expTwoSynapse" type="ExpTwoSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="expThreeSynapse" type="ExpThreeSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="blockingPlasticSynapse" type="BlockingPlasticSynapse" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="blockingSynapse" type="BlockingSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="gapJunction" type="GapJunction" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="silentSynapse" type="SilentSynapse" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="linearGradedSynapse" type="LinearGradedSynapse" minOccurs="0" maxOccurs="unbounded"/>
@@ -1145,18 +1144,7 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="BlockingSynapse">
-        <xs:complexContent>
-            <xs:extension base="ExpTwoSynapse">
-	      <xs:sequence>
-                
-		<xs:element name="blockMechanism"
-			    type="BlockMechanism"
-			    minOccurs="0"/>
-	      </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    
     
 
     <xs:simpleType name="BlockTypes">

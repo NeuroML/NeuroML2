@@ -63,13 +63,6 @@
     </blockingPlasticSynapse>
 
 
-   <blockingSynapse id="MF_PF_SpikeSynNMDA" gbase="0.3nS" tauRise="3.4ms" tauDecay="44ms" erev="0mV"> 
-      <notes> NMDA component for parallel fiber and mossy fiber to Golgi cell synapse.</notes>
-    <blockMechanism type="voltageConcDepBlockMechanism" species="mg"
-		      blockConcentration="1.0 mM"
-		      scalingConc="0.5128 mM" scalingVolt="65.33 mV"/>
-
-  
-   </blockingSynapse>
+    
 
 </neuroml>
