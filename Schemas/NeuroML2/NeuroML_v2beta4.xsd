@@ -735,6 +735,20 @@
         </xs:sequence>
     </xs:group>
 
+    <xs:complexType name="TauInfTransition">
+        <xs:complexContent>
+            <xs:extension base="Base">
+                <xs:all>
+                    <xs:element name="steadyState" type="HHVariable"/>
+                    <xs:element name="timeCourse" type="HHTime"/>
+                </xs:all>
+                <xs:attribute name="from" type="NmlId" use="required"/>
+                <xs:attribute name="to" type="NmlId" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
     <xs:complexType name="GateKS">
         <xs:complexContent>
             <xs:extension base="Base">
@@ -744,8 +758,10 @@
                     
                     <xs:element name="closedState" type="ClosedState" minOccurs="1" maxOccurs="unbounded"/>
                     <xs:element name="openState" type="OpenState" minOccurs="1"  maxOccurs="unbounded"/>
-                    
-                    <xs:group ref="ForwardReverseTransition" minOccurs="1"  maxOccurs="unbounded"/>
+                    <xs:choice minOccurs="1"  maxOccurs="unbounded"> 
+                        <xs:group ref="ForwardReverseTransition"/>
+                        <xs:element name ="tauInfTransition" type="TauInfTransition"/>
+                    </xs:choice> 
                     
                 </xs:sequence>
                 
