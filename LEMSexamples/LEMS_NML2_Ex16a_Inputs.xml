@@ -29,7 +29,7 @@
     
     <expTwoSynapse id="syn_exc1" erev="0mV" gbase="0.01nS" tauDecay="2ms" tauRise="0.5ms"/>
 
-    <timedSynapticInput id="poissonFiringSyn" synapse="syn_exc1" spikeTarget="./syn_exc1">
+    <timedSynapticInput id="synTrain" synapse="syn_exc1" spikeTarget="./syn_exc1">
         <spike  time="2 ms"/>
         <spike  time="15 ms"/>
         <spike  time="27 ms"/>
@@ -50,7 +50,7 @@
 
     <network id="netSpikes">
         <population id="iafPop" component="iaf" size="1" />
-        <explicitInput input="poissonFiringSyn" destination="synapses" target="iafPop[0]"/>
+        <explicitInput input="synTrain" destination="synapses" target="iafPop[0]"/>
     </network>
 
     <!-- End of NeuroML2 content -->
@@ -63,11 +63,11 @@
             <Line id="iaf0" quantity="iafPop[0]/v" scale="1mV" color="#000000" timeScale="1ms" />
         </Display>
         
-        <OutputFile id="iaf_voltages" fileName="results/ex23a.iaf.dat">
+        <OutputFile id="iaf_voltages" fileName="results/ex16a.iaf.dat">
             <OutputColumn id="i0" quantity="iafPop[0]/v" />
         </OutputFile>
 
-        <EventOutputFile id="iaf_spikes" fileName="results/ex23a.iaf.spikes" format="TIME_ID">
+        <EventOutputFile id="iaf_spikes" fileName="results/ex16a.iaf.spikes" format="TIME_ID">
             <EventSelection id="0" select="iafPop[0]" eventPort="spike"/>
         </EventOutputFile>
 
