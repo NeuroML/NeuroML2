@@ -267,6 +267,42 @@
         </Structure>
 
     </ComponentType>
+
+
+    <ComponentType name="timedSynapticInput"
+                   description="Spike array connected to single synapse, producing current for each spike in the array "
+                   extends="baseVoltageDepPointCurrentSpiking">
+        
+        <ComponentReference name="synapse" type="baseSynapse"/>
+        <Children name="spikes" type="spike"/>
+        <EventPort name="in" direction="in" description="This will receive events from the children"/>
+
+        <Exposure name="tsince" dimension="time" description="Time since the last spike was emitted"/>
+        
+        <Path name="spikeTarget"/>
+        
+        <Dynamics>
+            <StateVariable name="tsince" dimension="time" exposure="tsince"/>
+            
+            <DerivedVariable name="i" dimension="current" exposure="i" select="synapse/i"/>
+
+            <TimeDerivative variable="tsince" value="1"/>
+            <OnEvent port="in">
+                <StateAssignment variable="tsince" value="0"/>
+                <EventOut port="spike"/>
+            </OnEvent>
+
+        </Dynamics>
+        <Structure>
+            <ChildInstance component="synapse"/>
+            
+            <With instance="this" as="a"/>
+            <With instance="spikeTarget" as="b"/>
+            
+            <EventConnection from="a" to="b"/>
+        </Structure>
+
+    </ComponentType>
     
 
     <ComponentType name="pulseGenerator" extends="basePointCurrent"
