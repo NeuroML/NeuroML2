@@ -1,0 +1,77 @@
+
+<Lems>
+
+    <!-- Example with simple network, recording spike times-->
+
+    <!-- This is a file which can be read and executed by the LEMS Interpreter.
+    It imports the LEMS definitions of the core NeuroML 2 Components, creates
+    a model in "pure" NeuroML 2 and contains some LEMS elements for running a
+    simulation -->
+
+    <!-- Specify which component to run -->
+    <Target component="sim1" />
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+
+    <Include file="Cells.xml" />
+    <!-- The above file includes NeuroMLCoreDimensions.xml, Channels.xml,
+    Synapses.xml and Inputs.xml -->
+    <Include file="Networks.xml" />
+    <Include file="Simulation.xml" />
+    
+    <Include file="../examples/NML2_SingleCompHHCell.nml"/>
+
+
+
+    <!-- Main NeuroML2 content -->
+    <iafCell id="iaf" leakConductance="0.2nS" leakReversal="-65mV"
+             thresh="-60mV" reset="-70mV" C="3.2pF"/>
+    
+    <expTwoSynapse id="syn_exc1" erev="0mV" gbase="0.01nS" tauDecay="2ms" tauRise="0.5ms"/>
+
+    <timedSynapticInput id="poissonFiringSyn" synapse="syn_exc1" spikeTarget="./syn_exc1">
+        <spike  time="2 ms"/>
+        <spike  time="15 ms"/>
+        <spike  time="27 ms"/>
+        <spike  time="40 ms"/>
+        <spike  time="45 ms"/>
+        <spike  time="50 ms"/>
+        <spike  time="52 ms"/>
+        <spike  time="54 ms"/>
+        <spike  time="54.5 ms"/>
+        <spike  time="54.6 ms"/>
+        <spike  time="54.7 ms"/>
+        <spike  time="54.8 ms"/>
+        <spike  time="54.9 ms"/>
+        <spike  time="55 ms"/>
+        <spike  time="55.1 ms"/>
+        <spike  time="55.2 ms"/>
+    </timedSynapticInput>
+
+    <network id="netSpikes">
+        <population id="iafPop" component="iaf" size="1" />
+        <explicitInput input="poissonFiringSyn" destination="synapses" target="iafPop[0]"/>
+    </network>
+
+    <!-- End of NeuroML2 content -->
+
+
+    <Simulation id="sim1" length="300ms" step="0.05ms" target="netSpikes" seed="123"> <!-- Note seed: ensures same random numbers used every run -->
+
+        <Display id="d0" title="Ex23: Recording spike times in LEMS: IaF cells" timeScale="1ms" xmin="-30"
+                 xmax="330" ymin="-75" ymax="-50">
+            <Line id="iaf0" quantity="iafPop[0]/v" scale="1mV" color="#000000" timeScale="1ms" />
+        </Display>
+        
+        <OutputFile id="iaf_voltages" fileName="results/ex23a.iaf.dat">
+            <OutputColumn id="i0" quantity="iafPop[0]/v" />
+        </OutputFile>
+
+        <EventOutputFile id="iaf_spikes" fileName="results/ex23a.iaf.spikes" format="TIME_ID">
+            <EventSelection id="0" select="iafPop[0]" eventPort="spike"/>
+        </EventOutputFile>
+
+    </Simulation>
+
+
+</Lems>

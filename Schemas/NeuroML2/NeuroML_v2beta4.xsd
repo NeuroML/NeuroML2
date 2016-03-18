@@ -546,6 +546,8 @@
                     minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="spikeArray" type="SpikeArray" minOccurs="0"
                     maxOccurs="unbounded"/>
+            <xs:element name="timedSynapticInput" type="TimedSynapticInput" minOccurs="0"
+                    maxOccurs="unbounded"/>
             <xs:element name="spikeGenerator" type="SpikeGenerator"
                     minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="spikeGeneratorRandom" type="SpikeGeneratorRandom"
@@ -2242,6 +2244,20 @@
                     <xs:element name="spike" type="Spike" minOccurs="0"
                                 maxOccurs="unbounded"/>
                 </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <xs:complexType name="TimedSynapticInput">
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+                <xs:sequence>
+                    <xs:element name="spike" type="Spike" minOccurs="0"
+                                maxOccurs="unbounded"/>
+                </xs:sequence>
+                <xs:attribute name="synapse" type="xs:string"
+                              use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
