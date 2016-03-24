@@ -29,7 +29,7 @@
 <Include file="../examples/NML2_Inputs.nml"/>
 
 <network id="net1">
-    <population id="izhPop" component="RS" size="11"/>
+    <population id="izhPop" component="RS" size="12"/>
 
     <population id="spikeArrPop" component="spkArr" size="1"/>
     <population id="spikeGenRegularPop" component="spikeGenRegular" size="1"/>
@@ -43,6 +43,7 @@
     <explicitInput target="izhPop[8]" input="poissonFiringSyn" destination="synapses"/>
     <explicitInput target="izhPop[9]" input="ci0" destination="synapses"/>
     <explicitInput target="izhPop[10]" input="transPoissonFiringSyn" destination="synapses"/>
+    <explicitInput target="izhPop[11]" input="synTrain" destination="synapses"/>
     
     <synapticConnection from="spikeArrPop[0]" to="izhPop[4]" synapse="syn1" destination="synapses"/>
     <synapticConnection from="spikeGenRegularPop[0]" to="izhPop[5]" synapse="syn1" destination="synapses"/>

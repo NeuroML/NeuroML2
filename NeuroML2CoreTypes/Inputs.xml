@@ -274,11 +274,13 @@
 
 
     <ComponentType name="timedSynapticInput"
-                   description="Spike array connected to single synapse, producing current for each spike in the array "
+                   description="Spike array connected to a single synapse, producing current triggered by each spike in the array"
                    extends="baseVoltageDepPointCurrentSpiking">
         
-        <ComponentReference name="synapse" type="baseSynapse"/>
         <Children name="spikes" type="spike"/>
+        
+        <ComponentReference name="synapse" type="baseSynapse"/>
+        
         <EventPort name="in" direction="in" description="This will receive events from the children"/>
 
         <Exposure name="tsince" dimension="time" description="Time since the last spike was emitted"/>
@@ -297,6 +299,7 @@
             </OnEvent>
 
         </Dynamics>
+        
         <Structure>
             <ChildInstance component="synapse"/>
             

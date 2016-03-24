@@ -45,7 +45,6 @@
 
     <ComponentType name="population" extends="basePopulation" description="A population of components, with just one parameter for the _size">
         <Parameter name="size" dimension="none" description="Number of instances of this Component to create when the population is instantiated"/>
-        <ComponentReference name="component" type="Component"/>
         <Structure>
             <MultiInstantiate number="size" component="component"/>
         </Structure>
@@ -54,8 +53,6 @@
 
     <ComponentType name="populationList" extends="basePopulation" description="An explicit list of the cells in the population. Work in progress...">        
         <Children name="instances" type="instance"/>
-    
-        <ComponentReference name="component" type="baseCell"/>
         
         <Text name="size"/> <!--Note: Text, not Parameter, as this is not actually used by LEMS, the <instance> elements determine the size, this attribute is really just metadata, though the two should be consistent-->
     </ComponentType>

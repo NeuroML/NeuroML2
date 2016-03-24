@@ -1,68 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  ../Schemas/NeuroML2/NeuroML_v2beta4.xsd"
-    id="NML2_SynapseTypes">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  ../Schemas/NeuroML2/NeuroML_v2beta4.xsd"
+         id="NML2_SynapseTypes">
 
     <!-- Some examples of the currently supported synapse types -->
 
-    
     <alphaSynapse id="synalpha" gbase="0.5nS" erev="0mV" tau="2ms" >
-      <notes>An alpha synapse with time for rise equal to decay.</notes>
+        <notes>An alpha synapse with time for rise equal to decay.</notes>
     </alphaSynapse>
-    
+   
+   
     <expOneSynapse id="sy1" gbase="0.5nS" erev="0mV" tauDecay="3ms" >
-      <notes>A simple monoexponential synapse.</notes>
+        <notes>A simple monoexponential synapse.</notes>
     </expOneSynapse>
 
+
     <expTwoSynapse id="SimpleSynapse" gbase="0.5nS" erev="0mV"
-		   tauRise="1ms" tauDecay="2ms" >
-      <notes>A biexponential synapse.</notes>
+                   tauRise="1ms" tauDecay="2ms" >
+        <notes>A biexponential synapse.</notes>
     </expTwoSynapse>
 
 
     <expThreeSynapse id="SynapseTwo" gbase1="1.5nS" tauRise="0.1ms" tauDecay1="0.7ms" 
-    gbase2="0.5nS" tauDecay2="2.5ms"  erev="0mV">
-    <notes>A synapse consisting of two biexponential components.</notes>
+                     gbase2="0.5nS" tauDecay2="2.5ms"  erev="0mV">
+        <notes>A synapse consisting of one rise and two decay time courses.</notes>
     </expThreeSynapse> 
 
+
     <blockingPlasticSynapse id="stpSynDep" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="2ms">
-      <notes>A biexponential synapse exhibiting STD.</notes>
-      <plasticityMechanism type="tsodyksMarkramDepMechanism"
-		 initReleaseProb="0.5" tauRec="120 ms" />
+        <notes>A biexponential synapse exhibiting STD.</notes>
+        <plasticityMechanism type="tsodyksMarkramDepMechanism"
+                           initReleaseProb="0.5" tauRec="120 ms" />
     </blockingPlasticSynapse>
+
 
     <blockingPlasticSynapse id="stpSynDepFac" gbase="1nS" erev="0mV"
-		tauRise="0.1ms" tauDecay="2ms">
-      <notes>A biexponential synapse with short term depression
-      and facilitation.</notes>
-      <plasticityMechanism type="tsodyksMarkramDepFacMechanism"
-		    initReleaseProb="0.5" tauRec="120 ms" tauFac="10 ms"/>
+                            tauRise="0.1ms" tauDecay="2ms">
+        <notes>A biexponential synapse with short term depression
+            and facilitation.</notes>
+        <plasticityMechanism type="tsodyksMarkramDepFacMechanism"
+                           initReleaseProb="0.5" tauRec="120 ms" tauFac="10 ms"/>
     </blockingPlasticSynapse>
+
 
     <blockingPlasticSynapse id="blockStpSynDep" gbase="1nS" erev="0mV"
-		     tauRise="0.1ms" tauDecay="2ms">
-      <notes>A biexponential blocking synapse, with STD.</notes>
-      <plasticityMechanism type="tsodyksMarkramDepMechanism"
-		    initReleaseProb="0.5" tauRec="120 ms"/>
-      <blockMechanism type="voltageConcDepBlockMechanism" species="mg"
-		      blockConcentration="1.2 mM"
-		      scalingConc="1.920544 mM" scalingVolt="16.129 mV"/>
+                            tauRise="0.1ms" tauDecay="2ms">
+        <notes>A biexponential blocking synapse, with STD.</notes>
+        <plasticityMechanism type="tsodyksMarkramDepMechanism"
+                           initReleaseProb="0.5" tauRec="120 ms"/>
+        <blockMechanism type="voltageConcDepBlockMechanism" species="mg"
+                      blockConcentration="1.2 mM"
+                      scalingConc="1.920544 mM" scalingVolt="16.129 mV"/>
     </blockingPlasticSynapse>
+
 
     <blockingPlasticSynapse id="blockStpSynDepFac" gbase="1nS" erev="0mV"
-		     tauRise="0.1ms" tauDecay="2ms">
-      <notes>A biexponential blocking synapse with short term
-      depression and facilitation.</notes>
-      <plasticityMechanism type="tsodyksMarkramDepFacMechanism"
-		    initReleaseProb="0.5" tauRec="120 ms" tauFac="10 ms"/>
-      <blockMechanism type="voltageConcDepBlockMechanism" species="mg"
-		      blockConcentration="1.2 mM"
-		      scalingConc="1.920544 mM" scalingVolt="16.129 mV"/>
+                            tauRise="0.1ms" tauDecay="2ms">
+        <notes>A biexponential blocking synapse with short term
+            depression and facilitation.</notes>
+        <plasticityMechanism type="tsodyksMarkramDepFacMechanism"
+                           initReleaseProb="0.5" tauRec="120 ms" tauFac="10 ms"/>
+        <blockMechanism type="voltageConcDepBlockMechanism" species="mg"
+                      blockConcentration="1.2 mM"
+                      scalingConc="1.920544 mM" scalingVolt="16.129 mV"/>
     </blockingPlasticSynapse>
 
-
-    
 
 </neuroml>

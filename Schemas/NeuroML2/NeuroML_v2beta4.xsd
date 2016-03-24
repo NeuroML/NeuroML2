@@ -2256,7 +2256,9 @@
                     <xs:element name="spike" type="Spike" minOccurs="0"
                                 maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="synapse" type="xs:string"
+                <xs:attribute name="synapse" type="NmlId"
+                              use="required"/>
+                <xs:attribute name="spikeTarget" type="xs:string"
                               use="required"/>
             </xs:extension>
         </xs:complexContent>
