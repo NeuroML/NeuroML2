@@ -19,15 +19,27 @@
    
     
     <network id="net2">
-        <population id="hhPop1" component="hhcell" size="1" />
-        <population id="hhPop2" component="hhcell" size="1" />
+        
+        <population id="hhPop1" component="hhcell" size="1" type="populationList">
+            <instance id="0">
+                <location x="0" y="0" z="0"/>
+            </instance>
+        </population>
+        
+        <population id="hhPop2" component="hhcell" size="1" type="populationList">
+            <instance id="0">
+                <location x="100" y="0" z="0"/>
+            </instance>
+        </population>
   
         
         <continuousProjection id ="testGradedConn" presynapticPopulation="hhPop1" postsynapticPopulation="hhPop2">
-            <continuousConnection id="0" preCell="0" postCell="0" preComponent="silent1" postComponent="gs1"/>
+            <continuousConnectionInstance id="0" preCell="../hhPop1/0/hhcell" postCell="../hhPop2/0/hhcell" preComponent="silent1" postComponent="gs1"/>
         </continuousProjection>
         
-        <explicitInput target="hhPop1[0]" input="pulseGen1"/>
+        <inputList id="i1" component="pulseGen1" population="iafPop1">
+            <input id="0" target="../hhPop1/0/hhcell" destination="synapses"/>
+        </inputList>
         
     </network>
     

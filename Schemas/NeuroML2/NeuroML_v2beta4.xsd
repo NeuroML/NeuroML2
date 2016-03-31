@@ -2636,6 +2636,7 @@
             <xs:extension base="Base">
                 <xs:sequence>
                     <xs:element name="continuousConnection" type="ContinuousConnection" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="continuousConnectionInstance" type="ContinuousConnectionInstance" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
                 <xs:attribute name="presynapticPopulation" type="NmlId" use="required"/>
                 <xs:attribute name="postsynapticPopulation" type="NmlId" use="required"/>
@@ -2658,6 +2659,15 @@
                 <xs:attribute name="preComponent" type="NmlId" use="required"/>
                 <xs:attribute name="postComponent" type="NmlId" use="required"/>
             </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="ContinuousConnectionInstance">
+        <xs:annotation>
+            <xs:documentation>Individual continuous/analog synaptic connection - instance based</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ContinuousConnection"/>
         </xs:complexContent>
     </xs:complexType>
 
