@@ -220,9 +220,6 @@
                    description="To enable Gap junctions, NOTE: STILL IN DEVELOPMENT!!!!">
         
         <ComponentReference name="synapse" type="gapJunction"/>
-
-        <ComponentRequirement name="presynapticPopulation"/>
-        <ComponentRequirement name="postsynapticPopulation"/>
         
         <Path name="preCell"/>
         <Path name="postCell"/>
@@ -269,11 +266,34 @@
 
     </ComponentType>
     
+    <ComponentType name="continuousConnectionInstance"
+                   description="STILL IN DEVELOPMENT!!!!">
+
+        <ComponentReference name="preComponent" type="baseGradedSynapse"/>
+        <ComponentReference name="postComponent" type="baseGradedSynapse"/>
+        
+        <Path name="preCell"/>
+        <Path name="postCell"/>
+
+        <Text name="preFractionAlong"/>
+        <Text name="postFractionAlong"/>
+        <Text name="preSegment"/>
+        <Text name="postSegment"/>
+
+        <Structure>
+            <With instance="preCell" as="a"/>
+            <With instance="postCell" as="b"/>
+            <Tunnel name="peer" endA="a" endB="b" componentA="preComponent" componentB="postComponent"/>
+        </Structure>
+
+    </ComponentType>
+    
     
     <ComponentType name="continuousProjection"
                    description="STILL IN DEVELOPMENT!!!!">
         
         <Children name="connections" type="continuousConnection"/>
+        <Children name="connections" type="continuousConnectionInstance"/>
         
         <ComponentReference name="presynapticPopulation" type="population" local="true"/>
         <ComponentReference name="postsynapticPopulation" type="population" local="true"/>
