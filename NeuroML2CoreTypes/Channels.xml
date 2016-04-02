@@ -449,6 +449,51 @@
     </ComponentType>
 
 
+    <ComponentType name="gateFractional"
+                   extends="baseGate"
+                   description="Gate composed of subgates contributing with fractional conductance">
+
+        <Children name="q10Settings" type="baseQ10Settings"/>
+        <Children name="subGate" type="subGate"/>
+        <Exposure name="rateScale" dimension="none"/>
+
+        <Dynamics>
+            <DerivedVariable name="q" exposure="q" dimension="none" select="subGate[*]/qfrac" reduce="add"/>
+            <DerivedVariable name="fcond" exposure="fcond" dimension="none" value="q^instances"/>
+            <DerivedVariable name="rateScale" exposure="rateScale" dimension="none" select="q10Settings[*]/q10" reduce="multiply"/>
+        </Dynamics>
+    </ComponentType>
+
+
+    <ComponentType name="subGate"
+                   description="Gate composed of subgates contributing with fractional conductance">
+
+        <Child name="notes" type="notes"/>
+
+        <Child name="timeCourse" type="baseVoltageDepTime" />
+        <Child name="steadyState" type="baseVoltageDepVariable" />
+        <Parameter name="fractionalConductance" dimension="none"/>
+
+        <Exposure name="tau" dimension="time"/>
+        <Exposure name="inf" dimension="none"/>
+        <Exposure name="qfrac" dimension="none"/>
+        <Exposure name="q" dimension="none"/>
+        <Requirement name="rateScale" dimension="none"/>
+
+        <Dynamics>
+            <StateVariable name="q" exposure="q" dimension="none"/>
+            <DerivedVariable name="inf" dimension="none" exposure="inf" select="steadyState/x"/>
+            <DerivedVariable name="tauUnscaled" dimension="time" select="timeCourse/t"/>
+            <DerivedVariable name="tau" dimension="time" exposure="tau" value="tauUnscaled / rateScale"/>
+            <DerivedVariable name="qfrac" dimension="none" exposure="qfrac" value="q * fractionalConductance"/>
+            <TimeDerivative variable="q" value="(inf - q) / tau"/>
+            <OnStart>
+                <StateAssignment variable="q" value="inf"/>
+            </OnStart>
+        </Dynamics>
+    </ComponentType>
+
+
     <ComponentType name="baseIonChannel"
                    description="Base for all ion channel ComponentTypes">
         <Parameter name="conductance" dimension="conductance"/>
@@ -486,6 +531,7 @@
         <Children name="gatesHHratesInf" type="gateHHratesInf"/>
         <Children name="gatesHHratesTauInf" type="gateHHratesTauInf"/>
         <Children name="gateHHInstantaneous" type="gateHHInstantaneous"/>
+        <Children name="gatesFractional" type="gateFractional"/>
         
         <Text name="neuroLexId"/>
         <Text name="species"/>
@@ -498,7 +544,8 @@
             <DerivedVariable name="fopenHHratesInf" dimension="none" select="gatesHHratesInf[*]/fcond" reduce="multiply"/>
             <DerivedVariable name="fopenHHratesTauInf" dimension="none" select="gatesHHratesTauInf[*]/fcond" reduce="multiply"/>
             <DerivedVariable name="fopenHHInstantaneous" dimension="none" select="gateHHInstantaneous[*]/fcond" reduce="multiply"/>
-            <DerivedVariable name="fopen" exposure="fopen" dimension="none" value="conductanceScale * fopenHHrates * fopenHHtauInf * fopenHHratesTau * fopenHHratesInf * fopenHHratesTauInf * fopenHHInstantaneous"/>
+            <DerivedVariable name="fopenFractional" dimension="none" select="gatesFractional[*]/fcond" reduce="multiply"/>
+            <DerivedVariable name="fopen" exposure="fopen" dimension="none" value="conductanceScale * fopenHHrates * fopenHHtauInf * fopenHHratesTau * fopenHHratesInf * fopenHHratesTauInf * fopenHHInstantaneous * fopenFractional"/>
             <DerivedVariable name="g" exposure="g" value="conductance * fopen" dimension="conductance"/>
         </Dynamics>
     </ComponentType>
@@ -658,10 +705,10 @@
     
         <Dynamics>
 
+            <DerivedVariable name="rateScale" exposure="rateScale" dimension="none" select="q10Settings[*]/q10" reduce="multiply"/>
             <DerivedVariable name="q" exposure="q" dimension="none" select="states[*]/q" reduce="add"/>
             <DerivedVariable name="fcond" exposure="fcond" dimension="none" value="q^instances"/>
             
-            <DerivedVariable name="rateScale" exposure="rateScale" dimension="none" select="q10Settings[*]/q10" reduce="multiply"/>
 
             <KineticScheme name="ks" nodes="states" stateVariable="occupancy"
                            edges="transitions" edgeSource="from" edgeTarget="to"
