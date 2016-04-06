@@ -216,9 +216,13 @@
         
     </ComponentType>
     
+    <ComponentType name="gate"
+                   extends="baseGate"
+                   description="Conveniently named baseGate">
+    </ComponentType>
 
     <ComponentType name="gateHHrates"
-                   extends="baseGate"
+                   extends="gate"
                    description="Gate which follows the general Hodgkin Huxley formalism">
 
         <Child name="notes" type="notes"/>
@@ -262,7 +266,7 @@
 
 
     <ComponentType name="gateHHtauInf"
-                   extends="baseGate"
+                   extends="gate"
                    description="Gate which follows the general Hodgkin Huxley formalism">
 
         <Child name="notes" type="notes"/>
@@ -298,7 +302,7 @@
     </ComponentType>
     
     <ComponentType name="gateHHInstantaneous"
-                   extends="baseGate"
+                   extends="gate"
                    description="Gate which follows the general Hodgkin Huxley formalism but is instantaneous, so tau = 0 and gate follows exactly inf value">
 
         <Constant name="SEC" dimension="time" value="1 s"/>
@@ -325,7 +329,7 @@
 
 
     <ComponentType name="gateHHratesTau"
-                   extends="baseGate"
+                   extends="gate"
                    description="Gate which follows the general Hodgkin Huxley formalism">
 
         <Child name="notes" type="notes"/>
@@ -369,7 +373,7 @@
     
     
     <ComponentType name="gateHHratesInf"
-                   extends="baseGate"
+                   extends="gate"
                    description="Gate which follows the general Hodgkin Huxley formalism">
 
         <Child name="notes" type="notes"/>
@@ -409,7 +413,7 @@
     
     
     <ComponentType name="gateHHratesTauInf"
-                   extends="baseGate"
+                   extends="gate"
                    description="Gate which follows the general Hodgkin Huxley formalism">
 
         <Child name="notes" type="notes"/>
@@ -450,7 +454,7 @@
 
 
     <ComponentType name="gateFractional"
-                   extends="baseGate"
+                   extends="gate"
                    description="Gate composed of subgates contributing with fractional conductance">
 
         <Children name="q10Settings" type="baseQ10Settings"/>
@@ -525,27 +529,15 @@
         <Child name="annotation" type="annotation"/>
         
         <Children name="conductanceScaling" type="baseConductanceScaling"/>
-        <Children name="gatesHHrates" type="gateHHrates"/>
-        <Children name="gatesHHtauInf" type="gateHHtauInf"/>
-        <Children name="gatesHHratesTau" type="gateHHratesTau"/>
-        <Children name="gatesHHratesInf" type="gateHHratesInf"/>
-        <Children name="gatesHHratesTauInf" type="gateHHratesTauInf"/>
-        <Children name="gateHHInstantaneous" type="gateHHInstantaneous"/>
-        <Children name="gatesFractional" type="gateFractional"/>
+        <Children name="gates" type="gate"/>
         
         <Text name="neuroLexId"/>
         <Text name="species"/>
     
         <Dynamics>
             <DerivedVariable name="conductanceScale" dimension="none" select="conductanceScaling[*]/factor" reduce="multiply"/>
-            <DerivedVariable name="fopenHHrates" dimension="none" select="gatesHHrates[*]/fcond" reduce="multiply"/>
-            <DerivedVariable name="fopenHHtauInf" dimension="none" select="gatesHHtauInf[*]/fcond" reduce="multiply"/>
-            <DerivedVariable name="fopenHHratesTau" dimension="none" select="gatesHHratesTau[*]/fcond" reduce="multiply"/>
-            <DerivedVariable name="fopenHHratesInf" dimension="none" select="gatesHHratesInf[*]/fcond" reduce="multiply"/>
-            <DerivedVariable name="fopenHHratesTauInf" dimension="none" select="gatesHHratesTauInf[*]/fcond" reduce="multiply"/>
-            <DerivedVariable name="fopenHHInstantaneous" dimension="none" select="gateHHInstantaneous[*]/fcond" reduce="multiply"/>
-            <DerivedVariable name="fopenFractional" dimension="none" select="gatesFractional[*]/fcond" reduce="multiply"/>
-            <DerivedVariable name="fopen" exposure="fopen" dimension="none" value="conductanceScale * fopenHHrates * fopenHHtauInf * fopenHHratesTau * fopenHHratesInf * fopenHHratesTauInf * fopenHHInstantaneous * fopenFractional"/>
+            <DerivedVariable name="fopen0" dimension="none" select="gates[*]/fcond" reduce="multiply"/>
+            <DerivedVariable name="fopen" exposure="fopen" dimension="none" value="conductanceScale * fopen0"/>
             <DerivedVariable name="g" exposure="g" value="conductance * fopen" dimension="conductance"/>
         </Dynamics>
     </ComponentType>
@@ -557,11 +549,8 @@
         
         <Dynamics>
             <DerivedVariable name="conductanceScale" dimension="none" select="conductanceScaling[*]/factor" reduce="multiply"/>
-            <DerivedVariable name="fopenHHrates" dimension="none" select="gatesHHrates[*]/fcond" reduce="multiply"/>
-            <DerivedVariable name="fopenHHtauInf" dimension="none" select="gatesHHtauInf[*]/fcond" reduce="multiply"/>
-            <DerivedVariable name="fopenHHratesTau" dimension="none" select="gatesHHratesTau[*]/fcond" reduce="multiply"/>
-            <DerivedVariable name="fopenHHratesInf" dimension="none" select="gatesHHratesInf[*]/fcond" reduce="multiply"/>
-            <DerivedVariable name="fopen" exposure="fopen" dimension="none" value="conductanceScale * fopenHHrates * fopenHHtauInf * fopenHHratesTau * fopenHHratesInf"/>
+            <DerivedVariable name="fopen0" dimension="none" select="gates[*]/fcond" reduce="multiply"/>
+            <DerivedVariable name="fopen" exposure="fopen" dimension="none" value="conductanceScale * fopen0"/>
             <DerivedVariable name="g" exposure="g" value="conductance * fopen" dimension="conductance"/>
         </Dynamics>
 
