@@ -683,6 +683,7 @@
             <xs:enumeration value="gateHHratesTauInf"/>
             <xs:enumeration value="gateHHInstantaneous"/>
             <xs:enumeration value="gateKS"/>
+            <xs:enumeration value="gateFractional"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -879,6 +880,35 @@
                 </xs:all>
                 <xs:attribute name="instances" type="PositiveInteger" use="required"/>
                 <!-- <xs:attribute name="type" type="gateTypes" use="optional"/> No longer allowed as it could conflict with the element definition -->
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <xs:complexType name="GateFractional">
+        <xs:complexContent>
+            <xs:extension base="Base">
+                <xs:all>
+                    <xs:element name="notes" type="Notes" minOccurs="0"/>
+                    <xs:element name="q10Settings" type="Q10Settings" minOccurs="0"/>
+                    <xs:element name="subGate" type="GateFractionalSubgate" minOccurs="1"/>
+                </xs:all>
+                <xs:attribute name="fractionalConductance" type="Nml2Quantity_none" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <xs:complexType name="GateFractionalSubgate">
+        <xs:complexContent>
+            <xs:extension base="Base">
+                <xs:all>
+                    <xs:element name="notes" type="Notes" minOccurs="0"/>
+                    <xs:element name="q10Settings" type="Q10Settings" minOccurs="0"/>
+                    <xs:element name="steadyState" type="HHVariable" minOccurs="1"/>
+                    <xs:element name="timeCourse" type="HHTime" minOccurs="1"/>
+                </xs:all>
+                <xs:attribute name="fractionalConductance" type="Nml2Quantity_none" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>

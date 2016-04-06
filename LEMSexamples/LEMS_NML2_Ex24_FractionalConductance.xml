@@ -1,0 +1,210 @@
+<Lems>
+
+    <Target component="sim1"/>
+    
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+
+    <!-- the slow K channel below uses the "fractional conductance / subGate" formalism -->
+    
+    <ionChannelHH id="k_slow" conductance="10pS">
+
+        <gateHHrates id="a" instances="2">
+            <q10Settings type="q10ExpTemp" q10Factor="2.3" experimentalTemp="21 degC"/> 
+            <reverseRate type="kslow_a_beta_rate"/>
+            <forwardRate  type="kslow_a_alpha_rate"/>
+        </gateHHrates>
+
+        <gateFractional id="b" instances="1">
+            <subGate fractionalConductance="0.5" id="bb" >
+                <steadyState type="HHSigmoidVariable" rate="1" midpoint="-58mV" scale="-11mV"/>
+                <timeCourse type="kslow_b_tau"/>
+            </subGate>
+            <subGate fractionalConductance="0.5" id="bb1" >
+                <steadyState type="HHSigmoidVariable" rate="1" midpoint="-58mV" scale="-11mV"/>
+                <timeCourse type="kslow_b1_tau"/>
+            </subGate>
+        </gateFractional>
+
+    </ionChannelHH>
+
+    <!-- complicated rates for kslow -->
+    <ComponentType name="kslow_a_alpha_rate" extends="baseVoltageDepRate">
+        <Constant name="TIME_SCALE" dimension="time" value="1 ms"/>
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
+        <Constant name="a0" dimension="none" value="0.0052"/>
+        <Constant name="a1" dimension="none" value="11.1"/>
+        <Constant name="a2" dimension="none" value="13.1"/>
+        <Constant name="a3" dimension="none" value="0.01938"/>
+        <Constant name="a4" dimension="none" value="-1.27"/>
+        <Constant name="a5" dimension="none" value="71"/>
+        <Constant name="a6" dimension="none" value="-0.0053"/>
+
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="v / VOLT_SCALE"/>
+            <DerivedVariable name="r" exposure="r" dimension="per_time" value="(a0*(V-a1)/(1-exp(-(V-a1)/a2))) / TIME_SCALE "/>
+        </Dynamics>
+
+    </ComponentType>
+
+    <ComponentType name="kslow_a_beta_rate" extends="baseVoltageDepRate">
+        <Constant name="TIME_SCALE" dimension="time" value="1 ms"/>
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
+        <Constant name="a0" dimension="none" value="0.0052"/>
+        <Constant name="a1" dimension="none" value="11.1"/>
+        <Constant name="a2" dimension="none" value="13.1"/>
+        <Constant name="a3" dimension="none" value="0.01938"/>
+        <Constant name="a4" dimension="none" value="-1.27"/>
+        <Constant name="a5" dimension="none" value="71"/>
+        <Constant name="a6" dimension="none" value="-0.0053"/>
+
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="v / VOLT_SCALE"/>
+            <DerivedVariable name="r" exposure="r" dimension="per_time" value="(a3*exp(-(V-a4)/a5)+a6) / TIME_SCALE "/>
+        </Dynamics>
+
+    </ComponentType>
+
+
+    <ComponentType name="kslow_b_tau" extends="baseVoltageDepTime">
+        <Constant name="TIME_SCALE" dimension="time" value="1 ms"/>
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
+        <Constant name="v05b" dimension="none" value="-58"/>
+        <Constant name="b0" dimension="none" value="360"/>
+        <Constant name="b11" dimension="none" value="1010"/>
+        <Constant name="b2" dimension="none" value="-75"/>
+        <Constant name="b3" dimension="none" value="48"/>
+        <Constant name="b4" dimension="none" value="23.7"/>
+        <Constant name="b5" dimension="none" value="-54"/>
+
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="v / VOLT_SCALE"/>
+            <DerivedVariable name="t" exposure="t" dimension="time" value="(b0+(b11+b4*(V-b5))*exp(-(V-b2)*(V-b2)/(b3*b3))) * TIME_SCALE "/>
+        </Dynamics>
+
+    </ComponentType>
+
+
+    <ComponentType name="kslow_b1_tau" extends="baseVoltageDepTime">
+        <Constant name="TIME_SCALE" dimension="time" value="1 ms"/>
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
+        <Constant name="bb0" dimension="none" value="2350"/>
+        <Constant name="bb1" dimension="none" value="1380"/>
+        <Constant name="bb2" dimension="none" value="0.01118"/>
+        <Constant name="bb3" dimension="none" value="-210"/>
+        <Constant name="bb4" dimension="none" value="0.0306"/>
+
+
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="v / VOLT_SCALE"/>
+            <DerivedVariable name="t" exposure="t" dimension="time" value="(bb0+bb1*exp(-bb2*V)+bb3*exp(-bb4*V)) * TIME_SCALE "/>
+        </Dynamics>
+
+    </ComponentType>
+
+
+    <!-- just standard HH below (similar to example 1) -->
+
+    <ionChannelHH id="k" conductance="10pS">
+        <gateHHrates id="n" instances="4">
+            <forwardRate type="HHExpLinearRate" rate="0.1per_ms" midpoint="-55mV" scale="10mV"/>
+            <reverseRate type="HHExpRate" rate="0.125per_ms" midpoint="-65mV" scale="-80mV"/>
+        </gateHHrates>
+    </ionChannelHH>
+
+    <ionChannelPassive id="leak" conductance="10pS"/>
+    
+    <ionChannelHH id="na" conductance="10pS">
+    
+       <gateHHrates id="m" instances="3">
+            <forwardRate type="HHExpLinearRate" rate="1per_ms" midpoint="-40mV" scale="10mV"/>
+            <reverseRate type="HHExpRate" rate="4per_ms" midpoint="-65mV" scale="-18mV"/>
+       </gateHHrates>
+    
+       <gateHHrates id="h" instances="1">
+           <forwardRate type="HHExpRate" rate="0.07per_ms" midpoint="-65mV" scale="-20mV"/>
+           <reverseRate type="HHSigmoidRate" rate="1per_ms" midpoint="-35mV" scale="10mV"/>
+       </gateHHrates>
+    
+    </ionChannelHH>
+    
+    
+    <cell id="hh">
+        <morphology id="just_a_cylinder">
+            <segment id="0" name="Soma">
+                <proximal x="0.0" y="0.0" z="0.0" diameter="10.0"/>
+                <distal x="0.0" y="0.0" z="20.0" diameter="10.0"/>
+            </segment>
+            <segmentGroup id="all">
+                <member segment="0"/>
+            </segmentGroup>
+            <segmentGroup id="soma_group">
+                <member segment="0"/>
+            </segmentGroup>
+        </morphology>
+
+        <biophysicalProperties id="biophys">
+            <membraneProperties>
+                <channelDensity condDensity="0.12 S_per_cm2" id="naChans" ionChannel="na" erev="50.0 mV" ion="na"/> 
+                <channelDensity condDensity="0.036 S_per_cm2" id="kChans" ionChannel="k" erev="-77.0 mV" ion="k"/>
+                <channelDensity condDensity="0.036 S_per_cm2" id="k_slowChans" ionChannel="k_slow" erev="-77.0 mV" ion="k"/>
+                <channelDensity condDensity="0.0003 S_per_cm2" id="leakChans" ionChannel="leak" erev="-54.3 mV" ion="non_specific"/>
+
+                <spikeThresh value="0 mV"/>
+                <specificCapacitance value="1.0 uF_per_cm2"/>
+                <initMembPotential value="-65.0 mV"/>
+
+            </membraneProperties>
+
+
+            <intracellularProperties>
+
+                <resistivity value="0.1 kohm_cm"/>
+
+            </intracellularProperties>
+
+        </biophysicalProperties>
+
+    </cell>
+
+    <pulseGenerator id="IClamp" delay="500ms" duration="50ms" amplitude="0.1 nA" />
+
+    <network id="net1" type="networkWithTemperature" temperature = "34 degC">
+        <population id="pop" component="hh" size="1"/>
+        <explicitInput target="pop[0]" input="IClamp" destination="synapses"/>
+    </network>
+    
+
+    <Simulation id="sim1" length="1000ms" step="0.01ms" target="net1">
+    
+        <Display id="d1" title="Voltage" timeScale="1ms" xmin="0" xmax="1000" ymin="-90" ymax="60">
+            <Line id="v" quantity="pop[0]/v" scale="1mV"  color="#ffffff" timeScale="1ms"/>
+        </Display>
+        
+        <Display id="d2" title="K chanell: rate variables" timeScale="1ms" xmin="0" xmax="1000" ymin="-0.1" ymax="1.1">
+            <Line id="k_slow_a" quantity="pop[0]/biophys/membraneProperties/k_slowChans/k_slow/a/q" scale="1"  color="#0000ff" timeScale="1ms"/>
+            <Line id="k_slow_b_bb" quantity="pop[0]/biophys/membraneProperties/k_slowChans/k_slow/b/bb/q" scale="1"  color="#00bbb00" timeScale="1ms"/>
+            <Line id="k_slow_b_bb1" quantity="pop[0]/biophys/membraneProperties/k_slowChans/k_slow/b/bb1/q" scale="1"  color="#bb0000" timeScale="1ms"/>
+        </Display>
+    
+        <Display id="d3" title="current" timeScale="1ms" xmin="0" xmax="1000" ymin="-0.01" ymax="1">
+            <Line id="i" quantity="pop[0]/IClamp/i" scale="1nA"  color="#000000" timeScale="1ms"/>
+        </Display>
+
+        <Display id="d4" title="potassium fractional conductance: a^2(0.5*bb + 0.5*bb1)" timeScale="1ms" xmin="0" xmax="1000" ymin="-0.1" ymax="1.1">
+            <Line id="k_slow_b_fcond" quantity="pop[0]/biophys/membraneProperties/k_slowChans/k_slow/b/fcond" scale="1"  color="#0000ff" timeScale="1ms"/>
+            <Line id="k_slow_fopen" quantity="pop[0]/biophys/membraneProperties/k_slowChans/k_slow/fopen" scale="1"  color="#0000ff" timeScale="1ms"/>
+        </Display>
+    
+        <OutputFile id="of0" fileName="results/hh_v.dat">
+            <OutputColumn id="v" quantity="pop[0]/v"/> 
+            <OutputColumn id="kslow_fcond" quantity="pop[0]/biophys/membraneProperties/k_slowChans/k_slow/fopen"/> 
+        </OutputFile>  
+    
+    </Simulation>
+    
+
+
+
+</Lems>
