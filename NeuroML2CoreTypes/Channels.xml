@@ -593,7 +593,7 @@
         <Text name="species"/>
     
         <Dynamics>
-            <DerivedVariable name="fopen" exposure="fopen" dimension="none" select="gates[*]/fcond" reduce="multiply"/>
+            <DerivedVariable name="fopen" exposure="fopen" dimension="none" select="gatesKS[*]/fcond" reduce="multiply"/>
             <DerivedVariable name="g" exposure="g" dimension="conductance" value="fopen * conductance"/>
 
         </Dynamics>
