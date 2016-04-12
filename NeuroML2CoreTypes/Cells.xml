@@ -60,8 +60,6 @@
         <Parameter name="number" dimension="none"/>
         <Parameter name="erev" dimension="voltage"/>
 
-        <ComponentReference name="ionChannel" type="baseIonChannel"/>
-
         <Text name="ion"/> <!-- TODO: Ideally this needs to be a property of ionChannel only! But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
 
         <Dynamics>
@@ -86,8 +84,6 @@
         <Constant name="R" dimension="idealGasConstantDims" value="8.3144621 J_per_K_per_mol" description="TODO: Make this a global constant!"/>
         <Constant name="zCa" dimension="none" value="2" description="TODO: Make this a global constant!"/>
         <Constant name="F" dimension="charge_per_mole" value="96485.3 C_per_mol" description="TODO: Make this a global constant!"/>
-
-        <ComponentReference name="ionChannel" type="baseIonChannel"/>
 
         <Exposure name="erev" dimension="voltage"/> <!-- Calculated from caConcExt and caConc-->
 
@@ -278,8 +274,6 @@
         <Constant name="zCa" dimension="none" value="2" description="TODO: Make this a global constant!"/>
         <Constant name="F" dimension="charge_per_mole" value="96485.3 C_per_mol" description="TODO: Make this a global constant!"/>
 
-        <ComponentReference name="ionChannel" type="baseIonChannel"/>
-
         <Exposure name="erev" dimension="voltage"/> <!-- Calculated from caConcExt and caConc-->
 
         <Requirement name="temperature" dimension="temperature"/>
@@ -329,8 +323,6 @@
         <Constant name="zCa" dimension="none" value="2" description="TODO: Make this a global constant!"/>
         <Constant name="F" dimension="charge_per_mole" value="96485.3 C_per_mol" description="TODO: Make this a global constant!"/>
 
-        <ComponentReference name="ionChannel" type="baseIonChannel"/>
-
         <Exposure name="erev" dimension="voltage"/> 
         
         <Requirement name="temperature" dimension="temperature"/>
@@ -377,8 +369,6 @@
         <Constant name="R" dimension="idealGasConstantDims" value="8.3144621 J_per_K_per_mol" description="TODO: Make this a global constant!"/>
         <Constant name="zCa" dimension="none" value="2" description="TODO: Make this a global constant!"/>
         <Constant name="F" dimension="charge_per_mole" value="96485.3 C_per_mol" description="TODO: Make this a global constant!"/>
-
-        <ComponentReference name="ionChannel" type="baseIonChannel"/>
 
         <Requirement name="temperature" dimension="temperature"/>
         <Requirement name="caConc" dimension="concentration"/>
