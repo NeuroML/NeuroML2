@@ -60,7 +60,7 @@
             <connectionWD id="0" preCellId="../pop_EIF_cond_exp_isfa_ista[0]" postCellId="../pop_target_1[0]" weight="0.01" delay="10ms"/>
         </projection>
         
-        <projection id="proj1" presynapticPopulation="pop_EIF_cond_exp_isfa_ista" postsynapticPopulation="pop_target_2" synapse="ps2">
+        <projection id="proj2" presynapticPopulation="pop_EIF_cond_exp_isfa_ista" postsynapticPopulation="pop_target_2" synapse="ps2">
             <connectionWD id="0" preCellId="../pop_EIF_cond_exp_isfa_ista[0]" postCellId="../pop_target_2[0]" weight="0.005" delay="20ms"/>
         </projection>
         
