@@ -472,11 +472,12 @@
     <ComponentType name="subGate"
                    description="Gate composed of subgates contributing with fractional conductance">
 
+        <Parameter name="fractionalConductance" dimension="none"/>
+        
         <Child name="notes" type="notes"/>
 
         <Child name="timeCourse" type="baseVoltageDepTime" />
         <Child name="steadyState" type="baseVoltageDepVariable" />
-        <Parameter name="fractionalConductance" dimension="none"/>
 
         <Exposure name="tau" dimension="time"/>
         <Exposure name="inf" dimension="none"/>
