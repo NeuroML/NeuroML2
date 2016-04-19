@@ -776,16 +776,20 @@
 
 
     <xs:complexType name="GateHHUndetermined">
+        <xs:annotation>
+            <xs:documentation>Note all sub elements for gateHHrates, gateHHratesTau, gateFractional etc. allowed here. Which are valid should be constrained by what type is set</xs:documentation>
+        </xs:annotation>
         <xs:complexContent>
             <xs:extension base="Base">
-                <xs:all>
+                <xs:sequence>
                     <xs:element name="notes" type="Notes" minOccurs="0"/>
                     <xs:element name="q10Settings" type="Q10Settings" minOccurs="0"/>
                     <xs:element name="forwardRate" type="HHRate" minOccurs="0"/>
                     <xs:element name="reverseRate" type="HHRate" minOccurs="0"/>
                     <xs:element name="timeCourse" type="HHTime"  minOccurs="0"/>
                     <xs:element name="steadyState" type="HHVariable" minOccurs="0"/>
-                </xs:all>
+                    <xs:element name="subGate" type="GateFractionalSubgate" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
                 <xs:attribute name="instances" type="PositiveInteger" use="required"/>
                 <xs:attribute name="type" type="gateTypes" use="required"/>  <!-- Required, as it must specify type="gateHHratesTau" etc. -->
             </xs:extension>
