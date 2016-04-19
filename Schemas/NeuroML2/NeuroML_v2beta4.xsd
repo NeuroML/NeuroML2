@@ -635,6 +635,7 @@
                     <xs:element name="gateHHratesInf" type="GateHHRatesInf" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="gateHHratesTauInf" type="GateHHRatesTauInf" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="gateHHInstantaneous" type="GateHHInstantaneous" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="gateFractional" type="GateFractional" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:choice>
 
                 <xs:attribute name="species" type="NmlId" use="optional"/>
@@ -888,12 +889,12 @@
     <xs:complexType name="GateFractional">
         <xs:complexContent>
             <xs:extension base="Base">
-                <xs:all>
+                <xs:sequence>
                     <xs:element name="notes" type="Notes" minOccurs="0"/>
                     <xs:element name="q10Settings" type="Q10Settings" minOccurs="0"/>
-                    <xs:element name="subGate" type="GateFractionalSubgate" minOccurs="1"/>
-                </xs:all>
-                <xs:attribute name="fractionalConductance" type="Nml2Quantity_none" use="required"/>
+                    <xs:element name="subGate" type="GateFractionalSubgate" minOccurs="1" maxOccurs="unbounded"/>
+                </xs:sequence>
+                <xs:attribute name="instances" type="PositiveInteger" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
