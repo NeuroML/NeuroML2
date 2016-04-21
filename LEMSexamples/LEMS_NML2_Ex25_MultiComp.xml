@@ -1,0 +1,50 @@
+
+<Lems>
+
+<!-- Example with instances of multicompartmental cells...
+
+     Note: requires Neuron to run, e.g.
+
+     jnml LEMS_NML2_Ex25_MultiComp.xml -neuron
+-->
+
+
+<!-- Specify which component to run -->
+    <Target component="sim1"/>
+
+<!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+
+
+    <!-- Main NeuroML2 content. -->
+
+    <!-- Including file with a <neuroml> root, a "real" NeuroML 2 file -->
+    <Include file="../examples/NML2_SingleCompHHCell.nml"/> <!-- Used to import channels from HH example-->
+    <Include file="../examples/NML2_MultiCompCellNetwork.nml"/>
+
+    <!-- End of NeuroML2 content -->
+
+
+    <Simulation id="sim1" length="300ms" step="0.05ms" target="MultiCompCellNetwork">
+
+        <Display id="d1" title="Ex25: MultiCompCellNetwork: cell0" timeScale="1ms" xmin="0" xmax="300" ymin="-75" ymax="52">
+            <Line id ="cell 0: soma" quantity="pop0/0/MultiCompCell/v" scale="1mV"  color="#ee0555" timeScale="1ms"/>
+            <!--<Line id ="cell 0: dend1" quantity="pop0/0/MultiCompCell/1/v" scale="1mV"  color="#ee5555" timeScale="1ms"/>
+            <Line id ="cell 0: dend2" quantity="pop0/0/MultiCompCell/2/v" scale="1mV"  color="#efff55" timeScale="1ms"/>-->
+        </Display>
+        <Display id="d2" title="Ex25: MultiCompCellNetwork: cell1" timeScale="1ms" xmin="0" xmax="300" ymin="-75" ymax="52">
+            <Line id ="cell 1: soma" quantity="pop0/1/MultiCompCell/v" scale="1mV"  color="#ee0555" timeScale="1ms"/>
+            <!--<Line id ="cell 1: dend1" quantity="pop0/1/MultiCompCell/1/v" scale="1mV"  color="#ee5555" timeScale="1ms"/>
+            <Line id ="cell 1: dend2" quantity="pop0/1/MultiCompCell/2/v" scale="1mV"  color="#efff55" timeScale="1ms"/>-->
+        </Display>
+        
+        <Display id="syns" title="Ex25: MultiCompCellNetwork: synapses" timeScale="1ms" xmin="0" xmax="300" ymin="-1" ymax="2">
+            <Line id ="syn1" quantity="pop0/1/MultiCompCell/AMPA/g" scale="1nS"  color="#ee0555" timeScale="1ms"/>
+        </Display>
+
+
+    </Simulation>
+
+</Lems>
