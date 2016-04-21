@@ -27,21 +27,22 @@
     <!-- End of NeuroML2 content -->
 
 
-    <Simulation id="sim1" length="300ms" step="0.05ms" target="MultiCompCellNetwork">
+    <Simulation id="sim1" length="140ms" step="0.05ms" target="MultiCompCellNetwork">
 
-        <Display id="d1" title="Ex25: MultiCompCellNetwork: cell0" timeScale="1ms" xmin="0" xmax="300" ymin="-75" ymax="52">
+        <Display id="d1" title="Ex25: MultiCompCellNetwork: cell0" timeScale="1ms" xmin="0" xmax="140" ymin="-75" ymax="52">
             <Line id ="cell 0: soma" quantity="pop0/0/MultiCompCell/v" scale="1mV"  color="#ee0555" timeScale="1ms"/>
             <!--<Line id ="cell 0: dend1" quantity="pop0/0/MultiCompCell/1/v" scale="1mV"  color="#ee5555" timeScale="1ms"/>
             <Line id ="cell 0: dend2" quantity="pop0/0/MultiCompCell/2/v" scale="1mV"  color="#efff55" timeScale="1ms"/>-->
         </Display>
-        <Display id="d2" title="Ex25: MultiCompCellNetwork: cell1" timeScale="1ms" xmin="0" xmax="300" ymin="-75" ymax="52">
+        <Display id="d2" title="Ex25: MultiCompCellNetwork: cell1" timeScale="1ms" xmin="0" xmax="140" ymin="-75" ymax="52">
             <Line id ="cell 1: soma" quantity="pop0/1/MultiCompCell/v" scale="1mV"  color="#ee0555" timeScale="1ms"/>
             <!--<Line id ="cell 1: dend1" quantity="pop0/1/MultiCompCell/1/v" scale="1mV"  color="#ee5555" timeScale="1ms"/>
             <Line id ="cell 1: dend2" quantity="pop0/1/MultiCompCell/2/v" scale="1mV"  color="#efff55" timeScale="1ms"/>-->
         </Display>
         
-        <Display id="syns" title="Ex25: MultiCompCellNetwork: synapses" timeScale="1ms" xmin="0" xmax="300" ymin="-1" ymax="2">
-            <Line id ="syn1" quantity="pop0/1/MultiCompCell/AMPA/g" scale="1nS"  color="#ee0555" timeScale="1ms"/>
+        <Display id="syns" title="Ex25: MultiCompCellNetwork: synapses" timeScale="1ms" xmin="0" xmax="140" ymin="-.1" ymax="1">
+            <Line id ="syn1 AMPA g" quantity="pop0/1/MultiCompCell/synapses:AMPA:0/g" scale="1nS"  color="#ee0555" timeScale="1ms"/>
+            <Line id ="syn1 NMDA g" quantity="pop0/1/MultiCompCell/synapses:NMDA:0/g" scale="1nS"  color="#333555" timeScale="1ms"/>
         </Display>
 
 

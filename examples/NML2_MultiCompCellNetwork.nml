@@ -73,7 +73,7 @@
         </biophysicalProperties>
     </cell>
     
-    <pulseGenerator id="pulseGen2" delay="50ms" duration="200ms" amplitude="0.2nA"/>
+    <pulseGenerator id="pulseGen2" delay="20ms" duration="100ms" amplitude="0.2nA"/>
 
     <network id="MultiCompCellNetwork">
 
