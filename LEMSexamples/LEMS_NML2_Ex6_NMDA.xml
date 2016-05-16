@@ -25,9 +25,37 @@
 
     <spikeGenerator id="spikeGen55ms" period="75ms" />
 
-    <baseCell id="passiveCell" type="pointCellCondBased" C="10pF"  v0="-55mV" thresh="20mV">
-        <channelPopulation id="leak" ionChannel="passiveChan" number="300" erev="-54.3mV"/>
-    </baseCell>
+    
+    <cell id="passiveCell">
+
+        <morphology id="morph1">
+            <segment id="0" name="soma">
+                <proximal x="0" y="0" z="0" diameter="17.841242"/> <!--Gives a convenient surface area of 1000.0 ?m�-->
+                <distal x="0" y="0" z="0" diameter="17.841242"/>
+            </segment>
+
+            <segmentGroup id="soma_group">
+                <member segment="0"/>
+            </segmentGroup>
+
+        </morphology>
+
+        <biophysicalProperties id="bioPhys1">
+
+            <membraneProperties>
+                <channelDensity id="leak" ionChannel="passiveChan" condDensity="3.0 S_per_m2" erev="-54.3mV" ion="non_specific"/>
+                <spikeThresh value="-20mV"/>
+                <specificCapacitance value="1.0 uF_per_cm2"/>
+                <initMembPotential value="-65mV"/>
+            </membraneProperties>
+
+            <intracellularProperties>
+                <resistivity value="0.03 kohm_cm"/>   <!-- Note: not used in single compartment simulations -->
+            </intracellularProperties>
+
+        </biophysicalProperties>
+
+    </cell>
 
     <blockingPlasticSynapse id="nmdaSyn1" gbase="0.5nS"
 			    erev="0mV" tauRise="2ms" tauDecay="8ms">
@@ -59,13 +87,12 @@
         </Display>
         
         <Display id="d2" title="Ex6: Cells with NMDA mediated synapse: synaptic conductance" timeScale="1ms" xmin="-20" xmax="420" ymin="-0.02" ymax="0.1">
-            <Line id ="g(nmdaSyn1)" quantity="pasPop1[0]/nmdaSyn1/g" scale="1nS"
+            <Line id ="g(nmdaSyn1)" quantity="pasPop1[0]/synapses:nmdaSyn1:0/g" scale="1nS"
 		  color="#01DF01" timeScale="1ms"/>
         </Display>
         
         <Display id="db" title="Ex6: Cells with NMDA mediated synapse: synaptic block factor" timeScale="1ms" xmin="-20" xmax="420" ymin="0" ymax="0.2">
-            <Line id ="blockFactor(nmdaSyn1)"
-		  quantity="pasPop1[0]/nmdaSyn1/block/blockFactor"
+            <Line id ="blockFactor(nmdaSyn1)" quantity="pasPop1[0]/synapses:nmdaSyn1:0/block/blockFactor"
 		  scale="1"  color="#01DF01" timeScale="1ms"/>
         </Display>
         
@@ -78,7 +105,11 @@
         </OutputFile>  
         
         <OutputFile id="of1" fileName="results/ex6_g.dat">
-            <OutputColumn id ="g" quantity="pasPop1[0]/nmdaSyn1/g"/> 
+            <OutputColumn id ="g" quantity="pasPop1[0]/synapses:nmdaSyn1:0/g"/> 
+        </OutputFile>  
+        
+        <OutputFile id="of2" fileName="results/ex6_block.dat">
+            <OutputColumn id ="b" quantity="pasPop1[0]/synapses:nmdaSyn1:0/block/blockFactor"/> 
         </OutputFile>  
         
     </Simulation>

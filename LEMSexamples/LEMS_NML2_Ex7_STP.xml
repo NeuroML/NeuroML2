@@ -26,10 +26,36 @@
 
     <spikeGenerator id="spikeGen55ms" period="30ms" />
 
-    <baseCell id="passiveCell" type="pointCellCondBased" C="10pF"  v0="-55mV" thresh="20mV">
-        <channelPopulation id="leak" ionChannel="passiveChan" number="300" erev="-55mV"/>
-    </baseCell>
+    <cell id="passiveCell">
 
+        <morphology id="morph1">
+            <segment id="0" name="soma">
+                <proximal x="0" y="0" z="0" diameter="17.841242"/> <!--Gives a convenient surface area of 1000.0 ?m�-->
+                <distal x="0" y="0" z="0" diameter="17.841242"/>
+            </segment>
+
+            <segmentGroup id="soma_group">
+                <member segment="0"/>
+            </segmentGroup>
+
+        </morphology>
+
+        <biophysicalProperties id="bioPhys1">
+
+            <membraneProperties>
+                <channelDensity id="leak" ionChannel="passiveChan" condDensity="3.0 S_per_m2" erev="-54.3mV" ion="non_specific"/>
+                <spikeThresh value="-20mV"/>
+                <specificCapacitance value="1.0 uF_per_cm2"/>
+                <initMembPotential value="-65mV"/>
+            </membraneProperties>
+
+            <intracellularProperties>
+                <resistivity value="0.03 kohm_cm"/>   <!-- Note: not used in single compartment simulations -->
+            </intracellularProperties>
+
+        </biophysicalProperties>
+
+    </cell>
 
     <expTwoSynapse id="noStpSyn" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="40ms"/>
 
@@ -62,17 +88,24 @@
         </Display>
 
         <Display id="d2" title="Ex7: Cells with STP synapse: synaptic conductances" timeScale="1ms" xmin="-20" xmax="320" ymin="-0.1" ymax="2.0">
-                <Line id ="g_noStp" quantity="pasPop[0]/noStpSyn/g" scale="1nS"  color="#000000" timeScale="1ms"/>
-                <Line id ="g_stpSynDep" quantity="pasPop[1]/stpSynDep/g" scale="1nS"  color="#0000FF" timeScale="1ms"/>
-                <Line id ="g_stpSynDepFac" quantity="pasPop[2]/stpSynDepFac/g" scale="1nS"  color="#ff0000" timeScale="1ms"/>
+                <Line id ="g_noStp" quantity="pasPop[0]/synapses:noStpSyn:0/g" scale="1nS"  color="#000000" timeScale="1ms"/>
+                <Line id ="g_stpSynDep" quantity="pasPop[1]/synapses:stpSynDep:0/g" scale="1nS"  color="#0000FF" timeScale="1ms"/>
+                <Line id ="g_stpSynDepFac" quantity="pasPop[2]/synapses:stpSynDepFac:0/g" scale="1nS"  color="#ff0000" timeScale="1ms"/>
         </Display>
 
         <Display id="d4" title="Ex7: Cells with STP synapse: scaling variables" timeScale="1ms" xmin="-20" xmax="320" ymin="-0.1" ymax="1.1">
-                <Line id ="R_Dep" quantity="pasPop[1]/stpSynDep/depMech/R" scale="1"  color="#00ffff" timeScale="1ms"/>
-                <Line id ="U_Dep" quantity="pasPop[1]/stpSynDep/depMech/U" scale="1"  color="#0000ff" timeScale="1ms"/>
-                <Line id ="R_DepFac" quantity="pasPop[2]/stpSynDepFac/depFacMech/R" scale="1"  color="#ffffff" timeScale="1ms"/>
-                <Line id ="U_DepFac" quantity="pasPop[2]/stpSynDepFac/depFacMech/U" scale="1"  color="#0055ff" timeScale="1ms"/>
+                <Line id ="R_Dep" quantity="pasPop[1]/synapses:stpSynDep:0/depMech/R" scale="1"  color="#00ffff" timeScale="1ms"/>
+                <Line id ="U_Dep" quantity="pasPop[1]/synapses:stpSynDep:0/depMech/U" scale="1"  color="#ff00ff" timeScale="1ms"/>
+                <Line id ="R_DepFac" quantity="pasPop[2]/synapses:stpSynDepFac:0/depFacMech/R" scale="1"  color="#ffffff" timeScale="1ms"/>
+                <Line id ="U_DepFac" quantity="pasPop[2]/synapses:stpSynDepFac:0/depFacMech/U" scale="1"  color="#0055ff" timeScale="1ms"/>
         </Display>
+        
+        <OutputFile id="of0" fileName="results/ex7_v.dat">
+            <OutputColumn id="v0" quantity="pasPop[0]/v"/> 
+            <OutputColumn id="v1" quantity="pasPop[1]/v"/> 
+            <OutputColumn id="2" quantity="pasPop[2]/v"/> 
+        </OutputFile>  
+        
     </Simulation>
 
 

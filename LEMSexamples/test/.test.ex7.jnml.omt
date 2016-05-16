@@ -2,3 +2,38 @@
  
 target: ../LEMS_NML2_Ex7_STP.xml 
 engine: jNeuroML
+mep: .test.ex7.mep
+experiments:
+  v0:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex7_v.dat
+          columns: [0,1]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: -40
+        tolerance: 0.00026
+  v1:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex7_v.dat
+          columns: [0,2]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: -49.4
+        tolerance: 0.00061
+  v2:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex7_v.dat
+          columns: [0,3]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: -49.4
+        tolerance: 0.00061
