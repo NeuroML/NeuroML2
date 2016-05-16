@@ -30,7 +30,7 @@
                 <proximal x="0" y="0" z="0" diameter="10"/>
                 <distal x="10" y="0" z="0" diameter="10"/>
             </segment>
-<!--
+
             <segment id ="1" name="Dendrite1">
                 <parent segment="0"/>
                 <distal x="20" y="0" z="0" diameter="3"/>
@@ -39,16 +39,16 @@
             <segment id ="2" name="Dendrite2">
                 <parent segment="1"/>
                 <distal x="30" y="0" z="0" diameter="1"/>
-            </segment>-->
+            </segment>
             
             <segmentGroup id="soma_group"> 
                 <member segment="0"/>
             </segmentGroup>
 
-           <!-- <segmentGroup id="dendrite_group">  
+           <segmentGroup id="dendrite_group">  
                 <member segment="1"/>
                 <member segment="2"/>
-            </segmentGroup>-->
+            </segmentGroup>
 
         </morphology>
 
@@ -93,17 +93,21 @@
         <projection id="projAMPA" presynapticPopulation="pop0" postsynapticPopulation="pop0" synapse="AMPA">
             <!--TODO: Fix! want to use preCellId="0" etc. -->
             <connection id="0" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="0" postFractionAlong="0.5"/>
-            <connection id="1" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="0" postFractionAlong="0.5"/>
-            <!--<connection id="1" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="1" preFractionAlong="0.5" postSegmentId="1" postFractionAlong="0.5"/>
-            <connection id="2" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="1" postFractionAlong="0.5"/>-->
+            <connection id="1" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="1" preFractionAlong="0.5" postSegmentId="2" postFractionAlong="0.5"/>
+            
+            <connection id="2" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="0" postFractionAlong="0.5"/>
+            <connection id="3" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="1" preFractionAlong="0.5" postSegmentId="1" postFractionAlong="0.5"/>
+            <connection id="4" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="1" preFractionAlong="0.5" postSegmentId="2" postFractionAlong="0.5"/>
         </projection>
 
         <projection id="projNMDA" presynapticPopulation="pop0" postsynapticPopulation="pop0" synapse="NMDA">
             <!--TODO: Fix! want to use preCellId="0" etc. -->
             <connection id="0" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="0" postFractionAlong="0.5"/>
-            <connection id="1" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="0" postFractionAlong="0.5"/>
-            <!--<connection id="1" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="1" preFractionAlong="0.5" postSegmentId="1" postFractionAlong="0.5"/>
-            <connection id="2" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="1" postFractionAlong="0.5"/>-->
+            <connection id="1" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="1" preFractionAlong="0.5" postSegmentId="2" postFractionAlong="0.5"/>
+            
+            <connection id="2" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="0" postFractionAlong="0.5"/>
+            <connection id="3" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="1" preFractionAlong="0.5" postSegmentId="1" postFractionAlong="0.5"/>
+            <connection id="4" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="1" preFractionAlong="0.5" postSegmentId="2" postFractionAlong="0.5"/>
         </projection>
 
         <inputList id="stimInput1" component="pulseGen2" population="pop0">
