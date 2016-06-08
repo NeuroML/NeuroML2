@@ -228,6 +228,16 @@
         </xs:restriction>
 
     </xs:simpleType>
+    
+    
+    <xs:simpleType name="DoubleGreaterThanZero">
+        <xs:annotation>
+            <xs:documentation>Double >0 only</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:double">
+            <xs:minExclusive value="0"/>
+        </xs:restriction>
+    </xs:simpleType>
 
     <!--NOTE: Base and Standalone definitions moved to end of file, as some XML language binding
         generators, e.g. generateDS.py, require superclasses to be defined after the subclasses... -->
@@ -1508,7 +1518,7 @@
         <xs:attribute name="x" type="xs:double" use="required"/>
         <xs:attribute name="y" type="xs:double" use="required"/>
         <xs:attribute name="z" type="xs:double" use="required"/>
-        <xs:attribute name="diameter" type="xs:double" use="required"/>
+        <xs:attribute name="diameter" type="DoubleGreaterThanZero" use="required"/>
     </xs:complexType>
 
 
