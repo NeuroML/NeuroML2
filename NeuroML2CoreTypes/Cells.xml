@@ -77,7 +77,7 @@
 
     <ComponentType name="channelPopulationNernst"
         extends="baseChannelPopulation"
-        description="Population of channels with a time varying reversal potential _erev determined by Nernst equation. Hard coded for Ca only! Work in progress!!">
+        description="Population of channels with a time varying reversal potential _erev determined by Nernst equation. Hard coded for Ca only!">
 
         <Parameter name="number" dimension="none"/>
 
@@ -268,7 +268,7 @@
 
     <ComponentType name="channelDensityNernst"
         extends="baseChannelDensityCond"
-        description="Specifies a time varying conductance density, _gDensity, which is distributed on an area of the cell, producing a current density _iDensity and whose reversal potential is calculated from the Nernst equation. Hard coded for Ca only!">
+        description="Specifies a time varying conductance density, _gDensity, which is distributed on an area of the cell, producing a current density _iDensity and whose reversal potential is calculated from the Nernst equation. Hard coded for Ca only! See https://github.com/OpenSourceBrain/ghk-nernst.">
 
         <Constant name="R" dimension="idealGasConstantDims" value="8.3144621 J_per_K_per_mol" description="TODO: Make this a global constant!"/>
         <Constant name="zCa" dimension="none" value="2" description="TODO: Make this a global constant!"/>
@@ -317,7 +317,7 @@
     
     <ComponentType name="channelDensityNernstCa2"
                    extends="baseChannelDensityCond"
-                   description="This component is similar to the original component type _ channelDensityNernst _ but it is changed in order to have a reversal potential that depends on 2nd independent pool of Ca (ca2)">
+                   description="This component is similar to the original component type _ channelDensityNernst _ but it is changed in order to have a reversal potential that depends on 2nd independent pool of Ca (ca2). See https://github.com/OpenSourceBrain/ghk-nernst.">
 
         <Constant name="R" dimension="idealGasConstantDims" value="8.3144621 J_per_K_per_mol" description="TODO: Make this a global constant!"/>
         <Constant name="zCa" dimension="none" value="2" description="TODO: Make this a global constant!"/>
@@ -362,7 +362,7 @@
 
     <ComponentType name="channelDensityGHK"
         extends="baseChannelDensity"
-        description="Specifies a time varying conductance density, _gDensity, which is distributed on an area of the cell, producing a current density _iDensity and whose reversal potential is calculated from the Goldman Hodgkin Katz equation. Hard coded for Ca only! Work in progress!">
+        description="Specifies a time varying conductance density, _gDensity, which is distributed on an area of the cell, producing a current density _iDensity and whose reversal potential is calculated from the Goldman Hodgkin Katz equation. Hard coded for Ca only! See https://github.com/OpenSourceBrain/ghk-nernst.">
 
         <Parameter name="permeability" dimension="permeability"/>
 
@@ -395,6 +395,54 @@
         <Structure>
             <ChildInstance component="ionChannel"/>
         </Structure>
+    </ComponentType>
+    
+    
+    <ComponentType name="channelDensityGHK2"
+        extends="baseChannelDensityCond"  
+        description="Time varying conductance density, _gDensity, which is distributed on an area of the cell, producing a current density _iDensity. Modified version of Jaffe et al. 1994 (used also in Lawrence et al. 2006). See https://github.com/OpenSourceBrain/ghk-nernst.">
+        
+        <Requirement name="temperature" dimension="temperature"/>
+        <Requirement name="caConc" dimension="concentration"/>
+        <Requirement name="caConcExt" dimension="concentration"/>
+        
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
+        <Constant name="CONC_SCALE" dimension="concentration" value="1 mM"/>
+        <Constant name="TEMP_SCALE" dimension="temperature" value="1 K"/>
+
+        <!-- TODO: Ensure Text elements are inherited from base type -->
+        <Text name="segmentGroup"/>
+
+        <Text name="ion"/> <!-- TODO: Ideally this needs to be a property of ionChannel only!
+                                But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="v / VOLT_SCALE"/>
+            <DerivedVariable name="ca_conc_i" dimension="none" value="caConc / CONC_SCALE"/>
+            <DerivedVariable name="ca_conc_ext" dimension="none" value="caConcExt / CONC_SCALE"/>
+            <DerivedVariable name="T" dimension="none" value="temperature / TEMP_SCALE"/>
+
+            <DerivedVariable name="channelf" dimension="none" select="ionChannel/fopen"/>
+            
+            <DerivedVariable name="gDensity" dimension="conductanceDensity" exposure="gDensity" value="condDensity * channelf"/>
+            
+            <DerivedVariable name="tmp" dimension="none" value="(25 * T) / (293.15 * 2)"/>
+            
+            <ConditionalDerivedVariable name="pOpen" dimension="voltage">
+                <Case condition="V/tmp .eq. 0." value="tmp * 1e-3 * (1 - ((ca_conc_i/ca_conc_ext) * exp(V/tmp))) * (1 - (V/tmp)/2)"/>
+                <Case condition="V/tmp .neq. 0." value="tmp * 1e-3 * (1 - ((ca_conc_i/ca_conc_ext) * exp(V/tmp))) * ((V/tmp) / (exp(V/tmp) - 1))"/>
+            </ConditionalDerivedVariable>
+
+            <ConditionalDerivedVariable name="iDensity" dimension="currentDensity" exposure="iDensity">
+	            <Case condition="ca_conc_ext .gt. 0" value="gDensity * pOpen"/>
+	            <Case condition="ca_conc_ext .leq. 0" value="0"/>
+	    </ConditionalDerivedVariable>
+
+        </Dynamics>
+        
+        <Structure>
+            <ChildInstance component="ionChannel"/>
+        </Structure>
+        
     </ComponentType>
 
 

@@ -1655,6 +1655,7 @@
             <xs:element name="channelDensity" type="ChannelDensity" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="channelDensityNernst" type="ChannelDensityNernst" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="channelDensityGHK" type="ChannelDensityGHK" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="channelDensityGHK2" type="ChannelDensityGHK2" minOccurs="0" maxOccurs="unbounded"/>
 
             <xs:element name="channelDensityNonUniform" type="ChannelDensityNonUniform" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="channelDensityNonUniformNernst" type="ChannelDensityNonUniformNernst" minOccurs="0" maxOccurs="unbounded"/>
@@ -1937,12 +1938,42 @@
         <xs:complexContent>
             <xs:extension base="Base">
 
-                <xs:sequence>
-                    <xs:element name="variableParameter" type="VariableParameter" minOccurs="0" maxOccurs="unbounded"/>
-                </xs:sequence>
-
                 <xs:attribute name="ionChannel" type="NmlId" use="required"/>
                 <xs:attribute name="permeability" type="Nml2Quantity_permeability" use="required"/>
+
+                <!-- Note: only one of the following should be used!! -->
+                <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
+
+                <xs:attribute name="segment" type="NmlId" use="optional"/>
+
+                <xs:attribute name="ion" type="NmlId" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel definition. It is added here
+                        TEMPORARILY since selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
+                        Also, it will make it easier to set the correct native simulator value for erev (e.g. ek for ion = k in NEURON).
+                        Currently a required attribute.
+                        It should be removed in the longer term, due to possible inconsistencies in this value and that in the ionChannel
+                        element. TODO: remove.
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+
+            </xs:extension>
+        </xs:complexContent>
+
+    </xs:complexType>
+
+
+    <xs:complexType name="ChannelDensityGHK2">
+        <!--
+            See https://github.com/OpenSourceBrain/ghk-nernst.
+        -->
+
+        <xs:complexContent>
+            <xs:extension base="Base">
+
+                <xs:attribute name="ionChannel" type="NmlId" use="required"/>
+                <xs:attribute name="condDensity" type="Nml2Quantity_conductanceDensity" use="optional"/>
 
                 <!-- Note: only one of the following should be used!! -->
                 <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
@@ -2593,12 +2624,25 @@
     </xs:complexType>
 
 
-    <xs:complexType name="Connection">
+    <xs:complexType name="BaseConnection">
         <xs:annotation>
-            <xs:documentation>Individual synaptic connection</xs:documentation>
+            <xs:documentation>Base of all synaptic connections (chemical/electrical/analog, etc.) inside projections</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="BaseNonNegativeIntegerId">
+                <!-- Nothing else for now...-->
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+        
+
+    <xs:complexType name="BaseConnectionOldFormat">
+        <xs:annotation>
+            <xs:documentation>Base of all synaptic connections with preCellId, postSegmentId, etc. 
+                Note: this is not the best name for these attributes, since Id is superfluous, hence BaseConnectionNewFormat</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="BaseConnection">
                 <xs:attribute name="preCellId" type="xs:string" use="required"/>
                 <xs:attribute name="preSegmentId" type="NonNegativeInteger" default="0"/>
                 <xs:attribute name="preFractionAlong" type="ZeroToOne" default="0.5"/>
@@ -2608,19 +2652,41 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <xs:complexType name="BaseConnectionNewFormat">
+        <xs:annotation>
+            <xs:documentation>Base of all synaptic connections with preCell, postSegment, etc. 
+                See BaseConnectionOldFormat</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="BaseConnection">
+                <xs:attribute name="preCell" type="xs:string" use="required"/>
+                <xs:attribute name="preSegment" type="NonNegativeInteger" default="0"/>
+                <xs:attribute name="preFractionAlong" type="ZeroToOne" default="0.5"/>
+                <xs:attribute name="postCell" type="xs:string" use="required"/>
+                <xs:attribute name="postSegment" type="NonNegativeInteger" default="0"/>
+                <xs:attribute name="postFractionAlong" type="ZeroToOne" default="0.5"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="Connection">
+        <xs:annotation>
+            <xs:documentation>Individual chemical (event based) synaptic connection, weight==1 and no delay</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="BaseConnectionOldFormat">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
     <xs:complexType name="ConnectionWD">
         <xs:annotation>
             <xs:documentation>Individual synaptic connection with weight and delay</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="BaseNonNegativeIntegerId">
-                <xs:attribute name="preCellId" type="xs:string" use="required"/>
-                <xs:attribute name="preSegmentId" type="NonNegativeInteger" default="0"/>
-                <xs:attribute name="preFractionAlong" type="ZeroToOne" default="0.5"/>
-                <xs:attribute name="postCellId" type="xs:string" use="required"/>
-                <xs:attribute name="postSegmentId" type="NonNegativeInteger" default="0"/>
-                <xs:attribute name="postFractionAlong" type="ZeroToOne" default="0.5"/>
+            <xs:extension base="BaseConnectionOldFormat">
                 <xs:attribute name="weight" type="xs:float" use="required"/>
                 <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
             </xs:extension>
@@ -2650,17 +2716,12 @@
             <xs:documentation>Individual electrical synaptic connection</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="BaseNonNegativeIntegerId">
-                <xs:attribute name="preCell" type="xs:string" use="required"/>
-                <xs:attribute name="preSegment" type="NonNegativeInteger" default="0"/>
-                <xs:attribute name="preFractionAlong" type="ZeroToOne" default="0.5"/>
-                <xs:attribute name="postCell" type="xs:string" use="required"/>
-                <xs:attribute name="postSegment" type="NonNegativeInteger" default="0"/>
-                <xs:attribute name="postFractionAlong" type="ZeroToOne" default="0.5"/>
+            <xs:extension base="BaseConnectionNewFormat">
                 <xs:attribute name="synapse" type="NmlId" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
     
     <xs:complexType name="ElectricalConnectionInstance">
         <xs:annotation>
@@ -2670,7 +2731,6 @@
             <xs:extension base="ElectricalConnection"/>
         </xs:complexContent>
     </xs:complexType>
-
 
 
     <xs:complexType name="ContinuousProjection">
@@ -2689,23 +2749,19 @@
         </xs:complexContent>
     </xs:complexType>
 
+
     <xs:complexType name="ContinuousConnection">
         <xs:annotation>
             <xs:documentation>Individual continuous/analog synaptic connection</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="BaseNonNegativeIntegerId">
-                <xs:attribute name="preCell" type="xs:string" use="required"/>
-                <xs:attribute name="preSegment" type="NonNegativeInteger" default="0"/>
-                <xs:attribute name="preFractionAlong" type="ZeroToOne" default="0.5"/>
-                <xs:attribute name="postCell" type="xs:string" use="required"/>
-                <xs:attribute name="postSegment" type="NonNegativeInteger" default="0"/>
-                <xs:attribute name="postFractionAlong" type="ZeroToOne" default="0.5"/>
+            <xs:extension base="BaseConnectionNewFormat">
                 <xs:attribute name="preComponent" type="NmlId" use="required"/>
                 <xs:attribute name="postComponent" type="NmlId" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+
 
     <xs:complexType name="ContinuousConnectionInstance">
         <xs:annotation>
