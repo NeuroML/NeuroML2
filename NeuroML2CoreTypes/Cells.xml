@@ -404,14 +404,14 @@
         extends="baseChannelDensityCond"  
         description="Time varying conductance density, _gDensity, which is distributed on an area of the cell, producing a current density _iDensity. Modified version of Jaffe et al. 1994 (used also in Lawrence et al. 2006). See https://github.com/OpenSourceBrain/ghk-nernst.">
         
-        <Requirement name="temperature" dimension="temperature"/>
-        <Requirement name="caConc" dimension="concentration"/>
-        <Requirement name="caConcExt" dimension="concentration"/>
-        
         <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
         <Constant name="CONC_SCALE" dimension="concentration" value="1 mM"/>
         <Constant name="TEMP_SCALE" dimension="temperature" value="1 K"/>
 
+        <Requirement name="temperature" dimension="temperature"/>
+        <Requirement name="caConc" dimension="concentration"/>
+        <Requirement name="caConcExt" dimension="concentration"/>
+        
         <!-- TODO: Ensure Text elements are inherited from base type -->
         <Text name="segmentGroup"/>
 
