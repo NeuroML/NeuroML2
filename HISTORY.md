@@ -12,7 +12,22 @@ v2beta4 / 2014-XX-XX
 * **Renamed the main Schema from NeuroML_v2beta3.xsd to [NeuroML_v2beta4.xsd](https://github.com/NeuroML/NeuroML2/blob/master/Schemas/NeuroML2/NeuroML_v2beta4.xsd).** 
   Changes outlined below are reflected in the new schema
 
-*
+* **Added support for gap junctions ([example](https://github.com/NeuroML/NeuroML2/blob/master/examples/NML2_GapJunctionInstances.nml)) 
+and analog synapses ([example](https://github.com/NeuroML/NeuroML2/blob/master/examples/NML2_AnalogSynapses.nml)). Supported in jLEMS and NEURON mapping
+via jNeuroML.**
+
+* **Added synapse types `<alphaSynapse>` (rise time == decay time) and `<expThreeSynapse>` (1 exponential rise time, decay times). See 
+[here](https://github.com/NeuroML/NeuroML2/blob/master/examples/NML2_SynapseTypes.nml)**
+
+* **Added `<pinskyRinzelCA3Cell>`, based on Pinsky and Rinzel 1994. See [here](http://www.opensourcebrain.org/projects/pinskyrinzelmodel) for more.**
+
+* **Added support for specifying in LEMS simulation file that spike times should be saved (as opposed to full membrane potential trace). See
+[here](https://github.com/NeuroML/NeuroML2/blob/master/LEMSexamples/LEMS_NML2_Ex23_Spiketimes.xml) for more.**
+
+* **Added tests on core LEMS examples using OMV (Open Source Brain Model Validation framework). See 
+[LEMSexamples/test](https://github.com/NeuroML/NeuroML2/tree/development/LEMSexamples/test) directory.**
+
+
 
 * 
 
