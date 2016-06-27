@@ -137,7 +137,7 @@
 
     <ComponentType name="alphaSynapse"
                    extends="baseConductanceBasedSynapse"
-                   description="Ohmic synapse model where rise time and decay time are both _tau. Max conductance reached during this time (assuming zero conductance before) is (_gbase * _weight).">
+                   description="Ohmic synapse model where rise time and decay time are both _tau. Max conductance reached during this time (assuming zero conductance before) is _gbase * _weight.">
 
         <Property name="weight" dimension="none" defaultValue="1"/> 
 
@@ -169,7 +169,7 @@
 
     <ComponentType name="expTwoSynapse"
                    extends="baseConductanceBasedSynapse"
-                   description="Ohmic synapse model whose conductance waveform on receiving an event has a rise time of _tauRise and a decay time of _tauDecay. Max conductance reached during this time (assuming zero conductance before) is (_gbase * _weight).">
+                   description="Ohmic synapse model whose conductance waveform on receiving an event has a rise time of _tauRise and a decay time of _tauDecay. Max conductance reached during this time (assuming zero conductance before) is _gbase * _weight.">
 
         <Property name="weight" dimension="none" defaultValue="1"/> 
         
@@ -485,12 +485,12 @@
     
     <ComponentType name="baseGradedSynapse"
                    extends="baseSynapse"
-                   description="STILL IN DEVELOPMENT!!!!">
+                   description="Base type for graded synapses">
     </ComponentType>
     
     <ComponentType name="silentSynapse"
                    extends="baseGradedSynapse"
-                   description="Dummy synapse which emits no current. Used as presynaptic endpoint for analog synaptic connection. STILL IN DEVELOPMENT!!!!">
+                   description="Dummy synapse which emits no current. Used as presynaptic endpoint for analog synaptic connection.">
         
         <Exposure name="i" dimension="current"/>
         
@@ -508,7 +508,7 @@
     
     <ComponentType name="linearGradedSynapse"
                    extends="baseGradedSynapse"
-                   description="Behaves just like a one way gap junction. STILL IN DEVELOPMENT!!!!">
+                   description="Behaves just like a one way gap junction.">
         
         <Parameter name="conductance" dimension="conductance"/>
         
@@ -526,7 +526,7 @@
     
     <ComponentType name="gradedSynapse"
                    extends="baseGradedSynapse"
-                   description="STILL IN DEVELOPMENT!!!! Based on synapse in Methods of http://www.nature.com/neuro/journal/v7/n12/abs/nn1352.html">
+                   description="Graded/analog synapse. Based on synapse in Methods of http://www.nature.com/neuro/journal/v7/n12/abs/nn1352.html">
         
         <Parameter name="conductance" dimension="conductance"/>
         

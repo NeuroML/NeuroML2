@@ -51,14 +51,14 @@
     </ComponentType>
 
 
-    <ComponentType name="populationList" extends="basePopulation" description="An explicit list of the cells in the population. Work in progress...">        
+    <ComponentType name="populationList" extends="basePopulation" description="An explicit list of the cells in the population. ">        
         <Children name="instances" type="instance"/>
         
         <Text name="size"/> <!--Note: Text, not Parameter, as this is not actually used by LEMS, the <instance> elements determine the size, this attribute is really just metadata, though the two should be consistent-->
     </ComponentType>
 
 
-    <ComponentType name="instance" description="Initial attempt to specify instances in populations. Work in progress...">
+    <ComponentType name="instance" description="Specifies a single instance of a component in a population (placed at _location_).">
         <Child name="location" type="location"/>
         <Structure>
             <ChildInstance component="../component"/>
@@ -67,7 +67,7 @@
     </ComponentType>
 
 
-    <ComponentType name="location" description="Initial attempt to specify instances in populations. Work in progress...">
+    <ComponentType name="location" description="Specifies location of a single _instance_ of a component in a population">
         <Parameter name="x" dimension="none"/>
         <Parameter name="y" dimension="none"/>
         <Parameter name="z" dimension="none"/>
@@ -90,19 +90,13 @@
 
 
     <ComponentType name="projection"
-        description="Projection from one population to another. Currently it's better to define an explicit list of connections, using _explicitConnection_. Work in progress...">
-        <!--TODO: allow more than one...
-        <Child name="synapseComponent" type="synapseComponent"/>-->
+        description="Projection from one population, _presynapticPopulation to another, _postsynapticPopulation, through _synapse. Contains lists of _connection_ or _connectionWD_ elements.">
+
         <Children name="connections" type="connection"/>
         <Children name="connectionsWD" type="connectionWD"/>
         <ComponentReference name="synapse" type="baseSynapse"/>
         <Path name="presynapticPopulation"/>
         <Path name="postsynapticPopulation"/>
-    </ComponentType>
-
-
-    <ComponentType name="synapseComponent" description="Work in progress...">
-        <ComponentReference name="component" type="baseSynapse"/>
     </ComponentType>
 
 
@@ -146,7 +140,6 @@
             <With instance="from" as="a"/>
             <With instance="to" as="b"/>
             <EventConnection from="a" to="b" receiver="synapse" receiverContainer="destination" sourcePort="sourcePort" targetPort="targetPort"/>
-            <!--<EventConnection from="a" to="b" receiver="synapse"/>-->
         </Structure>
     </ComponentType>
 
@@ -163,9 +156,7 @@
         <Structure>
             <With instance="from" as="a"/>
             <With instance="to" as="b"/>
-            <!--<EventConnection from="a" to="b" receiver="synapse" receiverContainer="destination" sourcePort="sourcePort" targetPort="targetPort" delay="delay">-->
             <EventConnection from="a" to="b" receiver="synapse" delay="delay">
-                <!--TODO: put back in! -->
                 <Assign property="weight" value="weight"/>
             </EventConnection>
         </Structure>
@@ -198,7 +189,7 @@
 
 
     <ComponentType name="electricalConnection"
-                   description="To enable Gap junctions, NOTE: STILL IN DEVELOPMENT!!!!">
+                   description="To enable connections between populations through gap junctions.">
         
         <IndexParameter name="preCell"/>
         <IndexParameter name="postCell"/>
@@ -217,7 +208,7 @@
     </ComponentType>
     
     <ComponentType name="electricalConnectionInstance"
-                   description="To enable Gap junctions, NOTE: STILL IN DEVELOPMENT!!!!">
+                   description="To enable connections between populations through gap junctions. Populations need to be of type _populationList_ and contain _instance_ and _location_ elements.">
         
         <ComponentReference name="synapse" type="gapJunction"/>
         
@@ -238,7 +229,7 @@
     </ComponentType>
     
     <ComponentType name="electricalProjection"
-                   description="To enable Gap junctions, NOTE: STILL IN DEVELOPMENT!!!!">
+                   description="A projection between _presynapticPopulation to another _postsynapticPopulation through gap junctions.">
         <Children name="connections" type="electricalConnection"/>
         <Children name="connections" type="electricalConnectionInstance"/>
         <ComponentReference name="presynapticPopulation" type="population" local="true"/>
@@ -247,7 +238,7 @@
     
     
     <ComponentType name="continuousConnection"
-                   description="STILL IN DEVELOPMENT!!!!">
+                   description="An instance of a connection in a _continuousProjection_ between _presynapticPopulation to another _postsynapticPopulation through a _preComponent at the start and _postComponent at the end. Can be used for analog synapses.">
         
         <IndexParameter name="preCell"/>
         <IndexParameter name="postCell"/>
@@ -267,7 +258,7 @@
     </ComponentType>
     
     <ComponentType name="continuousConnectionInstance"
-                   description="STILL IN DEVELOPMENT!!!!">
+                   description="An instance of a connection in a _continuousProjection_ between _presynapticPopulation to another _postsynapticPopulation through a _preComponent at the start and _postComponent at the end. Populations need to be of type _populationList_ and contain _instance_ and _location_ elements. Can be used for analog synapses.">
 
         <ComponentReference name="preComponent" type="baseGradedSynapse"/>
         <ComponentReference name="postComponent" type="baseGradedSynapse"/>
@@ -290,7 +281,7 @@
     
     
     <ComponentType name="continuousProjection"
-                   description="STILL IN DEVELOPMENT!!!!">
+                   description="A projection between _presynapticPopulation and _postsynapticPopulation through components _preComponent at the start and _postComponent at the end of a _continuousConnection_ or _continuousConnectionInstance_. Can be used for analog synapses.">
         
         <Children name="connections" type="continuousConnection"/>
         <Children name="connections" type="continuousConnectionInstance"/>
@@ -299,33 +290,6 @@
         <ComponentReference name="postsynapticPopulation" type="population" local="true"/>
         
     </ComponentType>
-    
-    <!--
-    <ComponentType name="projection2"
-                   description="...">
-        <ComponentReference name="presynapticPopulation" type="population" local="true"/>
-        <ComponentReference name="postsynapticPopulation" type="population" local="true"/>
-        <Children name="connections" type="connection2"/>
-    </ComponentType>
-    
-    <ComponentType name="connection2"
-                   description="...">
-        
-        <IndexParameter name="preCell"/>
-        <IndexParameter name="postCell"/>
-
-        <ComponentRequirement name="presynapticPopulation"/>
-        <ComponentRequirement name="postsynapticPopulation"/>
-
-        <ComponentReference name="synapse" type="baseSynapse"/>
-
-        <Structure>
-            <With list="presynapticPopulation" index="preCell" as="a"/>
-            <With list="postsynapticPopulation" index="postCell" as="b"/>
-            <EventConnection from="a" to="b" receiver="synapse" receiverContainer="destination"/>
-        </Structure>
-
-    </ComponentType>-->
 
 
     <!--   Not yet stable...
@@ -380,7 +344,7 @@
     </ComponentType>
 
 
-    <ComponentType name="input" description="Initial attempt to specify input lists. Work in progress...">
+    <ComponentType name="input" description="Specifies input lists.">
 
         <Path name="target"/>
         
