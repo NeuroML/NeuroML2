@@ -6,15 +6,13 @@ and [LEMS](https://github.com/LEMS/LEMS), but also the Python ([libNeuroML](http
 [PyLEMS](https://github.com/LEMS/pylems)) and Java ([jLEMS](https://github.com/LEMS/jLEMS), 
 [org.neuroml.model](https://github.com/NeuroML/org.neuroml.model), [jNeuroML](https://github.com/NeuroML/jNeuroML), etc.) libraries.
 
-v2beta4 / 2014-XX-XX
+v2beta4 / 2016-6-27
 -------------------
 
 * **Renamed the main Schema from NeuroML_v2beta3.xsd to [NeuroML_v2beta4.xsd](https://github.com/NeuroML/NeuroML2/blob/master/Schemas/NeuroML2/NeuroML_v2beta4.xsd).** 
   Changes outlined below are reflected in the new schema
 
-* **Gap junctions and analog synapses.** Added support for gap junctions ([example](https://github.com/NeuroML/NeuroML2/blob/master/examples/NML2_GapJunctionInstances.nml)) 
-and analog synapses ([example](https://github.com/NeuroML/NeuroML2/blob/master/examples/NML2_AnalogSynapses.nml)). Supported in jLEMS and NEURON mapping
-via [jNeuroML](https://github.com/NeuroML/jNeuroML).
+ (Cell types)
 
 * **Added `<pinskyRinzelCA3Cell>`, based on Pinsky and Rinzel 1994.** See [here](http://www.opensourcebrain.org/projects/pinskyrinzelmodel) for more.
 
@@ -23,11 +21,22 @@ to be applied. See [here](https://github.com/OpenSourceBrain/IzhikevichModel/tre
 
 * **Added `<fitzHughNagumo1969Cell>`** Version of FitzHugh Nagumo cell based on 1969 model. See https://github.com/OpenSourceBrain/FitzHugh-Nagumo.
 
+* **Cells with 2 independent pools of Ca2+**. The `<cell2CaPools>` has been added for cells with 2 independent pools of Ca2+. This may be required where some Ca channels contribute 
+to changes in internal [Ca2+] and some don't (just pass charge). See [here](https://github.com/OpenSourceBrain/SolinasEtAl-GolgiCell/blob/master/NeuroML2/Golgi.cell.nml) for example.
+
+ (Synapses)
+
+* **Gap junctions and analog synapses.** Added support for gap junctions ([example](https://github.com/NeuroML/NeuroML2/blob/master/examples/NML2_GapJunctionInstances.nml)) 
+and analog synapses ([example](https://github.com/NeuroML/NeuroML2/blob/master/examples/NML2_AnalogSynapses.nml)). Supported in jLEMS and NEURON mapping
+via [jNeuroML](https://github.com/NeuroML/jNeuroML).
+
 * **New synapse types `<alphaSynapse>` and `<expThreeSynapse>`.** Added synapse types `<alphaSynapse>` (rise time = decay time) and `<expThreeSynapse>` 
 (1 exponential rise time, decay times). See [here](https://github.com/NeuroML/NeuroML2/blob/master/examples/NML2_SynapseTypes.nml)
 
-* **Saving of spike times.** Added support for specifying in LEMS simulation file that spike times should be saved (as opposed to full membrane potential trace). See
-[here](https://github.com/NeuroML/NeuroML2/blob/master/LEMSexamples/LEMS_NML2_Ex23_Spiketimes.xml) for more.
+* **Improved recording from multiple synapses on multicompartmental cells**. See [here](https://github.com/NeuroML/NeuroML2/blob/master/LEMSexamples/LEMS_NML2_Ex25_MultiComp.xml)
+for an example of recording/saving of different variables on multiple synapses on a multicompartmental cell.
+
+ (Ion channels/conductances)
 
 * **Fractional conductances from sub gates in channels**. Added `<gateFractional>` which allows multiple children `<subGate>`, each of which has a fractional conductance.
 See [here](https://github.com/NeuroML/NeuroML2/blob/master/LEMSexamples/LEMS_NML2_Ex24_FractionalConductance.xml) and 
@@ -39,28 +48,38 @@ See [here](https://github.com/NeuroML/NeuroML2/blob/master/LEMSexamples/LEMS_NML
 jLEMS and NEURON via [jNeuroML](https://github.com/NeuroML/jNeuroML), see [here](https://github.com/OpenSourceBrain/AllenInstituteNeuroML/blob/master/CellTypesDatabase/models/NeuroML2/NaV.channel.nml) and 
 [here](https://github.com/OpenSourceBrain/SolinasEtAl-GolgiCell/blob/master/NeuroML2/Golgi_KAHP.channel.nml).
 
-* **Additional spiking/current inputs**. New types of inputs to apply to cells, including `<poissonFiringSynapse>`, `<transientPoissonFiringSynapse>`, `<timedSynapticInput>` and 
-`<compoundInput>`. See [here](https://github.com/NeuroML/NeuroML2/blob/master/examples/NML2_Inputs.nml) for examples.
-
-* **Improved recording from multiple synapses on multicompartmental cells**. See [here](https://github.com/NeuroML/NeuroML2/blob/master/LEMSexamples/LEMS_NML2_Ex25_MultiComp.xml)
-for an example of recording/saving of different variables on multiple synapses on a multicompartmental cell.
-
 * **Alternative GHK channel density.** Added a second mechanism for specifying channel densities which lead to currents based on the Goldman Hodgkin Katz current, `<channelDensityGHK2>`. 
 See [here](https://github.com/OpenSourceBrain/ghk-nernst/blob/master/NeuroML2/ghk2_na_k_ca.nml) and 
 [here](https://github.com/andrisecker/CA1-Oriens-Lacunosum-Moleculare---Lawrence-et-al.-2006/blob/master/NeuroML2/LawrenceOLM.cell.nml) for examples.
 
+ (Network)
+
 * **Connections with weights and delays**. Better support in jNeuroML and NEURON for `<connectionWD>`. See [here](https://github.com/NeuroML/NeuroML2/blob/master/LEMSexamples/LEMS_NML2_Ex12_Net2.xml).
- 
-* **Cells with 2 independent pools of Ca2+**. The `<cell2CaPools>` has been added for cells with 2 independent pools of Ca2+. This may be required where some Ca channels contribute 
-to changes in internal [Ca2+] and some don't (just pass charge). See [here](https://github.com/OpenSourceBrain/SolinasEtAl-GolgiCell/blob/master/NeuroML2/Golgi.cell.nml) for example.
 
-* **OMV tests on core examples.** Added tests on core LEMS examples using OMV (Open Source Brain Model Validation framework). See 
-[LEMSexamples/test](https://github.com/NeuroML/NeuroML2/tree/development/LEMSexamples/test) directory.
+ (Input/output)
 
-* **libNeuroML updated**. [libNeuroML](https://github.com/NeuralEnsemble/libNeuroML) has been regenerated from the latest Schema. There is also better support for Python 3
+* **Additional spiking/current inputs**. New types of inputs to apply to cells, including `<poissonFiringSynapse>`, `<transientPoissonFiringSynapse>`, `<timedSynapticInput>` and 
+`<compoundInput>`. See [here](https://github.com/NeuroML/NeuroML2/blob/master/examples/NML2_Inputs.nml) for examples.
 
-* **pyNeuroML is a well tested alternative to jNeuroML**. [pyNeuroML](https://github.com/NeuroML/pyNeuroML) is a Python module which can be installed with `pip install pyNeuroML` and can be used to access most of the 
-functionality of [jNeuroML](https://github.com/NeuroML/jNeuroML).
+* **Saving of spike times.** Added support for specifying in LEMS simulation file that spike times should be saved (as opposed to full membrane potential trace). See
+[here](https://github.com/NeuroML/NeuroML2/blob/master/LEMSexamples/LEMS_NML2_Ex23_Spiketimes.xml) for more.
+
+ (Testing)
+
+* **OMV tests on core examples.** Added tests on core LEMS examples using OMV (Open Source Brain Model Validation framework). This can be used to run the examples 
+with jNeuroML and other simulators and ensure correct spike times, etc. See the [LEMSexamples/test](https://github.com/NeuroML/NeuroML2/tree/development/LEMSexamples/test) 
+directory. The output from these tests on 16 different simulator configurations can be seen [here](https://travis-ci.org/OpenSourceBrain/osb-model-validation) 
+
+* **OMV tests on OSB models.** There are ~30 different projects on OSB using NeuroML 2 which are being tested using the OMV framework. See 
+[this page](https://travis-ci.org/OpenSourceBrain/osb-model-validation) for an overview of these.
+
+ (Tool support)
+
+* **libNeuroML updated**. [libNeuroML](https://github.com/NeuralEnsemble/libNeuroML), the Python API for reading/writing NeuroML2 has been regenerated from the 
+latest Schema. There is also better support for Python 3.
+
+* **pyNeuroML is a well tested alternative to jNeuroML**. [pyNeuroML](https://github.com/NeuroML/pyNeuroML) is a Python module which can be installed with 
+`pip install pyNeuroML` and can be used to access most of the functionality of [jNeuroML](https://github.com/NeuroML/jNeuroML).
 
 
 v2beta3 / 2014-9-11
