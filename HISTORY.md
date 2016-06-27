@@ -24,11 +24,23 @@ via jNeuroML.
 * **Added `<izhikevich2007Cell>`**. Version of Izhikevich cell from 2007 book has been added. Main advantage is explicit capacitance, allowing dimensional currents 
 to be applied. See [here](https://github.com/OpenSourceBrain/IzhikevichModel/tree/master/NeuroML2) for more.
 
+* **Added `<fitzHughNagumo1969Cell>`** Version of FitzHugh Nagumo cell based on 1969 model. See https://github.com/OpenSourceBrain/FitzHugh-Nagumo.
+
 * **Saving of spike times.** Added support for specifying in LEMS simulation file that spike times should be saved (as opposed to full membrane potential trace). See
 [here](https://github.com/NeuroML/NeuroML2/blob/master/LEMSexamples/LEMS_NML2_Ex23_Spiketimes.xml) for more.
 
 * **Fractional conductances from sub gates in channels**. Added `<gateFractional>` which allows multiple children `<subGate>`, each of which has a fractional conductance.
-See [here](https://github.com/NeuroML/NeuroML2/blob/master/LEMSexamples/LEMS_NML2_Ex24_FractionalConductance.xml).
+See [here](https://github.com/NeuroML/NeuroML2/blob/master/LEMSexamples/LEMS_NML2_Ex24_FractionalConductance.xml) and 
+[here](https://github.com/OpenSourceBrain/AllenInstituteNeuroML/blob/master/CellTypesDatabase/models/NeuroML2/Kv2like.channel.nml).
+
+* **Gate with instantaneous opening**. Added `<gateHHInstantaneous>` with only `<steadyState>` child, i.e. no time dependence of opening, just a voltage dependent steady state.
+
+* **Improved support for kinetic scheme based channels**. Channels based on kinetic schemes (using `<ionChannelKS>` and `<gateKS>`) have much better support in 
+jLEMS and NEURON via jNeruomL, see [here](https://github.com/OpenSourceBrain/AllenInstituteNeuroML/blob/master/CellTypesDatabase/models/NeuroML2/NaV.channel.nml) and 
+[here](https://github.com/OpenSourceBrain/SolinasEtAl-GolgiCell/blob/master/NeuroML2/Golgi_KAHP.channel.nml).
+
+* **Additional spiking/current inputs**. New types of inputs to apply to cells, including `<poissonFiringSynapse>`, `<transientPoissonFiringSynapse>`, `<timedSynapticInput>` and 
+`<compoundInput>`. See [here](https://github.com/NeuroML/NeuroML2/blob/master/examples/NML2_Inputs.nml) for examples.
 
 * **Improved recording from multiple synapses on multicompartmental cells**. See [here](https://github.com/NeuroML/NeuroML2/blob/master/LEMSexamples/LEMS_NML2_Ex25_MultiComp.xml)
 for an example of recording/saving of different variables on multiple synapses on a multicompartmental cell.
@@ -37,6 +49,8 @@ for an example of recording/saving of different variables on multiple synapses o
 See [here](https://github.com/OpenSourceBrain/ghk-nernst/blob/master/NeuroML2/ghk2_na_k_ca.nml) and 
 [here](https://github.com/andrisecker/CA1-Oriens-Lacunosum-Moleculare---Lawrence-et-al.-2006/blob/master/NeuroML2/LawrenceOLM.cell.nml) for examples.**
 
+* **Connections with weights and delays**. Better support in jNeuroML and NEURON for `<connectionWD>`. See [here](https://github.com/NeuroML/NeuroML2/blob/master/LEMSexamples/LEMS_NML2_Ex12_Net2.xml).
+ 
 * **Cells with 2 independent pools of Ca2+**. The `<cell2CaPools>` has been added for cells with 2 independent pools of Ca2+. This may be required where some Ca channels contribute 
 to changes in internal [Ca2+] and some don't (just pass charge). See [here](https://github.com/OpenSourceBrain/SolinasEtAl-GolgiCell/blob/master/NeuroML2/Golgi.cell.nml) for example.
 
