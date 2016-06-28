@@ -6,6 +6,8 @@ and [LEMS](https://github.com/LEMS/LEMS), but also the Python ([libNeuroML](http
 [PyLEMS](https://github.com/LEMS/pylems)) and Java ([jLEMS](https://github.com/LEMS/jLEMS), 
 [org.neuroml.model](https://github.com/NeuroML/org.neuroml.model), [jNeuroML](https://github.com/NeuroML/jNeuroML), etc.) libraries.
 
+Only contributors who are not [NeuroML Editors](https://neuroml.org/editors) are specifically pointed out below.
+
 v2beta4 / 2016-6-27
 -------------------
 
@@ -14,15 +16,18 @@ v2beta4 / 2016-6-27
 
 _Cell types_
 
-* **Added `<pinskyRinzelCA3Cell>`, based on Pinsky and Rinzel 1994.** See [here](http://www.opensourcebrain.org/projects/pinskyrinzelmodel) for more.
+* **Added `<pinskyRinzelCA3Cell>`, based on Pinsky and Rinzel 1994.** See [here](http://www.opensourcebrain.org/projects/pinskyrinzelmodel) for more. 
+Thanks to [Justas Birgolas](https://github.com/JustasB) for this.
 
 * **Added `<izhikevich2007Cell>`**. Version of Izhikevich cell from 2007 book has been added. Main advantage is explicit capacitance, allowing dimensional currents 
 to be applied. See [here](https://github.com/OpenSourceBrain/IzhikevichModel/tree/master/NeuroML2) for more.
 
-* **Added `<fitzHughNagumo1969Cell>`** Version of FitzHugh Nagumo cell based on 1969 model. See https://github.com/OpenSourceBrain/FitzHugh-Nagumo.
+* **Added `<fitzHughNagumo1969Cell>`** Version of FitzHugh Nagumo cell based on 1969 model. See https://github.com/OpenSourceBrain/FitzHugh-Nagumo. Thanks to 
+[Boris Marin](https://github.com/borismarin).
 
 * **Cells with 2 independent pools of Ca2+**. The `<cell2CaPools>` has been added for cells with 2 independent pools of Ca2+. This may be required where some Ca channels contribute 
 to changes in internal [Ca2+] and some don't (just pass charge). See [here](https://github.com/OpenSourceBrain/SolinasEtAl-GolgiCell/blob/master/NeuroML2/Golgi.cell.nml) for example.
+Thanks to [Rokas Stanislovas](https://github.com/RokasSt).
 
 _Synapses_
 
@@ -40,7 +45,8 @@ _Ion channels/conductances_
 
 * **Fractional conductances from sub gates in channels**. Added `<gateFractional>` which allows multiple children `<subGate>`, each of which has a fractional conductance.
 See [here](https://github.com/NeuroML/NeuroML2/blob/master/LEMSexamples/LEMS_NML2_Ex24_FractionalConductance.xml) and 
-[here](https://github.com/OpenSourceBrain/AllenInstituteNeuroML/blob/master/CellTypesDatabase/models/NeuroML2/Kv2like.channel.nml).
+[here](https://github.com/OpenSourceBrain/AllenInstituteNeuroML/blob/master/CellTypesDatabase/models/NeuroML2/Kv2like.channel.nml). Thanks to 
+[Boris Marin](https://github.com/borismarin).
 
 * **Gate with instantaneous opening**. Added `<gateHHInstantaneous>` with only `<steadyState>` child, i.e. no time dependence of opening, just a voltage dependent steady state.
 
@@ -50,7 +56,8 @@ jLEMS and NEURON via [jNeuroML](https://github.com/NeuroML/jNeuroML), see [here]
 
 * **Alternative GHK channel density.** Added a second mechanism for specifying channel densities which lead to currents based on the Goldman Hodgkin Katz current, `<channelDensityGHK2>`. 
 See [here](https://github.com/OpenSourceBrain/ghk-nernst/blob/master/NeuroML2/ghk2_na_k_ca.nml) and 
-[here](https://github.com/andrisecker/CA1-Oriens-Lacunosum-Moleculare---Lawrence-et-al.-2006/blob/master/NeuroML2/LawrenceOLM.cell.nml) for examples.
+[here](https://github.com/andrisecker/CA1-Oriens-Lacunosum-Moleculare---Lawrence-et-al.-2006/blob/master/NeuroML2/LawrenceOLM.cell.nml) for examples. 
+Thanks to [András Ecker](https://github.com/andrisecker).
 
 _Network_
 
@@ -59,16 +66,18 @@ _Network_
 _Input/output_
 
 * **Additional spiking/current inputs**. New types of inputs to apply to cells, including `<poissonFiringSynapse>`, `<transientPoissonFiringSynapse>`, `<timedSynapticInput>` and 
-`<compoundInput>`. See [here](https://github.com/NeuroML/NeuroML2/blob/master/examples/NML2_Inputs.nml) for examples.
+`<compoundInput>`. See [here](https://github.com/NeuroML/NeuroML2/blob/master/examples/NML2_Inputs.nml) for examples. Thanks to [Rokas Stanislovas](https://github.com/RokasSt).
 
 * **Saving of spike times.** Added support for specifying in LEMS simulation file that spike times should be saved (as opposed to full membrane potential trace). See
-[here](https://github.com/NeuroML/NeuroML2/blob/master/LEMSexamples/LEMS_NML2_Ex23_Spiketimes.xml) for more.
+[here](https://github.com/NeuroML/NeuroML2/blob/master/LEMSexamples/LEMS_NML2_Ex23_Spiketimes.xml) for more. Thanks to [Finn Krewer](https://github.com/FinnK).
 
 _Testing_
 
 * **OMV tests on core examples.** Added tests on core LEMS examples using OMV (Open Source Brain Model Validation framework). This can be used to run the examples 
 with jNeuroML and other simulators and ensure correct spike times, etc. See the [LEMSexamples/test](https://github.com/NeuroML/NeuroML2/tree/development/LEMSexamples/test) 
-directory. The output from these tests on 16 different simulator configurations can be seen [here](https://travis-ci.org/OpenSourceBrain/osb-model-validation) 
+directory. The output from these tests on 16 different simulator configurations can be seen [here](https://travis-ci.org/OpenSourceBrain/osb-model-validation). 
+Thanks to 
+[Boris Marin](https://github.com/borismarin).
 
 * **OMV tests on OSB models.** There are ~30 different projects on OSB using NeuroML 2 which are being tested using the OMV framework. See 
 [this page](https://travis-ci.org/OpenSourceBrain/osb-model-validation) for an overview of these.
@@ -79,7 +88,12 @@ _Tool support_
 latest Schema. There is also better support for Python 3.
 
 * **pyNeuroML is a well tested alternative to jNeuroML**. [pyNeuroML](https://github.com/NeuroML/pyNeuroML) is a Python module which can be installed with 
-`pip install pyNeuroML` and can be used to access most of the functionality of [jNeuroML](https://github.com/NeuroML/jNeuroML).
+`pip install pyNeuroML` and can be used to access most of the functionality of [jNeuroML](https://github.com/NeuroML/jNeuroML). Thanks to 
+[Rick Gerkin](https://github.com/rgerkin) for testing/updating.
+
+_Documentation_
+
+Direct links to all schemas, papers, libraries, tools, examples, contact details are now available on one page: https://neuroml.org/getneuroml
 
 
 v2beta3 / 2014-9-11
