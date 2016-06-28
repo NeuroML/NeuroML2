@@ -64,8 +64,6 @@
         <Constant name="MSEC" dimension="time" value="1ms"/>
         <Constant name="MVOLT" dimension="voltage" value="1mV"/>
 
-        <Child name="notes" type="notes"/>
-
         <Attachments name="synapses" type="alphaCurrSynapse"/>
 
         <Dynamics>
@@ -108,8 +106,6 @@
         <Constant name="SEC" dimension="time" value="1s"/>
         <Constant name="MSEC" dimension="time" value="1ms"/>
         <Constant name="MVOLT" dimension="voltage" value="1mV"/>
-        
-        <Child name="notes" type="notes"/>
 
         <Attachments name="synapses" type="expCurrSynapse"/>
 
@@ -153,8 +149,6 @@
         <Constant name="SEC" dimension="time" value="1s"/>
         <Constant name="MSEC" dimension="time" value="1ms"/>
         <Constant name="MVOLT" dimension="voltage" value="1mV"/>
-        
-        <Child name="notes" type="notes"/>
 
         <Attachments name="synapses" type="alphaCondSynapse"/>
 
@@ -198,8 +192,6 @@
         <Constant name="SEC" dimension="time" value="1s"/>
         <Constant name="MSEC" dimension="time" value="1ms"/>
         <Constant name="MVOLT" dimension="voltage" value="1mV"/>
-
-        <Child name="notes" type="notes"/>
 
         <Attachments name="synapses" type="expCondSynapse"/>
 
@@ -255,8 +247,6 @@
         <Constant name="SEC" dimension="time" value="1s"/>
         <Constant name="MSEC" dimension="time" value="1ms"/>
         <Constant name="MVOLT" dimension="voltage" value="1mV"/>
-
-        <Child name="notes" type="notes"/>
 
         <Attachments name="synapses" type="expCondSynapse"/>
 
@@ -327,8 +317,6 @@
         <Constant name="SEC" dimension="time" value="1s"/>
         <Constant name="MSEC" dimension="time" value="1ms"/>
         <Constant name="MVOLT" dimension="voltage" value="1mV"/>
-
-        <Child name="notes" type="notes"/>
 
         <Attachments name="synapses" type="alphaCondSynapse"/>
 
@@ -401,8 +389,6 @@
         <Constant name="SEC" dimension="time" value="1s"/>
         <Constant name="MSEC" dimension="time" value="1ms"/>
         <Constant name="MVOLT" dimension="voltage" value="1mV"/>
-
-        <Child name="notes" type="notes"/>
 
         <Attachments name="synapses" type="alphaCondSynapse"/>
 
@@ -589,8 +575,6 @@
         <Parameter name="rate" dimension="per_time"/>
         
         <DerivedParameter name="end" dimension="time" value="start + duration"/>
-
-        <Child name="notes" type="notes"/>
 
         <!--TODO: remove! Only required as EventConnection is used in explicitInput to
         connect inputs to cells. Events aren't passed! ... -->

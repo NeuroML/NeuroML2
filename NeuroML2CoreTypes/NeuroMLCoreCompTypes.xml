@@ -13,8 +13,8 @@
     
     
     <ComponentType name="annotation" description="Annotation...">
-        <Child name="property" type="property"/>
         <Child name="rdf:RDF" type="rdf_RDF"/>
+        <Children name="property" type="property"/>
         <Dynamics/>
     </ComponentType>
     
@@ -23,6 +23,13 @@
         <Text name="tag"/>
         <Text name="value"/>
         <Dynamics/>
+    </ComponentType>
+    
+    <ComponentType name="baseStandalone"
+        description="Base type of any component which will require notes, annotation, etc.">
+        <Child name="notes" type="notes"/>
+        <Child name="annotation" type="annotation"/>
+        <Children name="property" type="property"/>
     </ComponentType>
     
 

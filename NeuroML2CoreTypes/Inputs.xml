@@ -8,10 +8,8 @@
 
     
     <ComponentType name="basePointCurrent"
-                   description="Base type for all ComponentTypes which produce a current _i (with dimension current)">
-        
-        <Child name="notes" type="notes"/>
-        <Child name="annotation" type="annotation"/>
+                   description="Base type for all ComponentTypes which produce a current _i (with dimension current)"
+                   extends="baseStandalone">
         
         <Exposure name="i" dimension="current" description="The total (time varying) current produced by this ComponentType"/>
 

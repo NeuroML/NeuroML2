@@ -12,10 +12,9 @@
 
 
     <ComponentType name="baseCell"
-        description="Base type of any cell which can be used in a population">
-        <Child name="notes" type="notes"/>
-        <Child name="property" type="property"/>
-        <Child name="annotation" type="annotation"/>
+        description="Base type of any cell which can be used in a population"
+        extends="baseStandalone">
+        
     </ComponentType>
 
 
@@ -599,8 +598,8 @@
     <ComponentType name="segmentGroup" description="A method to describe a group of _segment_s in a _morphology_">
         
         <Child name="notes" type="notes"/>
-        <Child name="property" type="property"/>
         <Child name="annotation" type="annotation"/>
+        <Children name="property" type="property"/>
         <Children name="members" type="member"/>
         <Children name="paths" type="path"/>
         <Children name="subTrees" type="subTree"/>

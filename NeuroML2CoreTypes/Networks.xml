@@ -9,8 +9,9 @@
     <Include file="Synapses.xml"/>
 
 
-    <ComponentType name="network" description="Network containing _population_s, _projection_s and lists of _explicitConnection_s (either directly between components of the populations or via synapses)">
-        <Child name="notes" type="notes"/>
+    <ComponentType name="network" 
+                   description="Network containing _population_s, _projection_s and lists of _explicitConnection_s (either directly between components of the populations or via synapses)"
+                   extends="baseStandalone">
 
         <Children name="regions" type="region"/>
         <Children name="populations" type="basePopulation"/>
@@ -30,15 +31,18 @@
     <ComponentType name="networkWithTemperature" description="Network containing _population_s, _projection_s and lists of _explicitConnection_s (either directly between components of the populations or via synapses), and an explicit temperature" extends="network">
 
         <Parameter name="temperature" dimension="temperature"/>
-        <Child name="notes" type="notes"/>
 
     </ComponentType>
 
 
-    <ComponentType name="basePopulation" description="A population of cells (anything which extends _baseCell_)">        
+    <ComponentType name="basePopulation" 
+                   description="A population of cells (anything which extends _baseCell_)"
+                   extends="baseStandalone">   
+             
         <Child name="notes" type="notes"/>
-        <Child name="property" type="property"/>
         <Child name="annotation" type="annotation"/>
+        <Children name="property" type="property"/>
+        
         <ComponentReference name="component" type="baseCell"/>
     </ComponentType>
 

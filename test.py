@@ -109,10 +109,16 @@ if __name__ == '__main__':
         print("FAIL: NeuroML alpha schemas in neuroConstruct not in sync!")
     else:
         print("NeuroML alpha schemas in neuroConstruct are in sync.")
+        
     if os.path.isdir('../neuroConstruct') and not check_same_file('Schemas/NeuroML2/%s'%nml2_schema_name,  '../neuroConstruct/NeuroML2/Schemas/NeuroML2/%s'%nml2_schema_name):
         print("FAIL: NeuroML beta schemas in neuroConstruct not in sync!")
     else:
         print("NeuroML beta schemas in neuroConstruct are in sync.")
+        
+    if os.path.isdir('../git/NeuroMLWebsite') and not check_same_file('Schemas/NeuroML2/%s'%nml2_schema_name,  '../git/NeuroMLWebsite/public/schema/neuroml2/%s'%nml2_schema_name):
+        print("FAIL: NeuroML beta schemas in NeuroMLWebsite not in sync!")
+    else:
+        print("NeuroML beta schemas in NeuroMLWebsite are in sync.")
 
     print "--------------------------------------------------"
     print "    Checking local copies of examples"
