@@ -1,0 +1,9 @@
+system: Test Ex16
+
+experiments:
+    sine:
+        expected:
+            spike times: [57.75, 61.66, 65.59, 70.73, 109.51, 113.51, 117.97, 159.48, 163.48, 167.93, 209.48, 213.47, 217.91]
+    array:
+        expected:
+            spike times: [53.49, 103.2, 153.12, 253.28]

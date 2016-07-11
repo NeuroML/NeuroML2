@@ -1,6 +1,6 @@
-<Lems xmlns="http://www.neuroml.org/lems/0.7.1"
+<Lems xmlns="http://www.neuroml.org/lems/0.7.4"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.1 ../../LEMS/Schemas/LEMS/LEMS_v0.7.1.xsd"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.4 ../../LEMS/Schemas/LEMS/LEMS_v0.7.4.xsd"
       description="Network descriptions in NeuroML 2. Describes _network_ elements containing _population_s ">
 
     <!-- A number of network elements for use in NeuroML 2 documents  -->
@@ -9,14 +9,19 @@
     <Include file="Synapses.xml"/>
 
 
-    <ComponentType name="network" description="Network containing _population_s, _projection_s and lists of _explicitConnection_s (either directly between components of the populations or via synapses)">
+    <ComponentType name="network" 
+                   description="Network containing _population_s, _projection_s and lists of _explicitConnection_s (either directly between components of the populations or via synapses)"
+                   extends="baseStandalone">
 
         <Children name="regions" type="region"/>
         <Children name="populations" type="basePopulation"/>
         
         <Children name="projections" type="projection"/>
         <Children name="synapticConnections" type="explicitConnection"/>  <!-- Connection either directly between cells or to synapse attachment on post cell-->
-
+        
+        <Children name="electricalProjection" type="electricalProjection"/>
+        <Children name="continuousProjection" type="continuousProjection"/>
+        
         <Children name="explicitInputs" type="explicitInput"/>
         <Children name="inputs" type="inputList"/>
 
@@ -30,30 +35,34 @@
     </ComponentType>
 
 
-    <ComponentType name="basePopulation" description="A population of cells (anything which extends _baseCell_)">        
+    <ComponentType name="basePopulation" 
+                   description="A population of cells (anything which extends _baseCell_)"
+                   extends="baseStandalone">   
+             
         <Child name="notes" type="notes"/>
         <Child name="annotation" type="annotation"/>
+        <Children name="property" type="property"/>
+        
         <ComponentReference name="component" type="baseCell"/>
     </ComponentType>
 
 
     <ComponentType name="population" extends="basePopulation" description="A population of components, with just one parameter for the _size">
         <Parameter name="size" dimension="none" description="Number of instances of this Component to create when the population is instantiated"/>
-        <ComponentReference name="component" type="Component"/>
         <Structure>
             <MultiInstantiate number="size" component="component"/>
         </Structure>
     </ComponentType>
 
 
-    <ComponentType name="populationList" extends="basePopulation" description="An explicit list of the cells in the population. Work in progress...">
+    <ComponentType name="populationList" extends="basePopulation" description="An explicit list of the cells in the population. ">        
         <Children name="instances" type="instance"/>
-    
-        <ComponentReference name="component" type="baseCell"/>
+        
+        <Text name="size"/> <!--Note: Text, not Parameter, as this is not actually used by LEMS, the <instance> elements determine the size, this attribute is really just metadata, though the two should be consistent-->
     </ComponentType>
 
 
-    <ComponentType name="instance" description="Initial attempt to specify instances in populations. Work in progress...">
+    <ComponentType name="instance" description="Specifies a single instance of a component in a population (placed at _location_).">
         <Child name="location" type="location"/>
         <Structure>
             <ChildInstance component="../component"/>
@@ -62,7 +71,7 @@
     </ComponentType>
 
 
-    <ComponentType name="location" description="Initial attempt to specify instances in populations. Work in progress...">
+    <ComponentType name="location" description="Specifies location of a single _instance_ of a component in a population">
         <Parameter name="x" dimension="none"/>
         <Parameter name="y" dimension="none"/>
         <Parameter name="z" dimension="none"/>
@@ -85,34 +94,13 @@
 
 
     <ComponentType name="projection"
-        description="Projection from one population to another. Currently it's better to define an explicit list of connections, using _explicitConnection_. Work in progress...">
-        <!--TODO: allow more than one...-->
-        <Child name="synapseComponent" type="synapseComponent"/>
+        description="Projection from one population, _presynapticPopulation to another, _postsynapticPopulation, through _synapse. Contains lists of _connection_ or _connectionWD_ elements.">
+
         <Children name="connections" type="connection"/>
+        <Children name="connectionsWD" type="connectionWD"/>
         <ComponentReference name="synapse" type="baseSynapse"/>
         <Path name="presynapticPopulation"/>
         <Path name="postsynapticPopulation"/>
-    </ComponentType>
-
-
-    <ComponentType name="synapseComponent" description="Work in progress...">
-        <ComponentReference name="component" type="baseSynapse"/>
-    </ComponentType>
-
-
-    <ComponentType name="connection"
-        description="Explicit event connection directly between named components, which gets processed via a new instance of a _synapse component which is created on the target component. Normally contained inside a _projection_ element.">
-
-        <Path name="preCellId"/>
-        <Path name="postCellId"/>
-        <Text name="destination"/>
-
-        <Structure>
-            <With instance="preCellId" as="a"/>
-            <With instance="postCellId" as="b"/>
-            <EventConnection from="a" to="b" receiver="../synapse" receiverContainer="destination" sourcePort="sourcePort" targetPort="targetPort"/>
-        </Structure>
-
     </ComponentType>
 
 
@@ -121,6 +109,25 @@
         <Path name="from"/>
         <Path name="to"/>
         <Text name="targetPort"/>
+    </ComponentType>
+
+    <ComponentType name="connection"
+        description="Event connection directly between named components, which gets processed via a new instance of a _synapse component which is created on the target component. Normally contained inside a _projection_ element.">
+
+        <Path name="preCellId"/>
+        <Path name="postCellId"/>
+        <Text name="destination"/>
+        <Text name="preFractionAlong"/>
+        <Text name="postFractionAlong"/>
+        <Text name="preSegmentId"/>
+        <Text name="postSegmentId"/>
+
+        <Structure>
+            <With instance="preCellId" as="a"/>
+            <With instance="postCellId" as="b"/>
+            <EventConnection from="a" to="b" receiver="../synapse" receiverContainer="destination" sourcePort="sourcePort" targetPort="targetPort"/>
+        </Structure>
+
     </ComponentType>
 
 
@@ -137,7 +144,6 @@
             <With instance="from" as="a"/>
             <With instance="to" as="b"/>
             <EventConnection from="a" to="b" receiver="synapse" receiverContainer="destination" sourcePort="sourcePort" targetPort="targetPort"/>
-            <!--<EventConnection from="a" to="b" receiver="synapse"/>-->
         </Structure>
     </ComponentType>
 
@@ -154,13 +160,139 @@
         <Structure>
             <With instance="from" as="a"/>
             <With instance="to" as="b"/>
-            <!--<EventConnection from="a" to="b" receiver="synapse" receiverContainer="destination" sourcePort="sourcePort" targetPort="targetPort" delay="delay">-->
             <EventConnection from="a" to="b" receiver="synapse" delay="delay">
-                <!--TODO: put back in! -->
                 <Assign property="weight" value="weight"/>
             </EventConnection>
         </Structure>
 
+    </ComponentType>
+
+    <ComponentType name="connectionWD"
+                   description="Event connection between named components, which gets processed via a new instance of a synapse component which is created on the target component, includes setting of _weight and _delay for the synaptic connection"
+                   extends="connection">
+
+        <Parameter name="weight" dimension="none"/>
+        <Parameter name="delay" dimension="time"/>
+        <Path name="preCellId"/>
+        <Path name="postCellId"/>
+        <Text name="destination"/>
+        <Text name="preFractionAlong"/>
+        <Text name="postFractionAlong"/>
+        <Text name="preSegmentId"/>
+        <Text name="postSegmentId"/>
+        
+        <Structure>
+            <With instance="preCellId" as="a"/>
+            <With instance="postCellId" as="b"/>
+            <EventConnection from="a" to="b" receiver="../synapse" delay="delay">
+                <Assign property="weight" value="weight"/>
+            </EventConnection>
+        </Structure>
+
+    </ComponentType>
+
+
+    <ComponentType name="electricalConnection"
+                   description="To enable connections between populations through gap junctions.">
+        
+        <IndexParameter name="preCell"/>
+        <IndexParameter name="postCell"/>
+
+        <ComponentReference name="synapse" type="gapJunction"/>
+
+        <ComponentRequirement name="presynapticPopulation"/>
+        <ComponentRequirement name="postsynapticPopulation"/>
+
+        <Structure>
+            <With list="presynapticPopulation" index="preCell" as="a"/>
+            <With list="postsynapticPopulation" index="postCell" as="b"/>
+            <Tunnel name="peer" endA="a" endB="b" componentA="synapse" componentB="synapse"/>
+        </Structure>
+
+    </ComponentType>
+    
+    <ComponentType name="electricalConnectionInstance"
+                   description="To enable connections between populations through gap junctions. Populations need to be of type _populationList_ and contain _instance_ and _location_ elements.">
+        
+        <ComponentReference name="synapse" type="gapJunction"/>
+        
+        <Path name="preCell"/>
+        <Path name="postCell"/>
+
+        <Text name="preFractionAlong"/>
+        <Text name="postFractionAlong"/>
+        <Text name="preSegment"/>
+        <Text name="postSegment"/>
+
+        <Structure>
+            <With instance="preCell" as="a"/>
+            <With instance="postCell" as="b"/>
+            <Tunnel name="peer" endA="a" endB="b" componentA="synapse" componentB="synapse"/>
+        </Structure>
+
+    </ComponentType>
+    
+    <ComponentType name="electricalProjection"
+                   description="A projection between _presynapticPopulation to another _postsynapticPopulation through gap junctions.">
+        <Children name="connections" type="electricalConnection"/>
+        <Children name="connections" type="electricalConnectionInstance"/>
+        <ComponentReference name="presynapticPopulation" type="population" local="true"/>
+        <ComponentReference name="postsynapticPopulation" type="population" local="true"/>
+    </ComponentType>
+    
+    
+    <ComponentType name="continuousConnection"
+                   description="An instance of a connection in a _continuousProjection_ between _presynapticPopulation to another _postsynapticPopulation through a _preComponent at the start and _postComponent at the end. Can be used for analog synapses.">
+        
+        <IndexParameter name="preCell"/>
+        <IndexParameter name="postCell"/>
+
+        <ComponentReference name="preComponent" type="baseGradedSynapse"/>
+        <ComponentReference name="postComponent" type="baseGradedSynapse"/>
+        
+        <ComponentRequirement name="presynapticPopulation"/>
+        <ComponentRequirement name="postsynapticPopulation"/>
+
+        <Structure>
+            <With list="presynapticPopulation" index="preCell" as="a"/>
+            <With list="postsynapticPopulation" index="postCell" as="b"/>
+            <Tunnel name="peer" endA="a" endB="b" componentA="preComponent" componentB="postComponent"/>
+        </Structure>
+
+    </ComponentType>
+    
+    <ComponentType name="continuousConnectionInstance"
+                   description="An instance of a connection in a _continuousProjection_ between _presynapticPopulation to another _postsynapticPopulation through a _preComponent at the start and _postComponent at the end. Populations need to be of type _populationList_ and contain _instance_ and _location_ elements. Can be used for analog synapses.">
+
+        <ComponentReference name="preComponent" type="baseGradedSynapse"/>
+        <ComponentReference name="postComponent" type="baseGradedSynapse"/>
+        
+        <Path name="preCell"/>
+        <Path name="postCell"/>
+
+        <Text name="preFractionAlong"/>
+        <Text name="postFractionAlong"/>
+        <Text name="preSegment"/>
+        <Text name="postSegment"/>
+
+        <Structure>
+            <With instance="preCell" as="a"/>
+            <With instance="postCell" as="b"/>
+            <Tunnel name="peer" endA="a" endB="b" componentA="preComponent" componentB="postComponent"/>
+        </Structure>
+
+    </ComponentType>
+    
+    
+    <ComponentType name="continuousProjection"
+                   description="A projection between _presynapticPopulation and _postsynapticPopulation through components _preComponent at the start and _postComponent at the end of a _continuousConnection_ or _continuousConnectionInstance_. Can be used for analog synapses.">
+        
+        <Children name="connections" type="continuousConnection"/>
+        <Children name="connections" type="continuousConnectionInstance"/>
+        
+        <ComponentReference name="presynapticPopulation" type="population" local="true"/>
+        <ComponentReference name="postsynapticPopulation" type="population" local="true"/>
+        
     </ComponentType>
 
 
@@ -216,9 +348,13 @@
     </ComponentType>
 
 
-    <ComponentType name="input" description="Initial attempt to specify input lists. Work in progress...">
+    <ComponentType name="input" description="Specifies input lists.">
 
         <Path name="target"/>
+        
+        <Text name="segmentId"/>
+        <Text name="fractionAlong"/>
+        
         <Text name="destination"/>
         <Structure>
 

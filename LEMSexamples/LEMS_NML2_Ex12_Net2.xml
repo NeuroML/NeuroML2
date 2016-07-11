@@ -20,14 +20,10 @@
 
     <spikeGenerator id="spiker" period="30ms"/>
 
-    <spikeGeneratorRandom id="randSpiker" minISI="10ms" maxISI="30ms"/>
-
-    <spikeGeneratorPoisson id="poissonSpiker" averageRate="50per_s"/>
-
     <spikeArray id="spikes2">
-        <spike id="0" time="55ms"/>
-        <spike id="1" time="85ms"/>
-        <spike id="2" time="135ms"/>
+        <spike id="0" time="50ms"/>
+        <spike id="1" time="100ms"/>
+        <spike id="2" time="130ms"/>
     </spikeArray>
 
     <spikeArray id="spike100">
@@ -35,84 +31,57 @@
     </spikeArray>
 
 
-    <iafCell id="iaf1" leakReversal="-60mV" thresh="-55mV" reset="-65mV" C="1e-5uF" leakConductance="5e-7mS"/>
-    <iafCell id="iaf2" leakReversal="-60mV" thresh="-55mV" reset="-70mV" C="1e-5uF" leakConductance="5.2e-7mS"/>
+    <iafCell id="iaf1" leakReversal="-60mV" thresh="-35mV" reset="-65mV" C="1e-5uF" leakConductance="5e-7mS"/>
+    <iafCell id="iaf2" leakReversal="-60mV" thresh="-35mV" reset="-70mV" C="1e-5uF" leakConductance="5.2e-7mS"/>
 
 
-    <expTwoSynapse id="syn1" gbase="0.1nS" erev="0mV" tauRise="0.1ms" tauDecay="2ms">
-    </expTwoSynapse>
+    <expOneSynapse id="syn1" gbase="0.1nS" erev="0mV" tauDecay="2ms"/>
 
+    <expTwoSynapse id="syn2" gbase="0.1nS" erev="0mV" tauDecay="2ms" tauRise="0.05ms"/>
+    
+    
+    <blockingPlasticSynapse id="synNmda" gbase="5nS" tauDecay="10ms" tauRise="1ms" erev="0V">
+        
+        <blockMechanism type="voltageConcDepBlockMechanism" species="mg" blockConcentration="1.2mM" scalingConc="1.9205441817997078mM" scalingVolt="0.016129032258064516V"/>
 
-    <ComponentType name="expOneSynapseW" extends="baseConductanceBasedSynapse">
+    </blockingPlasticSynapse>
 
-        <Property name="weight" dimension="none"/>
-
-        <Parameter name="tauDecay" dimension="time" />
-
-        <Child name="notes" type="notes"/>
-
-        <Dynamics>
-
-            <StateVariable name="g" dimension="conductance" exposure="g"/>
-
-            <TimeDerivative variable="g" value="-g / tauDecay" />
-
-            <OnStart>
-                <StateAssignment variable="g" value="0" />
-            </OnStart>
-
-            <OnEvent port="in">
-                <StateAssignment variable="g" value="g + gbase" />
-            </OnEvent>
-
-            <DerivedVariable name="i" exposure="i" dimension="current" value="weight * g * (erev - v)" />
-        </Dynamics>
-    </ComponentType>
-
-
-    <expOneSynapseW id="synW" gbase="0.1nS" erev="0mV" tauDecay="2ms"/>
-
-
-    <ComponentType name="connectionWD"
-        description="Explicit event connection directly between named components, which gets processed via a new instance of a _synapse component which is created on the target component, transmitted after a time _delay. Synapse should use _weight value. Normally contained inside a _projection_ element."
-        extends="connection">
-
-        <Parameter name="weight" dimension="none"/>
-        <Parameter name="delay" dimension="time"/>
-        <Path name="preCellId"/>
-        <Path name="postCellId"/>
-
-        <Structure>
-            <With instance="preCellId" as="a"/>
-            <With instance="postCellId" as="b"/>
-            <EventConnection from="a" to="b" receiver="../synapse" delay="delay">
-                <Assign property="weight" value="weight"/>
-            </EventConnection>
-        </Structure>
-       
-    </ComponentType>
 
     <network id="net2">
-
-        <population id="randSpikersPop" component="randSpiker" size="3"/>
-
-        <population id="poissonSpikersPop" component="poissonSpiker" size="3"/>
 
         <population id="spikersPop" component="spiker" size="1"/>
 
         <population id="spikeArrayPop" component="spikes2" size="1"/>
 
-        <population id="spike100Pop" component="spike100" size="3"/>
+        <population id="spike100Pop" component="spike100" size="1"/>
 
-        <population id="iafPop" component="iaf1" size="3"/>
+        <population id="iafPop" component="iaf1" size="9"/>
 
         <projection id="projection1" presynapticPopulation="spike100Pop" postsynapticPopulation="iafPop" synapse="syn1">
             <connection preCellId="../spike100Pop[0]" postCellId="../iafPop[0]"/>
         </projection>
         
-        <projection id="projection2" presynapticPopulation="spike100Pop" postsynapticPopulation="iafPop" synapse="synW">
-            <connectionWD preCellId="../spike100Pop[1]" postCellId="../iafPop[1]" weight="0.5"  delay="10ms" />
-            <connectionWD preCellId="../spike100Pop[2]" postCellId="../iafPop[2]" weight="0.25" delay="15ms" />
+        <projection id="projection2" presynapticPopulation="spike100Pop" postsynapticPopulation="iafPop" synapse="syn1">
+            <connectionWD preCellId="../spike100Pop[0]" postCellId="../iafPop[1]" weight="0.5"  delay="10ms" />
+            <connectionWD preCellId="../spike100Pop[0]" postCellId="../iafPop[2]" weight="0.25" delay="15ms" />
+        </projection>
+        
+        <projection id="projection3" presynapticPopulation="spikeArrayPop" postsynapticPopulation="iafPop" synapse="syn2">
+            <connection preCellId="../spikeArrayPop[0]" postCellId="../iafPop[3]"/>
+        </projection>
+        
+        <projection id="projection4" presynapticPopulation="spikeArrayPop" postsynapticPopulation="iafPop" synapse="syn2">
+            <connectionWD preCellId="../spikeArrayPop[0]" postCellId="../iafPop[4]" weight="0.5"  delay="10ms" />
+            <connectionWD preCellId="../spikeArrayPop[0]" postCellId="../iafPop[5]" weight="0.25" delay="15ms" />
+        </projection>
+        
+        <projection id="projection5" presynapticPopulation="spikersPop" postsynapticPopulation="iafPop" synapse="synNmda">
+            <connection preCellId="../spikersPop[0]" postCellId="../iafPop[6]"/>
+        </projection>
+        
+        <projection id="projection6" presynapticPopulation="spikersPop" postsynapticPopulation="iafPop" synapse="synNmda">
+            <connectionWD preCellId="../spikersPop[0]" postCellId="../iafPop[7]" weight="0.5"  delay="10ms" />
+            <connectionWD preCellId="../spikersPop[0]" postCellId="../iafPop[8]" weight="0.25" delay="15ms" />
         </projection>
         
 
@@ -122,39 +91,44 @@
 
 
 
-    <Simulation id="sim1" length="300ms" step="0.01ms" target="net2">
+    <Simulation id="sim1" length="300ms" step="0.005ms" target="net2">
 
-        <Display id="dUniform" title="Ex12: random (uniform ISI) spike sources" timeScale="1ms" xmin="0" xmax="300" ymin="-5" ymax="35">
-            <Line id="l0" quantity="randSpikersPop[0]/tsince" scale="1ms" color="#000000" timeScale="1ms"/>
-            <Line id="l1" quantity="randSpikersPop[1]/tsince" scale="1ms" color="#00ff00" timeScale="1ms"/>
-            <Line id="l2" quantity="randSpikersPop[2]/tsince" scale="1ms" color="#ddff00" timeScale="1ms"/>
+        <Display id="d1" title="Ex12: Spiking elements" timeScale="1ms" xmin="0" xmax="300" ymin="-5" ymax="105">
+            <Line id="30ms period spiker" quantity="spikersPop[0]/tsince" scale="1ms" color="#000000" timeScale="1ms"/>
+            <Line id="Single spike at 100ms" quantity="spike100Pop[0]/tsince" scale="1ms" color="#ffff00" timeScale="1ms"/>
+            <Line id="3 spikes" quantity="spikeArrayPop[0]/tsince" scale="1ms" color="#ff0000" timeScale="1ms"/>
         </Display>
 
-        <Display id="dPoisson" title="Ex12: random (Poisson: exponential ISI) spike sources" timeScale="1ms" xmin="0" xmax="300" ymin="-5" ymax="35">
-            <Line id="l0" quantity="poissonSpikersPop[0]/tsince" scale="1ms" color="#000000" timeScale="1ms"/>
-            <Line id="l1" quantity="poissonSpikersPop[1]/tsince" scale="1ms" color="#00ff00" timeScale="1ms"/>
-            <Line id="l2" quantity="poissonSpikersPop[2]/tsince" scale="1ms" color="#ddff00" timeScale="1ms"/>
+        <Display id="d2" title="Ex12: Single Exp Syns" timeScale="1ms" xmin="0" xmax="300" ymin="-61" ymax="-58">
+            <Line id="No weight/delay" quantity="iafPop[0]/v" scale="1mV" color="#000000" timeScale="1ms"/>
+            <Line id="Weight:0.5;delay=10ms" quantity="iafPop[1]/v" scale="1mV" color="#00ff00" timeScale="1ms"/>
+            <Line id="Weight:0.25;delay=15ms" quantity="iafPop[2]/v" scale="1mV" color="#ff0000" timeScale="1ms"/>
         </Display>
 
-
-        <Display id="d1" title="Ex12: spikersPop" timeScale="1ms" xmin="0" xmax="300" ymin="-5" ymax="105">
-            <Line id="l0" quantity="spikersPop[0]/tsince" scale="1ms" color="#000000" timeScale="1ms"/>
-            <Line id="l1" quantity="spike100Pop[0]/tsince" scale="1ms" color="#ffff00" timeScale="1ms"/>
+        <Display id="d3" title="Ex12: Double Exp Syns" timeScale="1ms" xmin="0" xmax="300" ymin="-61" ymax="-58">
+            <Line id="No weight/delay" quantity="iafPop[3]/v" scale="1mV" color="#000000" timeScale="1ms"/>
+            <Line id="Weight:0.5;delay=10ms" quantity="iafPop[4]/v" scale="1mV" color="#00ff00" timeScale="1ms"/>
+            <Line id="Weight:0.25;delay=15ms" quantity="iafPop[5]/v" scale="1mV" color="#ff0000" timeScale="1ms"/>
         </Display>
 
-        <Display id="d2" title="Ex12: spike array" timeScale="1ms" xmin="0" xmax="300" ymin="-20" ymax="270">
-            <Line id="l0" quantity="spikeArrayPop[0]/0/tsince" scale="1ms" color="#000000" timeScale="1ms"/>
-            <Line id="l1" quantity="spikeArrayPop[0]/1/tsince" scale="1ms" color="#00ff00"  timeScale="1ms"/>
-            <Line id="l2" quantity="spikeArrayPop[0]/2/tsince" scale="1ms" color="#ddff00" timeScale="1ms"/>
-            <Line id="l3" quantity="spikeArrayPop[0]/tsince" scale="1ms" color="#ff0000" timeScale="1ms"/>
+        <Display id="d4" title="Ex12: NMDA Syns" timeScale="1ms" xmin="0" xmax="300" ymin="-62" ymax="-33">
+            <Line id="No weight/delay" quantity="iafPop[6]/v" scale="1mV" color="#000000" timeScale="1ms"/>
+            <Line id="Weight:0.5;delay=10ms" quantity="iafPop[7]/v" scale="1mV" color="#00ff00" timeScale="1ms"/>
+            <Line id="Weight:0.25;delay=15ms" quantity="iafPop[8]/v" scale="1mV" color="#ff0000" timeScale="1ms"/>
         </Display>
-
-
-        <Display id="dcells" title="Ex12: iafPop" timeScale="1ms" xmin="0" xmax="300" ymin="-65" ymax="-58">
-            <Line id="l0" quantity="iafPop[0]/v" scale="1mV" color="#000000" timeScale="1ms"/>
-            <Line id="l1" quantity="iafPop[1]/v" scale="1mV" color="#008800" timeScale="1ms"/>
-            <Line id="l2" quantity="iafPop[2]/v" scale="1mV" color="#880000" timeScale="1ms"/>
-        </Display>
+        
+        
+        <OutputFile id="of0" fileName="results/ex12.dat">
+            <OutputColumn id="0" quantity="iafPop[0]/v" />
+            <OutputColumn id="1" quantity="iafPop[1]/v" />
+            <OutputColumn id="2" quantity="iafPop[2]/v" />
+            <OutputColumn id="3" quantity="iafPop[3]/v" />
+            <OutputColumn id="4" quantity="iafPop[4]/v" />
+            <OutputColumn id="5" quantity="iafPop[5]/v" />
+            <OutputColumn id="6" quantity="iafPop[6]/v" />
+            <OutputColumn id="7" quantity="iafPop[7]/v" />
+            <OutputColumn id="8" quantity="iafPop[8]/v" />
+        </OutputFile>
 
     </Simulation>
 

@@ -11,7 +11,7 @@ from lems.model.dynamics import Transition
 from lems.model.dynamics import StateAssignment
 from lems.model.dynamics import EventOut
 
-nml2_version = "beta3"
+nml2_version = "beta4"
 nml2_branch = "master"
 
 col_width_left = "70"
@@ -117,7 +117,7 @@ ordered_comp_types = {}
 
 for file in files:
     fullfile = "%s/%s.xml"%(nml_src,file)
-    print "\n----------  Reading LEMS file: "+fullfile
+    print("\n----------  Reading LEMS file: "+fullfile)
     model = Model(include_includes=False)
     model.import_from_file(fullfile)
     
@@ -178,13 +178,15 @@ def add_comp_type_and_related(comp_type, added, indent, pre, nameInfo=""):
         for child_or_children in comp_type.children:
             nameInfo= "" if child_or_children.name == child_or_children.type else child_or_children.name+" "
             pre = children_pre if child_or_children.multiple else child_pre
-            contents += add_comp_type_and_related(comp_types[child_or_children.type], added, indent+spacer3, pre, nameInfo=nameInfo)
+            ctype = child_or_children.type
+            ctype = ctype.replace('rdf:','rdf_')
+            contents += add_comp_type_and_related(comp_types[ctype], added, indent+spacer3, pre, nameInfo=nameInfo)
 
     return contents
 
 for file in files:
     fullfile = "%s/%s.xml"%(nml_src,file)
-    print "\n----------  Reading LEMS file: "+fullfile
+    print("\n----------  Reading LEMS file: "+fullfile)
 
     model = Model(include_includes=False)
     model.import_from_file(fullfile)
@@ -245,6 +247,7 @@ for file in files:
     
     
     for o_comp_type in ordered_comp_types[file]:
+        o_comp_type = o_comp_type.replace('rdf:','rdf_')
         comp_type = model.component_types[o_comp_type]
         contents += add_comp_type_and_related(comp_type, added, "", "")
 
@@ -349,6 +352,7 @@ for file in files:
 
 
     for o_comp_type in ordered_comp_types[file]:
+        o_comp_type = o_comp_type.replace('rdf:','rdf_')
         comp_type = model.component_types[o_comp_type]
         #print "ComponentType %s is %s"%(comp_type.name, comp_type.description)
 
@@ -715,6 +719,8 @@ for file in files:
     contents += "</div>\n"
     contents += "</div>\n"
     contents += "</body>\n"
-
-    doc.write(contents)
+     
+    for line in contents.split('\n'):
+        #print("Writing: "+line)
+        doc.write(line)
     doc.close()

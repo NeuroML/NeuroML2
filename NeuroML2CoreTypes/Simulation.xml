@@ -1,6 +1,6 @@
-<Lems xmlns="http://www.neuroml.org/lems/0.7.1"
+<Lems xmlns="http://www.neuroml.org/lems/0.7.4"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.1 ../../LEMS/Schemas/LEMS/LEMS_v0.7.1.xsd">
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.4 ../../LEMS/Schemas/LEMS/LEMS_v0.7.4.xsd">
 
     <!-- A number of Simulation types for use in NeuroML 2 documents  -->
 
@@ -42,6 +42,7 @@
         
         <Children name="displays" type="Display"/>
         <Children name="outputs" type="OutputFile"/>
+        <Children name="events" type="EventOutputFile"/>
         
         <ComponentReference name="target" type="Component"/>
     
@@ -69,11 +70,33 @@
     
     </ComponentType>
     
-    
     <ComponentType name="OutputColumn">
-         <Path name="quantity"/>
-    	 <Simulation>
+        <Path name="quantity"/>
+        <Simulation>
             <Record quantity="quantity"/>
+        </Simulation>
+    </ComponentType>
+    
+    
+    <ComponentType name="EventOutputFile">
+    	
+        <Children name="eventSelection" type="EventSelection"/>
+        
+        <Text name="path"/>
+        <Text name="fileName"/>
+        <Text name="format"/>
+    	
+        <Simulation>
+            <EventWriter path="path" fileName="fileName" format="format"/>
+        </Simulation>
+    
+    </ComponentType>
+    
+    <ComponentType name="EventSelection">
+        <Path name="select"/>
+        <Text name="eventPort"/>
+        <Simulation>
+            <EventRecord quantity="select" eventPort="eventPort"/>
         </Simulation>
     </ComponentType>
 

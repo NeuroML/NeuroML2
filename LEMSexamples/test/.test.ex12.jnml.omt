@@ -1,0 +1,72 @@
+# Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
+ 
+target: ../LEMS_NML2_Ex12_Net2.xml
+engine: jNeuroML
+mep: .test.ex12.mep
+experiments:
+  v0:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex12.dat
+          columns: [0,1]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: -59.83
+        tolerance: 0.0001496
+  v1:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex12.dat
+          columns: [0,2]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: -59.83
+        tolerance: 0.000136
+  v3:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex12.dat
+          columns: [0,4]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: -59.53
+        tolerance: 0.0001962
+  v4:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex12.dat
+          columns: [0,5]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: -59.53
+        tolerance: 0.000159
+  v6:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex12.dat
+          columns: [0,7]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: -42
+        tolerance: 0.000258
+  v7:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex12.dat
+          columns: [0,8]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: -55
+        tolerance: 0.000267

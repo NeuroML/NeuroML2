@@ -1,8 +1,11 @@
+/LEMSexamples/NoInp0.xml3
+/examples/NML2_SimpleMorphology.svg
 /docs/update.sh
 /updateExamples.sh
 /updateSchemas.sh
 /.pydevproject
 .project
+target/
 
 target
 
@@ -42,7 +45,12 @@ LEMSexamples/*.spineml
 LEMSexamples/*.m
 LEMSexamples/*.json
 LEMSexamples/results/*.dat
-
+LEMSexamples/output
+LEMSexamples/old
+LEMSexamples/*.c
+LEMSexamples/*.o
+LEMSexamples/*.dll
 docs/*.html
 
 examples/NeuroML2_To_HTML/*.html
+/Schemas/NeuroML2/NeuroML_v2beta4.xsd_conns

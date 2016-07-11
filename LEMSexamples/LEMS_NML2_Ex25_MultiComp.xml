@@ -1,0 +1,66 @@
+
+<Lems>
+
+<!-- Example with instances of multicompartmental cells...
+
+     Note: requires Neuron to run, e.g.
+
+     jnml LEMS_NML2_Ex25_MultiComp.xml -neuron
+-->
+
+
+<!-- Specify which component to run -->
+    <Target component="sim1"/>
+
+<!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+
+    <!-- Main NeuroML2 content. -->
+
+    <!-- Including file with a <neuroml> root, a "real" NeuroML 2 file -->
+    <Include file="../examples/NML2_SingleCompHHCell.nml"/> <!-- Used to import channels from HH example-->
+    <Include file="../examples/NML2_MultiCompCellNetwork.nml"/>
+
+    <!-- End of NeuroML2 content -->
+
+
+    <Simulation id="sim1" length="140ms" step="0.005ms" target="MultiCompCellNetwork">
+
+        <Display id="d1" title="Ex25: MultiCompCellNetwork: cells pre" timeScale="1ms" xmin="0" xmax="140" ymin="-75" ymax="52">
+            <Line id ="cell 0: soma" quantity="pop0/0/MultiCompCell/v" scale="1mV"  color="#ee0555" timeScale="1ms"/>
+            <Line id ="cell 2: soma" quantity="pop0/2/MultiCompCell/v" scale="1mV"  color="#111555" timeScale="1ms"/>
+            <!--<Line id ="cell 0: dend1" quantity="pop0/0/MultiCompCell/1/v" scale="1mV"  color="#ee5555" timeScale="1ms"/>
+            <Line id ="cell 0: dend2" quantity="pop0/0/MultiCompCell/2/v" scale="1mV"  color="#efff55" timeScale="1ms"/>-->
+        </Display>
+        <Display id="d2" title="Ex25: MultiCompCellNetwork: cell1" timeScale="1ms" xmin="0" xmax="140" ymin="-75" ymax="52">
+            <Line id ="cell 1: soma" quantity="pop0/1/MultiCompCell/0/v" scale="1mV"  color="#ee0555" timeScale="1ms"/>
+            <Line id ="cell 1: dend1" quantity="pop0/1/MultiCompCell/1/v" scale="1mV"  color="#ee5555" timeScale="1ms"/>
+            <Line id ="cell 1: dend2" quantity="pop0/1/MultiCompCell/2/v" scale="1mV"  color="#efff55" timeScale="1ms"/>
+        </Display>
+        
+        <Display id="synsA" title="Ex25: MultiCompCellNetwork: AMPA synapses" timeScale="1ms" xmin="0" xmax="140" ymin="-.1" ymax="1">
+            <Line id ="AMPA g: pre 0:0-soma" quantity="pop0/1/MultiCompCell/0/synapses:AMPA:0/g" scale="1nS"  color="#ee0555" timeScale="1ms"/>
+            <Line id ="AMPA g: pre 0:1-dend2" quantity="pop0/1/MultiCompCell/2/synapses:AMPA:0/g" scale="1nS"  color="#eeff11" timeScale="1ms"/>
+            
+            <Line id ="AMPA g: pre 2:0-soma" quantity="pop0/1/MultiCompCell/0/synapses:AMPA:1/g" scale="1nS"  color="#22ff11" timeScale="1ms"/>
+            <Line id ="AMPA g: pre 2:1-dend1" quantity="pop0/1/MultiCompCell/1/synapses:AMPA:0/g" scale="1nS"  color="#77ff11" timeScale="1ms"/>
+            <Line id ="AMPA g: pre 2:2-dend2" quantity="pop0/1/MultiCompCell/2/synapses:AMPA:1/g" scale="1nS"  color="#ffff11" timeScale="1ms"/>
+            
+        </Display>
+        
+        <Display id="synsN" title="Ex25: MultiCompCellNetwork: NMDA synapses" timeScale="1ms" xmin="0" xmax="140" ymin="-.1" ymax="1">
+            <Line id ="NMDA g: pre 0:0-soma" quantity="pop0/1/MultiCompCell/0/synapses:NMDA:0/g" scale="1nS"  color="#ee0555" timeScale="1ms"/>
+            <Line id ="NMDA g: pre 0:1-dend2" quantity="pop0/1/MultiCompCell/2/synapses:NMDA:0/g" scale="1nS"  color="#eeff11" timeScale="1ms"/>
+            
+            <Line id ="NMDA g: pre 2:0-soma" quantity="pop0/1/MultiCompCell/0/synapses:NMDA:1/g" scale="1nS"  color="#22ff11" timeScale="1ms"/>
+            <Line id ="NMDA g: pre 2:1-dend1" quantity="pop0/1/MultiCompCell/1/synapses:NMDA:0/g" scale="1nS"  color="#77ff11" timeScale="1ms"/>
+            <Line id ="NMDA g: pre 2:2-dend2" quantity="pop0/1/MultiCompCell/2/synapses:NMDA:1/g" scale="1nS"  color="#ffff11" timeScale="1ms"/>
+            
+        </Display>
+
+
+    </Simulation>
+
+</Lems>

@@ -2,34 +2,68 @@
 
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  ../Schemas/NeuroML2/NeuroML_v2beta3.xsd"
+    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  ../Schemas/NeuroML2/NeuroML_v2beta4.xsd"
     id="NML2_Inputs">
 
     <!-- Some examples of the currently supported input types -->
 
-    <pulseGenerator id="pulseGen" delay="10 ms" duration="100 ms"
-		    amplitude="50 pA"/>
+    <expTwoSynapse id="synInput" gbase="8nS" erev="20mV" tauRise="1ms" tauDecay="5ms"/><!-- Will be used below... -->
+    <expTwoSynapse id="synInputFast" gbase="1nS" erev="20mV" tauRise="0.2ms" tauDecay="1ms"/><!-- Will be used below... -->
+    <expThreeSynapse id="synInputFastTwo" gbase1="1.5nS" tauRise="0.1ms" tauDecay1="0.7ms" gbase2="0.5nS" tauDecay2="2.5ms"  erev="0mV"/> 
 
-    <sineGenerator id="sineGen" phase="0" delay="50ms"
-		   duration="200ms" amplitude="1.2nA" period="50ms"/>
+    <pulseGenerator id="pulseGen0" delay="50ms" duration="200ms" amplitude="1 nA" />
 
-    <rampGenerator id="rampGen" delay="50ms" duration="200ms"
-		   startAmplitude="0.5nA" finishAmplitude="2nA"
-		   baselineAmplitude="0nA"/>
+    <sineGenerator id="sg0" phase="0" delay="50ms" duration="200ms" amplitude="1.4nA" period="50ms"/>
 
-    <voltageClamp id="vClamp" delay="50ms" duration="200ms"
-		  targetVoltage="-50mV" simpleSeriesResistance="10ohm"/>
+    <rampGenerator id="rg0" delay="50ms" duration="200ms" startAmplitude="0.5nA" finishAmplitude="4nA" baselineAmplitude="0nA"/>
+    
+    <compoundInput id="ci0">
+        <pulseGenerator id="pg1" delay="50ms" duration="200ms" amplitude="1 nA" />
+        <pulseGenerator id="pg2" delay="100ms" duration="100ms" amplitude="1 nA" />
+        <sineGenerator id="sg0" phase="0" delay="125ms" duration="50ms" amplitude="1nA" period="25ms"/>
+    </compoundInput>
+
+    <voltageClamp id="vClamp0" delay="50ms" duration="200ms"
+              targetVoltage="-50mV" simpleSeriesResistance="1e6ohm"/>
 
     <spikeArray id="spkArr">
-      <spike id="0" time="20 ms"/>
-      <spike id="1" time="30 ms"/>
+      <spike id="0" time="50 ms"/>
+      <spike id="1" time="100 ms"/>
+      <spike id="2" time="150 ms"/>
+      <spike id="3" time="155 ms"/>
+      <spike id="4" time="250 ms"/>
     </spikeArray>
+    
+    <timedSynapticInput id="synTrain" synapse="synInputFastTwo" spikeTarget="./synInputFastTwo">
+        <spike id="0" time="2 ms"/>
+        <spike id="1" time="15 ms"/>
+        <spike id="2" time="27 ms"/>
+        <spike id="3" time="40 ms"/>
+        <spike id="4" time="45 ms"/>
+        <spike id="5" time="50 ms"/>
+        <spike id="6" time="52 ms"/>
+        <spike id="7" time="54 ms"/>
+        <spike id="8" time="54.5 ms"/>
+        <spike id="9" time="54.6 ms"/>
+        <spike id="10" time="54.7 ms"/>
+        <spike id="11" time="54.8 ms"/>
+        <spike id="12" time="54.9 ms"/>
+        <spike id="13" time="55 ms"/>
+        <spike id="14" time="55.1 ms"/>
+        <spike id="15" time="55.2 ms"/>
+    </timedSynapticInput>
 
-    <spikeGenerator id="spikeGen" period="20 ms"/>
+    <spikeGenerator id="spikeGenRegular" period="20 ms"/>
 
     <spikeGeneratorRandom id="spikeGenRandom" minISI="10 ms"
-			  maxISI="30 ms"/>
+                  maxISI="30 ms"/>
 
     <spikeGeneratorPoisson id="spikeGenPoisson" averageRate="50 Hz"/>
+
+    <poissonFiringSynapse id="poissonFiringSyn" averageRate="10 Hz" synapse="synInput" spikeTarget="./synInput"/>
+    
+    <transientPoissonFiringSynapse id="transPoissonFiringSyn" delay="50ms" duration="50ms" averageRate="300 Hz" synapse="synInputFast" spikeTarget="./synInputFast"/>
+    <transientPoissonFiringSynapse id="transPoissonFiringSyn2" delay="50ms" duration="500ms" averageRate="10 Hz" synapse="synInputFastTwo" spikeTarget="./synInputFastTwo"/>
+
 
 </neuroml>

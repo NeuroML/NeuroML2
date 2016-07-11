@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta3.xsd"
-    id="NML2_MultiCompCellNetwork">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta4.xsd"
+         id="NML2_MultiCompCellNetwork">
 
-<!-- Example of a network with connections between multicompartmental cells --> 
+    <!-- Example of a network with connections between multicompartmental cells --> 
 
-    <expOneSynapse id="syn1" gbase="5nS" erev="0mV" tauDecay="3ms"/>
+    <include href="NML2_SingleCompHHCell.nml"/> <!-- Used to import channels from HH example-->
+
+    <expTwoSynapse id="AMPA" tauRise="3e-5s" tauDecay="0.5e-3s" gbase=".3nS" erev="0V"/>
+    
+    
+    <blockingPlasticSynapse id="NMDA" gbase=".8nS" tauRise="1e-3s" tauDecay="13.3333e-3s" erev="0V">
+
+        <blockMechanism type="voltageConcDepBlockMechanism" species="mg" 
+                        blockConcentration="1.2mM" scalingConc="1.9205441817997078mM" 
+                        scalingVolt="0.016129032258064516V"/>
+
+    </blockingPlasticSynapse>
 
     <cell id="MultiCompCell">
 
@@ -34,17 +45,36 @@
                 <member segment="0"/>
             </segmentGroup>
 
-            <segmentGroup id="dendrite_group">  
+           <segmentGroup id="dendrite_group">  
                 <member segment="1"/>
                 <member segment="2"/>
             </segmentGroup>
-            
-            <!-- No biophysical properties to keep example simple -->
 
         </morphology>
+
+        <biophysicalProperties id="bioPhys1">
+            
+            <membraneProperties>
+                        
+                <channelDensity id="leak" ionChannel="passiveChan" condDensity="3.0 S_per_m2" erev="-54.3mV" ion="non_specific"/>
+                <channelDensity id="naChans" ionChannel="naChan" condDensity="120.0 mS_per_cm2" erev="50.0 mV" ion="na"/>
+                <channelDensity id="kChans" ionChannel="kChan" condDensity="360 S_per_m2" erev="-77mV" ion="k"/>
+
+                <spikeThresh value="-20mV"/>
+                <specificCapacitance value="1.0 uF_per_cm2"/>
+                <initMembPotential value="-65mV"/>
+
+            </membraneProperties>
+
+            <intracellularProperties>
+                <resistivity value="1 kohm_cm"/>   
+            </intracellularProperties>
+
+        </biophysicalProperties>
     </cell>
     
-    <pulseGenerator id="pulseGen1" delay="100ms" duration="100ms" amplitude="0.3nA"/>
+    <pulseGenerator id="pulseGen2" delay="20ms" duration="100ms" amplitude="0.2nA"/>
+    <pulseGenerator id="pulseGen3" delay="30ms" duration="100ms" amplitude="0.18nA"/>
 
     <network id="MultiCompCellNetwork">
 
@@ -60,16 +90,32 @@
             </instance>
         </population>
 
-        <projection id="internal1" presynapticPopulation="pop0" postsynapticPopulation="pop0" synapse="syn1">
+        <projection id="projAMPA" presynapticPopulation="pop0" postsynapticPopulation="pop0" synapse="AMPA">
             <!--TODO: Fix! want to use preCellId="0" etc. -->
-            <connection id="0" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="2" postFractionAlong="0.5"/>
-            <connection id="1" preCellId="../pop0/1/MultiCompCell" postCellId="../pop0/2/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="1" postFractionAlong="0.5"/>
-            <connection id="2" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/0/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="2" postFractionAlong="0.5"/>
+            <connection id="0" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="0" postFractionAlong="0.5"/>
+            <connection id="1" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="1" preFractionAlong="0.5" postSegmentId="2" postFractionAlong="0.5"/>
+            
+            <connection id="2" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="0" postFractionAlong="0.5"/>
+            <connection id="3" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="1" preFractionAlong="0.5" postSegmentId="1" postFractionAlong="0.5"/>
+            <connection id="4" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="1" preFractionAlong="0.5" postSegmentId="2" postFractionAlong="0.5"/>
         </projection>
 
-        <inputList id="stimInput" component="pulseGen1" population="pop0">
-            <!--TODO: Fix! want to use target="0" etc. -->
+        <projection id="projNMDA" presynapticPopulation="pop0" postsynapticPopulation="pop0" synapse="NMDA">
+            <!--TODO: Fix! want to use preCellId="0" etc. -->
+            <connection id="0" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="0" postFractionAlong="0.5"/>
+            <connection id="1" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="1" preFractionAlong="0.5" postSegmentId="2" postFractionAlong="0.5"/>
+            
+            <connection id="2" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="0" postFractionAlong="0.5"/>
+            <connection id="3" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="1" preFractionAlong="0.5" postSegmentId="1" postFractionAlong="0.5"/>
+            <connection id="4" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="1" preFractionAlong="0.5" postSegmentId="2" postFractionAlong="0.5"/>
+        </projection>
+
+        <inputList id="stimInput1" component="pulseGen2" population="pop0">
             <input id="0" target="../pop0/0/MultiCompCell" segmentId="0" fractionAlong="0.5" destination="synapses"/>
+        </inputList>
+
+        <inputList id="stimInput2" component="pulseGen3" population="pop0">
+            <input id="1" target="../pop0/2/MultiCompCell" segmentId="0" fractionAlong="0.5" destination="synapses"/>
         </inputList>
         
     </network>

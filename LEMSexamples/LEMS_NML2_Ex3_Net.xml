@@ -68,6 +68,8 @@
     
     <expTwoSynapse id="syn2exp" gbase="0.5nS" erev="0mV" tauRise="1ms" tauDecay="2ms" />
     
+    <alphaSynapse id="synalpha" gbase="0.5nS" erev="0mV" tau="2ms" />
+    
     
             <!-- End of NeuroML2 content -->
     
@@ -76,32 +78,39 @@
     
     <network id="net1">
         <population id="hh1pop" component="hhcell_1" size="1"/>
-        <population id="hh2pop" component="hhcell_2" size="2"/>
+        <population id="hh2pop" component="hhcell_2" size="3"/>
     
         <!-- NOTE: Only explicit connections allowed at the moment!
              Templates for connectivity patterns are being worked on... -->
         <synapticConnection from="hh1pop[0]" to="hh2pop[0]" synapse="syn1exp" destination="synapses"/>
         <synapticConnection from="hh1pop[0]" to="hh2pop[1]" synapse="syn2exp" destination="synapses"/>
+        <synapticConnection from="hh1pop[0]" to="hh2pop[2]" synapse="synalpha" destination="synapses"/>
     
         <explicitInput target="hh1pop[0]" input="pulseGen1" destination="synapses"/>
     
     </network>
     
     
-    <Simulation id="sim1" length="100ms" step="0.01ms" target="net1">
+    <Simulation id="sim1" length="100ms" step="0.005ms" target="net1">
     
         <Display id="d1" title="Ex3: Network connection between HH cells: voltage traces" timeScale="1ms" xmin="0" xmax="100" ymin="-90" ymax="60">
-            <Line id ="v_pop1_0" quantity="hh1pop[0]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
-            <Line id ="v_pop2_0" quantity="hh2pop[0]/v" scale="1mV"  color="#BBA0AA" timeScale="1ms"/>
-            <Line id ="v_pop2_1" quantity="hh2pop[1]/v" scale="1mV"  color="#BBFFAA" timeScale="1ms"/>
+            <Line id ="Pre cell v" quantity="hh1pop[0]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
+            <Line id ="Exp1 cell v" quantity="hh2pop[0]/v" scale="1mV"  color="#1111FF" timeScale="1ms"/>
+            <Line id ="Exp2 cell v" quantity="hh2pop[1]/v" scale="1mV"  color="#aaaaFF" timeScale="1ms"/>
+            <Line id ="Alpha cell v" quantity="hh2pop[2]/v" scale="1mV"  color="#aaFFFF" timeScale="1ms"/>
         </Display>
     
         <Display id="d2" title="Ex3: Network connection between HH cells: synaptic conductance" timeScale="1ms" xmin="0" xmax="100" ymin="-0.05" ymax="0.6">
-            <Line id ="syn1exp_g" quantity="hh2pop[0]/syn1exp/g" scale="1nS"  color="#1111FF" timeScale="1ms"/>
-            <Line id ="syn2exp_g" quantity="hh2pop[1]/syn2exp/g" scale="1nS"  color="#aaaaFF" timeScale="1ms"/>
+            <Line id ="Cond exp1" quantity="hh2pop[0]/syn1exp/g" scale="1nS"  color="#1111FF" timeScale="1ms"/>
+            <Line id ="Cond exp2" quantity="hh2pop[1]/syn2exp/g" scale="1nS"  color="#aaaaFF" timeScale="1ms"/>
+            <Line id ="Cond alpha" quantity="hh2pop[2]/synalpha/g" scale="1nS"  color="#aaFFFF" timeScale="1ms"/>
         </Display>
     
-        <!-- See other examples for saving of data traces -->
+        <OutputFile id="of0" fileName="results/ex3_g.dat">
+            <OutputColumn id="syn1exp_g" quantity="hh2pop[0]/syn1exp/g" />
+            <OutputColumn id="syn2exp_g" quantity="hh2pop[1]/syn2exp/g" />
+            <OutputColumn id="synalpha_g" quantity="hh2pop[2]/synalpha/g" />
+        </OutputFile>
     
     </Simulation>
 

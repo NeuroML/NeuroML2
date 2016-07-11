@@ -3,7 +3,7 @@
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:xi="http://www.w3.org/2001/XInclude"
-      xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta3.xsd"
+    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta4.xsd"
     id="NML2_FullCell">
         
 
@@ -12,7 +12,9 @@
 <!-- This is a "pure" NeuroML 2 file. It cannot currently used for simulations with 
      jLEMS/jNeuroML however, as jLEMS does not yet support multicompartmental cells -->    
 
-    <include href="SimpleIonChannel.xml"/> <!-- Contains ionChannel NaConductance -->
+    <include href="NML2_SimpleIonChannel.nml"/> <!-- Contains ionChannel NaConductance -->
+    
+    <ionChannelHH id="pas" conductance="10pS"/> <!--For use in example cell below-->
 
     <!-- Note, no <cells> element...  -->
     
@@ -81,11 +83,11 @@
 
             <membraneProperties> 
 
-                <channelPopulation id="naChansDend" ionChannel="NaConductance" segment="2" number="120000" erev="50mV"/>   <!-- Use population instead of density -->
+                <channelPopulation id="naChansDend" ionChannel="NaConductance" segment="2" number="120000" erev="50mV" ion="na"/>   <!-- Use population instead of density -->
 
-                <channelDensity id="pasChans" ionChannel="pas" condDensity="3.0 S_per_m2" erev="-70mV"/> <!-- no segmentGroup => all segments! -->
+                <channelDensity id="pasChans" ionChannel="pas" condDensity="3.0 S_per_m2" erev="-70mV" ion="non_specific"/> <!-- no segmentGroup => all segments! -->
 
-                <channelDensity id="naChansSoma" ionChannel="NaConductance" segmentGroup="soma_group" condDensity="120.0 mS_per_cm2" erev="50mV"/>
+                <channelDensity id="naChansSoma" ionChannel="NaConductance" segmentGroup="soma_group" condDensity="120.0 mS_per_cm2" erev="50mV" ion="na"/>
 
                 <specificCapacitance segmentGroup="soma_group" value="1.0 uF_per_cm2"/>
 

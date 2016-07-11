@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta4.xsd"
+    id="NML2_AnalogSynapses">
+
+<!-- Example of a network containing analog synapses in NeuroML 2 --> 
+
+    <include href="NML2_SingleCompHHCell.nml"/>
+
+    <!--Dummy synapse which emits no current. Used as presynaptic endpoint for analog synaptic connection.-->
+    <silentSynapse id="silent1"/>
+    
+    
+    <!--Based on synapse in Methods of http://www.nature.com/neuro/journal/v7/n12/abs/nn1352.html-->
+    <gradedSynapse id="gs1" conductance="0.1nS" delta="5mV" Vth="-35mV" k="0.025per_ms" erev="0mV"/>
+    
+   
+    
+    <network id="net2">
+        
+        <population id="hhPop1" component="hhcell" size="1" type="populationList">
+            <instance id="0">
+                <location x="0" y="0" z="0"/>
+            </instance>
+        </population>
+        
+        <population id="hhPop2" component="hhcell" size="1" type="populationList">
+            <instance id="0">
+                <location x="100" y="0" z="0"/>
+            </instance>
+        </population>
+  
+        
+        <continuousProjection id ="testGradedConn" presynapticPopulation="hhPop1" postsynapticPopulation="hhPop2">
+            <continuousConnectionInstance id="0" preCell="../hhPop1/0/hhcell" postCell="../hhPop2/0/hhcell" preComponent="silent1" postComponent="gs1"/>
+        </continuousProjection>
+        
+        <inputList id="i1" component="pulseGen1" population="iafPop1">
+            <input id="0" target="../hhPop1/0/hhcell" destination="synapses"/>
+        </inputList>
+        
+    </network>
+    
+    
+
+</neuroml>
+
+
+
+
+
+
+
+

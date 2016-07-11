@@ -1,6 +1,6 @@
-<Lems xmlns="http://www.neuroml.org/lems/0.7.1"
+<Lems xmlns="http://www.neuroml.org/lems/0.7.4"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.1 ../../LEMS/Schemas/LEMS/LEMS_v0.7.1.xsd">
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.4 ../../LEMS/Schemas/LEMS/LEMS_v0.7.4.xsd">
 
     <!-- A number of common component types for use in NeuroML 2 documents  -->
 
@@ -13,8 +13,8 @@
     
     
     <ComponentType name="annotation" description="Annotation...">
-        <Child name="property" type="property"/>
         <Child name="rdf:RDF" type="rdf_RDF"/>
+        <Children name="property" type="property"/>
         <Dynamics/>
     </ComponentType>
     
@@ -23,6 +23,13 @@
         <Text name="tag"/>
         <Text name="value"/>
         <Dynamics/>
+    </ComponentType>
+    
+    <ComponentType name="baseStandalone"
+        description="Base type of any component which will require notes, annotation, etc.">
+        <Child name="notes" type="notes"/>
+        <Child name="annotation" type="annotation"/>
+        <Children name="property" type="property"/>
     </ComponentType>
     
 
@@ -100,12 +107,12 @@
     
     
     <ComponentType name="rdf_Bag" description="Work in progress...">
-        <Child name="rdf:li" type="rdf_li"/>
+        <Children name="rdf:li" type="rdf:li"/>
         <Dynamics/>
     </ComponentType>
 
 
-    <ComponentType name="rdf_li" description="Annotation...">
+    <ComponentType name="rdf:li" description="Annotation...">
         <Text name="rdf:resource"/>
         <Dynamics/>
     </ComponentType>

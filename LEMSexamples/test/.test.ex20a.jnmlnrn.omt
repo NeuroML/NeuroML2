@@ -1,0 +1,28 @@
+# Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
+ 
+target: ../LEMS_NML2_Ex20a_AnalogSynapsesHH.xml
+engine: jNeuroML_NEURON
+mep: .test.ex20a.mep
+experiments:
+  cell0:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex20a_v.dat
+          columns: [0,1]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: 0
+        tolerance: 0
+  cell1:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex20a_v.dat
+          columns: [0,2]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: -64.4
+        tolerance: 0

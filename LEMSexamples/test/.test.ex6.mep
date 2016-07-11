@@ -1,0 +1,12 @@
+system: Test Ex0
+
+experiments:
+    v:
+        expected:
+            spike times: [229.78, 304.74, 379.74]
+    g:
+        expected:
+            spike times: [75.59, 150.59, 225.17, 300.17, 375.17]
+    block:
+        expected:
+            spike times: [229.35, 304.32, 379.32]
