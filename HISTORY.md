@@ -26,7 +26,7 @@ to be applied. See [here](https://github.com/OpenSourceBrain/IzhikevichModel/tre
 [Boris Marin](https://github.com/borismarin).
 
 * **Cells with 2 independent pools of Ca2+**. The `<cell2CaPools>` has been added for cells with 2 independent pools of Ca2+. This may be required where some Ca channels contribute 
-to changes in internal [Ca2+] and some don't (just pass charge). See [here](https://github.com/OpenSourceBrain/SolinasEtAl-GolgiCell/blob/master/NeuroML2/Golgi.cell.nml) for example.
+to changes in internal [Ca2+] (thus influencing [Ca2+] dependent K channels) and some don't (just pass charge). See [here](https://github.com/OpenSourceBrain/SolinasEtAl-GolgiCell/blob/master/NeuroML2/Golgi.cell.nml) for example.
 Thanks to [Rokas Stanislovas](https://github.com/RokasSt).
 
 _Synapses_
@@ -93,7 +93,7 @@ latest Schema. There is also better support for Python 3.
 
 _Documentation_
 
-Direct links to all schemas, papers, libraries, tools, examples, contact details are now available on one page: https://neuroml.org/getneuroml
+* **Consolidated web page for documentation.** Direct links to all schemas, papers, libraries, tools, examples, contact details are now available on one page: https://neuroml.org/getneuroml
 
 
 v2beta3 / 2014-9-11
