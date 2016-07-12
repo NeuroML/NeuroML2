@@ -36,7 +36,7 @@ and analog synapses ([example](https://github.com/NeuroML/NeuroML2/blob/master/e
 via [jNeuroML](https://github.com/NeuroML/jNeuroML).
 
 * **New synapse types `<alphaSynapse>` and `<expThreeSynapse>`.** Added synapse types `<alphaSynapse>` (rise time = decay time) and `<expThreeSynapse>` 
-(1 exponential rise time, decay times). See [here](https://github.com/NeuroML/NeuroML2/blob/master/examples/NML2_SynapseTypes.nml)
+(1 exponential rise time, 2 decay times). See [here](https://github.com/NeuroML/NeuroML2/blob/master/examples/NML2_SynapseTypes.nml)
 
 * **Improved recording from multiple synapses on multicompartmental cells**. See [here](https://github.com/NeuroML/NeuroML2/blob/master/LEMSexamples/LEMS_NML2_Ex25_MultiComp.xml)
 for an example of recording/saving of different variables on multiple synapses on a multicompartmental cell.
