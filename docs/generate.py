@@ -722,5 +722,5 @@ for file in files:
      
     for line in contents.split('\n'):
         #print("Writing: "+line)
-        doc.write(line)
+        doc.write(line+'\n')
     doc.close()
