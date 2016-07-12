@@ -11,7 +11,7 @@ from lems.model.dynamics import Transition
 from lems.model.dynamics import StateAssignment
 from lems.model.dynamics import EventOut
 
-nml2_version = "beta4"
+nml2_version = "beta5"
 nml2_branch = "master"
 
 col_width_left = "70"
