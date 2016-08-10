@@ -2,17 +2,53 @@
  
 target: ../LEMS_NML2_Ex14_PyNN.xml
 engine: jNeuroML
-#mep: .test.ex14.mep
-#experiments:
-#  v:
-#    observables:
-#      spike times:
-#        file: 
-#          path: ../results/ex6_v.dat
-#          columns: [0,1]
-#          scaling: [1000, 1000]
-#        spike detection: 
-#          method: threshold
-#          threshold: -32
-#        tolerance: 0
+mep: .test.ex14.mep
+experiments:
+    
+  pop_IF_curr_exp:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex14.dat
+          columns: [0,1]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: -50.1
+        tolerance: 0
 
+  pop_IF_cond_alpha:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex14.dat
+          columns: [0,2]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: -50.1
+        tolerance: 0
+
+  pop_EIF_cond_exp_isfa_ista:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex14.dat
+          columns: [0,3]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: -45
+        tolerance: 0
+
+  pop_HH_cond_exp:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex14.dat
+          columns: [0,4]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: 0
+        tolerance: 0

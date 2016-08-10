@@ -45,7 +45,15 @@
             <Line color="#0000FF" id="spikes1" quantity="pop_spikes1[0]/tsince" scale="1ms" timeScale="1ms"/>
             <Line color="#00aaFF" id="spikes2" quantity="pop_spikes2[0]/tsince" scale="1ms" timeScale="1ms"/>
         </Display>
+        
+        <OutputFile id="of0" fileName="results/ex14.dat">
+            <OutputColumn id="pop_IF_curr_exp" quantity="pop_IF_curr_exp[0]/v" />
+            <OutputColumn id="pop_IF_cond_alpha" quantity="pop_IF_cond_alpha[0]/v" />
+            <OutputColumn id="pop_EIF_cond_exp_isfa_ista" quantity="pop_EIF_cond_exp_isfa_ista[0]/v" />
+            <OutputColumn id="pop_HH_cond_exp" quantity="pop_HH_cond_exp[0]/v" />
+        </OutputFile>
+        
     </Simulation>
-
-
+    
+    
 </Lems>
