@@ -15,7 +15,7 @@ experiments:
         spike detection: 
           method: threshold
           threshold: -50.1
-        tolerance: 0
+        tolerance: 0.000448
 
   pop_IF_cond_alpha:
     observables:
@@ -27,7 +27,7 @@ experiments:
         spike detection: 
           method: threshold
           threshold: -50.1
-        tolerance: 0
+        tolerance: 0.00062
 
   pop_EIF_cond_exp_isfa_ista:
     observables:
@@ -39,7 +39,7 @@ experiments:
         spike detection: 
           method: threshold
           threshold: -45
-        tolerance: 0
+        tolerance: 0.00526
 
   pop_HH_cond_exp:
     observables:
@@ -51,4 +51,41 @@ experiments:
         spike detection: 
           method: threshold
           threshold: 0
-        tolerance: 0
+        tolerance: 0.000969
+
+  pop_post_1:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex14.dat
+          columns: [0,5]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: -64
+        tolerance: 0.000
+
+
+  pop_post_1_g:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex14_g.dat
+          columns: [0,1]
+          scaling: [1000, 1]
+        spike detection: 
+          method: threshold
+          threshold: 0.003
+        tolerance: 0.000
+
+  pop_post_2_g:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex14_g.dat
+          columns: [0,2]
+          scaling: [1000, 1]
+        spike detection: 
+          method: threshold
+          threshold: 0.003
+        tolerance: 0.000

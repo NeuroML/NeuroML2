@@ -19,6 +19,11 @@
 
         <Parameter name="cm" dimension="none"/>
         <Parameter name="i_offset" dimension="none"/>
+        
+        
+        
+        
+        
         <Parameter name="tau_syn_E" dimension="none"/>
         <Parameter name="tau_syn_I" dimension="none"/>
         
@@ -434,13 +439,12 @@
     <!--  Synapses   -->
 
     <ComponentType name="basePynnSynapse"
-                   description="Base type for all PyNN synapses. Note, the current _I produced is dimensionless, but it requires a membrane potential _v with dimension voltage">
+                   description="Base type for all PyNN synapses. Note, the current _I produced is dimensionless, but it requires a membrane potential _v with dimension voltage"
+                   extends="baseVoltageDepSynapse">
 
         <Parameter name="tau_syn" dimension="none"/>
 
-        <EventPort name="in" direction="in"/>
         <Exposure name="I" dimension="none"/>
-        <Requirement name="v" dimension="voltage"/>
 
     </ComponentType>
 

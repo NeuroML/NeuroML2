@@ -25,7 +25,7 @@
         tau_m="20.0" tau_refrac="5.0" tau_syn_E="5.0" tau_syn_I="5.0" v_init="-65" v_reset="-68.0" v_rest="-65.0" v_thresh="-52.0"/>
     
     <EIF_cond_exp_isfa_ista id="EIF_cond_exp_isfa_ista" a="0.0" b="0.0805" cm="0.281"
-        delta_T="2.0" e_rev_E="0.0" e_rev_I="-80.0" i_offset="0.6" tau_m="9.3667" tau_refrac="0.0" tau_syn_E="5.0"
+        delta_T="2.0" e_rev_E="0.0" e_rev_I="-80.0" i_offset="0.6" tau_m="9.3667" tau_refrac="5" tau_syn_E="5.0"
         tau_syn_I="5.0" tau_w="144.0" v_init="-65" v_reset="-68.0" v_rest="-70.6" v_spike="-40.0" v_thresh="-52.0"/>
     
     <HH_cond_exp id="HH_cond_exp" cm="0.2" e_rev_E="0.0" e_rev_I="-80.0" e_rev_K="-90.0"
@@ -36,9 +36,10 @@
     <alphaCondSynapse id="ps2" tau_syn="5" e_rev="0"/>
     <expCurrSynapse id="ps3" tau_syn="5"/>
     <alphaCurrSynapse id="ps4" tau_syn="5"/>
-    
+   
     <SpikeSourcePoisson id="spikes1" start="50ms" duration="400ms" rate="50Hz"/>
     <SpikeSourcePoisson id="spikes2" start="50ms" duration="400ms" rate="80Hz"/>
+    
     
     
     <network id="netAll">
@@ -54,7 +55,7 @@
          
         <population component="spikes1" id="pop_spikes1" size="1"/>
         <population component="spikes2" id="pop_spikes2" size="1"/>
-        
+       
         <projection id="proj1" presynapticPopulation="pop_EIF_cond_exp_isfa_ista" postsynapticPopulation="pop_target_1" synapse="ps1">
             <connectionWD id="0" preCellId="../pop_EIF_cond_exp_isfa_ista[0]" postCellId="../pop_target_1[0]" weight="0.01" delay="10ms"/>
         </projection>
