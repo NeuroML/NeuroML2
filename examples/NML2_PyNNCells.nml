@@ -25,6 +25,10 @@
         delta_T="2.0" e_rev_E="0.0" e_rev_I="-80.0" i_offset="0.6" tau_m="9.3667" tau_refrac="5" tau_syn_E="5.0"
         tau_syn_I="5.0" tau_w="144.0" v_init="-65" v_reset="-68.0" v_rest="-70.6" v_spike="-40.0" v_thresh="-52.0"/>
     
+    <EIF_cond_alpha_isfa_ista id="EIF_cond_alpha_isfa_ista" a="0.0" b="0.0805" cm="0.281"
+        delta_T="0" e_rev_E="0.0" e_rev_I="-80.0" i_offset="0.6" tau_m="9.3667" tau_refrac="5" tau_syn_E="5.0"
+        tau_syn_I="5.0" tau_w="144.0" v_init="-65" v_reset="-68.0" v_rest="-70.6" v_spike="-40.0" v_thresh="-52.0"/>
+    
     <HH_cond_exp id="HH_cond_exp" cm="0.2" e_rev_E="0.0" e_rev_I="-80.0" e_rev_K="-90.0"
         e_rev_Na="50.0" e_rev_leak="-65.0" g_leak="0.01" gbar_K="6.0" gbar_Na="20.0" i_offset="0.2" tau_syn_E="0.2"
         tau_syn_I="2.0" v_init="-65" v_offset="-63.0"/>
@@ -45,6 +49,7 @@
         <population component="IF_cond_alpha" id="pop_IF_cond_alpha" size="1"/>
         <population component="IF_cond_exp" id="pop_IF_cond_exp" size="1"/>
         <population component="EIF_cond_exp_isfa_ista" id="pop_EIF_cond_exp_isfa_ista" size="1"/>
+        <population component="EIF_cond_alpha_isfa_ista" id="pop_EIF_cond_alpha_isfa_ista" size="1"/>
         <population component="HH_cond_exp" id="pop_HH_cond_exp" size="1"/>
     
         <population component="silent_cell" id="pop_target" size="4"/>
@@ -56,16 +61,16 @@
             <connectionWD id="0" preCellId="../pop_EIF_cond_exp_isfa_ista[0]" postCellId="../pop_target[0]" weight="0.01" delay="10ms"/>
         </projection>
         
-        <projection id="proj1" presynapticPopulation="pop_EIF_cond_exp_isfa_ista" postsynapticPopulation="pop_target" synapse="ps2">
-            <connectionWD id="0" preCellId="../pop_EIF_cond_exp_isfa_ista[0]" postCellId="../pop_target[1]" weight="0.005" delay="20ms"/>
+        <projection id="proj1" presynapticPopulation="pop_EIF_cond_alpha_isfa_ista" postsynapticPopulation="pop_target" synapse="ps2">
+            <connectionWD id="0" preCellId="../pop_EIF_cond_alpha_isfa_ista[0]" postCellId="../pop_target[1]" weight="0.005" delay="20ms"/>
         </projection>
         
-        <projection id="proj2" presynapticPopulation="pop_EIF_cond_exp_isfa_ista" postsynapticPopulation="pop_target" synapse="ps3">
-            <connectionWD id="0" preCellId="../pop_EIF_cond_exp_isfa_ista[0]" postCellId="../pop_target[2]" weight="1" delay="30ms"/>
+        <projection id="proj2" presynapticPopulation="pop_IF_curr_alpha" postsynapticPopulation="pop_target" synapse="ps3">
+            <connectionWD id="0" preCellId="../pop_IF_curr_alpha[0]" postCellId="../pop_target[2]" weight="1" delay="30ms"/>
         </projection>
         
-        <projection id="proj3" presynapticPopulation="pop_EIF_cond_exp_isfa_ista" postsynapticPopulation="pop_target" synapse="ps4">
-            <connectionWD id="0" preCellId="../pop_EIF_cond_exp_isfa_ista[0]" postCellId="../pop_target[3]" weight="0.5" delay="40ms"/>
+        <projection id="proj3" presynapticPopulation="pop_IF_cond_exp" postsynapticPopulation="pop_target" synapse="ps4">
+            <connectionWD id="0" preCellId="../pop_IF_cond_exp[0]" postCellId="../pop_target[3]" weight="0.5" delay="40ms"/>
         </projection>
         
     </network>

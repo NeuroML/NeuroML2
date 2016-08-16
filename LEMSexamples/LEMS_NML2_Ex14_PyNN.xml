@@ -29,6 +29,7 @@
         </Display>
         <Display id="display_1" timeScale="1ms" title="PyNN EIF model run in LEMS" xmin="0" xmax="500" ymin="-72" ymax="-38">
             <Line color="#ffc800" id="EIF_cond_exp_isfa_ista_v" quantity="pop_EIF_cond_exp_isfa_ista[0]/v" scale="1mV" timeScale="1ms"/>
+            <Line color="#ffaaaa" id="EIF_cond_alpha_isfa_ista_v" quantity="pop_EIF_cond_alpha_isfa_ista[0]/v" scale="1mV" timeScale="1ms"/>
         </Display>
         <Display id="display_2" timeScale="1ms" title="PyNN HH model run in LEMS" xmin="0" xmax="500" ymin="-100" ymax="100">
             <Line color="#8c6400" id="HH_cond_exp_v" quantity="pop_HH_cond_exp[0]/v" scale="1mV" timeScale="1ms"/>

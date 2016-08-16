@@ -230,6 +230,8 @@
         <Parameter name="i_offset" dimension="none"/>
 
         <Parameter name="tau_refrac" dimension="none"/>
+            
+        <DerivedParameter name="eif_threshold" dimension="none" value="v_spike * H(delta_T-1e-12) + v_thresh * H(-1*delta_T+1e-9)"/>
 
         <Attachments name="synapses" type="baseSynapse"/> <!-- Note, any NeuroML2 synapse producing a current can be used-->
 
@@ -242,6 +244,11 @@
             <StateVariable name="lastSpikeTime" dimension="time"/>
 
             <DerivedVariable name="iSyn" dimension="current" exposure="iSyn" select="synapses[*]/i" reduce="add" />
+
+            <ConditionalDerivedVariable name="delta_I" dimension="none">
+                <Case condition="delta_T .gt. 0" value="delta_T * exp(((v / MVOLT) - v_thresh) / delta_T)"/>
+                <Case condition="delta_T .eq. 0" value="0"/>
+            </ConditionalDerivedVariable>
 
             <OnStart>
                 <StateAssignment variable="v" value="v_init * MVOLT"/>
@@ -266,10 +273,10 @@
 
             <Regime name="integrating" initial="true">
 
-                <TimeDerivative variable="v" value="(MVOLT * ((-1 * ((v / MVOLT) - v_rest) + delta_T * exp(((v / MVOLT) - v_thresh) / delta_T)) / tau_m + (i_offset - w) / cm) / MSEC) + (iSyn / (cm * NFARAD))"/>
+                <TimeDerivative variable="v" value="(MVOLT * ((-1 * ((v / MVOLT) - v_rest) + delta_I) / tau_m + (i_offset - w) / cm) / MSEC) + (iSyn / (cm * NFARAD))"/>
                 <TimeDerivative variable="w" value="(1 / tau_w) * (a * ((v / MVOLT) - v_rest) - w) / MSEC"/>
 
-                <OnCondition test="v .gt. v_spike * MVOLT">
+                <OnCondition test="v .gt. eif_threshold * MVOLT">
                     <EventOut port="spike"/>
                     <Transition regime="refractory" />
                 </OnCondition>
@@ -296,6 +303,8 @@
         <Parameter name="i_offset" dimension="none"/>
 
         <Parameter name="tau_refrac" dimension="none"/>
+            
+        <DerivedParameter name="eif_threshold" dimension="none" value="v_spike * H(delta_T-1e-12) + v_thresh * H(-1*delta_T+1e-9)"/>
 
         <Attachments name="synapses" type="baseSynapse"/> <!-- Note, any NeuroML2 synapse producing a current can be used-->
 
@@ -308,6 +317,12 @@
             <StateVariable name="lastSpikeTime" dimension="time"/>
 
             <DerivedVariable name="iSyn" dimension="current" exposure="iSyn" select="synapses[*]/i" reduce="add" />
+
+        
+            <ConditionalDerivedVariable name="delta_I" dimension="none">
+                <Case condition="delta_T .gt. 0" value="delta_T * exp(((v / MVOLT) - v_thresh) / delta_T)"/>
+                <Case condition="delta_T .eq. 0" value="0"/>
+            </ConditionalDerivedVariable>
 
             <OnStart>
                 <StateAssignment variable="v" value="v_init * MVOLT"/>
@@ -331,11 +346,11 @@
 
 
             <Regime name="integrating" initial="true">
-
-                <TimeDerivative variable="v" value="(MVOLT * ((-1 * ( (v / MVOLT) - v_rest) + delta_T * exp(((v / MVOLT) - v_thresh) / delta_T)) / tau_m + (i_offset - w) / cm) / MSEC) + (iSyn / (cm * NFARAD))"/>
+   
+                <TimeDerivative variable="v" value="(MVOLT * ((-1 * ( (v / MVOLT) - v_rest) + delta_I) / tau_m + (i_offset - w) / cm) / MSEC) + (iSyn / (cm * NFARAD))"/>
                 <TimeDerivative variable="w" value="(1/ tau_w) * (a*((v/MVOLT)-v_rest) - w) /MSEC"/>
 
-                <OnCondition test="v .gt. v_spike * MVOLT">
+                <OnCondition test="v .gt. eif_threshold * MVOLT">
                     <EventOut port="spike"/>
                     <Transition regime="refractory" />
                 </OnCondition>

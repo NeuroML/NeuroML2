@@ -84,7 +84,7 @@ experiments:
           scaling: [1000, 1000]
         spike detection: 
           method: threshold
-          threshold: -64
+          threshold: -61.5
         tolerance: 0.000
   pop_post_3:
     observables:
@@ -95,7 +95,7 @@ experiments:
           scaling: [1000, 1000]
         spike detection: 
           method: threshold
-          threshold: -64
+          threshold: -60.3
         tolerance: 0.000
 
 
