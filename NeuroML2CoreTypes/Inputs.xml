@@ -252,7 +252,8 @@
                 <StateAssignment variable="tsince" value="0"/>
                 <StateAssignment variable="nextIsi" value="- averageIsi * log(1 - random(1))"/>
                 <!--
-                Check to see whether current time + next ISI is greater than delay+duration and if so set is to a long time in future...
+                Check to see whether current time + next ISI is greater than delay+duration and if so set it to a long time in the future...
+                The use of H() is necessary here (as opposed to checking this in the test of OnCondition) since NEURON requires a single boolean expression in test above
                 -->
                 <StateAssignment variable="isi" value="nextIsi + H(((t+nextIsi) - (delay+duration))/duration)*LONG_TIME"/>
                 <EventOut port="spike"/>
