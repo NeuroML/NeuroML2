@@ -33,10 +33,10 @@
         e_rev_Na="50.0" e_rev_leak="-65.0" g_leak="0.01" gbar_K="6.0" gbar_Na="20.0" i_offset="0.2" tau_syn_E="0.2"
         tau_syn_I="2.0" v_init="-65" v_offset="-63.0"/>
     
-    <expCondSynapse id="ps1" tau_syn="5" e_rev="0"/>
-    <alphaCondSynapse id="ps2" tau_syn="5" e_rev="0"/>
-    <expCurrSynapse id="ps3" tau_syn="5"/>
-    <alphaCurrSynapse id="ps4" tau_syn="5"/>
+    <expCondSynapse id="syn1" tau_syn="5" e_rev="0"/>
+    <alphaCondSynapse id="syn2" tau_syn="5" e_rev="0"/>
+    <expCurrSynapse id="syn3" tau_syn="5"/>
+    <alphaCurrSynapse id="syn4" tau_syn="5"/>
    
     <SpikeSourcePoisson id="spikes1" start="50ms" duration="400ms" rate="50Hz"/>
     <SpikeSourcePoisson id="spikes2" start="50ms" duration="300ms" rate="80Hz"/>
@@ -57,19 +57,19 @@
         <population component="spikes1" id="pop_spikes1" size="1"/>
         <population component="spikes2" id="pop_spikes2" size="1"/>
        
-        <projection id="proj0" presynapticPopulation="pop_EIF_cond_exp_isfa_ista" postsynapticPopulation="pop_target" synapse="ps1">
+        <projection id="proj0" presynapticPopulation="pop_EIF_cond_exp_isfa_ista" postsynapticPopulation="pop_target" synapse="syn1">
             <connectionWD id="0" preCellId="../pop_EIF_cond_exp_isfa_ista[0]" postCellId="../pop_target[0]" weight="0.01" delay="10ms"/>
         </projection>
         
-        <projection id="proj1" presynapticPopulation="pop_EIF_cond_alpha_isfa_ista" postsynapticPopulation="pop_target" synapse="ps2">
+        <projection id="proj1" presynapticPopulation="pop_EIF_cond_alpha_isfa_ista" postsynapticPopulation="pop_target" synapse="syn2">
             <connectionWD id="0" preCellId="../pop_EIF_cond_alpha_isfa_ista[0]" postCellId="../pop_target[1]" weight="0.005" delay="20ms"/>
         </projection>
         
-        <projection id="proj2" presynapticPopulation="pop_IF_curr_alpha" postsynapticPopulation="pop_target" synapse="ps3">
+        <projection id="proj2" presynapticPopulation="pop_IF_curr_alpha" postsynapticPopulation="pop_target" synapse="syn3">
             <connectionWD id="0" preCellId="../pop_IF_curr_alpha[0]" postCellId="../pop_target[2]" weight="1" delay="30ms"/>
         </projection>
         
-        <projection id="proj3" presynapticPopulation="pop_IF_cond_exp" postsynapticPopulation="pop_target" synapse="ps4">
+        <projection id="proj3" presynapticPopulation="pop_IF_cond_exp" postsynapticPopulation="pop_target" synapse="syn4">
             <connectionWD id="0" preCellId="../pop_IF_cond_exp[0]" postCellId="../pop_target[3]" weight="0.5" delay="40ms"/>
         </projection>
         
