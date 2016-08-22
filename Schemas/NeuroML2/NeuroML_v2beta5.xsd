@@ -374,9 +374,9 @@
 
     <xs:simpleType name="ZeroToOne">
         <xs:annotation>
-            <xs:documentation>Double restricted to between 1 and 0</xs:documentation>
+            <xs:documentation>Float value restricted to between 1 and 0</xs:documentation>
         </xs:annotation>
-        <xs:restriction base="xs:double">
+        <xs:restriction base="xs:float">
             <xs:minInclusive value="0"/>
             <xs:maxInclusive value="1"/>
         </xs:restriction>
@@ -2820,11 +2820,11 @@
 
         <xs:complexContent>
             <xs:extension base="BaseCell">
-                <xs:attribute name="cm" type="xs:double" use="required"/>
-                <xs:attribute name="i_offset" type="xs:double" use="required"/>
-                <xs:attribute name="tau_syn_E" type="xs:double" use="required"/>
-                <xs:attribute name="tau_syn_I" type="xs:double" use="required"/>
-                <xs:attribute name="v_init" type="xs:double" use="required"/>
+                <xs:attribute name="cm" type="xs:float" use="required"/>
+                <xs:attribute name="i_offset" type="xs:float" use="required"/>
+                <xs:attribute name="tau_syn_E" type="xs:float" use="required"/>
+                <xs:attribute name="tau_syn_I" type="xs:float" use="required"/>
+                <xs:attribute name="v_init" type="xs:float" use="required"/>
             </xs:extension>
         </xs:complexContent>
 
@@ -2834,11 +2834,11 @@
 
         <xs:complexContent>
             <xs:extension base="basePyNNCell">
-                <xs:attribute name="tau_m" type="xs:double" use="required"/>
-                <xs:attribute name="tau_refrac" type="xs:double" use="required"/>
-                <xs:attribute name="v_reset" type="xs:double" use="required"/>
-                <xs:attribute name="v_rest" type="xs:double" use="required"/>
-                <xs:attribute name="v_thresh" type="xs:double" use="required"/>
+                <xs:attribute name="tau_m" type="xs:float" use="required"/>
+                <xs:attribute name="tau_refrac" type="xs:float" use="required"/>
+                <xs:attribute name="v_reset" type="xs:float" use="required"/>
+                <xs:attribute name="v_rest" type="xs:float" use="required"/>
+                <xs:attribute name="v_thresh" type="xs:float" use="required"/>
             </xs:extension>
         </xs:complexContent>
 
@@ -2848,8 +2848,8 @@
 
         <xs:complexContent>
             <xs:extension base="basePyNNIaFCell">
-                <xs:attribute name="e_rev_E" type="xs:double" use="required"/>
-                <xs:attribute name="e_rev_I" type="xs:double" use="required"/>
+                <xs:attribute name="e_rev_E" type="xs:float" use="required"/>
+                <xs:attribute name="e_rev_I" type="xs:float" use="required"/>
             </xs:extension>
         </xs:complexContent>
 
@@ -2897,11 +2897,11 @@
 
         <xs:complexContent>
             <xs:extension base="basePyNNIaFCondCell">
-                <xs:attribute name="a" type="xs:double" use="required"/>
-                <xs:attribute name="b" type="xs:double" use="required"/>
-                <xs:attribute name="delta_T" type="xs:double" use="required"/>
-                <xs:attribute name="tau_w" type="xs:double" use="required"/>
-                <xs:attribute name="v_spike" type="xs:double" use="required"/>
+                <xs:attribute name="a" type="xs:float" use="required"/>
+                <xs:attribute name="b" type="xs:float" use="required"/>
+                <xs:attribute name="delta_T" type="xs:float" use="required"/>
+                <xs:attribute name="tau_w" type="xs:float" use="required"/>
+                <xs:attribute name="v_spike" type="xs:float" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2909,12 +2909,7 @@
     <xs:complexType name="EIF_cond_alpha_isfa_ista">
 
         <xs:complexContent>
-            <xs:extension base="basePyNNIaFCondCell">
-                <xs:attribute name="a" type="xs:double" use="required"/>
-                <xs:attribute name="b" type="xs:double" use="required"/>
-                <xs:attribute name="delta_T" type="xs:double" use="required"/>
-                <xs:attribute name="tau_w" type="xs:double" use="required"/>
-                <xs:attribute name="v_spike" type="xs:double" use="required"/>
+            <xs:extension base="EIF_cond_exp_isfa_ista">
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2924,15 +2919,15 @@
 
         <xs:complexContent>
             <xs:extension base="basePyNNCell">
-                <xs:attribute name="v_offset" type="xs:double" use="required"/>
-                <xs:attribute name="e_rev_E" type="xs:double" use="required"/>
-                <xs:attribute name="e_rev_I" type="xs:double" use="required"/>
-                <xs:attribute name="e_rev_K" type="xs:double" use="required"/>
-                <xs:attribute name="e_rev_Na" type="xs:double" use="required"/>
-                <xs:attribute name="e_rev_leak" type="xs:double" use="required"/>
-                <xs:attribute name="g_leak" type="xs:double" use="required"/>
-                <xs:attribute name="gbar_K" type="xs:double" use="required"/>
-                <xs:attribute name="gbar_Na" type="xs:double" use="required"/>
+                <xs:attribute name="v_offset" type="xs:float" use="required"/>
+                <xs:attribute name="e_rev_E" type="xs:float" use="required"/>
+                <xs:attribute name="e_rev_I" type="xs:float" use="required"/>
+                <xs:attribute name="e_rev_K" type="xs:float" use="required"/>
+                <xs:attribute name="e_rev_Na" type="xs:float" use="required"/>
+                <xs:attribute name="e_rev_leak" type="xs:float" use="required"/>
+                <xs:attribute name="g_leak" type="xs:float" use="required"/>
+                <xs:attribute name="gbar_K" type="xs:float" use="required"/>
+                <xs:attribute name="gbar_Na" type="xs:float" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2942,7 +2937,7 @@
 
         <xs:complexContent>
             <xs:extension base="BaseSynapse">
-                <xs:attribute name="tau_syn" type="xs:double" use="required"/>
+                <xs:attribute name="tau_syn" type="xs:float" use="required"/>
             </xs:extension>
         </xs:complexContent>
 
@@ -2952,7 +2947,7 @@
 
         <xs:complexContent>
             <xs:extension base="BasePynnSynapse">
-                <xs:attribute name="e_rev" type="xs:double" use="required"/>
+                <xs:attribute name="e_rev" type="xs:float" use="required"/>
             </xs:extension>
         </xs:complexContent>
 
@@ -2962,7 +2957,7 @@
 
         <xs:complexContent>
             <xs:extension base="BasePynnSynapse">
-                <xs:attribute name="e_rev" type="xs:double" use="required"/>
+                <xs:attribute name="e_rev" type="xs:float" use="required"/>
             </xs:extension>
         </xs:complexContent>
 
