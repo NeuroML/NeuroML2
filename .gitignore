@@ -53,5 +53,9 @@ LEMSexamples/*.dll
 docs/*.html
 
 examples/NeuroML2_To_HTML/*.html
+examples/*.png
+examples/*.svg
+examples/*.pov
+
 /Schemas/NeuroML2/NeuroML_v2beta4.xsd_conns
 /LEMSexamples/NET_*.net.nml
