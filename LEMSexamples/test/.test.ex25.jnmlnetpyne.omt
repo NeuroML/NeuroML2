@@ -1,7 +1,7 @@
 # Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
  
 target: ../LEMS_NML2_Ex25_MultiComp.xml 
-engine: jNeuroML_NEURON
+engine: jNeuroML_NetPyNE
 mep: .test.ex25.mep
 experiments:
   c0_0:

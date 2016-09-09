@@ -62,17 +62,18 @@
             </segmentGroup>
             
             <segmentGroup id="dendSec2" neuroLexId="sao864921383">   
+                <property tag="numberInternalDivisions" value="9"/>
                 <member segment="2"/>
                 <member segment="3"/>
             </segmentGroup>
             
             <segmentGroup id="soma_group"> 
-                <member segment="0"/>
+                <include segmentGroup="soma"/>
             </segmentGroup>
 
            <segmentGroup id="dendrite_group">  
-                <member segment="1"/>
-                <member segment="2"/>
+                <include segmentGroup="dendSec1"/>
+                <include segmentGroup="dendSec2"/>
             </segmentGroup>
 
         </morphology>
@@ -116,7 +117,6 @@
         </population>
 
         <projection id="projAMPA" presynapticPopulation="pop0" postsynapticPopulation="pop0" synapse="AMPA">
-            <!--TODO: Fix! want to use preCellId="0" etc. -->
             <connection id="0" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="0" postFractionAlong="0.5"/>
             <connection id="1" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="3" postFractionAlong="0.3"/>
             
@@ -126,7 +126,6 @@
         </projection>
 
         <projection id="projNMDA" presynapticPopulation="pop0" postsynapticPopulation="pop0" synapse="NMDA">
-            <!--TODO: Fix! want to use preCellId="0" etc. -->
             <connection id="0" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="0" postFractionAlong="0.5"/>
             <connection id="1" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="3" postFractionAlong="0.5"/>
             
@@ -138,7 +137,7 @@
         <inputList id="stimInput1" component="pulseGen2" population="pop0">
             <input id="0" target="../pop0/0/MultiCompCell" segmentId="0" fractionAlong="0.5" destination="synapses"/>
         </inputList>
-        
+
         <inputList id="stimInput2" component="pulseGen3" population="pop0">
             <input id="1" target="../pop0/2/MultiCompCell" segmentId="0" fractionAlong="0.5" destination="synapses"/>
         </inputList>
