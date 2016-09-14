@@ -31,7 +31,8 @@ install:
 
 script:
     - jnml -v
+    - cd $TRAVIS_BUILD_DIR/NeuroML2/LEMSexamples
     - pwd
-    - cd NeuroML2/LEMSexamples
+    - ls -alt
     - omv all -V
     
