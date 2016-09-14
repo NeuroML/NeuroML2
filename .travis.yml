@@ -31,5 +31,7 @@ install:
 
 script:
     - jnml -v
+    - pwd
+    - cd NeuroML2/LEMSexamples
     - omv all -V
     
