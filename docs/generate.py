@@ -34,6 +34,9 @@ bioportal_url = "http://bioportal.bioontology.org/ontologies/46856/?p=terms&conc
 
 nml_src = "../NeuroML2CoreTypes"
 
+IF="IF"
+THEN="THEN"
+
 def category(name, rows=1, type="label-info"):
     return ("  <td width=\"%s\" rowspan='%i'>\n"+ \
            "    <span class=\"label %s\">%s</span>\n"+ \
@@ -56,6 +59,7 @@ def format_expression(expr):
     expr2 = expr2.replace(".leq.", "&lt;=")
     expr2 = expr2.replace(".and.", "AND")
     expr2 = expr2.replace(".eq.", "=")
+    expr2 = expr2.replace(".neq.", "!=")
 
     return expr2
 
@@ -616,7 +620,7 @@ for file in files:
                             
                             oc = eh
                             test = format_expression(oc.test)
-                            oc_content += spacer4+"<i>IF</i> "+test+" <i>THEN</i><br/>\n"
+                            oc_content += spacer4+IF+" "+test+" "+THEN+"<br/>\n"
                             
                             for ac in oc.actions:
                                 if isinstance(ac, StateAssignment):
@@ -660,9 +664,11 @@ for file in files:
                     for cdv in dynamics.conditional_derived_variables:
                         for case in cdv.cases:
                             res = case.value
-                            cond = "<i>IF</i> "+case.condition+" <i>THEN</i><br/>"+spacer4+spacer4 if case.condition else "OTHERWISE<br/>"+spacer4+spacer4
+                            cond = IF+" "+format_expression(case.condition)+" "+THEN+"<br/>"+spacer4+spacer4 if case.condition else "OTHERWISE<br/>"+spacer4+spacer4
                             contents += spacer4+cond+"<b>"+cdv.name+"</b> = "+res+spacer4+exposed_as(cdv.exposure)+"<br/>\n"
                             
+                        contents += "<br/>\n"
+                        
                     if len(dynamics.conditional_derived_variables) > 0: contents += "<br/>\n"
                 
 
@@ -696,7 +702,7 @@ for file in files:
 
                                 oc = eh
                                 test = format_expression(oc.test)
-                                oc_content += spacer8+spacer4+"<i>IF</i> "+test+" <i>THEN</i><br/>\n"
+                                oc_content += spacer8+spacer4+IF+" "+test+" "+THEN+"<br/>\n"
 
                                 for ac in oc.actions:
                                     if isinstance(ac, StateAssignment):
