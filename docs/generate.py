@@ -616,7 +616,7 @@ for file in files:
                             
                             oc = eh
                             test = format_expression(oc.test)
-                            oc_content += spacer4+"IF "+test+" THEN<br/>\n"
+                            oc_content += spacer4+"<i>IF</i> "+test+" <i>THEN</i><br/>\n"
                             
                             for ac in oc.actions:
                                 if isinstance(ac, StateAssignment):
@@ -654,6 +654,16 @@ for file in files:
                                 res=res+" (reduce method: "+dv.reduce+")"
                         contents += spacer4+"<b>"+dv.name+"</b> = "+res+spacer4+exposed_as(dv.exposure)+"<br/>\n"
                     if len(dynamics.derived_variables) > 0: contents += "<br/>\n"
+
+                if len(dynamics.conditional_derived_variables) > 0:
+                    contents += "<span class=\"label\">Conditional Derived Variables</span><br/><br/>\n"
+                    for cdv in dynamics.conditional_derived_variables:
+                        for case in cdv.cases:
+                            res = case.value
+                            cond = "<i>IF</i> "+case.condition+" <i>THEN</i><br/>"+spacer4+spacer4 if case.condition else "OTHERWISE<br/>"+spacer4+spacer4
+                            contents += spacer4+cond+"<b>"+cdv.name+"</b> = "+res+spacer4+exposed_as(cdv.exposure)+"<br/>\n"
+                            
+                    if len(dynamics.conditional_derived_variables) > 0: contents += "<br/>\n"
                 
 
                 if len(dynamics.time_derivatives) > 0:
@@ -686,7 +696,7 @@ for file in files:
 
                                 oc = eh
                                 test = format_expression(oc.test)
-                                oc_content += spacer8+spacer4+"IF "+test+" THEN<br/>\n"
+                                oc_content += spacer8+spacer4+"<i>IF</i> "+test+" <i>THEN</i><br/>\n"
 
                                 for ac in oc.actions:
                                     if isinstance(ac, StateAssignment):
