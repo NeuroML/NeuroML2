@@ -2703,6 +2703,7 @@
                 <xs:sequence>
                     <xs:element name="electricalConnection" type="ElectricalConnection" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="electricalConnectionInstance" type="ElectricalConnectionInstance" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="electricalConnectionInstanceW" type="ElectricalConnectionInstanceW" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
                 <xs:attribute name="presynapticPopulation" type="NmlId" use="required"/>
                 <xs:attribute name="postsynapticPopulation" type="NmlId" use="required"/>
@@ -2731,6 +2732,17 @@
             <xs:extension base="ElectricalConnection"/>
         </xs:complexContent>
     </xs:complexType>
+    
+    <xs:complexType name="ElectricalConnectionInstanceW">
+        <xs:annotation>
+            <xs:documentation>Projection between two populations consisting of analog connections (e.g. graded synapses). Includes setting of weight for the connection</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ElectricalConnectionInstance">
+                <xs:attribute name="weight" type="xs:float" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
 
     <xs:complexType name="ContinuousProjection">
@@ -2742,6 +2754,7 @@
                 <xs:sequence>
                     <xs:element name="continuousConnection" type="ContinuousConnection" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="continuousConnectionInstance" type="ContinuousConnectionInstance" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="continuousConnectionInstanceW" type="ContinuousConnectionInstanceW" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
                 <xs:attribute name="presynapticPopulation" type="NmlId" use="required"/>
                 <xs:attribute name="postsynapticPopulation" type="NmlId" use="required"/>
@@ -2773,6 +2786,18 @@
     </xs:complexType>
 
 
+    <xs:complexType name="ContinuousConnectionInstanceW">
+        <xs:annotation>
+            <xs:documentation>Individual continuous/analog synaptic connection - instance based. Includes setting of _weight for the connection</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ContinuousConnectionInstance">
+                <xs:attribute name="weight" type="xs:float" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
     <xs:complexType name="ExplicitInput">
         <xs:annotation>
             <xs:documentation>Single explicit input. Introduced to test inputs in LEMS. Will probably be removed in favour of
@@ -2786,12 +2811,13 @@
 
     <xs:complexType name="InputList">
         <xs:annotation>
-            <xs:documentation>Subject to change as it gets tested with LEMS</xs:documentation>
+            <xs:documentation>List of inputs to a population. Currents will be provided by the specified component.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="Base">
                 <xs:sequence>
-                    <xs:element name="input" type="Input" minOccurs="1" maxOccurs="unbounded"/>
+                    <xs:element name="input" type="Input" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="inputW" type="InputW" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
                 <xs:attribute name="population" type="NmlId" use="required"/>
                 <xs:attribute name="component" type="NmlId" use="required"/>
@@ -2799,15 +2825,28 @@
         </xs:complexContent>
     </xs:complexType>
 
+
     <xs:complexType name="Input">
         <xs:annotation>
-            <xs:documentation>Subject to change as it gets tested with LEMS</xs:documentation>
+            <xs:documentation>Individual input to the cell specified by target</xs:documentation>
         </xs:annotation>
         <xs:attribute name="id" type="NonNegativeInteger" use="required"/>
         <xs:attribute name="target" type="xs:string" use="required"/>
         <xs:attribute name="destination" type="NmlId" use="required"/>
         <xs:attribute name="segmentId" type="NonNegativeInteger"/>
         <xs:attribute name="fractionAlong" type="ZeroToOne"/>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="InputW">
+        <xs:annotation>
+            <xs:documentation>Individual input to the cell specified by target. Includes setting of _weight for the connection</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="Input">
+                <xs:attribute name="weight" type="xs:float" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
 

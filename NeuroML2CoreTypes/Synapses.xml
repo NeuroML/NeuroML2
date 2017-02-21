@@ -491,6 +491,8 @@
                    extends="baseGradedSynapse"
                    description="Dummy synapse which emits no current. Used as presynaptic endpoint for analog synaptic connection.">
         
+        <Property name="weight" dimension="none" defaultValue="1"/> <!-- Not used...-->
+    
         <Exposure name="i" dimension="current"/>
         
         <Requirement name="v" dimension="voltage"/>
