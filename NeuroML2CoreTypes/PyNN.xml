@@ -578,19 +578,20 @@
             <TimeDerivative variable="tsince" value="1"/>
 
             <OnStart>
-                <StateAssignment variable="nextSpike" value="start + exp(-1 * random(1))/rate"/>
+                <StateAssignment variable="nextSpike" value="start - log(1 - random(1))/rate"/>
                 <StateAssignment variable="tsince" value="0"/>
             </OnStart>
 
 
             <OnCondition test="tsince .gt. nextSpike">
-                <StateAssignment variable="nextSpikeTemp" value="exp(-1 * random(1))/rate"/>
+                <StateAssignment variable="nextSpikeTemp" value="-1 * log(1 - random(1))/rate"/>
                 <!--
                 Check to see whether current time + nextSpikeTemp is greater than start+duration and if so set it to a long time in the future...
                 The use of H() is necessary here (as opposed to checking this in the test of OnCondition) since NEURON requires a single boolean expression in test above
                 -->
                 <StateAssignment variable="nextSpike" value="nextSpikeTemp + H(((t+nextSpikeTemp) - (start+duration))/duration)*LONG_TIME"/>
                 <StateAssignment variable="tsince" value="0"/>
+                <!--<StateAssignment variable="spiking" value="1"/>-->
                 <EventOut port="spike"/>
             </OnCondition>
 
