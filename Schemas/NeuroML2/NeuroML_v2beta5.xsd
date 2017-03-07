@@ -2047,7 +2047,7 @@
                 <xs:attribute name="ion" type="NmlId" use="optional">
                     <xs:annotation>
                         <xs:documentation>Specifying the ion here again is redundant, the ion name should be the same as id. Kept for now
-                        until LEMS implementation can select by id. TODO: remove.
+                            until LEMS implementation can select by id. TODO: remove.
                         </xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
@@ -2260,9 +2260,9 @@
                     <xs:element name="pulseGenerator" type="PulseGenerator"
                                 minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="sineGenerator" type="SineGenerator"
-                        minOccurs="0" maxOccurs="unbounded"/>
+                                minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="rampGenerator" type="RampGenerator"
-                        minOccurs="0" maxOccurs="unbounded"/>
+                                minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -2276,9 +2276,9 @@
                     <xs:element name="pulseGeneratorDL" type="PulseGeneratorDL"
                                 minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="sineGeneratorDL" type="SineGeneratorDL"
-                        minOccurs="0" maxOccurs="unbounded"/>
+                                minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="rampGeneratorDL" type="RampGeneratorDL"
-                        minOccurs="0" maxOccurs="unbounded"/>
+                                minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -2385,7 +2385,7 @@
         </xs:complexContent>
     </xs:complexType>
 
-   <xs:complexType name="TransientPoissonFiringSynapse">
+    <xs:complexType name="TransientPoissonFiringSynapse">
         <xs:complexContent>
             <xs:extension base="Standalone">
                 <xs:attribute name="averageRate" type="Nml2Quantity_pertime"
