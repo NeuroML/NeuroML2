@@ -18,9 +18,9 @@
     <rampGenerator id="rg0" delay="50ms" duration="200ms" startAmplitude="0.5nA" finishAmplitude="4nA" baselineAmplitude="0nA"/>
     
     <compoundInput id="ci0">
-        <pulseGenerator id="pg1" delay="50ms" duration="200ms" amplitude="1 nA" />
-        <pulseGenerator id="pg2" delay="100ms" duration="100ms" amplitude="1 nA" />
-        <sineGenerator id="sg0" phase="0" delay="125ms" duration="50ms" amplitude="1nA" period="25ms"/>
+        <pulseGenerator id="pg1" delay="50ms" duration="200ms" amplitude=".8 nA" />
+        <pulseGenerator id="pg2" delay="100ms" duration="100ms" amplitude=".4 nA" />
+        <sineGenerator id="sg0" phase="0" delay="125ms" duration="50ms" amplitude=".4nA" period="25ms"/>
     </compoundInput>
 
     <voltageClamp id="vClamp0" delay="50ms" duration="200ms"

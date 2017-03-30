@@ -54,7 +54,7 @@
         <!-- End of NeuroML2 content -->
         
 
-<Simulation id="sim1" length="300ms" step="0.01ms" target="net1" seed="123"> <!-- Note seed: ensures same random numbers used every run -->
+<Simulation id="sim1" length="300ms" step="0.001ms" target="net1" seed="123"> <!-- Note seed: ensures same random numbers used every run -->
 
     <Display id="d0" title="Ex16: Izhikevich cell, current clamp input" timeScale="1ms" xmin="-20" xmax="320" ymin="-80" ymax="45">
         <Line id ="izh0 v (mV)" quantity="izhPop[0]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
@@ -74,6 +74,11 @@
     <Display id="d3" title="Ex16: Izhikevich cell, voltage clamp" timeScale="1ms" xmin="-20" xmax="320" ymin="-70" ymax="120">
         <Line id ="izh3 v (mV)" quantity="izhPop[3]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
         <Line id ="voltage clamp i (pA)" quantity="izhPop[3]/vClamp0/i" scale="1pA"  color="#333333" timeScale="1ms"/>
+    </Display>
+    
+    <Display id="dx" title="Ex16: Izhikevich cell, compound input" timeScale="1ms" xmin="-20" xmax="320" ymin="-70" ymax="120">
+        <Line id ="izh3 v (mV)" quantity="izhPop[9]/v" scale="1mV"  color="#ee40FF" timeScale="1ms"/>
+        <Line id ="compound clamp i (nA)" quantity="izhPop[9]/ci0/i" scale="1nA"  color="#333333" timeScale="1ms"/>
     </Display>
     
     <Display id="d40" title="Ex16: Izhikevich cell, spiking inputs, time since spikes" timeScale="1ms" xmin="-20" xmax="320" ymin="-5" ymax="45">
