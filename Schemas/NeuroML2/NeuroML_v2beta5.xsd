@@ -2606,18 +2606,28 @@
     </xs:complexType>
 
 
-    <xs:complexType name="Projection">
+    <xs:complexType name="BaseProjection">
         <xs:annotation>
-            <xs:documentation>Projection (set of synaptic connections) between two populations</xs:documentation>
+            <xs:documentation>Base for projection (set of synaptic connections) between two populations</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="Base">
+                <xs:attribute name="presynapticPopulation" type="NmlId" use="required"/>
+                <xs:attribute name="postsynapticPopulation" type="NmlId" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="Projection">
+        <xs:annotation>
+            <xs:documentation>Projection (set of synaptic connections) between two populations. Chemical/event based synaptic transmission</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="BaseProjection">
                 <xs:sequence>
                     <xs:element name="connection" type="Connection" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="connectionWD" type="ConnectionWD" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="presynapticPopulation" type="NmlId" use="required"/>
-                <xs:attribute name="postsynapticPopulation" type="NmlId" use="required"/>
                 <xs:attribute name="synapse" type="NmlId" use="required"/>
             </xs:extension>
         </xs:complexContent>
@@ -2699,14 +2709,12 @@
             <xs:documentation>Projection between two populations consisting of electrical connections (gap junctions)</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="Base">
+            <xs:extension base="BaseProjection">
                 <xs:sequence>
                     <xs:element name="electricalConnection" type="ElectricalConnection" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="electricalConnectionInstance" type="ElectricalConnectionInstance" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="electricalConnectionInstanceW" type="ElectricalConnectionInstanceW" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="presynapticPopulation" type="NmlId" use="required"/>
-                <xs:attribute name="postsynapticPopulation" type="NmlId" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2750,14 +2758,12 @@
             <xs:documentation>Projection between two populations consisting of analog connections (e.g. graded synapses)</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="Base">
+            <xs:extension base="BaseProjection">
                 <xs:sequence>
                     <xs:element name="continuousConnection" type="ContinuousConnection" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="continuousConnectionInstance" type="ContinuousConnectionInstance" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="continuousConnectionInstanceW" type="ContinuousConnectionInstanceW" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="presynapticPopulation" type="NmlId" use="required"/>
-                <xs:attribute name="postsynapticPopulation" type="NmlId" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
