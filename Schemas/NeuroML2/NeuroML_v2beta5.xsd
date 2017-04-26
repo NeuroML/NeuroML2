@@ -238,6 +238,16 @@
             <xs:minExclusive value="0"/>
         </xs:restriction>
     </xs:simpleType>
+    
+    <xs:simpleType name="ZeroOrOne">
+        <xs:annotation>
+            <xs:documentation>Value which is either 0 or 1</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:double">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
 
     <!--NOTE: Base and Standalone definitions moved to end of file, as some XML language binding
         generators, e.g. generateDS.py, require superclasses to be defined after the subclasses... -->
@@ -563,6 +573,8 @@
             <xs:element name="compoundInputDL" type="CompoundInputDL"
                     minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="voltageClamp" type="VoltageClamp"
+                    minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="voltageClampTriple" type="VoltageClampTriple"
                     minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="spikeArray" type="SpikeArray" minOccurs="0"
                     maxOccurs="unbounded"/>
@@ -2318,6 +2330,32 @@
                 <xs:attribute name="duration" type="Nml2Quantity_time"
                               use="required"/>
                 <xs:attribute name="targetVoltage"
+                              type="Nml2Quantity_voltage"
+                              use="required"/>
+                <xs:attribute name="simpleSeriesResistance"
+                              type="Nml2Quantity_resistance"
+                              use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <xs:complexType name="VoltageClampTriple">
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+                <xs:attribute name="active" type="ZeroOrOne"
+                              use="required"/>
+                <xs:attribute name="delay" type="Nml2Quantity_time"
+                              use="required"/>
+                <xs:attribute name="duration" type="Nml2Quantity_time"
+                              use="required"/>
+                <xs:attribute name="conditioningVoltage"
+                              type="Nml2Quantity_voltage"
+                              use="required"/>
+                <xs:attribute name="testingVoltage"
+                              type="Nml2Quantity_voltage"
+                              use="required"/>
+                <xs:attribute name="returnVoltage"
                               type="Nml2Quantity_voltage"
                               use="required"/>
                 <xs:attribute name="simpleSeriesResistance"

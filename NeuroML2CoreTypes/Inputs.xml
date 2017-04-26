@@ -587,7 +587,7 @@
 
 
     <ComponentType name="voltageClamp" extends="baseVoltageDepPointCurrent"
-                   description="Voltage clamp. Applies a variable current _i to try to keep parent at _targetVoltage. Not yet fully tested!!!">
+                   description="Voltage clamp. Applies a variable current _i to try to keep parent at _targetVoltage. Not yet fully tested!!! Consider using voltageClampTriple!!">
 
         <Property name="weight" dimension="none" defaultValue="1"/> 
         
@@ -621,6 +621,49 @@
 
             <OnCondition test="t .gt. duration + delay">
                 <StateAssignment variable="i" value="0"/>
+            </OnCondition>
+
+        </Dynamics>
+
+    </ComponentType>
+    
+    
+
+    <ComponentType name="voltageClampTriple" extends="baseVoltageDepPointCurrent"
+                   description="Voltage clamp with 3 clamp levels. Applies a variable current _i (through _simpleSeriesResistance) to try to keep parent cell at _conditioningVoltage until time _delay, _testingVoltage until _delay + _duration, and _returnVoltage afterwards. Only enabled if _active = 1. ">
+
+        <Parameter name="active" dimension="none" description="Whether the voltage clamp is active (1) or inactive (0)."/>
+        
+        <Parameter name="delay" dimension="time" description="Delay before switching from conditioningVoltage to testingVoltage."/>
+        <Parameter name="duration" dimension="time" description="Duration to hold at testingVoltage."/>
+        <Parameter name="conditioningVoltage" dimension="voltage" description="Target voltage before time delay"/>
+        <Parameter name="testingVoltage" dimension="voltage" description="Target voltage between times delay and delay + duration"/>
+        <Parameter name="returnVoltage" dimension="voltage" description="Target voltage after time duration"/>
+        
+        <Parameter name="simpleSeriesResistance" dimension="resistance" description="Current will be calculated by the difference in voltage between the target and parent, divided by this value"/>
+
+        <!--TODO: remove! Only required as EventConnection is used in explicitInput to
+        connect inputs to cells. Events aren't passed! ... -->
+        <EventPort name="in" direction="in" description="Note this is not used here. Will be removed in future"/>
+
+        <Dynamics>
+
+            <StateVariable name="i" exposure="i" dimension="current"/>
+
+            <OnEvent port="in"><!--TODO: remove, see above...
+            <StateAssignment variable="i" value="0"/>-->
+            </OnEvent>
+
+            <OnCondition test="active .eq. 1 .and. t .lt. delay">
+                <StateAssignment variable="i" value="(conditioningVoltage - v) / simpleSeriesResistance"/>
+            </OnCondition>
+
+            <OnCondition test="active .eq. 1 .and. t .geq. delay">
+                <StateAssignment variable="i" value="(testingVoltage - v) / simpleSeriesResistance"/>
+            </OnCondition>
+
+            <OnCondition test="active .eq. 1 .and. t .gt. duration + delay">
+                <StateAssignment variable="i" value="(returnVoltage - v) / simpleSeriesResistance"/>
             </OnCondition>
 
         </Dynamics>
