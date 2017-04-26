@@ -403,6 +403,49 @@
             </OnEvent>
         </Dynamics>
     </ComponentType>
+    
+
+    <ComponentType name="doubleSynapse"
+                   extends="baseVoltageDepSynapse"
+                   description="Synapse consisting of two independent synaptic mechanisms (e.g. AMPA-R and NMDA-R), which can be easily colocated in connections">
+       
+        <Property name="weight" dimension="none" defaultValue="1"/> 
+        
+        <ComponentReference name="synapse1" type="baseSynapse"/>
+        <ComponentReference name="synapse2" type="baseSynapse"/>
+        
+        <EventPort name="relay" direction="out" description="Used to relay incoming spikes to child mechanisms"/>
+        
+        <Path name="synapse1Path"/>
+        <Path name="synapse2Path"/>
+        
+        <Dynamics>
+            <StateVariable name="weightFactor" dimension="none"/>
+
+            <DerivedVariable name="i1" dimension="current" select="synapse1/i"/>
+            <DerivedVariable name="i2" dimension="current" select="synapse2/i"/>
+            <DerivedVariable name="i" exposure="i" dimension="current" value="weightFactor * (i1 + i2)"/>
+
+            <OnEvent port="in">
+                <StateAssignment variable="weightFactor" value="weight" />
+                <EventOut port="relay"/>
+            </OnEvent>
+            
+        </Dynamics>
+        
+        <Structure>
+            <ChildInstance component="synapse1"/>
+            <ChildInstance component="synapse2"/>
+            
+            <With instance="this" as="a"/>
+            <With instance="synapse1Path" as="b"/>
+            <With instance="synapse2Path" as="c"/>
+            
+            <EventConnection from="a" to="c"/>
+            <EventConnection from="a" to="b"/>
+        </Structure>
+        
+    </ComponentType>
 
 
 
