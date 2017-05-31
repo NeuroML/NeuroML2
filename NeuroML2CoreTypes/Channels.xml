@@ -580,8 +580,10 @@
     
 
     <ComponentType name="ionChannelKS" 
-                   extends="ionChannel"
+                   extends="baseIonChannel"
                    description="A kinetic scheme based ion channel with multiple _gateKS_s, each of which consists of multiple _KSState_s and _KSTransition_s giving the rates of transition between them">
+        
+        <Children name="conductanceScaling" type="baseConductanceScaling"/>
         <Children name="gates" type="gateKS"/>
     
         <Text name="species"/>

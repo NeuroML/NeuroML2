@@ -253,7 +253,7 @@
     <ComponentType name="electricalProjection"
                    description="A projection between _presynapticPopulation to another _postsynapticPopulation through gap junctions.">
         <Children name="connections" type="electricalConnection"/>
-        <Children name="connections" type="electricalConnectionInstance"/>
+        <Children name="connectionInstances" type="electricalConnectionInstance"/>
         <ComponentReference name="presynapticPopulation" type="population" local="true"/>
         <ComponentReference name="postsynapticPopulation" type="population" local="true"/>
     </ComponentType>
@@ -322,7 +322,7 @@
                    description="A projection between _presynapticPopulation and _postsynapticPopulation through components _preComponent at the start and _postComponent at the end of a _continuousConnection_ or _continuousConnectionInstance_. Can be used for analog synapses.">
         
         <Children name="connections" type="continuousConnection"/>
-        <Children name="connections" type="continuousConnectionInstance"/>
+        <Children name="connectionInstances" type="continuousConnectionInstance"/>
         
         <ComponentReference name="presynapticPopulation" type="population" local="true"/>
         <ComponentReference name="postsynapticPopulation" type="population" local="true"/>
