@@ -67,7 +67,7 @@
     <Simulation id="sim1" length="150ms" step="0.01ms" target="net1">
     
         <Display id="d1" title="Ex1: Simple HH example: Voltage" timeScale="1ms" xmin="0" xmax="150" ymin="-90" ymax="60">
-            <Line id="v" quantity="hhpop[0]/v" scale="1mV"  color="#ffffff" timeScale="1ms"/>
+            <Line id="v" quantity="hhpop[0]/v" scale="1mV"  color="#000000" timeScale="1ms"/>
         </Display>
         
         <Display id="d2" title="Ex1: Simple HH example: rate variables" timeScale="1ms" xmin="0" xmax="150" ymin="-0.1" ymax="1.1">
@@ -77,9 +77,6 @@
             <Line id="k_n" quantity="hhpop[0]/kChans/k/n/q" scale="1"  color="#0000ff" timeScale="1ms"/>
         </Display>
     
-        <Display id="d3" title="Ex1: Simple HH example: currents" timeScale="1ms" xmin="0" xmax="150" ymin="-0.01" ymax="0.1">
-            <Line id="i" quantity="hhpop[0]/pulseGen1/i" scale="1nA"  color="#000000" timeScale="1ms"/>
-        </Display>
     
         <OutputFile id="of0" fileName="results/hh_v.dat">
             <OutputColumn id="v" quantity="hhpop[0]/v"/> 
