@@ -47,6 +47,8 @@ install:
     - cd
     - pip install git+https://github.com/OpenSourceBrain/osb-model-validation
     
+    - pip install scipy # Why is this needed? Doesn't seem to get installed correctly on trusty with addons above...
+    
 
 script:
     - jnml -v
