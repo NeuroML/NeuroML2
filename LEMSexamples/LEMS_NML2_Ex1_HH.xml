@@ -46,7 +46,7 @@
     </ionChannelHH>
     
     
-    <pointCellCondBased id="hhcell" C="10pF"  v0="-65mV" thresh="20mV">
+    <pointCellCondBased id="hhpointcell" C="10pF"  v0="-65mV" thresh="20mV">
         <channelPopulation id="leak" ionChannel="passive" number="300" erev="-54.3mV"/>
         <channelPopulation id="naChans" ionChannel="na" number="120000" erev="50mV"/><!-- -->
         <channelPopulation id="kChans" ionChannel="k" number="36000" erev="-77mV"/>
@@ -56,7 +56,7 @@
   
     
     <network id="net1">
-        <population id="hhpop" component="hhcell" size="1"/>
+        <population id="hhpop" component="hhpointcell" size="1"/>
         <explicitInput target="hhpop[0]" input="pulseGen1" destination="synapses"/>
     </network>
     
