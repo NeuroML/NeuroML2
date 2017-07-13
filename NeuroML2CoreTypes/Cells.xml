@@ -1031,7 +1031,7 @@
         <Attachments name="synapses" type="basePointCurrent"/>
 
         <Exposure name="spiking" dimension="none"/>
-        <Exposure name="debugVal" dimension="none"/>
+        <!--<Exposure name="debugVal" dimension="none"/>-->
         <Exposure name="iChannels" dimension="current"/>
         <Exposure name="iSyn" dimension="current"/>
         <Exposure name="totSpecCap" dimension="specificCapacitance"/>
@@ -1047,12 +1047,12 @@
         <Dynamics>
             <StateVariable name="v" exposure="v" dimension="voltage"/>
             <StateVariable name="spiking" exposure="spiking" dimension="none"/>
-            <StateVariable name="debugVal" exposure="debugVal" dimension="none"/>
+            <!--<StateVariable name="debugVal" exposure="debugVal" dimension="none"/>-->
 
             <DerivedVariable name="initMembPot" dimension="voltage" select="biophysicalProperties/membraneProperties/initMembPotential/value"/>
             <DerivedVariable name="thresh" dimension="voltage" select="biophysicalProperties/membraneProperties/spikeThresh/value"/>
 
-            <DerivedVariable name="debug" dimension="none" value="0"/>
+            <!--<DerivedVariable name="debug" dimension="none" value="0"/>-->
             
             <!--TODO replace this with just using first segment!!-->
             <DerivedVariable name="surfaceArea" exposure="surfaceArea" dimension="area" select="morphology/segments[*]/surfaceArea" reduce="add"/>
@@ -1083,9 +1083,9 @@
                 <StateAssignment variable="spiking" value="0"/>
             </OnCondition>
 
-            <OnCondition test="t .geq. 0">
+            <!--<OnCondition test="t .geq. 0">
                 <StateAssignment variable="debugVal" value="debug"/>
-            </OnCondition>
+            </OnCondition>-->
 
         </Dynamics>
 
@@ -1128,12 +1128,12 @@
         <Dynamics>
             <StateVariable name="v" exposure="v" dimension="voltage"/>
             <StateVariable name="spiking" exposure="spiking" dimension="none"/>
-            <StateVariable name="debugVal" exposure="debugVal" dimension="none"/>
+            <!--<StateVariable name="debugVal" exposure="debugVal" dimension="none"/>-->
 
             <DerivedVariable name="initMembPot" dimension="voltage" select="biophysicalProperties2CaPools/membraneProperties2CaPools/initMembPotential/value"/>
             <DerivedVariable name="thresh" dimension="voltage" select="biophysicalProperties2CaPools/membraneProperties2CaPools/spikeThresh/value"/>
 
-            <DerivedVariable name="debug" dimension="none" select="0"/>
+            <!--<DerivedVariable name="debug" dimension="none" select="0"/>-->
             
             
             <DerivedVariable name="surfaceArea" exposure="surfaceArea" dimension="area" select="morphology/segments[*]/surfaceArea" reduce="add"/>
@@ -1172,9 +1172,9 @@
                 <StateAssignment variable="spiking" value="0"/>
             </OnCondition>
 
-            <OnCondition test="t .geq. 0">
+            <!--<OnCondition test="t .geq. 0">
                 <StateAssignment variable="debugVal" value="debug"/>
-            </OnCondition>
+            </OnCondition>-->
 
         </Dynamics>
 
