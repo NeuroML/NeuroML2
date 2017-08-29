@@ -244,6 +244,8 @@
         description="Specifies a time varying ohmic conductance density, _gDensity, which is distributed on an area of the cell with fixed reversal potential _erev producing a current density _iDensity">
 
         <Parameter name="erev" dimension="voltage"/>
+        
+        <Constant name="vShift" dimension="voltage" value="0mV" description="Set to a constant 0mV here to allow ion channels which use _vShift in their rate variable expressions to be used with _channelDensity_, not just with _channelDensityVShift_ (where _vShift would be explicitly set)"/>
 
         <!-- TODO: Ensure Text elements are inherited from base type -->
         <Text name="segmentGroup"/>
@@ -259,6 +261,23 @@
             <DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" value="gDensity * (erev - v)"/>
 
         </Dynamics>
+
+        <Structure>
+            <ChildInstance component="ionChannel"/>
+        </Structure>
+
+    </ComponentType>
+
+    <ComponentType name="channelDensityVShift"
+        extends="channelDensity"
+        description="Same as _channelDensity_, but with a _vShift parameter to change voltage activation of gates. The exact usage of _vShift in expressions for rates is determined by the individual gates.">
+
+        <Parameter name="vShift" dimension="voltage"/>
+
+        <!-- TODO: Ensure Text elements are inherited from base type -->
+        <Text name="segmentGroup"/>
+        <Text name="ion"/> <!-- TODO: Ideally this needs to be a property of ionChannel only!
+                                But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
 
         <Structure>
             <ChildInstance component="ionChannel"/>

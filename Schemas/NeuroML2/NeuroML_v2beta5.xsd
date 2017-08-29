@@ -436,6 +436,8 @@
                     remove one of these -->
                     <xs:element name="ionChannelHH" type="IonChannelHH" minOccurs="0" maxOccurs="unbounded"/>
                     
+                    <xs:element name="ionChannelVShift" type="IonChannelVShift" minOccurs="0" maxOccurs="unbounded"/>
+                    
                     <xs:element name="ionChannelKS" type="IonChannelKS" minOccurs="0" maxOccurs="unbounded"/>
 
                     <xs:group ref="ConcentrationModelTypes"/>
@@ -687,6 +689,17 @@
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="IonChannel"/>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="IonChannelVShift">
+        <xs:annotation>
+            <xs:documentation>Same as ionChannel, but with a vShift parameter to change voltage activation of gates. The exact usage of vShift in expressions for rates is determined by the individual gates.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="IonChannel">
+                <xs:attribute name="vShift" type="Nml2Quantity_voltage" use="required"/>
+            </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
@@ -1690,6 +1703,7 @@
             <xs:element name="channelPopulation" type="ChannelPopulation" minOccurs="0" maxOccurs="unbounded"/>
 
             <xs:element name="channelDensity" type="ChannelDensity" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="channelDensityVShift" type="ChannelDensityVShift" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="channelDensityNernst" type="ChannelDensityNernst" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="channelDensityGHK" type="ChannelDensityGHK" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="channelDensityGHK2" type="ChannelDensityGHK2" minOccurs="0" maxOccurs="unbounded"/>
@@ -1922,6 +1936,17 @@
 
     </xs:complexType>
 
+
+    <xs:complexType name="ChannelDensityVShift">
+
+        <xs:complexContent>
+            <xs:extension base="ChannelDensity">
+                
+                <xs:attribute name="vShift" type="Nml2Quantity_voltage" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+
+    </xs:complexType>
 
 
 

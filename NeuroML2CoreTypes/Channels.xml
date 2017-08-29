@@ -549,6 +549,17 @@
         </Dynamics>
 
     </ComponentType>
+
+    <ComponentType name="ionChannelVShift"
+                   extends="ionChannel"
+                   description="Same as _ionChannel_, but with a _vShift parameter to change voltage activation of gates. The exact usage of _vShift in expressions for rates is determined by the individual gates.">
+        
+        
+        <Parameter name="vShift" dimension="voltage"/>
+        <!-- TODO: Ensure Text elements are inherited from base type -->
+        <Text name="species"/>
+
+    </ComponentType>
  
 
     <ComponentType name="KSState"
