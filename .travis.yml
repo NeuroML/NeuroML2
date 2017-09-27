@@ -24,8 +24,8 @@ env:
     - OMV_ENGINE=PyLEMS_NeuroML2
     - OMV_ENGINE=jNeuroML_NEURON
     - OMV_ENGINE=jNeuroML_NetPyNE
-    - OMV_ENGINE=jNeuroML_Brain
-    - OMV_ENGINE=jNeuroML_Brain2
+    - OMV_ENGINE=jNeuroML_Brian
+    - OMV_ENGINE=jNeuroML_Brian2
     - OMV_ENGINE=jNeuroML_validate
 
 install: 
