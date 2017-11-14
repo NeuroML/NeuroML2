@@ -60,6 +60,9 @@
 
         <Parameter name="number" dimension="none"/>
         <Parameter name="erev" dimension="voltage"/>
+        
+        <Constant name="vShift" dimension="voltage" value="0mV" description="Set to a constant 0mV here to allow ion channels which use _vShift in their rate variable expressions to be used with _channelPopulation_, not just with _channelDensityVShift_ (where _vShift would be explicitly set)"/>
+
 
         <Text name="ion"/> <!-- TODO: Ideally this needs to be a property of ionChannel only! But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
 
@@ -85,6 +88,9 @@
         <Constant name="R" dimension="idealGasConstantDims" value="8.3144621 J_per_K_per_mol" description="TODO: Make this a global constant!"/>
         <Constant name="zCa" dimension="none" value="2" description="TODO: Make this a global constant!"/>
         <Constant name="F" dimension="charge_per_mole" value="96485.3 C_per_mol" description="TODO: Make this a global constant!"/>
+        
+        <Constant name="vShift" dimension="voltage" value="0mV" description="Set to a constant 0mV here to allow ion channels which use _vShift in their rate variable expressions to be used with _channelPopulation_, not just with _channelDensityVShift_ (where _vShift would be explicitly set)"/>
+
 
         <Exposure name="erev" dimension="voltage"/> <!-- Calculated from caConcExt and caConc-->
 
