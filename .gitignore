@@ -59,3 +59,5 @@ examples/*.pov
 
 /Schemas/NeuroML2/NeuroML_v2beta4.xsd_conns
 /LEMSexamples/NET_*.net.nml
+/examples/*.mod
+/examples/*.hoc
