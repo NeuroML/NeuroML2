@@ -61,3 +61,4 @@ examples/*.pov
 /LEMSexamples/NET_*.net.nml
 /examples/*.mod
 /examples/*.hoc
+/examples/x86_64
