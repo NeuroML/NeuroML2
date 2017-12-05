@@ -26,6 +26,7 @@ env:
     - OMV_ENGINE=jNeuroML_NetPyNE
     - OMV_ENGINE=jNeuroML_Brian
     - OMV_ENGINE=jNeuroML_Brian2
+    - OMV_ENGINE=jNeuroML_Moose
     - OMV_ENGINE=jNeuroML_validate
 
 install: 
