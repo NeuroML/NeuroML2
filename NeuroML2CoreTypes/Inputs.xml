@@ -151,6 +151,29 @@
         </Dynamics>
     </ComponentType>
     
+    
+    <ComponentType name="spikeGeneratorRefPoisson"
+                 extends="spikeGeneratorPoisson"
+                 description="Generator of spikes whose ISI distribution is the maximum entropy distribution over [_minimumISI, +infinity) with mean 1/_averageRate">
+        <Parameter name="minimumISI" dimension="time"/>
+        <Dynamics>
+            <StateVariable name="tsince" dimension="time" exposure="tsince"/>
+            <StateVariable name="isi" dimension="time"/>
+            <TimeDerivative variable="tsince" value="1"/>
+
+            <OnStart>
+                <StateAssignment variable="tsince" value="0"/>
+                <StateAssignment variable="isi" value="minimumISI - (averageIsi-minimumISI) * log(1 - random(1))"/>
+            </OnStart>
+
+            <OnCondition test="tsince .gt. isi">
+                <StateAssignment variable="tsince" value="0"/>
+                <StateAssignment variable="isi" value="minimumISI - (averageIsi-minimumISI) * log(1 - random(1))"/>
+                <EventOut port="spike"/>
+            </OnCondition>
+        </Dynamics>
+    </ComponentType>
+    
 
     <ComponentType name="poissonFiringSynapse"
                    description="Poisson spike generator connected to single synapse providing an input current"

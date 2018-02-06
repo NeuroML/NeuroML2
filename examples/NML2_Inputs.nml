@@ -64,6 +64,8 @@
                   maxISI="30 ms"/>
 
     <spikeGeneratorPoisson id="spikeGenPoisson" averageRate="50 Hz"/>
+    
+    <spikeGeneratorRefPoisson id="spikeGenRefPoisson" averageRate="50 Hz" minimumISI="10 ms"/>
 
     <poissonFiringSynapse id="poissonFiringSyn" averageRate="10 Hz" synapse="synInput" spikeTarget="./synInput"/>
     

@@ -29,17 +29,19 @@
 <Include file="../examples/NML2_Inputs.nml"/>
 
 <network id="net1">
-    <population id="izhPop" component="RS" size="12"/>
+    <population id="izhPop" component="RS" size="13"/>
 
     <population id="spikeArrPop" component="spkArr" size="1"/>
     <population id="spikeGenRegularPop" component="spikeGenRegular" size="1"/>
     <population id="spikeGenPoissonPop" component="spikeGenPoisson" size="1"/>
+    <population id="spikeGenRefPoissonPop" component="spikeGenRefPoisson" size="1"/>
     <population id="spikeGenRandomPop" component="spikeGenRandom" size="1"/>
 
     <explicitInput target="izhPop[0]" input="pulseGen0" destination="synapses"/>
     <explicitInput target="izhPop[1]" input="sg0" destination="synapses"/>
     <explicitInput target="izhPop[2]" input="rg0" destination="synapses"/>
     <explicitInput target="izhPop[3]" input="vClamp0" destination="synapses"/>
+    
     <explicitInput target="izhPop[8]" input="poissonFiringSyn" destination="synapses"/>
     <explicitInput target="izhPop[9]" input="ci0" destination="synapses"/>
     <explicitInput target="izhPop[10]" input="transPoissonFiringSyn" destination="synapses"/>
@@ -49,6 +51,7 @@
     <synapticConnection from="spikeGenRegularPop[0]" to="izhPop[5]" synapse="syn1" destination="synapses"/>
     <synapticConnection from="spikeGenRandomPop[0]" to="izhPop[6]" synapse="syn1" destination="synapses"/>
     <synapticConnection from="spikeGenPoissonPop[0]" to="izhPop[7]" synapse="syn1" destination="synapses"/>
+    <synapticConnection from="spikeGenRefPoissonPop[0]" to="izhPop[12]" synapse="syn1" destination="synapses"/>
 </network>
 
         <!-- End of NeuroML2 content -->
@@ -82,9 +85,12 @@
     </Display>
     
     <Display id="d40" title="Ex16: Izhikevich cell, spiking inputs, time since spikes" timeScale="1ms" xmin="-20" xmax="320" ymin="-5" ymax="45">
-        <Line id ="Regular spike gen t since" quantity="spikeGenRegularPop[0]/tsince" scale="1ms"  color="#3fffaa" timeScale="1ms"/>
-        <Line id ="Poisson spike gen t since" quantity="spikeGenRandomPop[0]/tsince" scale="1ms"  color="#3ff9999" timeScale="1ms"/>
-        <Line id ="Spike array t since" quantity="spikeArrPop[0]/tsince" scale="1ms"  color="#3faa99" timeScale="1ms"/>
+        <Line id ="regular spike gen t since" quantity="spikeGenRegularPop[0]/tsince" scale="1ms"  color="#3fffaa" timeScale="1ms"/>
+        <Line id ="poisson spike gen t since" quantity="spikeGenPoissonPop[0]/tsince" scale="1ms"  color="#3ff9999" timeScale="1ms"/>
+        <Line id ="poisson ref. spike gen t since" quantity="spikeGenRefPoissonPop[0]/tsince" scale="1ms"  color="#3ff1119" timeScale="1ms"/>
+        <Line id ="random spike t since" quantity="spikeGenRandomPop[0]/tsince" scale="1ms"  color="#aaf9999" timeScale="1ms"/>
+        
+        <Line id ="spike array t since" quantity="spikeArrPop[0]/tsince" scale="1ms"  color="#3faa99" timeScale="1ms"/>
         <Line id ="Transient poisson spike gen" quantity="izhPop[10]/transPoissonFiringSyn/tsince" scale="1ms"  color="#000000" timeScale="1ms"/>
     </Display>
     
@@ -97,6 +103,8 @@
 	    color="#01A9DB" timeScale="1ms"/>
       <Line id="poisson spike gen" quantity="izhPop[7]/v" scale="1mV"
 	    color="#8000FF" timeScale="1ms"/>
+      <Line id="poisson ref. spike gen" quantity="izhPop[12]/v" scale="1mV"
+	    color="#80aaaF" timeScale="1ms"/>
       <Line id="transient poisson spike gen" quantity="izhPop[10]/v" scale="1mV"
 	    color="#ff00FF" timeScale="1ms"/>
     </Display>

@@ -588,6 +588,8 @@
                     minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="spikeGeneratorPoisson" type="SpikeGeneratorPoisson"
                     minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="spikeGeneratorRefPoisson" type="SpikeGeneratorRefPoisson"
+                    minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="poissonFiringSynapse" type="PoissonFiringSynapse"
                     minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="transientPoissonFiringSynapse" type="TransientPoissonFiringSynapse"
@@ -2455,6 +2457,15 @@
         <xs:complexContent>
             <xs:extension base="Standalone">
                 <xs:attribute name="averageRate" type="Nml2Quantity_pertime"
+                              use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="SpikeGeneratorRefPoisson">
+        <xs:complexContent>
+            <xs:extension base="SpikeGeneratorPoisson">
+                <xs:attribute name="minimumISI" type="Nml2Quantity_time"
                               use="required"/>
             </xs:extension>
         </xs:complexContent>
