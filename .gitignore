@@ -62,3 +62,5 @@ examples/*.pov
 /examples/*.mod
 /examples/*.hoc
 /examples/x86_64
+/LEMSexamples/report.txt
+/LEMSexamples/test/x86_64
