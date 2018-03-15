@@ -12,6 +12,7 @@ addons:
         # Requirements for NetPyNE & libNeuroML
     - python-tk
     - python-lxml        
+    - python-tornado        
         # Requirements for Moose
     - python-dev
     - libhdf5-dev
