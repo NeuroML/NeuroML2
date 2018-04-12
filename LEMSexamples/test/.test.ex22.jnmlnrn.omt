@@ -1,0 +1,28 @@
+# Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
+ 
+target: ../LEMS_NML2_Ex22_PinskyRinzelCA3.xml
+engine: jNeuroML_NEURON
+mep: .test.ex22.mep
+experiments:
+  Vs:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex22_v.dat
+          columns: [0,1]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: 0
+        tolerance: 0
+  Vd:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex22_v.dat
+          columns: [0,2]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: 0
+        tolerance: 0
