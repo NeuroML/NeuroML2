@@ -294,7 +294,9 @@
             <xs:element name="Property" type="LEMS_Property" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="Parameter" type="Parameter" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="Constant" type="Constant" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Exposure" type="Exposure" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="Requirement" type="Requirement" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="InstanceRequirement" type="InstanceRequirement" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="Dynamics" type="Dynamics" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
 
@@ -318,14 +320,31 @@
     </xs:complexType>
 
 
-    <!-- for Parameter, StateVariable etc. -->
+    <xs:complexType name="Exposure">
+        <xs:annotation>
+            <xs:documentation>LEMS Exposure (ComponentType property) </xs:documentation>
+        </xs:annotation>
+
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="dimension" type="xs:string" use="required"/>
+        <xs:attribute name="description" type="xs:string" use="optional"/>
+
+    </xs:complexType>
+
+
+    <!-- for Parameter etc. -->
     <xs:complexType name="NamedDimensionalType">
         <xs:attribute name="name" type="xs:string" use="required"/>
-        
         <!--See https://github.com/NeuroML/jNeuroML/issues/56, suggesting the following change: -->
         <xs:attribute name="dimension" type="xs:string" use="required"/> 
-        
         <xs:attribute name="description" type="xs:string" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="NamedDimensionalVariable">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="dimension" type="xs:string" use="required"/>
+        <xs:attribute name="description" type="xs:string" use="optional"/>
+        <xs:attribute name="exposure" type="xs:string" use="optional"/>
     </xs:complexType>
 
     <xs:complexType name="Parameter"> <!-- For language binding generators, so there will be a class of this name... -->
@@ -334,7 +353,7 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="LEMS_Property"> 
+    <xs:complexType name="LEMS_Property">
         <xs:complexContent>
             <xs:extension base="NamedDimensionalType">
                 <xs:attribute name="defaultValue" type="xs:double" use="optional"/>
@@ -348,48 +367,64 @@
         </xs:complexContent>
     </xs:complexType>
 
+    <xs:complexType name="InstanceRequirement"> <!-- For language binding generators, so there will be a class of this name... -->
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="type" type="xs:string" use="required"/>
+    </xs:complexType>
+
     <xs:complexType name="Dynamics">
         <xs:annotation>
             <xs:documentation>LEMS ComponentType for Dynamics</xs:documentation>
         </xs:annotation>
         <xs:sequence>
+            <xs:element name="StateVariable" type="StateVariable" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="DerivedVariable" type="DerivedVariable" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="ConditionalDerivedVariable" type="ConditionalDerivedVariable" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="TimeDerivative" type="TimeDerivative" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
 
     </xs:complexType>
 
-    <xs:complexType name="DerivedVariable">
-        <xs:annotation>
-            <xs:documentation>LEMS ComponentType for DerivedVariable</xs:documentation>
-        </xs:annotation>
+	<xs:complexType name="DerivedVariable">
+		<xs:annotation>
+			<xs:documentation>LEMS ComponentType for DerivedVariable</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="NamedDimensionalVariable">
+				<xs:attribute name="value" type="xs:string" use="optional"/>
+				<xs:attribute name="select" type="xs:string" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 
-        <xs:attribute name="name" type="xs:string" use="required"/>
-        <xs:attribute name="dimension" type="xs:string" use="required"/>
-        <xs:attribute name="value" type="xs:string" use="required"/>
-        <xs:attribute name="exposure" type="xs:string" use="optional"/>
+	<xs:complexType name="StateVariable">
+		<xs:complexContent>
+			<xs:extension base="NamedDimensionalVariable">
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 
-    </xs:complexType>
-
-    <xs:complexType name="ConditionalDerivedVariable">
-        <xs:annotation>
-            <xs:documentation>LEMS ComponentType for ConditionalDerivedVariable</xs:documentation>
-        </xs:annotation>
-
-        <xs:sequence>
-            <xs:element name="Case" type="Case" minOccurs="1" maxOccurs="unbounded"/>
-        </xs:sequence>
-
-        <xs:attribute name="name" type="xs:string" use="required"/>
-        <xs:attribute name="dimension" type="xs:string" use="required"/>
-        <xs:attribute name="exposure" type="xs:string" use="optional"/>
-
-    </xs:complexType>
+	<xs:complexType name="ConditionalDerivedVariable">
+		<xs:complexContent>
+			<xs:extension base="NamedDimensionalVariable">
+				<xs:annotation>
+					<xs:documentation>LEMS ComponentType for ConditionalDerivedVariable</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="Case" type="Case" minOccurs="1" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 
 
     <xs:complexType name="Case">
-
         <xs:attribute name="condition" type="xs:string" use="optional"/>
+        <xs:attribute name="value" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="TimeDerivative">
+        <xs:attribute name="variable" type="xs:string" use="required"/>
         <xs:attribute name="value" type="xs:string" use="required"/>
     </xs:complexType>
 
