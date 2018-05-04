@@ -1,7 +1,7 @@
 # Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
  
 target: ../LEMS_NML2_Ex14_PyNN.xml
-engine: jNeuroML
+engine: jNeuroML_NEURON
 mep: .test.ex14.mep
 experiments:
     
@@ -15,7 +15,7 @@ experiments:
         spike detection: 
           method: threshold
           threshold: -50.1
-        tolerance: 0.000448
+        tolerance: 0
 
   pop_IF_cond_alpha:
     observables:
@@ -27,7 +27,7 @@ experiments:
         spike detection: 
           method: threshold
           threshold: -50.1
-        tolerance: 0.00062
+        tolerance: 0
 
   pop_EIF_cond_exp_isfa_ista:
     observables:
@@ -39,7 +39,7 @@ experiments:
         spike detection: 
           method: threshold
           threshold: -45
-        tolerance: 0.00526
+        tolerance: 0
 
   pop_HH_cond_exp:
     observables:
@@ -51,7 +51,7 @@ experiments:
         spike detection: 
           method: threshold
           threshold: 0
-        tolerance: 0.000969
+        tolerance: 0
 
   pop_post_0:
     observables:
@@ -63,7 +63,7 @@ experiments:
         spike detection: 
           method: threshold
           threshold: -64
-        tolerance: 0.0047079
+        tolerance: 0.000
   pop_post_1:
     observables:
       spike times:
@@ -74,7 +74,7 @@ experiments:
         spike detection: 
           method: threshold
           threshold: -64
-        tolerance: 0.004365
+        tolerance: 0.000
   pop_post_2:
     observables:
       spike times:
@@ -85,7 +85,7 @@ experiments:
         spike detection: 
           method: threshold
           threshold: -61.5
-        tolerance: 0.000527
+        tolerance: 0.000
   pop_post_3:
     observables:
       spike times:
@@ -96,7 +96,7 @@ experiments:
         spike detection: 
           method: threshold
           threshold: -60.3
-        tolerance: 0.000582
+        tolerance: 0.000
 
 
   pop_post_1_g:
@@ -109,7 +109,7 @@ experiments:
         spike detection: 
           method: threshold
           threshold: 0.003
-        tolerance: 0.00467
+        tolerance: 0.000
 
   pop_post_2_g:
     observables:
@@ -121,4 +121,4 @@ experiments:
         spike detection: 
           method: threshold
           threshold: 0.003
-        tolerance: 0.004153
+        tolerance: 0.000

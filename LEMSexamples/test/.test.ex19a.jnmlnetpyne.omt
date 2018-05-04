@@ -1,7 +1,7 @@
 # Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
  
 target: ../LEMS_NML2_Ex19a_GapJunctionInstances.xml 
-engine: jNeuroML
+engine: jNeuroML_NetPyNE
 mep: .test.ex19.mep
 experiments:
   cell0:
@@ -14,7 +14,7 @@ experiments:
         spike detection: 
           method: threshold
           threshold: -69.5
-        tolerance: 0.000551783
+        tolerance: 2.04398659145e-05  # Slight difference since Netpyne uses Parallel Neuron...
   cell1:
     observables:
       spike times:
@@ -25,5 +25,5 @@ experiments:
         spike detection: 
           method: threshold
           threshold: -69.5
-        tolerance: 0.000549
+        tolerance: 0.00011576  # Slight difference since Netpyne uses Parallel Neuron...
   

@@ -28,26 +28,52 @@
 
             <segment id ="0" name="Soma">
                 <proximal x="0" y="0" z="0" diameter="10"/>
-                <distal x="10" y="0" z="0" diameter="10"/>
+                <distal x="0" y="10" z="0" diameter="10"/>
             </segment>
 
             <segment id ="1" name="Dendrite1">
                 <parent segment="0"/>
-                <distal x="20" y="0" z="0" diameter="3"/>
+                <proximal x="0" y="10" z="0" diameter="3"/>
+                <distal x="0" y="20" z="0" diameter="3"/>
             </segment>
 
-            <segment id ="2" name="Dendrite2">
+            <segment id ="2" name="Dendrite2a">
                 <parent segment="1"/>
-                <distal x="30" y="0" z="0" diameter="1"/>
+                <proximal x="0" y="20" z="0" diameter="3"/>
+                <distal x="0" y="30" z="0" diameter="2.5"/>
             </segment>
             
-            <segmentGroup id="soma_group"> 
+            <segment id ="3" name="Dendrite2b">
+                <parent segment="2"/>
+                <distal x="0" y="50" z="0" diameter="1.5"/>
+            </segment>
+            
+            
+            <segmentGroup id="soma" neuroLexId="sao864921383">    <!--
+                This group contains an unbranched set of segments, and all of the segmentGroups marked with
+                neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+                These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
+
                 <member segment="0"/>
+            </segmentGroup>
+            
+            <segmentGroup id="dendSec1" neuroLexId="sao864921383">   
+                <member segment="1"/>
+            </segmentGroup>
+            
+            <segmentGroup id="dendSec2" neuroLexId="sao864921383">   
+                <property tag="numberInternalDivisions" value="9"/>
+                <member segment="2"/>
+                <member segment="3"/>
+            </segmentGroup>
+            
+            <segmentGroup id="soma_group"> 
+                <include segmentGroup="soma"/>
             </segmentGroup>
 
            <segmentGroup id="dendrite_group">  
-                <member segment="1"/>
-                <member segment="2"/>
+                <include segmentGroup="dendSec1"/>
+                <include segmentGroup="dendSec2"/>
             </segmentGroup>
 
         </morphology>
@@ -67,7 +93,7 @@
             </membraneProperties>
 
             <intracellularProperties>
-                <resistivity value="1 kohm_cm"/>   
+                <resistivity value="100 kohm_cm"/>   
             </intracellularProperties>
 
         </biophysicalProperties>
@@ -83,31 +109,29 @@
                 <location x="0" y="0" z="0"/>
             </instance>
             <instance id="1">
-                <location x="100" y="0" z="0"/>
+                <location x="30" y="0" z="0"/>
             </instance>
             <instance id="2">
-                <location x="200" y="0" z="0"/>
+                <location x="60" y="0" z="0"/>
             </instance>
         </population>
 
         <projection id="projAMPA" presynapticPopulation="pop0" postsynapticPopulation="pop0" synapse="AMPA">
-            <!--TODO: Fix! want to use preCellId="0" etc. -->
             <connection id="0" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="0" postFractionAlong="0.5"/>
-            <connection id="1" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="1" preFractionAlong="0.5" postSegmentId="2" postFractionAlong="0.5"/>
+            <connection id="1" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="3" postFractionAlong="0.3"/>
             
             <connection id="2" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="0" postFractionAlong="0.5"/>
-            <connection id="3" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="1" preFractionAlong="0.5" postSegmentId="1" postFractionAlong="0.5"/>
-            <connection id="4" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="1" preFractionAlong="0.5" postSegmentId="2" postFractionAlong="0.5"/>
+            <connection id="3" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="1" postFractionAlong="0.5"/>
+            <connection id="4" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="3" postFractionAlong="0.25"/>
         </projection>
 
         <projection id="projNMDA" presynapticPopulation="pop0" postsynapticPopulation="pop0" synapse="NMDA">
-            <!--TODO: Fix! want to use preCellId="0" etc. -->
             <connection id="0" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="0" postFractionAlong="0.5"/>
-            <connection id="1" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="1" preFractionAlong="0.5" postSegmentId="2" postFractionAlong="0.5"/>
+            <connection id="1" preCellId="../pop0/0/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="3" postFractionAlong="0.5"/>
             
             <connection id="2" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="0" postFractionAlong="0.5"/>
-            <connection id="3" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="1" preFractionAlong="0.5" postSegmentId="1" postFractionAlong="0.5"/>
-            <connection id="4" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="1" preFractionAlong="0.5" postSegmentId="2" postFractionAlong="0.5"/>
+            <connection id="3" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="1" postFractionAlong="0.5"/>
+            <connection id="4" preCellId="../pop0/2/MultiCompCell" postCellId="../pop0/1/MultiCompCell" preSegmentId="0" preFractionAlong="0.5" postSegmentId="3" postFractionAlong="0.25"/>
         </projection>
 
         <inputList id="stimInput1" component="pulseGen2" population="pop0">

@@ -151,6 +151,29 @@
         </Dynamics>
     </ComponentType>
     
+    
+    <ComponentType name="spikeGeneratorRefPoisson"
+                 extends="spikeGeneratorPoisson"
+                 description="Generator of spikes whose ISI distribution is the maximum entropy distribution over [_minimumISI, +infinity) with mean 1/_averageRate">
+        <Parameter name="minimumISI" dimension="time"/>
+        <Dynamics>
+            <StateVariable name="tsince" dimension="time" exposure="tsince"/>
+            <StateVariable name="isi" dimension="time"/>
+            <TimeDerivative variable="tsince" value="1"/>
+
+            <OnStart>
+                <StateAssignment variable="tsince" value="0"/>
+                <StateAssignment variable="isi" value="minimumISI - (averageIsi-minimumISI) * log(1 - random(1))"/>
+            </OnStart>
+
+            <OnCondition test="tsince .gt. isi">
+                <StateAssignment variable="tsince" value="0"/>
+                <StateAssignment variable="isi" value="minimumISI - (averageIsi-minimumISI) * log(1 - random(1))"/>
+                <EventOut port="spike"/>
+            </OnCondition>
+        </Dynamics>
+    </ComponentType>
+    
 
     <ComponentType name="poissonFiringSynapse"
                    description="Poisson spike generator connected to single synapse providing an input current"
@@ -252,7 +275,8 @@
                 <StateAssignment variable="tsince" value="0"/>
                 <StateAssignment variable="nextIsi" value="- averageIsi * log(1 - random(1))"/>
                 <!--
-                Check to see whether current time + next ISI is greater than delay+duration and if so set is to a long time in future...
+                Check to see whether current time + next ISI is greater than delay+duration and if so set it to a long time in the future...
+                The use of H() is necessary here (as opposed to checking this in the test of OnCondition) since NEURON requires a single boolean expression in test above
                 -->
                 <StateAssignment variable="isi" value="nextIsi + H(((t+nextIsi) - (delay+duration))/duration)*LONG_TIME"/>
                 <EventOut port="spike"/>
@@ -311,8 +335,10 @@
     
 
     <ComponentType name="pulseGenerator" extends="basePointCurrent"
-                   description="Generates a constant current pulse of a certain _amplitude for a specified _duration after a _delay"> <!-- Note: a synpase also extends basePointCurrent -->
+                   description="Generates a constant current pulse of a certain _amplitude for a specified _duration after a _delay. Scaled by _weight, if set"> <!-- Note: a synpase also extends basePointCurrent -->
 
+        <Property name="weight" dimension="none" defaultValue="1"/> 
+        
         <Parameter name="delay" dimension="time" description="Delay before change in current. Current is zero  prior to this."/>
         <Parameter name="duration" dimension="time" description="Duration for holding current at amplitude. Current is zero after delay + duration."/>
         <Parameter name="amplitude" dimension="current" description="Amplitude of current pulse"/>
@@ -334,7 +360,7 @@
             </OnCondition>
 
             <OnCondition test="t .geq. delay .and. t .lt. duration + delay">
-                <StateAssignment variable="i" value="amplitude"/>
+                <StateAssignment variable="i" value="weight * amplitude"/>
             </OnCondition>
 
             <OnCondition test="t .geq. duration + delay">
@@ -343,12 +369,14 @@
 
         </Dynamics>
     </ComponentType>
-    
+
     
 
     <ComponentType name="compoundInput" extends="basePointCurrent"
                    description="Generates a current which is the sum of all its child _basePointCurrent_ elements"> 
 
+        <Property name="weight" dimension="none" defaultValue="1"/> 
+        
         <Children name="currents" type="basePointCurrent"/>
 
         <!--TODO: remove! Only required as EventConnection is used in explicitInput to
@@ -357,18 +385,22 @@
 
         <Dynamics>
 
-            <DerivedVariable name="i" dimension="current" exposure="i" select="currents[*]/i" reduce="add"/>
+            <DerivedVariable name="i_total" dimension="current" select="currents[*]/i" reduce="add"/>
+            
+            <DerivedVariable name="i" dimension="current" exposure="i" value="weight * i_total"/>
 
             <OnEvent port="in"><!--TODO: remove, see above... -->
             </OnEvent>
 
-
         </Dynamics>
     </ComponentType>
+
 
     <ComponentType name="compoundInputDL" extends="basePointCurrentDL"
                    description="Generates a current which is the sum of all its child _basePointCurrentDL_ elements"> 
 
+        <Property name="weight" dimension="none" defaultValue="1"/> 
+        
         <Children name="currents" type="basePointCurrentDL"/>
 
         <!--TODO: remove! Only required as EventConnection is used in explicitInput to
@@ -377,7 +409,9 @@
 
         <Dynamics>
 
-            <DerivedVariable name="I" dimension="none" exposure="I" select="currents[*]/I" reduce="add"/>
+            <DerivedVariable name="I_total" dimension="none" select="currents[*]/I" reduce="add"/>
+
+            <DerivedVariable name="I" dimension="none" exposure="I" value="weight * I_total"/>
 
             <OnEvent port="in"><!--TODO: remove, see above... -->
             </OnEvent>
@@ -390,6 +424,8 @@
     <ComponentType name="pulseGeneratorDL" extends="basePointCurrentDL"
                    description="Dimensionless equivalent of _pulseGenerator_. Generates a constant current pulse of a certain _amplitude for a specified _duration after a _delay"> <!-- Note: a synpase also extends basePointCurrent -->
 
+        <Property name="weight" dimension="none" defaultValue="1"/> 
+        
         <Parameter name="delay" dimension="time" description="Delay before change in current. Current is zero  prior to this."/>
         <Parameter name="duration" dimension="time" description="Duration for holding current at amplitude. Current is zero after delay + duration."/>
         <Parameter name="amplitude" dimension="none" description="Amplitude of current pulse"/>
@@ -410,7 +446,7 @@
             </OnCondition>
 
             <OnCondition test="t .geq. delay .and. t .lt. duration + delay">
-                <StateAssignment variable="I" value="amplitude"/>
+                <StateAssignment variable="I" value="weight * amplitude"/>
             </OnCondition>
 
             <OnCondition test="t .geq. duration + delay">
@@ -424,6 +460,8 @@
     <ComponentType name="sineGenerator" extends="basePointCurrent"
                    description="Generates a sinusoidally varying current after a time _delay, for a fixed _duration. The _period and maximum _amplitude of the current can be set as well as the _phase at which to start.">
 
+        <Property name="weight" dimension="none" defaultValue="1"/> 
+        
         <Parameter name="phase" dimension="none"/>
         <Parameter name="delay" dimension="time"/>
         <Parameter name="duration" dimension="time"/>
@@ -444,7 +482,7 @@
             </OnCondition>
 
             <OnCondition test="t .geq. delay .and. t .lt. duration+delay">
-                <StateAssignment variable="i" value="amplitude * sin(phase + (2 * 3.14159265 * (t-delay)/period) )"/>
+                <StateAssignment variable="i" value="weight * amplitude * sin(phase + (2 * 3.14159265 * (t-delay)/period) )"/>
             </OnCondition>
 
             <OnCondition test="t .geq. duration+delay">
@@ -457,6 +495,8 @@
     <ComponentType name="sineGeneratorDL" extends="basePointCurrentDL"
                    description="Generates a sinusoidally varying current after a time _delay, for a fixed _duration. The _period and maximum _amplitude of the current can be set as well as the _phase at which to start.">
 
+        <Property name="weight" dimension="none" defaultValue="1"/> 
+        
         <Parameter name="phase" dimension="none"/>
         <Parameter name="delay" dimension="time"/>
         <Parameter name="duration" dimension="time"/>
@@ -477,7 +517,7 @@
             </OnCondition>
 
             <OnCondition test="t .geq. delay .and. t .lt. duration+delay">
-                <StateAssignment variable="I" value="amplitude * sin(phase + (2 * 3.14159265 * (t-delay)/period) )"/>
+                <StateAssignment variable="I" value="weight * amplitude * sin(phase + (2 * 3.14159265 * (t-delay)/period) )"/>
             </OnCondition>
 
             <OnCondition test="t .geq. duration+delay">
@@ -491,6 +531,8 @@
     <ComponentType name="rampGenerator" extends="basePointCurrent"
                    description="Generates a ramping current after a time _delay, for a fixed _duration. During this time the current steadily changes from _startAmplitude to _finishAmplitude.">
 
+        <Property name="weight" dimension="none" defaultValue="1"/> 
+        
         <Parameter name="delay" dimension="time"/>
         <Parameter name="duration" dimension="time"/>
         <Parameter name="startAmplitude" dimension="current"/>
@@ -512,15 +554,15 @@
 
 
             <OnCondition test="t .lt. delay">
-                <StateAssignment variable="i" value="baselineAmplitude"/>
+                <StateAssignment variable="i" value="weight * baselineAmplitude"/>
             </OnCondition>
 
             <OnCondition test="t .geq. delay .and. t .lt. duration+delay">
-                <StateAssignment variable="i" value="startAmplitude + (finishAmplitude - startAmplitude) * (t - delay) / (duration)"/>
+                <StateAssignment variable="i" value="weight * (startAmplitude + (finishAmplitude - startAmplitude) * (t - delay) / (duration))"/>
             </OnCondition>
 
             <OnCondition test="t .geq. duration+delay">
-                <StateAssignment variable="i" value="baselineAmplitude"/>
+                <StateAssignment variable="i" value="weight * baselineAmplitude"/>
             </OnCondition>
 
         </Dynamics>
@@ -530,6 +572,8 @@
     <ComponentType name="rampGeneratorDL" extends="basePointCurrentDL"
                    description="Generates a ramping current after a time _delay, for a fixed _duration. During this time the dimensionless current steadily changes from _startAmplitude to _finishAmplitude.">
 
+        <Property name="weight" dimension="none" defaultValue="1"/> 
+        
         <Parameter name="delay" dimension="time"/>
         <Parameter name="duration" dimension="time"/>
         <Parameter name="startAmplitude" dimension="none"/>
@@ -550,15 +594,15 @@
             </OnEvent>
 
             <OnCondition test="t .lt. delay">
-                <StateAssignment variable="I" value="baselineAmplitude"/>
+                <StateAssignment variable="I" value="weight * baselineAmplitude"/>
             </OnCondition>
 
             <OnCondition test="t .geq. delay .and. t .lt. duration+delay">
-                <StateAssignment variable="I" value="startAmplitude + (finishAmplitude - startAmplitude) * (t - delay) / (duration)"/>
+                <StateAssignment variable="I" value="weight * (startAmplitude + (finishAmplitude - startAmplitude) * (t - delay) / (duration))"/>
             </OnCondition>
 
             <OnCondition test="t .geq. duration+delay">
-                <StateAssignment variable="I" value="baselineAmplitude"/>
+                <StateAssignment variable="I" value="weight * baselineAmplitude"/>
             </OnCondition>
 
         </Dynamics>
@@ -566,8 +610,10 @@
 
 
     <ComponentType name="voltageClamp" extends="baseVoltageDepPointCurrent"
-                   description="Voltage clamp. Applies a variable current _i to try to keep parent at _targetVoltage. Not yet fully tested!!!">
+                   description="Voltage clamp. Applies a variable current _i to try to keep parent at _targetVoltage. Not yet fully tested!!! Consider using voltageClampTriple!!">
 
+        <Property name="weight" dimension="none" defaultValue="1"/> 
+        
         <Parameter name="delay" dimension="time" description="Delay before change in current. Current is zero  prior to this."/>
         <Parameter name="duration" dimension="time" description="Duration for attempting to keep parent at targetVoltage. Current is zero after delay + duration."/>
         <Parameter name="targetVoltage" dimension="voltage" description="Current will be applied to try to get parent to this target voltage"/>
@@ -593,11 +639,54 @@
 
             <OnCondition test="t .geq. delay">
                 <!-- seriesResistance renamed to simpleSeriesResistance & factor of 1e-5 removed from calculation of current. Still being tested... -->
-                <StateAssignment variable="i" value="(targetVoltage - v) / simpleSeriesResistance"/>
+                <StateAssignment variable="i" value="weight * (targetVoltage - v) / simpleSeriesResistance"/>
             </OnCondition>
 
             <OnCondition test="t .gt. duration + delay">
                 <StateAssignment variable="i" value="0"/>
+            </OnCondition>
+
+        </Dynamics>
+
+    </ComponentType>
+    
+    
+
+    <ComponentType name="voltageClampTriple" extends="baseVoltageDepPointCurrent"
+                   description="Voltage clamp with 3 clamp levels. Applies a variable current _i (through _simpleSeriesResistance) to try to keep parent cell at _conditioningVoltage until time _delay, _testingVoltage until _delay + _duration, and _returnVoltage afterwards. Only enabled if _active = 1. ">
+
+        <Parameter name="active" dimension="none" description="Whether the voltage clamp is active (1) or inactive (0)."/>
+        
+        <Parameter name="delay" dimension="time" description="Delay before switching from conditioningVoltage to testingVoltage."/>
+        <Parameter name="duration" dimension="time" description="Duration to hold at testingVoltage."/>
+        <Parameter name="conditioningVoltage" dimension="voltage" description="Target voltage before time delay"/>
+        <Parameter name="testingVoltage" dimension="voltage" description="Target voltage between times delay and delay + duration"/>
+        <Parameter name="returnVoltage" dimension="voltage" description="Target voltage after time duration"/>
+        
+        <Parameter name="simpleSeriesResistance" dimension="resistance" description="Current will be calculated by the difference in voltage between the target and parent, divided by this value"/>
+
+        <!--TODO: remove! Only required as EventConnection is used in explicitInput to
+        connect inputs to cells. Events aren't passed! ... -->
+        <EventPort name="in" direction="in" description="Note this is not used here. Will be removed in future"/>
+
+        <Dynamics>
+
+            <StateVariable name="i" exposure="i" dimension="current"/>
+
+            <OnEvent port="in"><!--TODO: remove, see above...
+            <StateAssignment variable="i" value="0"/>-->
+            </OnEvent>
+
+            <OnCondition test="active .eq. 1 .and. t .lt. delay">
+                <StateAssignment variable="i" value="(conditioningVoltage - v) / simpleSeriesResistance"/>
+            </OnCondition>
+
+            <OnCondition test="active .eq. 1 .and. t .geq. delay">
+                <StateAssignment variable="i" value="(testingVoltage - v) / simpleSeriesResistance"/>
+            </OnCondition>
+
+            <OnCondition test="active .eq. 1 .and. t .gt. duration + delay">
+                <StateAssignment variable="i" value="(returnVoltage - v) / simpleSeriesResistance"/>
             </OnCondition>
 
         </Dynamics>

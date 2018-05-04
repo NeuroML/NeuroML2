@@ -37,28 +37,52 @@
         <Display id="d2" title="Ex25: MultiCompCellNetwork: cell1" timeScale="1ms" xmin="0" xmax="140" ymin="-75" ymax="52">
             <Line id ="cell 1: soma" quantity="pop0/1/MultiCompCell/0/v" scale="1mV"  color="#ee0555" timeScale="1ms"/>
             <Line id ="cell 1: dend1" quantity="pop0/1/MultiCompCell/1/v" scale="1mV"  color="#ee5555" timeScale="1ms"/>
-            <Line id ="cell 1: dend2" quantity="pop0/1/MultiCompCell/2/v" scale="1mV"  color="#efff55" timeScale="1ms"/>
+            <Line id ="cell 1: dend2a" quantity="pop0/1/MultiCompCell/2/v" scale="1mV"  color="#efff55" timeScale="1ms"/>
+            <Line id ="cell 1: dend2b" quantity="pop0/1/MultiCompCell/3/v" scale="1mV"  color="#111f55" timeScale="1ms"/>
         </Display>
         
         <Display id="synsA" title="Ex25: MultiCompCellNetwork: AMPA synapses" timeScale="1ms" xmin="0" xmax="140" ymin="-.1" ymax="1">
             <Line id ="AMPA g: pre 0:0-soma" quantity="pop0/1/MultiCompCell/0/synapses:AMPA:0/g" scale="1nS"  color="#ee0555" timeScale="1ms"/>
-            <Line id ="AMPA g: pre 0:1-dend2" quantity="pop0/1/MultiCompCell/2/synapses:AMPA:0/g" scale="1nS"  color="#eeff11" timeScale="1ms"/>
+            <Line id ="AMPA g: pre 0:1-dend2" quantity="pop0/1/MultiCompCell/3/synapses:AMPA:0/g" scale="1nS"  color="#eeff11" timeScale="1ms"/>
             
             <Line id ="AMPA g: pre 2:0-soma" quantity="pop0/1/MultiCompCell/0/synapses:AMPA:1/g" scale="1nS"  color="#22ff11" timeScale="1ms"/>
             <Line id ="AMPA g: pre 2:1-dend1" quantity="pop0/1/MultiCompCell/1/synapses:AMPA:0/g" scale="1nS"  color="#77ff11" timeScale="1ms"/>
-            <Line id ="AMPA g: pre 2:2-dend2" quantity="pop0/1/MultiCompCell/2/synapses:AMPA:1/g" scale="1nS"  color="#ffff11" timeScale="1ms"/>
+            <Line id ="AMPA g: pre 2:2-dend2" quantity="pop0/1/MultiCompCell/3/synapses:AMPA:1/g" scale="1nS"  color="#ffff11" timeScale="1ms"/>
             
         </Display>
         
         <Display id="synsN" title="Ex25: MultiCompCellNetwork: NMDA synapses" timeScale="1ms" xmin="0" xmax="140" ymin="-.1" ymax="1">
             <Line id ="NMDA g: pre 0:0-soma" quantity="pop0/1/MultiCompCell/0/synapses:NMDA:0/g" scale="1nS"  color="#ee0555" timeScale="1ms"/>
-            <Line id ="NMDA g: pre 0:1-dend2" quantity="pop0/1/MultiCompCell/2/synapses:NMDA:0/g" scale="1nS"  color="#eeff11" timeScale="1ms"/>
+            <Line id ="NMDA g: pre 0:1-dend2" quantity="pop0/1/MultiCompCell/3/synapses:NMDA:0/g" scale="1nS"  color="#eeff11" timeScale="1ms"/>
             
             <Line id ="NMDA g: pre 2:0-soma" quantity="pop0/1/MultiCompCell/0/synapses:NMDA:1/g" scale="1nS"  color="#22ff11" timeScale="1ms"/>
             <Line id ="NMDA g: pre 2:1-dend1" quantity="pop0/1/MultiCompCell/1/synapses:NMDA:0/g" scale="1nS"  color="#77ff11" timeScale="1ms"/>
-            <Line id ="NMDA g: pre 2:2-dend2" quantity="pop0/1/MultiCompCell/2/synapses:NMDA:1/g" scale="1nS"  color="#ffff11" timeScale="1ms"/>
+            <Line id ="NMDA g: pre 2:2-dend2" quantity="pop0/1/MultiCompCell/3/synapses:NMDA:1/g" scale="1nS"  color="#ffff11" timeScale="1ms"/>
             
         </Display>
+        
+        
+        
+        <OutputFile id="of0" fileName="results/ex25_0.dat">
+            <OutputColumn id="0" quantity="pop0/0/MultiCompCell/0/v" />
+            <OutputColumn id="1" quantity="pop0/0/MultiCompCell/1/v" />
+            <OutputColumn id="2" quantity="pop0/0/MultiCompCell/2/v" />
+            <OutputColumn id="3" quantity="pop0/0/MultiCompCell/3/v" />
+        </OutputFile>
+        
+        <OutputFile id="of1" fileName="results/ex25_1.dat">
+            <OutputColumn id="0" quantity="pop0/1/MultiCompCell/0/v" />
+            <OutputColumn id="1" quantity="pop0/1/MultiCompCell/1/v" />
+            <OutputColumn id="2" quantity="pop0/1/MultiCompCell/2/v" />
+            <OutputColumn id="3" quantity="pop0/1/MultiCompCell/3/v" />
+        </OutputFile>
+        
+        <OutputFile id="of2" fileName="results/ex25_2.dat">
+            <OutputColumn id="0" quantity="pop0/2/MultiCompCell/0/v" />
+            <OutputColumn id="1" quantity="pop0/2/MultiCompCell/1/v" />
+            <OutputColumn id="2" quantity="pop0/2/MultiCompCell/2/v" />
+            <OutputColumn id="3" quantity="pop0/2/MultiCompCell/3/v" />
+        </OutputFile>
 
 
     </Simulation>

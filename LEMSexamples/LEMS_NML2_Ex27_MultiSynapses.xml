@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<Lems>
+  <Target component="sim1"/>
+
+  <Include file="Synapses.xml"/>
+  <Include file="Cells.xml"/>
+  <Include file="Networks.xml"/>
+  <Include file="Simulation.xml"/>
+  <Include file="Inputs.xml"/>
+
+
+    <iafCell id="iaf" leakReversal="-70mV" thresh="-55mV"
+	     reset="-70mV" C="0.2nF" leakConductance="0.01uS"/>
+
+    <expTwoSynapse id="AMPA" gbase="1nS" erev="0mV"
+                   tauRise="1ms" tauDecay="2ms" >
+        <notes>A biexponential synapse.</notes>
+    </expTwoSynapse>
+    
+    
+    <blockingPlasticSynapse id="NMDA" gbase="4nS"
+			    erev="0mV" tauRise="2ms" tauDecay="20ms">
+        <voltageConcDepBlockMechanism id="block" species="mg" blockConcentration="1.2 mM"
+			scalingConc="1.920544 mM" scalingVolt="16.129 mV"/>
+    </blockingPlasticSynapse>
+    
+    <doubleSynapse id="AMPA_NMDA" synapse1="AMPA" synapse1Path="./AMPA" synapse2="NMDA" synapse2Path="./NMDA">
+        <notes>A single "synapse" which contains both AMPA and NMDA. It is planned that the need for extra synapse1Path/synapse2Path attributes can be removed in later versions.</notes>
+    </doubleSynapse>
+
+  <spikeArray id="spks">
+    <spike id="0" time="50 ms"/>
+    <spike id="1" time="200 ms"/>
+    <spike id="2" time="350 ms"/>
+    <spike id="3" time="360 ms"/>
+  </spikeArray>
+
+  <network id="net">
+      
+    <population component="iaf" id="iafPop" size="5"/>
+    <population id="spksPop" component="spks" size="1"/>
+    
+    <synapticConnectionWD from="spksPop[0]" to="iafPop[0]" synapse="AMPA" destination="synapses" weight="0.5"  delay="0ms"/>
+    <synapticConnectionWD from="spksPop[0]" to="iafPop[1]" synapse="NMDA" destination="synapses" weight="0.5"  delay="0ms"/>
+    <synapticConnectionWD from="spksPop[0]" to="iafPop[2]" synapse="AMPA" destination="synapses" weight="0.5"  delay="0ms"/>
+    <synapticConnectionWD from="spksPop[0]" to="iafPop[2]" synapse="NMDA" destination="synapses" weight="0.5"  delay="0ms"/>
+    <synapticConnectionWD from="spksPop[0]" to="iafPop[3]" synapse="AMPA_NMDA" destination="synapses" weight="0.5"  delay="5ms"/>
+    
+  </network>
+
+  <Simulation id="sim1" length="600ms" step="0.001ms" target="net">
+      
+    <Display id="display_0" timeScale="1ms" title="IafRef cell: Vm" xmin="-20" xmax="620" ymin="-70" ymax="-68">
+      <Line color="#000000" id="AMPA" quantity="iafPop[0]/v" scale="1mV" timeScale="1ms"/>
+      <Line color="#ff0000" id="NMDA" quantity="iafPop[1]/v" scale="1mV" timeScale="1ms"/>
+      <Line color="#00ff00" id="(AMPA) + (NMDA)" quantity="iafPop[2]/v" scale="1mV" timeScale="1ms"/>
+      <Line color="#0000ff" id="(AMPA + NMDA) - 5ms delay" quantity="iafPop[3]/v" scale="1mV" timeScale="1ms"/>
+    </Display>
+    
+    <Display id="display_1" timeScale="1ms" title="Spike array: tsince" xmin="-20" xmax="620" ymin="-20" ymax="250">
+      <Line color="#0000FF" id="spikes_t" quantity="spksPop[0]/tsince" scale="1ms" timeScale="1ms"/>
+    </Display>
+    
+    <OutputFile id="of0" fileName="./results/ex27_v.dat">
+      <OutputColumn id="0" quantity="iafPop[0]/v"/>
+      <OutputColumn id="1" quantity="iafPop[1]/v"/>
+      <OutputColumn id="2" quantity="iafPop[2]/v"/>
+      <OutputColumn id="3" quantity="iafPop[3]/v"/>
+    </OutputFile>
+    
+  </Simulation>
+
+
+</Lems>

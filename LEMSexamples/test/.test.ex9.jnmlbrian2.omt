@@ -1,0 +1,26 @@
+# Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
+ 
+target: ../LEMS_NML2_Ex9_FN.xml 
+engine: jNeuroML_Brian2
+mep: .test.ex9.mep
+experiments:
+  V:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex9.dat
+          columns: [0,1]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: derivative
+        tolerance: 0.00
+  W:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex9.dat
+          columns: [0,2]
+          scaling: [1000, 1]
+        spike detection: 
+          method: derivative
+        tolerance: 1.11868967008e-16

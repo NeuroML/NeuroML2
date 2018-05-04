@@ -8,7 +8,7 @@
 
   <artifactId>neuroml2-base-definitions</artifactId>
   <groupId>org.neuroml.core</groupId>
-  <version>1.4.6</version>
+  <version>1.5.3</version>
 
   <build>
     <resources>

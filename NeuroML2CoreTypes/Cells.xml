@@ -60,6 +60,9 @@
 
         <Parameter name="number" dimension="none"/>
         <Parameter name="erev" dimension="voltage"/>
+        
+        <Constant name="vShift" dimension="voltage" value="0mV" description="Set to a constant 0mV here to allow ion channels which use _vShift in their rate variable expressions to be used with _channelPopulation_, not just with _channelDensityVShift_ (where _vShift would be explicitly set)"/>
+
 
         <Text name="ion"/> <!-- TODO: Ideally this needs to be a property of ionChannel only! But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
 
@@ -85,6 +88,9 @@
         <Constant name="R" dimension="idealGasConstantDims" value="8.3144621 J_per_K_per_mol" description="TODO: Make this a global constant!"/>
         <Constant name="zCa" dimension="none" value="2" description="TODO: Make this a global constant!"/>
         <Constant name="F" dimension="charge_per_mole" value="96485.3 C_per_mol" description="TODO: Make this a global constant!"/>
+        
+        <Constant name="vShift" dimension="voltage" value="0mV" description="Set to a constant 0mV here to allow ion channels which use _vShift in their rate variable expressions to be used with _channelPopulation_, not just with _channelDensityVShift_ (where _vShift would be explicitly set)"/>
+
 
         <Exposure name="erev" dimension="voltage"/> <!-- Calculated from caConcExt and caConc-->
 
@@ -244,6 +250,8 @@
         description="Specifies a time varying ohmic conductance density, _gDensity, which is distributed on an area of the cell with fixed reversal potential _erev producing a current density _iDensity">
 
         <Parameter name="erev" dimension="voltage"/>
+        
+        <Constant name="vShift" dimension="voltage" value="0mV" description="Set to a constant 0mV here to allow ion channels which use _vShift in their rate variable expressions to be used with _channelDensity_, not just with _channelDensityVShift_ (where _vShift would be explicitly set)"/>
 
         <!-- TODO: Ensure Text elements are inherited from base type -->
         <Text name="segmentGroup"/>
@@ -259,6 +267,23 @@
             <DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" value="gDensity * (erev - v)"/>
 
         </Dynamics>
+
+        <Structure>
+            <ChildInstance component="ionChannel"/>
+        </Structure>
+
+    </ComponentType>
+
+    <ComponentType name="channelDensityVShift"
+        extends="channelDensity"
+        description="Same as _channelDensity_, but with a _vShift parameter to change voltage activation of gates. The exact usage of _vShift in expressions for rates is determined by the individual gates.">
+
+        <Parameter name="vShift" dimension="voltage"/>
+
+        <!-- TODO: Ensure Text elements are inherited from base type -->
+        <Text name="segmentGroup"/>
+        <Text name="ion"/> <!-- TODO: Ideally this needs to be a property of ionChannel only!
+                                But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
 
         <Structure>
             <ChildInstance component="ionChannel"/>
@@ -586,8 +611,8 @@
             <!--<DerivedVariable name="surfaceArea" dimension="area" exposure="surfaceArea" value = "4 * radDist * radDist * 3.14159265" valueCondition="length .eq. 0" valueIfFalse = "2 * radDist * 3.14159265 * length"/>-->
 
 			<ConditionalDerivedVariable name="surfaceArea" dimension="area" exposure="surfaceArea">
-            	<Case condition="length .eq. 0" value="4 * radDist * radDist * 3.14159265"/>
-				<Case condition="length .gt. 0" value="2 * radDist * 3.14159265 * length"/>
+            	<Case condition="length .eq. 0 * LEN" value="4 * radDist * radDist * 3.14159265"/>
+				<Case condition="length .gt. 0 * LEN" value="2 * radDist * 3.14159265 * length"/>
 			</ConditionalDerivedVariable>
 
         </Dynamics>
@@ -1031,7 +1056,7 @@
         <Attachments name="synapses" type="basePointCurrent"/>
 
         <Exposure name="spiking" dimension="none"/>
-        <Exposure name="debugVal" dimension="none"/>
+        <!--<Exposure name="debugVal" dimension="none"/>-->
         <Exposure name="iChannels" dimension="current"/>
         <Exposure name="iSyn" dimension="current"/>
         <Exposure name="totSpecCap" dimension="specificCapacitance"/>
@@ -1047,12 +1072,12 @@
         <Dynamics>
             <StateVariable name="v" exposure="v" dimension="voltage"/>
             <StateVariable name="spiking" exposure="spiking" dimension="none"/>
-            <StateVariable name="debugVal" exposure="debugVal" dimension="none"/>
+            <!--<StateVariable name="debugVal" exposure="debugVal" dimension="none"/>-->
 
             <DerivedVariable name="initMembPot" dimension="voltage" select="biophysicalProperties/membraneProperties/initMembPotential/value"/>
             <DerivedVariable name="thresh" dimension="voltage" select="biophysicalProperties/membraneProperties/spikeThresh/value"/>
 
-            <DerivedVariable name="debug" dimension="none" select="biophysicalProperties/membraneProperties/totChanCurrent"/>
+            <!--<DerivedVariable name="debug" dimension="none" value="0"/>-->
             
             <!--TODO replace this with just using first segment!!-->
             <DerivedVariable name="surfaceArea" exposure="surfaceArea" dimension="area" select="morphology/segments[*]/surfaceArea" reduce="add"/>
@@ -1083,9 +1108,9 @@
                 <StateAssignment variable="spiking" value="0"/>
             </OnCondition>
 
-            <OnCondition test="t .geq. 0">
+            <!--<OnCondition test="t .geq. 0">
                 <StateAssignment variable="debugVal" value="debug"/>
-            </OnCondition>
+            </OnCondition>-->
 
         </Dynamics>
 
@@ -1128,12 +1153,12 @@
         <Dynamics>
             <StateVariable name="v" exposure="v" dimension="voltage"/>
             <StateVariable name="spiking" exposure="spiking" dimension="none"/>
-            <StateVariable name="debugVal" exposure="debugVal" dimension="none"/>
+            <!--<StateVariable name="debugVal" exposure="debugVal" dimension="none"/>-->
 
             <DerivedVariable name="initMembPot" dimension="voltage" select="biophysicalProperties2CaPools/membraneProperties2CaPools/initMembPotential/value"/>
             <DerivedVariable name="thresh" dimension="voltage" select="biophysicalProperties2CaPools/membraneProperties2CaPools/spikeThresh/value"/>
 
-            <DerivedVariable name="debug" dimension="none" select="biophysicalProperties2CaPools/membraneProperties2CaPools/totChanCurrent"/>
+            <!--<DerivedVariable name="debug" dimension="none" select="0"/>-->
             
             
             <DerivedVariable name="surfaceArea" exposure="surfaceArea" dimension="area" select="morphology/segments[*]/surfaceArea" reduce="add"/>
@@ -1172,9 +1197,9 @@
                 <StateAssignment variable="spiking" value="0"/>
             </OnCondition>
 
-            <OnCondition test="t .geq. 0">
+            <!--<OnCondition test="t .geq. 0">
                 <StateAssignment variable="debugVal" value="debug"/>
-            </OnCondition>
+            </OnCondition>-->
 
         </Dynamics>
 

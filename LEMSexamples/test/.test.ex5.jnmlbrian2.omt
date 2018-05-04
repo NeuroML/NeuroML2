@@ -1,29 +1,28 @@
 # Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
  
-target: ../LEMS_NML2_Ex19a_GapJunctionInstances.xml 
-engine: jNeuroML
-mep: .test.ex19.mep
+target: ../LEMS_NML2_Ex5_DetCell.xml 
+engine: jNeuroML_Brian2
+mep: .test.ex5.mep
 experiments:
-  cell0:
+  v:
     observables:
       spike times:
         file: 
-          path: ../results/ex19_v.dat
+          path: ../results/ex5_v.dat
           columns: [0,1]
           scaling: [1000, 1000]
         spike detection: 
           method: threshold
-          threshold: -69.5
-        tolerance: 0.000551783
-  cell1:
+          threshold: 0
+        tolerance: 0.001712
+  m:
     observables:
       spike times:
         file: 
-          path: ../results/ex19_v.dat
-          columns: [0,2]
-          scaling: [1000, 1000]
+          path: ../results/ex5_vars.dat
+          columns: [0,1]
+          scaling: [1000, 1]
         spike detection: 
           method: threshold
-          threshold: -69.5
-        tolerance: 0.000549
-  
+          threshold: 0.9
+        tolerance: 0.00166

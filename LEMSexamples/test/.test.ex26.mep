@@ -1,0 +1,24 @@
+system: Test Ex26
+
+experiments:
+    pre0:
+        expected:
+            spike times: [102.48500000000001, 121.455]
+    pre2:
+        expected:
+            spike times: [101.6, 115.13, 128.305, 141.46, 154.615, 167.77, 180.925, 194.085]
+    post3:
+        expected:
+            spike times: [101.78, 115.0, 133.5, 150.16]
+    post5:
+        expected:
+            spike times: [101.245, 114.665, 133.105, 148.88000000000002, 161.295, 173.04500000000002, 185.64]
+    post6:
+        expected:
+            spike times: [103.78, 123.53500000000001]
+    post8:
+        expected:
+            spike times: [103.05499999999999, 117.925, 135.835]
+
+
+    

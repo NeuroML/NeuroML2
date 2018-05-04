@@ -1,0 +1,165 @@
+<Lems>
+
+    <!-- Example showing new types of connections/inputs which can use weights -->
+
+    <!-- This is a file which can be read and executed by the LEMS Interpreter.
+    It imports the LEMS definitions of the core NeuroML 2 Components, creates
+    a model in "pure" NeuroML 2 and contains some LEMS elements for running
+    a simulation -->
+
+
+    <Target component="sim1"/>
+
+    <Include file="NeuroMLCoreDimensions.xml"/>
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+
+    <Include file="../examples/NML2_SingleCompHHCell.nml"/>
+
+    <!-- NeuroML 2 elements... -->
+
+    
+    <pulseGenerator id="pulseGen2" delay="100ms" duration="100ms" amplitude="0.068nA"/>
+    
+
+    <expOneSynapse id="syn1" gbase=".2nS" erev="0mV" tauDecay="2ms"/>
+
+    <expTwoSynapse id="syn2" gbase=".2nS" erev="0mV" tauDecay="2ms" tauRise="0.05ms"/>
+    
+    <gapJunction id="gj1" conductance="100pS"/>
+    
+    <!--Dummy synapse which emits no current. Used as presynaptic endpoint for analog synaptic connection.-->
+    <silentSynapse id="silent1"/>
+    
+    <!--Based on synapse in Methods of http://www.nature.com/neuro/journal/v7/n12/abs/nn1352.html-->
+    <gradedSynapse id="gs1" conductance="0.1nS" delta="5mV" Vth="-35mV" k="0.025per_ms" erev="0mV"/>
+
+    
+    <network id="net2">
+
+        <population id="prePop" component="hhcell" size="3" type="populationList">
+            <instance id="0">
+                <location x="0" y="0" z="0"/>
+            </instance>
+            <instance id="1">
+                <location x="100" y="0" z="0"/>
+            </instance>
+            <instance id="2">
+                <location x="200" y="0" z="0"/>
+            </instance>
+        </population>
+
+        <population id="postPop" component="hhcell" size="3" type="populationList">
+            <instance id="0">
+                <location x="0" y="10" z="0"/>
+            </instance>
+            <instance id="1">
+                <location x="100" y="100" z="0"/>
+            </instance>
+            <instance id="2">
+                <location x="200" y="100" z="0"/>
+            </instance>
+            <instance id="3">
+                <location x="300" y="10" z="0"/>
+            </instance>
+            <instance id="4">
+                <location x="400" y="100" z="0"/>
+            </instance>
+            <instance id="5">
+                <location x="500" y="100" z="0"/>
+            </instance>
+            <instance id="6">
+                <location x="600" y="10" z="0"/>
+            </instance>
+            <instance id="7">
+                <location x="700" y="100" z="0"/>
+            </instance>
+            <instance id="8">
+                <location x="800" y="100" z="0"/>
+            </instance>
+        </population>
+
+        <projection id="projection1" presynapticPopulation="prePop" postsynapticPopulation="postPop" synapse="syn1">
+            <connection id="0" preCellId="../prePop/0/hhcell" postCellId="../postPop/0/hhcell"/>
+        </projection>
+        
+        <projection id="projection2" presynapticPopulation="prePop" postsynapticPopulation="postPop" synapse="syn1">
+            <connectionWD id="0" preCellId="../prePop/0/hhcell" postCellId="../postPop/1/hhcell" weight=".5"  delay="20ms" />
+            <connectionWD id="1" preCellId="../prePop/0/hhcell" postCellId="../postPop/2/hhcell" weight="2" delay="40ms" />
+        </projection>
+        
+        <electricalProjection id ="testGJconn" presynapticPopulation="prePop" postsynapticPopulation="postPop">
+            <electricalConnectionInstanceW id="0" preCell="../prePop/0/hhcell" postCell="../postPop/3/hhcell" synapse="gj1" weight="1"/>
+            <electricalConnectionInstanceW id="1" preCell="../prePop/0/hhcell" postCell="../postPop/4/hhcell" synapse="gj1" weight=".5"/>
+            <electricalConnectionInstanceW id="2" preCell="../prePop/0/hhcell" postCell="../postPop/5/hhcell" synapse="gj1" weight="2"/>
+        </electricalProjection>
+        
+        <continuousProjection id ="testGradedConn" presynapticPopulation="prePop" postsynapticPopulation="postPop">
+            <continuousConnectionInstanceW id="0" preCell="../prePop/0/hhcell" postCell="../postPop/6/hhcell" preComponent="silent1" postComponent="gs1" weight="1"/>
+            <continuousConnectionInstanceW id="1" preCell="../prePop/0/hhcell" postCell="../postPop/7/hhcell" preComponent="silent1" postComponent="gs1" weight=".5"/>
+            <continuousConnectionInstanceW id="2" preCell="../prePop/0/hhcell" postCell="../postPop/8/hhcell" preComponent="silent1" postComponent="gs1" weight="2"/>
+        </continuousProjection>
+        
+        
+        <inputList id="i1" component="pulseGen2" population="prePop">
+            <inputW id="0" target="../prePop/0/hhcell" destination="synapses" weight="1"/>
+            <inputW id="1" target="../prePop/1/hhcell" destination="synapses" weight="0.5"/>
+            <inputW id="2" target="../prePop/2/hhcell" destination="synapses" weight="2"/>
+        </inputList>
+
+    </network>
+
+    <!-- End of NeuroML 2 elements... -->
+
+
+
+    <Simulation id="sim1" length="300ms" step="0.005ms" target="net2">
+
+        <Display id="d1" title="Ex26: Presynaptic elements" timeScale="1ms" xmin="0" xmax="300" ymin="-90" ymax="50">
+            <Line id="Pre 0 (x1 current)" quantity="prePop/0/hhcell/v" scale="1ms" color="#000000" timeScale="1ms"/>
+            <Line id="Pre 1 (x0.5 current)" quantity="prePop/1/hhcell/v" scale="1ms" color="#ff0000" timeScale="1ms"/>
+            <Line id="Pre 2 (x2 current)" quantity="prePop/2/hhcell/v" scale="1ms" color="#00ff00" timeScale="1ms"/>
+        </Display>
+
+        <Display id="d2" title="Ex26: Post elements - chemical syns" timeScale="1ms" xmin="0" xmax="300" ymin="-66" ymax="-62">
+            <Line id="Post 0 (weight=1, delay=0ms)" quantity="postPop/0/hhcell/v" scale="1mV" color="#000000" timeScale="1ms"/>
+            <Line id="Post 1 (weight=0.5, delay=20ms)" quantity="postPop/1/hhcell/v" scale="1mV" color="#ff0000" timeScale="1ms"/>
+            <Line id="Post 2 (weight=2, delay=40ms)" quantity="postPop/2/hhcell/v" scale="1mV" color="#00ff00" timeScale="1ms"/>
+        </Display>
+
+        <Display id="d3" title="Ex26: Post elements - elect syns" timeScale="1ms" xmin="0" xmax="300" ymin="-66" ymax="-62">
+            <Line id="Post 3 (weight=1)" quantity="postPop/3/hhcell/v" scale="1mV" color="#000000" timeScale="1ms"/>
+            <Line id="Post 4 (weight=0.5)" quantity="postPop/4/hhcell/v" scale="1mV" color="#ff0000" timeScale="1ms"/>
+            <Line id="Post 5 (weight=2)" quantity="postPop/5/hhcell/v" scale="1mV" color="#00ff00" timeScale="1ms"/>
+        </Display>
+
+        <Display id="d4" title="Ex26: Post elements - continuous syns" timeScale="1ms" xmin="0" xmax="300" ymin="-65.5" ymax="-62.5">
+            <Line id="Post 6 (weight=1)" quantity="postPop/6/hhcell/v" scale="1mV" color="#000000" timeScale="1ms"/>
+            <Line id="Post 7 (weight=0.5)" quantity="postPop/7/hhcell/v" scale="1mV" color="#ff0000" timeScale="1ms"/>
+            <Line id="Post 8 (weight=2)" quantity="postPop/8/hhcell/v" scale="1mV" color="#00ff00" timeScale="1ms"/>
+        </Display>
+
+        
+        <OutputFile id="of0pre" fileName="results/ex26_pre.dat">
+            <OutputColumn id="0" quantity="prePop/0/hhcell/v" />
+            <OutputColumn id="1" quantity="prePop/1/hhcell/v" />
+            <OutputColumn id="2" quantity="prePop/2/hhcell/v" />
+        </OutputFile>
+        
+        <OutputFile id="of0" fileName="results/ex26.dat">
+            <OutputColumn id="0" quantity="postPop/0/hhcell/v" />
+            <OutputColumn id="1" quantity="postPop/1/hhcell/v" />
+            <OutputColumn id="2" quantity="postPop/2/hhcell/v" />
+            <OutputColumn id="3" quantity="postPop/3/hhcell/v" />
+            <OutputColumn id="4" quantity="postPop/4/hhcell/v" />
+            <OutputColumn id="5" quantity="postPop/5/hhcell/v" />
+            <OutputColumn id="6" quantity="postPop/6/hhcell/v" />
+            <OutputColumn id="7" quantity="postPop/7/hhcell/v" />
+            <OutputColumn id="8" quantity="postPop/8/hhcell/v" />
+        </OutputFile>
+
+    </Simulation>
+
+
+</Lems>

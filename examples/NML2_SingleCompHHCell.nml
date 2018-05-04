@@ -46,7 +46,7 @@
 
         <morphology id="morph1">
             <segment id="0" name="soma">
-                <proximal x="0" y="0" z="0" diameter="17.841242"/> <!--Gives a convenient surface area of 1000.0 ?m�-->
+                <proximal x="0" y="0" z="0" diameter="17.841242"/> <!--Gives a convenient surface area of 1000.0 um^2-->
                 <distal x="0" y="0" z="0" diameter="17.841242"/>
             </segment>
 

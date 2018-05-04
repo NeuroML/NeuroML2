@@ -1,58 +1,70 @@
 # Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
  
-target: ../LEMS_NML2_Ex25_MultiComp.xml 
+target: ../LEMS_NML2_Ex26_Weights.xml
 engine: jNeuroML_NEURON
-mep: .test.ex25.mep
+mep: .test.ex26.mep
 experiments:
-  c0_0:
+  pre0:
     observables:
       spike times:
         file: 
-          path: ../results/ex25_0.dat
+          path: ../results/ex26_pre.dat
           columns: [0,1]
           scaling: [1000, 1000]
         spike detection: 
           method: threshold
         tolerance: 0
-  c0_2:
+  pre2:
     observables:
       spike times:
         file: 
-          path: ../results/ex25_0.dat
+          path: ../results/ex26_pre.dat
           columns: [0,3]
           scaling: [1000, 1000]
         spike detection: 
           method: threshold
         tolerance: 0
-  c0_3:
+  post3:
     observables:
       spike times:
         file: 
-          path: ../results/ex25_0.dat
+          path: ../results/ex26.dat
           columns: [0,4]
           scaling: [1000, 1000]
         spike detection: 
           method: threshold
+          threshold: -64.9
         tolerance: 0
-  c1_0:
+  post5:
     observables:
       spike times:
         file: 
-          path: ../results/ex25_1.dat
-          columns: [0,1]
+          path: ../results/ex26.dat
+          columns: [0,6]
           scaling: [1000, 1000]
         spike detection: 
           method: threshold
-          threshold: -64
+          threshold: -64.9
         tolerance: 0
-  c1_3:
+  post6:
     observables:
       spike times:
         file: 
-          path: ../results/ex25_1.dat
-          columns: [0,4]
+          path: ../results/ex26.dat
+          columns: [0,7]
           scaling: [1000, 1000]
         spike detection: 
           method: threshold
-          threshold: -64
+          threshold: -64.33
+        tolerance: 0
+  post8:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex26.dat
+          columns: [0,9]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: -64.33
         tolerance: 0

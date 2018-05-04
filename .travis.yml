@@ -1,11 +1,39 @@
+dist: trusty
+sudo: false
+
+addons:
+  apt:
+    packages:
+       # Requirements for Brian & NEST
+    - python-numpy 
+    - python-scipy 
+    - python-matplotlib 
+    - python-sympy
+        # Requirements for NetPyNE & libNeuroML
+    - python-tk
+    - python-lxml        
+    - python-tornado        
+        # Requirements for Moose
+    - python-dev
+    - libhdf5-dev
+    - libgsl0-dev 
+    - g++
+
+
 language: python
 python: 2.7
+ 
+virtualenv:
+    system_site_packages: true
 
 env:
     - OMV_ENGINE=jNeuroML
     - OMV_ENGINE=PyLEMS_NeuroML2
     - OMV_ENGINE=jNeuroML_NEURON
-    - OMV_ENGINE=jNeuroML_Brain
+    - OMV_ENGINE=jNeuroML_NetPyNE
+    - OMV_ENGINE=jNeuroML_Brian
+    - OMV_ENGINE=jNeuroML_Brian2
+    - OMV_ENGINE=jNeuroML_Moose
     - OMV_ENGINE=jNeuroML_validate
 
 install: 
@@ -27,6 +55,8 @@ install:
     - export JNML_HOME=$TRAVIS_BUILD_DIR/jNeuroML
     - cd
     - pip install git+https://github.com/OpenSourceBrain/osb-model-validation
+    
+    - pip install scipy # Why is this needed? Doesn't seem to get installed correctly on trusty with addons above...
     
 
 script:

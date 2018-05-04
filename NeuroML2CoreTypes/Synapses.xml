@@ -21,6 +21,8 @@
                    extends="basePointCurrent"
                    description="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009"> <!-- http://bioportal.bioontology.org/ontologies/46856/?p=terms&conceptid=cno%3Acno_0000009 -->
                    
+        <!-- Todo: see why Property isn't inherited by extended types
+        <Property name="weight" dimension="none" defaultValue="1"/>-->
         <EventPort name="in" direction="in"/>
 
     </ComponentType>
@@ -170,7 +172,7 @@
     <ComponentType name="expTwoSynapse"
                    extends="baseConductanceBasedSynapse"
                    description="Ohmic synapse model whose conductance waveform on receiving an event has a rise time of _tauRise and a decay time of _tauDecay. Max conductance reached during this time (assuming zero conductance before) is _gbase * _weight.">
-
+        
         <Property name="weight" dimension="none" defaultValue="1"/> 
         
         <Parameter name="tauRise" dimension="time" />
@@ -209,7 +211,7 @@
    <ComponentType name="expThreeSynapse"
                    extends="baseConductanceBasedSynapseTwo"
                    description="Ohmic synapse similar to expTwoSynapse but consisting of two components that can differ in decay times and max conductances but share the same rise time.">
-
+        
         <Property name="weight" dimension="none" defaultValue="1"/> 
         
         <Parameter name="tauRise" dimension="time" />
@@ -362,7 +364,7 @@
 				optional block and plasticity
 				mechanisms, which can be expressed as
 				child elements.">
-        
+       
         <Property name="weight" dimension="none" defaultValue="1"/> 
         
         <Children name="plasticityMechanisms" type="basePlasticityMechanism"/>
@@ -400,6 +402,49 @@
                 <EventOut port="relay"/>
             </OnEvent>
         </Dynamics>
+    </ComponentType>
+    
+
+    <ComponentType name="doubleSynapse"
+                   extends="baseVoltageDepSynapse"
+                   description="Synapse consisting of two independent synaptic mechanisms (e.g. AMPA-R and NMDA-R), which can be easily colocated in connections">
+       
+        <Property name="weight" dimension="none" defaultValue="1"/> 
+        
+        <ComponentReference name="synapse1" type="baseSynapse"/>
+        <ComponentReference name="synapse2" type="baseSynapse"/>
+        
+        <EventPort name="relay" direction="out" description="Used to relay incoming spikes to child mechanisms"/>
+        
+        <Path name="synapse1Path"/>
+        <Path name="synapse2Path"/>
+        
+        <Dynamics>
+            <StateVariable name="weightFactor" dimension="none"/>
+
+            <DerivedVariable name="i1" dimension="current" select="synapse1/i"/>
+            <DerivedVariable name="i2" dimension="current" select="synapse2/i"/>
+            <DerivedVariable name="i" exposure="i" dimension="current" value="weightFactor * (i1 + i2)"/>
+
+            <OnEvent port="in">
+                <StateAssignment variable="weightFactor" value="weight" />
+                <EventOut port="relay"/>
+            </OnEvent>
+            
+        </Dynamics>
+        
+        <Structure>
+            <ChildInstance component="synapse1"/>
+            <ChildInstance component="synapse2"/>
+            
+            <With instance="this" as="a"/>
+            <With instance="synapse1Path" as="b"/>
+            <With instance="synapse2Path" as="c"/>
+            
+            <EventConnection from="a" to="c"/>
+            <EventConnection from="a" to="b"/>
+        </Structure>
+        
     </ComponentType>
 
 
@@ -460,6 +505,8 @@
                    extends="baseSynapse"
                    description="Gap junction/single electrical connection">
         
+        <Property name="weight" dimension="none" defaultValue="1"/> 
+        
         <Parameter name="conductance" dimension="conductance"/>
         
         <Exposure name="i" dimension="current"/>
@@ -470,11 +517,11 @@
 
         <Dynamics>
             <DerivedVariable name="vpeer" dimension="voltage" select="peer/v"/>
-            <DerivedVariable name="i" exposure="i"  value="conductance * (vpeer - v)"/>
+            <DerivedVariable name="i" exposure="i"  value="weight * conductance * (vpeer - v)"/>
         </Dynamics>
+        
     </ComponentType>
     
-
 
     
     <ComponentType name="baseGradedSynapse"
@@ -482,10 +529,13 @@
                    description="Base type for graded synapses">
     </ComponentType>
     
+
     <ComponentType name="silentSynapse"
                    extends="baseGradedSynapse"
                    description="Dummy synapse which emits no current. Used as presynaptic endpoint for analog synaptic connection.">
         
+        <Property name="weight" dimension="none" defaultValue="1"/> <!-- Not used...-->
+    
         <Exposure name="i" dimension="current"/>
         
         <Requirement name="v" dimension="voltage"/>
@@ -504,23 +554,28 @@
                    extends="baseGradedSynapse"
                    description="Behaves just like a one way gap junction.">
         
+        <Property name="weight" dimension="none" defaultValue="1"/> 
+        
         <Parameter name="conductance" dimension="conductance"/>
         
         <Exposure name="i" dimension="current"/>
         
         <Requirement name="v" dimension="voltage"/>
 
-        <InstanceRequirement name="peer" type="gapJunction"/>
+        <InstanceRequirement name="peer" type="baseGradedSynapse"/>
 
         <Dynamics>
             <DerivedVariable name="vpeer" dimension="voltage" select="peer/v"/>
-            <DerivedVariable name="i" exposure="i"  value="conductance * (vpeer - v)"/>
+            <DerivedVariable name="i" exposure="i"  value="weight * conductance * (vpeer - v)"/>
         </Dynamics>
     </ComponentType>
+    
     
     <ComponentType name="gradedSynapse"
                    extends="baseGradedSynapse"
                    description="Graded/analog synapse. Based on synapse in Methods of http://www.nature.com/neuro/journal/v7/n12/abs/nn1352.html">
+        
+        <Property name="weight" dimension="none" defaultValue="1"/> 
         
         <Parameter name="conductance" dimension="conductance"/>
         
@@ -535,7 +590,7 @@
         
         <Requirement name="v" dimension="voltage"/>
 
-        <InstanceRequirement name="peer" type="gapJunction"/>
+        <InstanceRequirement name="peer" type="baseGradedSynapse"/>
 
         <Dynamics>
             <StateVariable name="s" dimension="none"/>
@@ -545,7 +600,7 @@
             <DerivedVariable name="inf" dimension="none" value="1/(1 + exp((Vth - vpeer)/delta))" exposure="inf"/>
             <DerivedVariable name="tau" dimension="time" value="(1-inf)/k" exposure="tau"/>
             
-            <DerivedVariable name="i" exposure="i"  value="conductance * s * (erev-v)"/>
+            <DerivedVariable name="i" exposure="i"  value="weight * conductance * s * (erev-v)"/>
             
             <!-- To catch case where tau ~ 0 => too fast a change in s => numerical instability -->
             <ConditionalDerivedVariable name="s_rate" dimension="per_time">

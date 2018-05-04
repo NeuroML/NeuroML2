@@ -45,7 +45,7 @@ lems_xmlschema = etree.XMLSchema(lems_xmlschema_doc)
 lems_master_ex_dir="../LEMS/examples"
 lems_master_ex_list=os.listdir(lems_master_ex_dir)
 
-nml2_schema_name = "NeuroML_v2beta4.xsd"
+nml2_schema_name = "NeuroML_v2beta5.xsd"
 nml2_schema = "Schemas/NeuroML2/%s"%nml2_schema_name
 nml2_schema_file = urlopen(nml2_schema)
 

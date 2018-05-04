@@ -1,58 +1,50 @@
 # Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
  
-target: ../LEMS_NML2_Ex25_MultiComp.xml 
-engine: jNeuroML_NEURON
-mep: .test.ex25.mep
+target: ../LEMS_NML2_Ex0_IaF.xml 
+engine: jNeuroML_NetPyNE
+mep: .test.ex0.mep
 experiments:
-  c0_0:
+  iafTauPop0:
     observables:
       spike times:
         file: 
-          path: ../results/ex25_0.dat
+          path: ../results/iaf_v.dat
           columns: [0,1]
           scaling: [1000, 1000]
         spike detection: 
           method: threshold
+          threshold: -55.1
         tolerance: 0
-  c0_2:
+  iafTauRefPop0:
     observables:
       spike times:
         file: 
-          path: ../results/ex25_0.dat
+          path: ../results/iaf_v.dat
+          columns: [0,2]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: -55.1
+        tolerance: 0
+  iafPop0:
+    observables:
+      spike times:
+        file: 
+          path: ../results/iaf_v.dat
           columns: [0,3]
           scaling: [1000, 1000]
         spike detection: 
           method: threshold
+          threshold: -55.1
         tolerance: 0
-  c0_3:
+  iafRefPop0:
     observables:
       spike times:
         file: 
-          path: ../results/ex25_0.dat
+          path: ../results/iaf_v.dat
           columns: [0,4]
           scaling: [1000, 1000]
         spike detection: 
           method: threshold
-        tolerance: 0
-  c1_0:
-    observables:
-      spike times:
-        file: 
-          path: ../results/ex25_1.dat
-          columns: [0,1]
-          scaling: [1000, 1000]
-        spike detection: 
-          method: threshold
-          threshold: -64
-        tolerance: 0
-  c1_3:
-    observables:
-      spike times:
-        file: 
-          path: ../results/ex25_1.dat
-          columns: [0,4]
-          scaling: [1000, 1000]
-        spike detection: 
-          method: threshold
-          threshold: -64
+          threshold: -55.1
         tolerance: 0

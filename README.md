@@ -16,5 +16,7 @@ See also http://www.neuroml.org/neuromlv2.
 
 This code is distributed under the terms of the GNU Lesser General Public License.
 
+[![Build Status](https://travis-ci.org/NeuroML/NeuroML2.svg?branch=development)](https://travis-ci.org/NeuroML/NeuroML2)
+
 
 

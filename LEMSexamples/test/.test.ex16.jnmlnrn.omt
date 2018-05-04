@@ -26,4 +26,15 @@ experiments:
           method: threshold
           threshold: -58.6
         tolerance:  0.00
+  compound:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex16_v.dat
+          columns: [0,10]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: 0
+        tolerance:  0.00
   

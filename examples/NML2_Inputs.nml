@@ -2,7 +2,7 @@
 
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  ../Schemas/NeuroML2/NeuroML_v2beta4.xsd"
+    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  ../Schemas/NeuroML2/NeuroML_v2beta5.xsd"
     id="NML2_Inputs">
 
     <!-- Some examples of the currently supported input types -->
@@ -18,13 +18,18 @@
     <rampGenerator id="rg0" delay="50ms" duration="200ms" startAmplitude="0.5nA" finishAmplitude="4nA" baselineAmplitude="0nA"/>
     
     <compoundInput id="ci0">
-        <pulseGenerator id="pg1" delay="50ms" duration="200ms" amplitude="1 nA" />
-        <pulseGenerator id="pg2" delay="100ms" duration="100ms" amplitude="1 nA" />
-        <sineGenerator id="sg0" phase="0" delay="125ms" duration="50ms" amplitude="1nA" period="25ms"/>
+        <pulseGenerator id="pg1" delay="50ms" duration="200ms" amplitude=".8 nA" />
+        <pulseGenerator id="pg2" delay="100ms" duration="100ms" amplitude=".4 nA" />
+        <sineGenerator id="sg0" phase="0" delay="125ms" duration="50ms" amplitude=".4nA" period="25ms"/>
     </compoundInput>
-
-    <voltageClamp id="vClamp0" delay="50ms" duration="200ms"
-              targetVoltage="-50mV" simpleSeriesResistance="1e6ohm"/>
+    
+    <voltageClampTriple id="vClamp0" 
+                        active = "1"
+                        delay="50ms" duration="200ms"
+                        conditioningVoltage="-70mV" 
+                        testingVoltage="-50mV" 
+                        returnVoltage="-70mV" 
+                        simpleSeriesResistance="1e6ohm"/>
 
     <spikeArray id="spkArr">
       <spike id="0" time="50 ms"/>
@@ -59,6 +64,8 @@
                   maxISI="30 ms"/>
 
     <spikeGeneratorPoisson id="spikeGenPoisson" averageRate="50 Hz"/>
+    
+    <spikeGeneratorRefPoisson id="spikeGenRefPoisson" averageRate="50 Hz" minimumISI="10 ms"/>
 
     <poissonFiringSynapse id="poissonFiringSyn" averageRate="10 Hz" synapse="synInput" spikeTarget="./synInput"/>
     

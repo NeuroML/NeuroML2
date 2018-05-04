@@ -16,6 +16,7 @@
     <Include file="Cells.xml" />
     <!-- The above file includes NeuroMLCoreDimensions.xml, Channels.xml,
     Synapses.xml and Inputs.xml -->
+    <Include file="PyNN.xml" />
     <Include file="Networks.xml" />
     <Include file="Simulation.xml" />
     
@@ -27,13 +28,19 @@
     <iafCell id="iaf" leakConductance="0.2nS" leakReversal="-65mV"
              thresh="-55mV" reset="-70mV" C="3.2pF"/>
     
+    <IF_curr_alpha id="IF_curr_alpha" cm="1.0" i_offset="0" tau_m="20.0" tau_refrac="2" 
+        tau_syn_E="0.5" tau_syn_I="0.5" v_init="-65" v_reset="-62.0" v_rest="-65.0" v_thresh="-52.0"/>
+    
     <expTwoSynapse id="syn_exc1" erev="0mV" gbase="0.1nS" tauDecay="10ms" tauRise="0.5ms"/>
     <expTwoSynapse id="syn_exc2" erev="0mV" gbase="0.3nS" tauDecay="10ms" tauRise="0.5ms"/>
+    <expTwoSynapse id="syn_exc3" erev="0mV" gbase="5nS" tauDecay="10ms" tauRise="0.5ms"/>
     
     <poissonFiringSynapse id="poissonFiringSyn" synapse="syn_exc1" averageRate="50 Hz" spikeTarget="./syn_exc1"/>
+    <poissonFiringSynapse id="poissonFiringSyn2" synapse="syn_exc3" averageRate="150 Hz" spikeTarget="./syn_exc3"/>
 
     <network id="netSpikes">
         <population id="iafPop" component="iaf" size="5" />
+        <population id="pynnPop" component="IF_curr_alpha" size="3" />
         <population id="hhpop" component="hhcell" size="1"/>
         
         <synapticConnection from="iafPop[0]" to="hhpop[0]" synapse="syn_exc2" destination="synapses"/>
@@ -47,6 +54,10 @@
         <explicitInput input="poissonFiringSyn" destination="synapses" target="iafPop[2]"/>
         <explicitInput input="poissonFiringSyn" destination="synapses" target="iafPop[3]"/>
         <explicitInput input="poissonFiringSyn" destination="synapses" target="iafPop[4]"/>
+        
+        <explicitInput input="poissonFiringSyn2" destination="synapses" target="pynnPop[0]"/>
+        <explicitInput input="poissonFiringSyn2" destination="synapses" target="pynnPop[1]"/>
+        <explicitInput input="poissonFiringSyn2" destination="synapses" target="pynnPop[2]"/>
     </network>
 
     <!-- End of NeuroML2 content -->
@@ -63,7 +74,14 @@
             <Line id="iaf4" quantity="iafPop[4]/v" scale="1mV" color="#882228" timeScale="1ms" />
         </Display>
         
-        <Display id="d1" title="Ex23: Recording spike times in LEMS: HH cell" timeScale="1ms" xmin="-30"
+        <Display id="d1" title="Ex23: Recording spike times in LEMS: PyNN cells" timeScale="1ms" xmin="-30"
+                 xmax="330" ymin="-75" ymax="-50">
+            <Line id="pynn0" quantity="pynnPop[0]/v" scale="1mV" color="#000000" timeScale="1ms" />
+            <Line id="pynn1" quantity="pynnPop[1]/v" scale="1mV" color="#ff2222" timeScale="1ms" />
+            <Line id="pynn2" quantity="pynnPop[2]/v" scale="1mV" color="#eeee44" timeScale="1ms" />
+        </Display>
+        
+        <Display id="d2" title="Ex23: Recording spike times in LEMS: HH cell" timeScale="1ms" xmin="-30"
                  xmax="330" ymin="-80" ymax="40">
             <Line id="hh0" quantity="hhpop[0]/v" scale="1mV" color="#000000" timeScale="1ms" />
         </Display>
@@ -86,6 +104,12 @@
             <EventSelection id="2" select="iafPop[2]" eventPort="spike"/>
             <EventSelection id="3" select="iafPop[3]" eventPort="spike"/>
             <EventSelection id="4" select="iafPop[4]" eventPort="spike"/>
+        </EventOutputFile>
+
+        <EventOutputFile id="pynn_spikes" fileName="results/ex23.pynn.spikes" format="TIME_ID">
+            <EventSelection id="0" select="pynnPop[0]" eventPort="spike"/>
+            <EventSelection id="1" select="pynnPop[1]" eventPort="spike"/>
+            <EventSelection id="2" select="pynnPop[2]" eventPort="spike"/>
         </EventOutputFile>
 
         <EventOutputFile id="hh_spikes" fileName="results/ex23.hh.spikes" format="ID_TIME">

@@ -232,10 +232,28 @@
 
     </ComponentType>
     
+    
+    <ComponentType name="electricalConnectionInstanceW"
+                   description="To enable connections between populations through gap junctions. Populations need to be of type _populationList_ and contain _instance_ and _location_ elements. Includes setting of _weight for the connection"
+                   extends="electricalConnectionInstance">
+        
+        <Parameter name="weight" dimension="none"/>
+        
+        <Structure>
+            <With instance="preCell" as="a"/>
+            <With instance="postCell" as="b"/>
+            <Tunnel name="peer" endA="a" endB="b" componentA="synapse" componentB="synapse">
+                <Assign property="weight" value="weight"/>
+            </Tunnel>
+        </Structure>
+
+    </ComponentType>
+    
+    
     <ComponentType name="electricalProjection"
                    description="A projection between _presynapticPopulation to another _postsynapticPopulation through gap junctions.">
         <Children name="connections" type="electricalConnection"/>
-        <Children name="connections" type="electricalConnectionInstance"/>
+        <Children name="connectionInstances" type="electricalConnectionInstance"/>
         <ComponentReference name="presynapticPopulation" type="population" local="true"/>
         <ComponentReference name="postsynapticPopulation" type="population" local="true"/>
     </ComponentType>
@@ -283,12 +301,28 @@
 
     </ComponentType>
     
+    <ComponentType name="continuousConnectionInstanceW"
+                   description="An instance of a connection in a _continuousProjection_ between _presynapticPopulation to another _postsynapticPopulation through a _preComponent at the start and _postComponent at the end. Populations need to be of type _populationList_ and contain _instance_ and _location_ elements. Can be used for analog synapses. Includes setting of _weight for the connection"
+                   extends="continuousConnectionInstance">
+
+        <Parameter name="weight" dimension="none"/>
+
+        <Structure>
+            <With instance="preCell" as="a"/>
+            <With instance="postCell" as="b"/>
+            <Tunnel name="peer" endA="a" endB="b" componentA="preComponent" componentB="postComponent">
+                <Assign property="weight" value="weight"/>
+            </Tunnel>
+        </Structure>
+
+    </ComponentType>
+    
     
     <ComponentType name="continuousProjection"
                    description="A projection between _presynapticPopulation and _postsynapticPopulation through components _preComponent at the start and _postComponent at the end of a _continuousConnection_ or _continuousConnectionInstance_. Can be used for analog synapses.">
         
         <Children name="connections" type="continuousConnection"/>
-        <Children name="connections" type="continuousConnectionInstance"/>
+        <Children name="connectionInstances" type="continuousConnectionInstance"/>
         
         <ComponentReference name="presynapticPopulation" type="population" local="true"/>
         <ComponentReference name="postsynapticPopulation" type="population" local="true"/>
@@ -362,6 +396,22 @@
             <With instance="target" as="b"/>
 
             <EventConnection from="a" to="b" receiver="../component" receiverContainer="destination"/>
+        </Structure>
+
+    </ComponentType>
+
+    <ComponentType name="inputW" description="Specifies input lists. Can set _weight to scale individual inputs." extends="input">
+
+        <Parameter name="weight" dimension="none"/>
+        
+        <Structure>
+
+            <With instance="target" as="a"/>
+            <With instance="target" as="b"/>
+
+            <EventConnection from="a" to="b" receiver="../component" receiverContainer="destination">
+                <Assign property="weight" value="weight"/>
+            </EventConnection>
         </Structure>
 
     </ComponentType>

@@ -2,7 +2,7 @@
 
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  ../Schemas/NeuroML2/NeuroML_v2beta4.xsd"
+         xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  ../Schemas/NeuroML2/NeuroML_v2beta5.xsd"
          id="NML2_SynapseTypes">
 
     <!-- Some examples of the currently supported synapse types -->
@@ -23,11 +23,11 @@
     </expTwoSynapse>
 
 
-    <expThreeSynapse id="SynapseTwo" gbase1="1.5nS" tauRise="0.1ms" tauDecay1="0.7ms" 
+    <expThreeSynapse id="AMPA" gbase1="1.5nS" tauRise="0.1ms" tauDecay1="0.7ms" 
                      gbase2="0.5nS" tauDecay2="2.5ms"  erev="0mV">
         <notes>A synapse consisting of one rise and two decay time courses.</notes>
-    </expThreeSynapse> 
-
+    </expThreeSynapse>
+    
 
     <blockingPlasticSynapse id="stpSynDep" gbase="1nS" erev="0mV" tauRise="0.1ms" tauDecay="2ms">
         <notes>A biexponential synapse exhibiting STD.</notes>
@@ -67,5 +67,14 @@
                       scalingConc="1.920544 mM" scalingVolt="16.129 mV"/>
     </blockingPlasticSynapse>
 
+    <blockingPlasticSynapse id="NMDA" gbase="0.5nS"
+			    erev="0mV" tauRise="2ms" tauDecay="8ms">
+        <blockMechanism type="voltageConcDepBlockMechanism" species="mg" blockConcentration="1.2 mM"
+			scalingConc="1.920544 mM" scalingVolt="16.129 mV"/>
+    </blockingPlasticSynapse>
+   
+    <doubleSynapse id="AMPA_NMDA" synapse1="AMPA" synapse1Path="./AMPA" synapse2="NMDA" synapse2Path="./NMDA">
+        <notes>A single "synapse" which contains both AMPA and NMDA. It is planned that the need for extra synapse1Path/synapse2Path attributes can be removed in later versions.</notes>
+    </doubleSynapse> 
 
 </neuroml>
