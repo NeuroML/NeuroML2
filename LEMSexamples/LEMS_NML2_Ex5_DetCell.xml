@@ -22,7 +22,7 @@
     <Simulation id="sim1" length="300ms" step="0.01ms" target="net1">
     
         <Display id="d1" title="Ex5: HH cell with simple morphology: voltage" timeScale="1ms" xmin="0" xmax="300" ymin="-90" ymax="50">
-                <Line id="v" quantity="hhpop[0]/v" scale="1mV" color="#ffffff" timeScale="1ms"/>
+                <Line id="v" quantity="hhpop[0]/v" scale="1mV" color="#cccccc" timeScale="1ms"/>
                 <Line id="spiking" quantity="hhpop[0]/spiking" scale="0.1V"  color="#004040" timeScale="1ms"/>
                 <!--<Line id="l3" quantity="hhpop[0]/debugVal" scale="1V"  color="#999999" timeScale="1ms"/>-->
         </Display>
