@@ -34,7 +34,7 @@
   
         
         <continuousProjection id ="testGradedConn" presynapticPopulation="hhPop1" postsynapticPopulation="hhPop2">
-            <continuousConnectionInstance id="0" preCell="../hhPop1/0/hhcell" postCell="../hhPop2/0/hhcell" preComponent="silent1" postComponent="gs1"/>
+            <continuousConnectionInstanceW id="0" preCell="../hhPop1/0/hhcell" postCell="../hhPop2/0/hhcell" preComponent="silent1" postComponent="gs1" weight="1"/>
         </continuousProjection>
         
         <inputList id="i1" component="pulseGen1" population="iafPop1">

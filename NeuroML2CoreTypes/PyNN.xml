@@ -565,33 +565,50 @@
         <DerivedParameter name="end" dimension="time" value="start + duration"/>
         
         <Constant name="LONG_TIME" dimension="time" value="1e9hour"/>
+        <Constant name="SMALL_TIME" dimension="time" value="1e-9ms"/> <!-- See below for usage -->
 
         <!--TODO: remove! Only required as EventConnection is used in explicitInput to
         connect inputs to cells. Events aren't passed! ... -->
         <EventPort name="in" direction="in"/>
+         
+        <!-- See spikeGeneratorPoisson for full description of tnextIdeal/tnextUsed etc. -->
+        <Exposure name="isi" dimension="time"/>
+        <Exposure name="tnextIdeal" dimension="time"/>
+        <Exposure name="tnextUsed" dimension="time"/> 
 
         <Dynamics>
+            
             <StateVariable name="tsince" dimension="time" exposure="tsince"/>
-            <StateVariable name="nextSpike" dimension="time"/>
-            <StateVariable name="nextSpikeTemp" dimension="time"/>
+            <StateVariable name="tnextIdeal" dimension="time" exposure="tnextIdeal"/>
+            <StateVariable name="tnextUsed" dimension="time" exposure="tnextUsed"/>
+            <StateVariable name="isi" dimension="time" exposure="isi"/>
 
             <TimeDerivative variable="tsince" value="1"/>
+            <TimeDerivative variable="tnextUsed" value="0"/> 
+            <TimeDerivative variable="tnextIdeal" value="0"/> 
 
             <OnStart>
-                <StateAssignment variable="nextSpike" value="start - log(1 - random(1))/rate"/>
+                <StateAssignment variable="isi" value="start - log(random(1))/rate"/>
                 <StateAssignment variable="tsince" value="0"/>
+                
+                <!-- See spikeGeneratorPoisson for full description of tnextIdeal/tnextUsed etc. -->
+                <StateAssignment variable="tnextIdeal" value="isi + H(((isi) - (start+duration))/duration)*LONG_TIME"/>
+                <StateAssignment variable="tnextUsed" value="tnextIdeal"/>
             </OnStart>
 
 
-            <OnCondition test="tsince .gt. nextSpike">
-                <StateAssignment variable="nextSpikeTemp" value="-1 * log(1 - random(1))/rate"/>
+            <OnCondition test="t .gt. tnextUsed">
+                <StateAssignment variable="isi" value="-1 * log(random(1))/rate"/>
+                
                 <!--
-                Check to see whether current time + nextSpikeTemp is greater than start+duration and if so set it to a long time in the future...
+                Check to see whether tnextIdeal+isi is greater than start+duration and if so set it to a long time in the future...
                 The use of H() is necessary here (as opposed to checking this in the test of OnCondition) since NEURON requires a single boolean expression in test above
                 -->
-                <StateAssignment variable="nextSpike" value="nextSpikeTemp + H(((t+nextSpikeTemp) - (start+duration))/duration)*LONG_TIME"/>
+                <StateAssignment variable="tnextIdeal" value="(tnextIdeal+isi) + H(((tnextIdeal+isi) - (start+duration))/duration)*LONG_TIME"/> 
+                <StateAssignment variable="tnextUsed" value="tnextIdeal*H( (tnextIdeal-t)/t ) + (t+SMALL_TIME)*H( (t-tnextIdeal)/t )"/> 
+                
                 <StateAssignment variable="tsince" value="0"/>
-                <!--<StateAssignment variable="spiking" value="1"/>-->
+                
                 <EventOut port="spike"/>
             </OnCondition>
 
