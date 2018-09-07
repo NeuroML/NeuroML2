@@ -248,6 +248,8 @@
                    description="Poisson spike generator connected to single synapse providing an input current"
                    extends="baseVoltageDepPointCurrentSpiking">
         
+        <Property name="weight" dimension="none" defaultValue="1"/> 
+        
         <Parameter name="averageRate" dimension="per_time"/>
         
         <DerivedParameter name="averageIsi" dimension="time" value="1 / averageRate"/>
@@ -276,7 +278,8 @@
             <StateVariable name="tnextUsed" dimension="time" exposure="tnextUsed"/>
             <StateVariable name="isi" dimension="time" exposure="isi"/>
             
-            <DerivedVariable name="i" dimension="current" exposure="i" select="synapse/i"/>
+            <DerivedVariable name="iSyn" dimension="current" select="synapse/i"/>
+            <DerivedVariable name="i" dimension="current" exposure="i" value="weight * iSyn"/>
 
             <TimeDerivative variable="tsince" value="1"/>
             <TimeDerivative variable="tnextUsed" value="0"/> 
@@ -315,6 +318,8 @@
                       Similar to ComponentType poissonFiringSynapse."
                    extends="baseVoltageDepPointCurrentSpiking">
         
+        <Property name="weight" dimension="none" defaultValue="1"/> 
+        
         <Parameter name="averageRate" dimension="per_time"/>
         
         <Parameter name="delay" dimension="time"/>
@@ -346,7 +351,8 @@
             <StateVariable name="tnextUsed" dimension="time" exposure="tnextUsed"/>
             <StateVariable name="isi" dimension="time" exposure="isi"/>
             
-            <DerivedVariable name="i" dimension="current" exposure="i" select="synapse/i"/>
+            <DerivedVariable name="iSyn" dimension="current" select="synapse/i"/>
+            <DerivedVariable name="i" dimension="current" exposure="i" value="weight * iSyn"/>
 
             <TimeDerivative variable="tsince" value="1"/>
             <TimeDerivative variable="tnextUsed" value="0"/> 
@@ -390,6 +396,8 @@
                    description="Spike array connected to a single synapse, producing current triggered by each spike in the array"
                    extends="baseVoltageDepPointCurrentSpiking">
         
+        <Property name="weight" dimension="none" defaultValue="1"/> 
+        
         <Children name="spikes" type="spike"/>
         
         <ComponentReference name="synapse" type="baseSynapse"/>
@@ -403,7 +411,8 @@
         <Dynamics>
             <StateVariable name="tsince" dimension="time" exposure="tsince"/>
             
-            <DerivedVariable name="i" dimension="current" exposure="i" select="synapse/i"/>
+            <DerivedVariable name="iSyn" dimension="current" select="synapse/i"/>
+            <DerivedVariable name="i" dimension="current" exposure="i" value="weight * iSyn"/>
 
             <TimeDerivative variable="tsince" value="1"/>
             <OnEvent port="in">
@@ -746,6 +755,8 @@
     <ComponentType name="voltageClampTriple" extends="baseVoltageDepPointCurrent"
                    description="Voltage clamp with 3 clamp levels. Applies a variable current _i (through _simpleSeriesResistance) to try to keep parent cell at _conditioningVoltage until time _delay, _testingVoltage until _delay + _duration, and _returnVoltage afterwards. Only enabled if _active = 1. ">
 
+        <Property name="weight" dimension="none" defaultValue="1"/> 
+        
         <Parameter name="active" dimension="none" description="Whether the voltage clamp is active (1) or inactive (0)."/>
         
         <Parameter name="delay" dimension="time" description="Delay before switching from conditioningVoltage to testingVoltage."/>
@@ -769,15 +780,15 @@
             </OnEvent>
 
             <OnCondition test="active .eq. 1 .and. t .lt. delay">
-                <StateAssignment variable="i" value="(conditioningVoltage - v) / simpleSeriesResistance"/>
+                <StateAssignment variable="i" value="weight * (conditioningVoltage - v) / simpleSeriesResistance"/>
             </OnCondition>
 
             <OnCondition test="active .eq. 1 .and. t .geq. delay">
-                <StateAssignment variable="i" value="(testingVoltage - v) / simpleSeriesResistance"/>
+                <StateAssignment variable="i" value="weight * (testingVoltage - v) / simpleSeriesResistance"/>
             </OnCondition>
 
             <OnCondition test="active .eq. 1 .and. t .gt. duration + delay">
-                <StateAssignment variable="i" value="(returnVoltage - v) / simpleSeriesResistance"/>
+                <StateAssignment variable="i" value="weight * (returnVoltage - v) / simpleSeriesResistance"/>
             </OnCondition>
 
         </Dynamics>
