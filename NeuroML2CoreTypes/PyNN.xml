@@ -443,7 +443,7 @@
                    extends="basePynnSynapse" 
                    description="Conductance based synapse with instantaneous rise and single exponential decay (with time constant tau_syn)">
 
-        <Property name="weight" dimension="none" />
+        <Property name="weight" dimension="none"  defaultValue="1"/>
 
         <Parameter name="e_rev" dimension="none"/>
 
@@ -469,7 +469,7 @@
                    extends="basePynnSynapse" 
                    description="Current based synapse with instantaneous rise and single exponential decay (with time constant tau_syn)">
 
-        <Property name="weight" dimension="none" />
+        <Property name="weight" dimension="none"  defaultValue="1"/>
 
         <Dynamics>
             <StateVariable name="I" dimension="none"/>
@@ -491,7 +491,7 @@
                    extends="basePynnSynapse" 
                    description="Alpha synapse: rise time and decay time are both tau_syn. Conductance based synapse.">
 
-        <Property name="weight" dimension="none" />
+        <Property name="weight" dimension="none"  defaultValue="1"/>
 
         <Parameter name="e_rev" dimension="none"/>
 
@@ -530,7 +530,7 @@
                    extends="basePynnSynapse" 
                    description="Alpha synapse: rise time and decay time are both tau_syn. Current based synapse.">
 
-        <Property name="weight" dimension="none" />
+        <Property name="weight" dimension="none"  defaultValue="1"/>
 
         <Exposure name="A" dimension="current"/>
 

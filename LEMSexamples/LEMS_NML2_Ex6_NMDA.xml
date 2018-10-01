@@ -112,6 +112,10 @@
             <OutputColumn id ="b" quantity="pasPop1[0]/synapses:nmdaSyn1:0/block/blockFactor"/> 
         </OutputFile>  
         
+        <EventOutputFile id="spikes0" fileName="results/ex6.input.spikes" format="ID_TIME">
+            <EventSelection id="0" select="srcPop[0]" eventPort="spike"/>
+        </EventOutputFile>
+        
     </Simulation>
 
 </Lems>
