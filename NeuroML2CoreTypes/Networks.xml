@@ -416,4 +416,24 @@
 
     </ComponentType>
 
+
+    <!-- Work in progress  ... 
+    <ComponentType name="inputIndex" description="..." extends="input">
+
+        <Parameter name="target_id" dimension="none"/>
+        <Parameter name="weight" dimension="none"/>
+        
+        <Structure>
+
+            <With instance="target" as="a"/>
+            <With instance="target" as="b"/>
+
+            <EventConnection from="a" to="b" receiver="../component" receiverContainer="destination">
+                <Assign property="target_id" value="target_id"/>
+                <Assign property="weight" value="weight"/>
+            </EventConnection>
+        </Structure>
+
+    </ComponentType>-->
+
 </Lems>

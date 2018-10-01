@@ -39,6 +39,13 @@
       <spike id="4" time="250 ms"/>
     </spikeArray>
     
+    <!-- Work in progress  ... 
+    <spikeTimes id="spikeTimes0"  synapse="synInput" spikeTarget="./synInput">
+      <spikeTimeIndex id="0" time="50 ms" cell_id="4"/>
+      <spikeTimeIndex id="1" time="100 ms" cell_id="13"/>
+      <spikeTimeIndex id="2" time="150 ms" cell_id="12"/>
+    </spikeTimes>-->
+    
     <timedSynapticInput id="synTrain" synapse="synInputFastTwo" spikeTarget="./synInputFastTwo">
         <spike id="0" time="2 ms"/>
         <spike id="1" time="15 ms"/>

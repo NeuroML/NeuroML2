@@ -186,6 +186,7 @@
         <DerivedParameter name="averageIsi" dimension="time" value="1 / averageRate"/>
         
         <ComponentReference name="synapse" type="baseSynapse"/>
+          
         
         
         <EventPort name="spike" direction="out" description="Port on which spikes are emitted"/>
@@ -762,4 +763,86 @@
 
     </ComponentType>
 
+    <!-- Work in progress  ... 
+    <ComponentType name="spikeTimes" extends="baseVoltageDepPointCurrentSpiking"
+                   description="Set of ...">
+
+        <Property name="weight" dimension="none" defaultValue="1"/> 
+        
+        <Property name="target_id" dimension="none" description="..."/>
+        
+        <Children name="spikeTimeIndex" type="spikeTimeIndex"/>
+        
+        <ComponentReference name="synapse" type="baseSynapse"/>
+        
+        <EventPort name="in" direction="in" description="This will receive events from the children"/>
+                
+        <Path name="spikeTarget"/>
+
+        <Dynamics>
+            <StateVariable name="tsince" dimension="time" exposure="tsince"/>
+
+            <DerivedVariable name="iSyn" dimension="current" select="synapse/i"/>
+            <DerivedVariable name="i" dimension="current" exposure="i" value="weight * iSyn"/>
+
+            <TimeDerivative variable="tsince" value="1"/>
+            <OnStart>
+                <StateAssignment variable="tsince" value="0"/>
+            </OnStart>
+
+            <OnEvent port="in">
+                <StateAssignment variable="tsince" value="0"/>
+                <EventOut port="spike"/>
+            </OnEvent>
+
+        </Dynamics>
+        
+        <Structure>
+            <ChildInstance component="synapse"/>
+            
+            <With instance="this" as="a"/>
+            <With instance="spikeTarget" as="b"/>
+            
+            <EventConnection from="a" to="b"/>
+        </Structure>
+
+    </ComponentType>
+
+
+    <ComponentType name="spikeTimeIndex" extends="baseSpikeSource"
+                   description="Emits a single spike at the specified time to an identified cell index">
+
+        <Requirement name="target_id" dimension="none" description="..."/>
+        
+        <Parameter name="time" dimension="time" description="Time at which to emit one spike event"/>
+        <Parameter name="cell_id" dimension="none" description="..."/>
+        
+        <Exposure name="spiked" dimension="none" description="0 signals not yet spiked, 1 signals has spiked"/>
+
+        <Dynamics>
+
+            <StateVariable name="tsince" dimension="time" exposure="tsince"/>
+            <StateVariable name="spiked" dimension="none" exposure="spiked"/>
+
+            <TimeDerivative variable="tsince" value="1"/>
+
+            <OnStart>
+                <StateAssignment variable="tsince" value="0"/>
+            </OnStart>
+
+            <OnCondition test="(t .geq. time) .and. (spiked .eq. 0) .and. (target_id .eq. cell_id)">
+                <StateAssignment variable="spiked" value="1"/>
+                <StateAssignment variable="tsince" value="0"/>
+                <EventOut port="spike"/>
+            </OnCondition>
+        </Dynamics>
+
+        <Structure>
+            <With instance="this" as="a"/>
+            <With instance="parent" as="b"/>
+            <EventConnection from="a" to="b"/>
+        </Structure>
+
+    </ComponentType>
+    -->
 </Lems>
