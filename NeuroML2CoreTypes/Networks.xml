@@ -154,8 +154,9 @@
 
         <Parameter name="weight" dimension="none"/>
         <Parameter name="delay" dimension="time"/>
-        <Path name="from"/>
-        <Path name="to"/>
+        
+        <Path name="from"/> <!-- Ideally this should be taken from extended comp type -->
+        <Path name="to"/>   <!-- Ideally this should be taken from extended comp type -->
 
         <Structure>
             <With instance="from" as="a"/>
@@ -239,6 +240,9 @@
         
         <Parameter name="weight" dimension="none"/>
         
+        <Path name="preCell"/>  <!-- Ideally this should be taken from extended comp type -->
+        <Path name="postCell"/> <!-- Ideally this should be taken from extended comp type -->
+        
         <Structure>
             <With instance="preCell" as="a"/>
             <With instance="postCell" as="b"/>
@@ -306,6 +310,9 @@
                    extends="continuousConnectionInstance">
 
         <Parameter name="weight" dimension="none"/>
+        
+        <Path name="preCell"/>  <!-- Ideally this should be taken from extended comp type -->
+        <Path name="postCell"/> <!-- Ideally this should be taken from extended comp type -->
 
         <Structure>
             <With instance="preCell" as="a"/>
@@ -403,6 +410,9 @@
     <ComponentType name="inputW" description="Specifies input lists. Can set _weight to scale individual inputs." extends="input">
 
         <Parameter name="weight" dimension="none"/>
+        
+        <Path name="target"/> <!-- Ideally this should be taken from extended comp type -->
+        <Text name="destination"/> <!-- Ideally this should be taken from extended comp type -->
         
         <Structure>
 

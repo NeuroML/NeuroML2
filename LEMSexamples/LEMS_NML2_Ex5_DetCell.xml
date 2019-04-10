@@ -8,7 +8,7 @@
          a simulation -->
 
 
-    <Target component="sim1" reportFile="report.txt"/>
+    <Target component="sim1" reportFile="report.ex5.txt"/>
 
     <Include file="Cells.xml"/>
     <Include file="Networks.xml"/>
