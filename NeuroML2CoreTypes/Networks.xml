@@ -154,8 +154,9 @@
 
         <Parameter name="weight" dimension="none"/>
         <Parameter name="delay" dimension="time"/>
-        <Path name="from"/>
-        <Path name="to"/>
+        
+        <Path name="from"/> <!-- Ideally this should be taken from extended comp type -->
+        <Path name="to"/>   <!-- Ideally this should be taken from extended comp type -->
 
         <Structure>
             <With instance="from" as="a"/>
@@ -317,7 +318,7 @@
                    extends="continuousConnectionInstance">
 
         <Parameter name="weight" dimension="none"/>
-       
+        
         <!-- Ideally these should be inherited from the extended CT, but jLEMS 
         complains about this... adding them here for a quieter life... -->
         <Path name="preCell"/>
@@ -423,6 +424,9 @@
     <ComponentType name="inputW" description="Specifies input lists. Can set _weight to scale individual inputs." extends="input">
 
         <Parameter name="weight" dimension="none"/>
+        
+        <Path name="target"/> <!-- Ideally this should be taken from extended comp type -->
+        <Text name="destination"/> <!-- Ideally this should be taken from extended comp type -->
         
         <Structure>
 
