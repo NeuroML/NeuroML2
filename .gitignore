@@ -64,3 +64,4 @@ examples/*.pov
 /examples/x86_64
 /LEMSexamples/report.txt
 /LEMSexamples/test/x86_64
+/LEMSexamples/report.ex*.txt
