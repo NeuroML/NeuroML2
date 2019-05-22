@@ -8,7 +8,7 @@
          a simulation -->
 
 
-    <Target component="sim1"/>
+    <Target component="sim1" reportFile="report.ex7.txt"/>
 
     <Include file="NeuroMLCoreDimensions.xml"/>
     <Include file="Cells.xml"/>
