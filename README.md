@@ -1,5 +1,5 @@
-NeuroML2
-========
+NeuroML 2
+=========
 
 This repository contains the [NeuroML 2 Schema](https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2), 
 the [ComponentType definitions in LEMS](https://github.com/NeuroML/NeuroML2/tree/master/NeuroML2CoreTypes) and 
