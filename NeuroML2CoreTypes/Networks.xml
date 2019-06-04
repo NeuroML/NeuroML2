@@ -240,8 +240,14 @@
         
         <Parameter name="weight" dimension="none"/>
         
-        <Path name="preCell"/>  <!-- Ideally this should be taken from extended comp type -->
-        <Path name="postCell"/> <!-- Ideally this should be taken from extended comp type -->
+        <!-- Ideally these should be inherited from the extended CT, but jLEMS 
+        complains about this... adding them here for a quieter life... -->
+        <Path name="preCell"/>
+        <Path name="postCell"/>
+        <Text name="preFractionAlong"/>
+        <Text name="postFractionAlong"/>
+        <Text name="preSegment"/>
+        <Text name="postSegment"/>
         
         <Structure>
             <With instance="preCell" as="a"/>
@@ -306,13 +312,21 @@
     </ComponentType>
     
     <ComponentType name="continuousConnectionInstanceW"
+    
+    
                    description="An instance of a connection in a _continuousProjection_ between _presynapticPopulation to another _postsynapticPopulation through a _preComponent at the start and _postComponent at the end. Populations need to be of type _populationList_ and contain _instance_ and _location_ elements. Can be used for analog synapses. Includes setting of _weight for the connection"
                    extends="continuousConnectionInstance">
 
         <Parameter name="weight" dimension="none"/>
         
-        <Path name="preCell"/>  <!-- Ideally this should be taken from extended comp type -->
-        <Path name="postCell"/> <!-- Ideally this should be taken from extended comp type -->
+        <!-- Ideally these should be inherited from the extended CT, but jLEMS 
+        complains about this... adding them here for a quieter life... -->
+        <Path name="preCell"/>
+        <Path name="postCell"/>
+        <Text name="preFractionAlong"/>
+        <Text name="postFractionAlong"/>
+        <Text name="preSegment"/>
+        <Text name="postSegment"/>
 
         <Structure>
             <With instance="preCell" as="a"/>
