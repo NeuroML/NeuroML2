@@ -1,5 +1,5 @@
-NeuroML2
-========
+NeuroML 2
+=========
 
 This repository contains the [NeuroML 2 Schema](https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2), 
 the [ComponentType definitions in LEMS](https://github.com/NeuroML/NeuroML2/tree/master/NeuroML2CoreTypes) and 
@@ -15,6 +15,11 @@ Robert C. Cannon, Padraig Gleeson, Sharon Crook, Gautham Ganapathy, Boris Marin,
 See also http://www.neuroml.org/neuromlv2.
 
 This code is distributed under the terms of the GNU Lesser General Public License.
+
+[![Build Status](https://travis-ci.org/NeuroML/NeuroML2.svg?branch=development)](https://travis-ci.org/NeuroML/NeuroML2)
+
+
+
 
 
 
