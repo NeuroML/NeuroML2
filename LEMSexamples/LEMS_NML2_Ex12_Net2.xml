@@ -129,6 +129,10 @@
             <OutputColumn id="7" quantity="iafPop[7]/v" />
             <OutputColumn id="8" quantity="iafPop[8]/v" />
         </OutputFile>
+        
+        <EventOutputFile id="spikes" fileName="results/ex12.spikes" format="ID_TIME">
+            <EventSelection id="0" select="spikersPop[0]" eventPort="spike"/>
+        </EventOutputFile>
 
     </Simulation>
 

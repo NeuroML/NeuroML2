@@ -10,3 +10,6 @@ experiments:
     block:
         expected:
             spike times: [229.35, 304.32, 379.32]
+    spikerate:
+        expected:
+            spike rate: 13.333333333333332

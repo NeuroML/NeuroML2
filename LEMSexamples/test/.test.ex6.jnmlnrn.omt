@@ -38,3 +38,12 @@ experiments:
           threshold: 0.18
         tolerance: 0
 
+  spikerate:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: ../results/ex6.input.spikes
+          format: ID_TIME
+          id: 0
+        tolerance: 0
+

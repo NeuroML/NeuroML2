@@ -77,6 +77,8 @@
 
         <Parameter name="period" dimension="time" description="Time between spikes. First spike will be emitted after this time."/>
         
+        <Constant name="SMALL_TIME" dimension="time" value="1e-9ms"/> <!-- See below for usage -->
+        
         <Exposure name="tnext" dimension="time" description="When the next spike should ideally be emitted (dt permitting)"/>
         
         <Dynamics>
@@ -87,7 +89,7 @@
             <StateVariable name="tnext" dimension="time" exposure="tnext"/>
 
             <TimeDerivative variable="tsince" value="1"/>  
-            <!-- Required to keep Neuron happy; needs this as 'real' state variable to use in condition below... -->
+            <!-- Required to keep NEURON happy; needs tnext as 'real' state variable to use in condition below... -->
             <TimeDerivative variable="tnext" value="0"/>
 
             <OnStart>
@@ -95,7 +97,8 @@
                 <StateAssignment variable="tnext" value="period"/>
             </OnStart>
 
-            <OnCondition test="t .gt. tnext">
+            <!-- This is to require that the spike is emitted as close as possible to tnext.-->
+            <OnCondition test="tnext-t .lt. SMALL_TIME">
                 <StateAssignment variable="tsince" value="0"/>
                 <!-- Note the spike is emitted period after the last planned spike time, NOT period after the current spike time -->
                 <!-- This is important if period is close in size to to dt -->
