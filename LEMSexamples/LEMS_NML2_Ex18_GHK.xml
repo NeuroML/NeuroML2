@@ -73,16 +73,16 @@
         <distal x="0.0" y="0.0" z="10.0" diameter="1.0"/>
       </segment>
 
-      <segmentGroup id="Soma">
+      <segmentGroup id="SomaSegs">
         <member segment="0"/>
       </segmentGroup>
 
       <segmentGroup id="all">
-        <include segmentGroup="Soma"/>
+        <include segmentGroup="SomaSegs"/>
       </segmentGroup>
 
       <segmentGroup id="soma_group">
-        <include segmentGroup="Soma"/>
+        <include segmentGroup="SomaSegs"/>
       </segmentGroup>
 
     </morphology>
@@ -152,7 +152,7 @@
       <Line id="caConc" quantity="pop/0/na_k_ca/caConc" scale="1e-6 mM"  color="#ff0000" timeScale="1ms"/>
     </Display>
 
-    <OutputFile id="of0" fileName="/tmp/lems_ghk.dat">
+    <OutputFile id="of0" fileName="results/ex18.dat">
       <OutputColumn id="v" quantity="pop/0/na_k_ca/v"/>
       <OutputColumn id="ica" quantity="pop/0/na_k_ca/biophys/membraneProperties/ca_all/iDensity"/>
       <OutputColumn id="ca" quantity="pop/0/na_k_ca/caConc"/>
