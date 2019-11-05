@@ -8,8 +8,48 @@ and [LEMS](https://github.com/LEMS/LEMS), but also the Python ([libNeuroML](http
 
 Only contributors who are not [NeuroML Editors](https://neuroml.org/editors) are specifically pointed out below.
 
-v2beta5 / 2016-??-??
+v2beta5 / 2019-11-05
 --------------------
+
+* **Renamed the main Schema from NeuroML_v2beta4.xsd to [NeuroML_v2beta5.xsd](https://github.com/NeuroML/NeuroML2/blob/master/Schemas/NeuroML2/NeuroML_v2beta5.xsd).** 
+  Changes outlined below are reflected in the new schema
+
+_Core NeuroML elements_
+
+* Allows **weighted electrical and continuous connections** ([examples](https://github.com/NeuroML/NeuroML2/blob/development/LEMSexamples/LEMS_NML2_Ex26_Weights.xml))
+
+* Allows **weighted inputs** (e.g. define one pulseGenerator and have individually weighted inputs from this to each cell in population; [examples](https://github.com/NeuroML/NeuroML2/blob/development/LEMSexamples/LEMS_NML2_Ex26_Weights.xml))
+
+* Adds `<channelDensityVShift>` which can be used to **add a channel with an explicit vshift parameter** (e.g. adjust activation variable s by 10mV; [example](https://github.com/OpenSourceBrain/PospischilEtAl2008/blob/f8f663c69d7ca74b3b323a7ed436ab84994ddb59/NeuroML2/channels/Na/Na.cell.nml#L36))
+
+* Adds input type `<spikeGeneratorRefPoisson>`, a **poisson spike generator with a refractory period** ([example](https://github.com/NeuroML/NeuroML2/blob/development/LEMSexamples/LEMS_NML2_Ex16_Inputs.xml))
+
+* Adds `<voltageClampTriple>`, a **voltage clamp with 3 clamp levels** ([definition](https://github.com/NeuroML/NeuroML2/blob/207bbc301e59a741a0a1c7adc140037a1330a513/NeuroML2CoreTypes/Inputs.xml#L664))
+
+* Adds `<doubleSynapse>`, a **single synaptic mechanism containing multiple currents**, which can be used e.g. to bundle an AMPA and NMDA on one synapse, which can in turn be used for individual connections in projections ([example](https://github.com/NeuroML/NeuroML2/blob/development/LEMSexamples/LEMS_NML2_Ex27_MultiSynapses.xml))
+
+_LEMS functionality_
+
+* Add option to put **reportFile="report.txt"** in Target component in `<Lems>` to save short report of simulator version etc. ([example](https://github.com/NeuroML/NeuroML2/blob/development/LEMSexamples/LEMS_NML2_Ex5_DetCell.xml#L11))
+
+_Bug fixes_
+
+* Fixes for **issue with statistics of stochastic spiking inputs at very high frequencies** (see [issue](https://github.com/NeuroML/NeuroML2/issues/121))
+
+_Simulator support_
+
+* Extensive support for **mapping to NetPyNE format** added (generate this with: jnml LEMS_Model.xml -netpyne). For examples and tests see: https://github.com/OpenSourceBrain/NetPyNEShowcase
+* Improved mapping to **Brian & Brian2**, see https://github.com/OpenSourceBrain/BrianShowcase
+- Improved mapping to **Moose** (single compartment cells only), see https://github.com/OpenSourceBrain/MOOSEShowcase
+
+_Library support_
+
+* Better support for accessing **all jnml functionality through Python in pyNeuroML**, see https://github.com/NeuroML/pyNeuroML
+
+* New **C++ API**: https://github.com/NeuroML/NeuroML_API
+
+* New **Matlab API**: https://github.com/NeuroML/NeuroMLToolbox
+
 
 
 v2beta4 / 2016-6-27
