@@ -6,7 +6,7 @@ and [LEMS](https://github.com/LEMS/LEMS), but also the Python ([libNeuroML](http
 [PyLEMS](https://github.com/LEMS/pylems)) and Java ([jLEMS](https://github.com/LEMS/jLEMS), 
 [org.neuroml.model](https://github.com/NeuroML/org.neuroml.model), [jNeuroML](https://github.com/NeuroML/jNeuroML), etc.) libraries.
 
-Only contributors who are not [NeuroML Editors](https://neuroml.org/editors) are specifically pointed out below.
+**Only contributors who are not [NeuroML Editors](https://neuroml.org/editors) are specifically pointed out below.**
 
 v2beta5 / 2019-11-05
 --------------------
@@ -30,7 +30,7 @@ _Core NeuroML elements_
 
 _LEMS functionality_
 
-* Add option to put **reportFile="report.txt"** in Target component in `<Lems>` to save short report of simulator version etc. ([example](https://github.com/NeuroML/NeuroML2/blob/development/LEMSexamples/LEMS_NML2_Ex5_DetCell.xml#L11))
+* Add option to put **reportFile="report.txt"** in Target component in `<Lems>` to save short report of simulator version, runtime etc. ([example](https://github.com/NeuroML/NeuroML2/blob/development/LEMSexamples/LEMS_NML2_Ex5_DetCell.xml#L11))
 
 _Bug fixes_
 
@@ -39,18 +39,24 @@ _Bug fixes_
 _Simulator support_
 
 * Extensive support for **mapping to NetPyNE format** added (generate this with: jnml LEMS_Model.xml -netpyne). For examples and tests see: https://github.com/OpenSourceBrain/NetPyNEShowcase
+
+* Much better interaction with PyNN, see examples at https://github.com/OpenSourceBrain/PyNNShowcase and https://github.com/NeuroML/NeuroML2/issues/73. Also see examples mentioned in OSB paper (below).
+
 * Improved mapping to **Brian & Brian2**, see https://github.com/OpenSourceBrain/BrianShowcase
-- Improved mapping to **Moose** (single compartment cells only), see https://github.com/OpenSourceBrain/MOOSEShowcase
+
+* Improved mapping to **Moose** (single compartment cells only), see https://github.com/OpenSourceBrain/MOOSEShowcase
 
 _Library support_
 
 * Better support for accessing **all jnml functionality through Python in pyNeuroML**, see https://github.com/NeuroML/pyNeuroML
 
-* New **C++ API**: https://github.com/NeuroML/NeuroML_API
+* New **C++ API**: https://github.com/NeuroML/NeuroML_API. Thanks to [Jonathan Cooper](https://github.com/jonc125).
 
-* New **Matlab API**: https://github.com/NeuroML/NeuroMLToolbox
+* New **Matlab API**: https://github.com/NeuroML/NeuroMLToolbox. Thanks to [Jonathan Cooper](https://github.com/jonc125)
 
+_Models_
 
+* Most of the NeuroML models as featured in the [Open Source Brain paper](https://www.cell.com/neuron/fulltext/S0896-6273(19)30444-1) are compliant with v2beta5
 
 v2beta4 / 2016-6-27
 -------------------
