@@ -36,8 +36,7 @@
     
     </ionChannelHH>
     
-    
-    
+ 
     <ionChannelHH id="k" conductance="10pS">
         <gateHHrates id="n" instances="4">
             <forwardRate type="HHExpLinearRate" rate="0.1per_ms" midpoint="-55mV" scale="10mV"/>
@@ -46,19 +45,24 @@
     </ionChannelHH>
     
     
-    <baseCell id="hhcell_1" type="pointCellCondBased" C="10pF"  v0="-65mV" thresh="20mV">
+    <pointCellCondBased id="hhcell_1" C="10pF"  v0="-65mV" thresh="20mV">
     
+        <!-- Note: while pointCellCondBased is the simplest way to represent a cell with
+             HH/passive conductances, it is highly recommended to use the <cell> element as in 
+             examples/NML2_SingleCompHHCell.nml with an explicit description of the 
+             compartment (proximal/distal info for the segment). This will ensure maximal
+             compatibility with simuators and visualisation/analysis applications -->
         <channelPopulation id="leak" ionChannel="passive" number="300" erev="-54.3mV"/>
         <channelPopulation id="naChans" ionChannel="na" number="120000" erev="50mV"/>
         <channelPopulation id="kChans" ionChannel="k" number="36000" erev="-77mV"/>
     
-    </baseCell>
+    </pointCellCondBased>
     
-    <baseCell id="hhcell_2" type="pointCellCondBased" C="10pF"  v0="-55mV" thresh="20mV">
+    <pointCellCondBased id="hhcell_2" C="10pF"  v0="-55mV" thresh="20mV">
     
         <channelPopulation id="leak" ionChannel="passive" number="300" erev="-54.3mV"/>
     
-    </baseCell>
+    </pointCellCondBased>
     
     
     <pulseGenerator id="pulseGen1" delay="25ms" duration="50ms" amplitude="0.065 nA" />
@@ -106,10 +110,10 @@
             <Line id ="Cond alpha" quantity="hh2pop[2]/synalpha/g" scale="1nS"  color="#aaFFFF" timeScale="1ms"/>
         </Display>
     
-        <OutputFile id="of0" fileName="results/ex3_g.dat">
-            <OutputColumn id="syn1exp_g" quantity="hh2pop[0]/syn1exp/g" />
-            <OutputColumn id="syn2exp_g" quantity="hh2pop[1]/syn2exp/g" />
-            <OutputColumn id="synalpha_g" quantity="hh2pop[2]/synalpha/g" />
+        <OutputFile id="of0" fileName="results/ex3_v.dat">
+            <OutputColumn id="syn1exp_g" quantity="hh2pop[0]/v" />
+            <OutputColumn id="syn2exp_g" quantity="hh2pop[1]/v" />
+            <OutputColumn id="synalpha_g" quantity="hh2pop[2]/v" />
         </OutputFile>
     
     </Simulation>

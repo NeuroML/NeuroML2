@@ -8,21 +8,21 @@ experiments:
     observables:
       spike times:
         file: 
-          path: ../results/ex3_g.dat
+          path: ../results/ex3_v.dat
           columns: [0,1]
           scaling: [1000, 1]
         spike detection: 
           method: threshold
-          threshold: 4.5e-10
-        tolerance: 0
+          threshold: -0.0515
+        tolerance: 0.0031618887015178268
   syn2:
     observables:
       spike times:
         file: 
-          path: ../results/ex3_g.dat
+          path: ../results/ex3_v.dat
           columns: [0,2]
           scaling: [1000, 1]
         spike detection: 
           method: threshold
-          threshold: 4.5e-10
-        tolerance: 0
+          threshold:  -0.0515
+        tolerance: 0.003282507412113535
