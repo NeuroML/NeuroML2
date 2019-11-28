@@ -343,7 +343,7 @@
     
     <ComponentType name="channelDensityNernstCa2"
                    extends="baseChannelDensityCond"
-                   description="This component is similar to the original component type _ channelDensityNernst _ but it is changed in order to have a reversal potential that depends on 2nd independent pool of Ca (ca2). See https://github.com/OpenSourceBrain/ghk-nernst.">
+                   description="This component is similar to the original component type _ channelDensityNernst _ but it is changed in order to have a reversal potential that depends on a second independent Ca++ pool (ca2). See https://github.com/OpenSourceBrain/ghk-nernst.">
 
         <Constant name="R" dimension="idealGasConstantDims" value="8.3144621 J_per_K_per_mol" description="TODO: Make this a global constant!"/>
         <Constant name="zCa" dimension="none" value="2" description="TODO: Make this a global constant!"/>
@@ -611,7 +611,7 @@
             <!--<DerivedVariable name="surfaceArea" dimension="area" exposure="surfaceArea" value = "4 * radDist * radDist * 3.14159265" valueCondition="length .eq. 0" valueIfFalse = "2 * radDist * 3.14159265 * length"/>-->
 
 			<ConditionalDerivedVariable name="surfaceArea" dimension="area" exposure="surfaceArea">
-            	<Case condition="length .eq. 0 * LEN" value="4 * radDist * radDist * 3.14159265"/>
+            			<Case condition="length .eq. 0 * LEN" value="4 * radDist * radDist * 3.14159265"/>
 				<Case condition="length .gt. 0 * LEN" value="2 * radDist * 3.14159265 * length"/>
 			</ConditionalDerivedVariable>
 
@@ -833,7 +833,7 @@
     
 
     <ComponentType name="intracellularProperties"
-        description="Biophysical properties related to the intracellular space within the _cell_, such as the _resistivity_ and the list of _species_ present. _caConc and _caConcExt are explicitly exposed here to facilitate accessing these values from other Components, even though _caConcExt is clearly not an intracellular property">
+        description="Biophysical properties related to the intracellular space within the _cell_, such as the _resistivity_ and the list of ionic _species_ present. _caConc and _caConcExt are explicitly exposed here to facilitate accessing these values from other Components, even though _caConcExt is clearly not an intracellular property">
 
         <Children name="resistivity" type="resistivity"/>
         <Children name="speciesList" type="species"/>
@@ -881,7 +881,7 @@
 
 
     <ComponentType name="concentrationModel"
-        description="Base for any model of an _ion concentration which changes with time. Internal, _concentration, and external, _extConcentration, values for the concentration of the ion are given.">
+        description="Base for any model of an _ion concentration which changes with time. Internal (_concentration) and external (_extConcentration) values for the concentration of the ion are given.">
 
         <Exposure name="concentration" dimension="concentration"/>
         <Exposure name="extConcentration" dimension="concentration"/>
@@ -907,7 +907,7 @@
 
     <ComponentType name="decayingPoolConcentrationModel"
         extends="concentrationModel"
-        description="Model of buffering of concentration of an _ion (currently hard coded to be calcium, due to requirement for _iCa) which has a baseline level _restingConc and tends to this value with time course _decayConstant. The ion is assumed to occupy a shell inside the membrane of thickness _shellThickness.">
+        description="Model of an intracellular buffering mechanism for _ion (currently hard Coded to be calcium, due to requirement for _iCa) which has a baseline level _restingConc and tends to this value with time course _decayConstant. The ion is assumed to occupy a shell inside the membrane of thickness _shellThickness.">
 
         <Parameter name="restingConc" dimension="concentration"/>
         <Parameter name="decayConstant" dimension="time"/>
@@ -930,7 +930,6 @@
             <!--<StateVariable name="debugVal" exposure="debugVal" dimension="none"/>-->
             <!--<DerivedVariable name="debug" dimension="none" value="shell_volume"/>-->
 
-            <!-- TODO: make these derived vars! -->
             <DerivedVariable name="effectiveRadius" dimension="length" value="LENGTH_SCALE * sqrt(surfaceArea/(AREA_SCALE * (4 * 3.14159)))"/>  <!-- needed to calc volume of pools, etc. -->
             <DerivedVariable name="innerRadius" dimension="length" value="effectiveRadius - shellThickness"/>
 
@@ -954,7 +953,7 @@
 
     <ComponentType name="fixedFactorConcentrationModel"
         extends="concentrationModel"
-        description="Model of buffering of concentration of an ion (currently hard coded to be calcium, due to requirement for _iCa) which has a baseline level _restingConc and tends to this value with time course _decayConstant. A fixed factor _rho is used to scale the incoming current INDEPENDENTLY OF THE SIZE OF THE COMPARTMENT to produce a concentration change.">
+        description="Model of buffering of concentration of an ion (currently hard coded to be calcium, due to requirement for _iCa) which has a baseline level _restingConc and tends to this value with time course _decayConstant. A fixed factor _rho is used to scale the incoming current _independently of the size of the compartment_ to produce a concentration change.">
 
         <Parameter name="restingConc" dimension="concentration"/>
         <Parameter name="decayConstant" dimension="time"/>
@@ -986,7 +985,7 @@
     
     <ComponentType name="fixedFactorConcentrationModelTraub"
         extends="concentrationModel"
-        description="Model of buffering of concentration of an ion (currently hard coded to be calcium, due to requirement for _iCa) which has a baseline level _restingConc and tends to this value with time course 1 / _beta. A fixed factor _phi is used to scale the incoming current INDEPENDENTLY OF THE SIZE OF THE COMPARTMENT to produce a concentration change. Not recommended for use in models other than Traub et al. 2005!">
+        description="Model of buffering of concentration of an ion (currently hard coded to be calcium, due to requirement for _iCa) which has a baseline level _restingConc and tends to this value with time course 1 / _beta. A fixed factor _phi is used to scale the incoming current _independently of the size of the compartment_ to produce a concentration change. Not recommended for use in models other than Traub et al. 2005!">
 
         <Parameter name="restingConc" dimension="concentration"/>
         <Parameter name="beta" dimension="per_time"/>
@@ -1047,7 +1046,7 @@
 
     <ComponentType name="cell"
         extends="baseCellMembPot"
-        description="Cell with _segment_s specified in a _morphology_ element along with details on its _biophysicalProperties_. NOTE: this can only be correctly simulated using LEMS when there is a single segment in the cell, and _v of this cell represents the membrane potential in that isopotential segment!!!">
+        description="Cell with _segment_s specified in a _morphology_ element along with details on its _biophysicalProperties_. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and _v of this cell represents the membrane potential in that isopotential segment.">
                 
         <Child name="morphology" type="morphology"/>
 
@@ -1119,7 +1118,7 @@
     
     <ComponentType name="cell2CaPools"
                    extends="cell"
-                   description="Variant of cell with 2 independnet Ca pools. Cell with _segment_s specified in a _morphology_ element along with details on its _biophysicalProperties_. NOTE: this can only be correctly simulated using LEMS when there is a single segment in the cell, and _v of this cell represents the membrane potential in that isopotential segment!!!">
+                   description="Variant of cell with two independent Ca2+ pools. Cell with _segment_s specified in a _morphology_ element along with details on its _biophysicalProperties_. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and _v of this cell represents the membrane potential in that isopotential segment.">
         
         <!--<Child name="notes" type="notes"/>
         <Child name="annotation" type="annotation"/>
@@ -1210,7 +1209,7 @@
 
     <ComponentType name="baseCellMembPotCap"
         extends="baseCellMembPot"
-        description="Any cell with a membrane potential _v with voltage units and a membrane capacitance _C. Also defines exposed value _iSyn for current due to external synapses and _iMemb for total current crossing membrane (normally channel currents plus _iSyn)">
+        description="Any cell with a membrane potential _v with voltage units and a membrane capacitance _C. Also defines exposed value _iSyn for current due to external synapses and _iMemb for total transmembrane current (usually channel currents plus _iSyn)">
         <Parameter name="C" dimension="capacitance" description="Total capacitance of the cell membrane"/>
         <Exposure name="iSyn" dimension="current" description="Total current due to synaptic inputs"/>
         <Exposure name="iMemb" dimension="current" description="Total current crossing the cell membrane"/>
@@ -1227,7 +1226,7 @@
 
     <ComponentType name="iafTauCell"
         extends="baseIaf"
-        description="Integrate and fire cell which returns to its leak reversal potential of _leakReversal with a time course _tau">
+        description="Integrate and fire cell which returns to its leak reversal potential of _leakReversal with a time constant _tau">
 
         <Parameter name="leakReversal" dimension="voltage"/>
         <Parameter name="tau" dimension="time"/>
@@ -1580,7 +1579,7 @@
 
     <ComponentType name="fitzHughNagumoCell"
                    extends="baseCellMembPotDL"
-                   description="Simple dimensionless model of spiking cell from FitzHugh and Nagumo. Based on http://www.scholarpedia.org/article/FitzHugh-Nagumo_model. Note: should be updated, see https://github.com/NeuroML/NeuroML2/issues/42">
+                   description="Simple dimensionless model of spiking cell from FitzHugh and Nagumo. Superseded by _fitzHughNagumo1969Cell (See https://github.com/NeuroML/NeuroML2/issues/42)">
 
         <Parameter name="I" dimension="none"/>
 
