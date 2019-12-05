@@ -15,7 +15,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="#">NeuroML v22.0 Component Types</a>
+      <a class="brand" href="#">NeuroML v2.0 Component Types</a>
       <div class="nav-collapse">
         <ul class="nav">
           <li class="active"><a href="Cells.html">Cells</a></li>
@@ -56,9 +56,9 @@
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#decayingPoolConcentrationModel" title="Model of an intracellular buffering mechanism for ion (currently hard Coded to be calcium, due to requirement for iCa) which has a baseline level restingConc and tends to this value with time course decayConstant. The ion is assumed to occupy a shell inside the membrane of thickness shellThickness. ">decayingPoolConcentrationModel</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#fixedFactorConcentrationModelTraub" title="Model of buffering of concentration of an ion (currently hard coded to be calcium, due to requirement for iCa) which has a baseline level restingConc and tends to this value with time course 1 / beta. A fixed factor phi is used to scale the incoming current independently of the size of the compartment_ to produce a concentration change. Not recommended for use in models other than Traub et al. 2005! ">fixedFactorConcentrationModelTraub</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#fixedFactorConcentrationModelTraub" title="Model of buffering of concentration of an ion (currently hard coded to be calcium, due to requirement for iCa) which has a baseline level restingConc and tends to this value with time course 1 / beta. A fixed factor phi is used to scale the incoming current *independently of the size of the compartment* to produce a concentration change. Not recommended for use in models other than Traub et al. 2005! ">fixedFactorConcentrationModelTraub</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#fixedFactorConcentrationModel" title="Model of buffering of concentration of an ion (currently hard coded to be calcium, due to requirement for iCa) which has a baseline level restingConc and tends to this value with time course decayConstant. A fixed factor rho is used to scale the incoming current independently of the size of the compartment_ to produce a concentration change. ">fixedFactorConcentrationModel</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#fixedFactorConcentrationModel" title="Model of buffering of concentration of an ion (currently hard coded to be calcium, due to requirement for iCa) which has a baseline level restingConc and tends to this value with time course decayConstant. A fixed factor rho is used to scale the incoming current *independently of the size of the compartment* to produce a concentration change. ">fixedFactorConcentrationModel</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>populations <a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a><br/>
   
@@ -227,10 +227,10 @@
     </div><!--/.well -->
     </div><!--/span-->
     <div class="span7">
-   <div class="alert alert-error">For more information on NeuroML 2 and LEMS see <a href="http://www.neuroml.org/neuromlv2">here</a>. <br/>Note: these descriptions have been updated to the latest    <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2">NeuroML v22.0</a> definitions, using    <a href="https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS">the latest version of LEMS</a>!</div>
+   <div class="alert alert-error">For more information on NeuroML 2 and LEMS see <a href="http://www.neuroml.org/neuromlv2">here</a>. <br/>Note: these descriptions have been updated to the latest    <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2">NeuroML v2.0</a> definitions, using    <a href="https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS">the latest version of LEMS</a>!</div>
     <table class="table table-bordered"><tr><td ><h3>Cells</h3></td></tr>
     <tr><td><span  style="color:dimgrey"><i>NeuroML2 ComponentType definitions from Cells.xml </i></span></td></tr>
-    <tr><td>Original LEMS ComponentType definitions: <a href="https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/Cells.xml">Cells.xml</a><br/>    Schema against which NeuroML based on these should be valid: <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2/NeuroML_v22.0.xsd">NeuroML_v22.0.xsd</a></td></tr>
+    <tr><td>Original LEMS ComponentType definitions: <a href="https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/Cells.xml">Cells.xml</a><br/>    Schema against which NeuroML based on these should be valid: <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2/NeuroML_v2.0.xsd">NeuroML_v2.0.xsd</a></td></tr>
     </table><br/>
 <a name="baseCell">&nbsp;</a>
 <table class="table table-bordered">
@@ -2175,10 +2175,10 @@
   <td width="70" rowspan='7'>
     <span class="label label-info">Exposures</span>
   </td>
-    <td style="color:darkgrey"><b>iCa</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#membraneProperties" title="Properties specific to the membrane, such as the populations of channels, channelDensities, specificCapacitance, etc. ">membraneProperties</a>)</td>
+    <td><b>iCa</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td><b>iCa</b></td>
+    <td style="color:darkgrey"><b>iCa</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#membraneProperties" title="Properties specific to the membrane, such as the populations of channels, channelDensities, specificCapacitance, etc. ">membraneProperties</a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
     <td><b>iCa2</b></td>
@@ -2200,10 +2200,10 @@
   <td width="70" rowspan='2'>
     <span class="label label-info">Requirements</span>
   </td>
-    <td><b>surfaceArea</b></td>
+    <td style="color:darkgrey"><b>surfaceArea</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#membraneProperties" title="Properties specific to the membrane, such as the populations of channels, channelDensities, specificCapacitance, etc. ">membraneProperties</a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#area">area</a></td>
   </tr>
-    <td style="color:darkgrey"><b>surfaceArea</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#membraneProperties" title="Properties specific to the membrane, such as the populations of channels, channelDensities, specificCapacitance, etc. ">membraneProperties</a>)</td>
+    <td><b>surfaceArea</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#area">area</a></td>
   </tr>
 <tr>
@@ -2393,10 +2393,10 @@
     <td><b>caConc2</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#concentration">concentration</a></td>
   </tr>
-    <td style="color:darkgrey"><b>caConcExt</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#intracellularProperties" title="Biophysical properties related to the intracellular space within the cell, such as the resistivity and the list of ionic species present. caConc and caConcExt are explicitly exposed here to facilitate accessing these values from other Components, even though caConcExt is clearly not an intracellular property ">intracellularProperties</a>)</td>
+    <td><b>caConcExt</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#concentration">concentration</a></td>
   </tr>
-    <td><b>caConcExt</b></td>
+    <td style="color:darkgrey"><b>caConcExt</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#intracellularProperties" title="Biophysical properties related to the intracellular space within the cell, such as the resistivity and the list of ionic species present. caConc and caConcExt are explicitly exposed here to facilitate accessing these values from other Components, even though caConcExt is clearly not an intracellular property ">intracellularProperties</a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#concentration">concentration</a></td>
   </tr>
     <td><b>caConcExt2</b></td>
@@ -2615,7 +2615,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Model of buffering of concentration of an ion (currently hard coded to be calcium, due to requirement for <b>iCa)</b> which has a baseline level <b>restingConc</b> and tends to this value with time course <b>decayConstant.</b> A fixed factor <b>rho</b> is used to scale the incoming current <b>independently</b> of the size of the compartment_ to produce a concentration change. </i></span>    </td>
+      <span  style="color:dimgrey"><i>Model of buffering of concentration of an ion (currently hard coded to be calcium, due to requirement for <b>iCa)</b> which has a baseline level <b>restingConc</b> and tends to this value with time course <b>decayConstant.</b> A fixed factor <b>rho</b> is used to scale the incoming current <u>independently of the size of the compartment</u> to produce a concentration change. </i></span>    </td>
   </tr>
   <tr>
   <td width="70" rowspan='3'>
@@ -2700,7 +2700,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Model of buffering of concentration of an ion (currently hard coded to be calcium, due to requirement for <b>iCa)</b> which has a baseline level <b>restingConc</b> and tends to this value with time course 1 / <b>beta.</b> A fixed factor <b>phi</b> is used to scale the incoming current <b>independently</b> of the size of the compartment_ to produce a concentration change. Not recommended for use in models other than Traub et al. 2005! </i></span>    </td>
+      <span  style="color:dimgrey"><i>Model of buffering of concentration of an ion (currently hard coded to be calcium, due to requirement for <b>iCa)</b> which has a baseline level <b>restingConc</b> and tends to this value with time course 1 / <b>beta.</b> A fixed factor <b>phi</b> is used to scale the incoming current <u>independently of the size of the compartment</u> to produce a concentration change. Not recommended for use in models other than Traub et al. 2005! </i></span>    </td>
   </tr>
   <tr>
   <td width="70" rowspan='3'>

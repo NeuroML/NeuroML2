@@ -953,7 +953,7 @@
 
     <ComponentType name="fixedFactorConcentrationModel"
         extends="concentrationModel"
-        description="Model of buffering of concentration of an ion (currently hard coded to be calcium, due to requirement for _iCa) which has a baseline level _restingConc and tends to this value with time course _decayConstant. A fixed factor _rho is used to scale the incoming current _independently of the size of the compartment_ to produce a concentration change.">
+        description="Model of buffering of concentration of an ion (currently hard coded to be calcium, due to requirement for _iCa) which has a baseline level _restingConc and tends to this value with time course _decayConstant. A fixed factor _rho is used to scale the incoming current *independently of the size of the compartment* to produce a concentration change.">
 
         <Parameter name="restingConc" dimension="concentration"/>
         <Parameter name="decayConstant" dimension="time"/>
@@ -985,7 +985,7 @@
     
     <ComponentType name="fixedFactorConcentrationModelTraub"
         extends="concentrationModel"
-        description="Model of buffering of concentration of an ion (currently hard coded to be calcium, due to requirement for _iCa) which has a baseline level _restingConc and tends to this value with time course 1 / _beta. A fixed factor _phi is used to scale the incoming current _independently of the size of the compartment_ to produce a concentration change. Not recommended for use in models other than Traub et al. 2005!">
+        description="Model of buffering of concentration of an ion (currently hard coded to be calcium, due to requirement for _iCa) which has a baseline level _restingConc and tends to this value with time course 1 / _beta. A fixed factor _phi is used to scale the incoming current *independently of the size of the compartment* to produce a concentration change. Not recommended for use in models other than Traub et al. 2005!">
 
         <Parameter name="restingConc" dimension="concentration"/>
         <Parameter name="beta" dimension="per_time"/>
