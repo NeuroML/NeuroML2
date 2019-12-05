@@ -1,0 +1,1676 @@
+<html>
+  <head>
+    <title>PyNN</title>
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css"> td { font-size: 14; } </style>
+    <!--<style type="text/css"> body { padding-top: 90px; padding-bottom: 30px;  padding-left: 50px;  padding-right:50px; } </style>-->
+  </head>
+<body>
+
+<div class="navbar ">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="#">NeuroML v22.0 Component Types</a>
+      <div class="nav-collapse">
+        <ul class="nav">
+          <li><a href="Cells.html">Cells</a></li>
+          <li><a href="Synapses.html">Synapses</a></li>
+          <li><a href="Channels.html">Channels</a></li>
+          <li><a href="Inputs.html">Inputs</a></li>
+          <li><a href="Networks.html">Networks</a></li>
+          <li class="active"><a href="PyNN.html">PyNN</a></li>
+          <li><a href="NeuroMLCoreDimensions.html">NeuroMLCoreDimensions</a></li>
+          <li><a href="NeuroMLCoreCompTypes.html">NeuroMLCoreCompTypes</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+    </div>
+    </div>
+    <div class="container-fluid">
+    <div class="row-fluid">
+    <div class="span3">
+    <div class="well sidebar-nav">
+      <b>Component Types</b><br/>
+<a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a><br/>
+  
+&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="PyNN.html#HH_cond_exp" title="Single-compartment Hodgkin-Huxley-type neuron with transient sodium and delayed-rectifier potassium currents using the ion channel models from Traub. ">HH_cond_exp</a><br/>
+  
+&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="PyNN.html#IF_curr_exp" title="Leaky integrate and fire model with fixed threshold and decaying-exponential post-synaptic current ">IF_curr_exp</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="PyNN.html#IF_curr_alpha" title="Leaky integrate and fire model with fixed threshold and alpha-function-shaped post-synaptic current ">IF_curr_alpha</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="PyNN.html#basePyNNIaFCondCell" title="Base type of conductance based PyNN IaF cell models "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCondCell</span></a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="PyNN.html#IF_cond_alpha" title="Leaky integrate and fire model with fixed threshold and alpha-function-shaped post-synaptic conductance ">IF_cond_alpha</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="PyNN.html#IF_cond_exp" title="Leaky integrate and fire model with fixed threshold and exponentially-decaying post-synaptic conductance ">IF_cond_exp</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="PyNN.html#EIF_cond_exp_isfa_ista" title="Adaptive exponential integrate and fire neuron according to Brette R and Gerstner W (2005) with exponentially-decaying post-synaptic conductance ">EIF_cond_exp_isfa_ista</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="PyNN.html#EIF_cond_alpha_isfa_ista" title="Adaptive exponential integrate and fire neuron according to Brette R and Gerstner W (2005) with alpha-function-shaped post-synaptic conductance ">EIF_cond_alpha_isfa_ista</a><br/>
+  
+<a href="PyNN.html#basePynnSynapse" title="Base type for all PyNN synapses. Note, the current I produced is dimensionless, but it requires a membrane potential v with dimension voltage "><span  style="color:#85ACE1;font-style:italic">basePynnSynapse</span></a><br/>
+  
+&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="PyNN.html#alphaCurrSynapse" title="Alpha synapse: rise time and decay time are both tau_syn. Current based synapse. ">alphaCurrSynapse</a><br/>
+  
+&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="PyNN.html#expCurrSynapse" title="Current based synapse with instantaneous rise and single exponential decay (with time constant tau_syn) ">expCurrSynapse</a><br/>
+  
+&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="PyNN.html#alphaCondSynapse" title="Alpha synapse: rise time and decay time are both tau_syn. Conductance based synapse. ">alphaCondSynapse</a><br/>
+  
+&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="PyNN.html#expCondSynapse" title="Conductance based synapse with instantaneous rise and single exponential decay (with time constant tau_syn) ">expCondSynapse</a><br/>
+  
+<a href="PyNN.html#SpikeSourcePoisson" title="Spike source, generating spikes according to a Poisson process. ">SpikeSourcePoisson</a><br/>
+  
+    </div><!--/.well -->
+    </div><!--/span-->
+    <div class="span7">
+   <div class="alert alert-error">For more information on NeuroML 2 and LEMS see <a href="http://www.neuroml.org/neuromlv2">here</a>. <br/>Note: these descriptions have been updated to the latest    <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2">NeuroML v22.0</a> definitions, using    <a href="https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS">the latest version of LEMS</a>!</div>
+    <table class="table table-bordered"><tr><td ><h3>PyNN</h3></td></tr>
+    <tr><td><span  style="color:dimgrey"><i>NeuroML2 ComponentType definitions from PyNN.xml </i></span></td></tr>
+    <tr><td>Original LEMS ComponentType definitions: <a href="https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/PyNN.xml">PyNN.xml</a><br/>    Schema against which NeuroML based on these should be valid: <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2/NeuroML_v22.0.xsd">NeuroML_v22.0.xsd</a></td></tr>
+    </table><br/>
+<a name="basePyNNCell">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b><span  style="color:dimgrey;font-style:italic">basePyNNCell</span></b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Base type of any PyNN standard cell model. Note: membrane potential <b>v</b> has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see <a href="http://neuralensemble.org/trac/PyNN/wiki/StandardModels">http://neuralensemble.org/trac/PyNN/wiki/StandardModels</a> </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='5'>
+    <span class="label label-success">Parameters</span>
+  </td>
+    <td><b>cm</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>i_offset</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>tau_syn_E</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>tau_syn_I</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>v_init</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='3'>
+    <span class="label label-info">Constants</span>
+  </td>
+    <td><b>NFARAD</b> = 1nF</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#capacitance">capacitance</a></td>
+  </tr>
+    <td><b>MVOLT</b> = 1mV</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
+  </tr>
+    <td><b>MSEC</b> = 1ms</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='2'>
+    <span class="label label-info">Exposures</span>
+  </td>
+    <td><b>iSyn</b></td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
+  </tr>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='3'>
+    <span class="label label-info">Event Ports</span>
+  </td>
+    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseSpikingCell" title="Base type of any cell which can emit spike events. "><span  style="color:#85ACE1;font-style:italic">baseSpikingCell</span></a>)</td>
+    <td width="100">Direction: out</td>
+  </tr>
+    <td><b>spike_in_E</b></td>
+    <td width="100">Direction: in</td>
+  </tr>
+    <td><b>spike_in_I</b></td>
+    <td width="100">Direction: in</td>
+  </tr>
+</table>
+
+<a name="basePyNNIaFCell">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b><span  style="color:dimgrey;font-style:italic">basePyNNIaFCell</span></b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Base type of any PyNN standard integrate and fire model </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='10'>
+    <span class="label label-success">Parameters</span>
+  </td>
+    <td style="color:darkgrey"><b>cm</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>i_offset</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>tau_m</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>tau_refrac</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_syn_E</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_syn_I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_init</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>v_reset</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>v_rest</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>v_thresh</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='2'>
+    <span class="label label-info">Exposures</span>
+  </td>
+    <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
+  </tr>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='3'>
+    <span class="label label-info">Event Ports</span>
+  </td>
+    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseSpikingCell" title="Base type of any cell which can emit spike events. "><span  style="color:#85ACE1;font-style:italic">baseSpikingCell</span></a>)</td>
+    <td width="100">Direction: out</td>
+  </tr>
+    <td style="color:darkgrey"><b>spike_in_E</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+    <td style="color:darkgrey"><b>spike_in_I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+</table>
+
+<a name="basePyNNIaFCondCell">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b><span  style="color:dimgrey;font-style:italic">basePyNNIaFCondCell</span></b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Base type of conductance based PyNN IaF cell models </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='12'>
+    <span class="label label-success">Parameters</span>
+  </td>
+    <td style="color:darkgrey"><b>cm</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>e_rev_E</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>e_rev_I</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>i_offset</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_m</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_refrac</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_syn_E</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_syn_I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_init</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_reset</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_rest</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_thresh</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='2'>
+    <span class="label label-info">Exposures</span>
+  </td>
+    <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
+  </tr>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='3'>
+    <span class="label label-info">Event Ports</span>
+  </td>
+    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseSpikingCell" title="Base type of any cell which can emit spike events. "><span  style="color:#85ACE1;font-style:italic">baseSpikingCell</span></a>)</td>
+    <td width="100">Direction: out</td>
+  </tr>
+    <td style="color:darkgrey"><b>spike_in_E</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+    <td style="color:darkgrey"><b>spike_in_I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+</table>
+
+<a name="IF_curr_alpha">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>IF_curr_alpha</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Leaky integrate and fire model with fixed threshold and alpha-function-shaped post-synaptic current </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='10'>
+    <span class="label label-success">Parameters</span>
+  </td>
+    <td style="color:darkgrey"><b>cm</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>i_offset</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_m</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_refrac</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_syn_E</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_syn_I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_init</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_reset</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_rest</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_thresh</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='2'>
+    <span class="label label-info">Exposures</span>
+  </td>
+    <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
+  </tr>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='3'>
+    <span class="label label-info">Event Ports</span>
+  </td>
+    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseSpikingCell" title="Base type of any cell which can emit spike events. "><span  style="color:#85ACE1;font-style:italic">baseSpikingCell</span></a>)</td>
+    <td width="100">Direction: out</td>
+  </tr>
+    <td style="color:darkgrey"><b>spike_in_E</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+    <td style="color:darkgrey"><b>spike_in_I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-info">Attachments</span>
+  </td>
+    <td><b>synapses</b></td>
+    <td width="100"><a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a></td>
+  </tr>
+<tr>
+  <td width="70" rowspan='1'>
+    <span class="label ">Dynamics</span>
+  </td>
+<td colspan='2'>
+<span class="label">State Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>lastSpikeTime</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#time">time</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#voltage">voltage</a> (exposed as <b>v</b>)
+<br/>
+<br/>
+<span class="label">On Start</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>v</b> = v_init * MVOLT<br/>
+<br/>
+<span class="label">Derived Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>iSyn</b> = synapses[*]->i (reduce method: add)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>iSyn</b>)
+<br/>
+<br/>
+<span class="label">Regime: refractory (initial)</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">On Entry</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>lastSpikeTime</b> = t<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>v</b> = v_reset * MVOLT<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">On Conditions</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF t &gt; lastSpikeTime + (tau_refrac*MSEC) THEN<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TRANSITION to REGIME <b>integrating</b><br/>
+<br/>
+<span class="label">Regime: integrating (initial)</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">On Conditions</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF v &gt; v_thresh * MVOLT THEN<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EVENT OUT on port <b>spike</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TRANSITION to REGIME <b>refractory</b><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">Time Derivatives</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d <b>v</b> /dt = (MVOLT * ((i_offset/cm) +  ((v_rest - (v/MVOLT)) / tau_m))/MSEC) + (iSyn / (cm * NFARAD))<br/>
+<br/>
+<br/>
+</td>
+</tr>
+</table>
+
+<a name="IF_curr_exp">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>IF_curr_exp</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Leaky integrate and fire model with fixed threshold and decaying-exponential post-synaptic current </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='10'>
+    <span class="label label-success">Parameters</span>
+  </td>
+    <td style="color:darkgrey"><b>cm</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>i_offset</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_m</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_refrac</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_syn_E</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_syn_I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_init</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_reset</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_rest</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_thresh</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='2'>
+    <span class="label label-info">Exposures</span>
+  </td>
+    <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
+  </tr>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='3'>
+    <span class="label label-info">Event Ports</span>
+  </td>
+    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseSpikingCell" title="Base type of any cell which can emit spike events. "><span  style="color:#85ACE1;font-style:italic">baseSpikingCell</span></a>)</td>
+    <td width="100">Direction: out</td>
+  </tr>
+    <td style="color:darkgrey"><b>spike_in_E</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+    <td style="color:darkgrey"><b>spike_in_I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-info">Attachments</span>
+  </td>
+    <td><b>synapses</b></td>
+    <td width="100"><a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a></td>
+  </tr>
+<tr>
+  <td width="70" rowspan='1'>
+    <span class="label ">Dynamics</span>
+  </td>
+<td colspan='2'>
+<span class="label">State Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>lastSpikeTime</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#time">time</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#voltage">voltage</a> (exposed as <b>v</b>)
+<br/>
+<br/>
+<span class="label">On Start</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>v</b> = v_init * MVOLT<br/>
+<br/>
+<span class="label">Derived Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>iSyn</b> = synapses[*]->i (reduce method: add)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>iSyn</b>)
+<br/>
+<br/>
+<span class="label">Regime: refractory (initial)</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">On Entry</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>lastSpikeTime</b> = t<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>v</b> = v_reset * MVOLT<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">On Conditions</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF t &gt; lastSpikeTime + (tau_refrac*MSEC) THEN<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TRANSITION to REGIME <b>integrating</b><br/>
+<br/>
+<span class="label">Regime: integrating (initial)</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">On Conditions</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF v &gt; v_thresh * MVOLT THEN<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EVENT OUT on port <b>spike</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TRANSITION to REGIME <b>refractory</b><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">Time Derivatives</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d <b>v</b> /dt = (MVOLT * (((i_offset)/cm) +  ((v_rest - (v/MVOLT)) / tau_m))/MSEC) + (iSyn / (cm * NFARAD))<br/>
+<br/>
+<br/>
+</td>
+</tr>
+</table>
+
+<a name="IF_cond_alpha">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>IF_cond_alpha</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="PyNN.html#basePyNNIaFCondCell" title="Base type of conductance based PyNN IaF cell models "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCondCell</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Leaky integrate and fire model with fixed threshold and alpha-function-shaped post-synaptic conductance </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='12'>
+    <span class="label label-success">Parameters</span>
+  </td>
+    <td style="color:darkgrey"><b>cm</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>e_rev_E</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCondCell" title="Base type of conductance based PyNN IaF cell models "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCondCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>e_rev_I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCondCell" title="Base type of conductance based PyNN IaF cell models "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCondCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>i_offset</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_m</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_refrac</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_syn_E</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_syn_I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_init</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_reset</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_rest</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_thresh</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='2'>
+    <span class="label label-info">Exposures</span>
+  </td>
+    <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
+  </tr>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='3'>
+    <span class="label label-info">Event Ports</span>
+  </td>
+    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseSpikingCell" title="Base type of any cell which can emit spike events. "><span  style="color:#85ACE1;font-style:italic">baseSpikingCell</span></a>)</td>
+    <td width="100">Direction: out</td>
+  </tr>
+    <td style="color:darkgrey"><b>spike_in_E</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+    <td style="color:darkgrey"><b>spike_in_I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-info">Attachments</span>
+  </td>
+    <td><b>synapses</b></td>
+    <td width="100"><a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a></td>
+  </tr>
+<tr>
+  <td width="70" rowspan='1'>
+    <span class="label ">Dynamics</span>
+  </td>
+<td colspan='2'>
+<span class="label">State Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>lastSpikeTime</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#time">time</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#voltage">voltage</a> (exposed as <b>v</b>)
+<br/>
+<br/>
+<span class="label">On Start</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>v</b> = v_init * MVOLT<br/>
+<br/>
+<span class="label">Derived Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>iSyn</b> = synapses[*]->i (reduce method: add)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>iSyn</b>)
+<br/>
+<br/>
+<span class="label">Regime: refractory (initial)</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">On Entry</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>lastSpikeTime</b> = t<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>v</b> = v_reset * MVOLT<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">On Conditions</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF t &gt; lastSpikeTime + (tau_refrac*MSEC) THEN<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TRANSITION to REGIME <b>integrating</b><br/>
+<br/>
+<span class="label">Regime: integrating (initial)</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">On Conditions</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF v &gt; v_thresh * MVOLT THEN<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EVENT OUT on port <b>spike</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TRANSITION to REGIME <b>refractory</b><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">Time Derivatives</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d <b>v</b> /dt = (MVOLT * (((i_offset) / cm) +  ((v_rest - (v / MVOLT)) / tau_m)) / MSEC) + (iSyn / (cm * NFARAD))<br/>
+<br/>
+<br/>
+</td>
+</tr>
+</table>
+
+<a name="IF_cond_exp">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>IF_cond_exp</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="PyNN.html#basePyNNIaFCondCell" title="Base type of conductance based PyNN IaF cell models "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCondCell</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Leaky integrate and fire model with fixed threshold and exponentially-decaying post-synaptic conductance </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='12'>
+    <span class="label label-success">Parameters</span>
+  </td>
+    <td style="color:darkgrey"><b>cm</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>e_rev_E</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCondCell" title="Base type of conductance based PyNN IaF cell models "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCondCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>e_rev_I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCondCell" title="Base type of conductance based PyNN IaF cell models "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCondCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>i_offset</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_m</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_refrac</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_syn_E</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_syn_I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_init</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_reset</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_rest</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_thresh</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='2'>
+    <span class="label label-info">Exposures</span>
+  </td>
+    <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
+  </tr>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='3'>
+    <span class="label label-info">Event Ports</span>
+  </td>
+    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseSpikingCell" title="Base type of any cell which can emit spike events. "><span  style="color:#85ACE1;font-style:italic">baseSpikingCell</span></a>)</td>
+    <td width="100">Direction: out</td>
+  </tr>
+    <td style="color:darkgrey"><b>spike_in_E</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+    <td style="color:darkgrey"><b>spike_in_I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-info">Attachments</span>
+  </td>
+    <td><b>synapses</b></td>
+    <td width="100"><a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a></td>
+  </tr>
+<tr>
+  <td width="70" rowspan='1'>
+    <span class="label ">Dynamics</span>
+  </td>
+<td colspan='2'>
+<span class="label">State Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>lastSpikeTime</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#time">time</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#voltage">voltage</a> (exposed as <b>v</b>)
+<br/>
+<br/>
+<span class="label">On Start</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>v</b> = v_init * MVOLT<br/>
+<br/>
+<span class="label">Derived Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>iSyn</b> = synapses[*]->i (reduce method: add)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>iSyn</b>)
+<br/>
+<br/>
+<span class="label">Regime: refractory (initial)</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">On Entry</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>lastSpikeTime</b> = t<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>v</b> = v_reset * MVOLT<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">On Conditions</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF t &gt; lastSpikeTime + (tau_refrac*MSEC) THEN<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TRANSITION to REGIME <b>integrating</b><br/>
+<br/>
+<span class="label">Regime: integrating (initial)</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">On Conditions</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF v &gt; v_thresh * MVOLT THEN<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EVENT OUT on port <b>spike</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TRANSITION to REGIME <b>refractory</b><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">Time Derivatives</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d <b>v</b> /dt = (MVOLT * (((i_offset)/cm) +  ((v_rest - (v / MVOLT)) / tau_m)) / MSEC) + (iSyn / (cm * NFARAD))<br/>
+<br/>
+<br/>
+</td>
+</tr>
+</table>
+
+<a name="EIF_cond_exp_isfa_ista">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>EIF_cond_exp_isfa_ista</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="PyNN.html#basePyNNIaFCondCell" title="Base type of conductance based PyNN IaF cell models "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCondCell</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Adaptive exponential integrate and fire neuron according to Brette R and Gerstner W (2005) with exponentially-decaying post-synaptic conductance </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='20'>
+    <span class="label label-success">Parameters</span>
+  </td>
+    <td><b>a</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>b</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>cm</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>delta_T</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>e_rev_E</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCondCell" title="Base type of conductance based PyNN IaF cell models "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCondCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>e_rev_I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCondCell" title="Base type of conductance based PyNN IaF cell models "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCondCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>i_offset</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>i_offset</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_m</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>tau_refrac</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_refrac</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_syn_E</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_syn_I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>tau_w</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_init</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_reset</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>v_rest</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_rest</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>v_spike</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_thresh</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-success">Derived Parameters</span>
+  </td>
+    <td><b>eif_threshold = v_spike * H(delta_T-1e-12) + v_thresh * H(-1*delta_T+1e-9)</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='3'>
+    <span class="label label-info">Exposures</span>
+  </td>
+    <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
+  </tr>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
+  </tr>
+    <td><b>w</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='3'>
+    <span class="label label-info">Event Ports</span>
+  </td>
+    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseSpikingCell" title="Base type of any cell which can emit spike events. "><span  style="color:#85ACE1;font-style:italic">baseSpikingCell</span></a>)</td>
+    <td width="100">Direction: out</td>
+  </tr>
+    <td style="color:darkgrey"><b>spike_in_E</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+    <td style="color:darkgrey"><b>spike_in_I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-info">Attachments</span>
+  </td>
+    <td><b>synapses</b></td>
+    <td width="100"><a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a></td>
+  </tr>
+<tr>
+  <td width="70" rowspan='1'>
+    <span class="label ">Dynamics</span>
+  </td>
+<td colspan='2'>
+<span class="label">State Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>lastSpikeTime</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#time">time</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>w</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless (exposed as <b>w</b>)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#voltage">voltage</a> (exposed as <b>v</b>)
+<br/>
+<br/>
+<span class="label">On Start</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>v</b> = v_init * MVOLT<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>w</b> = 0<br/>
+<br/>
+<span class="label">Derived Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>iSyn</b> = synapses[*]->i (reduce method: add)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>iSyn</b>)
+<br/>
+<br/>
+<span class="label">Conditional Derived Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;IF delta_T &gt; 0 THEN<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>delta_I</b> = delta_T * exp(((v / MVOLT) - v_thresh) / delta_T)&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;IF delta_T = 0 THEN<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>delta_I</b> = 0&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+<br/>
+<br/>
+<span class="label">Regime: refractory (initial)</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">On Entry</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>lastSpikeTime</b> = t<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>v</b> = v_reset * MVOLT<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>w</b> = w+b<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">On Conditions</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF t &gt; lastSpikeTime + (tau_refrac*MSEC) THEN<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TRANSITION to REGIME <b>integrating</b><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">Time Derivatives</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d <b>w</b> /dt = (1 / tau_w) * (a * ((v / MVOLT) - v_rest) - w) / MSEC<br/>
+<br/>
+<span class="label">Regime: integrating (initial)</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">On Conditions</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF v &gt; eif_threshold * MVOLT THEN<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EVENT OUT on port <b>spike</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TRANSITION to REGIME <b>refractory</b><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">Time Derivatives</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d <b>w</b> /dt = (1 / tau_w) * (a * ((v / MVOLT) - v_rest) - w) / MSEC<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d <b>v</b> /dt = (MVOLT * ((-1 * ((v / MVOLT) - v_rest) + delta_I) / tau_m + (i_offset - w) / cm) / MSEC) + (iSyn / (cm * NFARAD))<br/>
+<br/>
+<br/>
+</td>
+</tr>
+</table>
+
+<a name="EIF_cond_alpha_isfa_ista">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>EIF_cond_alpha_isfa_ista</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="PyNN.html#basePyNNIaFCondCell" title="Base type of conductance based PyNN IaF cell models "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCondCell</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Adaptive exponential integrate and fire neuron according to Brette R and Gerstner W (2005) with alpha-function-shaped post-synaptic conductance </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='20'>
+    <span class="label label-success">Parameters</span>
+  </td>
+    <td><b>a</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>b</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>cm</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>delta_T</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>e_rev_E</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCondCell" title="Base type of conductance based PyNN IaF cell models "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCondCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>e_rev_I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCondCell" title="Base type of conductance based PyNN IaF cell models "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCondCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>i_offset</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>i_offset</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_m</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>tau_refrac</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_refrac</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_syn_E</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_syn_I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>tau_w</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_init</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_reset</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>v_rest</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_rest</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>v_spike</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_thresh</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNIaFCell" title="Base type of any PyNN standard integrate and fire model "><span  style="color:#85ACE1;font-style:italic">basePyNNIaFCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-success">Derived Parameters</span>
+  </td>
+    <td><b>eif_threshold = v_spike * H(delta_T-1e-12) + v_thresh * H(-1*delta_T+1e-9)</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='3'>
+    <span class="label label-info">Exposures</span>
+  </td>
+    <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
+  </tr>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
+  </tr>
+    <td><b>w</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='3'>
+    <span class="label label-info">Event Ports</span>
+  </td>
+    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseSpikingCell" title="Base type of any cell which can emit spike events. "><span  style="color:#85ACE1;font-style:italic">baseSpikingCell</span></a>)</td>
+    <td width="100">Direction: out</td>
+  </tr>
+    <td style="color:darkgrey"><b>spike_in_E</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+    <td style="color:darkgrey"><b>spike_in_I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-info">Attachments</span>
+  </td>
+    <td><b>synapses</b></td>
+    <td width="100"><a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a></td>
+  </tr>
+<tr>
+  <td width="70" rowspan='1'>
+    <span class="label ">Dynamics</span>
+  </td>
+<td colspan='2'>
+<span class="label">State Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>lastSpikeTime</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#time">time</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>w</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless (exposed as <b>w</b>)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#voltage">voltage</a> (exposed as <b>v</b>)
+<br/>
+<br/>
+<span class="label">On Start</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>v</b> = v_init * MVOLT<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>w</b> = 0<br/>
+<br/>
+<span class="label">Derived Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>iSyn</b> = synapses[*]->i (reduce method: add)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>iSyn</b>)
+<br/>
+<br/>
+<span class="label">Conditional Derived Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;IF delta_T &gt; 0 THEN<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>delta_I</b> = delta_T * exp(((v / MVOLT) - v_thresh) / delta_T)&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;IF delta_T = 0 THEN<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>delta_I</b> = 0&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+<br/>
+<br/>
+<span class="label">Regime: refractory (initial)</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">On Entry</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>lastSpikeTime</b> = t<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>v</b> = v_reset * MVOLT<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>w</b> = w + b<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">On Conditions</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF t &gt; lastSpikeTime + (tau_refrac * MSEC) THEN<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TRANSITION to REGIME <b>integrating</b><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">Time Derivatives</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d <b>w</b> /dt = (1 / tau_w) * (a * ((v / MVOLT) - v_rest) - w) / MSEC<br/>
+<br/>
+<span class="label">Regime: integrating (initial)</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">On Conditions</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF v &gt; eif_threshold * MVOLT THEN<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EVENT OUT on port <b>spike</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TRANSITION to REGIME <b>refractory</b><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">Time Derivatives</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d <b>w</b> /dt = (1/ tau_w) * (a*((v/MVOLT)-v_rest) - w) /MSEC<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d <b>v</b> /dt = (MVOLT * ((-1 * ( (v / MVOLT) - v_rest) + delta_I) / tau_m + (i_offset - w) / cm) / MSEC) + (iSyn / (cm * NFARAD))<br/>
+<br/>
+<br/>
+</td>
+</tr>
+</table>
+
+<a name="HH_cond_exp">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>HH_cond_exp</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Single-compartment Hodgkin-Huxley-type neuron with transient sodium and delayed-rectifier potassium currents using the ion channel models from Traub. </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='14'>
+    <span class="label label-success">Parameters</span>
+  </td>
+    <td style="color:darkgrey"><b>cm</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>e_rev_E</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>e_rev_I</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>e_rev_K</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>e_rev_Na</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>e_rev_leak</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>g_leak</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>gbar_K</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>gbar_Na</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>i_offset</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_syn_E</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_syn_I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v_init</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>v_offset</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='5'>
+    <span class="label label-info">Exposures</span>
+  </td>
+    <td><b>h</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
+  </tr>
+    <td><b>m</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>n</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='3'>
+    <span class="label label-info">Event Ports</span>
+  </td>
+    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseSpikingCell" title="Base type of any cell which can emit spike events. "><span  style="color:#85ACE1;font-style:italic">baseSpikingCell</span></a>)</td>
+    <td width="100">Direction: out</td>
+  </tr>
+    <td style="color:darkgrey"><b>spike_in_E</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+    <td style="color:darkgrey"><b>spike_in_I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-info">Attachments</span>
+  </td>
+    <td><b>synapses</b></td>
+    <td width="100"><a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a></td>
+  </tr>
+<tr>
+  <td width="70" rowspan='1'>
+    <span class="label ">Dynamics</span>
+  </td>
+<td colspan='2'>
+<span class="label">State Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>h</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless (exposed as <b>h</b>)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>n</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless (exposed as <b>n</b>)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>m</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless (exposed as <b>m</b>)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#voltage">voltage</a> (exposed as <b>v</b>)
+<br/>
+<br/>
+<span class="label">On Start</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>v</b> = v_init * MVOLT<br/>
+<br/>
+<span class="label">Derived Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>iSyn</b> = synapses[*]->i (reduce method: add)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>iSyn</b>)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>betam</b> = 0.28 * ((v / MVOLT) - v_offset - 40) / (exp(((v / MVOLT) - v_offset - 40) / 5.0) - 1)&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>iLeak</b> = g_leak * (e_rev_leak - (v / MVOLT))&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>iMemb</b> = iLeak + iNa + iK + i_offset&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>iK</b> = gbar_K * (n * n * n * n) * (e_rev_K - (v / MVOLT))&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>betan</b> = 0.5 * exp((10 - (v / MVOLT) + v_offset) / 40)&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>alphah</b> = 0.128 * exp((17 - (v / MVOLT) + v_offset) / 18.0)&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>betah</b> = 4.0 / (1 + exp((40 - (v / MVOLT) + v_offset) / 5))&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>alphan</b> = 0.032 * (15 - (v / MVOLT) + v_offset) / (exp((15 - (v / MVOLT) + v_offset) / 5) - 1)&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>iNa</b> = gbar_Na * (m * m * m) * h * (e_rev_Na - (v / MVOLT))&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>alpham</b> = 0.32 * (13 - (v / MVOLT) + v_offset) / (exp((13 - (v / MVOLT) + v_offset) / 4.0) - 1)&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+<br/>
+<span class="label">Time Derivatives</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;d <b>h</b> /dt = (alphah * (1 - h) - betah * h) / MSEC<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;d <b>n</b> /dt = (alphan * (1 - n) - betan * n) / MSEC<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;d <b>m</b> /dt = (alpham * (1 - m) - betam * m) / MSEC<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;d <b>v</b> /dt = (MVOLT * (iMemb / cm) / MSEC) + (iSyn / (cm * NFARAD))<br/>
+<br/>
+</td>
+</tr>
+</table>
+
+<a name="basePynnSynapse">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b><span  style="color:dimgrey;font-style:italic">basePynnSynapse</span></b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Synapses.html#baseVoltageDepSynapse" title="Base type for synapses with a dependence on membrane potential "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepSynapse</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Base type for all PyNN synapses. Note, the current <b>I</b> produced is dimensionless, but it requires a membrane potential <b>v</b> with dimension voltage </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-success">Parameters</span>
+  </td>
+    <td><b>tau_syn</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='3'>
+    <span class="label label-info">Constants</span>
+  </td>
+    <td><b>NAMP</b> = 1nA</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
+  </tr>
+    <td><b>MVOLT</b> = 1mV</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
+  </tr>
+    <td><b>MSEC</b> = 1ms</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-info">Exposures</span>
+  </td>
+    <td style="color:darkgrey"><b>i</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-info">Requirements</span>
+  </td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseVoltageDepSynapse" title="Base type for synapses with a dependence on membrane potential "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepSynapse</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-info">Event Ports</span>
+  </td>
+    <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+</table>
+
+<a name="expCondSynapse">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>expCondSynapse</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="PyNN.html#basePynnSynapse" title="Base type for all PyNN synapses. Note, the current I produced is dimensionless, but it requires a membrane potential v with dimension voltage "><span  style="color:#85ACE1;font-style:italic">basePynnSynapse</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Conductance based synapse with instantaneous rise and single exponential decay (with time constant tau_syn) </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='2'>
+    <span class="label label-success">Parameters</span>
+  </td>
+    <td><b>e_rev</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_syn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePynnSynapse" title="Base type for all PyNN synapses. Note, the current I produced is dimensionless, but it requires a membrane potential v with dimension voltage "><span  style="color:#85ACE1;font-style:italic">basePynnSynapse</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='2'>
+    <span class="label label-info">Exposures</span>
+  </td>
+    <td><b>g</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>i</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-info">Requirements</span>
+  </td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseVoltageDepSynapse" title="Base type for synapses with a dependence on membrane potential "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepSynapse</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-info">Event Ports</span>
+  </td>
+    <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+<tr>
+  <td width="70" rowspan='1'>
+    <span class="label ">Dynamics</span>
+  </td>
+<td colspan='2'>
+<span class="label">State Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>g</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless (exposed as <b>g</b>)
+<br/>
+<br/>
+<span class="label">On Events</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;EVENT IN on port: <b>in</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>g</b> = g+weight<br/>
+<br/>
+<span class="label">Derived Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>i</b> = g * (e_rev - (v/MVOLT)) * NAMP&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>i</b>)
+<br/>
+<br/>
+<span class="label">Time Derivatives</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;d <b>g</b> /dt = -g / (tau_syn*MSEC)<br/>
+<br/>
+</td>
+</tr>
+</table>
+
+<a name="expCurrSynapse">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>expCurrSynapse</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="PyNN.html#basePynnSynapse" title="Base type for all PyNN synapses. Note, the current I produced is dimensionless, but it requires a membrane potential v with dimension voltage "><span  style="color:#85ACE1;font-style:italic">basePynnSynapse</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Current based synapse with instantaneous rise and single exponential decay (with time constant tau_syn) </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-success">Parameters</span>
+  </td>
+    <td style="color:darkgrey"><b>tau_syn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePynnSynapse" title="Base type for all PyNN synapses. Note, the current I produced is dimensionless, but it requires a membrane potential v with dimension voltage "><span  style="color:#85ACE1;font-style:italic">basePynnSynapse</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-info">Exposures</span>
+  </td>
+    <td style="color:darkgrey"><b>i</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-info">Requirements</span>
+  </td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseVoltageDepSynapse" title="Base type for synapses with a dependence on membrane potential "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepSynapse</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-info">Event Ports</span>
+  </td>
+    <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+<tr>
+  <td width="70" rowspan='1'>
+    <span class="label ">Dynamics</span>
+  </td>
+<td colspan='2'>
+<span class="label">State Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>I</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless<br/>
+<br/>
+<span class="label">On Events</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;EVENT IN on port: <b>in</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>I</b> = I + weight<br/>
+<br/>
+<span class="label">Derived Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>i</b> = I * NAMP&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>i</b>)
+<br/>
+<br/>
+<span class="label">Time Derivatives</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;d <b>I</b> /dt = -I / (tau_syn*MSEC)<br/>
+<br/>
+</td>
+</tr>
+</table>
+
+<a name="alphaCondSynapse">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>alphaCondSynapse</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="PyNN.html#basePynnSynapse" title="Base type for all PyNN synapses. Note, the current I produced is dimensionless, but it requires a membrane potential v with dimension voltage "><span  style="color:#85ACE1;font-style:italic">basePynnSynapse</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Alpha synapse: rise time and decay time are both tau_syn. Conductance based synapse. </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='2'>
+    <span class="label label-success">Parameters</span>
+  </td>
+    <td><b>e_rev</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tau_syn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePynnSynapse" title="Base type for all PyNN synapses. Note, the current I produced is dimensionless, but it requires a membrane potential v with dimension voltage "><span  style="color:#85ACE1;font-style:italic">basePynnSynapse</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='3'>
+    <span class="label label-info">Exposures</span>
+  </td>
+    <td><b>A</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>g</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>i</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-info">Requirements</span>
+  </td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseVoltageDepSynapse" title="Base type for synapses with a dependence on membrane potential "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepSynapse</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-info">Event Ports</span>
+  </td>
+    <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+<tr>
+  <td width="70" rowspan='1'>
+    <span class="label ">Dynamics</span>
+  </td>
+<td colspan='2'>
+<span class="label">State Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>A</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless (exposed as <b>A</b>)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>g</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless (exposed as <b>g</b>)
+<br/>
+<br/>
+<span class="label">On Events</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;EVENT IN on port: <b>in</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>A</b> = A + weight<br/>
+<br/>
+<span class="label">Derived Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>i</b> = g * (e_rev - (v/MVOLT)) * NAMP&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>i</b>)
+<br/>
+<br/>
+<span class="label">Time Derivatives</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;d <b>A</b> /dt = -A /(tau_syn*MSEC)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;d <b>g</b> /dt = (2.7182818*A - g)/(tau_syn*MSEC)<br/>
+<br/>
+</td>
+</tr>
+</table>
+
+<a name="alphaCurrSynapse">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>alphaCurrSynapse</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="PyNN.html#basePynnSynapse" title="Base type for all PyNN synapses. Note, the current I produced is dimensionless, but it requires a membrane potential v with dimension voltage "><span  style="color:#85ACE1;font-style:italic">basePynnSynapse</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Alpha synapse: rise time and decay time are both tau_syn. Current based synapse. </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-success">Parameters</span>
+  </td>
+    <td style="color:darkgrey"><b>tau_syn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePynnSynapse" title="Base type for all PyNN synapses. Note, the current I produced is dimensionless, but it requires a membrane potential v with dimension voltage "><span  style="color:#85ACE1;font-style:italic">basePynnSynapse</span></a>)</td>
+    <td width="100">Dimensionless</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='2'>
+    <span class="label label-info">Exposures</span>
+  </td>
+    <td><b>A</b></td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
+  </tr>
+    <td style="color:darkgrey"><b>i</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-info">Requirements</span>
+  </td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseVoltageDepSynapse" title="Base type for synapses with a dependence on membrane potential "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepSynapse</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-info">Event Ports</span>
+  </td>
+    <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a>)</td>
+    <td width="100">Direction: in</td>
+  </tr>
+<tr>
+  <td width="70" rowspan='1'>
+    <span class="label ">Dynamics</span>
+  </td>
+<td colspan='2'>
+<span class="label">State Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>I</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>A</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless (exposed as <b>A</b>)
+<br/>
+<br/>
+<span class="label">On Events</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;EVENT IN on port: <b>in</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>A</b> = A + weight<br/>
+<br/>
+<span class="label">Derived Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>i</b> = I * NAMP&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>i</b>)
+<br/>
+<br/>
+<span class="label">Time Derivatives</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;d <b>I</b> /dt = (2.7182818*A - I)/(tau_syn*MSEC)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;d <b>A</b> /dt = -A /(tau_syn*MSEC)<br/>
+<br/>
+</td>
+</tr>
+</table>
+
+<a name="SpikeSourcePoisson">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>SpikeSourcePoisson</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Spike source, generating spikes according to a Poisson process. </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='3'>
+    <span class="label label-success">Parameters</span>
+  </td>
+    <td><b>duration</b></td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
+  </tr>
+    <td><b>rate</b></td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#per_time">per_time</a></td>
+  </tr>
+    <td><b>start</b></td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-success">Derived Parameters</span>
+  </td>
+    <td><b>end = start + duration</b></td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='2'>
+    <span class="label label-info">Constants</span>
+  </td>
+    <td><b>SMALL_TIME</b> = 1e-9ms</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
+  </tr>
+    <td><b>LONG_TIME</b> = 1e9hour</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='4'>
+    <span class="label label-info">Exposures</span>
+  </td>
+    <td><b>isi</b></td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
+  </tr>
+    <td><b>tnextIdeal</b></td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
+  </tr>
+    <td><b>tnextUsed</b></td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
+  </tr>
+    <td style="color:darkgrey"><b>tsince</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='2'>
+    <span class="label label-info">Event Ports</span>
+  </td>
+    <td><b>in</b></td>
+    <td width="100">Direction: in</td>
+  </tr>
+    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
+    <td width="100">Direction: out</td>
+  </tr>
+<tr>
+  <td width="70" rowspan='1'>
+    <span class="label ">Dynamics</span>
+  </td>
+<td colspan='2'>
+<span class="label">State Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>tnextIdeal</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#time">time</a> (exposed as <b>tnextIdeal</b>)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>isi</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#time">time</a> (exposed as <b>isi</b>)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>tsince</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#time">time</a> (exposed as <b>tsince</b>)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>tnextUsed</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#time">time</a> (exposed as <b>tnextUsed</b>)
+<br/>
+<br/>
+<span class="label">On Start</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>isi</b> = start - log(random(1))/rate<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>tsince</b> = 0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>tnextIdeal</b> = isi + H(((isi) - (start+duration))/duration)*LONG_TIME<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>tnextUsed</b> = tnextIdeal<br/>
+<br/>
+<span class="label">On Conditions</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;IF t &gt; tnextUsed THEN<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>isi</b> = -1 * log(random(1))/rate<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>tnextIdeal</b> = (tnextIdeal+isi) + H(((tnextIdeal+isi) - (start+duration))/duration)*LONG_TIME<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>tnextUsed</b> = tnextIdeal*H( (tnextIdeal-t)/t ) + (t+SMALL_TIME)*H( (t-tnextIdeal)/t )<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>tsince</b> = 0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EVENT OUT on port <b>spike</b><br/>
+<br/>
+<span class="label">Time Derivatives</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;d <b>tnextIdeal</b> /dt = 0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;d <b>tnextUsed</b> /dt = 0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;d <b>tsince</b> /dt = 1<br/>
+<br/>
+</td>
+</tr>
+</table>
+
+</div>
+</div>
+</div>
+</body>
+

@@ -50,7 +50,6 @@ LEMSexamples/old
 LEMSexamples/*.c
 LEMSexamples/*.o
 LEMSexamples/*.dll
-docs/*.html
 
 examples/NeuroML2_To_HTML/*.html
 examples/*.png
