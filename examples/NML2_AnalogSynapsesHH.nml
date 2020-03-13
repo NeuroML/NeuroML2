@@ -37,7 +37,7 @@
             <continuousConnectionInstanceW id="0" preCell="../hhPop1/0/hhcell" postCell="../hhPop2/0/hhcell" preComponent="silent1" postComponent="gs1" weight="1"/>
         </continuousProjection>
         
-        <inputList id="i1" component="pulseGen1" population="iafPop1">
+        <inputList id="i1" component="pulseGen1" population="hhPop1">
             <input id="0" target="../hhPop1/0/hhcell" destination="synapses"/>
         </inputList>
         
