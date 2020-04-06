@@ -8,8 +8,23 @@ and [LEMS](https://github.com/LEMS/LEMS), but also the Python ([libNeuroML](http
 
 **Only contributors who are not [NeuroML Editors](https://neuroml.org/editors) are specifically pointed out below.**
 
-v2.0 / 2019-XX-XX
+v2.0 / 2020-04-06
 --------------------
+
+* **Renamed the main Schema from NeuroML_v2beta5.xsd to [NeuroML_v2.0.xsd](https://github.com/NeuroML/NeuroML2/blob/master/Schemas/NeuroML2/NeuroML_v2.0).** 
+  Changes outlined below are reflected in the new schema
+
+_Example NeuroML models_
+
+* The standard NeuroML examples have been updated/revised (and tests added) to ensure as many as possible of them run when converted to NEURON via jNeuroML.
+
+_Export formats_
+
+* Improved export to graphical view of LEMS ComponentTypes, e.g. try: jnml LEMS_NML2_Ex2_Izh.xml  -graph
+
+* Improved/retested export to SBML & SED-ML. Added export option -sbml-sedml, which converts LEMS file to SBML format with a SED-ML file describing the experiment to run. Successfully tested with Tellurium SBML simulator. 
+
+* Minor updates to improve export to Moose. Latest developments with Moose support outlined here: https://github.com/NeuroML/NeuroML2/issues/94
 
 
 v2beta5 / 2019-11-05
