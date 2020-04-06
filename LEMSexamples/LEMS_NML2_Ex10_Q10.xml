@@ -20,7 +20,7 @@
     
     <ionChannelPassive id="passive" conductance="10pS"/>
     
-    <ionChannelHH id="na" conductance="10pS">
+    <ionChannelHH id="naChan" conductance="10pS" species="na">
     
        <gateHHrates id="m" instances="3">
             <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="32degC" /> 
@@ -48,7 +48,7 @@
     </ComponentType>
     
     
-    <ionChannelHH id="k" conductance="10pS">
+    <ionChannelHH id="kChan" conductance="10pS" species="k">
     
         <gateHHrates id="n" instances="4">
     
@@ -61,14 +61,35 @@
     </ionChannelHH>
     
     
-    
-    <pointCellCondBased id="hhcell"  C="10pF"  v0="-65mV" thresh="20mV">
-    
-        <channelPopulation id="leak" ionChannel="passive" number="300" erev="-54.3mV"/>
-        <channelPopulation id="naChans" ionChannel="na" number="120000" erev="50mV"/>
-        <channelPopulation id="kChans" ionChannel="k" number="36000" erev="-77mV"/>
-    
-    </pointCellCondBased>
+    <cell id="hhcell">
+
+        <morphology id="morph1">
+            <segment id="0" name="soma">
+                <proximal x="0" y="0" z="0" diameter="17.841242"/> <!--Gives a convenient surface area of 1000.0 um^2-->
+                <distal x="0" y="0" z="0" diameter="17.841242"/>
+            </segment>
+            <segmentGroup id="soma_group">
+                <member segment="0"/>
+            </segmentGroup>
+        </morphology>
+
+        <biophysicalProperties id="bioPhys1">
+            <membraneProperties>
+                <channelDensity id="leak" ionChannel="passive" condDensity="3.0 S_per_m2" erev="-54.3mV" ion="non_specific"/>
+                <channelDensity id="naChans" ionChannel="naChan" condDensity="120.0 mS_per_cm2" erev="50.0 mV" ion="na"/>
+                <channelDensity id="kChans" ionChannel="kChan" condDensity="360 S_per_m2" erev="-77mV" ion="k"/>
+                <spikeThresh value="-20mV"/>
+                <specificCapacitance value="1.0 uF_per_cm2"/>
+                <initMembPotential value="-65mV"/>
+            </membraneProperties>
+
+            <intracellularProperties>
+                <resistivity value="0.03 kohm_cm"/>   <!-- Note: not used in single compartment simulations -->
+            </intracellularProperties>
+            
+        </biophysicalProperties>
+
+    </cell>
     
     
     <pulseGenerator id="pulseGen1" delay="100ms" duration="100ms" amplitude="0.08 nA" />
@@ -91,10 +112,10 @@
         
         <Display id="d2" title="Ex10: HH example with Q10 rate adjustments: rate variables" timeScale="1ms" xmin="0" xmax="300" ymin="-0.1" ymax="1.1">
             
-            <Line id="m" quantity="hhpop[0]/naChans/na/m/q" scale="1"  color="#000000" timeScale="1ms"/>
-            <Line id="h" quantity="hhpop[0]/naChans/na/h/q" scale="1"  color="#ff0000" timeScale="1ms"/>
-            <Line id="n" quantity="hhpop[0]/kChans/k/n/q" scale="1"  color="#0000ff" timeScale="1ms"/>
-            <Line id="q10 scaling" quantity="hhpop[0]/kChans/k/n/rateScale" scale="1"  color="#00ffff" timeScale="1ms"/>
+            <Line id="m" quantity="hhpop[0]/bioPhys1/membraneProperties/naChans/naChan/m/q" scale="1"  color="#000000" timeScale="1ms"/>
+            <Line id="h" quantity="hhpop[0]/bioPhys1/membraneProperties/naChans/naChan/h/q" scale="1"  color="#ff0000" timeScale="1ms"/>
+            <Line id="n" quantity="hhpop[0]/bioPhys1/membraneProperties/kChans/kChan/n/q" scale="1"  color="#0000ff" timeScale="1ms"/>
+            <Line id="q10 scaling" quantity="hhpop[0]/bioPhys1/membraneProperties/kChans/kChan/n/rateScale" scale="1"  color="#00ffff" timeScale="1ms"/>
         </Display>
     
         <Display id="d3" title="Ex10: HH example with Q10 rate adjustments: currents" timeScale="1ms" xmin="0" xmax="300" ymin="-0.01" ymax="0.1">

@@ -45,7 +45,7 @@ lems_xmlschema = etree.XMLSchema(lems_xmlschema_doc)
 lems_master_ex_dir="../LEMS/examples"
 lems_master_ex_list=os.listdir(lems_master_ex_dir)
 
-nml2_schema_name = "NeuroML_v2beta5.xsd"
+nml2_schema_name = "NeuroML_v2.0.xsd"
 nml2_schema = "Schemas/NeuroML2/%s"%nml2_schema_name
 nml2_schema_file = urlopen(nml2_schema)
 
@@ -111,14 +111,14 @@ if __name__ == '__main__':
         print("NeuroML alpha schemas in neuroConstruct are in sync.")
         
     if os.path.isdir('../neuroConstruct') and not check_same_file('Schemas/NeuroML2/%s'%nml2_schema_name,  '../neuroConstruct/NeuroML2/Schemas/NeuroML2/%s'%nml2_schema_name):
-        print("FAIL: NeuroML beta schemas in neuroConstruct not in sync!")
+        print("FAIL: NeuroML schemas in neuroConstruct not in sync!")
     else:
-        print("NeuroML beta schemas in neuroConstruct are in sync.")
+        print("NeuroML schemas in neuroConstruct are in sync.")
         
     if os.path.isdir('../git/NeuroMLWebsite') and not check_same_file('Schemas/NeuroML2/%s'%nml2_schema_name,  '../git/NeuroMLWebsite/public/schema/neuroml2/%s'%nml2_schema_name):
-        print("FAIL: NeuroML beta schemas in NeuroMLWebsite not in sync!")
+        print("FAIL: NeuroML schemas in NeuroMLWebsite not in sync!")
     else:
-        print("NeuroML beta schemas in NeuroMLWebsite are in sync.")
+        print("NeuroML schemas in NeuroMLWebsite are in sync.")
 
     print "--------------------------------------------------"
     print "    Checking local copies of examples"

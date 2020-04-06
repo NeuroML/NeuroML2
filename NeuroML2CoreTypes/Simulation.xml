@@ -14,9 +14,10 @@
         <Parameter name="xmax" dimension="none"/>
         <Parameter name="ymin" dimension="none"/>
         <Parameter name="ymax" dimension="none"/>
-
         <Parameter name="timeScale" dimension="time"/>
+        
         <Children name="lines" type="Line"/>
+        
         <Text name="title"/>   
 
         <Simulation>
@@ -27,7 +28,7 @@
 
     <ComponentType name="Line">
         <Parameter name="scale" dimension="*"/>
-         <Parameter name="timeScale" dimension="*"/>
+        <Parameter name="timeScale" dimension="*"/>
         <Path name="quantity"/>
         <Text name="color"/>
         <Simulation>
@@ -45,8 +46,9 @@
         <Children name="events" type="EventOutputFile"/>
         
         <ComponentReference name="target" type="Component"/>
+        
+        <Text name="seed"/>
     
-       
         <Dynamics>
             <StateVariable name="t" dimension="time"/>
         </Dynamics>
@@ -99,132 +101,5 @@
             <EventRecord quantity="select" eventPort="eventPort"/>
         </Simulation>
     </ComponentType>
-
-<!-- 
-    <ComponentType name="DisplayList">
-        <Parameter name="timeScale" dimension="time"/>
-        <Children name="lines" type="LineElement"/>
-
-        <Text name="title"/>
-        <Text name="display"/>
-    </ComponentType>
-
-
-    <ComponentType name="LineElement">
-        <Parameter name="scale" dimension="*"/>
-        <Parameter name="timeScale" dimension="*"/>
-        <Text name="color"/>
-        <Text name="save"/>
-        <Path name="quantity"/>
-        <Simulation>
-            <Record quantity="quantity" timeScale="timeScale" scale="scale" color="color" display="display"/>
-        </Simulation>
-    </ComponentType>
-    
-    <ComponentType name="DisplayElement">
-        <Parameter name="xmin" dimension="none"/>
-        <Parameter name="xmax" dimension="none"/>
-        <Parameter name="ymin" dimension="none"/>
-        <Parameter name="ymax" dimension="none"/>
-        <Text name="title"/>
-
-        <Simulation>
-            <DataDisplay title="title" dataRegion="xmin,xmax,ymin,ymax"/>
-        </Simulation>
-    </ComponentType>
-	
-    <ComponentType name="SimulationElement">
-        <Parameter name="length" dimension="time"/>
-        <Parameter name="step" dimension="time"/>
-        <ComponentReference name="target" type="Component"/>
-        <Link name="display" type="DisplayElement"/>
-        <Children name="outputs" type="DisplayList"/>
-        <Dynamics>
-            <StateVariable name="t" dimension="time"/>
-        </Dynamics>
-
-        <Simulation>
-            <Run component="target" variable="t" increment="step" total="length"/>
-        </Simulation>
-    </ComponentType>
-
-
-    <ComponentType name="SimulationSet">
-        <Children name="simulations" type="SimulationElement"/>
-        <Children name="displays" type="DisplayElement"/>
-    </ComponentType>
-     -->
-
-
-
-<!-- In development... *Might* lead to SED-ML descriptions being natively used by LEMS...
-
-    <ComponentType name="listOfSimulations">
-        <Children name="uniformTimeCourse" type="uniformTimeCourse"/>
-    </ComponentType>
-
-    <ComponentType name="uniformTimeCourse">
-        <Parameter name="initialTime" dimension="time"/>
-        <Parameter name="outputStartTime" dimension="time"/>
-        <Parameter name="outputEndTime" dimension="time"/>
-        <Parameter name="numberOfPoints" dimension="none"/>
-
-        <Dynamics>
-             <DerivedVariable name="length" dimension="time" value="outputEndTime - initialTime"/>
-             <DerivedVariable name="step" dimension="time" value="length/numberOfPoints"/>
-        </Dynamics>
-
-    </ComponentType>
-
-    <ComponentType name="Simulation2">
-
-        <Parameter name="length" dimension="time"/>
-        <Parameter name="step" dimension="time"/>
-
-        <Constant name="l2" dimension="time" value="400ms"/>
-        
-        <ComponentReference name="target" type="network"/>
-        <Children name="displays" type="Display"/>
-
-
-        <Child name="uniformTimeCourse" type="uniformTimeCourse"/>
-
-        <Dynamics>
-            <StateVariable name="t" dimension="time"/>
-
-            <DerivedVariable name="length2" dimension="time" select="uniformTimeCourse/outputEndTime"/>
-
-       <Run component="target" variable="t" increment="step" total="length"/>
-            <Show src="displays"/>
-        </Dynamics>
-    </ComponentType>
-
-
-    <ComponentType name="sedML">
-
-        <Child name="listOfSimulations" type="listOfSimulations"/>
-        <Children name="uniformTimeCourse" type="uniformTimeCourse"/>
-        <Children name="displays" type="Display"/>
-
-        <ComponentReference name="target" type="network"/>
-        
-        <Text name="version"/>
-        <Text name="level"/>
-        
-        <Parameter name="length" dimension="time"/>
-        <Parameter name="step" dimension="time"/>
-
-    <Dynamics>
-        <StateVariable name="t" dimension="time"/>-->
-
-        <!--<ExternalVariable name="length" dimension="time" select="uniformTimeCourse/outputEndTime"/>-->
-        <!--<ExternalVariable name="length" dimension="time" select="listOfSimulations/uniformTimeCourse/outputEndTime"/>-->
-        <!--<DerivedVariable name="length" value="listOfSimulations/uniformTimeCourse/outputEndTime"/>-->
-
-        <!--<Run component="target" variable="t" increment="step" total="length"/>-->
-        <!--<Run component="target" variable="t" increment="0.01" total="300"/>
-                <Show src="displays"/>
-            </Dynamics>
-        </ComponentType>-->
 
 </Lems>

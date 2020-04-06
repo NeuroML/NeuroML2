@@ -2,3 +2,17 @@
  
 target: ../LEMS_NML2_Ex15_CaDynamics.xml
 engine: jNeuroML
+mep: .test.ex15.mep
+experiments:
+  v:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex15_v.dat
+          columns: [0,1]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: 0
+        tolerance: 0.005044726617700581 #  relatively large tolerance due to inaccuracy of jLEMS's simple numerical integration methods
+

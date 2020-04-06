@@ -47,8 +47,13 @@
     
     
     <pointCellCondBased id="hhpointcell" C="10pF"  v0="-65mV" thresh="20mV">
+        <!-- Note: while pointCellCondBased is the simplest way to represent a cell with
+             HH conductances, it is highly recommended to use the <cell> element as in 
+             examples/NML2_SingleCompHHCell.nml with an explicit description of the 
+             compartment (proximal/distal info for the segment). This will ensure maximal
+             compatibility with simuators and visualisation/analysis applications -->
         <channelPopulation id="leak" ionChannel="passive" number="300" erev="-54.3mV"/>
-        <channelPopulation id="naChans" ionChannel="na" number="120000" erev="50mV"/><!-- -->
+        <channelPopulation id="naChans" ionChannel="na" number="120000" erev="50mV"/>
         <channelPopulation id="kChans" ionChannel="k" number="36000" erev="-77mV"/>
     </pointCellCondBased>
     

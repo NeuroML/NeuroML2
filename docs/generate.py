@@ -11,7 +11,7 @@ from lems.model.dynamics import Transition
 from lems.model.dynamics import StateAssignment
 from lems.model.dynamics import EventOut
 
-nml2_version = "beta5"
+nml2_version = "2.0"
 nml2_branch = "master"
 
 col_width_left = "70"
@@ -68,6 +68,14 @@ def replace_underscores_and_urls(text, useHtml=True):
     text2 = ""
     for word in words:
         if len(word)>0:
+            
+            if word.startswith("*"):
+                if useHtml:
+                    word = "<u>%s"%(word[1:])
+            if word.endswith("*"):
+                if useHtml:
+                    word = "%s</u>"%(word[:-1])
+                    
             if word.startswith("http://"):
                 if useHtml:
                     word = "<a href=\"%s\">%s</a>"%(word, word)
@@ -213,7 +221,7 @@ for file in files:
                 "        <span class=\"icon-bar\"></span>\n"+ \
                 "        <span class=\"icon-bar\"></span>\n"+ \
                 "      </a>\n"+ \
-                "      <a class=\"brand\" href=\"#\">NeuroML v2%s Component Types</a>\n"%nml2_version+ \
+                "      <a class=\"brand\" href=\"#\">NeuroML v%s Component Types</a>\n"%nml2_version+ \
                 "      <div class=\"nav-collapse\">\n"+ \
                 "        <ul class=\"nav\">\n"
 
@@ -263,12 +271,12 @@ for file in files:
     if model.description:
         desc = model.description
     contents += ("   <div class=\"alert alert-error\">For more information on NeuroML 2 and LEMS see <a href=\"http://www.neuroml.org/neuromlv2\">here</a>. <br/>Note: these descriptions have been updated to the latest "
-                     "   <a href=\"https://github.com/NeuroML/NeuroML2/tree/%s/Schemas/NeuroML2\">NeuroML v2%s</a> definitions, using "
+                     "   <a href=\"https://github.com/NeuroML/NeuroML2/tree/%s/Schemas/NeuroML2\">NeuroML v%s</a> definitions, using "
                      "   <a href=\"https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS\">the latest version of LEMS</a>!</div>\n"+ \
                     "    <table class=\"table table-bordered\"><tr><td ><h3>%s</h3></td></tr>\n"+ \
                     "    <tr><td>%s</td></tr>\n"+ \
                     "    <tr><td>Original LEMS ComponentType definitions: <a href=\"%s%s.xml\">%s.xml</a><br/>"+ \
-                    "    Schema against which NeuroML based on these should be valid: <a href=\"https://github.com/NeuroML/NeuroML2/tree/%s/Schemas/NeuroML2/NeuroML_v2%s.xsd\">NeuroML_v2%s.xsd</a></td></tr>\n"+ \
+                    "    Schema against which NeuroML based on these should be valid: <a href=\"https://github.com/NeuroML/NeuroML2/tree/%s/Schemas/NeuroML2/NeuroML_v%s.xsd\">NeuroML_v%s.xsd</a></td></tr>\n"+ \
                     "    </table><br/>\n")%(nml2_branch,nml2_version,file,format_description(desc),lems_xml_url,file,file, nml2_branch, nml2_version, nml2_version)
 
     '''
