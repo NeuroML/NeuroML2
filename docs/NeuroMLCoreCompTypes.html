@@ -1,0 +1,620 @@
+<html>
+  <head>
+    <title>NeuroMLCoreCompTypes</title>
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css"> td { font-size: 14; } </style>
+    <!--<style type="text/css"> body { padding-top: 90px; padding-bottom: 30px;  padding-left: 50px;  padding-right:50px; } </style>-->
+  </head>
+<body>
+
+<div class="navbar ">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="#">NeuroML v2.0 Component Types</a>
+      <div class="nav-collapse">
+        <ul class="nav">
+          <li><a href="Cells.html">Cells</a></li>
+          <li><a href="Synapses.html">Synapses</a></li>
+          <li><a href="Channels.html">Channels</a></li>
+          <li><a href="Inputs.html">Inputs</a></li>
+          <li><a href="Networks.html">Networks</a></li>
+          <li><a href="PyNN.html">PyNN</a></li>
+          <li><a href="NeuroMLCoreDimensions.html">NeuroMLCoreDimensions</a></li>
+          <li class="active"><a href="NeuroMLCoreCompTypes.html">NeuroMLCoreCompTypes</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+    </div>
+    </div>
+    <div class="container-fluid">
+    <div class="row-fluid">
+    <div class="span3">
+    <div class="well sidebar-nav">
+      <b>Component Types</b><br/>
+<a href="NeuroMLCoreCompTypes.html#notes" title="Human readable notes on a Component ">notes</a><br/>
+  
+<a href="NeuroMLCoreCompTypes.html#annotation" title="Annotation... ">annotation</a><br/>
+  
+&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>rdf:RDF <a href="NeuroMLCoreCompTypes.html#rdf_RDF" title="Work in progress... ">rdf_RDF</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>rdf:Description <a href="NeuroMLCoreCompTypes.html#rdf_Description" title="Work in progress... ">rdf_Description</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:encodes <a href="NeuroMLCoreCompTypes.html#bqbiol_encodes" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_encodes</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:hasPart <a href="NeuroMLCoreCompTypes.html#bqbiol_hasPart" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_hasPart</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:isEncodedBy <a href="NeuroMLCoreCompTypes.html#bqbiol_isEncodedBy" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_isEncodedBy</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:occursIn <a href="NeuroMLCoreCompTypes.html#bqbiol_occursIn" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_occursIn</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:isVersionOf <a href="NeuroMLCoreCompTypes.html#bqbiol_isVersionOf" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_isVersionOf</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:hasVersion <a href="NeuroMLCoreCompTypes.html#bqbiol_hasVersion" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_hasVersion</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:isPartOf <a href="NeuroMLCoreCompTypes.html#bqbiol_isPartOf" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_isPartOf</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:hasTaxon <a href="NeuroMLCoreCompTypes.html#bqbiol_hasTaxon" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_hasTaxon</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:is <a href="NeuroMLCoreCompTypes.html#bqbiol_is" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_is</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:isDescribedBy <a href="NeuroMLCoreCompTypes.html#bqbiol_isDescribedBy" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_isDescribedBy</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:isPropertyOf <a href="NeuroMLCoreCompTypes.html#bqbiol_isPropertyOf" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_isPropertyOf</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:isHomologTo <a href="NeuroMLCoreCompTypes.html#bqbiol_isHomologTo" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_isHomologTo</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqmodel:isDerivedFrom <a href="NeuroMLCoreCompTypes.html#bqmodel_isDerivedFrom" title="See http://co.mbine.org/standards/qualifiers ">bqmodel_isDerivedFrom</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:hasProperty <a href="NeuroMLCoreCompTypes.html#bqbiol_hasProperty" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_hasProperty</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqmodel:isDescribedBy <a href="NeuroMLCoreCompTypes.html#bqmodel_isDescribedBy" title="See http://co.mbine.org/standards/qualifiers ">bqmodel_isDescribedBy</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqmodel:is <a href="NeuroMLCoreCompTypes.html#bqmodel_is" title="See http://co.mbine.org/standards/qualifiers ">bqmodel_is</a><br/>
+  
+&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span><a href="NeuroMLCoreCompTypes.html#property" title="Property in Annotation... ">property</a><br/>
+  
+<a href="NeuroMLCoreCompTypes.html#baseStandalone" title="Base type of any component which will require notes, annotation, etc. "><span  style="color:#85ACE1;font-style:italic">baseStandalone</span></a><br/>
+  
+<a href="NeuroMLCoreCompTypes.html#baseBqbiol" title="Work in progress... "><span  style="color:#85ACE1;font-style:italic">baseBqbiol</span></a><br/>
+  
+&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>rdf:Bag <a href="NeuroMLCoreCompTypes.html#rdf_Bag" title="Work in progress... ">rdf_Bag</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span><a href="NeuroMLCoreCompTypes.html#rdf_li" title="Annotation... ">rdf_li</a><br/>
+  
+<a href="NeuroMLCoreCompTypes.html#point3DWithDiam" title="Base type for ComponentTypes which specify an ( x, y, z ) coordinate along with a diameter. Note: no dimension used in the attributes for these coordinates! These are assumed to have dimension micrometer (10^-6 m). This is due to micrometers being the default option for the majority of neuronal morphology formats, and dimensions are omitted here to facilitate reading and writing of morphologies in NeuroML. ">point3DWithDiam</a><br/>
+  
+    </div><!--/.well -->
+    </div><!--/span-->
+    <div class="span7">
+   <div class="alert alert-error">For more information on NeuroML 2 and LEMS see <a href="http://www.neuroml.org/neuromlv2">here</a>. <br/>Note: these descriptions have been updated to the latest    <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2">NeuroML v2.0</a> definitions, using    <a href="https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS">the latest version of LEMS</a>!</div>
+    <table class="table table-bordered"><tr><td ><h3>NeuroMLCoreCompTypes</h3></td></tr>
+    <tr><td><span  style="color:dimgrey"><i>NeuroML2 ComponentType definitions from NeuroMLCoreCompTypes.xml </i></span></td></tr>
+    <tr><td>Original LEMS ComponentType definitions: <a href="https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/NeuroMLCoreCompTypes.xml">NeuroMLCoreCompTypes.xml</a><br/>    Schema against which NeuroML based on these should be valid: <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2/NeuroML_v2.0.xsd">NeuroML_v2.0.xsd</a></td></tr>
+    </table><br/>
+<a name="notes">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>notes</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Human readable notes on a Component </i></span>    </td>
+  </tr>
+</table>
+
+<a name="annotation">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>annotation</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Annotation... </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-success">Child elements</span>
+  </td>
+    <td><b>rdf:RDF</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#rdf_RDF" title="Work in progress... ">rdf_RDF</a></td>
+  </tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-success">Children elements</span>
+  </td>
+    <td><b>property</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#property" title="Property in Annotation... ">property</a></td>
+  </tr>
+</table>
+
+<a name="property">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>property</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Property in Annotation... </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='2'>
+    <span class="label label-success">Text fields</span>
+  </td>
+    <td colspan='2'><b>tag</b></td>
+  </tr>
+    <td colspan='2'><b>value</b></td>
+  </tr>
+</table>
+
+<a name="baseStandalone">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b><span  style="color:dimgrey;font-style:italic">baseStandalone</span></b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Base type of any component which will require notes, annotation, etc. </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='2'>
+    <span class="label label-success">Child elements</span>
+  </td>
+    <td><b>notes</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#notes" title="Human readable notes on a Component ">notes</a></td>
+  </tr>
+    <td><b>annotation</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#annotation" title="Annotation... ">annotation</a></td>
+  </tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-success">Children elements</span>
+  </td>
+    <td><b>property</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#property" title="Property in Annotation... ">property</a></td>
+  </tr>
+</table>
+
+<a name="rdf_RDF">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>rdf_RDF</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Work in progress... </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-success">Text fields</span>
+  </td>
+    <td colspan='2'><b>xmlns:rdf</b></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-success">Child elements</span>
+  </td>
+    <td><b>rdf:Description</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#rdf_Description" title="Work in progress... ">rdf_Description</a></td>
+  </tr>
+</table>
+
+<a name="rdf_Description">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>rdf_Description</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Work in progress... </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-success">Text fields</span>
+  </td>
+    <td colspan='2'><b>rdf:about</b></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='16'>
+    <span class="label label-success">Child elements</span>
+  </td>
+    <td><b>bqbiol:encodes</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#bqbiol_encodes" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_encodes</a></td>
+  </tr>
+    <td><b>bqbiol:hasPart</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#bqbiol_hasPart" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_hasPart</a></td>
+  </tr>
+    <td><b>bqbiol:isEncodedBy</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#bqbiol_isEncodedBy" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_isEncodedBy</a></td>
+  </tr>
+    <td><b>bqbiol:occursIn</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#bqbiol_occursIn" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_occursIn</a></td>
+  </tr>
+    <td><b>bqbiol:isVersionOf</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#bqbiol_isVersionOf" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_isVersionOf</a></td>
+  </tr>
+    <td><b>bqbiol:hasVersion</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#bqbiol_hasVersion" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_hasVersion</a></td>
+  </tr>
+    <td><b>bqbiol:isPartOf</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#bqbiol_isPartOf" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_isPartOf</a></td>
+  </tr>
+    <td><b>bqbiol:hasTaxon</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#bqbiol_hasTaxon" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_hasTaxon</a></td>
+  </tr>
+    <td><b>bqbiol:is</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#bqbiol_is" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_is</a></td>
+  </tr>
+    <td><b>bqbiol:isDescribedBy</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#bqbiol_isDescribedBy" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_isDescribedBy</a></td>
+  </tr>
+    <td><b>bqbiol:isPropertyOf</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#bqbiol_isPropertyOf" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_isPropertyOf</a></td>
+  </tr>
+    <td><b>bqbiol:isHomologTo</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#bqbiol_isHomologTo" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_isHomologTo</a></td>
+  </tr>
+    <td><b>bqmodel:isDerivedFrom</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#bqmodel_isDerivedFrom" title="See http://co.mbine.org/standards/qualifiers ">bqmodel_isDerivedFrom</a></td>
+  </tr>
+    <td><b>bqbiol:hasProperty</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#bqbiol_hasProperty" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_hasProperty</a></td>
+  </tr>
+    <td><b>bqmodel:isDescribedBy</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#bqmodel_isDescribedBy" title="See http://co.mbine.org/standards/qualifiers ">bqmodel_isDescribedBy</a></td>
+  </tr>
+    <td><b>bqmodel:is</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#bqmodel_is" title="See http://co.mbine.org/standards/qualifiers ">bqmodel_is</a></td>
+  </tr>
+</table>
+
+<a name="baseBqbiol">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b><span  style="color:dimgrey;font-style:italic">baseBqbiol</span></b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Work in progress... </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-success">Child elements</span>
+  </td>
+    <td><b>rdf:Bag</b></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#rdf_Bag" title="Work in progress... ">rdf_Bag</a></td>
+  </tr>
+</table>
+
+<a name="bqbiol_encodes">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>bqbiol_encodes</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="NeuroMLCoreCompTypes.html#baseBqbiol" title="Work in progress... "><span  style="color:#85ACE1;font-style:italic">baseBqbiol</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>See <a href="http://co.mbine.org/standards/qualifiers">http://co.mbine.org/standards/qualifiers</a> </i></span>    </td>
+  </tr>
+</table>
+
+<a name="bqbiol_hasPart">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>bqbiol_hasPart</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="NeuroMLCoreCompTypes.html#baseBqbiol" title="Work in progress... "><span  style="color:#85ACE1;font-style:italic">baseBqbiol</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>See <a href="http://co.mbine.org/standards/qualifiers">http://co.mbine.org/standards/qualifiers</a> </i></span>    </td>
+  </tr>
+</table>
+
+<a name="bqbiol_hasProperty">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>bqbiol_hasProperty</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="NeuroMLCoreCompTypes.html#baseBqbiol" title="Work in progress... "><span  style="color:#85ACE1;font-style:italic">baseBqbiol</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>See <a href="http://co.mbine.org/standards/qualifiers">http://co.mbine.org/standards/qualifiers</a> </i></span>    </td>
+  </tr>
+</table>
+
+<a name="bqbiol_hasVersion">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>bqbiol_hasVersion</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="NeuroMLCoreCompTypes.html#baseBqbiol" title="Work in progress... "><span  style="color:#85ACE1;font-style:italic">baseBqbiol</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>See <a href="http://co.mbine.org/standards/qualifiers">http://co.mbine.org/standards/qualifiers</a> </i></span>    </td>
+  </tr>
+</table>
+
+<a name="bqbiol_is">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>bqbiol_is</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="NeuroMLCoreCompTypes.html#baseBqbiol" title="Work in progress... "><span  style="color:#85ACE1;font-style:italic">baseBqbiol</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>See <a href="http://co.mbine.org/standards/qualifiers">http://co.mbine.org/standards/qualifiers</a> </i></span>    </td>
+  </tr>
+</table>
+
+<a name="bqbiol_isDescribedBy">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>bqbiol_isDescribedBy</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="NeuroMLCoreCompTypes.html#baseBqbiol" title="Work in progress... "><span  style="color:#85ACE1;font-style:italic">baseBqbiol</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>See <a href="http://co.mbine.org/standards/qualifiers">http://co.mbine.org/standards/qualifiers</a> </i></span>    </td>
+  </tr>
+</table>
+
+<a name="bqbiol_isEncodedBy">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>bqbiol_isEncodedBy</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="NeuroMLCoreCompTypes.html#baseBqbiol" title="Work in progress... "><span  style="color:#85ACE1;font-style:italic">baseBqbiol</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>See <a href="http://co.mbine.org/standards/qualifiers">http://co.mbine.org/standards/qualifiers</a> </i></span>    </td>
+  </tr>
+</table>
+
+<a name="bqbiol_isHomologTo">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>bqbiol_isHomologTo</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="NeuroMLCoreCompTypes.html#baseBqbiol" title="Work in progress... "><span  style="color:#85ACE1;font-style:italic">baseBqbiol</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>See <a href="http://co.mbine.org/standards/qualifiers">http://co.mbine.org/standards/qualifiers</a> </i></span>    </td>
+  </tr>
+</table>
+
+<a name="bqbiol_isPartOf">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>bqbiol_isPartOf</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="NeuroMLCoreCompTypes.html#baseBqbiol" title="Work in progress... "><span  style="color:#85ACE1;font-style:italic">baseBqbiol</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>See <a href="http://co.mbine.org/standards/qualifiers">http://co.mbine.org/standards/qualifiers</a> </i></span>    </td>
+  </tr>
+</table>
+
+<a name="bqbiol_isPropertyOf">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>bqbiol_isPropertyOf</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="NeuroMLCoreCompTypes.html#baseBqbiol" title="Work in progress... "><span  style="color:#85ACE1;font-style:italic">baseBqbiol</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>See <a href="http://co.mbine.org/standards/qualifiers">http://co.mbine.org/standards/qualifiers</a> </i></span>    </td>
+  </tr>
+</table>
+
+<a name="bqbiol_isVersionOf">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>bqbiol_isVersionOf</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="NeuroMLCoreCompTypes.html#baseBqbiol" title="Work in progress... "><span  style="color:#85ACE1;font-style:italic">baseBqbiol</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>See <a href="http://co.mbine.org/standards/qualifiers">http://co.mbine.org/standards/qualifiers</a> </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-success">Text fields</span>
+  </td>
+    <td colspan='2'><b>xmlns:bqbiol</b></td>
+  </tr>
+</table>
+
+<a name="bqbiol_occursIn">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>bqbiol_occursIn</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="NeuroMLCoreCompTypes.html#baseBqbiol" title="Work in progress... "><span  style="color:#85ACE1;font-style:italic">baseBqbiol</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>See <a href="http://co.mbine.org/standards/qualifiers">http://co.mbine.org/standards/qualifiers</a> </i></span>    </td>
+  </tr>
+</table>
+
+<a name="bqbiol_hasTaxon">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>bqbiol_hasTaxon</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="NeuroMLCoreCompTypes.html#baseBqbiol" title="Work in progress... "><span  style="color:#85ACE1;font-style:italic">baseBqbiol</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>See <a href="http://co.mbine.org/standards/qualifiers">http://co.mbine.org/standards/qualifiers</a> </i></span>    </td>
+  </tr>
+</table>
+
+<a name="bqmodel_is">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>bqmodel_is</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="NeuroMLCoreCompTypes.html#baseBqbiol" title="Work in progress... "><span  style="color:#85ACE1;font-style:italic">baseBqbiol</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>See <a href="http://co.mbine.org/standards/qualifiers">http://co.mbine.org/standards/qualifiers</a> </i></span>    </td>
+  </tr>
+</table>
+
+<a name="bqmodel_isDescribedBy">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>bqmodel_isDescribedBy</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="NeuroMLCoreCompTypes.html#baseBqbiol" title="Work in progress... "><span  style="color:#85ACE1;font-style:italic">baseBqbiol</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>See <a href="http://co.mbine.org/standards/qualifiers">http://co.mbine.org/standards/qualifiers</a> </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-success">Text fields</span>
+  </td>
+    <td colspan='2'><b>xmlns:bqmodel</b></td>
+  </tr>
+</table>
+
+<a name="bqmodel_isDerivedFrom">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>bqmodel_isDerivedFrom</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="NeuroMLCoreCompTypes.html#baseBqbiol" title="Work in progress... "><span  style="color:#85ACE1;font-style:italic">baseBqbiol</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>See <a href="http://co.mbine.org/standards/qualifiers">http://co.mbine.org/standards/qualifiers</a> </i></span>    </td>
+  </tr>
+</table>
+
+<a name="rdf_Bag">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>rdf_Bag</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Work in progress... </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-success">Children elements</span>
+  </td>
+    <td><b>rdf:li</b></td>
+    <td width="100">???</td>
+  </tr>
+</table>
+
+<a name="rdf_li">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>rdf_li</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Annotation... </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-success">Text fields</span>
+  </td>
+    <td colspan='2'><b>rdf:resource</b></td>
+  </tr>
+</table>
+
+<a name="point3DWithDiam">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>point3DWithDiam</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Base type for ComponentTypes which specify an ( <b>x,</b> <b>y,</b> <b>z</b> ) coordinate along with a <b>diameter.</b> Note: no dimension used in the attributes for these coordinates! These are assumed to have dimension micrometer (10^-6 m). This is due to micrometers being the default option for the majority of neuronal morphology formats, and dimensions are omitted here to facilitate reading and writing of morphologies in NeuroML. </i></span>    </td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='4'>
+    <span class="label label-success">Parameters</span>
+  </td>
+    <td><b>diameter</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>x</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>y</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td><b>z</b></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='4'>
+    <span class="label label-success">Derived Parameters</span>
+  </td>
+    <td><b>radius = MICRON * diameter / 2</b></td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#length">length</a></td>
+  </tr>
+    <td><b>xLength = MICRON * x</b></td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#length">length</a></td>
+  </tr>
+    <td><b>yLength = MICRON * y</b></td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#length">length</a></td>
+  </tr>
+    <td><b>zLength = MICRON * z</b></td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#length">length</a></td>
+  </tr>
+  <tr>
+  <td width="70" rowspan='1'>
+    <span class="label label-info">Constants</span>
+  </td>
+    <td><b>MICRON</b> = 1um</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#length">length</a></td>
+  </tr>
+</table>
+
+</div>
+</div>
+</div>
+</body>
+

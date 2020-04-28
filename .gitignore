@@ -50,7 +50,6 @@ LEMSexamples/old
 LEMSexamples/*.c
 LEMSexamples/*.o
 LEMSexamples/*.dll
-docs/*.html
 
 examples/NeuroML2_To_HTML/*.html
 examples/*.png
@@ -64,3 +63,4 @@ examples/*.pov
 /examples/x86_64
 /LEMSexamples/report.txt
 /LEMSexamples/test/x86_64
+/LEMSexamples/report.ex*.txt

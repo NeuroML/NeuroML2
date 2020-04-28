@@ -14,7 +14,7 @@ experiments:
         spike detection: 
           method: threshold
           threshold: -32
-        tolerance: 0.00014
+        tolerance: 0.00013055966576726058
   g:
     observables:
       spike times:
@@ -25,7 +25,7 @@ experiments:
         spike detection: 
           method: threshold
           threshold: 1e-11
-        tolerance: 0.00014
+        tolerance: 0.00013229263130050425
   block:
     observables:
       spike times:
@@ -36,4 +36,22 @@ experiments:
         spike detection: 
           method: threshold
           threshold: 0.18
-        tolerance: 5e-05
+        tolerance: 4.3601482450487585e-05
+    
+  spiketimes:
+    observables:
+      spike times:
+        spiketimes file: 
+          path: ../results/ex6.input.spikes
+          format: ID_TIME
+          id: 0
+        tolerance: 0
+
+  spikerate:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: ../results/ex6.input.spikes
+          format: ID_TIME
+          id: 0
+        tolerance: 0

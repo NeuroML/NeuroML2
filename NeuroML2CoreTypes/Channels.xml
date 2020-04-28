@@ -511,7 +511,7 @@
     <ComponentType name="ionChannelPassive" 
                    extends="ionChannel"
                    description="Simple passive ion channel where the constant conductance through the channel is equal to _conductance">
-
+      <Text name="species"/> <!-- quick and dirty workaround - sould inherit that from IonChannelHH-->
         <Dynamics>
             <DerivedVariable name="fopen" exposure="fopen" value="1" dimension="none"/>
             <DerivedVariable name="g" exposure="g" value="conductance" dimension="conductance"/>

@@ -6,11 +6,76 @@ and [LEMS](https://github.com/LEMS/LEMS), but also the Python ([libNeuroML](http
 [PyLEMS](https://github.com/LEMS/pylems)) and Java ([jLEMS](https://github.com/LEMS/jLEMS), 
 [org.neuroml.model](https://github.com/NeuroML/org.neuroml.model), [jNeuroML](https://github.com/NeuroML/jNeuroML), etc.) libraries.
 
-Only contributors who are not [NeuroML Editors](https://neuroml.org/editors) are specifically pointed out below.
+**Only contributors who are not [NeuroML Editors](https://neuroml.org/editors) are specifically pointed out below.**
 
-v2beta5 / 2016-??-??
+v2.0 / 2020-04-06
 --------------------
 
+* **Renamed the main Schema from NeuroML_v2beta5.xsd to [NeuroML_v2.0.xsd](https://github.com/NeuroML/NeuroML2/blob/master/Schemas/NeuroML2/NeuroML_v2.0).** 
+  Changes outlined below are reflected in the new schema
+
+_Example NeuroML models_
+
+* The standard NeuroML examples have been updated/revised (and tests added) to ensure as many as possible of them run when converted to NEURON via jNeuroML.
+
+_Export formats_
+
+* Improved export to graphical view of LEMS ComponentTypes, e.g. try: jnml LEMS_NML2_Ex2_Izh.xml  -graph
+
+* Improved/retested export to SBML & SED-ML. Added export option -sbml-sedml, which converts LEMS file to SBML format with a SED-ML file describing the experiment to run. Successfully tested with Tellurium SBML simulator. 
+
+* Minor updates to improve export to Moose. Latest developments with Moose support outlined here: https://github.com/NeuroML/NeuroML2/issues/94
+
+
+v2beta5 / 2019-11-05
+--------------------
+
+* **Renamed the main Schema from NeuroML_v2beta4.xsd to [NeuroML_v2beta5.xsd](https://github.com/NeuroML/NeuroML2/blob/master/Schemas/NeuroML2/NeuroML_v2beta5.xsd).** 
+  Changes outlined below are reflected in the new schema
+
+_Core NeuroML elements_
+
+* Allows **weighted electrical and continuous connections** ([examples](https://github.com/NeuroML/NeuroML2/blob/development/LEMSexamples/LEMS_NML2_Ex26_Weights.xml))
+
+* Allows **weighted inputs** (e.g. define one pulseGenerator and have individually weighted inputs from this to each cell in population; [examples](https://github.com/NeuroML/NeuroML2/blob/development/LEMSexamples/LEMS_NML2_Ex26_Weights.xml))
+
+* Adds `<channelDensityVShift>` which can be used to **add a channel with an explicit vshift parameter** (e.g. adjust activation variable s by 10mV; [example](https://github.com/OpenSourceBrain/PospischilEtAl2008/blob/f8f663c69d7ca74b3b323a7ed436ab84994ddb59/NeuroML2/channels/Na/Na.cell.nml#L36))
+
+* Adds input type `<spikeGeneratorRefPoisson>`, a **poisson spike generator with a refractory period** ([example](https://github.com/NeuroML/NeuroML2/blob/development/LEMSexamples/LEMS_NML2_Ex16_Inputs.xml))
+
+* Adds `<voltageClampTriple>`, a **voltage clamp with 3 clamp levels** ([definition](https://github.com/NeuroML/NeuroML2/blob/207bbc301e59a741a0a1c7adc140037a1330a513/NeuroML2CoreTypes/Inputs.xml#L664))
+
+* Adds `<doubleSynapse>`, a **single synaptic mechanism containing multiple currents**, which can be used e.g. to bundle an AMPA and NMDA on one synapse, which can in turn be used for individual connections in projections ([example](https://github.com/NeuroML/NeuroML2/blob/development/LEMSexamples/LEMS_NML2_Ex27_MultiSynapses.xml))
+
+_LEMS functionality_
+
+* Add option to put **reportFile="report.txt"** in Target component in `<Lems>` to save short report of simulator version, runtime etc. ([example](https://github.com/NeuroML/NeuroML2/blob/development/LEMSexamples/LEMS_NML2_Ex5_DetCell.xml#L11))
+
+_Bug fixes_
+
+* Fixes for **issue with statistics of stochastic spiking inputs at very high frequencies** (see [issue](https://github.com/NeuroML/NeuroML2/issues/121))
+
+_Simulator support_
+
+* Extensive support for **mapping to NetPyNE format** added (generate this with: jnml LEMS_Model.xml -netpyne). For examples and tests see: https://github.com/OpenSourceBrain/NetPyNEShowcase
+
+* Much better interaction with PyNN, see examples at https://github.com/OpenSourceBrain/PyNNShowcase and https://github.com/NeuroML/NeuroML2/issues/73. Also see examples mentioned in OSB paper (below).
+
+* Improved mapping to **Brian & Brian2**, see https://github.com/OpenSourceBrain/BrianShowcase
+
+* Improved mapping to **Moose** (single compartment cells only), see https://github.com/OpenSourceBrain/MOOSEShowcase
+
+_Library support_
+
+* Better support for accessing **all jnml functionality through Python in pyNeuroML**, see https://github.com/NeuroML/pyNeuroML
+
+* New **C++ API**: https://github.com/NeuroML/NeuroML_API. Thanks to [Jonathan Cooper](https://github.com/jonc125).
+
+* New **Matlab API**: https://github.com/NeuroML/NeuroMLToolbox. Thanks to [Jonathan Cooper](https://github.com/jonc125)
+
+_Models_
+
+* Most of the NeuroML models as featured in the [Open Source Brain paper](https://www.cell.com/neuron/fulltext/S0896-6273(19)30444-1) are compliant with v2beta5
 
 v2beta4 / 2016-6-27
 -------------------

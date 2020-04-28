@@ -1,0 +1,6 @@
+system: Test Ex18
+
+experiments:
+    v:
+        expected:
+            spike times: [5.079, 10.239]

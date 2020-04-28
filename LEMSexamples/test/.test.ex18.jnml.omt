@@ -2,3 +2,16 @@
  
 target: ../LEMS_NML2_Ex18_GHK.xml
 engine: jNeuroML
+mep: .test.ex18.mep
+experiments:
+  v:
+    observables:
+      spike times:
+        file: 
+          path: ../results/ex18.dat
+          columns: [0,1]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: 0
+        tolerance: 0.0013673210274440224

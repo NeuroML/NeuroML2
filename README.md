@@ -1,5 +1,5 @@
-NeuroML2
-========
+NeuroML 2
+=========
 
 This repository contains the [NeuroML 2 Schema](https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2), 
 the [ComponentType definitions in LEMS](https://github.com/NeuroML/NeuroML2/tree/master/NeuroML2CoreTypes) and 
@@ -12,7 +12,7 @@ Robert C. Cannon, Padraig Gleeson, Sharon Crook, Gautham Ganapathy, Boris Marin,
 **LEMS: A language for expressing complex biological models in concise and hierarchical form and its use in underpinning NeuroML 2**, 
 [Frontiers in Neuroinformatics 2014](http://journal.frontiersin.org/Journal/10.3389/fninf.2014.00079/abstract), doi: 10.3389/fninf.2014.00079
 
-See also http://www.neuroml.org/neuromlv2.
+For information on how to contribute to the NeuroML initiative, see [here](CONTRIBUTING.md). See also http://www.neuroml.org/neuromlv2.
 
 This code is distributed under the terms of the GNU Lesser General Public License.
 

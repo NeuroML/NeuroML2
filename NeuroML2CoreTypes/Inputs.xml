@@ -76,17 +76,33 @@
                    description="Simple generator of spikes at a regular interval set by _period.">
 
         <Parameter name="period" dimension="time" description="Time between spikes. First spike will be emitted after this time."/>
+        
+        <Constant name="SMALL_TIME" dimension="time" value="1e-9ms"/> <!-- See below for usage -->
+        
+        <Exposure name="tnext" dimension="time" description="When the next spike should ideally be emitted (dt permitting)"/>
+        
         <Dynamics>
+            
+            <!-- This is mainly useful as an exposed variable to plot/save to see actual spike times... -->
             <StateVariable name="tsince" dimension="time" exposure="tsince"/>
+            <!-- This is the ideal next spike time, but dt precision will mean that it's usually slightly later than this... -->
+            <StateVariable name="tnext" dimension="time" exposure="tnext"/>
 
-            <TimeDerivative variable="tsince" value="1"/>
+            <TimeDerivative variable="tsince" value="1"/>  
+            <!-- Required to keep NEURON happy; needs tnext as 'real' state variable to use in condition below... -->
+            <TimeDerivative variable="tnext" value="0"/>
 
             <OnStart>
                 <StateAssignment variable="tsince" value="0"/>
+                <StateAssignment variable="tnext" value="period"/>
             </OnStart>
 
-            <OnCondition test="tsince .gt. period">
+            <!-- This is to require that the spike is emitted as close as possible to tnext.-->
+            <OnCondition test="tnext-t .lt. SMALL_TIME">
                 <StateAssignment variable="tsince" value="0"/>
+                <!-- Note the spike is emitted period after the last planned spike time, NOT period after the current spike time -->
+                <!-- This is important if period is close in size to to dt -->
+                <StateAssignment variable="tnext" value="tnext+period"/> 
                 <EventOut port="spike"/>
             </OnCondition>
 
@@ -104,23 +120,30 @@
         <Constant name="MSEC" dimension="time" value="1ms"/>
 
         <Exposure name="isi" dimension="time" description="The interval until the next spike"/>
+        <Exposure name="tnext" dimension="time" description="When the next spike should ideally be emitted (dt permitting)"/>
 
         <Dynamics>
             <StateVariable name="tsince" dimension="time" exposure="tsince"/>
+            <StateVariable name="tnext" dimension="time" exposure="tnext"/>
 
             <StateVariable name="isi" dimension="time" exposure="isi"/>
 
             <TimeDerivative variable="tsince" value="1"/>
+            <!-- Required to keep Neuron happy; needs this as 'real' state variable to use in condition below... -->
+            <TimeDerivative variable="tnext" value="0"/>
 
             <OnStart>
                 <StateAssignment variable="tsince" value="0"/>
                 <StateAssignment variable="isi" value="minISI + MSEC * random((maxISI - minISI) / MSEC)"/>
+                <StateAssignment variable="tnext" value="isi"/>
             </OnStart>
 
 
-            <OnCondition test="tsince .gt. isi">
+            <OnCondition test="t .gt. tnext">
                 <StateAssignment variable="isi" value="minISI + MSEC * random((maxISI - minISI) / MSEC)"/>
                 <StateAssignment variable="tsince" value="0"/>
+                <!-- Important to set this to the time which is isi from the last value for tnext NOT from the current time! -->
+                <StateAssignment variable="tnext" value="tnext+isi"/> 
                 <EventOut port="spike"/>
             </OnCondition>
 
@@ -130,22 +153,55 @@
 
     <ComponentType name="spikeGeneratorPoisson" extends="baseSpikeSource"
                    description="Generator of spikes whose ISI is distributed according to an exponential pdf with scale 1/_averageRate">
+        
         <Parameter name="averageRate" dimension="per_time"/>
-        <DerivedParameter name="averageIsi" dimension="time" value="1 / averageRate"/>
+        
+        <Constant name="SMALL_TIME" dimension="time" value="1e-9ms"/> <!-- See below for usage -->
+        
+        <Exposure name="isi" dimension="time"/> <!-- See below for usage -->
+        <Exposure name="tnextIdeal" dimension="time"/> <!-- See below for usage -->
+        <Exposure name="tnextUsed" dimension="time"/> <!-- See below for usage -->
+        
         <Dynamics>
+            
+            <!-- This is mainly useful as an exposed variable to plot/save to see actual spike times... -->
             <StateVariable name="tsince" dimension="time" exposure="tsince"/>
-            <StateVariable name="isi" dimension="time"/>
+            
+            <!-- This is the ideal next spike time, but dt precision will mean that it's usually slightly later than this... -->
+            <StateVariable name="tnextIdeal" dimension="time" exposure="tnextIdeal"/>
+            <!-- This is the next spike time for practical purposes, ensuring that it's later than the current time... -->
+            <StateVariable name="tnextUsed" dimension="time" exposure="tnextUsed"/>
+            <!-- This is the calculated next interspike interval... -->
+            <StateVariable name="isi" dimension="time" exposure="isi"/>
 
+            <!-- So that tsince will increase each time step smoothly -->
             <TimeDerivative variable="tsince" value="1"/>
+            <!-- Required to keep Neuron happy; needs these as 'real' state variables... -->
+            <TimeDerivative variable="tnextUsed" value="0"/> 
+            <TimeDerivative variable="tnextIdeal" value="0"/> 
 
             <OnStart>
                 <StateAssignment variable="tsince" value="0"/>
-                <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
+                <StateAssignment variable="isi" value="-1 * log(random(1)) / averageRate"/>
+                <StateAssignment variable="tnextIdeal" value="isi"/>
+                <StateAssignment variable="tnextUsed" value="isi"/>
             </OnStart>
 
-            <OnCondition test="tsince .gt. isi">
+            <OnCondition test="t .gt. tnextUsed">
+                
+                <!-- Reset... -->
                 <StateAssignment variable="tsince" value="0"/>
-                <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
+                
+                <!-- isi is the ideal next time for a spike ... -->
+                <StateAssignment variable="isi" value="-1 * log(random(1)) / averageRate"/>
+                
+                <!-- IF (tnextIdeal+isi) is greater than current time (i.e. (tnextIdeal+isi)-t > 0), then set (tnextIdeal+isi) to the time of the next spike (tnextUsed) -->
+                <!-- OTHERWISE in the case of v small isi (i.e. smaller than dt), set tnextUsed to current time plus a small amount -->
+                <!-- This extra amount is so that tnextUsed != current time, which NEURON doesn't like for its WATCH expressions -->
+                
+                <StateAssignment variable="tnextIdeal" value="(tnextIdeal+isi)"/> 
+                <StateAssignment variable="tnextUsed" value="tnextIdeal*H( (tnextIdeal-t)/t ) + (t+SMALL_TIME)*H( (t-tnextIdeal)/t )"/> 
+                
                 <EventOut port="spike"/>
             </OnCondition>
         </Dynamics>
@@ -155,20 +211,36 @@
     <ComponentType name="spikeGeneratorRefPoisson"
                  extends="spikeGeneratorPoisson"
                  description="Generator of spikes whose ISI distribution is the maximum entropy distribution over [_minimumISI, +infinity) with mean 1/_averageRate">
+        
         <Parameter name="minimumISI" dimension="time"/>
+                
+        <DerivedParameter name="averageIsi" dimension="time" value="1 / averageRate"/>
+
+        
         <Dynamics>
             <StateVariable name="tsince" dimension="time" exposure="tsince"/>
-            <StateVariable name="isi" dimension="time"/>
+            <StateVariable name="tnextIdeal" dimension="time" exposure="tnextIdeal"/>
+            <StateVariable name="tnextUsed" dimension="time" exposure="tnextUsed"/>
+            <StateVariable name="isi" dimension="time" exposure="isi"/>
+            
             <TimeDerivative variable="tsince" value="1"/>
+            <TimeDerivative variable="tnextUsed" value="0"/> 
+            <TimeDerivative variable="tnextIdeal" value="0"/> 
 
             <OnStart>
                 <StateAssignment variable="tsince" value="0"/>
-                <StateAssignment variable="isi" value="minimumISI - (averageIsi-minimumISI) * log(1 - random(1))"/>
+                <StateAssignment variable="isi" value="minimumISI - (averageIsi-minimumISI) * log(random(1))"/>
+                <StateAssignment variable="tnextIdeal" value="isi"/>
+                <StateAssignment variable="tnextUsed" value="isi"/>
             </OnStart>
 
-            <OnCondition test="tsince .gt. isi">
+            <OnCondition test="t .gt. tnextUsed">
                 <StateAssignment variable="tsince" value="0"/>
-                <StateAssignment variable="isi" value="minimumISI - (averageIsi-minimumISI) * log(1 - random(1))"/>
+                <StateAssignment variable="isi" value="minimumISI - (averageIsi-minimumISI) * log(random(1))"/>
+                
+                <StateAssignment variable="tnextIdeal" value="(tnextIdeal+isi)"/> 
+                <StateAssignment variable="tnextUsed" value="tnextIdeal*H( (tnextIdeal-t)/t ) + (t+SMALL_TIME)*H( (t-tnextIdeal)/t )"/> 
+                
                 <EventOut port="spike"/>
             </OnCondition>
         </Dynamics>
@@ -185,36 +257,49 @@
         
         <DerivedParameter name="averageIsi" dimension="time" value="1 / averageRate"/>
         
-        <ComponentReference name="synapse" type="baseSynapse"/>
+        <Constant name="SMALL_TIME" dimension="time" value="1e-9ms"/> <!-- See below for usage -->
         
+        <ComponentReference name="synapse" type="baseSynapse"/>
         
         <EventPort name="spike" direction="out" description="Port on which spikes are emitted"/>
         
         <!--TODO: remove! Only required as EventConnection is used in explicitInput to
         connect inputs to cells. Events aren't passed! ... -->
         <EventPort name="in" direction="in" description="Note this is not used here. Will be removed in future"/>
+        
 
         <Exposure name="tsince" dimension="time" description="Time since the last spike was emitted"/>
+        <Exposure name="isi" dimension="time"/> <!-- See below for usage -->
+        <Exposure name="tnextIdeal" dimension="time"/> <!-- See below for usage -->
+        <Exposure name="tnextUsed" dimension="time"/> <!-- See below for usage -->
         
         <Path name="spikeTarget"/>
         
         <Dynamics>
             <StateVariable name="tsince" dimension="time" exposure="tsince"/>
-            <StateVariable name="isi" dimension="time"/>
+            <StateVariable name="tnextIdeal" dimension="time" exposure="tnextIdeal"/>
+            <StateVariable name="tnextUsed" dimension="time" exposure="tnextUsed"/>
+            <StateVariable name="isi" dimension="time" exposure="isi"/>
             
             <DerivedVariable name="iSyn" dimension="current" select="synapse/i"/>
             <DerivedVariable name="i" dimension="current" exposure="i" value="weight * iSyn"/>
 
             <TimeDerivative variable="tsince" value="1"/>
+            <TimeDerivative variable="tnextUsed" value="0"/> 
+            <TimeDerivative variable="tnextIdeal" value="0"/> 
 
             <OnStart>
                 <StateAssignment variable="tsince" value="0"/>
-                <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
+                <StateAssignment variable="isi" value="- averageIsi * log(random(1))"/>
+                <StateAssignment variable="tnextIdeal" value="isi"/>
+                <StateAssignment variable="tnextUsed" value="isi"/>
             </OnStart>
             
-            <OnCondition test="tsince .gt. isi">
+            <OnCondition test="t .gt. tnextUsed">
                    <StateAssignment variable="tsince" value="0"/>
                    <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
+                <StateAssignment variable="tnextIdeal" value="(tnextIdeal+isi)"/> 
+                <StateAssignment variable="tnextUsed" value="tnextIdeal*H( (tnextIdeal-t)/t ) + (t+SMALL_TIME)*H( (t-tnextIdeal)/t )"/> 
                    <EventOut port="spike"/>
               </OnCondition>
           
@@ -245,6 +330,7 @@
         
         <DerivedParameter name="averageIsi" dimension="time" value="1 / averageRate"/>
         
+        <Constant name="SMALL_TIME" dimension="time" value="1e-9ms"/> <!-- See below for usage -->
         <Constant name="LONG_TIME" dimension="time" value="1e9hour"/>
         
         <ComponentReference name="synapse" type="baseSynapse"/>
@@ -256,35 +342,43 @@
         <EventPort name="in" direction="in" description="Note this is not used here. Will be removed in future"/>
 
         <Exposure name="tsince" dimension="time" description="Time since the last spike was emitted"/>
+        <Exposure name="isi" dimension="time"/> <!-- See below for usage -->
+        <Exposure name="tnextIdeal" dimension="time"/> <!-- See below for usage -->
+        <Exposure name="tnextUsed" dimension="time"/> <!-- See below for usage -->
         
         <Path name="spikeTarget"/>
         
         <Dynamics>
             <StateVariable name="tsince" dimension="time" exposure="tsince"/>
-            <StateVariable name="nextIsi" dimension="time"/>
-            <StateVariable name="isi" dimension="time"/>
+            <StateVariable name="tnextIdeal" dimension="time" exposure="tnextIdeal"/>
+            <StateVariable name="tnextUsed" dimension="time" exposure="tnextUsed"/>
+            <StateVariable name="isi" dimension="time" exposure="isi"/>
             
             <DerivedVariable name="iSyn" dimension="current" select="synapse/i"/>
             <DerivedVariable name="i" dimension="current" exposure="i" value="weight * iSyn"/>
 
             <TimeDerivative variable="tsince" value="1"/>
+            <TimeDerivative variable="tnextUsed" value="0"/> 
+            <TimeDerivative variable="tnextIdeal" value="0"/> 
 
             <OnStart>
                 <StateAssignment variable="tsince" value="0"/>
-                <StateAssignment variable="nextIsi" value="- averageIsi * log(1 - random(1))  +delay"/>
-                <StateAssignment variable="isi" value="nextIsi"/>
+                <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))  +delay"/>
+                <StateAssignment variable="tnextIdeal" value="isi"/>
+                <StateAssignment variable="tnextUsed" value="isi"/>
             </OnStart>
             
 
            
-            <OnCondition test="tsince .gt. isi">
+            <OnCondition test="t .gt. tnextUsed">
                 <StateAssignment variable="tsince" value="0"/>
-                <StateAssignment variable="nextIsi" value="- averageIsi * log(1 - random(1))"/>
+                <StateAssignment variable="isi" value="- averageIsi * log(1 - random(1))"/>
                 <!--
                 Check to see whether current time + next ISI is greater than delay+duration and if so set it to a long time in the future...
                 The use of H() is necessary here (as opposed to checking this in the test of OnCondition) since NEURON requires a single boolean expression in test above
                 -->
-                <StateAssignment variable="isi" value="nextIsi + H(((t+nextIsi) - (delay+duration))/duration)*LONG_TIME"/>
+                <StateAssignment variable="tnextIdeal" value="(tnextIdeal+isi) + H(((t+isi) - (delay+duration))/duration)*LONG_TIME"/> 
+                <StateAssignment variable="tnextUsed" value="tnextIdeal*H( (tnextIdeal-t)/t ) + (t+SMALL_TIME)*H( (t-tnextIdeal)/t )"/> 
                 <EventOut port="spike"/>
             </OnCondition>
           

@@ -9,7 +9,7 @@
 
 
 <!-- Specify which component to run -->
-<Target component="sim1"/>
+<Target component="sim1" reportFile="report.ex16.txt"/>
 
 <!-- Include core NeuroML2 ComponentType definitions -->
 <Include file="Cells.xml"/>

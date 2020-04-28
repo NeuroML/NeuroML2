@@ -8,7 +8,7 @@
          a simulation -->
 
 
-    <Target component="sim1"/>
+    <Target component="sim1" reportFile="report.ex7.txt"/>
 
     <Include file="NeuroMLCoreDimensions.xml"/>
     <Include file="Cells.xml"/>
@@ -24,7 +24,7 @@
 
     <!-- NeuroML 2 elements... -->
 
-    <spikeGenerator id="spikeGen55ms" period="30ms" />
+    <spikeGenerator id="spikeGen30ms" period="30ms" />
 
     <cell id="passiveCell">
 
@@ -69,7 +69,7 @@
 
 
     <network id="net2">
-        <population id="srcPop" component="spikeGen55ms" size="1"/>
+        <population id="srcPop" component="spikeGen30ms" size="1"/>
         <population id="pasPop" component="passiveCell" size="5"/>
         <synapticConnection from="srcPop[0]" to="pasPop[0]" synapse="noStpSyn" destination="synapses"/>
         <synapticConnection from="srcPop[0]" to="pasPop[1]" synapse="stpSynDep" destination="synapses"/>
@@ -105,6 +105,10 @@
             <OutputColumn id="v1" quantity="pasPop[1]/v"/> 
             <OutputColumn id="2" quantity="pasPop[2]/v"/> 
         </OutputFile>  
+        
+        <EventOutputFile id="spikes" fileName="results/ex7.spikes" format="ID_TIME">
+            <EventSelection id="0" select="srcPop[0]" eventPort="spike"/>
+        </EventOutputFile>
         
     </Simulation>
 
