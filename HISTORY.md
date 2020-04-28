@@ -8,6 +8,11 @@ and [LEMS](https://github.com/LEMS/LEMS), but also the Python ([libNeuroML](http
 
 **Only contributors who are not [NeuroML Editors](https://neuroml.org/editors) are specifically pointed out below.**
 
+v2.1 / 2020-XX-XX
+--------------------
+
+...
+
 v2.0 / 2020-04-06
 --------------------
 
