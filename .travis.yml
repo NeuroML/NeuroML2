@@ -66,4 +66,5 @@ script:
     - pwd
     - ls -alt
     - omv all -V
+    - omv list -V
     
