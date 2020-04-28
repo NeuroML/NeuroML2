@@ -11,7 +11,7 @@ from lems.model.dynamics import Transition
 from lems.model.dynamics import StateAssignment
 from lems.model.dynamics import EventOut
 
-nml2_version = "2.0"
+nml2_version = "2.1"
 nml2_branch = "master"
 
 col_width_left = "70"
@@ -430,6 +430,10 @@ for file in files:
 
         while extd_comp_type is not None:
             for param in extd_comp_type.parameters:
+                pk = params.keys()
+                for pp0 in pk:
+                    if pp0.name == param.name:
+                        del params[pp0]
                 params[param] = extd_comp_type.name
             for derived_param in extd_comp_type.derived_parameters:
                 derived_params[derived_param] = extd_comp_type.name
@@ -438,6 +442,10 @@ for file in files:
             for path in extd_comp_type.paths:
                 paths[path] = extd_comp_type.paths
             for exp in extd_comp_type.exposures:
+                ek = exposures.keys()
+                for ee0 in ek:
+                    if ee0.name == exp.name:
+                        del exposures[ee0]
                 exposures[exp] = extd_comp_type.name
             for req in extd_comp_type.requirements:
                 requirements[req] = extd_comp_type.name
