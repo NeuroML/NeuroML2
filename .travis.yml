@@ -65,7 +65,7 @@ script:
     - cd $TRAVIS_BUILD_DIR/NeuroML2/LEMSexamples
     - pwd
     - ls -alt
-    - omv all -V
+    - if [ "$TRAVIS_PYTHON_VERSION" == "2.7" ]; then omv all -V; else omv all -V --ignore-non-py3; fi
     - omv list -V
     - java -version 
     
