@@ -38,7 +38,7 @@ env:
 
 install: 
     
-    #- pip install kiwisolver==1.1.0 #  Temporary, due to issues with 1.2.0
+    - pip install kiwisolver==1.1.0 #  Temporary, due to issues with 1.2.0
     - export main_repo_branch=$TRAVIS_BRANCH
     - echo $main_repo_branch
     - if [[ ${main_repo_branch} != "master" && ${main_repo_branch} != "development" && ${main_repo_branch} != "experimental" ]]; then main_repo_branch=development ; fi
