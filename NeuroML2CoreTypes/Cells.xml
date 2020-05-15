@@ -1669,15 +1669,12 @@
             <!-- Synaptic Dynamics -->
             <StateVariable name="Si" dimension="none" exposure="Si"/>
             <StateVariable name="Wi" dimension="none" exposure="Wi"/>
-            
-            <!-- Note Sisat is StateVariable & ConditionalDerivedVariable, see https://github.com/OpenSourceBrain/PinskyRinzelModel/issues/7 -->
-            <StateVariable name="Sisat" dimension="none"/>
-            
+
             <!-- baseCellMembPot compatibility -->
             <DerivedVariable name="v" dimension="voltage" value="Vs" exposure="v"/>
             <DerivedVariable name="ICad" dimension="currentDensity" exposure="ICad" value="gCa*sd*sd*(Vd-eCa)"/>
-        
-        
+
+
 
             <DerivedVariable name="alphams_Vs" dimension="none" value="0.32*(-46.9-Vs/MVOLT)/(exp((-46.9-Vs/MVOLT)/4.0)-1.0)"/>
             <DerivedVariable name="betams_Vs" dimension="none" value="0.28*(Vs/MVOLT+19.9)/(exp((Vs/MVOLT+19.9)/5.0)-1.0)"/>
@@ -1692,17 +1689,15 @@
             <DerivedVariable name="alphasd_Vd" dimension="none" value="1.6/(1.0+exp(-0.072*(Vd/MVOLT-5.0)))"/>
             <DerivedVariable name="betasd_Vd" dimension="none" value="0.02*(Vd/MVOLT+8.9)/(exp((Vd/MVOLT+8.9)/5.0)-1.0)"/>
 
-            
+
             <DerivedVariable name="Iampa" dimension="currentDensity" value="gAmpa*Wi*(Vd-Vsyn)"/>
-            <DerivedVariable name="Inmda" dimension="currentDensity" value="gNmda*Sisat*(Vd-Vsyn)/(1.0+0.28*exp(-0.062*(Vd/MVOLT-60.0)))"/>
-            <DerivedVariable name="Isyn" dimension="currentDensity" value="Iampa+Inmda"/>
-            
-            
+
+
             <ConditionalDerivedVariable name="alphaqd" dimension="none">
                 <Case condition="0.00002*Cad .gt. 0.01" value="0.01"/>
                 <Case value="0.00002*Cad"/>
             </ConditionalDerivedVariable>
-        
+
             <ConditionalDerivedVariable name="chid" dimension="none">
                 <Case condition="Cad/250 .gt. 1" value="1"/>
                 <Case value="Cad/250"/>
@@ -1712,18 +1707,25 @@
                 <Case condition="Vd .lt. -10*MVOLT" value="exp((Vd/MVOLT+50.0)/11-(Vd/MVOLT+53.5)/27)/18.975"/>
                 <Case value="2.0*exp((-53.5-Vd/MVOLT)/27.0)"/>
             </ConditionalDerivedVariable>
-        
+
             <ConditionalDerivedVariable name="betacd_Vd" dimension="none">
                 <Case condition="Vd .lt. -10*MVOLT" value="(2.0*exp((-53.5-Vd/MVOLT)/27.0)-alphacd_Vd)"/>
                 <Case value="0"/>
             </ConditionalDerivedVariable>
 
-            <!-- Note Sisat is StateVariable & ConditionalDerivedVariable, see https://github.com/OpenSourceBrain/PinskyRinzelModel/issues/7 -->
+
             <ConditionalDerivedVariable name="Sisat" dimension="none">
                 <Case condition="Si .gt. Smax" value="Smax"/>
                 <Case value="Si"/>
             </ConditionalDerivedVariable>
 
+            <ConditionalDerivedVariable name="Inmda" dimension="currentDensity">
+                <Case condition="1 .eq. 1" value="gNmda*Sisat*(Vd-Vsyn)/(1.0+0.28*exp(-0.062*(Vd/MVOLT-60.0)))"/>
+            </ConditionalDerivedVariable>
+
+            <ConditionalDerivedVariable name="Isyn" dimension="currentDensity">
+                <Case condition="1 .eq. 1" value="Iampa+Inmda"/>
+            </ConditionalDerivedVariable>
 
             <TimeDerivative variable="Vs" value="(-gLs*(Vs-eL)-gNa*(Minfs_Vs^2)*hs*(Vs-eNa)-gKdr*ns*(Vs-eK)+(gc/pp)*(Vd-Vs)+iSoma/pp) / cm"/>
             <TimeDerivative variable="Vd" value="(iDend/(1.0-pp)-Isyn/(1.0-pp)-gLd*(Vd-eL)-ICad-gKahp*qd*(Vd-eK)-gKC*cd*chid*(Vd-eK)+(gc*(Vs-Vd))/(1.0-pp)) / cm"/>
