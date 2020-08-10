@@ -28,12 +28,12 @@ python:
 
 env:
     - OMV_ENGINE=jNeuroML
-    - OMV_ENGINE=PyLEMS_NeuroML2
-    - OMV_ENGINE=jNeuroML_NEURON
+    ##- OMV_ENGINE=PyLEMS_NeuroML2
+    ##- OMV_ENGINE=jNeuroML_NEURON
     - OMV_ENGINE=jNeuroML_NetPyNE
-    - OMV_ENGINE=jNeuroML_Brian
-    - OMV_ENGINE=jNeuroML_Brian2
-    - OMV_ENGINE=jNeuroML_Moose
+    ##- OMV_ENGINE=jNeuroML_Brian
+    ##- OMV_ENGINE=jNeuroML_Brian2
+    ##- OMV_ENGINE=jNeuroML_Moose
     - OMV_ENGINE=jNeuroML_validate
 
 install: 
@@ -51,6 +51,7 @@ install:
     
     - python getNeuroML.py $main_repo_branch  # will call mvn install on this & other repos
     - ls -alt
+    - mvn dependency:tree
     
     - export PATH=$PATH:$TRAVIS_BUILD_DIR/jNeuroML
     - export JNML_HOME=$TRAVIS_BUILD_DIR/jNeuroML
