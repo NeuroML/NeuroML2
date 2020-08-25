@@ -20,20 +20,20 @@ addons:
 
 
 language: python
-
+ 
 python: 
   - 2.7
   - 3.6
- 
+
 
 env:
     - OMV_ENGINE=jNeuroML
-    ##- OMV_ENGINE=PyLEMS_NeuroML2
-    ##- OMV_ENGINE=jNeuroML_NEURON
+    - OMV_ENGINE=PyLEMS_NeuroML2
+    - OMV_ENGINE=jNeuroML_NEURON
     - OMV_ENGINE=jNeuroML_NetPyNE
-    ##- OMV_ENGINE=jNeuroML_Brian
-    ##- OMV_ENGINE=jNeuroML_Brian2
-    ##- OMV_ENGINE=jNeuroML_Moose
+    - OMV_ENGINE=jNeuroML_Brian
+    - OMV_ENGINE=jNeuroML_Brian2
+    - OMV_ENGINE=jNeuroML_Moose
     - OMV_ENGINE=jNeuroML_validate
 
 install: 
