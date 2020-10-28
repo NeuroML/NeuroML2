@@ -23,7 +23,7 @@ language: python
  
 python: 
   - 2.7
-  - 3.6
+  - 3.7
 
 
 env:
@@ -33,7 +33,7 @@ env:
     - OMV_ENGINE=jNeuroML_NetPyNE
     - OMV_ENGINE=jNeuroML_Brian
     - OMV_ENGINE=jNeuroML_Brian2
-    - OMV_ENGINE=jNeuroML_Moose
+    #- OMV_ENGINE=jNeuroML_Moose # issue on xenial and python 3?
     - OMV_ENGINE=jNeuroML_validate
 
 install: 
