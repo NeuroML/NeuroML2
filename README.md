@@ -16,7 +16,7 @@ For information on how to contribute to the NeuroML initiative, see [here](CONTR
 
 This code is distributed under the terms of the GNU Lesser General Public License.
 
-[![Build Status](https://travis-ci.org/NeuroML/NeuroML2.svg?branch=development)](https://travis-ci.org/NeuroML/NeuroML2)
+[![Build Status](https://travis-ci.com/NeuroML/NeuroML2.svg?branch=development)](https://travis-ci.com/NeuroML/NeuroML2)
 
 
 
