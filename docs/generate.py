@@ -437,7 +437,7 @@ for file in files:
 
         while extd_comp_type is not None:
             for param in extd_comp_type.parameters:
-                pk = params.keys()
+                pk = params.copy().keys()
                 for pp0 in pk:
                     if pp0.name == param.name:
                         del params[pp0]
@@ -449,7 +449,7 @@ for file in files:
             for path in extd_comp_type.paths:
                 paths[path] = extd_comp_type.paths
             for exp in extd_comp_type.exposures:
-                ek = exposures.keys()
+                ek = exposures.copy().keys()
                 for ee0 in ek:
                     if ee0.name == exp.name:
                         del exposures[ee0]
