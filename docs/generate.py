@@ -2,6 +2,7 @@
 A script for generating HTML docs from LEMS descriptions of the core NeuroML 2 Component Types
 """
 
+import textwrap
 from lems.model.model import Model
 from lems.model.dynamics import OnStart
 from lems.model.dynamics import OnCondition
@@ -38,9 +39,15 @@ IF="IF"
 THEN="THEN"
 
 def category(name, rows=1, type="label-info"):
-    return ("  <td width=\"%s\" rowspan='%i'>\n"+ \
-           "    <span class=\"label %s\">%s</span>\n"+ \
-           "  </td>\n")%(col_width_left, rows, type, name)
+    return (textwrap.dedent(
+        """
+        <td width="{}" rowspan="{}">
+            <span class="label {}">{}</span>
+        </td>
+        """.format(col_width_left, rows, type, name)
+    )
+    )
+
 
 def exposed_as(name):
     if name is None:
