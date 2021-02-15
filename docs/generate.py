@@ -3,6 +3,8 @@ A script for generating HTML docs from LEMS descriptions of the core NeuroML 2 C
 """
 
 import textwrap
+from decimal import Decimal
+from decimal import getcontext
 from lems.model.model import Model
 from lems.model.dynamics import OnStart
 from lems.model.dynamics import OnCondition
@@ -11,6 +13,15 @@ from lems.model.dynamics import OnEntry
 from lems.model.dynamics import Transition
 from lems.model.dynamics import StateAssignment
 from lems.model.dynamics import EventOut
+
+# To display correct conversion values, we limit the precision context to 2
+# places (required by Hz). Higher precisions, such as the default machine
+# precision include the usual issues with floating point arithmetic and do not
+# display exact conversions
+#
+# References: https://docs.python.org/3/tutorial/floatingpoint.html
+# https://docs.python.org/3/library/decimal.html#module-decimal
+getcontext().prec = 2
 
 nml2_version = "2.1"
 nml2_branch = "master"
@@ -367,7 +378,7 @@ for file in files:
                         factor = 1'''
                     factor1 = model.get_numeric_value("1%s" % unit.symbol, unit.dimension)
                     factor2 = model.get_numeric_value("1%s" % unit2.symbol, unit2.dimension)
-                    contents += "<br/>" + spacer4 + "1 %s = %s <a href='#%s'>%s</a>" % (unit.symbol, "%s" % (factor1 / factor2), unit2.symbol, unit2.symbol)
+                    contents += "<br/>" + spacer4 + "1 %s = %s <a href='#%s'>%s</a>" % (unit.symbol, "%s" % (Decimal(factor1) / Decimal(factor2)), unit2.symbol, unit2.symbol)
 
             contents += "    </td>\n"
             contents += "  </tr>\n"
