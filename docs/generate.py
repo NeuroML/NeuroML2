@@ -235,6 +235,23 @@ def get_extended_from_comp_type(comp_type_name):
 
 
 def add_comp_type_and_related(comp_type, added, indent, pre, nameInfo=""):
+    """Recursively add information on ancestors and descendents
+
+    :params comp_type: component type to investigate.
+    :type comp_type: ComponentType model.
+    :params added: list of currently added component type.
+    :type added: list.
+    :params indent: indentation level.
+    :type indent: str.
+    :params pre: prefix string.
+    :type pre: str.
+    :params nameInfo: ?
+    :type nameInfo: str
+
+    :returns: completed string
+
+    :TODO: complete docstring
+    """
     name = comp_type.name
     extender_pre = "<span %s><b>></b> </span>" % grey_style
     child_pre = "<span %s><b>+</b> </span>" % grey_style
