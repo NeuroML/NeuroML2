@@ -219,6 +219,13 @@ def comp_type_link(name):
 
 
 def get_extended_from_comp_type(comp_type_name):
+    """Get name of the parent ComponentType.
+
+    :param comp_type_name: name of component type to get parent for.
+    :type comp_type_name: str.
+
+    :returns: parent ComponentType if derived from one.
+    """
     if comp_type_name not in comp_types:
         return None
     extCompTypeName = comp_types[comp_type_name].extends
