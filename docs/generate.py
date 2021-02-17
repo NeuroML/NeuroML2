@@ -85,6 +85,16 @@ def exposed_as(name):
 
 
 def dimension(name, pre="", post=""):
+    """Create string with link to CoreDimensions listing
+
+    :param name: name of dimension
+    :type name: str.
+    :param pre: prefix string.
+    :type pre: str.
+    :param post: suffix string.
+    :type post: str.
+    :returns: formatted string with link to entry in CoreDimensions html file.
+    """
     if name is None or name == "none":
         return "" + pre + "Dimensionless" + post
     return "" + pre + "<a href=\"NeuroMLCoreDimensions.html#" + name + "\">" + name + "</a>" + post + ""
