@@ -125,7 +125,7 @@ def replace_underscores_and_urls(text, useHtml=True):
         if len(word) > 0:
             if word.startswith("*"):
                 if useHtml:
-                    word = "<u>%s"%(word[1:])
+                    word = "<u>%s" % (word[1:])
             if word.endswith("*"):
                 if useHtml:
                     word = "%s</u>" % (word[:-1])
