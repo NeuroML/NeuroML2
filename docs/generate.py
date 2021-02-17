@@ -119,6 +119,15 @@ def format_expression(expr):
 
 
 def replace_underscores_and_urls(text, useHtml=True):
+    """Replace underscores with <u> tags, and URLs with <a> tags where required.
+
+    :param text: text to parse.
+    :type text: str.
+    :param useHTML: if HTML tags are to be used or not.
+    :param useHTML: bool
+
+    :returns: converted text.
+    """
     words = text.split(" ")
     text2 = ""
     for word in words:
