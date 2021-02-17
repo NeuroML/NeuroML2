@@ -179,6 +179,16 @@ def format_description(element):
 
 
 def format_description_small(element):
+    """Format description in HTML.
+
+    Similar to :func:`format_description` but with a smaller font.
+
+    TODO: Could probably be merged into :func:`format_description` itself.
+
+    :param element: element to format.
+    :type element: str or model.component_type object.
+    :returns: formatted string.
+    """
     if isinstance(element, str):
         desc = element
     elif element.description is None:
