@@ -72,9 +72,16 @@ def category(name, rows=1, label_type="label-info"):
 
 
 def exposed_as(name):
-    if name is None:
-        return ""
-    return " (exposed as <b>" + name + "</b>)\n"
+    """Return name formatted in bold.
+
+    :param name: name to be converted.
+    :type name: str.
+
+    :returns: formatted string.
+    """
+    if name:
+        return " (exposed as <b>" + name + "</b>)\n"
+    return ""
 
 
 def dimension(name, pre="", post=""):
