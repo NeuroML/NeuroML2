@@ -50,14 +50,22 @@ IF = "IF"
 THEN = "THEN"
 
 
-def category(name, rows=1, type="label-info"):
+def category(name, rows=1, label_type="label-info"):
+    """Print formatted category name.
+
+    :param name: name of category.
+    :type name: str.
+    :param rows: number of rows.
+    :type rows: int.
+    :param label_type: label type to use.
+    :type label_type: str.
+    """
     return (textwrap.dedent(
         """
         <td width="{}" rowspan="{}">
             <span class="label {}">{}</span>
         </td>
-        """.format(col_width_left, rows, type, name)
-    )
+        """.format(col_width_left, rows, label_type, name))
     )
 
 
