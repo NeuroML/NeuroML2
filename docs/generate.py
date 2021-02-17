@@ -317,6 +317,9 @@ for file in files:
 print("Read in all files")
 
 
+"""
+Iterate over the files again to generate the HTML output.
+"""
 for file in files:
     fullfile = "%s/%s.xml" % (nml_src, file)
     print("\n----------  Reading LEMS file: " + fullfile)
@@ -327,12 +330,21 @@ for file in files:
     # contents = HTMLgen.Simplecontentsument(title=file)
     doc = open("%s.html" % file, 'w')
 
+    """
+    Add <head> element with CSS references.
+    """
     contents = ("<html>\n  <head>\n    <title>%s</title>\n" + \
                 "    <link href=\"assets/css/bootstrap.css\" rel=\"stylesheet\">\n" + \
                 "    <style type=\"text/css\"> td { font-size: 14; } </style>\n" + \
                 "    <!--<style type=\"text/css\"> body { padding-top: 90px; padding-bottom: 30px;  padding-left: 50px;  padding-right:50px; } </style>-->\n" + \
                 "  </head>\n<body>\n\n") % file
 
+    """
+    Set up top header nav bar.
+
+    Add the various HTML files as links in a list, which bootstrap will lay out
+    nicely as a top header bar.
+    """
     contents += "<div class=\"navbar \">\n" + \
                 "  <div class=\"navbar-inner\">\n" + \
                 "    <div class=\"container\">\n" + \
@@ -358,7 +370,17 @@ for file in files:
                 "    <div class=\"row-fluid\">\n" + \
                 "    <div class=\"span3\">\n" + \
                 "    <div class=\"well sidebar-nav\">\n"
+    """
+    Nav bar set up complete.
+    """
 
+    """
+    Set up the left hand side bar.
+
+    If the read in model has Dimensions defined, list them all.
+    If it has Units defined, list them all.
+    If it has ComponentTypes, list them all.
+    """
     if len(model.dimensions) > 0:
         contents += "      <b>Dimensions</b><br/>\n"
         dimensions = model.dimensions
@@ -384,7 +406,15 @@ for file in files:
     contents += "    </div><!--/.well -->\n" + \
                 "    </div><!--/span-->\n" + \
                 "    <div class=\"span7\">\n"
+    """
+    Left hand side bar set up complete.
+    """
 
+    """
+    Set up of main central text starts here.
+
+    First, the top admon and the header table.
+    """
     desc = "NeuroML2 ComponentType definitions from %s.xml" % file
     if model.description:
         desc = model.description
@@ -401,8 +431,12 @@ for file in files:
     for inc in model.getInclude():
         contents += "<p>Included file: <a href=\"%s\">%s</a></p>\n"%(inc.getFile().replace(".xml", ".html"),inc.getFile())'''
 
-    if "Dimensions" in file:
+    """
+    Contents of the primary model are parsed here.
 
+    First, list any Dimensions that the model may include.
+    """
+    if "Dimensions" in file:
         dimensions = model.dimensions
         dimensions = sorted(dimensions, key=lambda dim: dim.name)
         for dim in dimensions:
@@ -418,7 +452,6 @@ for file in files:
             contents += "  <tr>\n"
             contents += "    <td>\n"
 
-            contents2 = ""
             format = "%s<sup>%i</sup> "
             if dim.m is not None and dim.m != 0:
                 contents += format % ("M", dim.m)
@@ -442,6 +475,9 @@ for file in files:
             contents += "  </tr>\n"
             contents += "</table>\n"
 
+        """
+        Parse and list any units contained in the model.
+        """
         units = model.units
         units = sorted(units, key=lambda unit: unit.symbol)
         for unit in units:
@@ -466,6 +502,10 @@ for file in files:
 
             contents += spacer4 + "Dimension: " + dimension(unit.dimension, "", "") + "<br/>" + spacer4 + "Power of 10: " + str(unit.power) + offset + scale + "<br/>\n"
 
+            """
+            If other units of the same dimension exist, generate a list of
+            their conversion factors.
+            """
             for unit2 in model.units:
                 if unit.symbol != unit2.symbol and unit.dimension == unit2.dimension:
                     '''diff = unit.power - unit2.power
@@ -486,20 +526,26 @@ for file in files:
             contents += "  </tr>\n"
             contents += "</table>\n"
 
+    """
+    Parse the components in this file, in order.
+    """
     for o_comp_type in ordered_comp_types[file]:
         o_comp_type = o_comp_type.replace('rdf:', 'rdf_')
         comp_type = model.component_types[o_comp_type]
         # print "ComponentType %s is %s"%(comp_type.name, comp_type.description)
 
+        """Check if it is derived."""
         ext = "" if comp_type.extends is None else "<p>%sextends %s</p>" % (spacer4, comp_type_link(comp_type.extends))
         # ext = "" if comp_type.extends is None else "%s<small>extends <a href=\"#%s\">%s</a></small>"%(spacer4,comp_type.extends,comp_type.extends)
 
+        """Information table starts"""
         contents += "<a name=\"" + comp_type.name + "\">&nbsp;</a>\n"
         contents += "<table class=\"table table-bordered\">\n"
         contents += "  <tr>\n"
         contents += "    <td colspan='3'>\n"
         classInfo = ""
 
+        """Print header, and what it extends"""
         if comp_type.name.startswith("base"):
             contents += "       <b><span " + grey_style_dark_ital + ">" + comp_type.name + "</span></b>\n"
         else:
@@ -511,18 +557,21 @@ for file in files:
         desc = "<i>--- no description yet ---</i>" if comp_type.description is None else format_description(comp_type)
         cnoLink = ""
 
+        """Link to the Bioportal entry"""
         if " cno_00" in str(comp_type.description):
             cno = comp_type.description.split(" ")[-1]
             desc = desc.replace(cno, "")
             title = "Link to Bioportal entry for Computational Neuroscience Ontology related to: " + comp_type.name
             cnoLink = "<br/><br/><a class=\"btn\" title=\"%s\" href=\"%s%s\" target=\"CNO\">%s</a>" % (title, bioportal_url, cno, cno)
-
+        """Print description and link to Bioportal entry."""
         contents += "  <tr>\n"
         contents += "    <td colspan='3'>\n"
         contents += "      " + desc + cnoLink
         contents += "    </td>\n"
         contents += "  </tr>\n"
 
+        """Process parameters, derived parameters, texts, paths, expsures,
+        requirements and ports"""
         params = {}
         derived_params = {}
         texts = {}
@@ -531,6 +580,7 @@ for file in files:
         requirements = {}
         eventPorts = {}
 
+        """Get lists of them all"""
         for param in comp_type.parameters:
             params[param] = comp_type.name
         for derived_param in comp_type.derived_parameters:
@@ -546,8 +596,10 @@ for file in files:
         for ep in comp_type.event_ports:
             eventPorts[ep] = comp_type.name
 
+        """Get parent ComponentType if derived from one."""
         extd_comp_type = get_extended_from_comp_type(comp_type.name)
 
+        """Recursively go up the tree and get attributes inherited from ancestors."""
         while extd_comp_type is not None:
             for param in extd_comp_type.parameters:
                 pk = params.copy().keys()
@@ -572,8 +624,10 @@ for file in files:
             for ep in extd_comp_type.event_ports:
                 eventPorts[ep] = extd_comp_type.name
 
+            """Recurse up the next parent"""
             extd_comp_type = get_extended_from_comp_type(extd_comp_type.name)
 
+        """Print parameters to HTML"""
         if len(params) > 0:
             contents += "  <tr>\n"
             contents += category("Parameters", len(params), type="label-success")
@@ -588,6 +642,7 @@ for file in files:
                     style = grey_style
                 contents += "    <td" + style + "><b>" + param.name + "</b>" + origin + "</td>\n    <td width=\"" + col_width_right + "\">" + dimension(param.dimension) + "</td>\n  </tr>\n"
 
+        """Print derived parameters to HTML"""
         if len(derived_params) > 0:
             contents += "  <tr>\n"
             contents += category("Derived Parameters", len(derived_params), type="label-success")
@@ -601,18 +656,21 @@ for file in files:
                     style = grey_style
                 contents += "    <td" + style + "><b>" + dp.name + " = " + dp.value + "</b>" + origin + "</td>\n    <td width=\"" + col_width_right + "\">" + dimension(dp.dimension) + "</td>\n  </tr>\n"
 
+        """Print text attributes to HTML"""
         if len(comp_type.texts) > 0:  # TODO: Check if Text elements are inherited...
             contents += "  <tr>\n"
             contents += category("Text fields", len(comp_type.texts), type="label-success")
             for text in comp_type.texts:
                 contents += "    <td colspan='2'><b>" + text.name + "</b></td>\n  </tr>\n"
 
+        """Print path attributes to HTML"""
         if len(comp_type.paths) > 0:  # TODO: Check if Path elements are inherited...
             contents += "  <tr>\n"
             contents += category("Paths", len(comp_type.paths), type="label-success")
             for path in comp_type.paths:
                 contents += "    <td colspan='2'><b>" + path.name + "</b></td>\n  </tr>\n"
 
+        """Print Component Reference attributes to HTML"""
         # TODO: check if ComponentRef are inherited...
         if len(comp_type.component_references) > 0:
             contents += "  <tr>\n"
@@ -620,6 +678,7 @@ for file in files:
             for cr in comp_type.component_references:
                 contents += "    <td><b>" + cr.name + "</b></td>\n    <td width=\"" + col_width_right + "\">" + comp_type_link(cr.type) + "</td>\n  </tr>\n"
 
+        """Print descendents to HTML"""
         # TODO: check if Childrens are inherited...
         if len(comp_type.children) > 0:
             contents += "  <tr>\n"
@@ -643,12 +702,14 @@ for file in files:
                 contents += category("Children elements", children_count, type="label-success")
                 contents += children_contents
 
+        """Print constants to HTML."""
         if len(comp_type.constants) > 0:
             contents += "  <tr>\n"
             contents += category("Constants", len(comp_type.constants))
             for const in comp_type.constants:
                 contents += "    <td><b>" + const.name + "</b> = " + const.value + format_description_small(const) + "</td>\n    <td width=\"" + col_width_right + "\">" + dimension(const.dimension) + "</td>\n  </tr>\n"
 
+        """Print exposures to HTML"""
         if len(exposures) > 0:
             contents += "  <tr>\n"
             contents += category("Exposures", len(exposures))
@@ -661,6 +722,7 @@ for file in files:
                     style = grey_style
                 contents += "    <td" + style + "><b>" + exp.name + "</b>" + origin + "</td>\n    <td width=\"" + col_width_right + "\">" + dimension(exp.dimension) + "</td>\n  </tr>\n"
 
+        """Print requirements to HTML"""
         if len(requirements) > 0:
             contents += "  <tr>\n"
             contents += category("Requirements", len(requirements))
@@ -673,6 +735,7 @@ for file in files:
                     style = grey_style
                 contents += "    <td" + style + "><b>" + req.name + "</b>" + origin + "</td>\n    <td width=\"" + col_width_right + "\">" + dimension(req.dimension) + "</td>\n  </tr>\n"
 
+        """Print ports to HTML"""
         if len(eventPorts) > 0:
             contents += "  <tr>\n"
             contents += category("Event Ports", len(eventPorts))
@@ -685,6 +748,7 @@ for file in files:
                     style = grey_style
                 contents += "    <td" + style + "><b>" + ep.name + "</b>" + origin + "</td>\n    <td width=\"" + col_width_right + "\">Direction: " + ep.direction + "</td>\n  </tr>\n"
 
+        """Print attachments to HTML"""
         # TODO: check if Attachments are inherited...
         if len(comp_type.attachments) > 0:
             contents += "  <tr>\n"
@@ -692,12 +756,14 @@ for file in files:
             for att in comp_type.attachments:
                 contents += "    <td><b>" + att.name + "</b></td>\n    <td width=\"" + col_width_right + "\">" + comp_type_link(att.type) + "</td>\n  </tr>\n"
 
+        """Print dynamics to HTML"""
         if comp_type.dynamics and comp_type.dynamics.has_content():
             dynamics = comp_type.dynamics
             contents += "<tr>\n"
             contents += category("Dynamics", type="")
             contents += "<td colspan='2'>\n"
 
+            """Print Structure information to HTML"""
             structure = None
             if comp_type.structure is not None:
                 structure = comp_type.structure
@@ -724,6 +790,7 @@ for file in files:
 
                 contents += "<br/>\n"
 
+            """Print state variables for dynamics to HTML"""
             if len(dynamics.state_variables) > 0:
                 contents += "<span class=\"label\">State Variables</span><br/><br/>\n"
                 for sv in dynamics.state_variables:
@@ -731,6 +798,7 @@ for file in files:
                 if len(dynamics.state_variables) > 0:
                     contents += "<br/>\n"
 
+            """Print event handler information to HTML"""
             if dynamics.event_handlers is not None:
                 os_content = ""
                 oc_content = ""
@@ -780,6 +848,7 @@ for file in files:
                 contents += oc_content
                 contents += oe_content
 
+            """Print derived variables to HTML"""
             if len(dynamics.derived_variables) > 0:
                 contents += "<span class=\"label\">Derived Variables</span><br/><br/>\n"
                 for dv in dynamics.derived_variables:
@@ -792,6 +861,7 @@ for file in files:
                 if len(dynamics.derived_variables) > 0:
                     contents += "<br/>\n"
 
+            """Print conditional derived variables to HTML"""
             if len(dynamics.conditional_derived_variables) > 0:
                 contents += "<span class=\"label\">Conditional Derived Variables</span><br/><br/>\n"
                 for cdv in dynamics.conditional_derived_variables:
@@ -805,6 +875,7 @@ for file in files:
                 if len(dynamics.conditional_derived_variables) > 0:
                     contents += "<br/>\n"
 
+            """Print time derivatives to HTML"""
             if len(dynamics.time_derivatives) > 0:
                 contents += "<span class=\"label\">Time Derivatives</span><br/><br/>\n"
                 for td in dynamics.time_derivatives:
@@ -813,6 +884,7 @@ for file in files:
                 if len(dynamics.time_derivatives) > 0:
                     contents += "<br/>\n"
 
+            """Print regimes to HTML"""
             if len(dynamics.regimes) > 0:
                 for rg in dynamics.regimes:
                     initial = "" if rg.initial is None or rg.initial == "false" else " (initial)"
@@ -861,12 +933,15 @@ for file in files:
             contents += "</tr>\n"
 
         contents += "</table>\n\n"
+        """Table complete"""
 
+    """File parsing finished"""
     contents += "</div>\n"
     contents += "</div>\n"
     contents += "</div>\n"
     contents += "</body>\n"
 
+    """Write HTML to file and close file"""
     for line in contents.split('\n'):
         # print("Writing: "+line)
         doc.write(line + '\n')
