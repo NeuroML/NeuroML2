@@ -101,6 +101,12 @@ def dimension(name, pre="", post=""):
 
 
 def format_expression(expr):
+    """Convert mathematical symbols to HTML in expressions.
+
+    :param expr: expression to convert.
+    :type expr: str.
+    :returns: converted expression
+    """
     expr2 = expr.replace(".gt.", "&gt;")
     expr2 = expr2.replace(".geq.", "&gt;=")
     expr2 = expr2.replace(".lt.", "&lt;")
