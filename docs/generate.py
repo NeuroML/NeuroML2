@@ -59,6 +59,8 @@ def category(name, rows=1, label_type="label-info"):
     :type rows: int.
     :param label_type: label type to use.
     :type label_type: str.
+
+    :returns: formatted string.
     """
     return (textwrap.dedent(
         """
