@@ -160,6 +160,14 @@ def replace_underscores_and_urls(text, useHtml=True):
 
 
 def format_description(element):
+    """Format description in HTML.
+
+    This replaces underscores and URLs with the necessary HTML tags, and place the
+    description in an italic span block.
+
+    :param element: element to format.
+    :type element: str or model.component_type object.
+    :returns: formatted string."""
     if element is None or (not isinstance(element, str) and (element.description is None or len(element.description) == 0)):
         return ""
     if isinstance(element, str):
