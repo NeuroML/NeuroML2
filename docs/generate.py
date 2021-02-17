@@ -200,6 +200,7 @@ def format_description_small(element):
     return "<br/>%s<span %s><i>%s</i></span>" % (spacer4, grey_small_style_dark, desc)
 
 
+# Main worker bits start here
 files = ["Cells", "Synapses", "Channels", "Inputs", "Networks", "PyNN", "NeuroMLCoreDimensions", "NeuroMLCoreCompTypes"]
 
 comp_types = {}
@@ -208,9 +209,19 @@ comp_type_desc = {}
 ordered_comp_types = {}
 
 
+"""
+Obtain a list of all component types that have been defined in the schemas.
+"""
 for file in files:
     fullfile = "%s/%s.xml" % (nml_src, file)
     print("\n----------  Reading LEMS file: " + fullfile)
+    """
+    From the XML schema files, we read all the models and get the required metadata:
+    - names,
+    - the xml source file in which it is defined
+    - description of the component
+
+    """
     model = Model(include_includes=False)
     model.import_from_file(fullfile)
 
@@ -218,6 +229,16 @@ for file in files:
         comp_types[comp_type.name] = comp_type
         comp_type_src[comp_type.name] = file
         comp_type_desc[comp_type.name] = comp_type.description if comp_type.description is not None else "ComponentType: " + comp_type.name
+
+    """
+    Read all the XML files to get an ordered list of components.
+
+    We get this list by reading the XML files and parsing them rather than
+    using the LEMS API used above because the LEMS API does not guarantee what
+    order the components will be returned in. By using the file as the source
+    here, we ensure that we get the component list in the same order in which
+    they are defined in the XML file.
+    """
     ordered_comp_type_list = []
     with open(fullfile) as fp:
         for line in fp:
