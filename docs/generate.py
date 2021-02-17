@@ -200,6 +200,55 @@ def format_description_small(element):
     return "<br/>%s<span %s><i>%s</i></span>" % (spacer4, grey_small_style_dark, desc)
 
 
+def comp_type_link(name):
+    if name is None or name == "none" or name not in comp_type_src:
+        return "???"
+    compName = name
+    if name.startswith("base"):
+        compName = "<span %s>%s</span>" % (grey_blue_style, name)
+    desc = replace_underscores_and_urls(comp_type_desc[name], False)
+    return "<a href=\"%s.html#%s\" title=\"%s\">%s</a>" % (comp_type_src[name], name, desc, compName)
+
+
+def get_extended_from_comp_type(comp_type_name):
+    if comp_type_name not in comp_types:
+        return None
+    extCompTypeName = comp_types[comp_type_name].extends
+    if extCompTypeName is None:
+        return None
+    return comp_types[extCompTypeName]
+
+
+def add_comp_type_and_related(comp_type, added, indent, pre, nameInfo=""):
+    name = comp_type.name
+    extender_pre = "<span %s><b>></b> </span>" % grey_style
+    child_pre = "<span %s><b>+</b> </span>" % grey_style
+    children_pre = "<span %s><b>++</b> </span>" % grey_style
+
+    contents = ""
+    if name not in added or nameInfo != "":
+        contents += indent + pre + nameInfo + comp_type_link(name) + "<br/>\n  \n"
+        added.append(name)
+
+        for ct in model.component_types:
+            if ct.extends == name:
+                contents += add_comp_type_and_related(ct, added, indent + spacer3, extender_pre)
+
+        '''
+        for child in comp_type.getChild():
+            nameInfo= "" if child.name == child.type else child.name+" "
+            contents += add_comp_type_and_related(comp_types[child.type], added, indent+spacer3, child_pre, nameInfo=nameInfo)
+        '''
+        for child_or_children in comp_type.children:
+            nameInfo = "" if child_or_children.name == child_or_children.type else child_or_children.name + " "
+            pre = children_pre if child_or_children.multiple else child_pre
+            ctype = child_or_children.type
+            ctype = ctype.replace('rdf:', 'rdf_')
+            contents += add_comp_type_and_related(comp_types[ctype], added, indent + spacer3, pre, nameInfo=nameInfo)
+
+    return contents
+
+
 # Main worker bits start here
 files = ["Cells", "Synapses", "Channels", "Inputs", "Networks", "PyNN", "NeuroMLCoreDimensions", "NeuroMLCoreCompTypes"]
 
@@ -251,55 +300,6 @@ for file in files:
     ordered_comp_types[file] = ordered_comp_type_list
 
 print("Read in all files")
-
-
-def comp_type_link(name):
-    if name is None or name == "none" or name not in comp_type_src:
-        return "???"
-    compName = name
-    if name.startswith("base"):
-        compName = "<span %s>%s</span>" % (grey_blue_style, name)
-    desc = replace_underscores_and_urls(comp_type_desc[name], False)
-    return "<a href=\"%s.html#%s\" title=\"%s\">%s</a>" % (comp_type_src[name], name, desc, compName)
-
-
-def get_extended_from_comp_type(comp_type_name):
-    if comp_type_name not in comp_types:
-        return None
-    extCompTypeName = comp_types[comp_type_name].extends
-    if extCompTypeName is None:
-        return None
-    return comp_types[extCompTypeName]
-
-
-def add_comp_type_and_related(comp_type, added, indent, pre, nameInfo=""):
-    name = comp_type.name
-    extender_pre = "<span %s><b>></b> </span>" % grey_style
-    child_pre = "<span %s><b>+</b> </span>" % grey_style
-    children_pre = "<span %s><b>++</b> </span>" % grey_style
-
-    contents = ""
-    if name not in added or nameInfo != "":
-        contents += indent + pre + nameInfo + comp_type_link(name) + "<br/>\n  \n"
-        added.append(name)
-
-        for ct in model.component_types:
-            if ct.extends == name:
-                contents += add_comp_type_and_related(ct, added, indent + spacer3, extender_pre)
-
-        '''
-        for child in comp_type.getChild():
-            nameInfo= "" if child.name == child.type else child.name+" "
-            contents += add_comp_type_and_related(comp_types[child.type], added, indent+spacer3, child_pre, nameInfo=nameInfo)
-        '''
-        for child_or_children in comp_type.children:
-            nameInfo = "" if child_or_children.name == child_or_children.type else child_or_children.name + " "
-            pre = children_pre if child_or_children.multiple else child_pre
-            ctype = child_or_children.type
-            ctype = ctype.replace('rdf:', 'rdf_')
-            contents += add_comp_type_and_related(comp_types[ctype], added, indent + spacer3, pre, nameInfo=nameInfo)
-
-    return contents
 
 
 for file in files:
