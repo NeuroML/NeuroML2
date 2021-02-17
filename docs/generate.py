@@ -201,6 +201,14 @@ def format_description_small(element):
 
 
 def comp_type_link(name):
+    """Get HTML string with link to the provided component type.
+
+    :param name: name of component.
+    :type name: str.
+
+    :returns: HTML string that includes <a> tag to link to the definition of
+    the provided component.
+    """
     if name is None or name == "none" or name not in comp_type_src:
         return "???"
     compName = name
