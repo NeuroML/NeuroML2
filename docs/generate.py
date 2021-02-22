@@ -21,7 +21,7 @@ from lems.model.dynamics import EventOut
 #
 # References: https://docs.python.org/3/tutorial/floatingpoint.html
 # https://docs.python.org/3/library/decimal.html#module-decimal
-getcontext().prec = 2
+getcontext().prec = 5
 
 nml2_version = "2.1"
 nml2_branch = "master"
@@ -378,7 +378,13 @@ for file in files:
                         factor = 1'''
                     factor1 = model.get_numeric_value("1%s" % unit.symbol, unit.dimension)
                     factor2 = model.get_numeric_value("1%s" % unit2.symbol, unit2.dimension)
-                    contents += "<br/>" + spacer4 + "1 %s = %s <a href='#%s'>%s</a>" % (unit.symbol, "%s" % (Decimal(factor1) / Decimal(factor2)), unit2.symbol, unit2.symbol)
+                    scaled = float(Decimal(factor1) / Decimal(factor2))
+                    if scaled>10000:
+                        scaled = '%.2e'%scaled
+                    else:
+                        scaled = '%s'%scaled
+                    if scaled.endswith('.0'): scaled = scaled[:-2]
+                    contents += "<br/>" + spacer4 + "1 %s = %s <a href='#%s'>%s</a>" % (unit.symbol, "%s" % scaled, unit2.symbol, unit2.symbol)
 
             contents += "    </td>\n"
             contents += "  </tr>\n"
