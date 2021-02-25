@@ -22,7 +22,7 @@ import asttemplates
 #
 # References: https://docs.python.org/3/tutorial/floatingpoint.html
 # https://docs.python.org/3/library/decimal.html#module-decimal
-getcontext().prec = 2
+getcontext().prec = 5
 
 # Main worker bits start here
 comp_definitiondir = "../NeuroML2CoreTypes"
@@ -151,7 +151,13 @@ def main():
                     if unit.symbol != unit2.symbol and unit.dimension == unit2.dimension:
                         factor1 = model.get_numeric_value("1%s" % unit.symbol.replace("__", ""), unit.dimension)
                         factor2 = model.get_numeric_value("1%s" % unit2.symbol.replace("__", ""), unit2.dimension)
-                        conversion = (Decimal(factor1) / Decimal(factor2))
+                        conversion = float(Decimal(factor1) / Decimal(factor2))
+                        if conversion > 10000:
+                            conversion = '{:.2e}'.format(conversion)
+                        else:
+                            conversion = '{}'.format(conversion)
+                        if conversion.endswith('.0'):
+                            conversion = conversion[:-2]
                         unit.factors.append([conversion, unit2.symbol])
 
             print(asttemplates.unit.render(comp_definition=comp_definition,
