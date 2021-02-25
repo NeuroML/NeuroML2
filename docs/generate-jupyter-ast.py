@@ -13,6 +13,8 @@ from datetime import date
 from decimal import Decimal
 from decimal import getcontext
 from lems.model.model import Model
+import requests
+import tempfile
 import asttemplates
 
 # To display correct conversion values, we limit the precision context to 2
@@ -25,7 +27,6 @@ import asttemplates
 getcontext().prec = 5
 
 # Main worker bits start here
-comp_definitiondir = "../NeuroML2CoreTypes"
 comp_definitions = ["Cells", "Synapses", "Channels", "Inputs", "Networks", "PyNN", "NeuroMLCoreDimensions", "NeuroMLCoreCompTypes"]
 #  comp_definitions = ["NeuroMLCoreCompTypes", "Cells", "Synapses"]
 
@@ -35,13 +36,14 @@ comp_type_desc = {}
 ordered_comp_types = {}
 
 GitHubCompSources = "https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/"
+GitHubCompSourcesRaw = "https://raw.githubusercontent.com/NeuroML/NeuroML2/master/NeuroML2CoreTypes/"
 nml_version = "2.1"
 nml_branch = "master"
 nml_date = date.today().strftime("%d/%m/%y")
 nml_commit = "6e4643d0eaa7246982b351a01e28856eeb320500"
 
 
-def get_component_types():
+def get_component_types(srcdir):
     """Obtain a list of all defined component types.
 
 
@@ -65,7 +67,7 @@ def get_component_types():
 
     """
     for comp_definition in comp_definitions:
-        fullpath = "{}/{}.xml".format(comp_definitiondir, comp_definition)
+        fullpath = "{}/{}.xml".format(srcdir, comp_definition)
         """Stage 1"""
         model = Model(include_includes=False)
         model.import_from_file(fullpath)
@@ -104,17 +106,50 @@ def get_extended_from_comp_type(comp_type_name):
     return comp_types[extCompTypeName]
 
 
-def main():
-    """Main parser and generator function."""
-    get_component_types()
+def main(srcdir, destdir):
+    """Main parser and generator function.
+
+    :param srcdir: directory holding source NeuroML Core Type XML files
+    :type srcdir: str
+    :param destdir: directory where generated files should be stored
+    :type destdir: str
+
+    :returns: nothing
+    """
+
+    # If not defined or empty, download a new copy to a temporary directory
+    if not srcdir or src == "":
+        print("No src directory specified. Downloading files to a temporary directory..")
+        tempdir = tempfile.TemporaryDirectory()
+        tmpsrcdir = tempdir.name
+        print("Temporariy directory: {}".format(tmpsrcdir))
+        for comp_definition in comp_definitions:
+            url = GitHubCompSourcesRaw + comp_definition + ".xml"
+            srcfile = tmpsrcdir + "/" + comp_definition + ".xml"
+            print("Downloading {} to {}".format(url, srcfile))
+            with open(srcfile, 'wb') as f:
+                response = requests.get(url)
+                f.write(response.content)
+    else:
+        tmpsrcdir = srcdir
+
+    # read the downloaded files
+    get_component_types(tmpsrcdir)
+
+    if not destdir or destdir == "":
+        destdir = "."
+    print("Output files will be written to {} directory".format(destdir))
 
     for comp_definition in comp_definitions:
-        fullpath = "{}/{}.xml".format(comp_definitiondir, comp_definition)
+        fullpath = "{}/{}.xml".format(tmpsrcdir, comp_definition)
+        outputfile = "{}/{}.md".format(destdir, comp_definition)
         """Stage 1"""
         model = Model(include_includes=False)
         model.import_from_file(fullpath)
 
-        #  ast_doc = open("{}.md".format(comp_definition), 'w')
+        print("Processing {}".format(fullpath))
+        print("Writing output to {}".format(outputfile))
+        ast_doc = open(outputfile, 'w')
 
         """Page header"""
         print(asttemplates.page_header.render(
@@ -124,7 +159,7 @@ def main():
             nml_version=nml_version, nml_branch=nml_branch,
             nml_date=nml_date,
             nml_commit=nml_commit
-        ))
+        ), file=ast_doc)
 
         """Dimensions and units"""
         if "Dimensions" in comp_definition:
@@ -142,7 +177,7 @@ def main():
                 symbols.append(unit.symbol.lower())
 
             print(asttemplates.dimension.render(comp_definition=comp_definition,
-                                                dimensions=dimensions, units=units))
+                                                dimensions=dimensions, units=units), file=ast_doc)
 
             # Get factors
             for unit in units:
@@ -161,7 +196,7 @@ def main():
                         unit.factors.append([conversion, unit2.symbol])
 
             print(asttemplates.unit.render(comp_definition=comp_definition,
-                                           units=units))
+                                           units=units), file=ast_doc)
 
         """Component Types"""
         for o_comp_type in ordered_comp_types[comp_definition]:
@@ -176,7 +211,7 @@ def main():
             if not comp_type.description.endswith("."):
                 comp_type.description += "."
             print(asttemplates.comp.render(comp_definition=comp_definition,
-                                           comp_type=comp_type, cno=cno))
+                                           comp_type=comp_type, cno=cno), file=ast_doc)
 
             """Process parameters, derived parameters, texts, paths, expsures,
             requirements and ports"""
@@ -240,23 +275,23 @@ def main():
                 print(asttemplates.params.render(title="Parameters",
                                                  comp_type=comp_type,
                                                  entries=params,
-                                                 keysort=keysort))
+                                                 keysort=keysort), file=ast_doc)
             if len(derived_params) > 0:
                 keysort = sorted(derived_params.keys(), key=lambda derived_param: derived_param.name)
                 print(asttemplates.params.render(title="Derived parameters",
                                                  comp_type=comp_type,
                                                  entries=derived_params,
-                                                 keysort=keysort))
+                                                 keysort=keysort), file=ast_doc)
 
             if len(comp_type.texts) > 0:  # TODO: Check if Text elements are inherited...
                 print(asttemplates.misc1c.render(title="Text fields",
-                                                 textlist=comp_type.texts))
+                                                 textlist=comp_type.texts), file=ast_doc)
             if len(comp_type.paths) > 0:  # TODO: Check if Path elements are inherited...
                 print(asttemplates.misc1c.render(title="Paths",
-                                                 textlist=comp_type.paths))
+                                                 textlist=comp_type.paths), file=ast_doc)
             if len(comp_type.component_references) > 0:
                 print(asttemplates.misc2c.render(title="Component References",
-                                                 textlist=comp_type.component_references))
+                                                 textlist=comp_type.component_references), file=ast_doc)
 
             if len(comp_type.children) > 0:
                 childlist = []
@@ -269,44 +304,51 @@ def main():
 
                 if len(childlist) > 0:
                     print(asttemplates.misc2c.render(title="Child list",
-                                                     textlist=childlist))
+                                                     textlist=childlist), file=ast_doc)
                 if len(childrenlist) > 0:
                     print(asttemplates.misc2c.render(title="Children list",
-                                                     textlist=childrenlist))
+                                                     textlist=childrenlist), file=ast_doc)
 
             if len(comp_type.constants) > 0:
                 print(asttemplates.constants.render(title="Constants",
-                                                    textlist=comp_type.constants))
+                                                    textlist=comp_type.constants), file=ast_doc)
 
             if len(exposures) > 0:
                 keysort = sorted(exposures, key=lambda entry: entry.name)
                 print(asttemplates.exposures.render(title="Exposures",
                                                     comp_type=comp_type,
                                                     entries=exposures,
-                                                    keysort=keysort))
+                                                    keysort=keysort), file=ast_doc)
 
             if len(requirements) > 0:
                 keysort = sorted(requirements, key=lambda entry: entry.name)
                 print(asttemplates.requirements.render(title="Requirements",
                                                        comp_type=comp_type,
                                                        entries=requirements,
-                                                       keysort=keysort))
+                                                       keysort=keysort), file=ast_doc)
 
             if len(eventPorts) > 0:
                 keysort = sorted(eventPorts, key=lambda entry: entry.name)
                 print(asttemplates.eventPorts.render(title="Event Ports",
                                                      comp_type=comp_type,
                                                      entries=eventPorts,
-                                                     keysort=keysort))
+                                                     keysort=keysort), file=ast_doc)
 
             if len(comp_type.attachments) > 0:
                 print(asttemplates.misc2c.render(title="Attachments",
-                                                 textlist=comp_type.attachments))
+                                                 textlist=comp_type.attachments), file=ast_doc)
 
             if comp_type.dynamics and comp_type.dynamics.has_content():
                 print(asttemplates.dynamics.render(title="Dynamics",
-                                                   comp_type=comp_type))
+                                                   comp_type=comp_type), file=ast_doc)
+        ast_doc.close()
+        print("Finished processing {}".format(fullpath))
+
+    if not srcdir:
+        tempdir.cleanup()
 
 
 if __name__ == "__main__":
-    main()
+    src = ""
+    destdir = "output"
+    main(src, destdir)
