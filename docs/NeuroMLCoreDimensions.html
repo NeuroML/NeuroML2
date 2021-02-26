@@ -83,6 +83,7 @@
       &nbsp;&nbsp<a href="NeuroMLCoreDimensions.html#cm_per_ms">cm_per_ms</a><br/>
       &nbsp;&nbsp<a href="NeuroMLCoreDimensions.html#cm_per_s">cm_per_s</a><br/>
       &nbsp;&nbsp<a href="NeuroMLCoreDimensions.html#degC">degC</a><br/>
+      &nbsp;&nbsp<a href="NeuroMLCoreDimensions.html#e">e</a><br/>
       &nbsp;&nbsp<a href="NeuroMLCoreDimensions.html#hour">hour</a><br/>
       &nbsp;&nbsp<a href="NeuroMLCoreDimensions.html#kohm">kohm</a><br/>
       &nbsp;&nbsp<a href="NeuroMLCoreDimensions.html#kohm_cm">kohm_cm</a><br/>
@@ -179,6 +180,7 @@ M<sup>-1</sup> L<sup>-2</sup> T<sup>4</sup> I<sup>2</sup> <br/><br/>&nbsp;&nbsp;
   <tr>
     <td>
 T<sup>1</sup> I<sup>1</sup> <br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;Defined unit: <a href='#C'>C</a>
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;Defined unit: <a href='#e'>e</a>
     </td>
   </tr>
 </table>
@@ -531,7 +533,7 @@ L<sup>3</sup> <br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;Defined unit: <a href='#cm3'>cm3
   <tr>
     <td>
 &nbsp;&nbsp;&nbsp;&nbsp;Dimension: <a href="NeuroMLCoreDimensions.html#charge">charge</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;Power of 10: 0<br/>
-    </td>
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;1 C = 6.24e+18 <a href='#e'>e</a>    </td>
   </tr>
 </table>
 <a name="C_per_mol">&nbsp;</a>
@@ -609,7 +611,7 @@ L<sup>3</sup> <br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;Defined unit: <a href='#cm3'>cm3
   <tr>
     <td>
 &nbsp;&nbsp;&nbsp;&nbsp;Dimension: <a href="NeuroMLCoreDimensions.html#temperature">temperature</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;Power of 10: 0<br/>
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;1 K = 0.0036476 <a href='#degC'>degC</a>    </td>
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;1 K = -272.15 <a href='#degC'>degC</a>    </td>
   </tr>
 </table>
 <a name="M">&nbsp;</a>
@@ -779,6 +781,19 @@ L<sup>3</sup> <br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;Defined unit: <a href='#cm3'>cm3
     <td>
 &nbsp;&nbsp;&nbsp;&nbsp;Dimension: <a href="NeuroMLCoreDimensions.html#temperature">temperature</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;Power of 10: 0<br/>&nbsp;&nbsp;&nbsp;&nbsp;Offset: 273.15<br/>
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;1 degC = 274.15 <a href='#K'>K</a>    </td>
+  </tr>
+</table>
+<a name="e">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td>
+       <b>e</b>
+    </td>
+  </tr>
+  <tr>
+    <td>
+&nbsp;&nbsp;&nbsp;&nbsp;Dimension: <a href="NeuroMLCoreDimensions.html#charge">charge</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;Power of 10: 0<br/>&nbsp;&nbsp;&nbsp;&nbsp;Scale: 1.602176634e-19<br/>
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;1 e = 1.602177e-19 <a href='#C'>C</a>    </td>
   </tr>
 </table>
 <a name="hour">&nbsp;</a>
@@ -960,7 +975,7 @@ L<sup>3</sup> <br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;Defined unit: <a href='#cm3'>cm3
   <tr>
     <td>
 &nbsp;&nbsp;&nbsp;&nbsp;Dimension: <a href="NeuroMLCoreDimensions.html#time">time</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;Power of 10: 0<br/>&nbsp;&nbsp;&nbsp;&nbsp;Scale: 60.0<br/>
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;1 min = 60 <a href='#s'>s</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 min = 6.00e+04 <a href='#ms'>ms</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 min = 0.016667 <a href='#hour'>hour</a>    </td>
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;1 min = 60 <a href='#s'>s</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 min = 6.00e+04 <a href='#ms'>ms</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 min = 0.01666667 <a href='#hour'>hour</a>    </td>
   </tr>
 </table>
 <a name="mol">&nbsp;</a>
@@ -1038,7 +1053,7 @@ L<sup>3</sup> <br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;Defined unit: <a href='#cm3'>cm3
   <tr>
     <td>
 &nbsp;&nbsp;&nbsp;&nbsp;Dimension: <a href="NeuroMLCoreDimensions.html#time">time</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;Power of 10: -3<br/>
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;1 ms = 0.001 <a href='#s'>s</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 ms = 1.6667e-05 <a href='#min'>min</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 ms = 2.7778e-07 <a href='#hour'>hour</a>    </td>
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;1 ms = 0.001 <a href='#s'>s</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 ms = 1.666667e-05 <a href='#min'>min</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 ms = 2.777778e-07 <a href='#hour'>hour</a>    </td>
   </tr>
 </table>
 <a name="nA">&nbsp;</a>
@@ -1207,7 +1222,7 @@ L<sup>3</sup> <br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;Defined unit: <a href='#cm3'>cm3
   <tr>
     <td>
 &nbsp;&nbsp;&nbsp;&nbsp;Dimension: <a href="NeuroMLCoreDimensions.html#per_time">per_time</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;Power of 10: 0<br/>&nbsp;&nbsp;&nbsp;&nbsp;Scale: 0.00027777777778<br/>
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;1 per_hour = 0.00027778 <a href='#per_s'>per_s</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 per_hour = 0.00027778 <a href='#Hz'>Hz</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 per_hour = 2.7778e-07 <a href='#per_ms'>per_ms</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 per_hour = 0.016667 <a href='#per_min'>per_min</a>    </td>
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;1 per_hour = 0.0002777778 <a href='#per_s'>per_s</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 per_hour = 0.0002777778 <a href='#Hz'>Hz</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 per_hour = 2.777778e-07 <a href='#per_ms'>per_ms</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 per_hour = 0.01666667 <a href='#per_min'>per_min</a>    </td>
   </tr>
 </table>
 <a name="per_mV">&nbsp;</a>
@@ -1233,7 +1248,7 @@ L<sup>3</sup> <br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;Defined unit: <a href='#cm3'>cm3
   <tr>
     <td>
 &nbsp;&nbsp;&nbsp;&nbsp;Dimension: <a href="NeuroMLCoreDimensions.html#per_time">per_time</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;Power of 10: 0<br/>&nbsp;&nbsp;&nbsp;&nbsp;Scale: 0.01666666667<br/>
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;1 per_min = 0.016667 <a href='#per_s'>per_s</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 per_min = 0.016667 <a href='#Hz'>Hz</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 per_min = 1.6667e-05 <a href='#per_ms'>per_ms</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 per_min = 60 <a href='#per_hour'>per_hour</a>    </td>
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;1 per_min = 0.01666667 <a href='#per_s'>per_s</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 per_min = 0.01666667 <a href='#Hz'>Hz</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 per_min = 1.666667e-05 <a href='#per_ms'>per_ms</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 per_min = 60 <a href='#per_hour'>per_hour</a>    </td>
   </tr>
 </table>
 <a name="per_ms">&nbsp;</a>
@@ -1272,7 +1287,7 @@ L<sup>3</sup> <br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;Defined unit: <a href='#cm3'>cm3
   <tr>
     <td>
 &nbsp;&nbsp;&nbsp;&nbsp;Dimension: <a href="NeuroMLCoreDimensions.html#time">time</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;Power of 10: 0<br/>
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;1 s = 1000 <a href='#ms'>ms</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 s = 0.016667 <a href='#min'>min</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 s = 0.00027778 <a href='#hour'>hour</a>    </td>
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;1 s = 1000 <a href='#ms'>ms</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 s = 0.01666667 <a href='#min'>min</a><br/>&nbsp;&nbsp;&nbsp;&nbsp;1 s = 0.0002777778 <a href='#hour'>hour</a>    </td>
   </tr>
 </table>
 <a name="uA">&nbsp;</a>

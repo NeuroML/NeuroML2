@@ -13,6 +13,7 @@ from lems.model.dynamics import OnEntry
 from lems.model.dynamics import Transition
 from lems.model.dynamics import StateAssignment
 from lems.model.dynamics import EventOut
+import math
 
 # To display correct conversion values, we limit the precision context to 2
 # places (required by Hz). Higher precisions, such as the default machine
@@ -21,7 +22,7 @@ from lems.model.dynamics import EventOut
 #
 # References: https://docs.python.org/3/tutorial/floatingpoint.html
 # https://docs.python.org/3/library/decimal.html#module-decimal
-getcontext().prec = 5
+getcontext().prec = 7
 
 nml2_version = "2.1"
 nml2_branch = "master"
@@ -372,18 +373,22 @@ for file in files:
 
             for unit2 in model.units:
                 if unit.symbol != unit2.symbol and unit.dimension == unit2.dimension:
-                    '''diff = unit.power - unit2.power
-                    factor = "10<sup>%i</sup>"%diff
-                    if diff == 0:
-                        factor = 1'''
-                    factor1 = model.get_numeric_value("1%s" % unit.symbol, unit.dimension)
-                    factor2 = model.get_numeric_value("1%s" % unit2.symbol, unit2.dimension)
-                    scaled = float(Decimal(factor1) / Decimal(factor2))
+        
+                    si_val = model.get_numeric_value("1%s" % unit.symbol, unit.dimension)
+                    unit_val =  ((Decimal(si_val)/Decimal(math.pow(10,unit2.power))) / Decimal(unit2.scale))-Decimal(unit2.offset)
+                    scaled = float(unit_val)
+
+                    # to catch 60.0001 etc.
+                    if scaled>1 and int(scaled)!=scaled:
+                        if scaled-int(scaled)<0.001:
+                            scaled = int(scaled)
+
                     if scaled>10000:
                         scaled = '%.2e'%scaled
                     else:
                         scaled = '%s'%scaled
                     if scaled.endswith('.0'): scaled = scaled[:-2]
+                    #contents += "<br/>" + spacer4 + "1 %s = %s <a href='#%s'>%s</a>   1: %s, 2: %s, si_val: %s, Decimal(unit2.scale): %s, unit_val: %s, Decimal(math.pow(10,unit2.power)): %s" % (unit.symbol, "%s" % scaled, unit2.symbol, unit2.symbol, factor1, factor2, si_val, Decimal(unit2.scale), unit_val, Decimal(math.pow(10,unit2.power)))
                     contents += "<br/>" + spacer4 + "1 %s = %s <a href='#%s'>%s</a>" % (unit.symbol, "%s" % scaled, unit2.symbol, unit2.symbol)
 
             contents += "    </td>\n"
