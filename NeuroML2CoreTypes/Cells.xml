@@ -343,7 +343,7 @@
     
     <ComponentType name="channelDensityNernstCa2"
                    extends="baseChannelDensityCond"
-                   description="This component is similar to the original component type _ channelDensityNernst _ but it is changed in order to have a reversal potential that depends on a second independent Ca++ pool (ca2). See https://github.com/OpenSourceBrain/ghk-nernst.">
+                   description="This component is similar to the original component type _channelDensityNernst_ but it is changed in order to have a reversal potential that depends on a second independent Ca++ pool (ca2). See https://github.com/OpenSourceBrain/ghk-nernst.">
 
         <Constant name="R" dimension="idealGasConstantDims" value="8.3144621 J_per_K_per_mol" description="TODO: Make this a global constant!"/>
         <Constant name="zCa" dimension="none" value="2" description="TODO: Make this a global constant!"/>
