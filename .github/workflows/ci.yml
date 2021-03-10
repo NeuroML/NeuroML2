@@ -28,7 +28,7 @@ jobs:
 
     - name: Override branch name if required
       uses: nelonoel/branch-name@v1.0.1
-      if: $BRANCH_NAME != "master" && $BRANCH_NAME != "development" && $BRANCH_NAME != "experimental"
+      if: BRANCH_NAME != "master" && BRANCH_NAME != "development" && BRANCH_NAME != "experimental"
       env:
         BRANCH_NAME: "development"
 
