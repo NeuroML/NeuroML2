@@ -20,9 +20,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: nelonoel/branch-name@v1.0.1
 
-    - name: Set branch name
+    - name: Set current branch name
+    - uses: nelonoel/branch-name@v1.0.1
+      env:
+        BRANCH_NAME: ${BRANCH_NAME}
+
+    - name: Override branch name if required
+    - uses: nelonoel/branch-name@v1.0.1
       if: ${BRANCH_NAME} != "master" && ${BRANCH_NAME} != "development" && ${BRANCH_NAME} != "experimental"
       env:
         BRANCH_NAME: "development"
