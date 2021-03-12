@@ -2,7 +2,7 @@
 name: Feature request
 about: Suggest an addition to the NeuroML specification
 title: ''
-labels: enhancement
+labels: ''
 assignees: ''
 
 ---
