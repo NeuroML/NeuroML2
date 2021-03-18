@@ -43,7 +43,8 @@ grey_blue_style = " style=\"color:#85ACE1;font-style:italic\""
 grey_small_style_dark = " style=\"color:dimgrey;font-size:12px\""
 
 lems_xml_url = "https://github.com/NeuroML/NeuroML2/blob/%s/NeuroML2CoreTypes/" % nml2_branch
-bioportal_url = "http://bioportal.bioontology.org/ontologies/46856/?p=terms&conceptid=cno:"
+#bioportal_url = "http://bioportal.bioontology.org/ontologies/46856/?p=terms&conceptid=cno:"
+bioportal_url = "https://bioportal.bioontology.org/ontologies/CNO/?p=classes&conceptid="
 
 nml_src = "../NeuroML2CoreTypes"
 
@@ -373,7 +374,7 @@ for file in files:
 
             for unit2 in model.units:
                 if unit.symbol != unit2.symbol and unit.dimension == unit2.dimension:
-        
+
                     si_val = model.get_numeric_value("1%s" % unit.symbol, unit.dimension)
                     unit_val =  ((Decimal(si_val)/Decimal(math.pow(10,unit2.power))) / Decimal(unit2.scale))-Decimal(unit2.offset)
                     scaled = float(unit_val)
