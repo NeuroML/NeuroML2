@@ -8,24 +8,24 @@ and [LEMS](https://github.com/LEMS/LEMS), but also the Python ([libNeuroML](http
 
 **Only contributors who are not [NeuroML Editors](https://neuroml.org/editors) are specifically pointed out below.**
 
-v2.1 / 2021-03-19
+v2.1 / 2021-03-22
 --------------------
 
 * **Renamed the main Schema from NeuroML_v2.0.xsd to [NeuroML_v2.1.xsd](https://github.com/NeuroML/NeuroML2/blob/master/Schemas/NeuroML2/NeuroML_v2.1).**
 
 * The main updates for this release were infrastructure related, mainly updates for **Python 3 compatibility** and enhanced testing and documentation.
 
-* [libNeuroML](https://docs.neuroml.org/Userdocs/Software/libNeuroML.html) was updated with better helper methods for handling cells, see https://github.com/NeuralEnsemble/libNeuroML/blob/development/notebooks/CellMorphology.ipynb
+* Documentation for the NeuroML specification and core libraries was consolidated at http://docs.neuroml.org. Thanks to [Ankur Sinha](https://github.com/sanjayankur31).
 
-* [pyNeuroML](https://docs.neuroml.org/Userdocs/Software/pyNeuroML.html) had many updates to improve the user experience and make as many jNeuroML features as possible accessible through it. 
+* [libNeuroML](https://docs.neuroml.org/Userdocs/Software/libNeuroML.html) was updated with improved Python 3 support, along with better helper methods for handling cells, see https://github.com/NeuralEnsemble/libNeuroML/blob/development/notebooks/CellMorphology.ipynb
 
-* [NeuroMLlite](https://docs.neuroml.org/Userdocs/Software/NeuroMLlite.html) had significant updates, with initial support for Arbor and Brian2.
+* [pyNeuroML](https://docs.neuroml.org/Userdocs/Software/pyNeuroML.html) had many updates to improve the user experience and make as many jNeuroML features as possible accessible through it.
 
-* NetPyNE support was extended and improved
+* [NeuroMLlite](https://docs.neuroml.org/Userdocs/Software/NeuroMLlite.html) had significant updates, with initial support for [Arbor](https://arbor-sim.github.io/), [Brian2](https://briansimulator.org/), [SONATA](https://github.com/AllenInstitute/sonata) and [ModECI MDF](http://www.modeci.org/).
 
-* Documentation for the NeuroML specification and core libraries was consolidated at http://docs.neuroml.org.
+* [NetPyNE](https://netpyne.org) support in jNeuroML was extended and improved
 
-
+* The C++ API for NeuroML, [NeuroML_API](https://github.com/NeuroML/NeuroML_API) has been updated to use the latest Schema.
 
 
 v2.0 / 2020-04-06

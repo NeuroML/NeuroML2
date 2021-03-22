@@ -294,7 +294,7 @@ for file in files:
     desc = "NeuroML2 ComponentType definitions from %s.xml" % file
     if model.description:
         desc = model.description
-    contents += ("   <div class=\"alert alert-error\">For more information on NeuroML 2 and LEMS see <a href=\"http://www.neuroml.org/neuromlv2\">here</a>. <br/>Note: these descriptions have been updated to the latest "
+    contents += ('   <div class=\"alert alert-error\"><br/><p><b>  NOTE: the latest version of this documentation can be found on <a href="https://docs.neuroml.org/Userdocs/Schemas/'+file+'.html">docs.neuroml.org</a>!</b></p><br/>For more information on NeuroML 2 and LEMS see <a href=\"http://www.neuroml.org/neuromlv2\">here</a>. <br/>Note: these descriptions have been updated to the latest '
                  "   <a href=\"https://github.com/NeuroML/NeuroML2/tree/%s/Schemas/NeuroML2\">NeuroML v%s</a> definitions, using "
                  "   <a href=\"https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS\">the latest version of LEMS</a>!</div>\n" + \
                  "    <table class=\"table table-bordered\"><tr><td ><h3>%s</h3></td></tr>\n" + \
