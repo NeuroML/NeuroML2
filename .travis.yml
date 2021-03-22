@@ -1,5 +1,4 @@
-dist: trusty
-sudo: false
+dist: xenial
 
 addons:
   apt:
@@ -21,10 +20,11 @@ addons:
 
 
 language: python
-python: 2.7
  
-virtualenv:
-    system_site_packages: true
+python: 
+  - 2.7
+  - 3.7
+
 
 env:
     - OMV_ENGINE=jNeuroML
@@ -33,7 +33,7 @@ env:
     - OMV_ENGINE=jNeuroML_NetPyNE
     - OMV_ENGINE=jNeuroML_Brian
     - OMV_ENGINE=jNeuroML_Brian2
-    - OMV_ENGINE=jNeuroML_Moose
+    #- OMV_ENGINE=jNeuroML_Moose # issue on xenial and python 3?
     - OMV_ENGINE=jNeuroML_validate
 
 install: 
@@ -51,13 +51,15 @@ install:
     
     - python getNeuroML.py $main_repo_branch  # will call mvn install on this & other repos
     - ls -alt
+    - mvn dependency:tree
     
     - export PATH=$PATH:$TRAVIS_BUILD_DIR/jNeuroML
     - export JNML_HOME=$TRAVIS_BUILD_DIR/jNeuroML
     - cd
     - pip install git+https://github.com/OpenSourceBrain/osb-model-validation
     
-    - pip install scipy # Why is this needed? Doesn't seem to get installed correctly on trusty with addons above...
+    - pip install matplotlib>=2.2.5 # This is more because Matplotlib v2.x is required...
+    - pip install future pandas matplotlib-scalebar bokeh scipy
     
 
 script:
@@ -65,6 +67,7 @@ script:
     - cd $TRAVIS_BUILD_DIR/NeuroML2/LEMSexamples
     - pwd
     - ls -alt
-    - omv all -V
+    - if [ "$TRAVIS_PYTHON_VERSION" == "2.7" ]; then omv all -V; else omv all -V --ignore-non-py3; fi
     - omv list -V
+    - java -version 
     

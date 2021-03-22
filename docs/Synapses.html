@@ -15,7 +15,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="#">NeuroML v2.0 Component Types</a>
+      <a class="brand" href="#">NeuroML v2.1 Component Types</a>
       <div class="nav-collapse">
         <ul class="nav">
           <li><a href="Cells.html">Cells</a></li>
@@ -38,31 +38,17 @@
       <b>Component Types</b><br/>
 <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a><br/>
   
-&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#baseGradedSynapse" title="Base type for graded synapses "><span  style="color:#85ACE1;font-style:italic">baseGradedSynapse</span></a><br/>
-  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#linearGradedSynapse" title="Behaves just like a one way gap junction. ">linearGradedSynapse</a><br/>
-  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#silentSynapse" title="Dummy synapse which emits no current. Used as presynaptic endpoint for analog synaptic connection. ">silentSynapse</a><br/>
-  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#gradedSynapse" title="Graded/analog synapse. Based on synapse in Methods of http://www.nature.com/neuro/journal/v7/n12/abs/nn1352.html ">gradedSynapse</a><br/>
-  
 &nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#baseVoltageDepSynapse" title="Base type for synapses with a dependence on membrane potential "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepSynapse</span></a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#doubleSynapse" title="Synapse consisting of two independent synaptic mechanisms (e.g. AMPA-R and NMDA-R), which can be easily colocated in connections ">doubleSynapse</a><br/>
-  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#baseConductanceBasedSynapse" title="Synapse model which exposes a conductance g in addition to producing a current. Not necessarily ohmic!! cno_0000027 "><span  style="color:#85ACE1;font-style:italic">baseConductanceBasedSynapse</span></a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#expOneSynapse" title="Ohmic synapse model whose conductance rises instantaneously by (_gbase * weight) on receiving an event, and which decays exponentially to zero with time course tauDecay ">expOneSynapse</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#alphaSynapse" title="Ohmic synapse model where rise time and decay time are both tau. Max conductance reached during this time (assuming zero conductance before) is gbase * weight. ">alphaSynapse</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#expTwoSynapse" title="Ohmic synapse model whose conductance waveform on receiving an event has a rise time of tauRise and a decay time of tauDecay. Max conductance reached during this time (assuming zero conductance before) is gbase * weight. ">expTwoSynapse</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#stdpSynapse" title="Spike timing dependent plasticity mechanism,  NOTE: EXAMPLE NOT YET WORKING!!!! cno_0000034 ">stdpSynapse</a><br/>
-  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#blockingPlasticSynapse" title="Biexponential synapse that allows for     optional block and plasticity     mechanisms, which can be expressed as     child elements. ">blockingPlasticSynapse</a><br/>
-  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>blockMechanisms <a href="Synapses.html#baseBlockMechanism" title="Base of any ComponentType which produces a varying scaling (or blockage) of synaptic strength of magnitude scaling "><span  style="color:#85ACE1;font-style:italic">baseBlockMechanism</span></a><br/>
-  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#voltageConcDepBlockMechanism" title="Synaptic blocking mechanism which varys with membrane potential across the synapse, e.g. in NMDA receptor mediated synapses ">voltageConcDepBlockMechanism</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>plasticityMechanisms <a href="Synapses.html#basePlasticityMechanism" title="Base plasticity mechanism. "><span  style="color:#85ACE1;font-style:italic">basePlasticityMechanism</span></a><br/>
   
@@ -70,11 +56,17 @@
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#tsodyksMarkramDepFacMechanism" title="Full Tsodyks-Markram STP model with both depression and facilitation, as in Tsodyks, Pawelzik and Markram 1998. ">tsodyksMarkramDepFacMechanism</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#expOneSynapse" title="Ohmic synapse model whose conductance rises instantaneously by (_gbase * weight) on receiving an event, and which decays exponentially to zero with time course tauDecay ">expOneSynapse</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>blockMechanisms <a href="Synapses.html#baseBlockMechanism" title="Base of any ComponentType which produces a varying scaling (or blockage) of synaptic strength of magnitude scaling "><span  style="color:#85ACE1;font-style:italic">baseBlockMechanism</span></a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#voltageConcDepBlockMechanism" title="Synaptic blocking mechanism which varys with membrane potential across the synapse, e.g. in NMDA receptor mediated synapses ">voltageConcDepBlockMechanism</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#stdpSynapse" title="Spike timing dependent plasticity mechanism,  NOTE: EXAMPLE NOT YET WORKING!!!! cno_0000034 ">stdpSynapse</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#baseConductanceBasedSynapseTwo" title="Synapse model suited for a sum of two expTwoSynapses which exposes a conductance g in addition to producing a current. Not necessarily ohmic!! cno_0000027 "><span  style="color:#85ACE1;font-style:italic">baseConductanceBasedSynapseTwo</span></a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#expThreeSynapse" title="Ohmic synapse similar to expTwoSynapse but consisting of two components that can differ in decay times and max conductances but share the same rise time. ">expThreeSynapse</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#doubleSynapse" title="Synapse consisting of two independent synaptic mechanisms (e.g. AMPA-R and NMDA-R), which can be easily colocated in connections ">doubleSynapse</a><br/>
   
 &nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#baseCurrentBasedSynapse" title="Synapse model which produces a synaptic current. "><span  style="color:#85ACE1;font-style:italic">baseCurrentBasedSynapse</span></a><br/>
   
@@ -82,15 +74,23 @@
   
 &nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#gapJunction" title="Gap junction/single electrical connection ">gapJunction</a><br/>
   
+&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#baseGradedSynapse" title="Base type for graded synapses "><span  style="color:#85ACE1;font-style:italic">baseGradedSynapse</span></a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#silentSynapse" title="Dummy synapse which emits no current. Used as presynaptic endpoint for analog synaptic connection. ">silentSynapse</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#linearGradedSynapse" title="Behaves just like a one way gap junction. ">linearGradedSynapse</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Synapses.html#gradedSynapse" title="Graded/analog synapse. Based on synapse in Methods of http://www.nature.com/neuro/journal/v7/n12/abs/nn1352.html ">gradedSynapse</a><br/>
+  
 <a href="Synapses.html#baseSynapseDL" title="Base type for all synapses, i.e. ComponentTypes which produce a dimensionless current and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapseDL</span></a><br/>
   
     </div><!--/.well -->
     </div><!--/span-->
     <div class="span7">
-   <div class="alert alert-error">For more information on NeuroML 2 and LEMS see <a href="http://www.neuroml.org/neuromlv2">here</a>. <br/>Note: these descriptions have been updated to the latest    <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2">NeuroML v2.0</a> definitions, using    <a href="https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS">the latest version of LEMS</a>!</div>
+   <div class="alert alert-error"><br/><p><b>  NOTE: the latest version of this documentation can be found on <a href="https://docs.neuroml.org/Userdocs/Schemas/Synapses.html">docs.neuroml.org</a>!</b></p><br/>For more information on NeuroML 2 and LEMS see <a href="http://www.neuroml.org/neuromlv2">here</a>. <br/>Note: these descriptions have been updated to the latest    <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2">NeuroML v2.1</a> definitions, using    <a href="https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS">the latest version of LEMS</a>!</div>
     <table class="table table-bordered"><tr><td ><h3>Synapses</h3></td></tr>
     <tr><td><span  style="color:dimgrey"><i>NeuroML2 ComponentType definitions from Synapses.xml </i></span></td></tr>
-    <tr><td>Original LEMS ComponentType definitions: <a href="https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/Synapses.xml">Synapses.xml</a><br/>    Schema against which NeuroML based on these should be valid: <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2/NeuroML_v2.0.xsd">NeuroML_v2.0.xsd</a></td></tr>
+    <tr><td>Original LEMS ComponentType definitions: <a href="https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/Synapses.xml">Synapses.xml</a><br/>    Schema against which NeuroML based on these should be valid: <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2/NeuroML_v2.1.xsd">NeuroML_v2.1.xsd</a></td></tr>
     </table><br/>
 <a name="baseSynapse">&nbsp;</a>
 <table class="table table-bordered">
@@ -101,19 +101,21 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event.  </i></span><br/><br/><a class="btn" title="Link to Bioportal entry for Computational Neuroscience Ontology related to: baseSynapse" href="http://bioportal.bioontology.org/ontologies/46856/?p=terms&conceptid=cno:cno_0000009" target="CNO">cno_0000009</a>    </td>
+      <span  style="color:dimgrey"><i>Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event.  </i></span><br/><br/><a class="btn" title="Link to Bioportal entry for Computational Neuroscience Ontology related to: baseSynapse" href="https://bioportal.bioontology.org/ontologies/CNO/?p=classes&conceptid=cno_0000009" target="CNO">cno_0000009</a>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>i</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
-  </td>
+</td>
     <td><b>in</b></td>
     <td width="100">Direction: in</td>
   </tr>
@@ -131,23 +133,26 @@
       <span  style="color:dimgrey"><i>Base type for synapses with a dependence on membrane potential </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>i</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
-  </td>
+</td>
     <td><b>v</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a>)</td>
     <td width="100">Direction: in</td>
   </tr>
@@ -162,19 +167,21 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Base type for all synapses, i.e. ComponentTypes which produce a dimensionless current and change Dynamics in response to an incoming event.  </i></span><br/><br/><a class="btn" title="Link to Bioportal entry for Computational Neuroscience Ontology related to: baseSynapseDL" href="http://bioportal.bioontology.org/ontologies/46856/?p=terms&conceptid=cno:cno_0000009" target="CNO">cno_0000009</a>    </td>
+      <span  style="color:dimgrey"><i>Base type for all synapses, i.e. ComponentTypes which produce a dimensionless current and change Dynamics in response to an incoming event.  </i></span><br/><br/><a class="btn" title="Link to Bioportal entry for Computational Neuroscience Ontology related to: baseSynapseDL" href="https://bioportal.bioontology.org/ontologies/CNO/?p=classes&conceptid=cno_0000009" target="CNO">cno_0000009</a>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There will eventually be dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator, sineGenerator and rampGenerator "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a>)</td>
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>V</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseVoltageDepPointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I and require a dimensionless membrane potential V exposed on the parent Component "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrentDL</span></a>)</td>
     <td width="100">Dimensionless</td>
   </tr>
@@ -192,16 +199,18 @@
       <span  style="color:dimgrey"><i>Synapse model which produces a synaptic current. </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>i</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a>)</td>
     <td width="100">Direction: in</td>
   </tr>
@@ -219,9 +228,10 @@
       <span  style="color:dimgrey"><i>Alpha current synapse: rise time and decay time are both <b>tau.</b> </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td><b>ibase</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
@@ -229,23 +239,26 @@
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>i</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a>)</td>
     <td width="100">Direction: in</td>
   </tr>
 <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label ">Dynamics</span>
-  </td>
+</td>
 <td colspan='2'>
 <span class="label">State Variables</span><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>I</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#current">current</a><br/>
@@ -280,12 +293,13 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Synapse model which exposes a conductance <b>g</b> in addition to producing a current. Not necessarily ohmic!!  </i></span><br/><br/><a class="btn" title="Link to Bioportal entry for Computational Neuroscience Ontology related to: baseConductanceBasedSynapse" href="http://bioportal.bioontology.org/ontologies/46856/?p=terms&conceptid=cno:cno_0000027" target="CNO">cno_0000027</a>    </td>
+      <span  style="color:dimgrey"><i>Synapse model which exposes a conductance <b>g</b> in addition to producing a current. Not necessarily ohmic!!  </i></span><br/><br/><a class="btn" title="Link to Bioportal entry for Computational Neuroscience Ontology related to: baseConductanceBasedSynapse" href="https://bioportal.bioontology.org/ontologies/CNO/?p=classes&conceptid=cno_0000027" target="CNO">cno_0000027</a>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td><b>erev</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
@@ -293,9 +307,10 @@
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductance">conductance</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td><b>g</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Time varying conductance through the synapse</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductance">conductance</a></td>
   </tr>
@@ -303,16 +318,18 @@
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseVoltageDepSynapse" title="Base type for synapses with a dependence on membrane potential "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepSynapse</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a>)</td>
     <td width="100">Direction: in</td>
   </tr>
@@ -327,12 +344,13 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Synapse model suited for a sum of two expTwoSynapses which exposes a conductance <b>g</b> in addition to producing a current. Not necessarily ohmic!!  </i></span><br/><br/><a class="btn" title="Link to Bioportal entry for Computational Neuroscience Ontology related to: baseConductanceBasedSynapseTwo" href="http://bioportal.bioontology.org/ontologies/46856/?p=terms&conceptid=cno:cno_0000027" target="CNO">cno_0000027</a>    </td>
+      <span  style="color:dimgrey"><i>Synapse model suited for a sum of two expTwoSynapses which exposes a conductance <b>g</b> in addition to producing a current. Not necessarily ohmic!!  </i></span><br/><br/><a class="btn" title="Link to Bioportal entry for Computational Neuroscience Ontology related to: baseConductanceBasedSynapseTwo" href="https://bioportal.bioontology.org/ontologies/CNO/?p=classes&conceptid=cno_0000027" target="CNO">cno_0000027</a>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='3'>
+
+<td width="70" rowspan="3">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td><b>erev</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
@@ -343,9 +361,10 @@
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductance">conductance</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td><b>g</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Time varying conductance through the synapse</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductance">conductance</a></td>
   </tr>
@@ -353,16 +372,18 @@
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseVoltageDepSynapse" title="Base type for synapses with a dependence on membrane potential "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepSynapse</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a>)</td>
     <td width="100">Direction: in</td>
   </tr>
@@ -380,9 +401,10 @@
       <span  style="color:dimgrey"><i>Ohmic synapse model whose conductance rises instantaneously by (_gbase <u> <b>weight)</b> on receiving an event, and which decays exponentially to zero with time course <b>tauDecay</b> </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='3'>
+
+<td width="70" rowspan="3">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>erev</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseConductanceBasedSynapse" title="Synapse model which exposes a conductance g in addition to producing a current. Not necessarily ohmic!! cno_0000027 "><span  style="color:#85ACE1;font-style:italic">baseConductanceBasedSynapse</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
@@ -393,9 +415,10 @@
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>g</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseConductanceBasedSynapse" title="Synapse model which exposes a conductance g in addition to producing a current. Not necessarily ohmic!! cno_0000027 "><span  style="color:#85ACE1;font-style:italic">baseConductanceBasedSynapse</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductance">conductance</a></td>
   </tr>
@@ -403,23 +426,26 @@
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseVoltageDepSynapse" title="Base type for synapses with a dependence on membrane potential "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepSynapse</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a>)</td>
     <td width="100">Direction: in</td>
   </tr>
 <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label ">Dynamics</span>
-  </td>
+</td>
 <td colspan='2'>
 <span class="label">State Variables</span><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>g</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#conductance">conductance</a> (exposed as <b>g</b>)
@@ -455,9 +481,10 @@
       <span  style="color:dimgrey"><i>Ohmic synapse model where rise time and decay time are both <b>tau.</b> Max conductance reached during this time (assuming zero conductance before) is <b>gbase</b> <u> <b>weight.</b> </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='3'>
+
+<td width="70" rowspan="3">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>erev</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseConductanceBasedSynapse" title="Synapse model which exposes a conductance g in addition to producing a current. Not necessarily ohmic!! cno_0000027 "><span  style="color:#85ACE1;font-style:italic">baseConductanceBasedSynapse</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
@@ -468,9 +495,10 @@
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>g</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseConductanceBasedSynapse" title="Synapse model which exposes a conductance g in addition to producing a current. Not necessarily ohmic!! cno_0000027 "><span  style="color:#85ACE1;font-style:italic">baseConductanceBasedSynapse</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductance">conductance</a></td>
   </tr>
@@ -478,28 +506,31 @@
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseVoltageDepSynapse" title="Base type for synapses with a dependence on membrane potential "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepSynapse</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a>)</td>
     <td width="100">Direction: in</td>
   </tr>
 <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label ">Dynamics</span>
-  </td>
+</td>
 <td colspan='2'>
 <span class="label">State Variables</span><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<b>A</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#conductance">conductance</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>g</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#conductance">conductance</a> (exposed as <b>g</b>)
 <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>A</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#conductance">conductance</a><br/>
 <br/>
 <span class="label">On Start</span><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>g</b> = 0<br/>
@@ -514,8 +545,8 @@
 <br/>
 <br/>
 <span class="label">Time Derivatives</span><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;d <b>A</b> /dt = -A / tau<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;d <b>g</b> /dt = (2.7182818284590451 * A - g)/tau<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;d <b>A</b> /dt = -A / tau<br/>
 <br/>
 </td>
 </tr>
@@ -533,9 +564,10 @@
       <span  style="color:dimgrey"><i>Ohmic synapse model whose conductance waveform on receiving an event has a rise time of <b>tauRise</b> and a decay time of <b>tauDecay.</b> Max conductance reached during this time (assuming zero conductance before) is <b>gbase</b> <u> <b>weight.</b> </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='4'>
+
+<td width="70" rowspan="4">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>erev</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseConductanceBasedSynapse" title="Synapse model which exposes a conductance g in addition to producing a current. Not necessarily ohmic!! cno_0000027 "><span  style="color:#85ACE1;font-style:italic">baseConductanceBasedSynapse</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
@@ -549,9 +581,10 @@
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Derived Parameters</span>
-  </td>
+</td>
     <td><b>peakTime = log(tauDecay / tauRise) * (tauRise * tauDecay)/(tauDecay - tauRise)</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
@@ -559,9 +592,10 @@
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>g</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseConductanceBasedSynapse" title="Synapse model which exposes a conductance g in addition to producing a current. Not necessarily ohmic!! cno_0000027 "><span  style="color:#85ACE1;font-style:italic">baseConductanceBasedSynapse</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductance">conductance</a></td>
   </tr>
@@ -569,23 +603,26 @@
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseVoltageDepSynapse" title="Base type for synapses with a dependence on membrane potential "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepSynapse</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a>)</td>
     <td width="100">Direction: in</td>
   </tr>
 <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label ">Dynamics</span>
-  </td>
+</td>
 <td colspan='2'>
 <span class="label">State Variables</span><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>A</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless<br/>
@@ -601,9 +638,9 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>B</b> = B + (weight * waveformFactor)<br/>
 <br/>
 <span class="label">Derived Variables</span><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<b>i</b> = g * (erev - v)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>i</b>)
-<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>g</b> = gbase * (B - A)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>g</b>)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>i</b> = g * (erev - v)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>i</b>)
 <br/>
 <br/>
 <span class="label">Time Derivatives</span><br/><br/>
@@ -626,9 +663,10 @@
       <span  style="color:dimgrey"><i>Ohmic synapse similar to expTwoSynapse but consisting of two components that can differ in decay times and max conductances but share the same rise time. </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='6'>
+
+<td width="70" rowspan="6">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>erev</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseConductanceBasedSynapseTwo" title="Synapse model suited for a sum of two expTwoSynapses which exposes a conductance g in addition to producing a current. Not necessarily ohmic!! cno_0000027 "><span  style="color:#85ACE1;font-style:italic">baseConductanceBasedSynapseTwo</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
@@ -648,9 +686,10 @@
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='4'>
+
+<td width="70" rowspan="4">
     <span class="label label-success">Derived Parameters</span>
-  </td>
+</td>
     <td><b>peakTime1 = log(tauDecay1 / tauRise) * (tauRise * tauDecay1)/(tauDecay1 - tauRise)</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
@@ -664,9 +703,10 @@
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>g</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseConductanceBasedSynapseTwo" title="Synapse model suited for a sum of two expTwoSynapses which exposes a conductance g in addition to producing a current. Not necessarily ohmic!! cno_0000027 "><span  style="color:#85ACE1;font-style:italic">baseConductanceBasedSynapseTwo</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductance">conductance</a></td>
   </tr>
@@ -674,28 +714,31 @@
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseVoltageDepSynapse" title="Base type for synapses with a dependence on membrane potential "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepSynapse</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a>)</td>
     <td width="100">Direction: in</td>
   </tr>
 <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label ">Dynamics</span>
-  </td>
+</td>
 <td colspan='2'>
 <span class="label">State Variables</span><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>A</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<b>C</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>B</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>C</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless<br/>
 <br/>
 <span class="label">On Start</span><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>A</b> = 0<br/>
@@ -709,15 +752,15 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>C</b> = C + (weight * waveformFactor2)<br/>
 <br/>
 <span class="label">Derived Variables</span><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<b>i</b> = g * (erev - v)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>i</b>)
-<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>g</b> = gbase1*(B - A) + gbase2*(C-A)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>g</b>)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>i</b> = g * (erev - v)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>i</b>)
 <br/>
 <br/>
 <span class="label">Time Derivatives</span><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;d <b>A</b> /dt = -A / tauRise<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;d <b>C</b> /dt = -C / tauDecay2<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;d <b>B</b> /dt = -B / tauDecay1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;d <b>C</b> /dt = -C / tauDecay2<br/>
 <br/>
 </td>
 </tr>
@@ -735,9 +778,10 @@
       <span  style="color:dimgrey"><i>Base of any ComponentType which produces a varying scaling (or blockage) of synaptic strength of magnitude <b>scaling</b> </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td><b>blockFactor</b></td>
     <td width="100">Dimensionless</td>
   </tr>
@@ -755,9 +799,10 @@
       <span  style="color:dimgrey"><i>Synaptic blocking mechanism which varys with membrane potential across the synapse, e.g. in NMDA receptor mediated synapses </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='3'>
+
+<td width="70" rowspan="3">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td><b>blockConcentration</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#concentration">concentration</a></td>
   </tr>
@@ -768,29 +813,33 @@
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Text fields</span>
-  </td>
+</td>
     <td colspan='2'><b>species</b></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>blockFactor</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseBlockMechanism" title="Base of any ComponentType which produces a varying scaling (or blockage) of synaptic strength of magnitude scaling "><span  style="color:#85ACE1;font-style:italic">baseBlockMechanism</span></a>)</td>
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
-  </td>
+</td>
     <td><b>v</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
 <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label ">Dynamics</span>
-  </td>
+</td>
 <td colspan='2'>
 <span class="label">Derived Variables</span><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>blockFactor</b> = 1/(1 + (blockConcentration / scalingConc)* exp(-1 * (v / scalingVolt)))&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>blockFactor</b>)
@@ -812,16 +861,18 @@
       <span  style="color:dimgrey"><i>Base plasticity mechanism. </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td><b>plasticityFactor</b></td>
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
-  </td>
+</td>
     <td><b>in</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>This is where the plasticity mechanism receives spike events from the parent synapse.</i></span></td>
     <td width="100">Direction: in</td>
   </tr>
@@ -839,9 +890,10 @@
       <span  style="color:dimgrey"><i>Depression-only Tsodyks-Markram model, as in Tsodyks and Markram 1997. </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td><b>initReleaseProb</b></td>
     <td width="100">Dimensionless</td>
   </tr>
@@ -849,23 +901,26 @@
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>plasticityFactor</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#basePlasticityMechanism" title="Base plasticity mechanism. "><span  style="color:#85ACE1;font-style:italic">basePlasticityMechanism</span></a>)</td>
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#basePlasticityMechanism" title="Base plasticity mechanism. "><span  style="color:#85ACE1;font-style:italic">basePlasticityMechanism</span></a>)</td>
     <td width="100">Direction: in</td>
   </tr>
 <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label ">Dynamics</span>
-  </td>
+</td>
 <td colspan='2'>
 <span class="label">Structure</span><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;WITH <b>parent</b> AS <b>a</b><br/>
@@ -906,9 +961,10 @@
       <span  style="color:dimgrey"><i>Full Tsodyks-Markram STP model with both depression and facilitation, as in Tsodyks, Pawelzik and Markram 1998. </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='3'>
+
+<td width="70" rowspan="3">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td><b>initReleaseProb</b></td>
     <td width="100">Dimensionless</td>
   </tr>
@@ -919,23 +975,26 @@
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>plasticityFactor</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#basePlasticityMechanism" title="Base plasticity mechanism. "><span  style="color:#85ACE1;font-style:italic">basePlasticityMechanism</span></a>)</td>
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#basePlasticityMechanism" title="Base plasticity mechanism. "><span  style="color:#85ACE1;font-style:italic">basePlasticityMechanism</span></a>)</td>
     <td width="100">Direction: in</td>
   </tr>
 <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label ">Dynamics</span>
-  </td>
+</td>
 <td colspan='2'>
 <span class="label">Structure</span><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;WITH <b>parent</b> AS <b>a</b><br/>
@@ -979,9 +1038,10 @@
       <span  style="color:dimgrey"><i>Biexponential synapse that allows for     optional block and plasticity     mechanisms, which can be expressed as     child elements. </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='4'>
+
+<td width="70" rowspan="4">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>erev</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseConductanceBasedSynapse" title="Synapse model which exposes a conductance g in addition to producing a current. Not necessarily ohmic!! cno_0000027 "><span  style="color:#85ACE1;font-style:italic">baseConductanceBasedSynapse</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
@@ -995,9 +1055,10 @@
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Derived Parameters</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>peakTime = log(tauDecay / tauRise) * (tauRise * tauDecay)/(tauDecay - tauRise)</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#expTwoSynapse" title="Ohmic synapse model whose conductance waveform on receiving an event has a rise time of tauRise and a decay time of tauDecay. Max conductance reached during this time (assuming zero conductance before) is gbase * weight. ">expTwoSynapse</a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
@@ -1005,19 +1066,21 @@
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Children elements</span>
-  </td>
-    <td><b>blockMechanisms</b></td>
-    <td width="100"><a href="Synapses.html#baseBlockMechanism" title="Base of any ComponentType which produces a varying scaling (or blockage) of synaptic strength of magnitude scaling "><span  style="color:#85ACE1;font-style:italic">baseBlockMechanism</span></a></td>
-  </tr>
+</td>
     <td><b>plasticityMechanisms</b></td>
     <td width="100"><a href="Synapses.html#basePlasticityMechanism" title="Base plasticity mechanism. "><span  style="color:#85ACE1;font-style:italic">basePlasticityMechanism</span></a></td>
   </tr>
+    <td><b>blockMechanisms</b></td>
+    <td width="100"><a href="Synapses.html#baseBlockMechanism" title="Base of any ComponentType which produces a varying scaling (or blockage) of synaptic strength of magnitude scaling "><span  style="color:#85ACE1;font-style:italic">baseBlockMechanism</span></a></td>
+  </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>g</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseConductanceBasedSynapse" title="Synapse model which exposes a conductance g in addition to producing a current. Not necessarily ohmic!! cno_0000027 "><span  style="color:#85ACE1;font-style:italic">baseConductanceBasedSynapse</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductance">conductance</a></td>
   </tr>
@@ -1025,16 +1088,18 @@
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseVoltageDepSynapse" title="Base type for synapses with a dependence on membrane potential "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepSynapse</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-info">Event Ports</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a>)</td>
     <td width="100">Direction: in</td>
   </tr>
@@ -1042,9 +1107,10 @@
     <td width="100">Direction: out</td>
   </tr>
 <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label ">Dynamics</span>
-  </td>
+</td>
 <td colspan='2'>
 <span class="label">State Variables</span><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>A</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless<br/>
@@ -1061,12 +1127,12 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EVENT OUT on port <b>relay</b><br/>
 <br/>
 <span class="label">Derived Variables</span><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<b>i</b> = g * (erev - v)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>i</b>)
-<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>plasticityFactor</b> = plasticityMechanisms[*]->plasticityFactor (reduce method: multiply)&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>blockFactor</b> = blockMechanisms[*]->blockFactor (reduce method: multiply)&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>g</b> = blockFactor * gbase * (B - A)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>g</b>)
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<b>blockFactor</b> = blockMechanisms[*]->blockFactor (reduce method: multiply)&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>i</b> = g * (erev - v)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>i</b>)
+<br/>
 <br/>
 <span class="label">Time Derivatives</span><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;d <b>A</b> /dt = -A / tauRise<br/>
@@ -1088,41 +1154,46 @@
       <span  style="color:dimgrey"><i>Synapse consisting of two independent synaptic mechanisms (e.g. AMPA-R and NMDA-R), which can be easily colocated in connections </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Paths</span>
-  </td>
-    <td colspan='2'><b>synapse2Path</b></td>
-  </tr>
+</td>
     <td colspan='2'><b>synapse1Path</b></td>
   </tr>
-  <tr>
-  <td width="70" rowspan='2'>
-    <span class="label label-success">Component References</span>
-  </td>
-    <td><b>synapse2</b></td>
-    <td width="100"><a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a></td>
+    <td colspan='2'><b>synapse2Path</b></td>
   </tr>
+  <tr>
+
+<td width="70" rowspan="2">
+    <span class="label label-success">Component References</span>
+</td>
     <td><b>synapse1</b></td>
     <td width="100"><a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a></td>
   </tr>
+    <td><b>synapse2</b></td>
+    <td width="100"><a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a></td>
+  </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>i</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseVoltageDepSynapse" title="Base type for synapses with a dependence on membrane potential "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepSynapse</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-info">Event Ports</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a>)</td>
     <td width="100">Direction: in</td>
   </tr>
@@ -1130,14 +1201,15 @@
     <td width="100">Direction: out</td>
   </tr>
 <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label ">Dynamics</span>
-  </td>
+</td>
 <td colspan='2'>
 <span class="label">Structure</span><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;WITH <b>this</b> AS <b>a</b><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;WITH <b>synapse2Path</b> AS <b>c</b><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;WITH <b>synapse1Path</b> AS <b>b</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;WITH <b>synapse2Path</b> AS <b>c</b><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;CHILD INSTANCE: <b>synapse1</b><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;CHILD INSTANCE: <b>synapse2</b><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;EVENT CONNECTION from <b>a</b> TO <b>c</b>, RECEIVER: <b></b>, TARGET PORT: <b></b><br/>
@@ -1153,9 +1225,9 @@
 <br/>
 <span class="label">Derived Variables</span><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>i1</b> = synapse1->i&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>i2</b> = synapse2->i&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>i</b> = weightFactor * (i1 + i2)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>i</b>)
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<b>i2</b> = synapse2->i&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 <br/>
 </td>
 </tr>
@@ -1170,12 +1242,13 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Spike timing dependent plasticity mechanism,  NOTE: EXAMPLE NOT YET WORKING!!!!  </i></span><br/><br/><a class="btn" title="Link to Bioportal entry for Computational Neuroscience Ontology related to: stdpSynapse" href="http://bioportal.bioontology.org/ontologies/46856/?p=terms&conceptid=cno:cno_0000034" target="CNO">cno_0000034</a>    </td>
+      <span  style="color:dimgrey"><i>Spike timing dependent plasticity mechanism,  NOTE: EXAMPLE NOT YET WORKING!!!!  </i></span><br/><br/><a class="btn" title="Link to Bioportal entry for Computational Neuroscience Ontology related to: stdpSynapse" href="https://bioportal.bioontology.org/ontologies/CNO/?p=classes&conceptid=cno_0000034" target="CNO">cno_0000034</a>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='4'>
+
+<td width="70" rowspan="4">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>erev</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseConductanceBasedSynapse" title="Synapse model which exposes a conductance g in addition to producing a current. Not necessarily ohmic!! cno_0000027 "><span  style="color:#85ACE1;font-style:italic">baseConductanceBasedSynapse</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
@@ -1189,9 +1262,10 @@
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Derived Parameters</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>peakTime = log(tauDecay / tauRise) * (tauRise * tauDecay)/(tauDecay - tauRise)</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#expTwoSynapse" title="Ohmic synapse model whose conductance waveform on receiving an event has a rise time of tauRise and a decay time of tauDecay. Max conductance reached during this time (assuming zero conductance before) is gbase * weight. ">expTwoSynapse</a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
@@ -1199,19 +1273,21 @@
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-info">Constants</span>
-  </td>
-    <td><b>longTime</b> = 1000s</td>
-    <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
-  </tr>
+</td>
     <td><b>tsinceRate</b> = 1</td>
     <td width="100">Dimensionless</td>
   </tr>
+    <td><b>longTime</b> = 1000s</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
+  </tr>
   <tr>
-  <td width="70" rowspan='5'>
+
+<td width="70" rowspan="5">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td><b>M</b></td>
     <td width="100">Dimensionless</td>
   </tr>
@@ -1228,32 +1304,35 @@
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseVoltageDepSynapse" title="Base type for synapses with a dependence on membrane potential "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepSynapse</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a>)</td>
     <td width="100">Direction: in</td>
   </tr>
 <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label ">Dynamics</span>
-  </td>
+</td>
 <td colspan='2'>
 <span class="label">State Variables</span><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>A</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>B</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>M</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless (exposed as <b>M</b>)
+<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>P</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless (exposed as <b>P</b>)
 <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>tsince</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#time">time</a> (exposed as <b>tsince</b>)
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<b>B</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<b>M</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless (exposed as <b>M</b>)
 <br/>
 <br/>
 <span class="label">On Start</span><br/><br/>
@@ -1270,9 +1349,9 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>tsince</b> = 0<br/>
 <br/>
 <span class="label">Derived Variables</span><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<b>i</b> = g * (erev - v)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>i</b>)
-<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>g</b> = gbase * (B - A)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>g</b>)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>i</b> = g * (erev - v)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>i</b>)
 <br/>
 <br/>
 <span class="label">Time Derivatives</span><br/><br/>
@@ -1296,42 +1375,47 @@
       <span  style="color:dimgrey"><i>Gap junction/single electrical connection </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td><b>conductance</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductance">conductance</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>i</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
-  </td>
+</td>
     <td><b>v</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a>)</td>
     <td width="100">Direction: in</td>
   </tr>
 <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label ">Dynamics</span>
-  </td>
+</td>
 <td colspan='2'>
 <span class="label">Derived Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>vpeer</b> = peer->v&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>i</b> = weight * conductance * (vpeer - v)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>i</b>)
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<b>vpeer</b> = peer->v&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 <br/>
 </td>
 </tr>
@@ -1349,16 +1433,18 @@
       <span  style="color:dimgrey"><i>Base type for graded synapses </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>i</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a>)</td>
     <td width="100">Direction: in</td>
   </tr>
@@ -1376,35 +1462,39 @@
       <span  style="color:dimgrey"><i>Dummy synapse which emits no current. Used as presynaptic endpoint for analog synaptic connection. </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>i</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
-  </td>
+</td>
     <td><b>v</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a>)</td>
     <td width="100">Direction: in</td>
   </tr>
 <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label ">Dynamics</span>
-  </td>
+</td>
 <td colspan='2'>
 <span class="label">Derived Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>vpeer</b> = peer->v&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>i</b> = 0&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>i</b>)
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<b>vpeer</b> = peer->v&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 <br/>
 </td>
 </tr>
@@ -1422,42 +1512,47 @@
       <span  style="color:dimgrey"><i>Behaves just like a one way gap junction. </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td><b>conductance</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductance">conductance</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>i</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
-  </td>
+</td>
     <td><b>v</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a>)</td>
     <td width="100">Direction: in</td>
   </tr>
 <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label ">Dynamics</span>
-  </td>
+</td>
 <td colspan='2'>
 <span class="label">Derived Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>vpeer</b> = peer->v&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>i</b> = weight * conductance * (vpeer - v)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>i</b>)
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<b>vpeer</b> = peer->v&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 <br/>
 </td>
 </tr>
@@ -1475,9 +1570,10 @@
       <span  style="color:dimgrey"><i>Graded/analog synapse. Based on synapse in Methods of <a href="http://www.nature.com/neuro/journal/v7/n12/abs/nn1352.html">http://www.nature.com/neuro/journal/v7/n12/abs/nn1352.html</a> </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='5'>
+
+<td width="70" rowspan="5">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td><b>Vth</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
@@ -1494,9 +1590,10 @@
     <td width="100"><a href="NeuroMLCoreDimensions.html#per_time">per_time</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='3'>
+
+<td width="70" rowspan="3">
     <span class="label label-info">Exposures</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>i</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
@@ -1507,23 +1604,26 @@
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
-  </td>
+</td>
     <td><b>v</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
-  </td>
+</td>
     <td style="color:darkgrey"><b>in</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a>)</td>
     <td width="100">Direction: in</td>
   </tr>
 <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label ">Dynamics</span>
-  </td>
+</td>
 <td colspan='2'>
 <span class="label">State Variables</span><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>s</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless<br/>
@@ -1533,13 +1633,13 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>s</b> = inf<br/>
 <br/>
 <span class="label">Derived Variables</span><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<b>i</b> = weight * conductance * s * (erev-v)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>i</b>)
+&nbsp;&nbsp;&nbsp;&nbsp;<b>vpeer</b> = peer->v&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>inf</b> = 1/(1 + exp((Vth - vpeer)/delta))&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>inf</b>)
 <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<b>tau</b> = (1-inf)/k&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>tau</b>)
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<b>inf</b> = 1/(1 + exp((Vth - vpeer)/delta))&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>inf</b>)
+&nbsp;&nbsp;&nbsp;&nbsp;<b>i</b> = weight * conductance * s * (erev-v)&nbsp;&nbsp;&nbsp;&nbsp; (exposed as <b>i</b>)
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<b>vpeer</b> = peer->v&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 <br/>
 <span class="label">Conditional Derived Variables</span><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;IF (1-inf) &gt; 1e-4 THEN<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>s_rate</b> = (inf - s)/tau&nbsp;&nbsp;&nbsp;&nbsp;<br/>

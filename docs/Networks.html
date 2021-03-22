@@ -15,7 +15,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="#">NeuroML v2.0 Component Types</a>
+      <a class="brand" href="#">NeuroML v2.1 Component Types</a>
       <div class="nav-collapse">
         <ul class="nav">
           <li><a href="Cells.html">Cells</a></li>
@@ -40,15 +40,13 @@
   
 &nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Networks.html#networkWithTemperature" title="Network containing populations, projections and lists of explicitConnections (either directly between components of the populations or via synapses), and an explicit temperature ">networkWithTemperature</a><br/>
   
-&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span><a href="Networks.html#electricalProjection" title="A projection between presynapticPopulation to another postsynapticPopulation through gap junctions. ">electricalProjection</a><br/>
+&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>regions <a href="Networks.html#region" title="Initial attempt to specify 3D region for placing cells. Work in progress... ">region</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>connections <a href="Networks.html#electricalConnection" title="To enable connections between populations through gap junctions. ">electricalConnection</a><br/>
-  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>connectionInstances <a href="Networks.html#electricalConnectionInstance" title="To enable connections between populations through gap junctions. Populations need to be of type populationList and contain instance and location elements. ">electricalConnectionInstance</a><br/>
-  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Networks.html#electricalConnectionInstanceW" title="To enable connections between populations through gap junctions. Populations need to be of type populationList and contain instance and location elements. Includes setting of weight for the connection ">electricalConnectionInstanceW</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Networks.html#rectangularExtent" title="For defining a 3D rectangular box ">rectangularExtent</a><br/>
   
 &nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>populations <a href="Networks.html#basePopulation" title="A population of cells (anything which extends baseCell) "><span  style="color:#85ACE1;font-style:italic">basePopulation</span></a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Networks.html#population" title="A population of components, with just one parameter for the size ">population</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Networks.html#populationList" title="An explicit list of the cells in the population.  ">populationList</a><br/>
   
@@ -56,11 +54,7 @@
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Networks.html#location" title="Specifies location of a single instance of a component in a population ">location</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Networks.html#population" title="A population of components, with just one parameter for the size ">population</a><br/>
-  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="NeuroMLCoreCompTypes.html#notes" title="Human readable notes on a Component ">notes</a><br/>
-  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span><a href="NeuroMLCoreCompTypes.html#property" title="Property in Annotation... ">property</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="NeuroMLCoreCompTypes.html#annotation" title="Annotation... ">annotation</a><br/>
   
@@ -72,51 +66,35 @@
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:hasPart <a href="NeuroMLCoreCompTypes.html#bqbiol_hasPart" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_hasPart</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:isEncodedBy <a href="NeuroMLCoreCompTypes.html#bqbiol_isEncodedBy" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_isEncodedBy</a><br/>
-  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:occursIn <a href="NeuroMLCoreCompTypes.html#bqbiol_occursIn" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_occursIn</a><br/>
-  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:isVersionOf <a href="NeuroMLCoreCompTypes.html#bqbiol_isVersionOf" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_isVersionOf</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:hasProperty <a href="NeuroMLCoreCompTypes.html#bqbiol_hasProperty" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_hasProperty</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:hasVersion <a href="NeuroMLCoreCompTypes.html#bqbiol_hasVersion" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_hasVersion</a><br/>
-  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:isPartOf <a href="NeuroMLCoreCompTypes.html#bqbiol_isPartOf" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_isPartOf</a><br/>
-  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:hasTaxon <a href="NeuroMLCoreCompTypes.html#bqbiol_hasTaxon" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_hasTaxon</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:is <a href="NeuroMLCoreCompTypes.html#bqbiol_is" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_is</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:isDescribedBy <a href="NeuroMLCoreCompTypes.html#bqbiol_isDescribedBy" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_isDescribedBy</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:isPropertyOf <a href="NeuroMLCoreCompTypes.html#bqbiol_isPropertyOf" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_isPropertyOf</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:isEncodedBy <a href="NeuroMLCoreCompTypes.html#bqbiol_isEncodedBy" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_isEncodedBy</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:isHomologTo <a href="NeuroMLCoreCompTypes.html#bqbiol_isHomologTo" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_isHomologTo</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqmodel:isDerivedFrom <a href="NeuroMLCoreCompTypes.html#bqmodel_isDerivedFrom" title="See http://co.mbine.org/standards/qualifiers ">bqmodel_isDerivedFrom</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:isPartOf <a href="NeuroMLCoreCompTypes.html#bqbiol_isPartOf" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_isPartOf</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:hasProperty <a href="NeuroMLCoreCompTypes.html#bqbiol_hasProperty" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_hasProperty</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:isPropertyOf <a href="NeuroMLCoreCompTypes.html#bqbiol_isPropertyOf" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_isPropertyOf</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqmodel:isDescribedBy <a href="NeuroMLCoreCompTypes.html#bqmodel_isDescribedBy" title="See http://co.mbine.org/standards/qualifiers ">bqmodel_isDescribedBy</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:isVersionOf <a href="NeuroMLCoreCompTypes.html#bqbiol_isVersionOf" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_isVersionOf</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:occursIn <a href="NeuroMLCoreCompTypes.html#bqbiol_occursIn" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_occursIn</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:hasTaxon <a href="NeuroMLCoreCompTypes.html#bqbiol_hasTaxon" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_hasTaxon</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqmodel:is <a href="NeuroMLCoreCompTypes.html#bqmodel_is" title="See http://co.mbine.org/standards/qualifiers ">bqmodel_is</a><br/>
   
-&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>synapticConnections <a href="Networks.html#explicitConnection" title="Explicit event connection between components ">explicitConnection</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqmodel:isDescribedBy <a href="NeuroMLCoreCompTypes.html#bqmodel_isDescribedBy" title="See http://co.mbine.org/standards/qualifiers ">bqmodel_isDescribedBy</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Networks.html#synapticConnection" title="Explicit event connection between named components, which gets processed via a new instance of a synapse component which is created on the target component ">synapticConnection</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqmodel:isDerivedFrom <a href="NeuroMLCoreCompTypes.html#bqmodel_isDerivedFrom" title="See http://co.mbine.org/standards/qualifiers ">bqmodel_isDerivedFrom</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Networks.html#synapticConnectionWD" title="Explicit event connection between named components, which gets processed via a new instance of a synapse component which is created on the target component, includes setting of weight and delay for the synaptic connection ">synapticConnectionWD</a><br/>
-  
-&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>explicitInputs <a href="Networks.html#explicitInput" title="An explicit input (anything which extends basePointCurrent) to a target cell in a population ">explicitInput</a><br/>
-  
-&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>regions <a href="Networks.html#region" title="Initial attempt to specify 3D region for placing cells. Work in progress... ">region</a><br/>
-  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Networks.html#rectangularExtent" title="For defining a 3D rectangular box ">rectangularExtent</a><br/>
-  
-&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>inputs <a href="Networks.html#inputList" title="An explicit list of inputs. Not yet stable... ">inputList</a><br/>
-  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>inputs <a href="Networks.html#input" title="Specifies input lists. ">input</a><br/>
-  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Networks.html#inputW" title="Specifies input lists. Can set weight to scale individual inputs. ">inputW</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span><a href="NeuroMLCoreCompTypes.html#property" title="Property in Annotation... ">property</a><br/>
   
 &nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>projections <a href="Networks.html#projection" title="Projection from one population, presynapticPopulation to another, postsynapticPopulation, through synapse. Contains lists of connection or connectionWD elements. ">projection</a><br/>
   
@@ -126,6 +104,20 @@
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>connectionsWD <a href="Networks.html#connectionWD" title="Event connection between named components, which gets processed via a new instance of a synapse component which is created on the target component, includes setting of weight and delay for the synaptic connection ">connectionWD</a><br/>
   
+&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>synapticConnections <a href="Networks.html#explicitConnection" title="Explicit event connection between components ">explicitConnection</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Networks.html#synapticConnection" title="Explicit event connection between named components, which gets processed via a new instance of a synapse component which is created on the target component ">synapticConnection</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Networks.html#synapticConnectionWD" title="Explicit event connection between named components, which gets processed via a new instance of a synapse component which is created on the target component, includes setting of weight and delay for the synaptic connection ">synapticConnectionWD</a><br/>
+  
+&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span><a href="Networks.html#electricalProjection" title="A projection between presynapticPopulation to another postsynapticPopulation through gap junctions. ">electricalProjection</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>connections <a href="Networks.html#electricalConnection" title="To enable connections between populations through gap junctions. ">electricalConnection</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>connectionInstances <a href="Networks.html#electricalConnectionInstance" title="To enable connections between populations through gap junctions. Populations need to be of type populationList and contain instance and location elements. ">electricalConnectionInstance</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Networks.html#electricalConnectionInstanceW" title="To enable connections between populations through gap junctions. Populations need to be of type populationList and contain instance and location elements. Includes setting of weight for the connection ">electricalConnectionInstanceW</a><br/>
+  
 &nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span><a href="Networks.html#continuousProjection" title="A projection between presynapticPopulation and postsynapticPopulation through components preComponent at the start and postComponent at the end of a continuousConnection or continuousConnectionInstance. Can be used for analog synapses. ">continuousProjection</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>connections <a href="Networks.html#continuousConnection" title="An instance of a connection in a continuousProjection between presynapticPopulation to another postsynapticPopulation through a preComponent at the start and postComponent at the end. Can be used for analog synapses. ">continuousConnection</a><br/>
@@ -134,13 +126,21 @@
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Networks.html#continuousConnectionInstanceW" title="An instance of a connection in a continuousProjection between presynapticPopulation to another postsynapticPopulation through a preComponent at the start and postComponent at the end. Populations need to be of type populationList and contain instance and location elements. Can be used for analog synapses. Includes setting of weight for the connection ">continuousConnectionInstanceW</a><br/>
   
+&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>explicitInputs <a href="Networks.html#explicitInput" title="An explicit input (anything which extends basePointCurrent) to a target cell in a population ">explicitInput</a><br/>
+  
+&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>inputs <a href="Networks.html#inputList" title="An explicit list of inputs. Not yet stable... ">inputList</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>inputs <a href="Networks.html#input" title="Specifies input lists. ">input</a><br/>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Networks.html#inputW" title="Specifies input lists. Can set weight to scale individual inputs. ">inputW</a><br/>
+  
     </div><!--/.well -->
     </div><!--/span-->
     <div class="span7">
-   <div class="alert alert-error">For more information on NeuroML 2 and LEMS see <a href="http://www.neuroml.org/neuromlv2">here</a>. <br/>Note: these descriptions have been updated to the latest    <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2">NeuroML v2.0</a> definitions, using    <a href="https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS">the latest version of LEMS</a>!</div>
+   <div class="alert alert-error"><br/><p><b>  NOTE: the latest version of this documentation can be found on <a href="https://docs.neuroml.org/Userdocs/Schemas/Networks.html">docs.neuroml.org</a>!</b></p><br/>For more information on NeuroML 2 and LEMS see <a href="http://www.neuroml.org/neuromlv2">here</a>. <br/>Note: these descriptions have been updated to the latest    <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2">NeuroML v2.1</a> definitions, using    <a href="https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS">the latest version of LEMS</a>!</div>
     <table class="table table-bordered"><tr><td ><h3>Networks</h3></td></tr>
     <tr><td><span  style="color:dimgrey"><i>NeuroML2 ComponentType definitions from Networks.xml </i></span></td></tr>
-    <tr><td>Original LEMS ComponentType definitions: <a href="https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/Networks.xml">Networks.xml</a><br/>    Schema against which NeuroML based on these should be valid: <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2/NeuroML_v2.0.xsd">NeuroML_v2.0.xsd</a></td></tr>
+    <tr><td>Original LEMS ComponentType definitions: <a href="https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/Networks.xml">Networks.xml</a><br/>    Schema against which NeuroML based on these should be valid: <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2/NeuroML_v2.1.xsd">NeuroML_v2.1.xsd</a></td></tr>
     </table><br/>
 <a name="network">&nbsp;</a>
 <table class="table table-bordered">
@@ -154,32 +154,33 @@
       <span  style="color:dimgrey"><i>Network containing <a href="Networks.html#population" title="A population of components, with just one parameter for the size ">population</a>s, <a href="Networks.html#projection" title="Projection from one population, presynapticPopulation to another, postsynapticPopulation, through synapse. Contains lists of connection or connectionWD elements. ">projection</a>s and lists of <a href="Networks.html#explicitConnection" title="Explicit event connection between components ">explicitConnection</a>s (either directly between components of the populations or via synapses) </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='8'>
+
+<td width="70" rowspan="8">
     <span class="label label-success">Children elements</span>
-  </td>
-    <td><b>electricalProjection</b></td>
-    <td width="100"><a href="Networks.html#electricalProjection" title="A projection between presynapticPopulation to another postsynapticPopulation through gap junctions. ">electricalProjection</a></td>
+</td>
+    <td><b>regions</b></td>
+    <td width="100"><a href="Networks.html#region" title="Initial attempt to specify 3D region for placing cells. Work in progress... ">region</a></td>
   </tr>
     <td><b>populations</b></td>
     <td width="100"><a href="Networks.html#basePopulation" title="A population of cells (anything which extends baseCell) "><span  style="color:#85ACE1;font-style:italic">basePopulation</span></a></td>
   </tr>
+    <td><b>projections</b></td>
+    <td width="100"><a href="Networks.html#projection" title="Projection from one population, presynapticPopulation to another, postsynapticPopulation, through synapse. Contains lists of connection or connectionWD elements. ">projection</a></td>
+  </tr>
     <td><b>synapticConnections</b></td>
     <td width="100"><a href="Networks.html#explicitConnection" title="Explicit event connection between components ">explicitConnection</a></td>
+  </tr>
+    <td><b>electricalProjection</b></td>
+    <td width="100"><a href="Networks.html#electricalProjection" title="A projection between presynapticPopulation to another postsynapticPopulation through gap junctions. ">electricalProjection</a></td>
+  </tr>
+    <td><b>continuousProjection</b></td>
+    <td width="100"><a href="Networks.html#continuousProjection" title="A projection between presynapticPopulation and postsynapticPopulation through components preComponent at the start and postComponent at the end of a continuousConnection or continuousConnectionInstance. Can be used for analog synapses. ">continuousProjection</a></td>
   </tr>
     <td><b>explicitInputs</b></td>
     <td width="100"><a href="Networks.html#explicitInput" title="An explicit input (anything which extends basePointCurrent) to a target cell in a population ">explicitInput</a></td>
   </tr>
-    <td><b>regions</b></td>
-    <td width="100"><a href="Networks.html#region" title="Initial attempt to specify 3D region for placing cells. Work in progress... ">region</a></td>
-  </tr>
     <td><b>inputs</b></td>
     <td width="100"><a href="Networks.html#inputList" title="An explicit list of inputs. Not yet stable... ">inputList</a></td>
-  </tr>
-    <td><b>projections</b></td>
-    <td width="100"><a href="Networks.html#projection" title="Projection from one population, presynapticPopulation to another, postsynapticPopulation, through synapse. Contains lists of connection or connectionWD elements. ">projection</a></td>
-  </tr>
-    <td><b>continuousProjection</b></td>
-    <td width="100"><a href="Networks.html#continuousProjection" title="A projection between presynapticPopulation and postsynapticPopulation through components preComponent at the start and postComponent at the end of a continuousConnection or continuousConnectionInstance. Can be used for analog synapses. ">continuousProjection</a></td>
   </tr>
 </table>
 
@@ -195,9 +196,10 @@
       <span  style="color:dimgrey"><i>Network containing <a href="Networks.html#population" title="A population of components, with just one parameter for the size ">population</a>s, <a href="Networks.html#projection" title="Projection from one population, presynapticPopulation to another, postsynapticPopulation, through synapse. Contains lists of connection or connectionWD elements. ">projection</a>s and lists of <a href="Networks.html#explicitConnection" title="Explicit event connection between components ">explicitConnection</a>s (either directly between components of the populations or via synapses), and an explicit temperature </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td><b>temperature</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#temperature">temperature</a></td>
   </tr>
@@ -215,25 +217,28 @@
       <span  style="color:dimgrey"><i>A population of cells (anything which extends <a href="Cells.html#baseCell" title="Base type of any cell which can be used in a population "><span  style="color:#85ACE1;font-style:italic">baseCell</span></a>) </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Component References</span>
-  </td>
+</td>
     <td><b>component</b></td>
     <td width="100"><a href="Cells.html#baseCell" title="Base type of any cell which can be used in a population "><span  style="color:#85ACE1;font-style:italic">baseCell</span></a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Child elements</span>
-  </td>
+</td>
     <td><b>notes</b></td>
     <td width="100"><a href="NeuroMLCoreCompTypes.html#notes" title="Human readable notes on a Component ">notes</a></td>
   </tr>
     <td><b>annotation</b></td>
     <td width="100"><a href="NeuroMLCoreCompTypes.html#annotation" title="Annotation... ">annotation</a></td>
   </tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Children elements</span>
-  </td>
+</td>
     <td><b>property</b></td>
     <td width="100"><a href="NeuroMLCoreCompTypes.html#property" title="Property in Annotation... ">property</a></td>
   </tr>
@@ -251,9 +256,10 @@
       <span  style="color:dimgrey"><i>A population of components, with just one parameter for the <b>size</b> </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td><b>size</b></td>
     <td width="100">Dimensionless</td>
   </tr>
@@ -271,15 +277,17 @@
       <span  style="color:dimgrey"><i>An explicit list of the cells in the population.  </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Text fields</span>
-  </td>
+</td>
     <td colspan='2'><b>size</b></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Children elements</span>
-  </td>
+</td>
     <td><b>instances</b></td>
     <td width="100"><a href="Networks.html#instance" title="Specifies a single instance of a component in a population (placed at location). ">instance</a></td>
   </tr>
@@ -297,9 +305,10 @@
       <span  style="color:dimgrey"><i>Specifies a single instance of a component in a population (placed at <a href="Networks.html#location" title="Specifies location of a single instance of a component in a population ">location</a>). </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Child elements</span>
-  </td>
+</td>
     <td><b>location</b></td>
     <td width="100"><a href="Networks.html#location" title="Specifies location of a single instance of a component in a population ">location</a></td>
   </tr>
@@ -317,9 +326,10 @@
       <span  style="color:dimgrey"><i>Specifies location of a single <a href="Networks.html#instance" title="Specifies a single instance of a component in a population (placed at location). ">instance</a> of a component in a population </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='3'>
+
+<td width="70" rowspan="3">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td><b>x</b></td>
     <td width="100">Dimensionless</td>
   </tr>
@@ -343,9 +353,10 @@
       <span  style="color:dimgrey"><i>Initial attempt to specify 3D region for placing cells. Work in progress... </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Child elements</span>
-  </td>
+</td>
     <td><b>rectangularExtent</b></td>
     <td width="100"><a href="Networks.html#rectangularExtent" title="For defining a 3D rectangular box ">rectangularExtent</a></td>
   </tr>
@@ -363,9 +374,10 @@
       <span  style="color:dimgrey"><i>For defining a 3D rectangular box </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='6'>
+
+<td width="70" rowspan="6">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td><b>xLength</b></td>
     <td width="100">Dimensionless</td>
   </tr>
@@ -398,24 +410,27 @@
       <span  style="color:dimgrey"><i>Projection from one population, <b>presynapticPopulation</b> to another, <b>postsynapticPopulation,</b> through <b>synapse.</b> Contains lists of <a href="Networks.html#connection" title="Event connection directly between named components, which gets processed via a new instance of a synapse component which is created on the target component. Normally contained inside a projection element. ">connection</a> or <a href="Networks.html#connectionWD" title="Event connection between named components, which gets processed via a new instance of a synapse component which is created on the target component, includes setting of weight and delay for the synaptic connection ">connectionWD</a> elements. </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Paths</span>
-  </td>
-    <td colspan='2'><b>postsynapticPopulation</b></td>
-  </tr>
+</td>
     <td colspan='2'><b>presynapticPopulation</b></td>
   </tr>
+    <td colspan='2'><b>postsynapticPopulation</b></td>
+  </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Component References</span>
-  </td>
+</td>
     <td><b>synapse</b></td>
     <td width="100"><a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Children elements</span>
-  </td>
+</td>
     <td><b>connections</b></td>
     <td width="100"><a href="Networks.html#connection" title="Event connection directly between named components, which gets processed via a new instance of a synapse component which is created on the target component. Normally contained inside a projection element. ">connection</a></td>
   </tr>
@@ -436,18 +451,20 @@
       <span  style="color:dimgrey"><i>Explicit event connection between components </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Text fields</span>
-  </td>
+</td>
     <td colspan='2'><b>targetPort</b></td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Paths</span>
-  </td>
-    <td colspan='2'><b>to</b></td>
-  </tr>
+</td>
     <td colspan='2'><b>from</b></td>
+  </tr>
+    <td colspan='2'><b>to</b></td>
   </tr>
 </table>
 
@@ -463,23 +480,25 @@
       <span  style="color:dimgrey"><i>Event connection directly between named components, which gets processed via a new instance of a <b>synapse</b> component which is created on the target component. Normally contained inside a <a href="Networks.html#projection" title="Projection from one population, presynapticPopulation to another, postsynapticPopulation, through synapse. Contains lists of connection or connectionWD elements. ">projection</a> element. </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='5'>
+
+<td width="70" rowspan="5">
     <span class="label label-success">Text fields</span>
-  </td>
-    <td colspan='2'><b>preSegmentId</b></td>
-  </tr>
+</td>
     <td colspan='2'><b>destination</b></td>
   </tr>
     <td colspan='2'><b>preFractionAlong</b></td>
   </tr>
     <td colspan='2'><b>postFractionAlong</b></td>
   </tr>
+    <td colspan='2'><b>preSegmentId</b></td>
+  </tr>
     <td colspan='2'><b>postSegmentId</b></td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Paths</span>
-  </td>
+</td>
     <td colspan='2'><b>preCellId</b></td>
   </tr>
     <td colspan='2'><b>postCellId</b></td>
@@ -498,23 +517,26 @@
       <span  style="color:dimgrey"><i>Explicit event connection between named components, which gets processed via a new instance of a <b>synapse</b> component which is created on the target component </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Text fields</span>
-  </td>
+</td>
     <td colspan='2'><b>destination</b></td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Paths</span>
-  </td>
-    <td colspan='2'><b>to</b></td>
-  </tr>
+</td>
     <td colspan='2'><b>from</b></td>
   </tr>
+    <td colspan='2'><b>to</b></td>
+  </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Component References</span>
-  </td>
+</td>
     <td><b>synapse</b></td>
     <td width="100"><a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a></td>
   </tr>
@@ -532,9 +554,10 @@
       <span  style="color:dimgrey"><i>Explicit event connection between named components, which gets processed via a new instance of a <b>synapse</b> component which is created on the target component, includes setting of <b>weight</b> and <b>delay</b> for the synaptic connection </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td><b>delay</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
@@ -542,12 +565,13 @@
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Paths</span>
-  </td>
-    <td colspan='2'><b>to</b></td>
-  </tr>
+</td>
     <td colspan='2'><b>from</b></td>
+  </tr>
+    <td colspan='2'><b>to</b></td>
   </tr>
 </table>
 
@@ -563,9 +587,10 @@
       <span  style="color:dimgrey"><i>Event connection between named components, which gets processed via a new instance of a synapse component which is created on the target component, includes setting of <b>weight</b> and <b>delay</b> for the synaptic connection </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td><b>delay</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
@@ -573,23 +598,25 @@
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
-  <td width="70" rowspan='5'>
+
+<td width="70" rowspan="5">
     <span class="label label-success">Text fields</span>
-  </td>
-    <td colspan='2'><b>preSegmentId</b></td>
-  </tr>
+</td>
     <td colspan='2'><b>destination</b></td>
   </tr>
     <td colspan='2'><b>preFractionAlong</b></td>
   </tr>
     <td colspan='2'><b>postFractionAlong</b></td>
   </tr>
+    <td colspan='2'><b>preSegmentId</b></td>
+  </tr>
     <td colspan='2'><b>postSegmentId</b></td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Paths</span>
-  </td>
+</td>
     <td colspan='2'><b>preCellId</b></td>
   </tr>
     <td colspan='2'><b>postCellId</b></td>
@@ -608,9 +635,10 @@
       <span  style="color:dimgrey"><i>To enable connections between populations through gap junctions. </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Component References</span>
-  </td>
+</td>
     <td><b>synapse</b></td>
     <td width="100"><a href="Synapses.html#gapJunction" title="Gap junction/single electrical connection ">gapJunction</a></td>
   </tr>
@@ -628,29 +656,32 @@
       <span  style="color:dimgrey"><i>To enable connections between populations through gap junctions. Populations need to be of type <a href="Networks.html#populationList" title="An explicit list of the cells in the population.  ">populationList</a> and contain <a href="Networks.html#instance" title="Specifies a single instance of a component in a population (placed at location). ">instance</a> and <a href="Networks.html#location" title="Specifies location of a single instance of a component in a population ">location</a> elements. </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='4'>
+
+<td width="70" rowspan="4">
     <span class="label label-success">Text fields</span>
-  </td>
-    <td colspan='2'><b>preSegment</b></td>
-  </tr>
-    <td colspan='2'><b>postSegment</b></td>
-  </tr>
+</td>
     <td colspan='2'><b>preFractionAlong</b></td>
   </tr>
     <td colspan='2'><b>postFractionAlong</b></td>
   </tr>
+    <td colspan='2'><b>preSegment</b></td>
+  </tr>
+    <td colspan='2'><b>postSegment</b></td>
+  </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Paths</span>
-  </td>
+</td>
     <td colspan='2'><b>preCell</b></td>
   </tr>
     <td colspan='2'><b>postCell</b></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Component References</span>
-  </td>
+</td>
     <td><b>synapse</b></td>
     <td width="100"><a href="Synapses.html#gapJunction" title="Gap junction/single electrical connection ">gapJunction</a></td>
   </tr>
@@ -668,28 +699,31 @@
       <span  style="color:dimgrey"><i>To enable connections between populations through gap junctions. Populations need to be of type <a href="Networks.html#populationList" title="An explicit list of the cells in the population.  ">populationList</a> and contain <a href="Networks.html#instance" title="Specifies a single instance of a component in a population (placed at location). ">instance</a> and <a href="Networks.html#location" title="Specifies location of a single instance of a component in a population ">location</a> elements. Includes setting of <b>weight</b> for the connection </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td><b>weight</b></td>
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
-  <td width="70" rowspan='4'>
+
+<td width="70" rowspan="4">
     <span class="label label-success">Text fields</span>
-  </td>
-    <td colspan='2'><b>preSegment</b></td>
-  </tr>
-    <td colspan='2'><b>postSegment</b></td>
-  </tr>
+</td>
     <td colspan='2'><b>preFractionAlong</b></td>
   </tr>
     <td colspan='2'><b>postFractionAlong</b></td>
   </tr>
+    <td colspan='2'><b>preSegment</b></td>
+  </tr>
+    <td colspan='2'><b>postSegment</b></td>
+  </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Paths</span>
-  </td>
+</td>
     <td colspan='2'><b>preCell</b></td>
   </tr>
     <td colspan='2'><b>postCell</b></td>
@@ -708,19 +742,21 @@
       <span  style="color:dimgrey"><i>A projection between <b>presynapticPopulation</b> to another <b>postsynapticPopulation</b> through gap junctions. </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Component References</span>
-  </td>
-    <td><b>postsynapticPopulation</b></td>
-    <td width="100"><a href="Networks.html#population" title="A population of components, with just one parameter for the size ">population</a></td>
-  </tr>
+</td>
     <td><b>presynapticPopulation</b></td>
     <td width="100"><a href="Networks.html#population" title="A population of components, with just one parameter for the size ">population</a></td>
   </tr>
+    <td><b>postsynapticPopulation</b></td>
+    <td width="100"><a href="Networks.html#population" title="A population of components, with just one parameter for the size ">population</a></td>
+  </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Children elements</span>
-  </td>
+</td>
     <td><b>connections</b></td>
     <td width="100"><a href="Networks.html#electricalConnection" title="To enable connections between populations through gap junctions. ">electricalConnection</a></td>
   </tr>
@@ -741,9 +777,10 @@
       <span  style="color:dimgrey"><i>An instance of a connection in a <a href="Networks.html#continuousProjection" title="A projection between presynapticPopulation and postsynapticPopulation through components preComponent at the start and postComponent at the end of a continuousConnection or continuousConnectionInstance. Can be used for analog synapses. ">continuousProjection</a> between <b>presynapticPopulation</b> to another <b>postsynapticPopulation</b> through a <b>preComponent</b> at the start and <b>postComponent</b> at the end. Can be used for analog synapses. </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Component References</span>
-  </td>
+</td>
     <td><b>preComponent</b></td>
     <td width="100"><a href="Synapses.html#baseGradedSynapse" title="Base type for graded synapses "><span  style="color:#85ACE1;font-style:italic">baseGradedSynapse</span></a></td>
   </tr>
@@ -764,29 +801,32 @@
       <span  style="color:dimgrey"><i>An instance of a connection in a <a href="Networks.html#continuousProjection" title="A projection between presynapticPopulation and postsynapticPopulation through components preComponent at the start and postComponent at the end of a continuousConnection or continuousConnectionInstance. Can be used for analog synapses. ">continuousProjection</a> between <b>presynapticPopulation</b> to another <b>postsynapticPopulation</b> through a <b>preComponent</b> at the start and <b>postComponent</b> at the end. Populations need to be of type <a href="Networks.html#populationList" title="An explicit list of the cells in the population.  ">populationList</a> and contain <a href="Networks.html#instance" title="Specifies a single instance of a component in a population (placed at location). ">instance</a> and <a href="Networks.html#location" title="Specifies location of a single instance of a component in a population ">location</a> elements. Can be used for analog synapses. </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='4'>
+
+<td width="70" rowspan="4">
     <span class="label label-success">Text fields</span>
-  </td>
-    <td colspan='2'><b>preSegment</b></td>
-  </tr>
-    <td colspan='2'><b>postSegment</b></td>
-  </tr>
+</td>
     <td colspan='2'><b>preFractionAlong</b></td>
   </tr>
     <td colspan='2'><b>postFractionAlong</b></td>
   </tr>
+    <td colspan='2'><b>preSegment</b></td>
+  </tr>
+    <td colspan='2'><b>postSegment</b></td>
+  </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Paths</span>
-  </td>
+</td>
     <td colspan='2'><b>preCell</b></td>
   </tr>
     <td colspan='2'><b>postCell</b></td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Component References</span>
-  </td>
+</td>
     <td><b>preComponent</b></td>
     <td width="100"><a href="Synapses.html#baseGradedSynapse" title="Base type for graded synapses "><span  style="color:#85ACE1;font-style:italic">baseGradedSynapse</span></a></td>
   </tr>
@@ -807,28 +847,31 @@
       <span  style="color:dimgrey"><i>An instance of a connection in a <a href="Networks.html#continuousProjection" title="A projection between presynapticPopulation and postsynapticPopulation through components preComponent at the start and postComponent at the end of a continuousConnection or continuousConnectionInstance. Can be used for analog synapses. ">continuousProjection</a> between <b>presynapticPopulation</b> to another <b>postsynapticPopulation</b> through a <b>preComponent</b> at the start and <b>postComponent</b> at the end. Populations need to be of type <a href="Networks.html#populationList" title="An explicit list of the cells in the population.  ">populationList</a> and contain <a href="Networks.html#instance" title="Specifies a single instance of a component in a population (placed at location). ">instance</a> and <a href="Networks.html#location" title="Specifies location of a single instance of a component in a population ">location</a> elements. Can be used for analog synapses. Includes setting of <b>weight</b> for the connection </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td><b>weight</b></td>
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
-  <td width="70" rowspan='4'>
+
+<td width="70" rowspan="4">
     <span class="label label-success">Text fields</span>
-  </td>
-    <td colspan='2'><b>preSegment</b></td>
-  </tr>
-    <td colspan='2'><b>postSegment</b></td>
-  </tr>
+</td>
     <td colspan='2'><b>preFractionAlong</b></td>
   </tr>
     <td colspan='2'><b>postFractionAlong</b></td>
   </tr>
+    <td colspan='2'><b>preSegment</b></td>
+  </tr>
+    <td colspan='2'><b>postSegment</b></td>
+  </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Paths</span>
-  </td>
+</td>
     <td colspan='2'><b>preCell</b></td>
   </tr>
     <td colspan='2'><b>postCell</b></td>
@@ -847,19 +890,21 @@
       <span  style="color:dimgrey"><i>A projection between <b>presynapticPopulation</b> and <b>postsynapticPopulation</b> through components <b>preComponent</b> at the start and <b>postComponent</b> at the end of a <a href="Networks.html#continuousConnection" title="An instance of a connection in a continuousProjection between presynapticPopulation to another postsynapticPopulation through a preComponent at the start and postComponent at the end. Can be used for analog synapses. ">continuousConnection</a> or <a href="Networks.html#continuousConnectionInstance" title="An instance of a connection in a continuousProjection between presynapticPopulation to another postsynapticPopulation through a preComponent at the start and postComponent at the end. Populations need to be of type populationList and contain instance and location elements. Can be used for analog synapses. ">continuousConnectionInstance</a>. Can be used for analog synapses. </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Component References</span>
-  </td>
-    <td><b>postsynapticPopulation</b></td>
-    <td width="100"><a href="Networks.html#population" title="A population of components, with just one parameter for the size ">population</a></td>
-  </tr>
+</td>
     <td><b>presynapticPopulation</b></td>
     <td width="100"><a href="Networks.html#population" title="A population of components, with just one parameter for the size ">population</a></td>
   </tr>
+    <td><b>postsynapticPopulation</b></td>
+    <td width="100"><a href="Networks.html#population" title="A population of components, with just one parameter for the size ">population</a></td>
+  </tr>
   <tr>
-  <td width="70" rowspan='2'>
+
+<td width="70" rowspan="2">
     <span class="label label-success">Children elements</span>
-  </td>
+</td>
     <td><b>connections</b></td>
     <td width="100"><a href="Networks.html#continuousConnection" title="An instance of a connection in a continuousProjection between presynapticPopulation to another postsynapticPopulation through a preComponent at the start and postComponent at the end. Can be used for analog synapses. ">continuousConnection</a></td>
   </tr>
@@ -880,25 +925,28 @@
       <span  style="color:dimgrey"><i>An explicit input (anything which extends <a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a>) to a target cell in a population </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='3'>
+
+<td width="70" rowspan="3">
     <span class="label label-success">Text fields</span>
-  </td>
-    <td colspan='2'><b>sourcePort</b></td>
-  </tr>
+</td>
     <td colspan='2'><b>destination</b></td>
+  </tr>
+    <td colspan='2'><b>sourcePort</b></td>
   </tr>
     <td colspan='2'><b>targetPort</b></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Paths</span>
-  </td>
+</td>
     <td colspan='2'><b>target</b></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Component References</span>
-  </td>
+</td>
     <td><b>input</b></td>
     <td width="100"><a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a></td>
   </tr>
@@ -916,22 +964,25 @@
       <span  style="color:dimgrey"><i>An explicit list of inputs. Not yet stable... </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Text fields</span>
-  </td>
+</td>
     <td colspan='2'><b>population</b></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Component References</span>
-  </td>
+</td>
     <td><b>component</b></td>
     <td width="100"><a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Children elements</span>
-  </td>
+</td>
     <td><b>inputs</b></td>
     <td width="100"><a href="Networks.html#input" title="Specifies input lists. ">input</a></td>
   </tr>
@@ -949,19 +1000,21 @@
       <span  style="color:dimgrey"><i>Specifies input lists. </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='3'>
+
+<td width="70" rowspan="3">
     <span class="label label-success">Text fields</span>
-  </td>
+</td>
+    <td colspan='2'><b>segmentId</b></td>
+  </tr>
     <td colspan='2'><b>fractionAlong</b></td>
   </tr>
     <td colspan='2'><b>destination</b></td>
   </tr>
-    <td colspan='2'><b>segmentId</b></td>
-  </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Paths</span>
-  </td>
+</td>
     <td colspan='2'><b>target</b></td>
   </tr>
 </table>
@@ -978,22 +1031,25 @@
       <span  style="color:dimgrey"><i>Specifies input lists. Can set <b>weight</b> to scale individual inputs. </i></span>    </td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Parameters</span>
-  </td>
+</td>
     <td><b>weight</b></td>
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Text fields</span>
-  </td>
+</td>
     <td colspan='2'><b>destination</b></td>
   </tr>
   <tr>
-  <td width="70" rowspan='1'>
+
+<td width="70" rowspan="1">
     <span class="label label-success">Paths</span>
-  </td>
+</td>
     <td colspan='2'><b>target</b></td>
   </tr>
 </table>
