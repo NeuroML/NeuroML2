@@ -12,9 +12,9 @@
 
 
     <ComponentType name="baseCell"
-        description="Base type of any cell which can be used in a population"
+        description="Base type of any cell (either abstract like _izhikevich2007Cell_ or morphologically detailed like _cell_) which can be used in a population"
         extends="baseStandalone">
-        
+
     </ComponentType>
 
 
@@ -25,7 +25,7 @@
         <EventPort name="spike" direction="out" description="Spike event"/>
 
     </ComponentType>
-    
+
 
     <ComponentType name="baseCellMembPot"
         extends="baseSpikingCell"
@@ -47,7 +47,7 @@
 
     <ComponentType name="baseChannelPopulation"
        extends="baseVoltageDepPointCurrent"
-       description="Base type for any current produced by a population of channels, all of type _ionChannel">
+       description="Base type for any current producing population of channels, all of type _ionChannel">
 
         <ComponentReference name="ionChannel" type="baseIonChannel"/>
 
@@ -60,7 +60,7 @@
 
         <Parameter name="number" dimension="none"/>
         <Parameter name="erev" dimension="voltage"/>
-        
+
         <Constant name="vShift" dimension="voltage" value="0mV" description="Set to a constant 0mV here to allow ion channels which use _vShift in their rate variable expressions to be used with _channelPopulation_, not just with _channelDensityVShift_ (where _vShift would be explicitly set)"/>
 
 
@@ -88,7 +88,7 @@
         <Constant name="R" dimension="idealGasConstantDims" value="8.3144621 J_per_K_per_mol" description="TODO: Make this a global constant!"/>
         <Constant name="zCa" dimension="none" value="2" description="TODO: Make this a global constant!"/>
         <Constant name="F" dimension="charge_per_mole" value="96485.3 C_per_mol" description="TODO: Make this a global constant!"/>
-        
+
         <Constant name="vShift" dimension="voltage" value="0mV" description="Set to a constant 0mV here to allow ion channels which use _vShift in their rate variable expressions to be used with _channelPopulation_, not just with _channelDensityVShift_ (where _vShift would be explicitly set)"/>
 
 
@@ -147,16 +147,16 @@
 
         <Child name="inhomogeneousValue" type="inhomogeneousValue"/>
 
-        <Text name="parameter"/> 
+        <Text name="parameter"/>
         <Text name="segmentGroup"/>
 
     </ComponentType>
-    
-    
+
+
     <ComponentType name="inhomogeneousValue"
         description="Specifies the value of a _variableParameter_">
 
-        <Text name="inhomogeneousParameter"/> 
+        <Text name="inhomogeneousParameter"/>
         <Text name="value"/>
 
     </ComponentType>
@@ -168,9 +168,9 @@
         description="Specifies a time varying ohmic conductance density, which is distributed on a region of the cell. The conductance density of the channel is not uniform, but is set using the _variableParameter_. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON">
 
         <Parameter name="erev" dimension="voltage"/>
-        
+
         <Constant name="ZERO_CURR_DENS" dimension="currentDensity" value="0 A_per_m2"/>
-        
+
         <Child name="variableParameter" type="variableParameter"/>
 
         <!-- TODO: Ensure Text elements are inherited from base type -->
@@ -179,7 +179,7 @@
                                 But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
 
         <Dynamics>
-            <!--NOTE: channelDensityNonUniform is not used by jLEMS, only when jNeuroML maps NML2 cells with this element to 
+            <!--NOTE: channelDensityNonUniform is not used by jLEMS, only when jNeuroML maps NML2 cells with this element to
                 a multicompartmental format in another simulator, e.g. NEURON-->
             <DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" value="ZERO_CURR_DENS"/>
         </Dynamics>
@@ -194,11 +194,11 @@
     <ComponentType name="channelDensityNonUniformNernst"
         extends="baseChannelDensity"
         description="Specifies a time varying conductance density, which is distributed on a region of the cell, and whose reversal potential is calculated from the Nernst equation. Hard coded for Ca only!. The conductance density of the channel is not uniform, but is set using the _variableParameter_. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON">
-        
+
         <Constant name="ZERO_CURR_DENS" dimension="currentDensity" value="0 A_per_m2"/>
-  
+
         <Child name="variableParameter" type="variableParameter"/>
-        
+
 
         <!-- TODO: Ensure Text elements are inherited from base type -->
         <Text name="segmentGroup"/>
@@ -206,7 +206,7 @@
                                 But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
 
         <Dynamics>
-            <!--NOTE: channelDensityNonUniform is not used by jLEMS, only when jNeuroML maps NML2 cells with this element to 
+            <!--NOTE: channelDensityNonUniform is not used by jLEMS, only when jNeuroML maps NML2 cells with this element to
                 a multicompartmental format in another simulator, e.g. NEURON-->
             <DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" value="ZERO_CURR_DENS"/>
         </Dynamics>
@@ -221,11 +221,11 @@
     <ComponentType name="channelDensityNonUniformGHK"
         extends="baseChannelDensity"
         description="Specifies a time varying conductance density, which is distributed on a region of the cell, and whose current is calculated from the Goldman-Hodgkin-Katz equation. Hard coded for Ca only!. The conductance density of the channel is not uniform, but is set using the _variableParameter_. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON">
-        
+
         <Constant name="ZERO_CURR_DENS" dimension="currentDensity" value="0 A_per_m2"/>
-  
+
         <Child name="variableParameter" type="variableParameter"/>
-        
+
 
         <!-- TODO: Ensure Text elements are inherited from base type -->
         <Text name="segmentGroup"/>
@@ -233,7 +233,7 @@
                                 But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
 
         <Dynamics>
-            <!--NOTE: channelDensityNonUniform is not used by jLEMS, only when jNeuroML maps NML2 cells with this element to 
+            <!--NOTE: channelDensityNonUniform is not used by jLEMS, only when jNeuroML maps NML2 cells with this element to
                 a multicompartmental format in another simulator, e.g. NEURON-->
             <DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" value="ZERO_CURR_DENS"/>
         </Dynamics>
@@ -243,14 +243,14 @@
         </Structure>
 
     </ComponentType>
-    
+
 
     <ComponentType name="channelDensity"
         extends="baseChannelDensityCond"
         description="Specifies a time varying ohmic conductance density, _gDensity, which is distributed on an area of the cell with fixed reversal potential _erev producing a current density _iDensity">
 
         <Parameter name="erev" dimension="voltage"/>
-        
+
         <Constant name="vShift" dimension="voltage" value="0mV" description="Set to a constant 0mV here to allow ion channels which use _vShift in their rate variable expressions to be used with _channelDensity_, not just with _channelDensityVShift_ (where _vShift would be explicitly set)"/>
 
         <!-- TODO: Ensure Text elements are inherited from base type -->
@@ -319,13 +319,13 @@
             	<Case condition="caConcExt .gt. 0" value="condDensity * channelf"/>
             	<Case condition="caConcExt .leq. 0" value="0"/>
             </ConditionalDerivedVariable>
-  
+
             <ConditionalDerivedVariable name="erev" dimension="voltage" exposure="erev">
             	<Case condition="caConcExt .gt. 0" value="(R * temperature / (zCa * F)) * log(caConcExt / caConc)"/>
             	<Case condition="caConcExt .leq. 0" value="0"/>
             </ConditionalDerivedVariable>
 
-            <!-- TODO check if needed <DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity" 
+            <!-- TODO check if needed <DerivedVariable name="iDensity"  dimension="currentDensity" exposure="iDensity"
                                                        value="gDensity * (erev - v)" valueCondition="caConcExt .gt. 0" valueIfFalse="0"/>  -->
             <ConditionalDerivedVariable name="iDensity" dimension="currentDensity" exposure="iDensity">
             	<Case condition="caConcExt .gt. 0" value="gDensity * (erev - v)"/>
@@ -339,8 +339,8 @@
         </Structure>
 
     </ComponentType>
-    
-    
+
+
     <ComponentType name="channelDensityNernstCa2"
                    extends="baseChannelDensityCond"
                    description="This component is similar to the original component type _channelDensityNernst_ but it is changed in order to have a reversal potential that depends on a second independent Ca++ pool (ca2). See https://github.com/OpenSourceBrain/ghk-nernst.">
@@ -349,15 +349,15 @@
         <Constant name="zCa" dimension="none" value="2" description="TODO: Make this a global constant!"/>
         <Constant name="F" dimension="charge_per_mole" value="96485.3 C_per_mol" description="TODO: Make this a global constant!"/>
 
-        <Exposure name="erev" dimension="voltage"/> 
-        
+        <Exposure name="erev" dimension="voltage"/>
+
         <Requirement name="temperature" dimension="temperature"/>
         <Requirement name="caConc2" dimension="concentration"/>
         <Requirement name="caConcExt2" dimension="concentration"/>
 
         <Text name="segmentGroup"/>
-        <Text name="ion"/> 
-        
+        <Text name="ion"/>
+
         <Dynamics>
 
             <DerivedVariable name="channelf" dimension="none" select="ionChannel/fopen"/>
@@ -366,7 +366,7 @@
                 <Case condition="caConcExt2 .gt. 0" value="condDensity * channelf"/>
                 <Case condition="caConcExt2 .leq. 0" value="0"/>
             </ConditionalDerivedVariable>
-  
+
             <ConditionalDerivedVariable name="erev" dimension="voltage" exposure="erev">
                 <Case condition="caConcExt2 .gt. 0" value="(R * temperature / (zCa * F)) * log(caConcExt2 / caConc2)"/>
                 <Case condition="caConcExt2 .leq. 0" value="0"/>
@@ -422,12 +422,12 @@
             <ChildInstance component="ionChannel"/>
         </Structure>
     </ComponentType>
-    
-    
+
+
     <ComponentType name="channelDensityGHK2"
-        extends="baseChannelDensityCond"  
+        extends="baseChannelDensityCond"
         description="Time varying conductance density, _gDensity, which is distributed on an area of the cell, producing a current density _iDensity. Modified version of Jaffe et al. 1994 (used also in Lawrence et al. 2006). See https://github.com/OpenSourceBrain/ghk-nernst.">
-        
+
         <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
         <Constant name="CONC_SCALE" dimension="concentration" value="1 mM"/>
         <Constant name="TEMP_SCALE" dimension="temperature" value="1 K"/>
@@ -435,7 +435,7 @@
         <Requirement name="temperature" dimension="temperature"/>
         <Requirement name="caConc" dimension="concentration"/>
         <Requirement name="caConcExt" dimension="concentration"/>
-        
+
         <!-- TODO: Ensure Text elements are inherited from base type -->
         <Text name="segmentGroup"/>
 
@@ -448,11 +448,11 @@
             <DerivedVariable name="T" dimension="none" value="temperature / TEMP_SCALE"/>
 
             <DerivedVariable name="channelf" dimension="none" select="ionChannel/fopen"/>
-            
+
             <DerivedVariable name="gDensity" dimension="conductanceDensity" exposure="gDensity" value="condDensity * channelf"/>
-            
+
             <DerivedVariable name="tmp" dimension="none" value="(25 * T) / (293.15 * 2)"/>
-            
+
             <ConditionalDerivedVariable name="pOpen" dimension="voltage">
                 <Case condition="V/tmp .eq. 0." value="tmp * 1e-3 * (1 - ((ca_conc_i/ca_conc_ext) * exp(V/tmp))) * (1 - (V/tmp)/2)"/>
                 <Case condition="V/tmp .neq. 0." value="tmp * 1e-3 * (1 - ((ca_conc_i/ca_conc_ext) * exp(V/tmp))) * ((V/tmp) / (exp(V/tmp) - 1))"/>
@@ -464,11 +464,11 @@
 	    </ConditionalDerivedVariable>
 
         </Dynamics>
-        
+
         <Structure>
             <ChildInstance component="ionChannel"/>
         </Structure>
-        
+
     </ComponentType>
 
 
@@ -563,26 +563,29 @@
 
     <ComponentType name="distal"
         extends="point3DWithDiam"
-        description="Point furthest from the soma in a segment">
+        description="Point furthest from the soma/root in a _segment_. See also _proximal_.">
     </ComponentType>
 
 
     <ComponentType name="proximal"
         extends="point3DWithDiam"
-        description="Point closest to the soma in a segment. Note, if the proximal point is equal to the distal point of the parent segment, proximal can be omitted.">
+        description="Point closest to the soma in a _segment_. Note: if the proximal point is equal to the _distal_ point of the _parent_ _segment_, proximal can be omitted.">
 
     </ComponentType>
 
 
     <ComponentType name="parent"
-        description="Specifies the segment which is this segment's parent">
+        description="Specifies the _segment_ which is this segment's parent. The _fractionAlong specifies where it is connected, usually 1 (the default value), meaning the _distal_ point of the parent, or 0, meaning the _proximal_ point. If it is between these, a linear interpolation between the 2 points should be used.">
         <Text name="segment"/>
         <Text name="fractionAlong"/>
     </ComponentType>
 
 
     <ComponentType name="segment"
-        description="A segment defines the smallest unit within a possibly branching structure (_morphology_), such as a dendrite or axon. The shape is given by the _proximal_ and _distal_ points. If _proximal_ is missing, the proximal point is assumed to be the _distal_ point of the parent. _parent_ specifies the parent segment. The first segment (no _parent_) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling. ">
+        description="A segment defines the smallest unit within a possibly branching structure (_morphology_), such as a dendrite or axon.
+        The shape is given by the _proximal_ and _distal_ points. If _proximal_ is missing, the proximal point is assumed to be the _distal_ point of the parent.
+
+         _parent_ specifies the parent segment. The first segment (no _parent_) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling. ">
 
         <Constant name="LEN" dimension="length" value="1m"/>
         <Child name="parent" type="parent"/>
@@ -592,7 +595,7 @@
         <Exposure name="surfaceArea" dimension="area"/>
         <Exposure name="radDist" dimension="length"/>
         <Exposure name="length" dimension="length"/>
-        
+
         <Text name="name"/>
 
         <Dynamics>
@@ -621,7 +624,7 @@
 
 
     <ComponentType name="segmentGroup" description="A method to describe a group of _segment_s in a _morphology_">
-        
+
         <Child name="notes" type="notes"/>
         <Child name="annotation" type="annotation"/>
         <Children name="property" type="property"/>
@@ -630,9 +633,9 @@
         <Children name="subTrees" type="subTree"/>
         <Children name="includes" type="include"/> <!-- TODO deal with <include> used also for including ext NML files... -->
         <Children name="inhomogeneousParameter" type="inhomogeneousParameter"/>
-        
+
         <Text name="neuroLexId"/>
-        
+
     </ComponentType>
 
 
@@ -666,21 +669,21 @@
     <ComponentType name="subTree" description="Include all the segments distal to that specified by _from_ in the _segmentGroup_">
         <Child name="from" type="from"/>
     </ComponentType>
-    
-    
+
+
     <ComponentType name="inhomogeneousParameter" description="An inhomogeneous parameter specified across the _segmentGroup_">
         <Child name="proximal" type="proximalProperties"/>
         <Child name="distal" type="distalProperties"/>
         <Text name="variable"/>
         <Text name="metric"/>
     </ComponentType>
-    
-    
+
+
     <ComponentType name="proximalProperties" description="What to do at the proximal point when creating an inhomogeneous parameter">
         <Text name="translationStart"/>
     </ComponentType>
-    
-    
+
+
     <ComponentType name="distalProperties" description="What to do at the distal point when creating an inhomogeneous parameter">
         <Text name="normalizationEnd"/>
     </ComponentType>
@@ -726,7 +729,7 @@
 
     <ComponentType name="membraneProperties"
        description="Properties specific to the membrane, such as the _populations of channels, _channelDensities, _specificCapacitance, etc.">
-        
+
         <Child name="initMembPotential" type="initMembPotential"/>      <!--TEMP: needs to be removed... -->
         <Child name="spikeThresh" type="spikeThresh"/>
         <Children name="specificCapacitances" type="specificCapacitance"/>
@@ -742,7 +745,7 @@
         <Requirement name="surfaceArea" dimension="area"/>
 
         <Dynamics>
-            <!-- Note this is not ideal, but for a single compartment cell (which is all this Dynamics should be used for) there should 
+            <!-- Note this is not ideal, but for a single compartment cell (which is all this Dynamics should be used for) there should
                  be only one specificCapacitance, referring to this compartment -->
             <DerivedVariable name="totSpecCap" dimension="specificCapacitance" exposure="totSpecCap" select="specificCapacitances[*]/specCap" reduce="add"/>
 
@@ -758,26 +761,26 @@
         </Dynamics>
 
     </ComponentType>
-    
-    
+
+
     <ComponentType name="membraneProperties2CaPools" extends="membraneProperties"
         description="Variant of membraneProperties with 2 independent Ca pools">
-        
-        <Child name="initMembPotential" type="initMembPotential"/>      
+
+        <Child name="initMembPotential" type="initMembPotential"/>
         <Child name="spikeThresh" type="spikeThresh"/>
         <Children name="specificCapacitances" type="specificCapacitance"/>
         <Children name="populations" type="baseChannelPopulation"/>
         <Children name="channelDensities" type="baseChannelDensity"/>
-          
+
         <Exposure name="totChanCurrent" dimension="current"/>
         <Exposure name="iCa" dimension="current"/>
-        <Exposure name="iCa2" dimension="current"/> 
+        <Exposure name="iCa2" dimension="current"/>
         <Exposure name="totSpecCap" dimension="specificCapacitance"/>
 
         <Requirement name="surfaceArea" dimension="area"/>
 
         <Dynamics>
-            
+
             <DerivedVariable name="totSpecCap" dimension="specificCapacitance" exposure="totSpecCap" select="specificCapacitances[*]/specCap" reduce="add"/>
 
             <DerivedVariable name="totChanPopCurrent" dimension="current" select="populations[*]/i" reduce="add"/>
@@ -802,7 +805,7 @@
 
     <ComponentType name="biophysicalProperties"
         description="The biophysical properties of the _cell_, including the _membraneProperties_ and the _intracellularProperties_">
-        
+
         <Child name="membraneProperties" type="membraneProperties"/>
 
         <Child name="intracellularProperties" type="intracellularProperties"/>
@@ -821,7 +824,7 @@
 
         <Child name="membraneProperties2CaPools" type="membraneProperties2CaPools"/>
 
-        <Child name="intracellularProperties2CaPools" type="intracellularProperties2CaPools"/> 
+        <Child name="intracellularProperties2CaPools" type="intracellularProperties2CaPools"/>
 
         <Exposure name="totSpecCap" dimension="specificCapacitance"/>
 
@@ -830,7 +833,7 @@
         </Dynamics>
 
     </ComponentType>
-    
+
 
     <ComponentType name="intracellularProperties"
         description="Biophysical properties related to the intracellular space within the _cell_, such as the _resistivity_ and the list of ionic _species_ present. _caConc and _caConcExt are explicitly exposed here to facilitate accessing these values from other Components, even though _caConcExt is clearly not an intracellular property">
@@ -846,8 +849,8 @@
             <DerivedVariable name="caConcExt" dimension="concentration" exposure="caConcExt" select="speciesList[ion='ca']/extConcentration" reduce="add" required="false"/>
         </Dynamics>
     </ComponentType>
-    
-    
+
+
     <ComponentType name="intracellularProperties2CaPools" extends="intracellularProperties"
         description="Variant of intracellularProperties with 2 independent Ca pools">
 
@@ -866,7 +869,7 @@
 
             <DerivedVariable name="caConc" dimension="concentration" exposure="caConc" select="speciesList[ion='ca']/concentration" reduce="add" required="false"/>
             <DerivedVariable name="caConcExt" dimension="concentration" exposure="caConcExt" select="speciesList[ion='ca']/extConcentration" reduce="add" required="false"/>
-  
+
         </Dynamics>
     </ComponentType>
 
@@ -941,7 +944,7 @@
                 <StateAssignment variable="concentration" value="initialConcentration"/>
                 <StateAssignment variable="extConcentration" value="initialExtConcentration"/>
             </OnStart>
-            
+
             <OnCondition test="concentration .lt. 0">
                 <StateAssignment variable="concentration" value="0"/>
             </OnCondition>
@@ -957,58 +960,58 @@
 
         <Parameter name="restingConc" dimension="concentration"/>
         <Parameter name="decayConstant" dimension="time"/>
-        
+
         <Parameter name="rho" dimension="rho_factor"/>
-        
+
         <Requirement name="iCa" dimension="current"/>
         <Requirement name="surfaceArea" dimension="area"/>
-    
+
         <Text name="ion"/> <!-- TODO: check why this isn't inherited from concentrationModel -->
 
         <Dynamics>
 
             <StateVariable name="concentration" exposure="concentration" dimension="concentration"/>
             <StateVariable name="extConcentration" exposure="extConcentration" dimension="concentration"/>
-            
+
             <TimeDerivative variable="concentration" value="(iCa/surfaceArea) * rho - ((concentration - restingConc) / decayConstant)"/>
 
             <OnStart>
                 <StateAssignment variable="concentration" value="initialConcentration"/>
                 <StateAssignment variable="extConcentration" value="initialExtConcentration"/>
             </OnStart>
-            
+
             <OnCondition test="concentration .lt. 0">
                 <StateAssignment variable="concentration" value="0"/>
             </OnCondition>
         </Dynamics>
     </ComponentType>
-    
+
     <ComponentType name="fixedFactorConcentrationModelTraub"
         extends="concentrationModel"
         description="Model of buffering of concentration of an ion (currently hard coded to be calcium, due to requirement for _iCa) which has a baseline level _restingConc and tends to this value with time course 1 / _beta. A fixed factor _phi is used to scale the incoming current *independently of the size of the compartment* to produce a concentration change. Not recommended for use in models other than Traub et al. 2005!">
 
         <Parameter name="restingConc" dimension="concentration"/>
         <Parameter name="beta" dimension="per_time"/>
-        
+
         <Parameter name="phi" dimension="rho_factor"/>
-        
+
         <Requirement name="iCa" dimension="current"/>
         <Requirement name="surfaceArea" dimension="area"/>
-    
+
         <Text name="species"/> <!-- TODO: check why this isn't inherited from concentrationModel -->
 
         <Dynamics>
 
             <StateVariable name="concentration" exposure="concentration" dimension="concentration"/>
             <StateVariable name="extConcentration" exposure="extConcentration" dimension="concentration"/>
-            
+
             <TimeDerivative variable="concentration" value="(iCa/surfaceArea) * 1e-9 * phi - ((concentration - restingConc) * beta)"/>
 
             <OnStart>
                 <StateAssignment variable="concentration" value="initialConcentration"/>
                 <StateAssignment variable="extConcentration" value="initialExtConcentration"/>
             </OnStart>
-            
+
             <OnCondition test="concentration .lt. 0">
                 <StateAssignment variable="concentration" value="0"/>
             </OnCondition>
@@ -1028,7 +1031,7 @@
         <Exposure name="extConcentration" dimension="concentration"/>
 
         <Text name="ion"/> <!-- TODO: this should be in id!!! -->
-        <Text name="segmentGroup"/> 
+        <Text name="segmentGroup"/>
 
         <Dynamics>
 
@@ -1047,7 +1050,7 @@
     <ComponentType name="cell"
         extends="baseCellMembPot"
         description="Cell with _segment_s specified in a _morphology_ element along with details on its _biophysicalProperties_. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and _v of this cell represents the membrane potential in that isopotential segment.">
-                
+
         <Child name="morphology" type="morphology"/>
 
         <Child name="biophysicalProperties" type="biophysicalProperties"/>
@@ -1065,7 +1068,7 @@
         <Exposure name="iCa" dimension="current"/>
         <Exposure name="caConc" dimension="concentration"/>
         <Exposure name="caConcExt" dimension="concentration"/>
-        
+
         <Text name="neuroLexId"/>
 
         <Dynamics>
@@ -1077,10 +1080,10 @@
             <DerivedVariable name="thresh" dimension="voltage" select="biophysicalProperties/membraneProperties/spikeThresh/value"/>
 
             <!--<DerivedVariable name="debug" dimension="none" value="0"/>-->
-            
+
             <!--TODO replace this with just using first segment!!-->
             <DerivedVariable name="surfaceArea" exposure="surfaceArea" dimension="area" select="morphology/segments[*]/surfaceArea" reduce="add"/>
-            
+
             <DerivedVariable name="totSpecCap" dimension="specificCapacitance" exposure="totSpecCap" select="biophysicalProperties/totSpecCap"/>
             <DerivedVariable name="totCap" dimension="capacitance" value="totSpecCap * surfaceArea "/>
 
@@ -1114,15 +1117,15 @@
         </Dynamics>
 
     </ComponentType>
-    
-    
+
+
     <ComponentType name="cell2CaPools"
                    extends="cell"
                    description="Variant of cell with two independent Ca2+ pools. Cell with _segment_s specified in a _morphology_ element along with details on its _biophysicalProperties_. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and _v of this cell represents the membrane potential in that isopotential segment.">
-        
+
         <!--<Child name="notes" type="notes"/>
         <Child name="annotation" type="annotation"/>
-        
+
         <Child name="morphology" type="morphology"/>-->
 
         <Child name="biophysicalProperties2CaPools" type="biophysicalProperties2CaPools"/>
@@ -1146,7 +1149,7 @@
         <Exposure name="caConc2" dimension="concentration"/>
         <Exposure name="caConcExt2" dimension="concentration"/>
 
-        
+
         <Text name="neuroLexId"/>
 
         <Dynamics>
@@ -1158,10 +1161,10 @@
             <DerivedVariable name="thresh" dimension="voltage" select="biophysicalProperties2CaPools/membraneProperties2CaPools/spikeThresh/value"/>
 
             <!--<DerivedVariable name="debug" dimension="none" select="0"/>-->
-            
-            
+
+
             <DerivedVariable name="surfaceArea" exposure="surfaceArea" dimension="area" select="morphology/segments[*]/surfaceArea" reduce="add"/>
-            
+
             <DerivedVariable name="totSpecCap" dimension="specificCapacitance" exposure="totSpecCap" select="biophysicalProperties2CaPools/totSpecCap"/>
             <DerivedVariable name="totCap" dimension="capacitance" value="totSpecCap * surfaceArea "/>
 
@@ -1204,7 +1207,7 @@
 
     </ComponentType>
 
-  
+
 
 
     <ComponentType name="baseCellMembPotCap"
@@ -1416,28 +1419,28 @@
         </Dynamics>
 
     </ComponentType>
-    
+
     <ComponentType name="izhikevich2007Cell"
         extends="baseCellMembPotCap"
         description="Cell based on the modified Izhikevich model in Izhikevich 2007, Dynamical systems in neuroscience, MIT Press">
 
-        <Parameter name="v0" dimension="voltage"/>  
-        
+        <Parameter name="v0" dimension="voltage"/>
+
         <!--
         Defined in baseCellMembPotCap:
         <Parameter name="C" dimension="capacitance"/>
         -->
         <Parameter name="k" dimension="conductance_per_voltage"/>
-        
-        <Parameter name="vr" dimension="voltage"/> 
-        <Parameter name="vt" dimension="voltage"/> 
-        <Parameter name="vpeak" dimension="voltage"/> 
-        
+
+        <Parameter name="vr" dimension="voltage"/>
+        <Parameter name="vt" dimension="voltage"/>
+        <Parameter name="vpeak" dimension="voltage"/>
+
         <Parameter name="a" dimension="per_time"/>
         <Parameter name="b" dimension="conductance"/>
         <Parameter name="c" dimension="voltage"/>
         <Parameter name="d" dimension="current"/>
-        
+
         <Attachments name="synapses" type="basePointCurrent"/>
 
         <Exposure name="u" dimension="current"/>
@@ -1448,9 +1451,9 @@
             <StateVariable name="u" dimension="current" exposure="u"/>
 
             <DerivedVariable name="iSyn"  dimension="current" exposure="iSyn" select="synapses[*]/i" reduce="add" />
-            
+
             <DerivedVariable name="iMemb" dimension="current" exposure="iMemb" value="k * (v-vr) * (v-vt) + iSyn - u"/>
-            
+
             <TimeDerivative variable="v" value="iMemb / C"/>
             <TimeDerivative variable="u" value="a * (b * (v-vr) - u)"/>
 
@@ -1464,7 +1467,7 @@
                 <StateAssignment variable="u" value="u + d"/>
                 <EventOut port="spike"/>
             </OnCondition>
-            
+
         </Dynamics>
 
     </ComponentType>
@@ -1599,15 +1602,15 @@
         </Dynamics>
 
     </ComponentType>
-    
-    
+
+
     <ComponentType name="pinskyRinzelCA3Cell"
                extends="baseCellMembPot"
                description="Reduced CA3 cell model from Pinsky and Rinzel 1994. See https://github.com/OpenSourceBrain/PinskyRinzelModel">
 
         <Parameter name="iSoma" dimension="currentDensity"/>
         <Parameter name="iDend" dimension="currentDensity"/>
-        
+
         <Parameter name="gLs" dimension="conductanceDensity"/>
         <Parameter name="gLd" dimension="conductanceDensity"/>
         <Parameter name="gNa" dimension="conductanceDensity"/>
@@ -1616,12 +1619,12 @@
         <Parameter name="gKahp" dimension="conductanceDensity"/>
         <Parameter name="gKC" dimension="conductanceDensity"/>
         <Parameter name="gc" dimension="conductanceDensity"/>
-        
+
         <Parameter name="eNa" dimension="voltage"/>
         <Parameter name="eCa" dimension="voltage"/>
         <Parameter name="eK" dimension="voltage"/>
         <Parameter name="eL" dimension="voltage"/>
-        
+
         <Parameter name="pp" dimension="none"/>
         <Parameter name="cm" dimension="specificCapacitance"/>
         <Parameter name="alphac" dimension="none"/>
@@ -1630,17 +1633,17 @@
         <Parameter name="gNmda" dimension="conductanceDensity"/>
         <Parameter name="gAmpa" dimension="conductanceDensity"/>
         <Parameter name="qd0" dimension="none"/>
-    
+
         <!-- Normalizing Constants -->
         <Constant name="MSEC" dimension="time" value="1 ms"/>
         <Constant name="MVOLT" dimension="voltage" value="1 mV"/>
         <Constant name="UAMP_PER_CM2" dimension="currentDensity" value="1 uA_per_cm2"/>
-    
+
         <!-- Model Constants -->
         <Constant name="Smax" dimension="none" value="125.0"/>
         <Constant name="Vsyn" dimension="voltage" value="60.0 mV"/>
         <Constant name="betaqd" dimension="none" value="0.001"/>
-        
+
         <Exposure name="Vs" dimension="voltage"/>
         <Exposure name="Vd" dimension="voltage"/>
         <Exposure name="ICad" dimension="currentDensity"/>
@@ -1652,10 +1655,10 @@
         <Exposure name="qd" dimension="none"/>
         <Exposure name="Si" dimension="none"/>
         <Exposure name="Wi" dimension="none"/>
-    
-    
+
+
         <Dynamics>
-        
+
             <StateVariable name="Vs" dimension="voltage" exposure="Vs"/>
             <StateVariable name="Vd" dimension="voltage" exposure="Vd"/>
             <StateVariable name="Cad" dimension="none" exposure="Cad"/>
@@ -1669,15 +1672,15 @@
             <!-- Synaptic Dynamics -->
             <StateVariable name="Si" dimension="none" exposure="Si"/>
             <StateVariable name="Wi" dimension="none" exposure="Wi"/>
-            
+
             <!-- Note Sisat is StateVariable & ConditionalDerivedVariable, see https://github.com/OpenSourceBrain/PinskyRinzelModel/issues/7 -->
             <StateVariable name="Sisat" dimension="none"/>
-            
+
             <!-- baseCellMembPot compatibility -->
             <DerivedVariable name="v" dimension="voltage" value="Vs" exposure="v"/>
             <DerivedVariable name="ICad" dimension="currentDensity" exposure="ICad" value="gCa*sd*sd*(Vd-eCa)"/>
-        
-        
+
+
 
             <DerivedVariable name="alphams_Vs" dimension="none" value="0.32*(-46.9-Vs/MVOLT)/(exp((-46.9-Vs/MVOLT)/4.0)-1.0)"/>
             <DerivedVariable name="betams_Vs" dimension="none" value="0.28*(Vs/MVOLT+19.9)/(exp((Vs/MVOLT+19.9)/5.0)-1.0)"/>
@@ -1692,17 +1695,17 @@
             <DerivedVariable name="alphasd_Vd" dimension="none" value="1.6/(1.0+exp(-0.072*(Vd/MVOLT-5.0)))"/>
             <DerivedVariable name="betasd_Vd" dimension="none" value="0.02*(Vd/MVOLT+8.9)/(exp((Vd/MVOLT+8.9)/5.0)-1.0)"/>
 
-            
+
             <DerivedVariable name="Iampa" dimension="currentDensity" value="gAmpa*Wi*(Vd-Vsyn)"/>
             <DerivedVariable name="Inmda" dimension="currentDensity" value="gNmda*Sisat*(Vd-Vsyn)/(1.0+0.28*exp(-0.062*(Vd/MVOLT-60.0)))"/>
             <DerivedVariable name="Isyn" dimension="currentDensity" value="Iampa+Inmda"/>
-            
-            
+
+
             <ConditionalDerivedVariable name="alphaqd" dimension="none">
                 <Case condition="0.00002*Cad .gt. 0.01" value="0.01"/>
                 <Case value="0.00002*Cad"/>
             </ConditionalDerivedVariable>
-        
+
             <ConditionalDerivedVariable name="chid" dimension="none">
                 <Case condition="Cad/250 .gt. 1" value="1"/>
                 <Case value="Cad/250"/>
@@ -1712,7 +1715,7 @@
                 <Case condition="Vd .lt. -10*MVOLT" value="exp((Vd/MVOLT+50.0)/11-(Vd/MVOLT+53.5)/27)/18.975"/>
                 <Case value="2.0*exp((-53.5-Vd/MVOLT)/27.0)"/>
             </ConditionalDerivedVariable>
-        
+
             <ConditionalDerivedVariable name="betacd_Vd" dimension="none">
                 <Case condition="Vd .lt. -10*MVOLT" value="(2.0*exp((-53.5-Vd/MVOLT)/27.0)-alphacd_Vd)"/>
                 <Case value="0"/>
@@ -1737,7 +1740,7 @@
             <!-- Synaptic Dynamics -->
             <TimeDerivative variable="Si" value="-Si/150.0" />
             <TimeDerivative variable="Wi" value="-Wi/2.0" />
-	
+
 
             <OnStart>
                 <StateAssignment variable="Vs" value="eL"/>
@@ -1746,7 +1749,7 @@
             </OnStart>
 
         </Dynamics>
-    
+
     </ComponentType>
 
 

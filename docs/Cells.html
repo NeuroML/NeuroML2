@@ -15,7 +15,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="#">NeuroML v2.1 Component Types</a>
+      <a class="brand" href="#">NeuroML v2.2 Component Types</a>
       <div class="nav-collapse">
         <ul class="nav">
           <li class="active"><a href="Cells.html">Cells</a></li>
@@ -36,7 +36,7 @@
     <div class="span3">
     <div class="well sidebar-nav">
       <b>Component Types</b><br/>
-<a href="Cells.html#baseCell" title="Base type of any cell which can be used in a population "><span  style="color:#85ACE1;font-style:italic">baseCell</span></a><br/>
+<a href="Cells.html#baseCell" title="Base type of any cell (either abstract like izhikevich2007Cell or morphologically detailed like cell) which can be used in a population "><span  style="color:#85ACE1;font-style:italic">baseCell</span></a><br/>
   
 &nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#baseSpikingCell" title="Base type of any cell which can emit spike events. "><span  style="color:#85ACE1;font-style:italic">baseSpikingCell</span></a><br/>
   
@@ -56,7 +56,7 @@
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>specificCapacitances <a href="Cells.html#specificCapacitance" title="Capacitance per unit area ">specificCapacitance</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>populations <a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>populations <a href="Cells.html#baseChannelPopulation" title="Base type for any current producing population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#channelPopulation" title="Population of number ohmic ion channels. These each produce a conductance channelg across a reversal potential erev, giving a total current i. ">channelPopulation</a><br/>
   
@@ -96,13 +96,13 @@
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#morphology" title="The collection of segments which specify the 3D structure of the cell, along with a number of segmentGroups ">morphology</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>segments <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent. parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>segments <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon.         The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent.           parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#parent" title="Specifies the segment which is this segment's parent ">parent</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#parent" title="Specifies the segment which is this segment's parent. The fractionAlong specifies where it is connected usually 1 (the default value), meaning the distal point of the parent, or 0, meaning the proximal point. If it is between these, a linear interpolation between the 2 points should be used. ">parent</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#distal" title="Point furthest from the soma in a segment ">distal</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#distal" title="Point furthest from the soma/root in a segment. See also proximal. ">distal</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#proximal" title="Point closest to the soma in a segment. Note, if the proximal point is equal to the distal point of the parent segment, proximal can be omitted. ">proximal</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#proximal" title="Point closest to the soma in a segment. Note: if the proximal point is equal to the distal point of the parent segment, proximal can be omitted. ">proximal</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>segmentGroups <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology ">segmentGroup</a><br/>
   
@@ -172,7 +172,7 @@
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>specificCapacitances <a href="Cells.html#specificCapacitance" title="Capacitance per unit area ">specificCapacitance</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>populations <a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>populations <a href="Cells.html#baseChannelPopulation" title="Base type for any current producing population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>channelDensities <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a><br/>
   
@@ -184,11 +184,11 @@
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#pointCellCondBased" title="Simple model of a conductance based cell, with no separate morphology element, just an absolute capacitance C, and a set of channel populations ">pointCellCondBased</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>populations <a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>populations <a href="Cells.html#baseChannelPopulation" title="Base type for any current producing population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#pointCellCondBasedCa" title="TEMPORARY: Point cell with conductances and Ca concentration  info. Not yet fully tested!!! ">pointCellCondBasedCa</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>populations <a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>populations <a href="Cells.html#baseChannelPopulation" title="Base type for any current producing population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>concentrationModels <a href="Cells.html#concentrationModel" title="Base for any model of an ion concentration which changes with time. Internal (_concentration) and external (_extConcentration) values for the concentration of the ion are given. ">concentrationModel</a><br/>
   
@@ -227,10 +227,10 @@
     </div><!--/.well -->
     </div><!--/span-->
     <div class="span7">
-   <div class="alert alert-error"><br/><p><b>  NOTE: the latest version of this documentation can be found on <a href="https://docs.neuroml.org/Userdocs/Schemas/Cells.html">docs.neuroml.org</a>!</b></p><br/>For more information on NeuroML 2 and LEMS see <a href="http://www.neuroml.org/neuromlv2">here</a>. <br/>Note: these descriptions have been updated to the latest    <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2">NeuroML v2.1</a> definitions, using    <a href="https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS">the latest version of LEMS</a>!</div>
+   <div class="alert alert-error"><br/><p><b>  NOTE: the latest version of this documentation can be found on <a href="https://docs.neuroml.org/Userdocs/Schemas/Cells.html">docs.neuroml.org</a>!</b></p><br/>For more information on NeuroML 2 and LEMS see <a href="http://www.neuroml.org/neuromlv2">here</a>. <br/>Note: these descriptions have been updated to the latest    <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2">NeuroML v2.2</a> definitions, using    <a href="https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS">the latest version of LEMS</a>!</div>
     <table class="table table-bordered"><tr><td ><h3>Cells</h3></td></tr>
     <tr><td><span  style="color:dimgrey"><i>NeuroML2 ComponentType definitions from Cells.xml </i></span></td></tr>
-    <tr><td>Original LEMS ComponentType definitions: <a href="https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/Cells.xml">Cells.xml</a><br/>    Schema against which NeuroML based on these should be valid: <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2/NeuroML_v2.1.xsd">NeuroML_v2.1.xsd</a></td></tr>
+    <tr><td>Original LEMS ComponentType definitions: <a href="https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/Cells.xml">Cells.xml</a><br/>    Schema against which NeuroML based on these should be valid: <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2/NeuroML_v2.2.xsd">NeuroML_v2.2.xsd</a></td></tr>
     </table><br/>
 <a name="baseCell">&nbsp;</a>
 <table class="table table-bordered">
@@ -241,7 +241,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Base type of any cell which can be used in a population </i></span>    </td>
+      <span  style="color:dimgrey"><i>Base type of any cell (either abstract like <a href="Cells.html#izhikevich2007Cell" title="Cell based on the modified Izhikevich model in Izhikevich 2007, Dynamical systems in neuroscience, MIT Press ">izhikevich2007Cell</a> or morphologically detailed like <a href="Cells.html#cell" title="Cell with segments specified in a morphology element along with details on its biophysicalProperties. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and v of this cell represents the membrane potential in that isopotential segment. ">cell</a>) which can be used in a population </i></span>    </td>
   </tr>
 </table>
 
@@ -250,7 +250,7 @@
   <tr>
     <td colspan='3'>
        <b><span  style="color:dimgrey;font-style:italic">baseSpikingCell</span></b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseCell" title="Base type of any cell which can be used in a population "><span  style="color:#85ACE1;font-style:italic">baseCell</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseCell" title="Base type of any cell (either abstract like izhikevich2007Cell or morphologically detailed like cell) which can be used in a population "><span  style="color:#85ACE1;font-style:italic">baseCell</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
@@ -333,7 +333,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Base type for any current produced by a population of channels, all of type <b>ionChannel</b> </i></span>    </td>
+      <span  style="color:dimgrey"><i>Base type for any current producing population of channels, all of type <b>ionChannel</b> </i></span>    </td>
   </tr>
   <tr>
 
@@ -366,7 +366,7 @@
   <tr>
     <td colspan='3'>
        <b>channelPopulation</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseChannelPopulation" title="Base type for any current producing population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
@@ -438,7 +438,7 @@
   <tr>
     <td colspan='3'>
        <b>channelPopulationNernst</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseChannelPopulation" title="Base type for any current producing population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
@@ -1440,7 +1440,7 @@
     <span class="label label-success">Children elements</span>
 </td>
     <td><b>populations</b></td>
-    <td width="100"><a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></td>
+    <td width="100"><a href="Cells.html#baseChannelPopulation" title="Base type for any current producing population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></td>
   </tr>
   <tr>
 
@@ -1540,7 +1540,7 @@
     <span class="label label-success">Children elements</span>
 </td>
     <td><b>populations</b></td>
-    <td width="100"><a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></td>
+    <td width="100"><a href="Cells.html#baseChannelPopulation" title="Base type for any current producing population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></td>
   </tr>
     <td><b>concentrationModels</b></td>
     <td width="100"><a href="Cells.html#concentrationModel" title="Base for any model of an ion concentration which changes with time. Internal (_concentration) and external (_extConcentration) values for the concentration of the ion are given. ">concentrationModel</a></td>
@@ -1631,7 +1631,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Point furthest from the soma in a segment </i></span>    </td>
+      <span  style="color:dimgrey"><i>Point furthest from the soma/root in a <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon.         The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent.           parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>. See also <a href="Cells.html#proximal" title="Point closest to the soma in a segment. Note: if the proximal point is equal to the distal point of the parent segment, proximal can be omitted. ">proximal</a>. </i></span>    </td>
   </tr>
   <tr>
 
@@ -1678,7 +1678,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Point closest to the soma in a segment. Note, if the proximal point is equal to the distal point of the parent segment, proximal can be omitted. </i></span>    </td>
+      <span  style="color:dimgrey"><i>Point closest to the soma in a <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon.         The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent.           parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>. Note: if the proximal point is equal to the <a href="Cells.html#distal" title="Point furthest from the soma/root in a segment. See also proximal. ">distal</a> point of the <a href="Cells.html#parent" title="Specifies the segment which is this segment's parent. The fractionAlong specifies where it is connected usually 1 (the default value), meaning the distal point of the parent, or 0, meaning the proximal point. If it is between these, a linear interpolation between the 2 points should be used. ">parent</a> <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon.         The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent.           parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>, proximal can be omitted. </i></span>    </td>
   </tr>
   <tr>
 
@@ -1725,7 +1725,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Specifies the segment which is this segment's parent </i></span>    </td>
+      <span  style="color:dimgrey"><i>Specifies the <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon.         The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent.           parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a> which is this segment's parent. The <b>fractionAlong</b> specifies where it is connected usually 1 (the default value), meaning the <a href="Cells.html#distal" title="Point furthest from the soma/root in a segment. See also proximal. ">distal</a> point of the parent, or 0, meaning the <a href="Cells.html#proximal" title="Point closest to the soma in a segment. Note: if the proximal point is equal to the distal point of the parent segment, proximal can be omitted. ">proximal</a> point. If it is between these, a linear interpolation between the 2 points should be used. </i></span>    </td>
   </tr>
   <tr>
 
@@ -1747,7 +1747,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>A segment defines the smallest unit within a possibly branching structure (<a href="Cells.html#morphology" title="The collection of segments which specify the 3D structure of the cell, along with a number of segmentGroups ">morphology</a>), such as a dendrite or axon. The shape is given by the <a href="Cells.html#proximal" title="Point closest to the soma in a segment. Note, if the proximal point is equal to the distal point of the parent segment, proximal can be omitted. ">proximal</a> and <a href="Cells.html#distal" title="Point furthest from the soma in a segment ">distal</a> points. If <a href="Cells.html#proximal" title="Point closest to the soma in a segment. Note, if the proximal point is equal to the distal point of the parent segment, proximal can be omitted. ">proximal</a> is missing, the proximal point is assumed to be the <a href="Cells.html#distal" title="Point furthest from the soma in a segment ">distal</a> point of the parent. <a href="Cells.html#parent" title="Specifies the segment which is this segment's parent ">parent</a> specifies the parent segment. The first segment (no <a href="Cells.html#parent" title="Specifies the segment which is this segment's parent ">parent</a>) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  </i></span>    </td>
+      <span  style="color:dimgrey"><i>A segment defines the smallest unit within a possibly branching structure (<a href="Cells.html#morphology" title="The collection of segments which specify the 3D structure of the cell, along with a number of segmentGroups ">morphology</a>), such as a dendrite or axon.         The shape is given by the <a href="Cells.html#proximal" title="Point closest to the soma in a segment. Note: if the proximal point is equal to the distal point of the parent segment, proximal can be omitted. ">proximal</a> and <a href="Cells.html#distal" title="Point furthest from the soma/root in a segment. See also proximal. ">distal</a> points. If <a href="Cells.html#proximal" title="Point closest to the soma in a segment. Note: if the proximal point is equal to the distal point of the parent segment, proximal can be omitted. ">proximal</a> is missing, the proximal point is assumed to be the <a href="Cells.html#distal" title="Point furthest from the soma/root in a segment. See also proximal. ">distal</a> point of the parent.           <a href="Cells.html#parent" title="Specifies the segment which is this segment's parent. The fractionAlong specifies where it is connected usually 1 (the default value), meaning the distal point of the parent, or 0, meaning the proximal point. If it is between these, a linear interpolation between the 2 points should be used. ">parent</a> specifies the parent segment. The first segment (no <a href="Cells.html#parent" title="Specifies the segment which is this segment's parent. The fractionAlong specifies where it is connected usually 1 (the default value), meaning the distal point of the parent, or 0, meaning the proximal point. If it is between these, a linear interpolation between the 2 points should be used. ">parent</a>) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  </i></span>    </td>
   </tr>
   <tr>
 
@@ -1762,13 +1762,13 @@
     <span class="label label-success">Child elements</span>
 </td>
     <td><b>parent</b></td>
-    <td width="100"><a href="Cells.html#parent" title="Specifies the segment which is this segment's parent ">parent</a></td>
+    <td width="100"><a href="Cells.html#parent" title="Specifies the segment which is this segment's parent. The fractionAlong specifies where it is connected usually 1 (the default value), meaning the distal point of the parent, or 0, meaning the proximal point. If it is between these, a linear interpolation between the 2 points should be used. ">parent</a></td>
   </tr>
     <td><b>distal</b></td>
-    <td width="100"><a href="Cells.html#distal" title="Point furthest from the soma in a segment ">distal</a></td>
+    <td width="100"><a href="Cells.html#distal" title="Point furthest from the soma/root in a segment. See also proximal. ">distal</a></td>
   </tr>
     <td><b>proximal</b></td>
-    <td width="100"><a href="Cells.html#proximal" title="Point closest to the soma in a segment. Note, if the proximal point is equal to the distal point of the parent segment, proximal can be omitted. ">proximal</a></td>
+    <td width="100"><a href="Cells.html#proximal" title="Point closest to the soma in a segment. Note: if the proximal point is equal to the distal point of the parent segment, proximal can be omitted. ">proximal</a></td>
   </tr>
   <tr>
 
@@ -1830,7 +1830,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>A method to describe a group of <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent. parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>s in a <a href="Cells.html#morphology" title="The collection of segments which specify the 3D structure of the cell, along with a number of segmentGroups ">morphology</a> </i></span>    </td>
+      <span  style="color:dimgrey"><i>A method to describe a group of <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon.         The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent.           parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>s in a <a href="Cells.html#morphology" title="The collection of segments which specify the 3D structure of the cell, along with a number of segmentGroups ">morphology</a> </i></span>    </td>
   </tr>
   <tr>
 
@@ -1883,7 +1883,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>A single identified <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent. parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a> which is part of the <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology ">segmentGroup</a> </i></span>    </td>
+      <span  style="color:dimgrey"><i>A single identified <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon.         The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent.           parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a> which is part of the <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology ">segmentGroup</a> </i></span>    </td>
   </tr>
   <tr>
 
@@ -1903,7 +1903,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Specifies which <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent. parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a> distal from which to calculate the <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology ">segmentGroup</a> </i></span>    </td>
+      <span  style="color:dimgrey"><i>Specifies which <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon.         The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent.           parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a> distal from which to calculate the <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology ">segmentGroup</a> </i></span>    </td>
   </tr>
   <tr>
 
@@ -1923,7 +1923,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Specifies which <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent. parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a> up to which to calculate the <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology ">segmentGroup</a> </i></span>    </td>
+      <span  style="color:dimgrey"><i>Specifies which <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon.         The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent.           parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a> up to which to calculate the <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology ">segmentGroup</a> </i></span>    </td>
   </tr>
   <tr>
 
@@ -2083,7 +2083,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>The collection of <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent. parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>s which specify the 3D structure of the cell, along with a number of <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology ">segmentGroup</a>s </i></span>    </td>
+      <span  style="color:dimgrey"><i>The collection of <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon.         The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent.           parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>s which specify the 3D structure of the cell, along with a number of <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology ">segmentGroup</a>s </i></span>    </td>
   </tr>
   <tr>
 
@@ -2091,7 +2091,7 @@
     <span class="label label-success">Children elements</span>
 </td>
     <td><b>segments</b></td>
-    <td width="100"><a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent. parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a></td>
+    <td width="100"><a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon.         The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent.           parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a></td>
   </tr>
     <td><b>segmentGroups</b></td>
     <td width="100"><a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology ">segmentGroup</a></td>
@@ -2218,7 +2218,7 @@
     <td width="100"><a href="Cells.html#specificCapacitance" title="Capacitance per unit area ">specificCapacitance</a></td>
   </tr>
     <td><b>populations</b></td>
-    <td width="100"><a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></td>
+    <td width="100"><a href="Cells.html#baseChannelPopulation" title="Base type for any current producing population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></td>
   </tr>
     <td><b>channelDensities</b></td>
     <td width="100"><a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a></td>
@@ -2297,7 +2297,7 @@
     <td width="100"><a href="Cells.html#specificCapacitance" title="Capacitance per unit area ">specificCapacitance</a></td>
   </tr>
     <td><b>populations</b></td>
-    <td width="100"><a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></td>
+    <td width="100"><a href="Cells.html#baseChannelPopulation" title="Base type for any current producing population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></td>
   </tr>
     <td><b>channelDensities</b></td>
     <td width="100"><a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a></td>
@@ -3007,7 +3007,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Cell with <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent. parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>s specified in a <a href="Cells.html#morphology" title="The collection of segments which specify the 3D structure of the cell, along with a number of segmentGroups ">morphology</a> element along with details on its <a href="Cells.html#biophysicalProperties" title="The biophysical properties of the cell, including the membraneProperties and the intracellularProperties ">biophysicalProperties</a>. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and <b>v</b> of this cell represents the membrane potential in that isopotential segment. </i></span>    </td>
+      <span  style="color:dimgrey"><i>Cell with <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon.         The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent.           parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>s specified in a <a href="Cells.html#morphology" title="The collection of segments which specify the 3D structure of the cell, along with a number of segmentGroups ">morphology</a> element along with details on its <a href="Cells.html#biophysicalProperties" title="The biophysical properties of the cell, including the membraneProperties and the intracellularProperties ">biophysicalProperties</a>. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and <b>v</b> of this cell represents the membrane potential in that isopotential segment. </i></span>    </td>
   </tr>
   <tr>
 
@@ -3134,7 +3134,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Variant of cell with two independent Ca2+ pools. Cell with <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent. parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>s specified in a <a href="Cells.html#morphology" title="The collection of segments which specify the 3D structure of the cell, along with a number of segmentGroups ">morphology</a> element along with details on its <a href="Cells.html#biophysicalProperties" title="The biophysical properties of the cell, including the membraneProperties and the intracellularProperties ">biophysicalProperties</a>. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and <b>v</b> of this cell represents the membrane potential in that isopotential segment. </i></span>    </td>
+      <span  style="color:dimgrey"><i>Variant of cell with two independent Ca2+ pools. Cell with <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon.         The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent.           parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>s specified in a <a href="Cells.html#morphology" title="The collection of segments which specify the 3D structure of the cell, along with a number of segmentGroups ">morphology</a> element along with details on its <a href="Cells.html#biophysicalProperties" title="The biophysical properties of the cell, including the membraneProperties and the intracellularProperties ">biophysicalProperties</a>. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and <b>v</b> of this cell represents the membrane potential in that isopotential segment. </i></span>    </td>
   </tr>
   <tr>
 
