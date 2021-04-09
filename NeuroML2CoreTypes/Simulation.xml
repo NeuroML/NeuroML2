@@ -1,13 +1,13 @@
-<Lems xmlns="http://www.neuroml.org/lems/0.7.4"
+<Lems xmlns="http://www.neuroml.org/lems/0.7.5"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.4 ../../LEMS/Schemas/LEMS/LEMS_v0.7.4.xsd">
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.5 ../../LEMS/Schemas/LEMS/LEMS_v0.7.5.xsd">
 
     <!-- A number of Simulation types for use in NeuroML 2 documents  -->
 
     <!-- Including standard unit definitions for NeuroML v2.0 -->
-    
+
     <Include file="NeuroMLCoreDimensions.xml"/>
-  
+
 
     <ComponentType name="Display">
         <Parameter name="xmin" dimension="none"/>
@@ -15,16 +15,16 @@
         <Parameter name="ymin" dimension="none"/>
         <Parameter name="ymax" dimension="none"/>
         <Parameter name="timeScale" dimension="time"/>
-        
+
         <Children name="lines" type="Line"/>
-        
-        <Text name="title"/>   
+
+        <Text name="title"/>
 
         <Simulation>
             <DataDisplay title="title" dataRegion="xmin,xmax,ymin,ymax"/>
         </Simulation>
     </ComponentType>
-        
+
 
     <ComponentType name="Line">
         <Parameter name="scale" dimension="*"/>
@@ -36,64 +36,64 @@
         </Simulation>
     </ComponentType>
 
-    
+
     <ComponentType name="Simulation">
         <Parameter name="length" dimension="time"/>
         <Parameter name="step" dimension="time"/>
-        
+
         <Children name="displays" type="Display"/>
         <Children name="outputs" type="OutputFile"/>
         <Children name="events" type="EventOutputFile"/>
-        
+
         <ComponentReference name="target" type="Component"/>
-        
+
         <Text name="seed"/>
-    
+
         <Dynamics>
             <StateVariable name="t" dimension="time"/>
         </Dynamics>
-        
+
         <Simulation>
             <Run component="target" variable="t" increment="step" total="length"/>
         </Simulation>
     </ComponentType>
-    
-    
+
+
     <ComponentType name="OutputFile">
-    	
+
     	<Children name="outputColumn" type="OutputColumn"/>
-        
+
         <Text name="path"/>
         <Text name="fileName"/>
-    	
+
     	<Simulation>
     		<DataWriter path="path" fileName="fileName"/>
     	</Simulation>
-    
+
     </ComponentType>
-    
+
     <ComponentType name="OutputColumn">
         <Path name="quantity"/>
         <Simulation>
             <Record quantity="quantity"/>
         </Simulation>
     </ComponentType>
-    
-    
+
+
     <ComponentType name="EventOutputFile">
-    	
+
         <Children name="eventSelection" type="EventSelection"/>
-        
+
         <Text name="path"/>
         <Text name="fileName"/>
         <Text name="format"/>
-    	
+
         <Simulation>
             <EventWriter path="path" fileName="fileName" format="format"/>
         </Simulation>
-    
+
     </ComponentType>
-    
+
     <ComponentType name="EventSelection">
         <Path name="select"/>
         <Text name="eventPort"/>
