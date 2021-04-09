@@ -1,6 +1,6 @@
-<Lems xmlns="http://www.neuroml.org/lems/0.7.4"
+<Lems xmlns="http://www.neuroml.org/lems/0.7.5"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.4 ../../LEMS/Schemas/LEMS/LEMS_v0.7.4.xsd"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.5 ../../LEMS/Schemas/LEMS/LEMS_v0.7.5.xsd"
       description="A number of ComponentTypes for providing spiking and current inputs to other ComponentTypes">
 
 
@@ -98,7 +98,7 @@
             </OnStart>
 
             <!-- This is to require that the spike is emitted as close as possible to tnext.-->
-            <OnCondition test="tnext-t .lt. SMALL_TIME">
+            <OnCondition test="tnext - t .lt. SMALL_TIME">
                 <StateAssignment variable="tsince" value="0"/>
                 <!-- Note the spike is emitted period after the last planned spike time, NOT period after the current spike time -->
                 <!-- This is important if period is close in size to to dt -->
@@ -117,7 +117,7 @@
         <Parameter name="maxISI" dimension="time" description="Maximum interspike interval"/>
         <Parameter name="minISI" dimension="time" description="Minimum interspike interval"/>
 
-        <Constant name="MSEC" dimension="time" value="1ms"/>
+        <Constant name="MSEC" dimension="time" value="1ms" description="Required for converting time values to/from dimensionless quantities"/>
 
         <Exposure name="isi" dimension="time" description="The interval until the next spike"/>
         <Exposure name="tnext" dimension="time" description="When the next spike should ideally be emitted (dt permitting)"/>
@@ -152,15 +152,15 @@
 
 
     <ComponentType name="spikeGeneratorPoisson" extends="baseSpikeSource"
-                   description="Generator of spikes whose ISI is distributed according to an exponential pdf with scale 1/_averageRate">
+                   description="Generator of spikes whose ISI is distributed according to an exponential PDF with scale: 1 / _averageRate">
 
-        <Parameter name="averageRate" dimension="per_time"/>
+        <Parameter name="averageRate" dimension="per_time" description="The average rate at which spikes are emitted"/>
 
         <Constant name="SMALL_TIME" dimension="time" value="1e-9ms"/> <!-- See below for usage -->
 
-        <Exposure name="isi" dimension="time"/> <!-- See below for usage -->
-        <Exposure name="tnextIdeal" dimension="time"/> <!-- See below for usage -->
-        <Exposure name="tnextUsed" dimension="time"/> <!-- See below for usage -->
+        <Exposure name="isi" dimension="time" description="The interval until the next spike"/> <!-- See below for usage -->
+        <Exposure name="tnextIdeal" dimension="time" description="This is the ideal/perfect next spike time, based on a newly generated isi, but dt precision will mean that it's usually slightly later than this"/> <!-- See below for usage -->
+        <Exposure name="tnextUsed" dimension="time" description="This is the next spike time for practical purposes, ensuring that it's later than the current time"/> <!-- See below for usage -->
 
         <Dynamics>
 
@@ -210,11 +210,11 @@
 
     <ComponentType name="spikeGeneratorRefPoisson"
                  extends="spikeGeneratorPoisson"
-                 description="Generator of spikes whose ISI distribution is the maximum entropy distribution over [_minimumISI, +infinity) with mean 1/_averageRate">
+                 description="Generator of spikes whose ISI distribution is the maximum entropy distribution over [ _minimumISI, +infinity ) with mean: 1 / _averageRate">
 
-        <Parameter name="minimumISI" dimension="time"/>
+        <Parameter name="minimumISI" dimension="time" description="The minimum interspike interval"/>
 
-        <DerivedParameter name="averageIsi" dimension="time" value="1 / averageRate"/>
+        <DerivedParameter name="averageIsi" dimension="time" value="1 / averageRate" description="The average interspike interval"/>
 
 
         <Dynamics>
@@ -248,14 +248,14 @@
 
 
     <ComponentType name="poissonFiringSynapse"
-                   description="Poisson spike generator connected to single synapse providing an input current"
+                   description="Poisson spike generator firing at _averageRate, which is connected to single _synapse that is triggered every time a spike is generated, producing an input current. See also _transientPoissonFiringSynapse_."
                    extends="baseVoltageDepPointCurrentSpiking">
 
         <Property name="weight" dimension="none" defaultValue="1"/>
 
-        <Parameter name="averageRate" dimension="per_time"/>
+        <Parameter name="averageRate" dimension="per_time" description="The average rate at which spikes are emitted"/>
 
-        <DerivedParameter name="averageIsi" dimension="time" value="1 / averageRate"/>
+        <DerivedParameter name="averageIsi" dimension="time" value="1 / averageRate" description="The average interspike interval"/>
 
         <Constant name="SMALL_TIME" dimension="time" value="1e-9ms"/> <!-- See below for usage -->
 
@@ -269,11 +269,11 @@
 
 
         <Exposure name="tsince" dimension="time" description="Time since the last spike was emitted"/>
-        <Exposure name="isi" dimension="time"/> <!-- See below for usage -->
+        <Exposure name="isi" dimension="time" description="The interval until the next spike"/> <!-- See below for usage -->
         <Exposure name="tnextIdeal" dimension="time"/> <!-- See below for usage -->
         <Exposure name="tnextUsed" dimension="time"/> <!-- See below for usage -->
 
-        <Path name="spikeTarget"/>
+        <Path name="spikeTarget"  description="The target of the spikes, i.e. the synapse"/>
 
         <Dynamics>
             <StateVariable name="tsince" dimension="time" exposure="tsince"/>
@@ -317,8 +317,8 @@
 
 
     <ComponentType name="transientPoissonFiringSynapse"
-                   description="Poisson spike generator with delay and duration connected to single synapse providing an input current.
-                      Similar to ComponentType poissonFiringSynapse."
+                   description="Poisson spike generator firing at _averageRate after a _delay and for a _duration, connected to single _synapse that is triggered every time a spike is generated, providing an input current.
+                      Similar to ComponentType _poissonFiringSynapse_."
                    extends="baseVoltageDepPointCurrentSpiking">
 
         <Property name="weight" dimension="none" defaultValue="1"/>
@@ -396,7 +396,7 @@
 
 
     <ComponentType name="timedSynapticInput"
-                   description="Spike array connected to a single synapse, producing current triggered by each spike in the array"
+                   description="Spike array connected to a single _synapse, producing a current triggered by each _spike_ in the array."
                    extends="baseVoltageDepPointCurrentSpiking">
 
         <Property name="weight" dimension="none" defaultValue="1"/>
@@ -431,6 +431,63 @@
             <With instance="this" as="a"/>
             <With instance="spikeTarget" as="b"/>
 
+            <EventConnection from="a" to="b"/>
+        </Structure>
+
+    </ComponentType>
+
+    <ComponentType name="spikeArray" extends="baseSpikeSource"
+                   description="Set of spike ComponentTypes, each emitting one spike at a certain time. Can be used to feed a predetermined spike train into a cell">
+
+        <Children name="spikes" type="spike"/>
+        <EventPort name="in" direction="in" description="This will receive events from the children"/>
+
+        <Dynamics>
+            <StateVariable name="tsince" dimension="time" exposure="tsince"/>
+
+            <TimeDerivative variable="tsince" value="1"/>
+
+            <OnStart>
+                <StateAssignment variable="tsince" value="0"/>
+            </OnStart>
+
+            <OnEvent port="in">
+                <StateAssignment variable="tsince" value="0"/>
+                <EventOut port="spike"/>
+            </OnEvent>
+
+        </Dynamics>
+
+    </ComponentType>
+
+
+    <ComponentType name="spike" extends="baseSpikeSource"
+                   description="Emits a single spike at the specified _time">
+
+        <Parameter name="time" dimension="time" description="Time at which to emit one spike event"/>
+        <Exposure name="spiked" dimension="none" description="0 signals not yet spiked, 1 signals has spiked"/>
+
+        <Dynamics>
+
+            <StateVariable name="tsince" dimension="time" exposure="tsince"/>
+            <StateVariable name="spiked" dimension="none" exposure="spiked"/>
+
+            <TimeDerivative variable="tsince" value="1"/>
+
+            <OnStart>
+                <StateAssignment variable="tsince" value="0"/>
+            </OnStart>
+
+            <OnCondition test="(t .geq. time) .and. (spiked .eq. 0)">
+                <StateAssignment variable="spiked" value="1"/>
+                <StateAssignment variable="tsince" value="0"/>
+                <EventOut port="spike"/>
+            </OnCondition>
+        </Dynamics>
+
+        <Structure>
+            <With instance="this" as="a"/>
+            <With instance="parent" as="b"/>
             <EventConnection from="a" to="b"/>
         </Structure>
 
@@ -798,62 +855,5 @@
 
     </ComponentType>
 
-
-    <ComponentType name="spikeArray" extends="baseSpikeSource"
-                   description="Set of spike ComponentTypes, each emitting one spike at a certain time. Can be used to feed a predetermined spike train into a cell">
-
-        <Children name="spikes" type="spike"/>
-        <EventPort name="in" direction="in" description="This will receive events from the children"/>
-
-        <Dynamics>
-            <StateVariable name="tsince" dimension="time" exposure="tsince"/>
-
-            <TimeDerivative variable="tsince" value="1"/>
-
-            <OnStart>
-                <StateAssignment variable="tsince" value="0"/>
-            </OnStart>
-
-            <OnEvent port="in">
-                <StateAssignment variable="tsince" value="0"/>
-                <EventOut port="spike"/>
-            </OnEvent>
-
-        </Dynamics>
-
-    </ComponentType>
-
-
-    <ComponentType name="spike" extends="baseSpikeSource"
-                   description="Emits a single spike at the specified time">
-
-        <Parameter name="time" dimension="time" description="Time at which to emit one spike event"/>
-        <Exposure name="spiked" dimension="none" description="0 signals not yet spiked, 1 signals has spiked"/>
-
-        <Dynamics>
-
-            <StateVariable name="tsince" dimension="time" exposure="tsince"/>
-            <StateVariable name="spiked" dimension="none" exposure="spiked"/>
-
-            <TimeDerivative variable="tsince" value="1"/>
-
-            <OnStart>
-                <StateAssignment variable="tsince" value="0"/>
-            </OnStart>
-
-            <OnCondition test="(t .geq. time) .and. (spiked .eq. 0)">
-                <StateAssignment variable="spiked" value="1"/>
-                <StateAssignment variable="tsince" value="0"/>
-                <EventOut port="spike"/>
-            </OnCondition>
-        </Dynamics>
-
-        <Structure>
-            <With instance="this" as="a"/>
-            <With instance="parent" as="b"/>
-            <EventConnection from="a" to="b"/>
-        </Structure>
-
-    </ComponentType>
 
 </Lems>
