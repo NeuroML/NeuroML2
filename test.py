@@ -36,7 +36,7 @@ lems_def_list=os.listdir(lems_def_dir)
 lems_exs_dir="LEMSexamples"
 lems_exs_list=os.listdir(lems_exs_dir)
 
-lems_schema = "../LEMS/Schemas/LEMS/LEMS_v0.7.4.xsd"
+lems_schema = "../LEMS/Schemas/LEMS/LEMS_v0.7.5.xsd"
 lems_schema_file = open(lems_schema)
 
 lems_xmlschema_doc = etree.parse(lems_schema_file)

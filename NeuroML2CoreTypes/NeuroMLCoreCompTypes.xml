@@ -1,10 +1,10 @@
-<Lems xmlns="http://www.neuroml.org/lems/0.7.4"
+<Lems xmlns="http://www.neuroml.org/lems/0.7.5"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.4 ../../LEMS/Schemas/LEMS/LEMS_v0.7.4.xsd">
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.5 ../../LEMS/Schemas/LEMS/LEMS_v0.7.5.xsd">
 
     <!-- A number of common component types for use in NeuroML 2 documents  -->
 
-    <!-- Including standard unit definitions for NeuroML v2.0 -->
+    <!-- Including standard unit definitions for NeuroML 2 -->
     <Include file="NeuroMLCoreDimensions.xml"/>
 
     <!-- Potentially needed for any NeuroML 2 file...-->
