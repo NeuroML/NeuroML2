@@ -12,7 +12,7 @@
 
 
     <ComponentType name="baseCell"
-        description="Base type of any cell which can be used in a population"
+        description="Base type of any cell (e.g. point neuron like _izhikevich2007Cell_, or a morphologically detailed _Cell_ with _segment_s) which can be used in a _population_"
         extends="baseStandalone">
 
     </ComponentType>
@@ -29,7 +29,7 @@
 
     <ComponentType name="baseCellMembPot"
         extends="baseSpikingCell"
-        description="Any spiking cell which has a membrane potential _v with voltage units.">
+        description="Any spiking cell which has a membrane potential _v with units of voltage.">
 
         <Exposure name="v" dimension="voltage" description="Membrane potential"/>
 
@@ -47,7 +47,7 @@
 
     <ComponentType name="baseChannelPopulation"
        extends="baseVoltageDepPointCurrent"
-       description="Base type for any current produced by a population of channels, all of type _ionChannel">
+       description="Base type for any current produced by a population of channels, all of type _ionChannel.">
 
         <ComponentReference name="ionChannel" type="baseIonChannel"/>
 
@@ -56,7 +56,7 @@
 
     <ComponentType name="channelPopulation"
         extends="baseChannelPopulation"
-        description="Population of _number ohmic ion channels. These each produce a conductance _channelg across a reversal potential _erev, giving a total current _i.">
+        description="Population of a _number of ohmic ion channels. These each produce a conductance _channelg across a reversal potential _erev, giving a total current _i. Note that active membrane currents are more frequently specified as a density over an area of the _cell_ using _channelDensity_">
 
         <Parameter name="number" dimension="none"/>
         <Parameter name="erev" dimension="voltage"/>
@@ -81,7 +81,7 @@
 
     <ComponentType name="channelPopulationNernst"
         extends="baseChannelPopulation"
-        description="Population of channels with a time varying reversal potential _erev determined by Nernst equation. Hard coded for Ca only!">
+        description="Population of channels with a time varying reversal potential _erev determined by Nernst equation. Note: hard coded for Ca only!">
 
         <Parameter name="number" dimension="none"/>
 
@@ -120,7 +120,7 @@
 
 
     <ComponentType name="baseChannelDensity"
-        description="Base type for current distributed on an area of a cell">
+        description="Base type for a current of density _iDensity distributed on an area of a _cell_, flowing through the specified _ionChannel. Instances of this (normally _channelDensity_) are specified in the _membraneProperties_ of the _cell_.">
 
         <ComponentReference name="ionChannel" type="baseIonChannel"/>
 
