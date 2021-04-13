@@ -505,7 +505,7 @@
 
         <!--TODO: remove! Only required as EventConnection is used in explicitInput to
         connect inputs to cells. Events aren't passed! ... -->
-        <EventPort name="in" direction="in" description="Note this is not used here. Will be removed in future"/>
+        <EventPort name="in" direction="in" description="Note: this is not used here. Will be removed in future"/>
 
         <Dynamics>
 
@@ -533,7 +533,7 @@
 
 
     <ComponentType name="compoundInput" extends="basePointCurrent"
-                   description="Generates a current which is the sum of all its child _basePointCurrent_ elements">
+                   description="Generates a current which is the sum of all its child _basePointCurrent_ element, e.g. can be a combination of _pulseGenerator_, _sineGenerator_ elements producing a single _i. Scaled by _weight, if set">
 
         <Property name="weight" dimension="none" defaultValue="1"/>
 
@@ -557,7 +557,7 @@
 
 
     <ComponentType name="compoundInputDL" extends="basePointCurrentDL"
-                   description="Generates a current which is the sum of all its child _basePointCurrentDL_ elements">
+                   description="Generates a current which is the sum of all its child _basePointCurrentDL_ elements, e.g. can be a combination of _pulseGeneratorDL_, _sineGeneratorDL_ elements producing a single _i. Scaled by _weight, if set">
 
         <Property name="weight" dimension="none" defaultValue="1"/>
 
@@ -582,7 +582,7 @@
 
 
     <ComponentType name="pulseGeneratorDL" extends="basePointCurrentDL"
-                   description="Dimensionless equivalent of _pulseGenerator_. Generates a constant current pulse of a certain _amplitude for a specified _duration after a _delay"> <!-- Note: a synpase also extends basePointCurrent -->
+                   description="Dimensionless equivalent of _pulseGenerator_. Generates a constant current pulse of a certain _amplitude for a specified _duration after a _delay. Scaled by _weight, if set"> <!-- Note: a synpase also extends basePointCurrent -->
 
         <Property name="weight" dimension="none" defaultValue="1"/>
 
@@ -618,15 +618,15 @@
 
 
     <ComponentType name="sineGenerator" extends="basePointCurrent"
-                   description="Generates a sinusoidally varying current after a time _delay, for a fixed _duration. The _period and maximum _amplitude of the current can be set as well as the _phase at which to start.">
+                   description="Generates a sinusoidally varying current after a time _delay, for a fixed _duration. The _period and maximum _amplitude of the current can be set as well as the _phase at which to start. Scaled by _weight, if set">
 
         <Property name="weight" dimension="none" defaultValue="1"/>
 
-        <Parameter name="phase" dimension="none"/>
-        <Parameter name="delay" dimension="time"/>
-        <Parameter name="duration" dimension="time"/>
-        <Parameter name="amplitude" dimension="current"/>
-        <Parameter name="period" dimension="time"/>
+        <Parameter name="phase" dimension="none" description="Phase (between 0 and 2*pi) at which to start the varying current (i.e. at time given by delay)"/>
+        <Parameter name="delay" dimension="time" description="Delay before change in current. Current is zero  prior to this."/>
+        <Parameter name="duration" dimension="time" description="Duration for holding current at amplitude. Current is zero after delay + duration."/>
+        <Parameter name="amplitude" dimension="current" description="Maximum amplitude of current"/>
+        <Parameter name="period" dimension="time" description="Time period of oscillation"/>
 
         <EventPort name="in" direction="in"/>
 
@@ -653,15 +653,15 @@
     </ComponentType>
 
     <ComponentType name="sineGeneratorDL" extends="basePointCurrentDL"
-                   description="Generates a sinusoidally varying current after a time _delay, for a fixed _duration. The _period and maximum _amplitude of the current can be set as well as the _phase at which to start.">
+                   description="Dimensionless equivalent of _sineGenerator_. Generates a sinusoidally varying current after a time _delay, for a fixed _duration. The _period and maximum _amplitude of the current can be set as well as the _phase at which to start. Scaled by _weight, if set">
 
         <Property name="weight" dimension="none" defaultValue="1"/>
 
-        <Parameter name="phase" dimension="none"/>
-        <Parameter name="delay" dimension="time"/>
-        <Parameter name="duration" dimension="time"/>
-        <Parameter name="amplitude" dimension="none"/>
-        <Parameter name="period" dimension="time"/>
+        <Parameter name="phase" dimension="none" description="Phase (between 0 and 2*pi) at which to start the varying current (i.e. at time given by delay)"/>
+        <Parameter name="delay" dimension="time" description="Delay before change in current. Current is zero  prior to this."/>
+        <Parameter name="duration" dimension="time" description="Duration for holding current at amplitude. Current is zero after delay + duration."/>
+        <Parameter name="amplitude" dimension="none" description="Maximum amplitude of current"/>
+        <Parameter name="period" dimension="time" description="Time period of oscillation"/>
 
         <EventPort name="in" direction="in"/>
 
@@ -689,15 +689,15 @@
 
 
     <ComponentType name="rampGenerator" extends="basePointCurrent"
-                   description="Generates a ramping current after a time _delay, for a fixed _duration. During this time the current steadily changes from _startAmplitude to _finishAmplitude.">
+                   description="Generates a ramping current after a time _delay, for a fixed _duration. During this time the current steadily changes from _startAmplitude to _finishAmplitude. Scaled by _weight, if set">
 
         <Property name="weight" dimension="none" defaultValue="1"/>
 
-        <Parameter name="delay" dimension="time"/>
-        <Parameter name="duration" dimension="time"/>
-        <Parameter name="startAmplitude" dimension="current"/>
-        <Parameter name="finishAmplitude" dimension="current"/>
-        <Parameter name="baselineAmplitude" dimension="current"/>
+        <Parameter name="delay" dimension="time" description="Delay before change in current. Current is baselineAmplitude prior to this."/>
+        <Parameter name="duration" dimension="time" description="Duration for holding current at amplitude. Current is baselineAmplitude after delay + duration."/>
+        <Parameter name="startAmplitude" dimension="current" description="Amplitude of linearly varying current at time delay"/>
+        <Parameter name="finishAmplitude" dimension="current" description="Amplitude of linearly varying current at time delay + duration"/>
+        <Parameter name="baselineAmplitude" dimension="current" description="Amplitude of current before time delay, and after time delay + duration"/>
 
         <EventPort name="in" direction="in"/>
 
@@ -730,15 +730,15 @@
 
 
     <ComponentType name="rampGeneratorDL" extends="basePointCurrentDL"
-                   description="Generates a ramping current after a time _delay, for a fixed _duration. During this time the dimensionless current steadily changes from _startAmplitude to _finishAmplitude.">
+                   description="Dimensionless equivalent of _rampGenerator_. Generates a ramping current after a time _delay, for a fixed _duration. During this time the dimensionless current steadily changes from _startAmplitude to _finishAmplitude. Scaled by _weight, if set">
 
         <Property name="weight" dimension="none" defaultValue="1"/>
 
-        <Parameter name="delay" dimension="time"/>
-        <Parameter name="duration" dimension="time"/>
-        <Parameter name="startAmplitude" dimension="none"/>
-        <Parameter name="finishAmplitude" dimension="none"/>
-        <Parameter name="baselineAmplitude" dimension="none"/>
+        <Parameter name="delay" dimension="time" description="Delay before change in current. Current is baselineAmplitude prior to this."/>
+        <Parameter name="duration" dimension="time" description="Duration for holding current at amplitude. Current is baselineAmplitude after delay + duration."/>
+        <Parameter name="startAmplitude" dimension="none" description="Amplitude of linearly varying current at time delay"/>
+        <Parameter name="finishAmplitude" dimension="none" description="Amplitude of linearly varying current at time delay + duration"/>
+        <Parameter name="baselineAmplitude" dimension="none" description="Amplitude of current before time delay, and after time delay + duration"/>
 
         <EventPort name="in" direction="in"/>
 
@@ -774,7 +774,7 @@
 
         <Property name="weight" dimension="none" defaultValue="1"/>
 
-        <Parameter name="delay" dimension="time" description="Delay before change in current. Current is zero  prior to this."/>
+        <Parameter name="delay" dimension="time" description="Delay before change in current. Current is zero prior to this."/>
         <Parameter name="duration" dimension="time" description="Duration for attempting to keep parent at targetVoltage. Current is zero after delay + duration."/>
         <Parameter name="targetVoltage" dimension="voltage" description="Current will be applied to try to get parent to this target voltage"/>
 
