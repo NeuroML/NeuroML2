@@ -120,15 +120,15 @@
 
     <ComponentType name="point3DWithDiam"
                    description="Base type for ComponentTypes which specify an ( _x, _y, _z ) coordinate along with a _diameter. Note: no dimension used in the attributes for these coordinates! These are assumed to have dimension micrometer (10^-6 m). This is due to micrometers being the default option for the majority of neuronal morphology formats, and dimensions are omitted here to facilitate reading and writing of morphologies in NeuroML.">
-        <Parameter name="x" dimension="none" description="x coordinate of point. Note: no dimension used, see note above!"/>
-        <Parameter name="y" dimension="none" description="y coordinate of point. Note: no dimension used, see note above!"/>
-        <Parameter name="z" dimension="none" description="z coordinate of point. Note: no dimension used, see note above!"/>
-        <Parameter name="diameter" dimension="none" description="Diameter at point. Note: no dimension used, see note above!"/> <!-- TODO decide whether this or radius should be default input field!!! -->
+        <Parameter name="x" dimension="none" description="x coordinate of the point. Note: no dimension used, see description of _point3DWithDiam_ for details."/>
+        <Parameter name="y" dimension="none" description="y coordinate of the ppoint. Note: no dimension used, see description of _point3DWithDiam_ for details."/>
+        <Parameter name="z" dimension="none" description="z coordinate of the ppoint. Note: no dimension used, see description of _point3DWithDiam_ for details."/>
+        <Parameter name="diameter" dimension="none" description="Diameter of the ppoint. Note: no dimension used, see description of _point3DWithDiam_ for details."/> <!-- TODO decide whether this or radius should be default input field!!! -->
 
-        <DerivedParameter name="radius" dimension="length" value="MICRON * diameter / 2"/>
-        <DerivedParameter name="xLength" dimension="length" value="MICRON * x"/>  <!-- conversion to SI units... -->
-        <DerivedParameter name="yLength" dimension="length" value="MICRON * y"/>  <!-- conversion to SI units... -->
-        <DerivedParameter name="zLength" dimension="length" value="MICRON * z"/>  <!-- conversion to SI units... -->
+        <DerivedParameter name="radius" dimension="length" value="MICRON * diameter / 2" description="A dimensional quantity given by half the _diameter."/>
+        <DerivedParameter name="xLength" dimension="length" value="MICRON * x" description="A version of _x with dimension length."/>  <!-- conversion to SI units... -->
+        <DerivedParameter name="yLength" dimension="length" value="MICRON * y" description="A version of _y with dimension length."/>  <!-- conversion to SI units... -->
+        <DerivedParameter name="zLength" dimension="length" value="MICRON * z" description="A version of _z with dimension length."/>  <!-- conversion to SI units... -->
 
         <Constant name="MICRON" dimension="length" value="1um"/>
     </ComponentType>

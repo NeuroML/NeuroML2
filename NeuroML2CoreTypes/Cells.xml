@@ -29,7 +29,7 @@
 
     <ComponentType name="baseCellMembPot"
         extends="baseSpikingCell"
-        description="Any spiking cell which has a membrane potential _v with units of voltage.">
+        description="Any spiking cell which has a membrane potential _v with units of voltage (as opposed to a dimensionless membrane potential used in _baseCellMembPotDL_).">
 
         <Exposure name="v" dimension="voltage" description="Membrane potential"/>
 
@@ -38,7 +38,7 @@
 
     <ComponentType name="baseCellMembPotDL"
         extends="baseSpikingCell"
-        description="Any spiking cell which has a dimensioness membrane potential, _V.">
+        description="Any spiking cell which has a dimensioness membrane potential, _V (as opposed to a membrane potential units of voltage, _baseCellMembPot_).">
 
         <Exposure name="V" dimension="none" description="Membrane potential"/>
 
@@ -47,7 +47,7 @@
 
     <ComponentType name="baseChannelPopulation"
        extends="baseVoltageDepPointCurrent"
-       description="Base type for any current produced by a population of channels, all of type _ionChannel.">
+       description="Base type for any current produced by a population of channels, all of which are of type _ionChannel">
 
         <ComponentReference name="ionChannel" type="baseIonChannel"/>
 
@@ -58,8 +58,8 @@
         extends="baseChannelPopulation"
         description="Population of a _number of ohmic ion channels. These each produce a conductance _channelg across a reversal potential _erev, giving a total current _i. Note that active membrane currents are more frequently specified as a density over an area of the _cell_ using _channelDensity_">
 
-        <Parameter name="number" dimension="none"/>
-        <Parameter name="erev" dimension="voltage"/>
+        <Parameter name="number" dimension="none" description="The number of channels present. This will be multiplied by the time varying conductance of the individual ion channel (which extends _baseIonChannel_) to produce the total conductance"/>
+        <Parameter name="erev" dimension="voltage" description="The reversal potential of the current produced"/>
 
         <Constant name="vShift" dimension="voltage" value="0mV" description="Set to a constant 0mV here to allow ion channels which use _vShift in their rate variable expressions to be used with _channelPopulation_, not just with _channelDensityVShift_ (where _vShift would be explicitly set)"/>
 
@@ -81,9 +81,9 @@
 
     <ComponentType name="channelPopulationNernst"
         extends="baseChannelPopulation"
-        description="Population of channels with a time varying reversal potential _erev determined by Nernst equation. Note: hard coded for Ca only!">
+        description="Population of a _number of channels with a time varying reversal potential _erev determined by Nernst equation. Note: hard coded for Ca only!">
 
-        <Parameter name="number" dimension="none"/>
+        <Parameter name="number" dimension="none" description="The number of channels present. This will be multiplied by the time varying conductance of the individual ion channel (which extends _baseIonChannel_) to produce the total conductance"/>
 
         <Constant name="R" dimension="idealGasConstantDims" value="8.3144621 J_per_K_per_mol" description="TODO: Make this a global constant!"/>
         <Constant name="zCa" dimension="none" value="2" description="TODO: Make this a global constant!"/>
@@ -92,11 +92,11 @@
         <Constant name="vShift" dimension="voltage" value="0mV" description="Set to a constant 0mV here to allow ion channels which use _vShift in their rate variable expressions to be used with _channelPopulation_, not just with _channelDensityVShift_ (where _vShift would be explicitly set)"/>
 
 
-        <Exposure name="erev" dimension="voltage"/> <!-- Calculated from caConcExt and caConc-->
+        <Exposure name="erev" dimension="voltage" description="The reversal potential of the current produced, calculated from _caConcExt and _caConc"/>
 
-        <Requirement name="temperature" dimension="temperature"/>
-        <Requirement name="caConc" dimension="concentration"/>
-        <Requirement name="caConcExt" dimension="concentration"/>
+        <Requirement name="temperature" dimension="temperature" description="The temperature to use in the calculation of _erev. Note this is generally exposed by a _networkWithTemperature_."/>
+        <Requirement name="caConc" dimension="concentration" description="The internal Ca2+ concentration, as calculated/exposed by the parent Component"/>
+        <Requirement name="caConcExt" dimension="concentration" description="The external Ca2+ concentration, as calculated/exposed by the parent Component"/>
 
         <Text name="ion"/> <!-- TODO: Ideally this needs to be a property of ionChannel only! But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
 
@@ -143,7 +143,7 @@
 
 
     <ComponentType name="variableParameter"
-        description="Specifies a parameter which can vary its value across a _segmentGroup">
+        description="Specifies a _parameter (e.g. condDensity) which can vary its value across a _segmentGroup. The value is calculated from _value attribute of the _inhomogeneousValue_ subelement. This element is normally a child of _channelDensityNonUniform_, _channelDensityNonUniformNernst_ or _channelDensityNonUniformGHK_ and is used to calculate the value of the conductance, etc. which will vary on different parts of the cell. The _segmentGroup specified here needs to define an _inhomogeneousParameter_ (referenced from _inhomogeneousParameter in the _inhomogeneousValue_), which calculates a _variable (e.g. p) varying across the cell (e.g. based on the path length from soma), which is then used in the _value attribute of the _inhomogeneousValue_ (so for example condDensity = f(p))">
 
         <Child name="inhomogeneousValue" type="inhomogeneousValue"/>
 
@@ -154,7 +154,7 @@
 
 
     <ComponentType name="inhomogeneousValue"
-        description="Specifies the value of a _variableParameter_">
+        description="Specifies the _value of an _inhomogeneousParameter. For usage see _variableParameter_">
 
         <Text name="inhomogeneousParameter"/>
         <Text name="value"/>
@@ -165,9 +165,9 @@
 
     <ComponentType name="channelDensityNonUniform"
         extends="baseChannelDensity"
-        description="Specifies a time varying ohmic conductance density, which is distributed on a region of the cell. The conductance density of the channel is not uniform, but is set using the _variableParameter_. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON">
+        description="Specifies a time varying ohmic conductance density, which is distributed on a region of the _cell. The conductance density of the channel is not uniform, but is set using the _variableParameter_. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON">
 
-        <Parameter name="erev" dimension="voltage"/>
+        <Parameter name="erev" dimension="voltage" description="The reversal potential of the current produced"/>
 
         <Constant name="ZERO_CURR_DENS" dimension="currentDensity" value="0 A_per_m2"/>
 
@@ -193,7 +193,7 @@
 
     <ComponentType name="channelDensityNonUniformNernst"
         extends="baseChannelDensity"
-        description="Specifies a time varying conductance density, which is distributed on a region of the cell, and whose reversal potential is calculated from the Nernst equation. Hard coded for Ca only!. The conductance density of the channel is not uniform, but is set using the _variableParameter_. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON">
+        description="Specifies a time varying conductance density, which is distributed on a region of the _cell, and whose reversal potential is calculated from the Nernst equation. Hard coded for Ca only!. The conductance density of the channel is not uniform, but is set using the _variableParameter_. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON">
 
         <Constant name="ZERO_CURR_DENS" dimension="currentDensity" value="0 A_per_m2"/>
 
@@ -220,7 +220,7 @@
 
     <ComponentType name="channelDensityNonUniformGHK"
         extends="baseChannelDensity"
-        description="Specifies a time varying conductance density, which is distributed on a region of the cell, and whose current is calculated from the Goldman-Hodgkin-Katz equation. Hard coded for Ca only!. The conductance density of the channel is not uniform, but is set using the _variableParameter_. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON">
+        description="Specifies a time varying conductance density, which is distributed on a region of the _cell, and whose current is calculated from the Goldman-Hodgkin-Katz equation. Hard coded for Ca only!. The conductance density of the channel is not uniform, but is set using the _variableParameter_. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON">
 
         <Constant name="ZERO_CURR_DENS" dimension="currentDensity" value="0 A_per_m2"/>
 
@@ -247,16 +247,15 @@
 
     <ComponentType name="channelDensity"
         extends="baseChannelDensityCond"
-        description="Specifies a time varying ohmic conductance density, _gDensity, which is distributed on an area of the cell with fixed reversal potential _erev producing a current density _iDensity">
+        description="Specifies a time varying ohmic conductance density, _gDensity, which is distributed on an area of the _cell (specified in _membraneProperties_) with fixed reversal potential _erev producing a current density _iDensity">
 
-        <Parameter name="erev" dimension="voltage"/>
+        <Parameter name="erev" dimension="voltage" description="The reversal potential of the current produced"/>
 
         <Constant name="vShift" dimension="voltage" value="0mV" description="Set to a constant 0mV here to allow ion channels which use _vShift in their rate variable expressions to be used with _channelDensity_, not just with _channelDensityVShift_ (where _vShift would be explicitly set)"/>
 
         <!-- TODO: Ensure Text elements are inherited from base type -->
-        <Text name="segmentGroup"/>
-        <Text name="ion"/> <!-- TODO: Ideally this needs to be a property of ionChannel only!
-                                But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
+        <Text name="segmentGroup" description="Which _segmentGroup_ the channelDensity is placed on. If this is missing, it implies it is placed on all _segment_s of the _cell_"/>
+        <Text name="ion" description="Which ion flows through the channel. Note: ideally this needs to be a property of ionChannel only, but it's here as it makes it easier to select channelPopulations transmitting specific ions."/>
 
         <Dynamics>
 
@@ -281,9 +280,9 @@
         <Parameter name="vShift" dimension="voltage"/>
 
         <!-- TODO: Ensure Text elements are inherited from base type -->
-        <Text name="segmentGroup"/>
-        <Text name="ion"/> <!-- TODO: Ideally this needs to be a property of ionChannel only!
-                                But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
+        <Text name="segmentGroup" description="Which _segmentGroup_ the channelDensity is placed on. If this is missing, it implies it is placed on all _segment_s of the _cell_"/>
+        <Text name="ion" description="Which ion flows through the channel. Note: ideally this needs to be a property of ionChannel only, but it's here as it makes it easier to select channelPopulations transmitting specific ions."/>
+
 
         <Structure>
             <ChildInstance component="ionChannel"/>
@@ -294,22 +293,22 @@
 
     <ComponentType name="channelDensityNernst"
         extends="baseChannelDensityCond"
-        description="Specifies a time varying conductance density, _gDensity, which is distributed on an area of the cell, producing a current density _iDensity and whose reversal potential is calculated from the Nernst equation. Hard coded for Ca only! See https://github.com/OpenSourceBrain/ghk-nernst.">
+        description="Specifies a time varying conductance density, _gDensity, which is distributed on an area of the _cell, producing a current density _iDensity and whose reversal potential is calculated from the Nernst equation. Hard coded for Ca only! See https://github.com/OpenSourceBrain/ghk-nernst.">
 
         <Constant name="R" dimension="idealGasConstantDims" value="8.3144621 J_per_K_per_mol" description="TODO: Make this a global constant!"/>
         <Constant name="zCa" dimension="none" value="2" description="TODO: Make this a global constant!"/>
         <Constant name="F" dimension="charge_per_mole" value="96485.3 C_per_mol" description="TODO: Make this a global constant!"/>
 
-        <Exposure name="erev" dimension="voltage"/> <!-- Calculated from caConcExt and caConc-->
+        <Exposure name="erev" dimension="voltage" description="The reversal potential of the current produced, calculated from caConcExt and caConc"/>
 
         <Requirement name="temperature" dimension="temperature"/>
         <Requirement name="caConc" dimension="concentration"/>
         <Requirement name="caConcExt" dimension="concentration"/>
 
         <!-- TODO: Ensure Text elements are inherited from base type -->
-        <Text name="segmentGroup"/>
-        <Text name="ion"/> <!-- TODO: Ideally this needs to be a property of ionChannel only!
-                                But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
+        <Text name="segmentGroup" description="Which _segmentGroup_ the channelDensityNernst is placed on. If this is missing, it implies it is placed on all _segment_s of the _cell_"/>
+        <Text name="ion" description="Which ion flows through the channel. Note: ideally this needs to be a property of ionChannel only, but it's here as it makes it easier to select channelPopulations transmitting specific ions."/>
+
 
         <Dynamics>
 
@@ -349,14 +348,15 @@
         <Constant name="zCa" dimension="none" value="2" description="TODO: Make this a global constant!"/>
         <Constant name="F" dimension="charge_per_mole" value="96485.3 C_per_mol" description="TODO: Make this a global constant!"/>
 
-        <Exposure name="erev" dimension="voltage"/>
+        <Exposure name="erev" dimension="voltage" description="The reversal potential of the current produced"/>
 
         <Requirement name="temperature" dimension="temperature"/>
         <Requirement name="caConc2" dimension="concentration"/>
         <Requirement name="caConcExt2" dimension="concentration"/>
 
-        <Text name="segmentGroup"/>
-        <Text name="ion"/>
+        <Text name="segmentGroup" description="Which _segmentGroup_ the channelDensityNernstCa2 is placed on. If this is missing, it implies it is placed on all _segment_s of the _cell_"/>
+        <Text name="ion" description="Which ion flows through the channel. Note: ideally this needs to be a property of ionChannel only, but it's here as it makes it easier to select channelPopulations transmitting specific ions."/>
+
 
         <Dynamics>
 
@@ -401,10 +401,9 @@
         <Requirement name="caConcExt" dimension="concentration"/>
 
         <!-- TODO: Ensure Text elements are inherited from base type -->
-        <Text name="segmentGroup"/>
+        <Text name="segmentGroup" description="Which _segmentGroup_ the channelDensityGHK is placed on. If this is missing, it implies it is placed on all _segment_s of the _cell_"/>
+        <Text name="ion" description="Which ion flows through the channel. Note: ideally this needs to be a property of ionChannel only, but it's here as it makes it easier to select channelPopulations transmitting specific ions."/>
 
-        <Text name="ion"/> <!-- TODO: Ideally this needs to be a property of ionChannel only!
-                                But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
         <Dynamics>
 
             <DerivedVariable name="K" dimension="per_voltage"  value="(zCa * F) / (R * temperature)"/>
@@ -437,10 +436,9 @@
         <Requirement name="caConcExt" dimension="concentration"/>
 
         <!-- TODO: Ensure Text elements are inherited from base type -->
-        <Text name="segmentGroup"/>
+        <Text name="segmentGroup" description="Which _segmentGroup_ the channelDensityGHK2 is placed on. If this is missing, it implies it is placed on all _segment_s of the _cell_"/>
+        <Text name="ion" description="Which ion flows through the channel. Note: ideally this needs to be a property of ionChannel only, but it's here as it makes it easier to select channelPopulations transmitting specific ions."/>
 
-        <Text name="ion"/> <!-- TODO: Ideally this needs to be a property of ionChannel only!
-                                But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
         <Dynamics>
             <DerivedVariable name="V" dimension="none" value="v / VOLT_SCALE"/>
             <DerivedVariable name="ca_conc_i" dimension="none" value="caConc / CONC_SCALE"/>
@@ -474,10 +472,10 @@
 
     <ComponentType name="pointCellCondBased"
         extends="baseCellMembPotCap"
-        description="Simple model of a conductance based cell, with no separate morphology element, just an absolute capacitance _C, and a set of channel populations">
+        description="Simple model of a conductance based cell, with no separate _morphology_ element, just an absolute capacitance _C, and a set of channel _populations. Note: use of _cell_ is generally preferable, even for a single compartment cell.">
 
-        <Parameter name="v0" dimension="voltage"/>  <!--TEMP: needs to be removed... -->
-        <Parameter name="thresh" dimension="voltage"/>
+        <Parameter name="v0" dimension="voltage" description="The initial membrane potential of the cell"/>  <!--TEMP: needs to be removed... -->
+        <Parameter name="thresh" dimension="voltage" description="The voltage threshold above which the cell is considered to be _spiking"/>
 
         <Children name="populations" type="baseChannelPopulation"/>
 
@@ -517,8 +515,8 @@
         extends="baseCellMembPotCap"
         description="TEMPORARY: Point cell with conductances and Ca concentration  info. Not yet fully tested!!!">
 
-        <Parameter name="v0" dimension="voltage"/>  <!--TEMP: needs to be removed... -->
-        <Parameter name="thresh" dimension="voltage"/>
+        <Parameter name="v0" dimension="voltage" description="The initial membrane potential of the cell"/>  <!--TEMP: needs to be removed... -->
+        <Parameter name="thresh" dimension="voltage" description="The voltage threshold above which the cell is considered to be _spiking"/>
 
         <Children name="populations" type="baseChannelPopulation"/>
         <Children name="concentrationModels" type="concentrationModel"/>
@@ -563,19 +561,19 @@
 
     <ComponentType name="distal"
         extends="point3DWithDiam"
-        description="Point furthest from the soma in a segment">
+        description="Point in a _segment_ furthest from the soma">
     </ComponentType>
 
 
     <ComponentType name="proximal"
         extends="point3DWithDiam"
-        description="Point closest to the soma in a segment. Note, if the proximal point is equal to the distal point of the parent segment, proximal can be omitted.">
+        description="Point in a _segment_ closest to the soma. Note, if the proximal point is equal to the _distal_ point of the parent _segment_, proximal can be omitted.">
 
     </ComponentType>
 
 
     <ComponentType name="parent"
-        description="Specifies the segment which is this segment's parent">
+        description="Specifies the _segment_ which is this segment's parent.">
         <Text name="segment"/>
         <Text name="fractionAlong"/>
     </ComponentType>
