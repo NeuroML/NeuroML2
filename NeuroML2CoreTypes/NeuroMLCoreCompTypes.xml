@@ -20,8 +20,8 @@
 
 
     <ComponentType name="property" description="A property (a _tag and _value pair), which can be on any _baseStandalone_ either as a direct child, or within an _Annotation_. Generally something which helps the visual display or facilitates simulation of a Component, but is not a core physiological property. Common examples include: _numberInternalDivisions, equivalent of nseg in NEURON; _radius, for a radius to use in graphical displays for abstract cells (i.e. without defined morphologies); _color, the color to use for a _Population_ or _populationList_ of cells; _recommended_dt_ms, the recommended timestep to use for simulating a _Network_, _recommended_duration_ms the recommended duration to use when running a _Network_ ">
-        <Text name="tag"/>
-        <Text name="value"/>
+        <Text name="tag" description="Name of the property"/>
+        <Text name="value" description="Value of the property"/>
         <Dynamics/>
     </ComponentType>
 

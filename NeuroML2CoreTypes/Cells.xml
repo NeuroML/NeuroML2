@@ -63,8 +63,7 @@
 
         <Constant name="vShift" dimension="voltage" value="0mV" description="Set to a constant 0mV here to allow ion channels which use _vShift in their rate variable expressions to be used with _channelPopulation_, not just with _channelDensityVShift_ (where _vShift would be explicitly set)"/>
 
-
-        <Text name="ion"/> <!-- TODO: Ideally this needs to be a property of ionChannel only! But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
+        <Text name="ion" description="Which ion flows through the channel. Note: ideally this needs to be a property of ionChannel only, but it's here as it makes it easier to select channelPopulations transmitting specific ions."/>
 
         <Dynamics>
             <DerivedVariable name="channelg" dimension="conductance" select="ionChannel/g"/>
@@ -98,7 +97,7 @@
         <Requirement name="caConc" dimension="concentration" description="The internal Ca2+ concentration, as calculated/exposed by the parent Component"/>
         <Requirement name="caConcExt" dimension="concentration" description="The external Ca2+ concentration, as calculated/exposed by the parent Component"/>
 
-        <Text name="ion"/> <!-- TODO: Ideally this needs to be a property of ionChannel only! But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
+        <Text name="ion" description="Which ion flows through the channel. Note: ideally this needs to be a property of ionChannel only, but it's here as it makes it easier to select channelPopulations transmitting specific ions."/>
 
         <Dynamics>
 
@@ -175,8 +174,8 @@
 
         <!-- TODO: Ensure Text elements are inherited from base type -->
         <Text name="segmentGroup"/>
-        <Text name="ion"/> <!-- TODO: Ideally this needs to be a property of ionChannel only!
-                                But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
+        <Text name="ion" description="Which ion flows through the channel. Note: ideally this needs to be a property of ionChannel only, but it's here as it makes it easier to select channelPopulations transmitting specific ions."/>
+
 
         <Dynamics>
             <!--NOTE: channelDensityNonUniform is not used by jLEMS, only when jNeuroML maps NML2 cells with this element to
@@ -202,8 +201,8 @@
 
         <!-- TODO: Ensure Text elements are inherited from base type -->
         <Text name="segmentGroup"/>
-        <Text name="ion"/> <!-- TODO: Ideally this needs to be a property of ionChannel only!
-                                But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
+        <Text name="ion" description="Which ion flows through the channel. Note: ideally this needs to be a property of ionChannel only, but it's here as it makes it easier to select channelPopulations transmitting specific ions."/>
+
 
         <Dynamics>
             <!--NOTE: channelDensityNonUniform is not used by jLEMS, only when jNeuroML maps NML2 cells with this element to
@@ -229,8 +228,8 @@
 
         <!-- TODO: Ensure Text elements are inherited from base type -->
         <Text name="segmentGroup"/>
-        <Text name="ion"/> <!-- TODO: Ideally this needs to be a property of ionChannel only!
-                                But it's here as it makes it easier to select channelPopulations transmitting specific ions...-->
+        <Text name="ion" description="Which ion flows through the channel. Note: ideally this needs to be a property of ionChannel only, but it's here as it makes it easier to select channelPopulations transmitting specific ions."/>
+
 
         <Dynamics>
             <!--NOTE: channelDensityNonUniform is not used by jLEMS, only when jNeuroML maps NML2 cells with this element to
@@ -472,7 +471,7 @@
 
     <ComponentType name="pointCellCondBased"
         extends="baseCellMembPotCap"
-        description="Simple model of a conductance based cell, with no separate _morphology_ element, just an absolute capacitance _C, and a set of channel _populations. Note: use of _cell_ is generally preferable, even for a single compartment cell.">
+        description="Simple model of a conductance based cell, with no separate _morphology_ element, just an absolute capacitance _C, and a set of channel _populations. Note: use of _cell_ is generally preferable (and more widely supported), even for a single compartment cell.">
 
         <Parameter name="v0" dimension="voltage" description="The initial membrane potential of the cell"/>  <!--TEMP: needs to be removed... -->
         <Parameter name="thresh" dimension="voltage" description="The voltage threshold above which the cell is considered to be _spiking"/>
@@ -513,7 +512,7 @@
 
     <ComponentType name="pointCellCondBasedCa"
         extends="baseCellMembPotCap"
-        description="TEMPORARY: Point cell with conductances and Ca concentration  info. Not yet fully tested!!!">
+        description="TEMPORARY: Point cell with conductances and Ca concentration info. Not yet fully tested!!! TODO: Remove in favour of _cell_">
 
         <Parameter name="v0" dimension="voltage" description="The initial membrane potential of the cell"/>  <!--TEMP: needs to be removed... -->
         <Parameter name="thresh" dimension="voltage" description="The voltage threshold above which the cell is considered to be _spiking"/>
@@ -561,26 +560,26 @@
 
     <ComponentType name="distal"
         extends="point3DWithDiam"
-        description="Point in a _segment_ furthest from the soma">
+        description="Point on a _segment_ furthest from the soma. Should always be present in the description of a _segment_, unlike _proximal_">
     </ComponentType>
 
 
     <ComponentType name="proximal"
         extends="point3DWithDiam"
-        description="Point in a _segment_ closest to the soma. Note, if the proximal point is equal to the _distal_ point of the parent _segment_, proximal can be omitted.">
+        description="Point on a _segment_ closest to the soma. Note, the proximal point can be omitted, and in this case is defined as being the point _fractionAlong between the proximal and _distal_ point of the _parent_, i.e. if _fractionAlong = 1 (as it is by default) it will be the _distal on the parent, or if _fractionAlong = 0, it will be the proximal point. If between 0 and 1, it is the linear interpolation between the two points.">
 
     </ComponentType>
 
 
     <ComponentType name="parent"
-        description="Specifies the _segment_ which is this segment's parent.">
-        <Text name="segment"/>
-        <Text name="fractionAlong"/>
+        description="Specifies the id of the _segment which is this segment's parent.">
+        <Text name="segment" description="The id of the parent segment"/>
+        <Text name="fractionAlong" description="The fraction along the the parent segment at which this segment is attached. For usage see _proximal_"/>
     </ComponentType>
 
 
     <ComponentType name="segment"
-        description="A segment defines the smallest unit within a possibly branching structure (_morphology_), such as a dendrite or axon. The shape is given by the _proximal_ and _distal_ points. If _proximal_ is missing, the proximal point is assumed to be the _distal_ point of the parent. _parent_ specifies the parent segment. The first segment (no _parent_) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling. ">
+        description="A segment defines the smallest unit within a possibly branching structure (_morphology_), such as a dendrite or axon. Its _id should be a nonnegative integer (usually soma/root = 0). Its end points are given by the _proximal_ and _distal_ points. The _proximal_ point can be omitted, usually because it is the same as a point on the _parent_ segment, see _proximal_ for details. _parent_ specifies the parent segment. The first segment of a _cell_ (with no _parent_) usually represents the soma. The shape is normally a cylinder (radii of the _proximal_ and _distal_ equal, but positions different) or a conical frustum (radii and positions different). If the x,y,x positions of the _proximal_ and _distal_ are equal, the segment can be interpreted as a sphere, and in this case the radii of these points must be equal. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling. ">
 
         <Constant name="LEN" dimension="length" value="1m"/>
         <Child name="parent" type="parent"/>
@@ -591,7 +590,7 @@
         <Exposure name="radDist" dimension="length"/>
         <Exposure name="length" dimension="length"/>
 
-        <Text name="name"/>
+        <Text name="name" description="An optional name for the segment. Convenient for providing a suitable variable name for generated code, e.g. soma, dend0"/>
 
         <Dynamics>
             <!-- TODO: make all of these derived params!! -->
@@ -618,7 +617,7 @@
     </ComponentType>
 
 
-    <ComponentType name="segmentGroup" description="A method to describe a group of _segment_s in a _morphology_">
+    <ComponentType name="segmentGroup" description="A method to describe a group of _segment_s in a _morphology_, e.g. soma_group, dendrite_group, axon_group. While a name is useful to describe the group, the _neuroLexId attribute can be used to explicitly specify the meaning of the group, e.g. sao1044911821 for 'Neuronal Cell Body', sao1211023249 for 'Dendrite'. The _segment_s in this group can be specified as: a list of individual _member_ segments; a _path_, all of the segments along which should be included; a _subTree_ of the _cell_ to include; other segmentGroups to _include_ (so all segments from those get included here). An _inhomogeneousParameter_ can be defined on the region of the cell specified by this group (see _variableParameter_ for usage).">
 
         <Child name="notes" type="notes"/>
         <Child name="annotation" type="annotation"/>
@@ -629,44 +628,45 @@
         <Children name="includes" type="include"/> <!-- TODO deal with <include> used also for including ext NML files... -->
         <Children name="inhomogeneousParameter" type="inhomogeneousParameter"/>
 
-        <Text name="neuroLexId"/>
+        <Text name="neuroLexId" description="An id string for pointing to an entry in the NeuroLex ontology. Use of this attribute is a shorthand for a full
+        RDF based reference to the MIRIAM Resource urn:miriam:neurolex, with an bqbiol:is qualifier."/>
 
     </ComponentType>
 
 
-    <ComponentType name="member" description="A single identified _segment_ which is part of the _segmentGroup_">
+    <ComponentType name="member" description="A single identified _segment which is part of the _segmentGroup_">
         <Text name="segment"/>
     </ComponentType>
 
 
-    <ComponentType name="from" description="Specifies which _segment_ distal from which to calculate the _segmentGroup_">
+    <ComponentType name="from" description="In a _path_ or _subTree_, specifies which _segment (inclusive) from which to calculate the _segmentGroup_">
         <Text name="segment"/>
     </ComponentType>
 
 
-    <ComponentType name="to" description="Specifies which _segment_ up to which to calculate the _segmentGroup_">
+    <ComponentType name="to" description="In a _path_, specifies which _segment (inclusive) up to which to calculate the _segmentGroup_">
         <Text name="segment"/>
     </ComponentType>
 
 
-    <ComponentType name="include" description="Include all members of another _segmentGroup_ in this">
-        <Text name="href"/> <!--TODO: sort this!!! Needed since <include> is used to include external nml files!! -->
+    <ComponentType name="include" description="Include all members of another _segmentGroup_ in this group">
+        <Text name="href" description="TODO: fix this!!! This is needed here, since include is used to include external nml files!!"/>
         <Text name="segmentGroup"/>
     </ComponentType>
 
 
-    <ComponentType name="path" description="Include all the segments between those specified by _from_ and _to_, inclusive">
+    <ComponentType name="path" description="Include all the _segment_s between those specified by _from_ and _to_, inclusive">
         <Child name="from" type="from"/>
         <Child name="to" type="to"/>
     </ComponentType>
 
 
-    <ComponentType name="subTree" description="Include all the segments distal to that specified by _from_ in the _segmentGroup_">
+    <ComponentType name="subTree" description="Include all the _segment_s distal to that specified by _from_ in the _segmentGroup_">
         <Child name="from" type="from"/>
     </ComponentType>
 
 
-    <ComponentType name="inhomogeneousParameter" description="An inhomogeneous parameter specified across the _segmentGroup_">
+    <ComponentType name="inhomogeneousParameter" description="An inhomogeneous parameter specified across the _segmentGroup_ (see _variableParameter_ for usage).">
         <Child name="proximal" type="proximalProperties"/>
         <Child name="distal" type="distalProperties"/>
         <Text name="variable"/>
@@ -687,7 +687,6 @@
     <ComponentType name="morphology" description="The collection of _segment_s which specify the 3D structure of the cell, along with a number of _segmentGroup_s">
 
         <Children name="segments" type="segment"/>
-
         <Children name="segmentGroups" type="segmentGroup"/>
 
     </ComponentType>
