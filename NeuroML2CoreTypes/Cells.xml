@@ -1045,9 +1045,9 @@
         extends="baseCellMembPot"
         description="Cell with _segment_s specified in a _morphology_ element along with details on its _biophysicalProperties_. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and _v of this cell represents the membrane potential in that isopotential segment.">
 
-        <Child name="morphology" type="morphology"/>
+        <Child name="morphology" type="morphology" description="Should only be used if morphology element is outside the cell. This points to the id of the morphology."/>
 
-        <Child name="biophysicalProperties" type="biophysicalProperties"/>
+        <Child name="biophysicalProperties" type="biophysicalProperties" description="Should only be used if biophysicalProperties element is outside the cell.  This points to the id of the biophysicalProperties"/>
 
         <Attachments name="synapses" type="basePointCurrent"/>
 
