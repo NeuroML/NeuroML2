@@ -9,7 +9,6 @@ on:
   pull_request:
     branches: [ master, development, experimental ]
 
-
 jobs:
   build:
 
@@ -27,6 +26,18 @@ jobs:
         java-version: ${{ matrix.java }}
         java-package: jdk
 
-    - name: Test build
+    - name: Install NeuroML 2 with Maven
       run: |
+        java -version
         mvn install
+
+    - name: Install jNeuroML
+      run: |
+        export main_repo_branch=${GITHUB_REF##*/}
+        echo Using branch $main_repo_branch
+        git clone https://github.com/NeuroML/jNeuroML.git
+        cd jNeuroML
+        git checkout $main_repo_branch
+        python getNeuroML.py $main_repo_branch  # will call mvn install on this & other repos
+        ls -alt
+        mvn dependency:tree
