@@ -55,3 +55,9 @@ jobs:
         omv list -V
         env
         pip freeze
+        
+    - name: Test examples using OMV
+      run: |
+        cd $GITHUB_WORKSPACE/NeuroML2/LEMSexamples
+        omv all -V --ignore-non-py3
+        omv list -V
