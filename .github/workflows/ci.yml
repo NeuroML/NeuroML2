@@ -5,9 +5,9 @@ name: Test commits
 
 on:
   push:
-    branches: [ master, development, experimental ]
+    branches: [ master, development, experimental, documentation_update ]
   pull_request:
-    branches: [ master, development, experimental ]
+    branches: [ master, development, experimental, documentation_update ]
 
 jobs:
   build:
@@ -34,6 +34,7 @@ jobs:
     - name: Install jNeuroML
       run: |
         export main_repo_branch=${GITHUB_REF##*/}
+        if [[ ${main_repo_branch} != "master" && ${main_repo_branch} != "development" && ${main_repo_branch} != "experimental" ]]; then main_repo_branch=development ; fi
         echo Using branch $main_repo_branch
         git clone https://github.com/NeuroML/jNeuroML.git
         cd jNeuroML
@@ -41,3 +42,4 @@ jobs:
         python getNeuroML.py $main_repo_branch  # will call mvn install on this & other repos
         ls -alt
         mvn dependency:tree
+        ./jnml -v
