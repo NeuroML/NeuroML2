@@ -572,7 +572,7 @@
 
 
     <ComponentType name="parent"
-        description="Specifies the id of the _segment which is this segment's parent.">
+        description="Specifies the _segment_ which is this segment's parent. The _fractionAlong specifies where it is connected, usually 1 (the default value), meaning the _distal_ point of the parent, or 0, meaning the _proximal_ point. If it is between these, a linear interpolation between the 2 points should be used.">
         <Text name="segment" description="The id of the parent segment"/>
         <Text name="fractionAlong" description="The fraction along the the parent segment at which this segment is attached. For usage see _proximal_"/>
     </ComponentType>
