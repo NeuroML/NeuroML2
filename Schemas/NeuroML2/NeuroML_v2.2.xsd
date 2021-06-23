@@ -1782,11 +1782,11 @@
 
     <xs:complexType name="SpikeThresh">
         <xs:annotation>
-            <xs:documentation>Using a thin extension of ValueAcrossSegOrSegGroup to facilitate library generation (e.g. libNeuroML)</xs:documentation>
+            <xs:documentation>Membrane potential at which to emit a spiking event. Note, usually the spiking event will not be emitted again until the membrane potential has fallen below this value and rises again to cross it in a positive direction.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="ValueAcrossSegOrSegGroup">
-            </xs:extension>
+            <xs:attribute name="value" type="Nml2Quantity_voltage" use="optional"/>
+            <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
         </xs:complexContent>
     </xs:complexType>
 
