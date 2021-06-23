@@ -2107,17 +2107,6 @@
 
     </xs:complexType>
 
-    <xs:complexType name="ValueAcrossSegOrSegGroup">
-
-        <xs:attribute name="value" type="Nml2Quantity" use="optional"/>
-
-        <!-- Note: only one of the following should be used!! -->
-        <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
-        <xs:attribute name="segment" type="NmlId" use="optional"/>
-
-    </xs:complexType>
-
-
     <xs:complexType name="VariableParameter">
 
         <xs:sequence>
