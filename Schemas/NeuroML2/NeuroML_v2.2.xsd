@@ -67,6 +67,14 @@
 
     </xs:simpleType>
 
+    <xs:simpleType name="Nml2Quantity_resistivity">
+
+        <xs:restriction base="xs:string">
+            <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(ohm_cm|kohm_cm|ohm_m)"/> <!-- Based on set of defined Units in NeuroMLCoreDimensions.xml -->
+        </xs:restriction>
+
+    </xs:simpleType>
+
     <xs:simpleType name="Nml2Quantity_conductance">
 
         <xs:restriction base="xs:string">
