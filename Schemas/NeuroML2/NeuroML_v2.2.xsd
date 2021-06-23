@@ -1792,11 +1792,11 @@
 
     <xs:complexType name="SpecificCapacitance">
         <xs:annotation>
-            <xs:documentation>Using a thin extension of ValueAcrossSegOrSegGroup to facilitate library generation (e.g. libNeuroML)</xs:documentation>
+            <xs:documentation>Capacitance per unit area</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="ValueAcrossSegOrSegGroup">
-            </xs:extension>
+            <xs:attribute name="value" type="Nml2Quantity_specificCapacitance" use="optional"/>
+            <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
         </xs:complexContent>
     </xs:complexType>
 
