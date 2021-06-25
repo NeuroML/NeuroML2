@@ -1792,7 +1792,7 @@
         <xs:annotation>
             <xs:documentation>Membrane potential at which to emit a spiking event. Note, usually the spiking event will not be emitted again until the membrane potential has fallen below this value and rises again to cross it in a positive direction.</xs:documentation>
         </xs:annotation>
-        <xs:attribute name="value" type="Nml2Quantity_voltage" use="optional"/>
+        <xs:attribute name="value" type="Nml2Quantity_voltage" use="required"/>
         <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
     </xs:complexType>
 
@@ -1800,7 +1800,7 @@
         <xs:annotation>
             <xs:documentation>Capacitance per unit area</xs:documentation>
         </xs:annotation>
-        <xs:attribute name="value" type="Nml2Quantity_specificCapacitance" use="optional"/>
+        <xs:attribute name="value" type="Nml2Quantity_specificCapacitance" use="required"/>
         <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
     </xs:complexType>
 
@@ -1808,7 +1808,7 @@
         <xs:annotation>
             <xs:documentation>Explicitly set initial membrane potential for the cell</xs:documentation>
         </xs:annotation>
-        <xs:attribute name="value" type="Nml2Quantity_voltage" use="optional"/>
+        <xs:attribute name="value" type="Nml2Quantity_voltage" use="required"/>
         <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
     </xs:complexType>
 
@@ -1816,7 +1816,7 @@
         <xs:annotation>
             <xs:documentation>The resistivity, or specific axial resistance, of the cytoplasm</xs:documentation>
         </xs:annotation>
-        <xs:attribute name="value" type="Nml2Quantity_resistivity" use="optional"/>
+        <xs:attribute name="value" type="Nml2Quantity_resistivity" use="required"/>
         <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
     </xs:complexType>
 
