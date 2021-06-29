@@ -1,7 +1,7 @@
 <Lems xmlns="http://www.neuroml.org/lems/0.7.5"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.neuroml.org/lems/0.7.5 ../../LEMS/Schemas/LEMS/LEMS_v0.7.5.xsd"
-      description="A number of ComponentTypes for providing spiking and current inputs to other ComponentTypes">
+      description="A number of ComponentTypes for providing spiking (e.g. _spikeGeneratorPoisson_, _spikeArray_) and current inputs (e.g. _pulseGenerator_, _voltageClamp_, _timedSynapticInput_, _poissonFiringSynapse_) to other ComponentTypes">
 
 
     <Include file="NeuroMLCoreDimensions.xml"/>

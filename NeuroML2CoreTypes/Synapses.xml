@@ -1,8 +1,8 @@
 <Lems xmlns="http://www.neuroml.org/lems/0.7.5"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.neuroml.org/lems/0.7.5 ../../LEMS/Schemas/LEMS/LEMS_v0.7.5.xsd"
-      description="A number of synaptic ComponentTypes for use in NeuroML 2 documents. These generally extend the _baseSynapse_ ComponentType.">
- 
+      description="A number of synaptic ComponentTypes for use in NeuroML 2 documents, e.g. _expOneSynapse_, _expTwoSynapse_, _blockingPlasticSynapse_. These extend the _baseSynapse_ ComponentType. Also defined continuously transmitting synapses, e.g. _gapJunction_ and _gradedSynapse_.">
+
 
     <!-- These definitions reference entries in the Computational Neuroscience Ontology. To translate
     the cnoTerms into URLs, follow example of synapse, e.g. cno_0000009 ->

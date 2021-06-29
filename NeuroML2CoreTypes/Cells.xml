@@ -1,7 +1,7 @@
 <Lems xmlns="http://www.neuroml.org/lems/0.7.5"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.neuroml.org/lems/0.7.5 ../../LEMS/Schemas/LEMS/LEMS_v0.7.5.xsd"
-      description="Defines both abstract cell models (e.g. _izhikevichCell_, adaptive exponential integrate and fire cell, _adExIaFCell_), point conductance based cell models (_pointCellCondBased_, _pointCellCondBasedCa_) and cells models (_cell_) which specify the _morphology_ (containing _segment_s) and _biophysicalProperties_ separately.">
+      description="Defines both abstract cell models (e.g. _izhikevichCell_, adaptive exponential integrate and fire cell, _adExIaFCell_), point conductance based cell models (_pointCellCondBased_, _pointCellCondBasedCa_) and cells models (_cell_), which specify the _morphology_ (containing _segment_s) and _biophysicalProperties_ separately.">
 
     <!-- A number of cell types for use in NeuroML 2 documents  -->
 

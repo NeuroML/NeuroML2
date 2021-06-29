@@ -1,7 +1,7 @@
 <Lems xmlns="http://www.neuroml.org/lems/0.7.5"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.neuroml.org/lems/0.7.5 ../../LEMS/Schemas/LEMS/LEMS_v0.7.5.xsd"
-      description="Network descriptions in NeuroML 2. Describes _network_ elements containing _population_s ">
+      description="Network descriptions in NeuroML 2. Describes _network_ elements containing _population_s (potentially specifying a list of cell _location_s), _projection_s (lists of _connection_s) and _input_s.">
 
     <!-- A number of network elements for use in NeuroML 2 documents  -->
 
@@ -394,7 +394,7 @@
     </ComponentType>
 
 
-    <ComponentType name="inputList" description="An explicit list of inputs. Not yet stable...">
+    <ComponentType name="inputList" description="An explicit list of _input_s to a _population.">
 
         <Children name="inputs" type="input"/>
         <ComponentReference name="component" type="basePointCurrent"/>
@@ -403,12 +403,12 @@
     </ComponentType>
 
 
-    <ComponentType name="input" description="Specifies input lists.">
+    <ComponentType name="input" description="Specifies a single input to a _target, optionally giving the _segmentId (default 0) and _fractionAlong the segment (default 0.5).">
 
         <Path name="target"/>
 
-        <Text name="segmentId"/>
-        <Text name="fractionAlong"/>
+        <Text name="segmentId" description="Optional specification of the segment to target, default 0"/>
+        <Text name="fractionAlong" description="Optional specification of the fraction along the specified segment, default 0.5"/>
 
         <Text name="destination"/>
         <Structure>
