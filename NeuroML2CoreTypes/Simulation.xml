@@ -9,18 +9,17 @@
 
     <Include file="NeuroMLCoreDimensions.xml"/>
 
-
-    <ComponentType name="Simulation" description="The main element in a LEMS Simulation file. Defines the _length of simulation, the timestep (dt) _step and an optional _seed to use for stochastic elements, as well as _displays, _outputs and _events to record.">
+    <ComponentType name="Simulation" description="The main element in a LEMS Simulation file. Defines the _length of simulation, the timestep (dt) _step and an optional _seed to use for stochastic elements, as well as _displays, _outputs and _events to record. Specifies a _target component to run, usually the id of a _network_">
         <Parameter name="length" dimension="time" description="Duration of the simulation run"/>
-        <Parameter name="step" dimension="time"/>
+        <Parameter name="step" dimension="time" description="Time step (dt) to use in the simulation"/>
 
         <Children name="displays" type="Display"/>
         <Children name="outputs" type="OutputFile"/>
         <Children name="events" type="EventOutputFile"/>
 
-        <ComponentReference name="target" type="Component"/>
+        <ComponentReference name="target" type="Component" description="The target component to run, usually the id of a network"/>
 
-        <Text name="seed"/>
+        <Text name="seed" description="The seed to use in the random number generator for stochastic entities"/>
 
         <Dynamics>
             <StateVariable name="t" dimension="time"/>
@@ -32,16 +31,16 @@
     </ComponentType>
 
 
-    <ComponentType name="Display">
-        <Parameter name="xmin" dimension="none"/>
-        <Parameter name="xmax" dimension="none"/>
-        <Parameter name="ymin" dimension="none"/>
-        <Parameter name="ymax" dimension="none"/>
-        <Parameter name="timeScale" dimension="time"/>
+    <ComponentType name="Display" description="Details of a display to generate (usually a set of traces given by _Line_s in a newly opened window) on completion of the simulation.">
+        <Parameter name="xmin" dimension="none" description="The minimum value on the x axis (i.e time variable) of the display"/>
+        <Parameter name="xmax" dimension="none" description="The maximum value on the x axis (i.e time variable) of the display"/>
+        <Parameter name="ymin" dimension="none" description="The minimum value on the y axis of the display"/>
+        <Parameter name="ymax" dimension="none" description="The maximum value on the x axis of the display"/>
+        <Parameter name="timeScale" dimension="time" description="A scaling of the time axis, e.g. 1ms means display in milliseconds"/>
 
         <Children name="lines" type="Line"/>
 
-        <Text name="title"/>
+        <Text name="title" description="The title of the display, e.g. to use for the window"/>
 
         <Simulation>
             <DataDisplay title="title" dataRegion="xmin,xmax,ymin,ymax"/>
@@ -49,23 +48,23 @@
     </ComponentType>
 
 
-    <ComponentType name="Line">
-        <Parameter name="scale" dimension="*"/>
-        <Parameter name="timeScale" dimension="*"/>
-        <Path name="quantity"/>
-        <Text name="color"/>
+    <ComponentType name="Line" description="Specification of a single time varying _quantity to plot on the _Display_">
+        <Parameter name="scale" dimension="*" description="xxx"/>
+        <Parameter name="timeScale" dimension="*" description="xxx"/>
+        <Path name="quantity" description="Path to the quantity to save, see see https://docs.neuroml.org/Userdocs/Paths.html"/>
+        <Text name="color" description="A hex string for the color to display the trace for this quantity, e.g. #aa33ff"/>
         <Simulation>
             <Record quantity="quantity" timeScale="timeScale" scale="scale" color="color"/>
         </Simulation>
     </ComponentType>
 
 
-    <ComponentType name="OutputFile">
+    <ComponentType name="OutputFile" description="A file in which to save recorded values from the simulation">
 
     	<Children name="outputColumn" type="OutputColumn"/>
 
-        <Text name="path"/>
-        <Text name="fileName"/>
+          <Text name="path" description="Optional path to the directory in which to store the file"/>
+          <Text name="fileName" description="Name of the file to generate. Can include a relative path (from the LEMS Simulation file location)."/>
 
     	<Simulation>
     		<DataWriter path="path" fileName="fileName"/>
@@ -73,21 +72,21 @@
 
     </ComponentType>
 
-    <ComponentType name="OutputColumn">
-        <Path name="quantity"/>
+    <ComponentType name="OutputColumn" description="Specification of a single time varying _quantity to record during the simulation.">
+        <Path name="quantity" description="Path to the quantity to save, see see https://docs.neuroml.org/Userdocs/Paths.html"/>
         <Simulation>
             <Record quantity="quantity"/>
         </Simulation>
     </ComponentType>
 
 
-    <ComponentType name="EventOutputFile">
+    <ComponentType name="EventOutputFile" description="A file in which to save event information (e.g. spikes from cells in a population) in a specified _format">
 
         <Children name="eventSelection" type="EventSelection"/>
 
-        <Text name="path"/>
-        <Text name="fileName"/>
-        <Text name="format"/>
+        <Text name="path" description="Optional path to the directory in which to store the file"/>
+        <Text name="fileName" description="Name of the file to generate. Can include a relative path (from the LEMS Simulation file location)."/>
+        <Text name="format" description="Takes values TIME_ID or ID_TIME, depending on the preferred order of the time or event id (from _EventSelection_) in each row of the file"/>
 
         <Simulation>
             <EventWriter path="path" fileName="fileName" format="format"/>
@@ -95,9 +94,9 @@
 
     </ComponentType>
 
-    <ComponentType name="EventSelection">
-        <Path name="select"/>
-        <Text name="eventPort"/>
+    <ComponentType name="EventSelection" description="A specific source of events with an associated _id, which will be recorded inside the file specified in the parent _EventOutputFile_. The attribute _select should point to a cell inside a _population_ (e.g. hhpop[0], see https://docs.neuroml.org/Userdocs/Paths.html), and the _eventPort specifies the port for the emitted events, which usually has id: spike. Note: the _id used on this element (and appearing in the file alongside the event time) can be different from the id/index of the cell in the population.">
+        <Path name="select" description="The cell which will be emitting the events"/>
+        <Text name="eventPort" description="The port on the cell which generates the events, usually: spike"/>
         <Simulation>
             <EventRecord quantity="select" eventPort="eventPort"/>
         </Simulation>
