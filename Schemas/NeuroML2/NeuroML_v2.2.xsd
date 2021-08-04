@@ -67,6 +67,14 @@
 
     </xs:simpleType>
 
+    <xs:simpleType name="Nml2Quantity_resistivity">
+
+        <xs:restriction base="xs:string">
+            <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(ohm_cm|kohm_cm|ohm_m)"/> <!-- Based on set of defined Units in NeuroMLCoreDimensions.xml -->
+        </xs:restriction>
+
+    </xs:simpleType>
+
     <xs:simpleType name="Nml2Quantity_conductance">
 
         <xs:restriction base="xs:string">
@@ -1782,42 +1790,34 @@
 
     <xs:complexType name="SpikeThresh">
         <xs:annotation>
-            <xs:documentation>Using a thin extension of ValueAcrossSegOrSegGroup to facilitate library generation (e.g. libNeuroML)</xs:documentation>
+            <xs:documentation>Membrane potential at which to emit a spiking event. Note, usually the spiking event will not be emitted again until the membrane potential has fallen below this value and rises again to cross it in a positive direction.</xs:documentation>
         </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ValueAcrossSegOrSegGroup">
-            </xs:extension>
-        </xs:complexContent>
+        <xs:attribute name="value" type="Nml2Quantity_voltage" use="required"/>
+        <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
     </xs:complexType>
 
     <xs:complexType name="SpecificCapacitance">
         <xs:annotation>
-            <xs:documentation>Using a thin extension of ValueAcrossSegOrSegGroup to facilitate library generation (e.g. libNeuroML)</xs:documentation>
+            <xs:documentation>Capacitance per unit area</xs:documentation>
         </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ValueAcrossSegOrSegGroup">
-            </xs:extension>
-        </xs:complexContent>
+        <xs:attribute name="value" type="Nml2Quantity_specificCapacitance" use="required"/>
+        <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
     </xs:complexType>
 
     <xs:complexType name="InitMembPotential">
         <xs:annotation>
-            <xs:documentation>Using a thin extension of ValueAcrossSegOrSegGroup to facilitate library generation (e.g. libNeuroML)</xs:documentation>
+            <xs:documentation>Explicitly set initial membrane potential for the cell</xs:documentation>
         </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ValueAcrossSegOrSegGroup">
-            </xs:extension>
-        </xs:complexContent>
+        <xs:attribute name="value" type="Nml2Quantity_voltage" use="required"/>
+        <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
     </xs:complexType>
 
     <xs:complexType name="Resistivity">
         <xs:annotation>
-            <xs:documentation>Using a thin extension of ValueAcrossSegOrSegGroup to facilitate library generation (e.g. libNeuroML)</xs:documentation>
+            <xs:documentation>The resistivity, or specific axial resistance, of the cytoplasm</xs:documentation>
         </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ValueAcrossSegOrSegGroup">
-            </xs:extension>
-        </xs:complexContent>
+        <xs:attribute name="value" type="Nml2Quantity_resistivity" use="required"/>
+        <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
     </xs:complexType>
 
     <xs:complexType name="ChannelPopulation">
@@ -2099,17 +2099,6 @@
 
     </xs:complexType>
 
-    <xs:complexType name="ValueAcrossSegOrSegGroup">
-
-        <xs:attribute name="value" type="Nml2Quantity" use="optional"/>
-
-        <!-- Note: only one of the following should be used!! -->
-        <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
-        <xs:attribute name="segment" type="NmlId" use="optional"/>
-
-    </xs:complexType>
-
-
     <xs:complexType name="VariableParameter">
 
         <xs:sequence>
@@ -2139,26 +2128,21 @@
 
     <xs:complexType name="Species">
 
-        <xs:complexContent>
-            <xs:extension base="ValueAcrossSegOrSegGroup">
+        <xs:attribute name="id" type="NmlId" use="required"/>
 
-                <xs:attribute name="id" type="NmlId" use="required"/>
+        <xs:attribute name="concentrationModel" type="NmlId" use="required"/>
 
-                <xs:attribute name="concentrationModel" type="NmlId" use="required"/>
+        <xs:attribute name="ion" type="NmlId" use="optional">
+            <xs:annotation>
+                <xs:documentation>Specifying the ion here again is redundant, the ion name should be the same as id. Kept for now
+                    until LEMS implementation can select by id. TODO: remove.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
 
-                <xs:attribute name="ion" type="NmlId" use="optional">
-                    <xs:annotation>
-                        <xs:documentation>Specifying the ion here again is redundant, the ion name should be the same as id. Kept for now
-                            until LEMS implementation can select by id. TODO: remove.
-                        </xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-
-                <xs:attribute name="initialConcentration" type="Nml2Quantity_concentration" use="required"/>
-                <xs:attribute name="initialExtConcentration" type="Nml2Quantity_concentration" use="required"/>
-
-            </xs:extension>
-        </xs:complexContent>
+        <xs:attribute name="initialConcentration" type="Nml2Quantity_concentration" use="required"/>
+        <xs:attribute name="initialExtConcentration" type="Nml2Quantity_concentration" use="required"/>
+        <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
 
     </xs:complexType>
 

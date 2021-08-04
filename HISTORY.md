@@ -11,7 +11,7 @@ and [LEMS](https://github.com/LEMS/LEMS), but also the Python ([libNeuroML](http
 v2.2 / 2021-??-??
 --------------------
 
-...
+* Removed `ValueAcrossSegOrSegGroup` (https://github.com/NeuroML/NeuroML2/pull/165 that fixes https://github.com/NeuroML/NeuroML2/issues/162) and update any elements using it to directly include `Value` and `SegmentGroup` attributes. This allows their correct validation.
 
 
 v2.1 / 2021-03-22

@@ -43,3 +43,21 @@ jobs:
         ls -alt
         mvn dependency:tree
         ./jnml -v
+        cd ..
+        
+    - name: Install OMV
+      run: |
+        pwd
+        echo $GITHUB_WORKSPACE
+        export PATH=$PATH:$GITHUB_WORKSPACE/jNeuroML
+        export JNML_HOME=$GITHUB_WORKSPACE/jNeuroML
+        pip install git+https://github.com/OpenSourceBrain/osb-model-validation
+        omv list -V
+        env
+        pip freeze
+        
+    - name: Test examples using OMV
+      run: |
+        cd $GITHUB_WORKSPACE/NeuroML2/LEMSexamples
+        omv all -V  --engine=jNeuroML --ignore-non-py3
+        omv list -V
