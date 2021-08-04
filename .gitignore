@@ -63,3 +63,4 @@ examples/*.pov
 /LEMSexamples/report.txt
 /LEMSexamples/test/x86_64
 /LEMSexamples/report.ex*.txt
+/LEMSexamples/results/*.spikes
