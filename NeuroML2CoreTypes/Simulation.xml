@@ -9,7 +9,7 @@
 
     <Include file="NeuroMLCoreDimensions.xml"/>
 
-    <ComponentType name="Simulation" description="The main element in a LEMS Simulation file. Defines the _length of simulation, the timestep (dt) _step and an optional _seed to use for stochastic elements, as well as _displays, _outputs and _events to record. Specifies a _target component to run, usually the id of a _network_">
+    <ComponentType name="Simulation" description="The main element in a LEMS Simulation file. Defines the _length of simulation, the timestep (dt) _step and an optional _seed to use for stochastic elements, as well as _Display_s, _OutputFile_s and _EventOutputFile_s to record. Specifies a _target component to run, usually the id of a _network_">
         <Parameter name="length" dimension="time" description="Duration of the simulation run"/>
         <Parameter name="step" dimension="time" description="Time step (dt) to use in the simulation"/>
 
@@ -36,7 +36,7 @@
         <Parameter name="xmax" dimension="none" description="The maximum value on the x axis (i.e time variable) of the display"/>
         <Parameter name="ymin" dimension="none" description="The minimum value on the y axis of the display"/>
         <Parameter name="ymax" dimension="none" description="The maximum value on the x axis of the display"/>
-        <Parameter name="timeScale" dimension="time" description="A scaling of the time axis, e.g. 1ms means display in milliseconds"/>
+        <Parameter name="timeScale" dimension="time" description="A scaling of the time axis, e.g. 1ms means display in milliseconds. Note: all quantities are recorded in SI units"/>
 
         <Children name="lines" type="Line"/>
 
@@ -48,10 +48,10 @@
     </ComponentType>
 
 
-    <ComponentType name="Line" description="Specification of a single time varying _quantity to plot on the _Display_">
-        <Parameter name="scale" dimension="*" description="xxx"/>
-        <Parameter name="timeScale" dimension="*" description="xxx"/>
-        <Path name="quantity" description="Path to the quantity to save, see see https://docs.neuroml.org/Userdocs/Paths.html"/>
+    <ComponentType name="Line" description="Specification of a single time varying _quantity to plot on the _Display_. Note that all quantities are handled internally in LEMS in SI units, and so a _scale should be used if it is to be displayed in other units.">
+        <Parameter name="scale" dimension="*" description="A scaling factor to DIVIDE the quantity by. Can be dimensional, so using scale=1mV means a value of -0.07V is displayed as -70. Alternatively, scale=0.001 would achieve the same thing."/>
+        <Parameter name="timeScale" dimension="*" description="An optional scaling of the time axis, e.g. 1ms means display in milliseconds. Note: if present, this overrides timeScale from _Display_"/>
+        <Path name="quantity" description="Path to the quantity to display, see see https://docs.neuroml.org/Userdocs/Paths.html."/>
         <Text name="color" description="A hex string for the color to display the trace for this quantity, e.g. #aa33ff"/>
         <Simulation>
             <Record quantity="quantity" timeScale="timeScale" scale="scale" color="color"/>
@@ -72,8 +72,8 @@
 
     </ComponentType>
 
-    <ComponentType name="OutputColumn" description="Specification of a single time varying _quantity to record during the simulation.">
-        <Path name="quantity" description="Path to the quantity to save, see see https://docs.neuroml.org/Userdocs/Paths.html"/>
+    <ComponentType name="OutputColumn" description="Specification of a single time varying _quantity to record during the simulation. Note that all quantities are handled internally in LEMS in SI units, and so the value for the quantity in the file (as well as time) will be in SI units.">
+        <Path name="quantity" description="Path to the quantity to save, see see https://docs.neuroml.org/Userdocs/Paths.html. Note that all quantities are saved in SI units."/>
         <Simulation>
             <Record quantity="quantity"/>
         </Simulation>
