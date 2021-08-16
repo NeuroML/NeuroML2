@@ -58,7 +58,7 @@
     <ComponentType name="populationList" extends="basePopulation" description="An explicit list of the cells in the population. ">
         <Children name="instances" type="instance"/>
 
-        <Text name="size"/> <!--Note: Text, not Parameter, as this is not actually used by LEMS, the <instance> elements determine the size, this attribute is really just metadata, though the two should be consistent-->
+        <Text name="size" description="This attribute is not used by LEMS and is provided for metadata purposes only. The size of the populationList is equal to the number of explicitly defined instances."/> <!--Note: Text, not Parameter, as this is not actually used by LEMS, the <instance> elements determine the size, this attribute is really just metadata, though the two should be consistent-->
     </ComponentType>
 
 
