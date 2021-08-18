@@ -1,7 +1,7 @@
 <Lems xmlns="http://www.neuroml.org/lems/0.7.5"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.neuroml.org/lems/0.7.5 ../../LEMS/Schemas/LEMS/LEMS_v0.7.5.xsd"
-      description="Network descriptions in NeuroML 2. Describes _network_ elements containing _population_s (potentially specifying a list of cell _location_s), _projection_s (lists of _connection_s) and _input_s.">
+      description="Network descriptions for NeuroML 2. Describes _network_ elements containing _population_s (potentially of type _populationList_, and so specifying a list of cell _location_s), _projection_s (i.e. lists of _connection_s) and _input_s.">
 
     <!-- A number of network elements for use in NeuroML 2 documents  -->
 
@@ -10,7 +10,7 @@
 
 
     <ComponentType name="network"
-                   description="Network containing _population_s, _projection_s and lists of _explicitConnection_s (either directly between components of the populations or via synapses)"
+                   description="Network containing: _population_s (potentially of type _populationList_, and so specifying a list of cell _location_s); _projection_s (with lists of _connection_s) and/or _explicitConnection_s; and _inputList_s (with lists of _input_s) and/or _explicitInput_s. Note: often in NeuroML this will be of type _networkWithTemperature_ if there are temperature dependent elements (e.g. ion channels)."
                    extends="baseStandalone">
 
         <Children name="regions" type="region"/>
@@ -28,7 +28,7 @@
     </ComponentType>
 
 
-    <ComponentType name="networkWithTemperature" description="Network containing _population_s, _projection_s and lists of _explicitConnection_s (either directly between components of the populations or via synapses), and an explicit temperature" extends="network">
+    <ComponentType name="networkWithTemperature" description="Same as _network_, but with an explicit _temperature for temperature dependent elements (e.g. ion channels)" extends="network">
 
         <Parameter name="temperature" dimension="temperature"/>
 
@@ -36,7 +36,7 @@
 
 
     <ComponentType name="basePopulation"
-                   description="A population of cells (anything which extends _baseCell_)"
+                   description="A population of multiple instances of a specific _component, which anything which extends _baseCell_. "
                    extends="baseStandalone">
 
         <Child name="notes" type="notes"/>
@@ -47,7 +47,7 @@
     </ComponentType>
 
 
-    <ComponentType name="population" extends="basePopulation" description="A population of components, with just one parameter for the _size">
+    <ComponentType name="population" extends="basePopulation" description="A population of components, with just one parameter for the _size, i.e. number of components to create. Note: quite often this is used with type=_populationList_ which means the size is determined by the number of _instance_s (with _location_s) in the list. The _size attribute is still set, and there will be a validation error if this does not match the number in the list.">
         <Parameter name="size" dimension="none" description="Number of instances of this Component to create when the population is instantiated"/>
         <Structure>
             <MultiInstantiate number="size" component="component"/>
@@ -55,14 +55,14 @@
     </ComponentType>
 
 
-    <ComponentType name="populationList" extends="basePopulation" description="An explicit list of the cells in the population. ">
+    <ComponentType name="populationList" extends="basePopulation" description="An explicit list of _instance_s (with _location_s) of components in the population. ">
         <Children name="instances" type="instance"/>
 
-        <Text name="size" description="This attribute is not used by LEMS and is provided for metadata purposes only. The size of the populationList is equal to the number of explicitly defined instances."/> <!--Note: Text, not Parameter, as this is not actually used by LEMS, the <instance> elements determine the size, this attribute is really just metadata, though the two should be consistent-->
+        <Text name="size" description="Note: the size of the populationList to create is set by the number of explicitly defined instances. The size attribute is still set, and there will be a validation error if this does not match the number in the list."/> <!--Note: Text, not Parameter, as this is not actually used by LEMS, the <instance> elements determine the size, this attribute is really just metadata, though the two should be consistent-->
     </ComponentType>
 
 
-    <ComponentType name="instance" description="Specifies a single instance of a component in a population (placed at _location_).">
+    <ComponentType name="instance" description="Specifies a single instance of a component in a _population_ (placed at _location_).">
         <Child name="location" type="location"/>
         <Structure>
             <ChildInstance component="../component"/>
@@ -71,12 +71,11 @@
     </ComponentType>
 
 
-    <ComponentType name="location" description="Specifies location of a single _instance_ of a component in a population">
+    <ComponentType name="location" description="Specifies the (x,y,z) location of a single _instance_ of a component in a _population_">
         <Parameter name="x" dimension="none"/>
         <Parameter name="y" dimension="none"/>
         <Parameter name="z" dimension="none"/>
     </ComponentType>
-
 
     <ComponentType name="region" description="Initial attempt to specify 3D region for placing cells. Work in progress...">
         <Child name="rectangularExtent" type="rectangularExtent"/>
