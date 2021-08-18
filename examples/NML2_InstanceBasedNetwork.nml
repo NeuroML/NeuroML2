@@ -2,10 +2,10 @@
 
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta4.xsd"
+    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta4.xsd"
     id="NML2_InstanceBasedNetwork">
 
-<!-- Example of a network specified as a set of location and connection instances in NeuroML 2 --> 
+<!-- Example of a network specified as a set of location and connection instances in NeuroML 2 -->
 
     <expOneSynapse id="syn1" gbase="5nS" erev="0mV" tauDecay="3ms" />
     <expOneSynapse id="syn2" gbase="10nS" erev="0mV" tauDecay="2ms" />
@@ -31,7 +31,7 @@
 
 
         <projection id="internal1" presynapticPopulation="iafCells" postsynapticPopulation="iafCells" synapse="syn1">
-            <!--TODO: Fix! want to define synapse in here, so that multiple synapses per connection can be defined  
+            <!--TODO: Fix! want to define synapse in here, so that multiple synapses per connection can be defined
             <synapseComponent component="syn1"/>-->
             <!--TODO: Fix! want to use preCellId="0"  -->
             <connection id="0" preCellId="../iafCells/0/iaf" postCellId="../iafCells/1/iaf"/>
@@ -46,16 +46,8 @@
             <!--TODO: Fix! want to use target="0"  -->
             <input id="0" target="../iafCells/0/iaf" destination="synapses"/>
         </inputList>
-        
+
 
     </network>
 
 </neuroml>
-
-
-
-
-
-
-
-
