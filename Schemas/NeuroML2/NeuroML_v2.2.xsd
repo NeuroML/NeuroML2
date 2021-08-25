@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema targetNamespace="http://www.neuroml.org/schema/neuroml2"
-    xmlns="http://www.neuroml.org/schema/neuroml2"
-    xmlns:xi="http://www.w3.org/2001/XInclude"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="2.0"
-    xsi:schemaLocation="http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd"
-    elementFormDefault="qualified"
-    attributeFormDefault="unqualified">
+<xs:schema xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" targetNamespace="http://www.neuroml.org/schema/neuroml2" jxb:version="2.0" xsi:schemaLocation="http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
 
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     <!--      Core elements                                    -->
@@ -94,9 +86,7 @@
     <xs:simpleType name="Nml2Quantity_permeability">
 
         <xs:restriction base="xs:string">
-            <xs:pattern
-                value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(m_per_s|
-                       um_per_ms|cm_per_s|cm_per_ms)"/> <!-- Based on set of defined Units in NeuroMLCoreDimensions.xml -->
+            <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(m_per_s|um_per_ms|cm_per_s|cm_per_ms)"/> <!-- Based on set of defined Units in NeuroMLCoreDimensions.xml -->
         </xs:restriction>
 
     </xs:simpleType>
@@ -211,10 +201,10 @@
 
     <xs:simpleType name="NonNegativeInteger">
         <xs:annotation>
-            <xs:documentation>An attribute useful as id of segments, connections, etc: integer >=0 only!</xs:documentation>
-            <xs:appinfo >
+            <xs:documentation>An attribute useful as id of segments, connections, etc: integer &gt;=0 only!</xs:documentation>
+            <xs:appinfo>
                 <!-- This tells JAXB to use an int for this attribute instead of BigInteger-->
-               <jxb:javaType name="int" parseMethod="javax.xml.bind.DatatypeConverter.parseInt" printMethod="javax.xml.bind.DatatypeConverter.printInt" />
+               <jxb:javaType name="int" parseMethod="javax.xml.bind.DatatypeConverter.parseInt" printMethod="javax.xml.bind.DatatypeConverter.printInt"/>
             </xs:appinfo>
         </xs:annotation>
 
@@ -225,10 +215,10 @@
 
     <xs:simpleType name="PositiveInteger">
         <xs:annotation>
-            <xs:documentation>Integer >=1 only!</xs:documentation>
-            <xs:appinfo >
+            <xs:documentation>Integer &gt;=1 only!</xs:documentation>
+            <xs:appinfo>
                 <!-- This tells JAXB to use an int for this attribute instead of BigInteger-->
-               <jxb:javaType name="int" parseMethod="javax.xml.bind.DatatypeConverter.parseInt" printMethod="javax.xml.bind.DatatypeConverter.printInt" />
+               <jxb:javaType name="int" parseMethod="javax.xml.bind.DatatypeConverter.parseInt" printMethod="javax.xml.bind.DatatypeConverter.printInt"/>
             </xs:appinfo>
         </xs:annotation>
 
@@ -240,7 +230,7 @@
 
     <xs:simpleType name="DoubleGreaterThanZero">
         <xs:annotation>
-            <xs:documentation>Double >0 only</xs:documentation>
+            <xs:documentation>Double &gt;0 only</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:double">
             <xs:minExclusive value="0"/>
@@ -531,14 +521,10 @@
             <xs:element name="cell" type="Cell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="cell2CaPools" type="Cell2CaPools" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="baseCell" type="BaseCell" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="iafTauCell" type="IafTauCell"
-			minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="iafTauRefCell" type="IafTauRefCell"
-			minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="iafCell" type="IafCell" minOccurs="0"
-			maxOccurs="unbounded"/>
-            <xs:element name="iafRefCell" type="IafRefCell" minOccurs="0"
-			maxOccurs="unbounded"/>
+            <xs:element name="iafTauCell" type="IafTauCell" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="iafTauRefCell" type="IafTauRefCell" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="iafCell" type="IafCell" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="iafRefCell" type="IafRefCell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="izhikevichCell" type="IzhikevichCell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="izhikevich2007Cell" type="Izhikevich2007Cell" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="adExIaFCell" type="AdExIaFCell" minOccurs="0" maxOccurs="unbounded"/>
@@ -604,42 +590,24 @@
             <xs:documentation>Various types of inputs which are defined in NeuroML2. This list will be expanded...</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="pulseGenerator" type="PulseGenerator"
-                    minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="pulseGeneratorDL" type="PulseGeneratorDL"
-                    minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="sineGenerator" type="SineGenerator"
-                    minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="sineGeneratorDL" type="SineGeneratorDL"
-                    minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="rampGenerator" type="RampGenerator"
-                    minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="rampGeneratorDL" type="RampGeneratorDL"
-                    minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="compoundInput" type="CompoundInput"
-                    minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="compoundInputDL" type="CompoundInputDL"
-                    minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="voltageClamp" type="VoltageClamp"
-                    minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="voltageClampTriple" type="VoltageClampTriple"
-                    minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="spikeArray" type="SpikeArray" minOccurs="0"
-                    maxOccurs="unbounded"/>
-            <xs:element name="timedSynapticInput" type="TimedSynapticInput" minOccurs="0"
-                    maxOccurs="unbounded"/>
-            <xs:element name="spikeGenerator" type="SpikeGenerator"
-                    minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="spikeGeneratorRandom" type="SpikeGeneratorRandom"
-                    minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="spikeGeneratorPoisson" type="SpikeGeneratorPoisson"
-                    minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="spikeGeneratorRefPoisson" type="SpikeGeneratorRefPoisson"
-                    minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="poissonFiringSynapse" type="PoissonFiringSynapse"
-                    minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="transientPoissonFiringSynapse" type="TransientPoissonFiringSynapse"
-                    minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="pulseGenerator" type="PulseGenerator" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="pulseGeneratorDL" type="PulseGeneratorDL" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="sineGenerator" type="SineGenerator" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="sineGeneratorDL" type="SineGeneratorDL" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="rampGenerator" type="RampGenerator" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="rampGeneratorDL" type="RampGeneratorDL" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="compoundInput" type="CompoundInput" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="compoundInputDL" type="CompoundInputDL" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="voltageClamp" type="VoltageClamp" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="voltageClampTriple" type="VoltageClampTriple" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="spikeArray" type="SpikeArray" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="timedSynapticInput" type="TimedSynapticInput" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="spikeGenerator" type="SpikeGenerator" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="spikeGeneratorRandom" type="SpikeGeneratorRandom" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="spikeGeneratorPoisson" type="SpikeGeneratorPoisson" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="spikeGeneratorRefPoisson" type="SpikeGeneratorRefPoisson" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="poissonFiringSynapse" type="PoissonFiringSynapse" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="transientPoissonFiringSynapse" type="TransientPoissonFiringSynapse" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:group>
 
@@ -854,10 +822,10 @@
                     <xs:element name="q10Settings" type="Q10Settings" minOccurs="0"/>
 
                     <xs:element name="closedState" type="ClosedState" minOccurs="1" maxOccurs="unbounded"/>
-                    <xs:element name="openState" type="OpenState" minOccurs="1"  maxOccurs="unbounded"/>
-                    <xs:choice minOccurs="1"  maxOccurs="unbounded">
+                    <xs:element name="openState" type="OpenState" minOccurs="1" maxOccurs="unbounded"/>
+                    <xs:choice minOccurs="1" maxOccurs="unbounded">
                         <xs:group ref="ForwardReverseTransition"/>
-                        <xs:element name ="tauInfTransition" type="TauInfTransition"/>
+                        <xs:element name="tauInfTransition" type="TauInfTransition"/>
                     </xs:choice>
 
                 </xs:sequence>
@@ -879,7 +847,7 @@
                     <xs:element name="q10Settings" type="Q10Settings" minOccurs="0"/>
                     <xs:element name="forwardRate" type="HHRate" minOccurs="0"/>
                     <xs:element name="reverseRate" type="HHRate" minOccurs="0"/>
-                    <xs:element name="timeCourse" type="HHTime"  minOccurs="0"/>
+                    <xs:element name="timeCourse" type="HHTime" minOccurs="0"/>
                     <xs:element name="steadyState" type="HHVariable" minOccurs="0"/>
                     <xs:element name="subGate" type="GateFractionalSubgate" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
@@ -911,7 +879,7 @@
                 <xs:all>
                     <xs:element name="notes" type="Notes" minOccurs="0"/>
                     <xs:element name="q10Settings" type="Q10Settings" minOccurs="0"/>
-                    <xs:element name="timeCourse" type="HHTime"  minOccurs="1"/>
+                    <xs:element name="timeCourse" type="HHTime" minOccurs="1"/>
                     <xs:element name="steadyState" type="HHVariable" minOccurs="1"/>
                 </xs:all>
                 <xs:attribute name="instances" type="PositiveInteger" use="required"/>
@@ -928,7 +896,7 @@
                     <xs:element name="q10Settings" type="Q10Settings" minOccurs="0"/>
                     <xs:element name="forwardRate" type="HHRate" minOccurs="1"/>
                     <xs:element name="reverseRate" type="HHRate" minOccurs="1"/>
-                    <xs:element name="timeCourse" type="HHTime"  minOccurs="1"/>
+                    <xs:element name="timeCourse" type="HHTime" minOccurs="1"/>
                     <xs:element name="steadyState" type="HHVariable" minOccurs="1"/>
                 </xs:all>
                 <xs:attribute name="instances" type="PositiveInteger" use="required"/>
@@ -945,7 +913,7 @@
                     <xs:element name="q10Settings" type="Q10Settings" minOccurs="0"/>
                     <xs:element name="forwardRate" type="HHRate" minOccurs="1"/>
                     <xs:element name="reverseRate" type="HHRate" minOccurs="1"/>
-                    <xs:element name="timeCourse" type="HHTime"  minOccurs="1"/>
+                    <xs:element name="timeCourse" type="HHTime" minOccurs="1"/>
                 </xs:all>
                 <xs:attribute name="instances" type="PositiveInteger" use="required"/>
                 <!-- <xs:attribute name="type" type="gateTypes" use="optional"/> No longer allowed as it could conflict with the element definition -->
@@ -1294,12 +1262,8 @@
         <xs:complexContent>
             <xs:extension base="ExpTwoSynapse">
 	      <xs:sequence>
-                <xs:element name="plasticityMechanism"
-			    type="PlasticityMechanism"
-			    minOccurs="0"/>
-		<xs:element name="blockMechanism"
-			    type="BlockMechanism"
-			    minOccurs="0"/>
+                <xs:element name="plasticityMechanism" type="PlasticityMechanism" minOccurs="0"/>
+		<xs:element name="blockMechanism" type="BlockMechanism" minOccurs="0"/>
 	      </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1316,15 +1280,11 @@
 
 
     <xs:complexType name="BlockMechanism">
-      <xs:attribute name="type" type="BlockTypes"
-		    use="required"/>
+      <xs:attribute name="type" type="BlockTypes" use="required"/>
       <xs:attribute name="species" type="NmlId" use="required"/>
-      <xs:attribute name="blockConcentration"
-		    type="Nml2Quantity_concentration" use="required"/>
-      <xs:attribute name="scalingConc"
-		    type="Nml2Quantity_concentration" use="required"/>
-      <xs:attribute name="scalingVolt" type="Nml2Quantity_voltage"
-		    use="required"/>
+      <xs:attribute name="blockConcentration" type="Nml2Quantity_concentration" use="required"/>
+      <xs:attribute name="scalingConc" type="Nml2Quantity_concentration" use="required"/>
+      <xs:attribute name="scalingVolt" type="Nml2Quantity_voltage" use="required"/>
     </xs:complexType>
 
 
@@ -1337,12 +1297,9 @@
 
     <xs:complexType name="PlasticityMechanism">
       <xs:attribute name="type" type="PlasticityTypes" use="required"/>
-      <xs:attribute name="initReleaseProb" type="ZeroToOne"
-		    use="required"/>
-      <xs:attribute name="tauRec" type="Nml2Quantity_time"
-		    use="required"/>
-      <xs:attribute name="tauFac" type="Nml2Quantity_time"
-		    use="optional"/>
+      <xs:attribute name="initReleaseProb" type="ZeroToOne" use="required"/>
+      <xs:attribute name="tauRec" type="Nml2Quantity_time" use="required"/>
+      <xs:attribute name="tauFac" type="Nml2Quantity_time" use="optional"/>
     </xs:complexType>
 
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
@@ -2232,13 +2189,9 @@
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="Standalone">
-                <xs:attribute name="delay" type="Nml2Quantity_time"
-                              use="required"/>
-                <xs:attribute name="duration" type="Nml2Quantity_time"
-                              use="required"/>
-                <xs:attribute name="amplitude"
-                              type="Nml2Quantity_current"
-                              use="required"/>
+                <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="duration" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="amplitude" type="Nml2Quantity_current" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2249,13 +2202,9 @@
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="Standalone">
-                <xs:attribute name="delay" type="Nml2Quantity_time"
-                              use="required"/>
-                <xs:attribute name="duration" type="Nml2Quantity_time"
-                              use="required"/>
-                <xs:attribute name="amplitude"
-                              type="Nml2Quantity_none"
-                              use="required"/>
+                <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="duration" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="amplitude" type="Nml2Quantity_none" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2264,17 +2213,11 @@
     <xs:complexType name="SineGenerator">
         <xs:complexContent>
             <xs:extension base="Standalone">
-                <xs:attribute name="delay" type="Nml2Quantity_time"
-                              use="required"/>
-                <xs:attribute name="phase" type="Nml2Quantity_none"
-                              use="required"/>
-                <xs:attribute name="duration" type="Nml2Quantity_time"
-                              use="required"/>
-                <xs:attribute name="amplitude"
-                              type="Nml2Quantity_current"
-                              use="required"/>
-                <xs:attribute name="period" type="Nml2Quantity_time"
-                              use="required"/>
+                <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="phase" type="Nml2Quantity_none" use="required"/>
+                <xs:attribute name="duration" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="amplitude" type="Nml2Quantity_current" use="required"/>
+                <xs:attribute name="period" type="Nml2Quantity_time" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2282,17 +2225,11 @@
     <xs:complexType name="SineGeneratorDL">
         <xs:complexContent>
             <xs:extension base="Standalone">
-                <xs:attribute name="delay" type="Nml2Quantity_time"
-                              use="required"/>
-                <xs:attribute name="phase" type="Nml2Quantity_none"
-                              use="required"/>
-                <xs:attribute name="duration" type="Nml2Quantity_time"
-                              use="required"/>
-                <xs:attribute name="amplitude"
-                              type="Nml2Quantity_none"
-                              use="required"/>
-                <xs:attribute name="period" type="Nml2Quantity_time"
-                              use="required"/>
+                <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="phase" type="Nml2Quantity_none" use="required"/>
+                <xs:attribute name="duration" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="amplitude" type="Nml2Quantity_none" use="required"/>
+                <xs:attribute name="period" type="Nml2Quantity_time" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2301,19 +2238,11 @@
     <xs:complexType name="RampGenerator">
         <xs:complexContent>
             <xs:extension base="Standalone">
-                <xs:attribute name="delay" type="Nml2Quantity_time"
-                              use="required"/>
-                <xs:attribute name="duration" type="Nml2Quantity_time"
-                              use="required"/>
-                <xs:attribute name="startAmplitude"
-                              type="Nml2Quantity_current"
-                              use="required"/>
-                <xs:attribute name="finishAmplitude"
-                              type="Nml2Quantity_current"
-                              use="required"/>
-                <xs:attribute name="baselineAmplitude"
-                              type="Nml2Quantity_current"
-                              use="required"/>
+                <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="duration" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="startAmplitude" type="Nml2Quantity_current" use="required"/>
+                <xs:attribute name="finishAmplitude" type="Nml2Quantity_current" use="required"/>
+                <xs:attribute name="baselineAmplitude" type="Nml2Quantity_current" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2321,19 +2250,11 @@
     <xs:complexType name="RampGeneratorDL">
         <xs:complexContent>
             <xs:extension base="Standalone">
-                <xs:attribute name="delay" type="Nml2Quantity_time"
-                              use="required"/>
-                <xs:attribute name="duration" type="Nml2Quantity_time"
-                              use="required"/>
-                <xs:attribute name="startAmplitude"
-                              type="Nml2Quantity_none"
-                              use="required"/>
-                <xs:attribute name="finishAmplitude"
-                              type="Nml2Quantity_none"
-                              use="required"/>
-                <xs:attribute name="baselineAmplitude"
-                              type="Nml2Quantity_none"
-                              use="required"/>
+                <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="duration" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="startAmplitude" type="Nml2Quantity_none" use="required"/>
+                <xs:attribute name="finishAmplitude" type="Nml2Quantity_none" use="required"/>
+                <xs:attribute name="baselineAmplitude" type="Nml2Quantity_none" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2343,12 +2264,9 @@
         <xs:complexContent>
             <xs:extension base="Standalone">
                 <xs:sequence>
-                    <xs:element name="pulseGenerator" type="PulseGenerator"
-                                minOccurs="0" maxOccurs="unbounded"/>
-                    <xs:element name="sineGenerator" type="SineGenerator"
-                                minOccurs="0" maxOccurs="unbounded"/>
-                    <xs:element name="rampGenerator" type="RampGenerator"
-                                minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="pulseGenerator" type="PulseGenerator" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="sineGenerator" type="SineGenerator" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="rampGenerator" type="RampGenerator" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -2359,12 +2277,9 @@
         <xs:complexContent>
             <xs:extension base="Standalone">
                 <xs:sequence>
-                    <xs:element name="pulseGeneratorDL" type="PulseGeneratorDL"
-                                minOccurs="0" maxOccurs="unbounded"/>
-                    <xs:element name="sineGeneratorDL" type="SineGeneratorDL"
-                                minOccurs="0" maxOccurs="unbounded"/>
-                    <xs:element name="rampGeneratorDL" type="RampGeneratorDL"
-                                minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="pulseGeneratorDL" type="PulseGeneratorDL" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="sineGeneratorDL" type="SineGeneratorDL" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="rampGeneratorDL" type="RampGeneratorDL" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -2374,16 +2289,10 @@
     <xs:complexType name="VoltageClamp">
         <xs:complexContent>
             <xs:extension base="Standalone">
-                <xs:attribute name="delay" type="Nml2Quantity_time"
-                              use="required"/>
-                <xs:attribute name="duration" type="Nml2Quantity_time"
-                              use="required"/>
-                <xs:attribute name="targetVoltage"
-                              type="Nml2Quantity_voltage"
-                              use="required"/>
-                <xs:attribute name="simpleSeriesResistance"
-                              type="Nml2Quantity_resistance"
-                              use="required"/>
+                <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="duration" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="targetVoltage" type="Nml2Quantity_voltage" use="required"/>
+                <xs:attribute name="simpleSeriesResistance" type="Nml2Quantity_resistance" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2392,24 +2301,13 @@
     <xs:complexType name="VoltageClampTriple">
         <xs:complexContent>
             <xs:extension base="Standalone">
-                <xs:attribute name="active" type="ZeroOrOne"
-                              use="required"/>
-                <xs:attribute name="delay" type="Nml2Quantity_time"
-                              use="required"/>
-                <xs:attribute name="duration" type="Nml2Quantity_time"
-                              use="required"/>
-                <xs:attribute name="conditioningVoltage"
-                              type="Nml2Quantity_voltage"
-                              use="required"/>
-                <xs:attribute name="testingVoltage"
-                              type="Nml2Quantity_voltage"
-                              use="required"/>
-                <xs:attribute name="returnVoltage"
-                              type="Nml2Quantity_voltage"
-                              use="required"/>
-                <xs:attribute name="simpleSeriesResistance"
-                              type="Nml2Quantity_resistance"
-                              use="required"/>
+                <xs:attribute name="active" type="ZeroOrOne" use="required"/>
+                <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="duration" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="conditioningVoltage" type="Nml2Quantity_voltage" use="required"/>
+                <xs:attribute name="testingVoltage" type="Nml2Quantity_voltage" use="required"/>
+                <xs:attribute name="returnVoltage" type="Nml2Quantity_voltage" use="required"/>
+                <xs:attribute name="simpleSeriesResistance" type="Nml2Quantity_resistance" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2418,8 +2316,7 @@
     <xs:complexType name="Spike">
         <xs:complexContent>
             <xs:extension base="BaseNonNegativeIntegerId">
-                <xs:attribute name="time" type="Nml2Quantity_time"
-                              use="required"/>
+                <xs:attribute name="time" type="Nml2Quantity_time" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2429,8 +2326,7 @@
         <xs:complexContent>
             <xs:extension base="Standalone">
                 <xs:sequence>
-                    <xs:element name="spike" type="Spike" minOccurs="0"
-                                maxOccurs="unbounded"/>
+                    <xs:element name="spike" type="Spike" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -2441,13 +2337,10 @@
         <xs:complexContent>
             <xs:extension base="Standalone">
                 <xs:sequence>
-                    <xs:element name="spike" type="Spike" minOccurs="0"
-                                maxOccurs="unbounded"/>
+                    <xs:element name="spike" type="Spike" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="synapse" type="NmlId"
-                              use="required"/>
-                <xs:attribute name="spikeTarget" type="xs:string"
-                              use="required"/>
+                <xs:attribute name="synapse" type="NmlId" use="required"/>
+                <xs:attribute name="spikeTarget" type="xs:string" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2456,8 +2349,7 @@
     <xs:complexType name="SpikeGenerator">
         <xs:complexContent>
             <xs:extension base="Standalone">
-                <xs:attribute name="period" type="Nml2Quantity_time"
-                              use="required"/>
+                <xs:attribute name="period" type="Nml2Quantity_time" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2466,10 +2358,8 @@
     <xs:complexType name="SpikeGeneratorRandom">
         <xs:complexContent>
             <xs:extension base="Standalone">
-                <xs:attribute name="maxISI" type="Nml2Quantity_time"
-                              use="required"/>
-                <xs:attribute name="minISI" type="Nml2Quantity_time"
-                              use="required"/>
+                <xs:attribute name="maxISI" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="minISI" type="Nml2Quantity_time" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2478,8 +2368,7 @@
     <xs:complexType name="SpikeGeneratorPoisson">
         <xs:complexContent>
             <xs:extension base="Standalone">
-                <xs:attribute name="averageRate" type="Nml2Quantity_pertime"
-                              use="required"/>
+                <xs:attribute name="averageRate" type="Nml2Quantity_pertime" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2487,8 +2376,7 @@
     <xs:complexType name="SpikeGeneratorRefPoisson">
         <xs:complexContent>
             <xs:extension base="SpikeGeneratorPoisson">
-                <xs:attribute name="minimumISI" type="Nml2Quantity_time"
-                              use="required"/>
+                <xs:attribute name="minimumISI" type="Nml2Quantity_time" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2496,12 +2384,9 @@
     <xs:complexType name="PoissonFiringSynapse">
         <xs:complexContent>
             <xs:extension base="Standalone">
-                <xs:attribute name="averageRate" type="Nml2Quantity_pertime"
-                              use="required"/>
-                <xs:attribute name="synapse" type="xs:string"
-                              use="required"/>
-                <xs:attribute name="spikeTarget" type="xs:string"
-                              use="required"/>
+                <xs:attribute name="averageRate" type="Nml2Quantity_pertime" use="required"/>
+                <xs:attribute name="synapse" type="xs:string" use="required"/>
+                <xs:attribute name="spikeTarget" type="xs:string" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2509,16 +2394,11 @@
     <xs:complexType name="TransientPoissonFiringSynapse">
         <xs:complexContent>
             <xs:extension base="Standalone">
-                <xs:attribute name="averageRate" type="Nml2Quantity_pertime"
-                              use="required"/>
-                <xs:attribute name="delay" type="Nml2Quantity_time"
-                              use="required"/>
-                <xs:attribute name="duration" type="Nml2Quantity_time"
-                              use="required"/>
-                <xs:attribute name="synapse" type="xs:string"
-                              use="required"/>
-                <xs:attribute name="spikeTarget" type="xs:string"
-                              use="required"/>
+                <xs:attribute name="averageRate" type="Nml2Quantity_pertime" use="required"/>
+                <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="duration" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="synapse" type="xs:string" use="required"/>
+                <xs:attribute name="spikeTarget" type="xs:string" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
