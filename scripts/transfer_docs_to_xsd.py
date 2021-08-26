@@ -133,7 +133,7 @@ def update_xsd(documentation_dict, replace=True):
                 new_annotation = ET.SubElement(ct, '{' + nsinfo + '}annotation')
                 doc_node = ET.SubElement(new_annotation, '{' + nsinfo + '}documentation')
             doc_node.text = format_description(xml_doc + doc_text)
-    tree.write(XSD_file_new)
+    tree.write(XSD_file_new, method="xml", xml_declaration=True)
     print("New file written to {}".format(XSD_file_new))
     print("Please check the differences before replacing the main file.")
     return ct_list
