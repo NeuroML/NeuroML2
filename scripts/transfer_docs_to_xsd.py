@@ -109,8 +109,10 @@ def update_xsd(documentation_dict, replace=True):
     nsinfo = namespaces['xs']
     print(namespaces)
     complex_types = root.findall(".//xs:complexType", namespaces=namespaces)
+    ct_list = []
     for ct in complex_types:
         ct_name = ct.attrib['name'].lower()
+        ct_list.append(ct_name)
         print("Schema: processing {}".format(ct_name))
         if ct_name in documentation_dict:
             doc_text = ""
@@ -134,8 +136,15 @@ def update_xsd(documentation_dict, replace=True):
     tree.write(XSD_file_new)
     print("New file written to {}".format(XSD_file_new))
     print("Please check the differences before replacing the main file.")
+    return ct_list
 
 
 if __name__ == "__main__":
     component_type_docs = get_component_type_docs()
-    update_xsd(component_type_docs)
+    component_types_xsd = set(update_xsd(component_type_docs))
+    component_types_xml = set(component_type_docs.keys())
+
+    print()
+    print("Following component types are defined in the XML but not the XSD: {}".format(component_types_xml - component_types_xsd))
+    print()
+    print("Following component types are defined in the XSD but not the XML: {}".format(component_types_xsd - component_types_xml))
