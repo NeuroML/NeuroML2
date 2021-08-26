@@ -31,7 +31,7 @@ def format_description(text):
     if not text or len(text) == 0:
         return ""
     # Add spaces after these so we correctly split "(_gbase" type constructs
-    puncts = ["(", ",", ";"]
+    puncts = ["(", ",", ";", "."]
     for punct in puncts:
         text = text.replace(punct, punct + " ")
     # Add spaces before these
@@ -46,9 +46,9 @@ def format_description(text):
                 pre = word[0:word.find('_')]
                 ct = word[word.find('_') + 1:word.rfind('_')]
                 post = word[word.rfind('_') + 1:]
-                word = "{} `{}`{}".format(pre, ct, post)
+                word = "{} **{}** {}".format(pre, ct, post)
             elif word[0] == '_':
-                word = "`{}`".format(word[1:])
+                word = "**{}** ".format(word[1:])
 
         text2 = text2 + word + " "
     return text2.rstrip()
