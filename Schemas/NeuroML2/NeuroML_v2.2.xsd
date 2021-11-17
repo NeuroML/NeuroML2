@@ -593,7 +593,11 @@
             </xs:annotation>
     <xs:complexContent>
       <xs:extension base="IonChannel">
-        <xs:attribute name="vShift" type="Nml2Quantity_voltage" use="required"/>
+        <xs:attribute name="vShift" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -613,8 +617,16 @@
       </xs:annotation>
     <xs:annotation>
       </xs:annotation>
-    <xs:attribute name="q10Factor" type="Nml2Quantity_none" use="required"/>
-    <xs:attribute name="experimentalTemp" type="Nml2Quantity_temperature" use="required"/>
+    <xs:attribute name="q10Factor" type="Nml2Quantity_none" use="required">
+      <xs:annotation>
+        <xs:documentation>(dimension: none)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="experimentalTemp" type="Nml2Quantity_temperature" use="required">
+      <xs:annotation>
+        <xs:documentation>(dimension: temperature)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:annotation/>
   </xs:complexType>
   <xs:simpleType name="gateTypes">
@@ -1000,9 +1012,21 @@
             <xs:documentation>Should not be required, as it's present on the species element!</xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name="restingConc" type="Nml2Quantity_concentration" use="required"/>
-        <xs:attribute name="decayConstant" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="shellThickness" type="Nml2Quantity_length" use="required"/>
+        <xs:attribute name="restingConc" type="Nml2Quantity_concentration" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: concentration)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="decayConstant" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="shellThickness" type="Nml2Quantity_length" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: length)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -1023,9 +1047,21 @@
             <xs:documentation>Should not be required, as it's present on the species element!</xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name="restingConc" type="Nml2Quantity_concentration" use="required"/>
-        <xs:attribute name="decayConstant" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="rho" type="Nml2Quantity_rhoFactor" use="required"/>
+        <xs:attribute name="restingConc" type="Nml2Quantity_concentration" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: concentration)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="decayConstant" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="rho" type="Nml2Quantity_rhoFactor" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: rho_factor)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -1092,8 +1128,16 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseVoltageDepSynapse">
-        <xs:attribute name="gbase" type="Nml2Quantity_conductance" use="required"/>
-        <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>
+        <xs:attribute name="gbase" type="Nml2Quantity_conductance" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: conductance): Baseline conductance, generally the maximum conductance following a single spike</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage): Reversal potential of the synapse</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -1109,9 +1153,21 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseVoltageDepSynapse">
-        <xs:attribute name="gbase1" type="Nml2Quantity_conductance" use="required"/>
-        <xs:attribute name="gbase2" type="Nml2Quantity_conductance" use="required"/>
-        <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>
+        <xs:attribute name="gbase1" type="Nml2Quantity_conductance" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: conductance): Baseline conductance 1</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="gbase2" type="Nml2Quantity_conductance" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: conductance): Baseline conductance 2</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage): Reversal potential of the synapse</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -1130,7 +1186,11 @@
         <xs:documentation>Gap junction/single electrical connection</xs:documentation>
       </xs:annotation>
       <xs:extension base="BaseSynapse">
-        <xs:attribute name="conductance" type="Nml2Quantity_conductance" use="required"/>
+        <xs:attribute name="conductance" type="Nml2Quantity_conductance" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: conductance)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -1168,7 +1228,11 @@
         <xs:documentation>Behaves just like a one way gap junction.</xs:documentation>
       </xs:annotation>
       <xs:extension base="BaseSynapse">
-        <xs:attribute name="conductance" type="Nml2Quantity_conductance" use="required"/>
+        <xs:attribute name="conductance" type="Nml2Quantity_conductance" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: conductance)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -1187,11 +1251,31 @@
         <xs:documentation>Based on synapse in Methods of http://www.nature.com/neuro/journal/v7/n12/abs/nn1352.html.</xs:documentation>
       </xs:annotation>
       <xs:extension base="BaseSynapse">
-        <xs:attribute name="conductance" type="Nml2Quantity_conductance" use="required"/>
-        <xs:attribute name="delta" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="Vth" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="k" type="Nml2Quantity_pertime" use="required"/>
-        <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>
+        <xs:attribute name="conductance" type="Nml2Quantity_conductance" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: conductance)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="delta" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage): Slope of the activation curve</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Vth" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage): The half-activation voltage of the synapse</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="k" type="Nml2Quantity_pertime" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: per_time): Rate constant for transmitter-receptor dissociation rate</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage): The reversal potential of the synapse</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -1207,8 +1291,16 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseCurrentBasedSynapse">
-        <xs:attribute name="tau" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="ibase" type="Nml2Quantity_current" use="required"/>
+        <xs:attribute name="tau" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Time course for rise and decay</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="ibase" type="Nml2Quantity_current" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: current): Baseline current increase after receiving a spike</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -1224,7 +1316,11 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseConductanceBasedSynapse">
-        <xs:attribute name="tau" type="Nml2Quantity_time" use="required"/>
+        <xs:attribute name="tau" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Time course of rise/decay</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -1240,7 +1336,11 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseConductanceBasedSynapse">
-        <xs:attribute name="tauDecay" type="Nml2Quantity_time" use="required"/>
+        <xs:attribute name="tauDecay" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Time course of decay</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -1256,8 +1356,16 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseConductanceBasedSynapse">
-        <xs:attribute name="tauDecay" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="tauRise" type="Nml2Quantity_time" use="required"/>
+        <xs:attribute name="tauDecay" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="tauRise" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -1273,9 +1381,21 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseConductanceBasedSynapseTwo">
-        <xs:attribute name="tauDecay1" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="tauDecay2" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="tauRise" type="Nml2Quantity_time" use="required"/>
+        <xs:attribute name="tauDecay1" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="tauDecay2" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="tauRise" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -1371,10 +1491,18 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseCell">
-        <xs:attribute name="leakReversal" type="Nml2Quantity_voltage" use="required"/>
+        <xs:attribute name="leakReversal" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
         <xs:attribute name="thresh" type="Nml2Quantity_voltage" use="required"/>
         <xs:attribute name="reset" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="tau" type="Nml2Quantity_time" use="required"/>
+        <xs:attribute name="tau" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -1390,7 +1518,11 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="IafTauCell">
-        <xs:attribute name="refract" type="Nml2Quantity_time" use="required"/>
+        <xs:attribute name="refract" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -1406,11 +1538,19 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseCell">
-        <xs:attribute name="leakReversal" type="Nml2Quantity_voltage" use="required"/>
+        <xs:attribute name="leakReversal" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
         <xs:attribute name="thresh" type="Nml2Quantity_voltage" use="required"/>
         <xs:attribute name="reset" type="Nml2Quantity_voltage" use="required"/>
         <xs:attribute name="C" type="Nml2Quantity_capacitance" use="required"/>
-        <xs:attribute name="leakConductance" type="Nml2Quantity_conductance" use="required"/>
+        <xs:attribute name="leakConductance" type="Nml2Quantity_conductance" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: conductance)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -1426,7 +1566,11 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="IafCell">
-        <xs:attribute name="refract" type="Nml2Quantity_time" use="required"/>
+        <xs:attribute name="refract" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -1442,12 +1586,36 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseCell">
-        <xs:attribute name="v0" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="thresh" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="a" type="Nml2Quantity_none" use="required"/>
-        <xs:attribute name="b" type="Nml2Quantity_none" use="required"/>
-        <xs:attribute name="c" type="Nml2Quantity_none" use="required"/>
-        <xs:attribute name="d" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="v0" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage): Initial membrane potential</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="thresh" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage): Spike threshold</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="a" type="Nml2Quantity_none" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none): Time scale of the recovery variable U</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="b" type="Nml2Quantity_none" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none): Sensitivity of U to the subthreshold fluctuations of the membrane potential v</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="c" type="Nml2Quantity_none" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none): After-spike reset value of v</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="d" type="Nml2Quantity_none" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none): After-spike reset of u</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -1465,7 +1633,9 @@
       <xs:extension base="BaseCell">
         <xs:attribute name="C" type="Nml2Quantity_capacitance" use="required">
           <xs:annotation>
-            <xs:documentation>This is to prevent it conflicting with attribute c (lowercase) e.g. in izhikevichCell2007</xs:documentation>
+            <xs:documentation>(dimension: capacitance): Total capacitance of the cell membrane</xs:documentation>
+          </xs:annotation>
+          <xs:annotation>
             <xs:appinfo>
               <jxb:property name="Cap"/>
             </xs:appinfo>
@@ -1486,15 +1656,51 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseCellMembPotCap">
-        <xs:attribute name="v0" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="k" type="Nml2Quantity_conductancePerVoltage" use="required"/>
-        <xs:attribute name="vr" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="vt" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="vpeak" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="a" type="Nml2Quantity_pertime" use="required"/>
-        <xs:attribute name="b" type="Nml2Quantity_conductance" use="required"/>
-        <xs:attribute name="c" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="d" type="Nml2Quantity_current" use="required"/>
+        <xs:attribute name="v0" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="k" type="Nml2Quantity_conductancePerVoltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: conductance_per_voltage)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="vr" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="vt" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="vpeak" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="a" type="Nml2Quantity_pertime" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: per_time)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="b" type="Nml2Quantity_conductance" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: conductance)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="c" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="d" type="Nml2Quantity_current" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: current)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -1510,16 +1716,56 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseCellMembPotCap">
-        <xs:attribute name="gL" type="Nml2Quantity_conductance" use="required"/>
-        <xs:attribute name="EL" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="reset" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="VT" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="thresh" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="delT" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="tauw" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="refract" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="a" type="Nml2Quantity_conductance" use="required"/>
-        <xs:attribute name="b" type="Nml2Quantity_current" use="required"/>
+        <xs:attribute name="gL" type="Nml2Quantity_conductance" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: conductance)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="EL" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="reset" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="VT" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="thresh" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="delT" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="tauw" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="refract" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="a" type="Nml2Quantity_conductance" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: conductance)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="b" type="Nml2Quantity_current" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: current)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -1535,7 +1781,11 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseCell">
-        <xs:attribute name="I" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="I" type="Nml2Quantity_none" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -1551,12 +1801,36 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseCell">
-        <xs:attribute name="a" type="Nml2Quantity_none" use="required"/>
-        <xs:attribute name="b" type="Nml2Quantity_none" use="required"/>
-        <xs:attribute name="I" type="Nml2Quantity_none" use="required"/>
-        <xs:attribute name="phi" type="Nml2Quantity_none" use="required"/>
-        <xs:attribute name="V0" type="Nml2Quantity_none" use="required"/>
-        <xs:attribute name="W0" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="a" type="Nml2Quantity_none" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="b" type="Nml2Quantity_none" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="I" type="Nml2Quantity_none" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none): plays the role of an external injected current</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="phi" type="Nml2Quantity_none" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="V0" type="Nml2Quantity_none" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="W0" type="Nml2Quantity_none" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -1572,27 +1846,111 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseCell">
-        <xs:attribute name="iSoma" type="Nml2Quantity_currentDensity" use="required"/>
-        <xs:attribute name="iDend" type="Nml2Quantity_currentDensity" use="required"/>
-        <xs:attribute name="gc" type="Nml2Quantity_conductanceDensity" use="required"/>
-        <xs:attribute name="gLs" type="Nml2Quantity_conductanceDensity" use="required"/>
-        <xs:attribute name="gLd" type="Nml2Quantity_conductanceDensity" use="required"/>
-        <xs:attribute name="gNa" type="Nml2Quantity_conductanceDensity" use="required"/>
-        <xs:attribute name="gKdr" type="Nml2Quantity_conductanceDensity" use="required"/>
-        <xs:attribute name="gCa" type="Nml2Quantity_conductanceDensity" use="required"/>
-        <xs:attribute name="gKahp" type="Nml2Quantity_conductanceDensity" use="required"/>
-        <xs:attribute name="gKC" type="Nml2Quantity_conductanceDensity" use="required"/>
-        <xs:attribute name="gNmda" type="Nml2Quantity_conductanceDensity" use="required"/>
-        <xs:attribute name="gAmpa" type="Nml2Quantity_conductanceDensity" use="required"/>
-        <xs:attribute name="eNa" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="eCa" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="eK" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="eL" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="qd0" type="Nml2Quantity_none" use="required"/>
-        <xs:attribute name="pp" type="Nml2Quantity_none" use="required"/>
-        <xs:attribute name="alphac" type="Nml2Quantity_none" use="required"/>
-        <xs:attribute name="betac" type="Nml2Quantity_none" use="required"/>
-        <xs:attribute name="cm" type="Nml2Quantity_specificCapacitance" use="required"/>
+        <xs:attribute name="iSoma" type="Nml2Quantity_currentDensity" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: currentDensity)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="iDend" type="Nml2Quantity_currentDensity" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: currentDensity)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="gc" type="Nml2Quantity_conductanceDensity" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: conductanceDensity)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="gLs" type="Nml2Quantity_conductanceDensity" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: conductanceDensity)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="gLd" type="Nml2Quantity_conductanceDensity" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: conductanceDensity)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="gNa" type="Nml2Quantity_conductanceDensity" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: conductanceDensity)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="gKdr" type="Nml2Quantity_conductanceDensity" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: conductanceDensity)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="gCa" type="Nml2Quantity_conductanceDensity" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: conductanceDensity)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="gKahp" type="Nml2Quantity_conductanceDensity" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: conductanceDensity)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="gKC" type="Nml2Quantity_conductanceDensity" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: conductanceDensity)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="gNmda" type="Nml2Quantity_conductanceDensity" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: conductanceDensity)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="gAmpa" type="Nml2Quantity_conductanceDensity" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: conductanceDensity)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="eNa" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="eCa" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="eK" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="eL" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="qd0" type="Nml2Quantity_none" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="pp" type="Nml2Quantity_none" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="alphac" type="Nml2Quantity_none" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="betac" type="Nml2Quantity_none" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="cm" type="Nml2Quantity_specificCapacitance" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: specificCapacitance)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -1705,10 +2063,26 @@
       </xs:annotation>
     <xs:annotation>
             </xs:annotation>
-    <xs:attribute name="x" type="xs:double" use="required"/>
-    <xs:attribute name="y" type="xs:double" use="required"/>
-    <xs:attribute name="z" type="xs:double" use="required"/>
-    <xs:attribute name="diameter" type="DoubleGreaterThanZero" use="required"/>
+    <xs:attribute name="x" type="xs:double" use="required">
+      <xs:annotation>
+        <xs:documentation>(dimension: none): x coordinate of the point. Note: no dimension used, see description of  **point3DWithDiam**  for details.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="y" type="xs:double" use="required">
+      <xs:annotation>
+        <xs:documentation>(dimension: none): y coordinate of the ppoint. Note: no dimension used, see description of  **point3DWithDiam**  for details.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="z" type="xs:double" use="required">
+      <xs:annotation>
+        <xs:documentation>(dimension: none): z coordinate of the ppoint. Note: no dimension used, see description of  **point3DWithDiam**  for details.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="diameter" type="DoubleGreaterThanZero" use="required">
+      <xs:annotation>
+        <xs:documentation>(dimension: none): Diameter of the ppoint. Note: no dimension used, see description of  **point3DWithDiam**  for details.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
   <xs:complexType name="SegmentGroup">
     <xs:annotation>
@@ -1929,7 +2303,11 @@
       </xs:annotation>
     <xs:annotation>
             </xs:annotation>
-    <xs:attribute name="value" type="Nml2Quantity_voltage" use="required"/>
+    <xs:attribute name="value" type="Nml2Quantity_voltage" use="required">
+      <xs:annotation>
+        <xs:documentation>(dimension: voltage)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
   </xs:complexType>
   <xs:complexType name="SpecificCapacitance">
@@ -1943,7 +2321,11 @@
       </xs:annotation>
     <xs:annotation>
             </xs:annotation>
-    <xs:attribute name="value" type="Nml2Quantity_specificCapacitance" use="required"/>
+    <xs:attribute name="value" type="Nml2Quantity_specificCapacitance" use="required">
+      <xs:annotation>
+        <xs:documentation>(dimension: specificCapacitance)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
   </xs:complexType>
   <xs:complexType name="InitMembPotential">
@@ -1957,7 +2339,11 @@
       </xs:annotation>
     <xs:annotation>
             </xs:annotation>
-    <xs:attribute name="value" type="Nml2Quantity_voltage" use="required"/>
+    <xs:attribute name="value" type="Nml2Quantity_voltage" use="required">
+      <xs:annotation>
+        <xs:documentation>(dimension: voltage)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
   </xs:complexType>
   <xs:complexType name="Resistivity">
@@ -1971,7 +2357,11 @@
       </xs:annotation>
     <xs:annotation>
             </xs:annotation>
-    <xs:attribute name="value" type="Nml2Quantity_resistivity" use="required"/>
+    <xs:attribute name="value" type="Nml2Quantity_resistivity" use="required">
+      <xs:annotation>
+        <xs:documentation>(dimension: resistivity)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
   </xs:complexType>
   <xs:complexType name="ChannelPopulation">
@@ -1989,8 +2379,16 @@
           <xs:element name="variableParameter" type="VariableParameter" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute name="ionChannel" type="NmlId" use="required"/>
-        <xs:attribute name="number" type="NonNegativeInteger" use="required"/>
-        <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>
+        <xs:attribute name="number" type="NonNegativeInteger" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none): The number of channels present. This will be multiplied by the time varying conductance of the individual ion channel ( which extends  **baseIonChannel**  ) to produce the total conductance</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage): The reversal potential of the current produced</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
         <!-- Note: only one of the following should be used!! -->
         <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
         <xs:attribute name="segment" type="NonNegativeInteger" use="optional"/>
@@ -2024,7 +2422,11 @@
           <xs:element name="variableParameter" type="VariableParameter" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute name="ionChannel" type="NmlId" use="required"/>
-        <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>
+        <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage): The reversal potential of the current produced</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
         <xs:attribute name="ion" type="NmlId" use="required">
           <xs:annotation>
             <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel definition. It is added here
@@ -2116,7 +2518,11 @@
         </xs:sequence>
         <xs:attribute name="ionChannel" type="NmlId" use="required"/>
         <xs:attribute name="condDensity" type="Nml2Quantity_conductanceDensity" use="optional"/>
-        <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>
+        <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage): The reversal potential of the current produced</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
         <!-- Note: only one of the following should be used!! -->
         <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
         <xs:attribute name="segment" type="NonNegativeInteger" use="optional"/>
@@ -2146,7 +2552,11 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="ChannelDensity">
-        <xs:attribute name="vShift" type="Nml2Quantity_voltage" use="required"/>
+        <xs:attribute name="vShift" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -2213,7 +2623,11 @@
     <xs:complexContent>
       <xs:extension base="Base">
         <xs:attribute name="ionChannel" type="NmlId" use="required"/>
-        <xs:attribute name="permeability" type="Nml2Quantity_permeability" use="required"/>
+        <xs:attribute name="permeability" type="Nml2Quantity_permeability" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: permeability)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
         <!-- Note: only one of the following should be used!! -->
         <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
         <xs:attribute name="segment" type="NmlId" use="optional"/>
@@ -2323,8 +2737,16 @@
                 </xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="initialConcentration" type="Nml2Quantity_concentration" use="required"/>
-    <xs:attribute name="initialExtConcentration" type="Nml2Quantity_concentration" use="required"/>
+    <xs:attribute name="initialConcentration" type="Nml2Quantity_concentration" use="required">
+      <xs:annotation>
+        <xs:documentation>(dimension: concentration)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="initialExtConcentration" type="Nml2Quantity_concentration" use="required">
+      <xs:annotation>
+        <xs:documentation>(dimension: concentration)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
     <xs:annotation/>
   </xs:complexType>
@@ -2414,9 +2836,21 @@
             </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
-        <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="duration" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="amplitude" type="Nml2Quantity_current" use="required"/>
+        <xs:attribute name="delay" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Delay before change in current. Current is zero prior to this.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="duration" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Duration for holding current at amplitude. Current is zero after delay + duration.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="amplitude" type="Nml2Quantity_current" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: current): Amplitude of current pulse</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -2433,9 +2867,21 @@
             </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
-        <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="duration" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="amplitude" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="delay" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Delay before change in current. Current is zero prior to this.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="duration" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Duration for holding current at amplitude. Current is zero after delay + duration.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="amplitude" type="Nml2Quantity_none" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none): Amplitude of current pulse</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -2450,11 +2896,31 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
-        <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="phase" type="Nml2Quantity_none" use="required"/>
-        <xs:attribute name="duration" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="amplitude" type="Nml2Quantity_current" use="required"/>
-        <xs:attribute name="period" type="Nml2Quantity_time" use="required"/>
+        <xs:attribute name="delay" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Delay before change in current. Current is zero prior to this.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="phase" type="Nml2Quantity_none" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none): Phase ( between 0 and 2*pi ) at which to start the varying current ( i. e. at time given by delay )</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="duration" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Duration for holding current at amplitude. Current is zero after delay + duration.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="amplitude" type="Nml2Quantity_current" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: current): Maximum amplitude of current</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="period" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Time period of oscillation</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -2470,11 +2936,31 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
-        <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="phase" type="Nml2Quantity_none" use="required"/>
-        <xs:attribute name="duration" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="amplitude" type="Nml2Quantity_none" use="required"/>
-        <xs:attribute name="period" type="Nml2Quantity_time" use="required"/>
+        <xs:attribute name="delay" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Delay before change in current. Current is zero prior to this.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="phase" type="Nml2Quantity_none" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none): Phase ( between 0 and 2*pi ) at which to start the varying current ( i. e. at time given by delay )</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="duration" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Duration for holding current at amplitude. Current is zero after delay + duration.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="amplitude" type="Nml2Quantity_none" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none): Maximum amplitude of current</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="period" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Time period of oscillation</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -2490,11 +2976,31 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
-        <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="duration" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="startAmplitude" type="Nml2Quantity_current" use="required"/>
-        <xs:attribute name="finishAmplitude" type="Nml2Quantity_current" use="required"/>
-        <xs:attribute name="baselineAmplitude" type="Nml2Quantity_current" use="required"/>
+        <xs:attribute name="delay" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Delay before change in current. Current is baselineAmplitude prior to this.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="duration" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Duration for holding current at amplitude. Current is baselineAmplitude after delay + duration.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="startAmplitude" type="Nml2Quantity_current" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: current): Amplitude of linearly varying current at time delay</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="finishAmplitude" type="Nml2Quantity_current" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: current): Amplitude of linearly varying current at time delay + duration</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="baselineAmplitude" type="Nml2Quantity_current" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: current): Amplitude of current before time delay, and after time delay + duration</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -2510,11 +3016,31 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
-        <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="duration" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="startAmplitude" type="Nml2Quantity_none" use="required"/>
-        <xs:attribute name="finishAmplitude" type="Nml2Quantity_none" use="required"/>
-        <xs:attribute name="baselineAmplitude" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="delay" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Delay before change in current. Current is baselineAmplitude prior to this.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="duration" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Duration for holding current at amplitude. Current is baselineAmplitude after delay + duration.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="startAmplitude" type="Nml2Quantity_none" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none): Amplitude of linearly varying current at time delay</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="finishAmplitude" type="Nml2Quantity_none" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none): Amplitude of linearly varying current at time delay + duration</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="baselineAmplitude" type="Nml2Quantity_none" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none): Amplitude of current before time delay, and after time delay + duration</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -2570,10 +3096,26 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
-        <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="duration" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="targetVoltage" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="simpleSeriesResistance" type="Nml2Quantity_resistance" use="required"/>
+        <xs:attribute name="delay" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Delay before change in current. Current is zero prior to this.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="duration" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Duration for attempting to keep parent at targetVoltage. Current is zero after delay + duration.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="targetVoltage" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage): Current will be applied to try to get parent to this target voltage</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="simpleSeriesResistance" type="Nml2Quantity_resistance" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: resistance): Current will be calculated by the difference in voltage between the target and parent, divided by this value</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -2589,13 +3131,41 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
-        <xs:attribute name="active" type="ZeroOrOne" use="required"/>
-        <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="duration" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="conditioningVoltage" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="testingVoltage" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="returnVoltage" type="Nml2Quantity_voltage" use="required"/>
-        <xs:attribute name="simpleSeriesResistance" type="Nml2Quantity_resistance" use="required"/>
+        <xs:attribute name="active" type="ZeroOrOne" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none): Whether the voltage clamp is active ( 1 ) or inactive ( 0 ).</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="delay" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Delay before switching from conditioningVoltage to testingVoltage.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="duration" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Duration to hold at testingVoltage.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="conditioningVoltage" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage): Target voltage before time delay</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="testingVoltage" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage): Target voltage between times delay and delay + duration</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="returnVoltage" type="Nml2Quantity_voltage" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: voltage): Target voltage after time duration</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="simpleSeriesResistance" type="Nml2Quantity_resistance" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: resistance): Current will be calculated by the difference in voltage between the target and parent, divided by this value</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -2611,7 +3181,11 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseNonNegativeIntegerId">
-        <xs:attribute name="time" type="Nml2Quantity_time" use="required"/>
+        <xs:attribute name="time" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Time at which to emit one spike event</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -2665,7 +3239,11 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
-        <xs:attribute name="period" type="Nml2Quantity_time" use="required"/>
+        <xs:attribute name="period" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Time between spikes. The first spike will be emitted after this time.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -2681,8 +3259,16 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
-        <xs:attribute name="maxISI" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="minISI" type="Nml2Quantity_time" use="required"/>
+        <xs:attribute name="maxISI" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Maximum interspike interval</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="minISI" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): Minimum interspike interval</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -2698,7 +3284,11 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
-        <xs:attribute name="averageRate" type="Nml2Quantity_pertime" use="required"/>
+        <xs:attribute name="averageRate" type="Nml2Quantity_pertime" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: per_time): The average rate at which spikes are emitted</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -2714,7 +3304,11 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="SpikeGeneratorPoisson">
-        <xs:attribute name="minimumISI" type="Nml2Quantity_time" use="required"/>
+        <xs:attribute name="minimumISI" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time): The minimum interspike interval</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -2730,7 +3324,11 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
-        <xs:attribute name="averageRate" type="Nml2Quantity_pertime" use="required"/>
+        <xs:attribute name="averageRate" type="Nml2Quantity_pertime" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: per_time): The average rate at which spikes are emitted</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
         <xs:attribute name="synapse" type="xs:string" use="required"/>
         <xs:attribute name="spikeTarget" type="xs:string" use="required"/>
       </xs:extension>
@@ -2748,9 +3346,21 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
-        <xs:attribute name="averageRate" type="Nml2Quantity_pertime" use="required"/>
-        <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="duration" type="Nml2Quantity_time" use="required"/>
+        <xs:attribute name="averageRate" type="Nml2Quantity_pertime" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: per_time)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="delay" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="duration" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
         <xs:attribute name="synapse" type="xs:string" use="required"/>
         <xs:attribute name="spikeTarget" type="xs:string" use="required"/>
       </xs:extension>
@@ -2870,7 +3480,11 @@
           <xs:element name="instance" type="Instance" maxOccurs="unbounded"/>
         </xs:choice>
         <xs:attribute name="component" type="NmlId" use="required"/>
-        <xs:attribute name="size" type="NonNegativeInteger" use="optional"/>
+        <xs:attribute name="size" type="NonNegativeInteger" use="optional">
+          <xs:annotation>
+            <xs:documentation>(dimension: none): Number of instances of this Component to create when the population is instantiated</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
         <xs:attribute name="type" type="populationTypes" use="optional"/>
         <xs:attribute name="extracellularProperties" type="NmlId" use="optional"/>
       </xs:extension>
@@ -2935,9 +3549,21 @@
       </xs:annotation>
     <xs:annotation>
       </xs:annotation>
-    <xs:attribute name="x" type="xs:float" use="required"/>
-    <xs:attribute name="y" type="xs:float" use="required"/>
-    <xs:attribute name="z" type="xs:float" use="required"/>
+    <xs:attribute name="x" type="xs:float" use="required">
+      <xs:annotation>
+        <xs:documentation>(dimension: none)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="y" type="xs:float" use="required">
+      <xs:annotation>
+        <xs:documentation>(dimension: none)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="z" type="xs:float" use="required">
+      <xs:annotation>
+        <xs:documentation>(dimension: none)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:annotation/>
   </xs:complexType>
   <xs:complexType name="CellSet">
@@ -3070,8 +3696,16 @@
             </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseConnectionOldFormat">
-        <xs:attribute name="weight" type="xs:float" use="required"/>
-        <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
+        <xs:attribute name="weight" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="delay" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -3141,7 +3775,11 @@
             </xs:annotation>
     <xs:complexContent>
       <xs:extension base="ElectricalConnectionInstance">
-        <xs:attribute name="weight" type="xs:float" use="required"/>
+        <xs:attribute name="weight" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -3212,7 +3850,11 @@
             </xs:annotation>
     <xs:complexContent>
       <xs:extension base="ContinuousConnectionInstance">
-        <xs:attribute name="weight" type="xs:float" use="required"/>
+        <xs:attribute name="weight" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -3283,7 +3925,11 @@
             </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Input">
-        <xs:attribute name="weight" type="xs:float" use="required"/>
+        <xs:attribute name="weight" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -3301,11 +3947,31 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseCell">
-        <xs:attribute name="cm" type="xs:float" use="required"/>
-        <xs:attribute name="i_offset" type="xs:float" use="required"/>
-        <xs:attribute name="tau_syn_E" type="xs:float" use="required"/>
-        <xs:attribute name="tau_syn_I" type="xs:float" use="required"/>
-        <xs:attribute name="v_init" type="xs:float" use="required"/>
+        <xs:attribute name="cm" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="i_offset" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="tau_syn_E" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none): This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="tau_syn_I" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none): This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="v_init" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -3321,11 +3987,31 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="basePyNNCell">
-        <xs:attribute name="tau_m" type="xs:float" use="required"/>
-        <xs:attribute name="tau_refrac" type="xs:float" use="required"/>
-        <xs:attribute name="v_reset" type="xs:float" use="required"/>
-        <xs:attribute name="v_rest" type="xs:float" use="required"/>
-        <xs:attribute name="v_thresh" type="xs:float" use="required"/>
+        <xs:attribute name="tau_m" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="tau_refrac" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="v_reset" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="v_rest" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="v_thresh" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -3341,8 +4027,16 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="basePyNNIaFCell">
-        <xs:attribute name="e_rev_E" type="xs:float" use="required"/>
-        <xs:attribute name="e_rev_I" type="xs:float" use="required"/>
+        <xs:attribute name="e_rev_E" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none): This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="e_rev_I" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none): This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -3418,11 +4112,31 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="basePyNNIaFCondCell">
-        <xs:attribute name="a" type="xs:float" use="required"/>
-        <xs:attribute name="b" type="xs:float" use="required"/>
-        <xs:attribute name="delta_T" type="xs:float" use="required"/>
-        <xs:attribute name="tau_w" type="xs:float" use="required"/>
-        <xs:attribute name="v_spike" type="xs:float" use="required"/>
+        <xs:attribute name="a" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="b" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="delta_T" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="tau_w" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="v_spike" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -3453,15 +4167,51 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="basePyNNCell">
-        <xs:attribute name="v_offset" type="xs:float" use="required"/>
-        <xs:attribute name="e_rev_E" type="xs:float" use="required"/>
-        <xs:attribute name="e_rev_I" type="xs:float" use="required"/>
-        <xs:attribute name="e_rev_K" type="xs:float" use="required"/>
-        <xs:attribute name="e_rev_Na" type="xs:float" use="required"/>
-        <xs:attribute name="e_rev_leak" type="xs:float" use="required"/>
-        <xs:attribute name="g_leak" type="xs:float" use="required"/>
-        <xs:attribute name="gbar_K" type="xs:float" use="required"/>
-        <xs:attribute name="gbar_Na" type="xs:float" use="required"/>
+        <xs:attribute name="v_offset" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="e_rev_E" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="e_rev_I" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="e_rev_K" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="e_rev_Na" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="e_rev_leak" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="g_leak" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="gbar_K" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="gbar_Na" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -3477,7 +4227,11 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseSynapse">
-        <xs:attribute name="tau_syn" type="xs:float" use="required"/>
+        <xs:attribute name="tau_syn" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -3493,7 +4247,11 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BasePynnSynapse">
-        <xs:attribute name="e_rev" type="xs:float" use="required"/>
+        <xs:attribute name="e_rev" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -3509,7 +4267,11 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BasePynnSynapse">
-        <xs:attribute name="e_rev" type="xs:float" use="required"/>
+        <xs:attribute name="e_rev" type="xs:float" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: none)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
@@ -3557,9 +4319,21 @@
       </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
-        <xs:attribute name="start" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="duration" type="Nml2Quantity_time" use="required"/>
-        <xs:attribute name="rate" type="Nml2Quantity_pertime" use="required"/>
+        <xs:attribute name="start" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="duration" type="Nml2Quantity_time" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: time)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="rate" type="Nml2Quantity_pertime" use="required">
+          <xs:annotation>
+            <xs:documentation>(dimension: per_time)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
     <xs:annotation/>
