@@ -114,6 +114,7 @@ def update_xsd(documentation_dict, replace=True):
         ct_name = ct.attrib['name'].lower()
         ct_list.append(ct_name)
         print("Schema: processing {}".format(ct_name))
+        doc_text = ""
         if ct_name in documentation_dict:
             doc_text = ""
             xml_doc = documentation_dict[ct_name]
@@ -141,7 +142,7 @@ def update_xsd(documentation_dict, replace=True):
             new_annotation = ET.Element('{' + nsinfo + '}annotation')
             ct.insert(0, new_annotation)
             doc_node = ET.SubElement(new_annotation, '{' + nsinfo + '}documentation')
-            doc_node.text = format_description(xml_doc + doc_text)
+            doc_node.text = format_description(xml_doc + doc_text) + '\n'
 
     ET.indent(tree)
     tree.write(XSD_file_new, method="xml", xml_declaration=True)
