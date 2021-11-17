@@ -13,6 +13,20 @@ import lxml.etree as ET
 import re
 
 
+xml_files = [
+    "Cells.xml",
+    "NeuroML2CoreTypes.xml",
+    "Simulation.xml",
+    "Channels.xml",
+    "NeuroMLCoreCompTypes.xml",
+    "Synapses.xml",
+    "Inputs.xml",
+    "NeuroMLCoreDimensions.xml",
+    "Networks.xml",
+    "PyNN.xml"
+]
+
+
 def format_description(text):
     """Format the description.
 
@@ -38,6 +52,12 @@ def format_description(text):
     for punct in [")"]:
         text = text.replace(punct, " " + punct)
 
+    # Remove spaces between dots and URL suffixes
+    # introduced by previous tweaks
+    suffixes = ["org", "com"]
+    for suf in suffixes:
+        text = text.replace(". " + suf, "." + suf)
+
     words = text.split()
     text2 = ""
     for word in words:
@@ -54,109 +74,140 @@ def format_description(text):
     return text2.rstrip()
 
 
-def get_component_type_docs():
-    """Get all component type documentation from the XML ComponentType definition files.
-    :returns: TODO
-
-    """
-    schema_files = [
-        "Cells.xml",
-        "NeuroML2CoreTypes.xml",
-        "Simulation.xml",
-        "Channels.xml",
-        "NeuroMLCoreCompTypes.xml",
-        "Synapses.xml",
-        "Inputs.xml",
-        "NeuroMLCoreDimensions.xml",
-        "Networks.xml",
-        "PyNN.xml"
-    ]
-    component_type_docs = {}
-    for file in schema_files:
-        srcfile = "../NeuroML2CoreTypes/" + file
-        print("Definitions: processing {}".format(srcfile))
-        try:
-            tree = ET.parse(srcfile)
-            root = tree.getroot()
-        except ET.XMLSyntaxError as e:
-            print(f"Could not parse file {file}: {e}")
-            continue
-        namespaces = root.nsmap
-        component_types = root.findall(".//ComponentType", namespaces=namespaces)
-        for ct in component_types:
-            ct_name = ct.attrib['name'].lower()
-            ct_doc = re.sub(' +', ' ', ct.attrib['description']).replace("\n", " ").rstrip().lstrip()
-            component_type_docs[ct_name] = ct_doc
-    # print(component_type_docs)
-    return component_type_docs
-
-
-def update_xsd(documentation_dict, replace=True):
+def update_xsd():
     """Update the XSD documentation.
 
-    If replace is true, we replace the current text in the XSD. Otherwise, we
-    combine the two texts.
+    This takes whatever is in the XML files and puts in the XSD, replacing
+    anything that may be in the XSD already.
     """
     XSD_file = "../Schemas/NeuroML2/NeuroML_v2.2.xsd"
     XSD_file_new = "../Schemas/NeuroML2/NeuroML_v2.2_docs.xsd"
     try:
-        tree = ET.parse(XSD_file)
-        root = tree.getroot()
+        xsdtree = ET.parse(XSD_file)
+        xsdroot = xsdtree.getroot()
     except ET.XMLSyntaxError as e:
         print(f"Could not parse file {XSD_file}: {e}")
 
-    namespaces = root.nsmap
-    nsinfo = namespaces['xs']
-    print(namespaces)
-    complex_types = root.findall(".//xs:complexType", namespaces=namespaces)
+    xsdnamespaces = xsdroot.nsmap
+    xsdnsinfo = xsdnamespaces['xs']
+    complex_types = xsdroot.findall(".//xs:complexType", namespaces=xsdnamespaces)
     ct_list = []
-    for ct in complex_types:
-        ct_name = ct.attrib['name'].lower()
-        ct_list.append(ct_name)
-        print("Schema: processing {}".format(ct_name))
-        doc_text = ""
-        if ct_name in documentation_dict:
-            doc_text = ""
-            xml_doc = documentation_dict[ct_name]
 
-            doc_node = ct.find("./xs:annotation/xs:documentation", namespaces=namespaces)
-            doc_text = ""
-            if doc_node is not None:
-                print("Found documentation node in {}".format(ct_name))
-                if len(doc_node) > 1:
-                    print("Multiple doc elements found?")
+    # iterate over all schema files
+    # find it in the XSD, make changes
+    for file in xml_files:
+        xmlfile = "../NeuroML2CoreTypes/" + file
+        print("Definitions: processing {}".format(xmlfile))
+        try:
+            xmltree = ET.parse(xmlfile)
+            xmlroot = xmltree.getroot()
+        except ET.XMLSyntaxError as e:
+            print(f"Could not parse file {file}: {e}")
+            continue
+        xmlnamespaces = xmlroot.nsmap
+        component_types = xmlroot.findall(".//ComponentType", namespaces=xmlnamespaces)
 
-                if replace:
-                    doc_text = ""
-                else:
-                    doc_text = re.sub(' +', ' ', doc_node.text).replace("\n", " ").rstrip().lstrip()
+        for ct in component_types:
+            ct_name = ct.attrib['name'].lower()
+            ct_doc = re.sub(' +', ' ', ct.attrib['description']).replace("\n", " ").rstrip().lstrip()
+            ct_doc += "\n"
 
-                # remove the node, we'll re-add a new one at the top of the
-                # complextype so that generateDS puts this documentation first
-                # in nml.py
-                doc_node.getparent().remove(doc_node)
-            else:
-                print("No documentation node found in {}. Creating new.".format(ct_name))
+            # find this in the schema
+            for cxt in complex_types:
+                cxt_name = cxt.attrib['name'].lower()
+                doc_text = ""
+                if cxt_name == ct_name:
 
-            # create new annotation at top of complextype
-            new_annotation = ET.Element('{' + nsinfo + '}annotation')
-            ct.insert(0, new_annotation)
-            doc_node = ET.SubElement(new_annotation, '{' + nsinfo + '}documentation')
-            doc_node.text = format_description(xml_doc + doc_text) + '\n'
+                    # complex type documentation
+                    doc_node = ct.find("./xs:annotation/xs:documentation",
+                                       namespaces=xsdnamespaces)
+                    # remove the existing doc node, we'll re-add a new one at
+                    # the top of the complextype so that generateDS puts this
+                    # documentation first in nml.py
+                    if doc_node is not None:
+                        if len(doc_node) > 1:
+                            print("Warning: multiple doc elements found?")
+                            for n in doc_node:
+                                n.getparent().remove(n)
+                        else:
+                            doc_node.getparent().remove(doc_node)
 
-    ET.indent(tree)
-    tree.write(XSD_file_new, method="xml", xml_declaration=True)
+                    # create new annotation at top of complextype
+                    new_annotation = ET.Element('{' + xsdnsinfo + '}annotation')
+                    ct.insert(0, new_annotation)
+                    doc_node = ET.SubElement(new_annotation, '{' + xsdnsinfo + '}documentation')
+                    doc_node.text = ct_doc + format_description(doc_text) + '\n'
+
+                    # Parameter documentation
+                    params = ct.findall("./Parameter", namespaces=xmlnamespaces)
+                    for p in params:
+                        pname = p.attrib['name']
+                        pdim = p.attrib['dimension']
+                        pdesc = None
+                        pdoc = ""
+                        if 'description' in p.attrib:
+                            pdesc = format_description(p.attrib['description'])
+                        # generateDS will say: <name> - pdoc
+                        pdoc = "(dimension: {}){}".format(
+                            pdim, ": " + pdesc if pdesc else ""
+                        )
+                        # create new document annotation for parameter
+                        p_xsd_nodes = cxt.findall(".//xs:attribute", namespaces=xsdnamespaces)
+                        for p_xsd_node in p_xsd_nodes:
+                            if p_xsd_node.attrib['name'].lower() == pname.lower():
+
+                                # remove existing doc
+                                p_doc_node = p_xsd_node.find("./xs:annotation/xs:documentation",
+                                                             namespaces=xsdnamespaces)
+                                if p_doc_node is not None:
+                                    p_doc_node.getparent().remove(p_doc_node)
+
+                                p_annotation = ET.Element('{' + xsdnsinfo + '}annotation')
+                                p_xsd_node.insert(0, p_annotation)
+                                p_doc_node = ET.SubElement(p_annotation, '{' + xsdnsinfo + '}documentation')
+                                p_doc_node.text = pdoc
+
+    ET.indent(xsdtree)
+    xsdtree.write(XSD_file_new, method="xml", xml_declaration=True)
     print("New file written to {}".format(XSD_file_new))
     print("Please check the differences before replacing the main file.")
     return ct_list
 
 
-if __name__ == "__main__":
-    component_type_docs = get_component_type_docs()
-    component_types_xsd = set(update_xsd(component_type_docs))
-    component_types_xml = set(component_type_docs.keys())
+def compare_xml_xsd():
+    """Compare what's defined in the XSD and in the XML."""
+
+    XSD_file = "../Schemas/NeuroML2/NeuroML_v2.2.xsd"
+    try:
+        xsdtree = ET.parse(XSD_file)
+        xsdroot = xsdtree.getroot()
+    except ET.XMLSyntaxError as e:
+        print(f"Could not parse file {XSD_file}: {e}")
+
+    xsdnamespaces = xsdroot.nsmap
+    complex_types = xsdroot.findall(".//xs:complexType", namespaces=xsdnamespaces)
+    cxt_list = [ct.attrib['name'].lower() for ct in complex_types]
+    cxt_list = set(cxt_list)
+
+    component_types = []
+    for file in xml_files:
+        xmlfile = "../NeuroML2CoreTypes/" + file
+        try:
+            xmltree = ET.parse(xmlfile)
+            xmlroot = xmltree.getroot()
+        except ET.XMLSyntaxError as e:
+            print(f"Could not parse file {file}: {e}")
+            continue
+        xmlnamespaces = xmlroot.nsmap
+        component_types.extend(xmlroot.findall(".//ComponentType", namespaces=xmlnamespaces))
+    ct_list = [ct.attrib['name'].lower() for ct in component_types]
+    ct_list = set(ct_list)
 
     print()
-    print("Following component types are defined in the XML but not the XSD: {}".format(component_types_xml - component_types_xsd))
-    print()
-    print("Following component types are defined in the XSD but not the XML: {}".format(component_types_xsd - component_types_xml))
+    print("These are in the XML but not in the XSD: {}\n\n".format(cxt_list - ct_list))
+    print("These are in the XSD but not in the XML: {}".format(ct_list - cxt_list))
+
+
+if __name__ == "__main__":
+    update_xsd()
+    compare_xml_xsd()
