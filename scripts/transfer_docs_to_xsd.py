@@ -124,14 +124,23 @@ def update_xsd(documentation_dict, replace=True):
                 print("Found documentation node in {}".format(ct_name))
                 if len(doc_node) > 1:
                     print("Multiple doc elements found?")
+
                 if replace:
                     doc_text = ""
                 else:
                     doc_text = re.sub(' +', ' ', doc_node.text).replace("\n", " ").rstrip().lstrip()
+
+                # remove the node, we'll re-add a new one at the top of the
+                # complextype so that generateDS puts this documentation first
+                # in nml.py
+                doc_node.getparent().remove(doc_node)
             else:
                 print("No documentation node found in {}. Creating new.".format(ct_name))
-                new_annotation = ET.SubElement(ct, '{' + nsinfo + '}annotation')
-                doc_node = ET.SubElement(new_annotation, '{' + nsinfo + '}documentation')
+
+            # create new annotation at top of complextype
+            new_annotation = ET.Element('{' + nsinfo + '}annotation')
+            ct.insert(0, new_annotation)
+            doc_node = ET.SubElement(new_annotation, '{' + nsinfo + '}documentation')
             doc_node.text = format_description(xml_doc + doc_text)
 
     ET.indent(tree)
