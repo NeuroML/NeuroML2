@@ -13,7 +13,9 @@
                    description="Network containing: _population_s (potentially of type _populationList_, and so specifying a list of cell _location_s); _projection_s (with lists of _connection_s) and/or _explicitConnection_s; and _inputList_s (with lists of _input_s) and/or _explicitInput_s. Note: often in NeuroML this will be of type _networkWithTemperature_ if there are temperature dependent elements (e.g. ion channels)."
                    extends="baseStandalone">
 
+        <!-- Removing in NML2.2 - See https://github.com/NeuroML/NeuroML2/issues/171-->
         <Children name="regions" type="region"/>
+
         <Children name="populations" type="basePopulation"/>
 
         <Children name="projections" type="projection"/>
@@ -77,6 +79,7 @@
         <Parameter name="z" dimension="none"/>
     </ComponentType>
 
+    <!-- Removing in NML2.2 - See https://github.com/NeuroML/NeuroML2/issues/171-->
     <ComponentType name="region" description="Initial attempt to specify 3D region for placing cells. Work in progress...">
         <Child name="rectangularExtent" type="rectangularExtent"/>
     </ComponentType>

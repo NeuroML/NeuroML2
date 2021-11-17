@@ -1374,12 +1374,12 @@
         extends="baseCellMembPot"
         description="Cell based on the 2003 model of Izhikevich, see http://izhikevich.org/publications/spikes.htm">
 
-        <Parameter name="v0" dimension="voltage"/>  <!--TEMP: needs to be removed... -->
-        <Parameter name="a" dimension="none"/>
-        <Parameter name="b" dimension="none"/>
-        <Parameter name="c" dimension="none"/>
-        <Parameter name="d" dimension="none"/>
-        <Parameter name="thresh" dimension="voltage"/>
+        <Parameter name="v0" dimension="voltage" description="Initial membrane potential"/>
+        <Parameter name="a" dimension="none" description="Time scale of the recovery variable U"/>
+        <Parameter name="b" dimension="none" description="Sensitivity of U to the subthreshold fluctuations of the membrane potential v"/>
+        <Parameter name="c" dimension="none" description="After-spike reset value of v"/>
+        <Parameter name="d" dimension="none" description="After-spike reset of u"/>
+        <Parameter name="thresh" dimension="voltage" description="Spike threshold"/>
 
     <!-- These are needed to ensure a, b, c, d, U & I remain dimensionless... -->
         <Constant name="MSEC" dimension="time" value="1ms"/>
@@ -1391,8 +1391,8 @@
 
         <Dynamics>
 
-            <StateVariable name="v" dimension="voltage" exposure="v"/>
-            <StateVariable name="U" dimension="none" exposure="U"/>
+            <StateVariable name="v" dimension="voltage" exposure="v" description="Membrane potential state variable"/>
+            <StateVariable name="U" dimension="none" exposure="U" description="..."/>
 
             <DerivedVariable name="ISyn" dimension="none" select="synapses[*]/I" reduce="add" />
 
