@@ -63,7 +63,7 @@
   </xs:simpleType>
   <xs:simpleType name="Nml2Quantity_permeability">
     <xs:restriction base="xs:string">
-      <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(m_per_s|                        um_per_ms|cm_per_s|cm_per_ms)"/>
+      <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(m_per_s|um_per_ms|cm_per_s|cm_per_ms)"/>
       <!-- Based on set of defined Units in NeuroMLCoreDimensions.xml -->
     </xs:restriction>
   </xs:simpleType>

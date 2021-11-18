@@ -57,7 +57,7 @@
   </xs:simpleType>
   <xs:simpleType name="Nml2Quantity_permeability">
     <xs:restriction base="xs:string">
-      <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(m_per_s|                        um_per_ms|cm_per_s|cm_per_ms)"/>
+      <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(m_per_s|um_per_ms|cm_per_s|cm_per_ms)"/>
       <!-- Based on set of defined Units in NeuroMLCoreDimensions.xml -->
     </xs:restriction>
   </xs:simpleType>
@@ -1962,7 +1962,7 @@
   </xs:complexType>
   <xs:complexType name="BaseConnectionOldFormat">
     <xs:annotation>
-      <xs:documentation>Base of all synaptic connections with preCellId, postSegmentId, etc. 
+      <xs:documentation>Base of all synaptic connections with preCellId, postSegmentId, etc.
                 Note: this is not the best name for these attributes, since Id is superfluous, hence BaseConnectionNewFormat</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -1978,7 +1978,7 @@
   </xs:complexType>
   <xs:complexType name="BaseConnectionNewFormat">
     <xs:annotation>
-      <xs:documentation>Base of all synaptic connections with preCell, postSegment, etc. 
+      <xs:documentation>Base of all synaptic connections with preCell, postSegment, etc.
                 See BaseConnectionOldFormat</xs:documentation>
     </xs:annotation>
     <xs:complexContent>

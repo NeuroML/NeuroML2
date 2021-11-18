@@ -57,7 +57,7 @@
   </xs:simpleType>
   <xs:simpleType name="Nml2Quantity_permeability">
     <xs:restriction base="xs:string">
-      <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(m_per_s|                        um_per_ms|cm_per_s|cm_per_ms)"/>
+      <xs:pattern value="-?([0-9]*(\.[0-9]+)?)([eE]-?[0-9]+)?[\s]*(m_per_s|um_per_ms|cm_per_s|cm_per_ms)"/>
       <!-- Based on set of defined Units in NeuroMLCoreDimensions.xml -->
     </xs:restriction>
   </xs:simpleType>
@@ -200,8 +200,8 @@
           <xs:element name="morphology" type="Morphology" minOccurs="0" maxOccurs="unbounded"/>
           <!-- Note: requires type = ionChannelHH -->
           <xs:element name="ionChannel" type="IonChannel" minOccurs="0" maxOccurs="unbounded"/>
-          <!-- Note ionChannel and _ionChannelHH are currently functionally identical. This is needed 
-                    since many existing examples use ionChannel, some use ionChannelHH. NeuroML v2beta3 will 
+          <!-- Note ionChannel and _ionChannelHH are currently functionally identical. This is needed
+                    since many existing examples use ionChannel, some use ionChannelHH. NeuroML v2beta3 will
                     remove one of these -->
           <xs:element name="ionChannelHH" type="IonChannelHH" minOccurs="0" maxOccurs="unbounded"/>
           <xs:group ref="ConcentrationModelTypes"/>
@@ -314,7 +314,7 @@
   <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   <xs:complexType name="IonChannel">
     <xs:annotation>
-      <xs:documentation>Note ionChannel and ionChannelHH are currently functionally identical. This is needed since many existing examples use ionChannel, some use ionChannelHH. 
+      <xs:documentation>Note ionChannel and ionChannelHH are currently functionally identical. This is needed since many existing examples use ionChannel, some use ionChannelHH.
                 NeuroML v2beta3 will remove one of these, probably ionChannelHH.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -335,7 +335,7 @@
   </xs:complexType>
   <xs:complexType name="IonChannelHH">
     <xs:annotation>
-      <xs:documentation>Note ionChannel and ionChannelHH are currently functionally identical. This is needed since many existing examples use ionChannel, some use ionChannelHH. 
+      <xs:documentation>Note ionChannel and ionChannelHH are currently functionally identical. This is needed since many existing examples use ionChannel, some use ionChannelHH.
                 NeuroML v2beta3 will remove one of these, probably ionChannelHH.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
