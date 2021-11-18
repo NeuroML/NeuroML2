@@ -231,8 +231,8 @@ def compare_xml_xsd():
     ct_list = set(ct_list)
 
     print()
-    print("These are in the XML but not in the XSD: {}\n\n".format(cxt_list - ct_list))
-    print("These are in the XSD but not in the XML: {}".format(ct_list - cxt_list))
+    print("These are in the XSD but not in the XML: {}\n\n".format(cxt_list - ct_list))
+    print("These are in the XML but not in the XSD: {}".format(ct_list - cxt_list))
 
 
 if __name__ == "__main__":
