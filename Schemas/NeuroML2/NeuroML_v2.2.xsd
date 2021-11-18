@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="ASCII"?>
 <xs:schema xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" targetNamespace="http://www.neuroml.org/schema/neuroml2" jxb:version="2.0" xsi:schemaLocation="http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   <!--      Core elements                                    -->
@@ -198,14 +198,16 @@
   </xs:simpleType>
   <xs:complexType name="Property">
     <xs:annotation>
-      <xs:documentation>Generic property with a tag and value</xs:documentation>
+      <xs:documentation>A property ( a **tag**  and **value**  pair ), which can be on any  **baseStandalone**  either as a direct child, or within an  **Annotation** . Generally something which helps the visual display or facilitates simulation of a Component, but is not a core physiological property. Common examples include: **numberInternalDivisions,**  equivalent of nseg in NEURON; **radius,**  for a radius to use in graphical displays for abstract cells ( i. e. without defined morphologies ); **color,**  the color to use for a  **Population**  or  **populationList**  of cells; **recommended_dt_ms,**  the recommended timestep to use for simulating a  **Network** , **recommended_duration_ms**  the recommended duration to use when running a  **Network**
+</xs:documentation>
     </xs:annotation>
     <xs:attribute name="tag" type="xs:string" use="required"/>
     <xs:attribute name="value" type="xs:string" use="required"/>
   </xs:complexType>
   <xs:complexType name="Annotation">
     <xs:annotation>
-      <xs:documentation>Placeholder for MIRIAM related metadata, among others.</xs:documentation>
+      <xs:documentation>A structured annotation containing metadata, specifically RDF or  **property**  elements
+</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
@@ -503,7 +505,12 @@
   </xs:complexType>
   <xs:complexType name="IonChannelKS">
     <xs:annotation>
-      <xs:documentation>Kinetic scheme based ion channel.</xs:documentation>
+      <xs:documentation>A kinetic scheme based ion channel with multiple  **gateKS** s, each of which consists of multiple  **KSState** s and  **KSTransition** s giving the rates of transition between them
+\n
+:param conductance: 
+:type conductance: conductance
+
+</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
@@ -517,8 +524,12 @@
   </xs:complexType>
   <xs:complexType name="IonChannel">
     <xs:annotation>
-      <xs:documentation>Note ionChannel and ionChannelHH are currently functionally identical. This is needed since many existing examples use ionChannel, some use ionChannelHH.
-                One of these should be removed, probably ionChannelHH.</xs:documentation>
+      <xs:documentation>Note  **ionChannel**  and  **ionChannelHH**  are currently functionally identical. This is needed since many existing examples use ionChannel, some use ionChannelHH. NeuroML v2beta4 should remove one of these, probably ionChannelHH.
+\n
+:param conductance: 
+:type conductance: conductance
+
+</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="IonChannelScalable">
@@ -540,8 +551,12 @@
   </xs:complexType>
   <xs:complexType name="IonChannelHH">
     <xs:annotation>
-      <xs:documentation>Note ionChannel and ionChannelHH are currently functionally identical. This is needed since many existing examples use ionChannel, some use ionChannelHH.
-                One of these should be removed, probably ionChannelHH.</xs:documentation>
+      <xs:documentation>Note  **ionChannel**  and  **ionChannelHH**  are currently functionally identical. This is needed since many existing examples use ionChannel, some use ionChannelHH. NeuroML v2beta4 should remove one of these, probably ionChannelHH.
+\n
+:param conductance: 
+:type conductance: conductance
+
+</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="IonChannel"/>
@@ -549,7 +564,14 @@
   </xs:complexType>
   <xs:complexType name="IonChannelVShift">
     <xs:annotation>
-      <xs:documentation>Same as ionChannel, but with a vShift parameter to change voltage activation of gates. The exact usage of vShift in expressions for rates is determined by the individual gates.</xs:documentation>
+      <xs:documentation>Same as  **ionChannel** , but with a **vShift**  parameter to change voltage activation of gates. The exact usage of **vShift**  in expressions for rates is determined by the individual gates.
+\n
+:param vShift: 
+:type vShift: voltage
+:param conductance: 
+:type conductance: conductance
+
+</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="IonChannel">
@@ -565,6 +587,16 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="Q10ConductanceScaling">
+    <xs:annotation>
+      <xs:documentation>A value for the conductance scaling which varies as a standard function of the difference between the current temperature, **temperature,**  and the temperature at which the conductance was originally determined, **experimentalTemp**
+\n
+:param q10Factor: 
+:type q10Factor: none
+:param experimentalTemp: 
+:type experimentalTemp: temperature
+
+</xs:documentation>
+    </xs:annotation>
     <xs:attribute name="q10Factor" type="Nml2Quantity_none" use="required"/>
     <xs:attribute name="experimentalTemp" type="Nml2Quantity_temperature" use="required"/>
   </xs:complexType>
@@ -581,6 +613,14 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="ClosedState">
+    <xs:annotation>
+      <xs:documentation>A  **KSState**  with **relativeConductance**  of 0
+\n
+:param relativeConductance: 
+:type relativeConductance: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <!-- Only has id...-->
@@ -588,6 +628,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="OpenState">
+    <xs:annotation>
+      <xs:documentation>A  **KSState**  with **relativeConductance**  of 1
+\n
+:param relativeConductance: 
+:type relativeConductance: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <!-- Only has id...-->
@@ -595,6 +643,10 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ForwardTransition">
+    <xs:annotation>
+      <xs:documentation>A forward only  **KSTransition**  for a  **gateKS**  which specifies a **rate**  ( type  **baseHHRate**  ) which follows one of the standard Hodgkin Huxley forms ( e. g.  **HHExpRate** ,  **HHSigmoidRate** ,  **HHExpLinearRate**
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <xs:sequence>
@@ -607,6 +659,10 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ReverseTransition">
+    <xs:annotation>
+      <xs:documentation>A reverse only  **KSTransition**  for a  **gateKS**  which specifies a **rate**  ( type  **baseHHRate**  ) which follows one of the standard Hodgkin Huxley forms ( e. g.  **HHExpRate** ,  **HHSigmoidRate** ,  **HHExpLinearRate**
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <xs:sequence>
@@ -625,6 +681,10 @@
     </xs:sequence>
   </xs:group>
   <xs:complexType name="TauInfTransition">
+    <xs:annotation>
+      <xs:documentation>KS Transition specified in terms of time constant  **tau**  and steady state  **inf**
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <xs:all>
@@ -637,6 +697,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="GateKS">
+    <xs:annotation>
+      <xs:documentation>A gate which consists of multiple  **KSState** s and  **KSTransition** s giving the rates of transition between them
+\n
+:param instances: 
+:type instances: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <xs:sequence>
@@ -675,6 +743,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="GateHHRates">
+    <xs:annotation>
+      <xs:documentation>Gate which follows the general Hodgkin Huxley formalism
+\n
+:param instances: 
+:type instances: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <xs:all>
@@ -689,6 +765,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="GateHHTauInf">
+    <xs:annotation>
+      <xs:documentation>Gate which follows the general Hodgkin Huxley formalism
+\n
+:param instances: 
+:type instances: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <xs:all>
@@ -703,6 +787,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="GateHHRatesTauInf">
+    <xs:annotation>
+      <xs:documentation>Gate which follows the general Hodgkin Huxley formalism
+\n
+:param instances: 
+:type instances: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <xs:all>
@@ -719,6 +811,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="GateHHRatesTau">
+    <xs:annotation>
+      <xs:documentation>Gate which follows the general Hodgkin Huxley formalism
+\n
+:param instances: 
+:type instances: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <xs:all>
@@ -734,6 +834,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="GateHHRatesInf">
+    <xs:annotation>
+      <xs:documentation>Gate which follows the general Hodgkin Huxley formalism
+\n
+:param instances: 
+:type instances: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <xs:all>
@@ -749,6 +857,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="GateHHInstantaneous">
+    <xs:annotation>
+      <xs:documentation>Gate which follows the general Hodgkin Huxley formalism but is instantaneous, so tau = 0 and gate follows exactly inf value
+\n
+:param instances: 
+:type instances: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <xs:all>
@@ -761,6 +877,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="GateFractional">
+    <xs:annotation>
+      <xs:documentation>Gate composed of subgates contributing with fractional conductance
+\n
+:param instances: 
+:type instances: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <xs:sequence>
@@ -819,12 +943,23 @@
   <!--      Concentration Model types                        -->
   <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   <xs:complexType name="DecayingPoolConcentrationModel">
+    <xs:annotation>
+      <xs:documentation>Model of an intracellular buffering mechanism for **ion**  ( currently hard Coded to be calcium, due to requirement for **iCa**  ) which has a baseline level **restingConc**  and tends to this value with time course **decayConstant.**  The ion is assumed to occupy a shell inside the membrane of thickness **shellThickness.**
+\n
+:param restingConc: 
+:type restingConc: concentration
+:param decayConstant: 
+:type decayConstant: time
+:param shellThickness: 
+:type shellThickness: length
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
         <xs:attribute name="ion" type="NmlId" use="required">
           <xs:annotation>
-            <xs:documentation>Should not be required, as it's present on the species element!</xs:documentation>
-          </xs:annotation>
+            </xs:annotation>
         </xs:attribute>
         <xs:attribute name="restingConc" type="Nml2Quantity_concentration" use="required"/>
         <xs:attribute name="decayConstant" type="Nml2Quantity_time" use="required"/>
@@ -833,12 +968,23 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="FixedFactorConcentrationModel">
+    <xs:annotation>
+      <xs:documentation>Model of buffering of concentration of an ion ( currently hard coded to be calcium, due to requirement for **iCa**  ) which has a baseline level **restingConc**  and tends to this value with time course **decayConstant.**  A fixed factor **rho**  is used to scale the incoming current *independently of the size of the compartment* to produce a concentration change.
+\n
+:param restingConc: 
+:type restingConc: concentration
+:param decayConstant: 
+:type decayConstant: time
+:param rho: 
+:type rho: rho_factor
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
         <xs:attribute name="ion" type="NmlId" use="required">
           <xs:annotation>
-            <xs:documentation>Should not be required, as it's present on the species element!</xs:documentation>
-          </xs:annotation>
+            </xs:annotation>
         </xs:attribute>
         <xs:attribute name="restingConc" type="Nml2Quantity_concentration" use="required"/>
         <xs:attribute name="decayConstant" type="Nml2Quantity_time" use="required"/>
@@ -850,6 +996,10 @@
   <!--      Synapse types                                    -->
   <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   <xs:complexType name="BaseSynapse">
+    <xs:annotation>
+      <xs:documentation>Base type for all synapses, i. e. ComponentTypes which produce a current ( dimension current ) and change Dynamics in response to an incoming event. cno_0000009
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
 
@@ -857,6 +1007,10 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="BaseVoltageDepSynapse">
+    <xs:annotation>
+      <xs:documentation>Base type for synapses with a dependence on membrane potential
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseSynapse">
 
@@ -864,6 +1018,10 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="BaseCurrentBasedSynapse">
+    <xs:annotation>
+      <xs:documentation>Synapse model which produces a synaptic current.
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseSynapse">
 
@@ -871,6 +1029,16 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="BaseConductanceBasedSynapse">
+    <xs:annotation>
+      <xs:documentation>Synapse model which exposes a conductance **g**  in addition to producing a current. Not necessarily ohmic!! cno_0000027
+\n
+:param gbase: Baseline conductance, generally the maximum conductance following a single spike
+:type gbase: conductance
+:param erev: Reversal potential of the synapse
+:type erev: voltage
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseVoltageDepSynapse">
         <xs:attribute name="gbase" type="Nml2Quantity_conductance" use="required"/>
@@ -879,6 +1047,18 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="BaseConductanceBasedSynapseTwo">
+    <xs:annotation>
+      <xs:documentation>Synapse model suited for a sum of two expTwoSynapses which exposes a conductance **g**  in addition to producing a current. Not necessarily ohmic!! cno_0000027
+\n
+:param gbase1: Baseline conductance 1
+:type gbase1: conductance
+:param gbase2: Baseline conductance 2
+:type gbase2: conductance
+:param erev: Reversal potential of the synapse
+:type erev: voltage
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseVoltageDepSynapse">
         <xs:attribute name="gbase1" type="Nml2Quantity_conductance" use="required"/>
@@ -888,40 +1068,64 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="GapJunction">
+    <xs:annotation>
+      <xs:documentation>Gap junction/single electrical connection
+\n
+:param conductance: 
+:type conductance: conductance
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
-      <xs:annotation>
-        <xs:documentation>Gap junction/single electrical connection</xs:documentation>
-      </xs:annotation>
       <xs:extension base="BaseSynapse">
         <xs:attribute name="conductance" type="Nml2Quantity_conductance" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="SilentSynapse">
+    <xs:annotation>
+      <xs:documentation>Dummy synapse which emits no current. Used as presynaptic endpoint for analog synaptic connection.
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
-      <xs:annotation>
-        <xs:documentation>Dummy synapse which emits no current. Used as presynaptic endpoint for analog synaptic connection (continuousConnection).</xs:documentation>
-      </xs:annotation>
       <xs:extension base="BaseSynapse">
 
             </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="LinearGradedSynapse">
+    <xs:annotation>
+      <xs:documentation>Behaves just like a one way gap junction.
+\n
+:param conductance: 
+:type conductance: conductance
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
-      <xs:annotation>
-        <xs:documentation>Behaves just like a one way gap junction.</xs:documentation>
-      </xs:annotation>
       <xs:extension base="BaseSynapse">
         <xs:attribute name="conductance" type="Nml2Quantity_conductance" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="GradedSynapse">
+    <xs:annotation>
+      <xs:documentation>Graded/analog synapse. Based on synapse in Methods of http://www. nature.com/neuro/journal/v7/n12/abs/nn1352.html
+\n
+:param conductance: 
+:type conductance: conductance
+:param delta: Slope of the activation curve
+:type delta: voltage
+:param k: Rate constant for transmitter-receptor dissociation rate
+:type k: per_time
+:param Vth: The half-activation voltage of the synapse
+:type Vth: voltage
+:param erev: The reversal potential of the synapse
+:type erev: voltage
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
-      <xs:annotation>
-        <xs:documentation>Based on synapse in Methods of http://www.nature.com/neuro/journal/v7/n12/abs/nn1352.html.</xs:documentation>
-      </xs:annotation>
       <xs:extension base="BaseSynapse">
         <xs:attribute name="conductance" type="Nml2Quantity_conductance" use="required"/>
         <xs:attribute name="delta" type="Nml2Quantity_voltage" use="required"/>
@@ -932,6 +1136,16 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="AlphaCurrentSynapse">
+    <xs:annotation>
+      <xs:documentation>Alpha current synapse: rise time and decay time are both **tau.**
+\n
+:param tau: Time course for rise and decay
+:type tau: time
+:param ibase: Baseline current increase after receiving a spike
+:type ibase: current
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseCurrentBasedSynapse">
         <xs:attribute name="tau" type="Nml2Quantity_time" use="required"/>
@@ -940,6 +1154,18 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="AlphaSynapse">
+    <xs:annotation>
+      <xs:documentation>Ohmic synapse model where rise time and decay time are both **tau.**  Max conductance reached during this time ( assuming zero conductance before ) is **gbase**  * **weight.**
+\n
+:param tau: Time course of rise/decay
+:type tau: time
+:param gbase: Baseline conductance, generally the maximum conductance following a single spike
+:type gbase: conductance
+:param erev: Reversal potential of the synapse
+:type erev: voltage
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseConductanceBasedSynapse">
         <xs:attribute name="tau" type="Nml2Quantity_time" use="required"/>
@@ -947,6 +1173,18 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ExpOneSynapse">
+    <xs:annotation>
+      <xs:documentation>Ohmic synapse model whose conductance rises instantaneously by ( **gbase**  * **weight**  ) on receiving an event, and which decays exponentially to zero with time course **tauDecay**
+\n
+:param tauDecay: Time course of decay
+:type tauDecay: time
+:param gbase: Baseline conductance, generally the maximum conductance following a single spike
+:type gbase: conductance
+:param erev: Reversal potential of the synapse
+:type erev: voltage
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseConductanceBasedSynapse">
         <xs:attribute name="tauDecay" type="Nml2Quantity_time" use="required"/>
@@ -954,6 +1192,20 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ExpTwoSynapse">
+    <xs:annotation>
+      <xs:documentation>Ohmic synapse model whose conductance waveform on receiving an event has a rise time of **tauRise**  and a decay time of **tauDecay.**  Max conductance reached during this time ( assuming zero conductance before ) is **gbase**  * **weight.**
+\n
+:param tauRise: 
+:type tauRise: time
+:param tauDecay: 
+:type tauDecay: time
+:param gbase: Baseline conductance, generally the maximum conductance following a single spike
+:type gbase: conductance
+:param erev: Reversal potential of the synapse
+:type erev: voltage
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseConductanceBasedSynapse">
         <xs:attribute name="tauDecay" type="Nml2Quantity_time" use="required"/>
@@ -962,6 +1214,24 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ExpThreeSynapse">
+    <xs:annotation>
+      <xs:documentation>Ohmic synapse similar to expTwoSynapse but consisting of two components that can differ in decay times and max conductances but share the same rise time.
+\n
+:param tauRise: 
+:type tauRise: time
+:param tauDecay1: 
+:type tauDecay1: time
+:param tauDecay2: 
+:type tauDecay2: time
+:param gbase1: Baseline conductance 1
+:type gbase1: conductance
+:param gbase2: Baseline conductance 2
+:type gbase2: conductance
+:param erev: Reversal potential of the synapse
+:type erev: voltage
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseConductanceBasedSynapseTwo">
         <xs:attribute name="tauDecay1" type="Nml2Quantity_time" use="required"/>
@@ -971,6 +1241,10 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="DoubleSynapse">
+    <xs:annotation>
+      <xs:documentation>Synapse consisting of two independent synaptic mechanisms ( e. g. AMPA-R and NMDA-R ), which can be easily colocated in connections
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseVoltageDepSynapse">
         <xs:attribute name="synapse1" type="NmlId" use="required"/>
@@ -981,6 +1255,20 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="BlockingPlasticSynapse">
+    <xs:annotation>
+      <xs:documentation>Biexponential synapse that allows for optional block and plasticity mechanisms, which can be expressed as child elements.
+\n
+:param tauRise: 
+:type tauRise: time
+:param tauDecay: 
+:type tauDecay: time
+:param gbase: Baseline conductance, generally the maximum conductance following a single spike
+:type gbase: conductance
+:param erev: Reversal potential of the synapse
+:type erev: voltage
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="ExpTwoSynapse">
         <xs:sequence>
@@ -1018,12 +1306,30 @@
   <!--      Cell element                                     -->
   <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   <xs:complexType name="BaseCell">
+    <xs:annotation>
+      <xs:documentation>Base type of any cell ( e. g. point neuron like  **izhikevich2007Cell** , or a morphologically detailed  **Cell**  with  **segment** s ) which can be used in a  **population**
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
             </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="IafTauCell">
+    <xs:annotation>
+      <xs:documentation>Integrate and fire cell which returns to its leak reversal potential of **leakReversal**  with a time constant **tau**
+\n
+:param leakReversal: 
+:type leakReversal: voltage
+:param tau: 
+:type tau: time
+:param thresh: The membrane potential at which to emit a spiking event and reset voltage
+:type thresh: voltage
+:param reset: The value the membrane potential is reset to on spiking
+:type reset: voltage
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseCell">
         <xs:attribute name="leakReversal" type="Nml2Quantity_voltage" use="required"/>
@@ -1034,6 +1340,22 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="IafTauRefCell">
+    <xs:annotation>
+      <xs:documentation>Integrate and fire cell which returns to its leak reversal potential of **leakReversal**  with a time course **tau.**  It has a refractory period of **refract**  after spiking
+\n
+:param refract: 
+:type refract: time
+:param leakReversal: 
+:type leakReversal: voltage
+:param tau: 
+:type tau: time
+:param thresh: The membrane potential at which to emit a spiking event and reset voltage
+:type thresh: voltage
+:param reset: The value the membrane potential is reset to on spiking
+:type reset: voltage
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="IafTauCell">
         <xs:attribute name="refract" type="Nml2Quantity_time" use="required"/>
@@ -1041,6 +1363,22 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="IafCell">
+    <xs:annotation>
+      <xs:documentation>Integrate and fire cell with capacitance **C,**  **leakConductance**  and **leakReversal**
+\n
+:param leakConductance: 
+:type leakConductance: conductance
+:param leakReversal: 
+:type leakReversal: voltage
+:param thresh: 
+:type thresh: voltage
+:param reset: 
+:type reset: voltage
+:param C: Total capacitance of the cell membrane
+:type C: capacitance
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseCell">
         <xs:attribute name="leakReversal" type="Nml2Quantity_voltage" use="required"/>
@@ -1052,6 +1390,24 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="IafRefCell">
+    <xs:annotation>
+      <xs:documentation>Integrate and fire cell with capacitance **C,**  **leakConductance,**  **leakReversal**  and refractory period **refract**
+\n
+:param refract: 
+:type refract: time
+:param leakConductance: 
+:type leakConductance: conductance
+:param leakReversal: 
+:type leakReversal: voltage
+:param thresh: 
+:type thresh: voltage
+:param reset: 
+:type reset: voltage
+:param C: Total capacitance of the cell membrane
+:type C: capacitance
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="IafCell">
         <xs:attribute name="refract" type="Nml2Quantity_time" use="required"/>
@@ -1059,6 +1415,24 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="IzhikevichCell">
+    <xs:annotation>
+      <xs:documentation>Cell based on the 2003 model of Izhikevich, see http://izhikevich.org/publications/spikes.htm
+\n
+:param v0: Initial membrane potential
+:type v0: voltage
+:param a: Time scale of the recovery variable U
+:type a: none
+:param b: Sensitivity of U to the subthreshold fluctuations of the membrane potential V
+:type b: none
+:param c: After-spike reset value of V
+:type c: none
+:param d: After-spike increase to U
+:type d: none
+:param thresh: Spike threshold
+:type thresh: voltage
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseCell">
         <xs:attribute name="v0" type="Nml2Quantity_voltage" use="required"/>
@@ -1071,11 +1445,18 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="BaseCellMembPotCap">
+    <xs:annotation>
+      <xs:documentation>Any cell with a membrane potential **v**  with voltage units and a membrane capacitance **C.**  Also defines exposed value **iSyn**  for current due to external synapses and **iMemb**  for total transmembrane current ( usually channel currents plus **iSyn**  )
+\n
+:param C: Total capacitance of the cell membrane
+:type C: capacitance
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseCell">
         <xs:attribute name="C" type="Nml2Quantity_capacitance" use="required">
           <xs:annotation>
-            <xs:documentation>This is to prevent it conflicting with attribute c (lowercase) e.g. in izhikevichCell2007</xs:documentation>
             <xs:appinfo>
               <jxb:property name="Cap"/>
             </xs:appinfo>
@@ -1085,6 +1466,32 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Izhikevich2007Cell">
+    <xs:annotation>
+      <xs:documentation>Cell based on the modified Izhikevich model in Izhikevich 2007, Dynamical systems in neuroscience, MIT Press
+\n
+:param v0: 
+:type v0: voltage
+:param k: 
+:type k: conductance_per_voltage
+:param vr: 
+:type vr: voltage
+:param vt: 
+:type vt: voltage
+:param vpeak: 
+:type vpeak: voltage
+:param a: 
+:type a: per_time
+:param b: 
+:type b: conductance
+:param c: 
+:type c: voltage
+:param d: 
+:type d: current
+:param C: Total capacitance of the cell membrane
+:type C: capacitance
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseCellMembPotCap">
         <xs:attribute name="v0" type="Nml2Quantity_voltage" use="required"/>
@@ -1100,6 +1507,34 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="AdExIaFCell">
+    <xs:annotation>
+      <xs:documentation>Model based on Brette R and Gerstner W ( 2005 ) Adaptive Exponential Integrate-and-Fire Model as an Effective Description of Neuronal Activity. J Neurophysiol 94:3637-3642
+\n
+:param gL: 
+:type gL: conductance
+:param EL: 
+:type EL: voltage
+:param VT: 
+:type VT: voltage
+:param thresh: 
+:type thresh: voltage
+:param reset: 
+:type reset: voltage
+:param delT: 
+:type delT: voltage
+:param tauw: 
+:type tauw: time
+:param refract: 
+:type refract: time
+:param a: 
+:type a: conductance
+:param b: 
+:type b: current
+:param C: Total capacitance of the cell membrane
+:type C: capacitance
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseCellMembPotCap">
         <xs:attribute name="gL" type="Nml2Quantity_conductance" use="required"/>
@@ -1116,6 +1551,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="FitzHughNagumoCell">
+    <xs:annotation>
+      <xs:documentation>Simple dimensionless model of spiking cell from FitzHugh and Nagumo. Superseded by **fitzHughNagumo1969Cell**  ( See https://github.com/NeuroML/NeuroML2/issues/42 )
+\n
+:param I: 
+:type I: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseCell">
         <xs:attribute name="I" type="Nml2Quantity_none" use="required"/>
@@ -1123,6 +1566,24 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="FitzHughNagumo1969Cell">
+    <xs:annotation>
+      <xs:documentation>The Fitzhugh Nagumo model is a two-dimensional simplification of the Hodgkin-Huxley model of spike generation in squid giant axons. This system was suggested by FitzHugh ( FitzHugh R. [1961]: Impulses and physiological states in theoretical models of nerve membrane. Biophysical J. 1:445-466 ), who called it " Bonhoeffer-van der Pol model ", and the equivalent circuit by Nagumo et al. ( Nagumo J. , Arimoto S. , and Yoshizawa S. [1962] An active pulse transmission line simulating nerve axon. Proc IRE. 50:2061-2070. 1962 ). This version corresponds to the one described in FitzHugh R. [1969]: Mathematical models of excitation and propagation in nerve. Chapter 1 ( pp. 1-85 in H. P. Schwan, ed. Biological Engineering, McGraw-Hill Book Co. , N. Y. )
+\n
+:param a: 
+:type a: none
+:param b: 
+:type b: none
+:param I: plays the role of an external injected current
+:type I: none
+:param phi: 
+:type phi: none
+:param V0: 
+:type V0: none
+:param W0: 
+:type W0: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseCell">
         <xs:attribute name="a" type="Nml2Quantity_none" use="required"/>
@@ -1135,6 +1596,54 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="PinskyRinzelCA3Cell">
+    <xs:annotation>
+      <xs:documentation>Reduced CA3 cell model from Pinsky and Rinzel 1994. See https://github.com/OpenSourceBrain/PinskyRinzelModel
+\n
+:param iSoma: 
+:type iSoma: currentDensity
+:param iDend: 
+:type iDend: currentDensity
+:param gLs: 
+:type gLs: conductanceDensity
+:param gLd: 
+:type gLd: conductanceDensity
+:param gNa: 
+:type gNa: conductanceDensity
+:param gKdr: 
+:type gKdr: conductanceDensity
+:param gCa: 
+:type gCa: conductanceDensity
+:param gKahp: 
+:type gKahp: conductanceDensity
+:param gKC: 
+:type gKC: conductanceDensity
+:param gc: 
+:type gc: conductanceDensity
+:param eNa: 
+:type eNa: voltage
+:param eCa: 
+:type eCa: voltage
+:param eK: 
+:type eK: voltage
+:param eL: 
+:type eL: voltage
+:param pp: 
+:type pp: none
+:param cm: 
+:type cm: specificCapacitance
+:param alphac: 
+:type alphac: none
+:param betac: 
+:type betac: none
+:param gNmda: 
+:type gNmda: conductanceDensity
+:param gAmpa: 
+:type gAmpa: conductanceDensity
+:param qd0: 
+:type qd0: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseCell">
         <xs:attribute name="iSoma" type="Nml2Quantity_currentDensity" use="required"/>
@@ -1162,6 +1671,10 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Cell">
+    <xs:annotation>
+      <xs:documentation>Cell with  **segment** s specified in a  **morphology**  element along with details on its  **biophysicalProperties** . NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and **v**  of this cell represents the membrane potential in that isopotential segment.
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseCell">
         <xs:sequence>
@@ -1170,22 +1683,20 @@
         </xs:sequence>
         <xs:attribute name="morphology" type="NmlId" use="optional">
           <xs:annotation>
-            <xs:documentation>Should only be used if morphology element is outside the cell.
-                                          This points to the id of the morphology
-                        </xs:documentation>
-          </xs:annotation>
+            </xs:annotation>
         </xs:attribute>
         <xs:attribute name="biophysicalProperties" type="NmlId" use="optional">
           <xs:annotation>
-            <xs:documentation>Should only be used if biophysicalProperties element is outside the cell.
-                                          This points to the id of the biophysicalProperties
-                        </xs:documentation>
-          </xs:annotation>
+            </xs:annotation>
         </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Cell2CaPools">
+    <xs:annotation>
+      <xs:documentation>Variant of cell with two independent Ca2+ pools. Cell with  **segment** s specified in a  **morphology**  element along with details on its  **biophysicalProperties** . NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and **v**  of this cell represents the membrane potential in that isopotential segment.
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Cell">
         <xs:sequence>
@@ -1196,9 +1707,8 @@
   </xs:complexType>
   <xs:complexType name="Morphology">
     <xs:annotation>
-      <xs:documentation>Standalone element which is usually inside a single cell, but could be outside and
-                              referenced by id.
-            </xs:documentation>
+      <xs:documentation>The collection of  **segment** s which specify the 3D structure of the cell, along with a number of  **segmentGroup** s
+</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
@@ -1210,6 +1720,10 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Segment">
+    <xs:annotation>
+      <xs:documentation>A segment defines the smallest unit within a possibly branching structure (  **morphology**  ), such as a dendrite or axon. Its **id**  should be a nonnegative integer ( usually soma/root = 0 ). Its end points are given by the  **proximal**  and  **distal**  points. The  **proximal**  point can be omitted, usually because it is the same as a point on the  **parent**  segment, see  **proximal**  for details.  **parent**  specifies the parent segment. The first segment of a  **cell**  ( with no  **parent**  ) usually represents the soma. The shape is normally a cylinder ( radii of the  **proximal**  and  **distal**  equal, but positions different ) or a conical frustum ( radii and positions different ). If the x, y, x positions of the  **proximal**  and  **distal**  are equal, the segment can be interpreted as a sphere, and in this case the radii of these points must be equal. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseNonNegativeIntegerId">
         <!-- Don't want to allow string value as with NmlId, want just non negative integer-->
@@ -1228,7 +1742,18 @@
   </xs:complexType>
   <xs:complexType name="Point3DWithDiam">
     <xs:annotation>
-      <xs:documentation>A 3D point with diameter.</xs:documentation>
+      <xs:documentation>Base type for ComponentTypes which specify an ( **x,**  **y,**  **z**  ) coordinate along with a **diameter.**  Note: no dimension used in the attributes for these coordinates! These are assumed to have dimension micrometer ( 10^-6 m ). This is due to micrometers being the default option for the majority of neuronal morphology formats, and dimensions are omitted here to facilitate reading and writing of morphologies in NeuroML.
+\n
+:param x: x coordinate of the point. Note: no dimension used, see description of  **point3DWithDiam**  for details.
+:type x: none
+:param y: y coordinate of the ppoint. Note: no dimension used, see description of  **point3DWithDiam**  for details.
+:type y: none
+:param z: z coordinate of the ppoint. Note: no dimension used, see description of  **point3DWithDiam**  for details.
+:type z: none
+:param diameter: Diameter of the ppoint. Note: no dimension used, see description of  **point3DWithDiam**  for details.
+:type diameter: none
+
+</xs:documentation>
     </xs:annotation>
     <xs:attribute name="x" type="xs:double" use="required"/>
     <xs:attribute name="y" type="xs:double" use="required"/>
@@ -1236,6 +1761,10 @@
     <xs:attribute name="diameter" type="DoubleGreaterThanZero" use="required"/>
   </xs:complexType>
   <xs:complexType name="SegmentGroup">
+    <xs:annotation>
+      <xs:documentation>A method to describe a group of  **segment** s in a  **morphology** , e. g. soma_group, dendrite_group, axon_group. While a name is useful to describe the group, the **neuroLexId**  attribute can be used to explicitly specify the meaning of the group, e. g. sao1044911821 for 'Neuronal Cell Body', sao1211023249 for 'Dendrite'. The  **segment** s in this group can be specified as: a list of individual  **member**  segments; a  **path** , all of the segments along which should be included; a  **subTree**  of the  **cell**  to include; other segmentGroups to  **include**  ( so all segments from those get included here ). An  **inhomogeneousParameter**  can be defined on the region of the cell specified by this group ( see  **variableParameter**  for usage ).
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <xs:sequence>
@@ -1252,6 +1781,10 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="InhomogeneousParameter">
+    <xs:annotation>
+      <xs:documentation>An inhomogeneous parameter specified across the  **segmentGroup**  ( see  **variableParameter**  for usage ).
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <xs:sequence>
@@ -1278,18 +1811,34 @@
     <xs:attribute name="normalizationEnd" type="xs:double" use="required"/>
   </xs:complexType>
   <xs:complexType name="Member">
+    <xs:annotation>
+      <xs:documentation>A single identified **segment**  which is part of the  **segmentGroup**
+</xs:documentation>
+    </xs:annotation>
     <xs:attribute name="segment" type="NonNegativeInteger" use="required"/>
   </xs:complexType>
   <xs:complexType name="Include">
+    <xs:annotation>
+      <xs:documentation>Include all members of another  **segmentGroup**  in this group
+</xs:documentation>
+    </xs:annotation>
     <xs:attribute name="segmentGroup" type="NmlId" use="required"/>
   </xs:complexType>
   <xs:complexType name="Path">
+    <xs:annotation>
+      <xs:documentation>Include all the  **segment** s between those specified by  **from**  and  **to** , inclusive
+</xs:documentation>
+    </xs:annotation>
     <xs:sequence>
       <xs:element name="from" type="SegmentEndPoint" minOccurs="0"/>
       <xs:element name="to" type="SegmentEndPoint" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="SubTree">
+    <xs:annotation>
+      <xs:documentation>Include all the  **segment** s distal to that specified by  **from**  in the  **segmentGroup**
+</xs:documentation>
+    </xs:annotation>
     <xs:choice>
       <xs:element name="from" type="SegmentEndPoint" minOccurs="0"/>
       <xs:element name="to" type="SegmentEndPoint" minOccurs="0"/>
@@ -1303,9 +1852,8 @@
   <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   <xs:complexType name="BiophysicalProperties">
     <xs:annotation>
-      <xs:documentation>Standalone element which is usually inside a single cell, but could be outside and
-                              referenced by id.
-            </xs:documentation>
+      <xs:documentation>The biophysical properties of the  **cell** , including the  **membraneProperties**  and the  **intracellularProperties**
+</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
@@ -1319,9 +1867,8 @@
   </xs:complexType>
   <xs:complexType name="BiophysicalProperties2CaPools">
     <xs:annotation>
-      <xs:documentation>Standalone element which is usually inside a single cell, but could be outside and
-                              referenced by id.
-            </xs:documentation>
+      <xs:documentation>The biophysical properties of the  **cell** , including the  **membraneProperties2CaPools**  and the  **intracellularProperties2CaPools**  for a cell with two Ca pools
+</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
@@ -1334,6 +1881,10 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="MembraneProperties">
+    <xs:annotation>
+      <xs:documentation>Properties specific to the membrane, such as the **populations**  of channels, **channelDensities,**  **specificCapacitance,**  etc.
+</xs:documentation>
+    </xs:annotation>
     <xs:sequence>
       <xs:element name="channelPopulation" type="ChannelPopulation" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="channelDensity" type="ChannelDensity" minOccurs="0" maxOccurs="unbounded"/>
@@ -1352,6 +1903,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="MembraneProperties2CaPools">
+    <xs:annotation>
+      <xs:documentation>Variant of membraneProperties with 2 independent Ca pools
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="MembraneProperties">
         <xs:sequence>
@@ -1363,33 +1918,63 @@
   </xs:complexType>
   <xs:complexType name="SpikeThresh">
     <xs:annotation>
-      <xs:documentation>Membrane potential at which to emit a spiking event. Note, usually the spiking event will not be emitted again until the membrane potential has fallen below this value and rises again to cross it in a positive direction.</xs:documentation>
+      <xs:documentation>Membrane potential at which to emit a spiking event. Note, usually the spiking event will not be emitted again until the membrane potential has fallen below this value and rises again to cross it in a positive direction
+\n
+:param value: 
+:type value: voltage
+
+</xs:documentation>
     </xs:annotation>
     <xs:attribute name="value" type="Nml2Quantity_voltage" use="required"/>
     <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
   </xs:complexType>
   <xs:complexType name="SpecificCapacitance">
     <xs:annotation>
-      <xs:documentation>Capacitance per unit area</xs:documentation>
+      <xs:documentation>Capacitance per unit area
+\n
+:param value: 
+:type value: specificCapacitance
+
+</xs:documentation>
     </xs:annotation>
     <xs:attribute name="value" type="Nml2Quantity_specificCapacitance" use="required"/>
     <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
   </xs:complexType>
   <xs:complexType name="InitMembPotential">
     <xs:annotation>
-      <xs:documentation>Explicitly set initial membrane potential for the cell</xs:documentation>
+      <xs:documentation>Explicitly set initial membrane potential for the cell
+\n
+:param value: 
+:type value: voltage
+
+</xs:documentation>
     </xs:annotation>
     <xs:attribute name="value" type="Nml2Quantity_voltage" use="required"/>
     <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
   </xs:complexType>
   <xs:complexType name="Resistivity">
     <xs:annotation>
-      <xs:documentation>The resistivity, or specific axial resistance, of the cytoplasm</xs:documentation>
+      <xs:documentation>The resistivity, or specific axial resistance, of the cytoplasm
+\n
+:param value: 
+:type value: resistivity
+
+</xs:documentation>
     </xs:annotation>
     <xs:attribute name="value" type="Nml2Quantity_resistivity" use="required"/>
     <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
   </xs:complexType>
   <xs:complexType name="ChannelPopulation">
+    <xs:annotation>
+      <xs:documentation>Population of a **number**  of ohmic ion channels. These each produce a conductance **channelg**  across a reversal potential **erev,**  giving a total current **i.**  Note that active membrane currents are more frequently specified as a density over an area of the  **cell**  using  **channelDensity**
+\n
+:param number: The number of channels present. This will be multiplied by the time varying conductance of the individual ion channel ( which extends  **baseIonChannel**  ) to produce the total conductance
+:type number: none
+:param erev: The reversal potential of the current produced
+:type erev: voltage
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <xs:sequence>
@@ -1403,19 +1988,20 @@
         <xs:attribute name="segment" type="NonNegativeInteger" use="optional"/>
         <xs:attribute name="ion" type="NmlId" use="required">
           <xs:annotation>
-            <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel definition. It is added here
-                        TEMPORARILY since selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
-                        Also, it will make it easier to set the correct native simulator value for erev (e.g. ek for ion = k in NEURON).
-                        Currently a required attribute.
-                        It should be removed in the longer term, due to possible inconsistencies in this value and that in the ionChannel
-                        element. TODO: remove.
-                        </xs:documentation>
-          </xs:annotation>
+            </xs:annotation>
         </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ChannelDensityNonUniform">
+    <xs:annotation>
+      <xs:documentation>Specifies a time varying ohmic conductance density, which is distributed on a region of the **cell.**  The conductance density of the channel is not uniform, but is set using the  **variableParameter** . Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON
+\n
+:param erev: The reversal potential of the current produced
+:type erev: voltage
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <xs:sequence>
@@ -1425,19 +2011,16 @@
         <xs:attribute name="erev" type="Nml2Quantity_voltage" use="required"/>
         <xs:attribute name="ion" type="NmlId" use="required">
           <xs:annotation>
-            <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel definition. It is added here
-                        TEMPORARILY since selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
-                        Also, it will make it easier to set the correct native simulator value for erev (e.g. ek for ion = k in NEURON).
-                        Currently a required attribute.
-                        It should be removed in the longer term, due to possible inconsistencies in this value and that in the ionChannel
-                        element. TODO: remove.
-                        </xs:documentation>
-          </xs:annotation>
+            </xs:annotation>
         </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ChannelDensityNonUniformNernst">
+    <xs:annotation>
+      <xs:documentation>Specifies a time varying conductance density, which is distributed on a region of the **cell,**  and whose reversal potential is calculated from the Nernst equation. Hard coded for Ca only!. The conductance density of the channel is not uniform, but is set using the  **variableParameter** . Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <xs:sequence>
@@ -1446,19 +2029,16 @@
         <xs:attribute name="ionChannel" type="NmlId" use="required"/>
         <xs:attribute name="ion" type="NmlId" use="required">
           <xs:annotation>
-            <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel definition. It is added here
-                        TEMPORARILY since selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
-                        Also, it will make it easier to set the correct native simulator value for erev (e.g. ek for ion = k in NEURON).
-                        Currently a required attribute.
-                        It should be removed in the longer term, due to possible inconsistencies in this value and that in the ionChannel
-                        element. TODO: remove.
-                        </xs:documentation>
-          </xs:annotation>
+            </xs:annotation>
         </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ChannelDensityNonUniformGHK">
+    <xs:annotation>
+      <xs:documentation>Specifies a time varying conductance density, which is distributed on a region of the **cell,**  and whose current is calculated from the Goldman-Hodgkin-Katz equation. Hard coded for Ca only!. The conductance density of the channel is not uniform, but is set using the  **variableParameter** . Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <xs:sequence>
@@ -1467,19 +2047,22 @@
         <xs:attribute name="ionChannel" type="NmlId" use="required"/>
         <xs:attribute name="ion" type="NmlId" use="required">
           <xs:annotation>
-            <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel definition. It is added here
-                        TEMPORARILY since selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
-                        Also, it will make it easier to set the correct native simulator value for erev (e.g. ek for ion = k in NEURON).
-                        Currently a required attribute.
-                        It should be removed in the longer term, due to possible inconsistencies in this value and that in the ionChannel
-                        element. TODO: remove.
-                        </xs:documentation>
-          </xs:annotation>
+            </xs:annotation>
         </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ChannelDensity">
+    <xs:annotation>
+      <xs:documentation>Specifies a time varying ohmic conductance density, **gDensity,**  which is distributed on an area of the **cell**  ( specified in  **membraneProperties**  ) with fixed reversal potential **erev**  producing a current density **iDensity**
+\n
+:param erev: The reversal potential of the current produced
+:type erev: voltage
+:param condDensity: 
+:type condDensity: conductanceDensity
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <xs:sequence>
@@ -1493,19 +2076,24 @@
         <xs:attribute name="segment" type="NonNegativeInteger" use="optional"/>
         <xs:attribute name="ion" type="NmlId" use="required">
           <xs:annotation>
-            <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel definition. It is added here
-                        TEMPORARILY since selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
-                        Also, it will make it easier to set the correct native simulator value for erev (e.g. ek for ion = k in NEURON).
-                        Currently a required attribute.
-                        It should be removed in the longer term, due to possible inconsistencies in this value and that in the ionChannel
-                        element. TODO: remove.
-                        </xs:documentation>
-          </xs:annotation>
+            </xs:annotation>
         </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ChannelDensityVShift">
+    <xs:annotation>
+      <xs:documentation>Same as  **channelDensity** , but with a **vShift**  parameter to change voltage activation of gates. The exact usage of **vShift**  in expressions for rates is determined by the individual gates.
+\n
+:param vShift: 
+:type vShift: voltage
+:param erev: The reversal potential of the current produced
+:type erev: voltage
+:param condDensity: 
+:type condDensity: conductanceDensity
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="ChannelDensity">
         <xs:attribute name="vShift" type="Nml2Quantity_voltage" use="required"/>
@@ -1513,6 +2101,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ChannelDensityNernst">
+    <xs:annotation>
+      <xs:documentation>Specifies a time varying conductance density, **gDensity,**  which is distributed on an area of the **cell,**  producing a current density **iDensity**  and whose reversal potential is calculated from the Nernst equation. Hard coded for Ca only! See https://github.com/OpenSourceBrain/ghk-nernst.
+\n
+:param condDensity: 
+:type condDensity: conductanceDensity
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <xs:sequence>
@@ -1525,19 +2121,20 @@
         <xs:attribute name="segment" type="NmlId" use="optional"/>
         <xs:attribute name="ion" type="NmlId" use="required">
           <xs:annotation>
-            <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel definition. It is added here
-                        TEMPORARILY since selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
-                        Also, it will make it easier to set the correct native simulator value for erev (e.g. ek for ion = k in NEURON).
-                        Currently a required attribute.
-                        It should be removed in the longer term, due to possible inconsistencies in this value and that in the ionChannel
-                        element. TODO: remove.
-                        </xs:documentation>
-          </xs:annotation>
+            </xs:annotation>
         </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ChannelDensityNernstCa2">
+    <xs:annotation>
+      <xs:documentation>This component is similar to the original component type  **channelDensityNernst**  but it is changed in order to have a reversal potential that depends on a second independent Ca++ pool ( ca2 ). See https://github.com/OpenSourceBrain/ghk-nernst.
+\n
+:param condDensity: 
+:type condDensity: conductanceDensity
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="ChannelDensityNernst">
         <!-- No difference in structure. Specifying an independent complexType ensures generated APIs create a class for this-->
@@ -1545,6 +2142,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ChannelDensityGHK">
+    <xs:annotation>
+      <xs:documentation>Specifies a time varying conductance density, **gDensity,**  which is distributed on an area of the cell, producing a current density **iDensity**  and whose reversal potential is calculated from the Goldman Hodgkin Katz equation. Hard coded for Ca only! See https://github.com/OpenSourceBrain/ghk-nernst.
+\n
+:param permeability: 
+:type permeability: permeability
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <xs:attribute name="ionChannel" type="NmlId" use="required"/>
@@ -1554,19 +2159,20 @@
         <xs:attribute name="segment" type="NmlId" use="optional"/>
         <xs:attribute name="ion" type="NmlId" use="required">
           <xs:annotation>
-            <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel definition. It is added here
-                        TEMPORARILY since selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
-                        Also, it will make it easier to set the correct native simulator value for erev (e.g. ek for ion = k in NEURON).
-                        Currently a required attribute.
-                        It should be removed in the longer term, due to possible inconsistencies in this value and that in the ionChannel
-                        element. TODO: remove.
-                        </xs:documentation>
-          </xs:annotation>
+            </xs:annotation>
         </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ChannelDensityGHK2">
+    <xs:annotation>
+      <xs:documentation>Time varying conductance density, **gDensity,**  which is distributed on an area of the cell, producing a current density **iDensity.**  Modified version of Jaffe et al. 1994 ( used also in Lawrence et al. 2006 ). See https://github.com/OpenSourceBrain/ghk-nernst.
+\n
+:param condDensity: 
+:type condDensity: conductanceDensity
+
+</xs:documentation>
+    </xs:annotation>
     <!--
             See https://github.com/OpenSourceBrain/ghk-nernst.
         -->
@@ -1579,19 +2185,16 @@
         <xs:attribute name="segment" type="NmlId" use="optional"/>
         <xs:attribute name="ion" type="NmlId" use="required">
           <xs:annotation>
-            <xs:documentation>Specifying the ion here again is redundant, this will be set in ionChannel definition. It is added here
-                        TEMPORARILY since selecting all ca or na conducting channel populations/densities in a cell would be difficult otherwise.
-                        Also, it will make it easier to set the correct native simulator value for erev (e.g. ek for ion = k in NEURON).
-                        Currently a required attribute.
-                        It should be removed in the longer term, due to possible inconsistencies in this value and that in the ionChannel
-                        element. TODO: remove.
-                        </xs:documentation>
-          </xs:annotation>
+            </xs:annotation>
         </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="VariableParameter">
+    <xs:annotation>
+      <xs:documentation>Specifies a **parameter**  ( e. g. condDensity ) which can vary its value across a **segmentGroup.**  The value is calculated from **value**  attribute of the  **inhomogeneousValue**  subelement. This element is normally a child of  **channelDensityNonUniform** ,  **channelDensityNonUniformNernst**  or  **channelDensityNonUniformGHK**  and is used to calculate the value of the conductance, etc. which will vary on different parts of the cell. The **segmentGroup**  specified here needs to define an  **inhomogeneousParameter**  ( referenced from **inhomogeneousParameter**  in the  **inhomogeneousValue**  ), which calculates a **variable**  ( e. g. p ) varying across the cell ( e. g. based on the path length from soma ), which is then used in the **value**  attribute of the  **inhomogeneousValue**  ( so for example condDensity = f( p ) )
+</xs:documentation>
+    </xs:annotation>
     <xs:sequence>
       <xs:element name="inhomogeneousValue" type="InhomogeneousValue" minOccurs="0"/>
     </xs:sequence>
@@ -1599,6 +2202,10 @@
     <xs:attribute name="segmentGroup" type="xs:string" use="required"/>
   </xs:complexType>
   <xs:complexType name="InhomogeneousValue">
+    <xs:annotation>
+      <xs:documentation>Specifies the **value**  of an **inhomogeneousParameter.**  For usage see  **variableParameter**
+</xs:documentation>
+    </xs:annotation>
     <xs:attribute name="inhomogeneousParameter" type="xs:string" use="required"/>
     <xs:attribute name="value" type="xs:string" use="required"/>
   </xs:complexType>
@@ -1613,14 +2220,21 @@
 
     </xs:complexType> -->
   <xs:complexType name="Species">
+    <xs:annotation>
+      <xs:documentation>Description of a chemical species identified by **ion,**  which has internal, **concentration,**  and external, **extConcentration**  values for its concentration
+\n
+:param initialConcentration: 
+:type initialConcentration: concentration
+:param initialExtConcentration: 
+:type initialExtConcentration: concentration
+
+</xs:documentation>
+    </xs:annotation>
     <xs:attribute name="id" type="NmlId" use="required"/>
     <xs:attribute name="concentrationModel" type="NmlId" use="required"/>
     <xs:attribute name="ion" type="NmlId" use="optional">
       <xs:annotation>
-        <xs:documentation>Specifying the ion here again is redundant, the ion name should be the same as id. Kept for now
-                    until LEMS implementation can select by id. TODO: remove.
-                </xs:documentation>
-      </xs:annotation>
+        </xs:annotation>
     </xs:attribute>
     <xs:attribute name="initialConcentration" type="Nml2Quantity_concentration" use="required"/>
     <xs:attribute name="initialExtConcentration" type="Nml2Quantity_concentration" use="required"/>
@@ -1635,12 +2249,20 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="IntracellularProperties">
+    <xs:annotation>
+      <xs:documentation>Biophysical properties related to the intracellular space within the  **cell** , such as the  **resistivity**  and the list of ionic  **species**  present. **caConc**  and **caConcExt**  are explicitly exposed here to facilitate accessing these values from other Components, even though **caConcExt**  is clearly not an intracellular property
+</xs:documentation>
+    </xs:annotation>
     <xs:sequence>
       <xs:element name="species" type="Species" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="resistivity" type="Resistivity" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="IntracellularProperties2CaPools">
+    <xs:annotation>
+      <xs:documentation>Variant of intracellularProperties with 2 independent Ca pools
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="IntracellularProperties">
         <!-- No difference in structure. Specifying an independent complexType ensures generated APIs create a class for this-->
@@ -1683,7 +2305,16 @@
   <!--Will be updated in line with LEMS ComponentType definitions -->
   <xs:complexType name="PulseGenerator">
     <xs:annotation>
-      <xs:documentation>Generates a constant current pulse of a certain amplitude (with dimensions for current) for a specified duration after a delay.</xs:documentation>
+      <xs:documentation>Generates a constant current pulse of a certain **amplitude**  for a specified **duration**  after a **delay.**  Scaled by **weight,**  if set
+\n
+:param delay: Delay before change in current. Current is zero prior to this.
+:type delay: time
+:param duration: Duration for holding current at amplitude. Current is zero after delay + duration.
+:type duration: time
+:param amplitude: Amplitude of current pulse
+:type amplitude: current
+
+</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
@@ -1695,7 +2326,16 @@
   </xs:complexType>
   <xs:complexType name="PulseGeneratorDL">
     <xs:annotation>
-      <xs:documentation>Generates a constant current pulse of a certain amplitude (non dimensional) for a specified duration after a delay.</xs:documentation>
+      <xs:documentation>Dimensionless equivalent of  **pulseGenerator** . Generates a constant current pulse of a certain **amplitude**  for a specified **duration**  after a **delay.**  Scaled by **weight,**  if set
+\n
+:param delay: Delay before change in current. Current is zero prior to this.
+:type delay: time
+:param duration: Duration for holding current at amplitude. Current is zero after delay + duration.
+:type duration: time
+:param amplitude: Amplitude of current pulse
+:type amplitude: none
+
+</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
@@ -1706,6 +2346,22 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="SineGenerator">
+    <xs:annotation>
+      <xs:documentation>Generates a sinusoidally varying current after a time **delay,**  for a fixed **duration.**  The **period**  and maximum **amplitude**  of the current can be set as well as the **phase**  at which to start. Scaled by **weight,**  if set
+\n
+:param phase: Phase ( between 0 and 2*pi ) at which to start the varying current ( i. e. at time given by delay )
+:type phase: none
+:param delay: Delay before change in current. Current is zero prior to this.
+:type delay: time
+:param duration: Duration for holding current at amplitude. Current is zero after delay + duration.
+:type duration: time
+:param amplitude: Maximum amplitude of current
+:type amplitude: current
+:param period: Time period of oscillation
+:type period: time
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
         <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
@@ -1717,6 +2373,22 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="SineGeneratorDL">
+    <xs:annotation>
+      <xs:documentation>Dimensionless equivalent of  **sineGenerator** . Generates a sinusoidally varying current after a time **delay,**  for a fixed **duration.**  The **period**  and maximum **amplitude**  of the current can be set as well as the **phase**  at which to start. Scaled by **weight,**  if set
+\n
+:param phase: Phase ( between 0 and 2*pi ) at which to start the varying current ( i. e. at time given by delay )
+:type phase: none
+:param delay: Delay before change in current. Current is zero prior to this.
+:type delay: time
+:param duration: Duration for holding current at amplitude. Current is zero after delay + duration.
+:type duration: time
+:param amplitude: Maximum amplitude of current
+:type amplitude: none
+:param period: Time period of oscillation
+:type period: time
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
         <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
@@ -1728,6 +2400,22 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="RampGenerator">
+    <xs:annotation>
+      <xs:documentation>Generates a ramping current after a time **delay,**  for a fixed **duration.**  During this time the current steadily changes from **startAmplitude**  to **finishAmplitude.**  Scaled by **weight,**  if set
+\n
+:param delay: Delay before change in current. Current is baselineAmplitude prior to this.
+:type delay: time
+:param duration: Duration for holding current at amplitude. Current is baselineAmplitude after delay + duration.
+:type duration: time
+:param startAmplitude: Amplitude of linearly varying current at time delay
+:type startAmplitude: current
+:param finishAmplitude: Amplitude of linearly varying current at time delay + duration
+:type finishAmplitude: current
+:param baselineAmplitude: Amplitude of current before time delay, and after time delay + duration
+:type baselineAmplitude: current
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
         <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
@@ -1739,6 +2427,22 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="RampGeneratorDL">
+    <xs:annotation>
+      <xs:documentation>Dimensionless equivalent of  **rampGenerator** . Generates a ramping current after a time **delay,**  for a fixed **duration.**  During this time the dimensionless current steadily changes from **startAmplitude**  to **finishAmplitude.**  Scaled by **weight,**  if set
+\n
+:param delay: Delay before change in current. Current is baselineAmplitude prior to this.
+:type delay: time
+:param duration: Duration for holding current at amplitude. Current is baselineAmplitude after delay + duration.
+:type duration: time
+:param startAmplitude: Amplitude of linearly varying current at time delay
+:type startAmplitude: none
+:param finishAmplitude: Amplitude of linearly varying current at time delay + duration
+:type finishAmplitude: none
+:param baselineAmplitude: Amplitude of current before time delay, and after time delay + duration
+:type baselineAmplitude: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
         <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
@@ -1750,6 +2454,10 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="CompoundInput">
+    <xs:annotation>
+      <xs:documentation>Generates a current which is the sum of all its child  **basePointCurrent**  element, e. g. can be a combination of  **pulseGenerator** ,  **sineGenerator**  elements producing a single **i.**  Scaled by **weight,**  if set
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
         <xs:sequence>
@@ -1761,6 +2469,10 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="CompoundInputDL">
+    <xs:annotation>
+      <xs:documentation>Generates a current which is the sum of all its child  **basePointCurrentDL**  elements, e. g. can be a combination of  **pulseGeneratorDL** ,  **sineGeneratorDL**  elements producing a single **i.**  Scaled by **weight,**  if set
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
         <xs:sequence>
@@ -1772,6 +2484,20 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="VoltageClamp">
+    <xs:annotation>
+      <xs:documentation>Voltage clamp. Applies a variable current **i**  to try to keep parent at **targetVoltage.**  Not yet fully tested!!! Consider using voltageClampTriple!!
+\n
+:param delay: Delay before change in current. Current is zero prior to this.
+:type delay: time
+:param duration: Duration for attempting to keep parent at targetVoltage. Current is zero after delay + duration.
+:type duration: time
+:param targetVoltage: Current will be applied to try to get parent to this target voltage
+:type targetVoltage: voltage
+:param simpleSeriesResistance: Current will be calculated by the difference in voltage between the target and parent, divided by this value
+:type simpleSeriesResistance: resistance
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
         <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
@@ -1782,6 +2508,26 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="VoltageClampTriple">
+    <xs:annotation>
+      <xs:documentation>Voltage clamp with 3 clamp levels. Applies a variable current **i**  ( through **simpleSeriesResistance**  ) to try to keep parent cell at **conditioningVoltage**  until time **delay,**  **testingVoltage**  until **delay**  + **duration,**  and **returnVoltage**  afterwards. Only enabled if **active**  = 1.
+\n
+:param active: Whether the voltage clamp is active ( 1 ) or inactive ( 0 ).
+:type active: none
+:param delay: Delay before switching from conditioningVoltage to testingVoltage.
+:type delay: time
+:param duration: Duration to hold at testingVoltage.
+:type duration: time
+:param conditioningVoltage: Target voltage before time delay
+:type conditioningVoltage: voltage
+:param testingVoltage: Target voltage between times delay and delay + duration
+:type testingVoltage: voltage
+:param returnVoltage: Target voltage after time duration
+:type returnVoltage: voltage
+:param simpleSeriesResistance: Current will be calculated by the difference in voltage between the target and parent, divided by this value
+:type simpleSeriesResistance: resistance
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
         <xs:attribute name="active" type="ZeroOrOne" use="required"/>
@@ -1795,6 +2541,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Spike">
+    <xs:annotation>
+      <xs:documentation>Emits a single spike at the specified **time**
+\n
+:param time: Time at which to emit one spike event
+:type time: time
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseNonNegativeIntegerId">
         <xs:attribute name="time" type="Nml2Quantity_time" use="required"/>
@@ -1802,6 +2556,10 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="SpikeArray">
+    <xs:annotation>
+      <xs:documentation>Set of spike ComponentTypes, each emitting one spike at a certain time. Can be used to feed a predetermined spike train into a cell
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
         <xs:sequence>
@@ -1811,6 +2569,10 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="TimedSynapticInput">
+    <xs:annotation>
+      <xs:documentation>Spike array connected to a single **synapse,**  producing a current triggered by each  **spike**  in the array.
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
         <xs:sequence>
@@ -1822,6 +2584,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="SpikeGenerator">
+    <xs:annotation>
+      <xs:documentation>Simple generator of spikes at a regular interval set by **period**
+\n
+:param period: Time between spikes. The first spike will be emitted after this time.
+:type period: time
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
         <xs:attribute name="period" type="Nml2Quantity_time" use="required"/>
@@ -1829,6 +2599,16 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="SpikeGeneratorRandom">
+    <xs:annotation>
+      <xs:documentation>Generator of spikes with a random interspike interval of at least **minISI**  and at most **maxISI**
+\n
+:param maxISI: Maximum interspike interval
+:type maxISI: time
+:param minISI: Minimum interspike interval
+:type minISI: time
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
         <xs:attribute name="maxISI" type="Nml2Quantity_time" use="required"/>
@@ -1837,6 +2617,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="SpikeGeneratorPoisson">
+    <xs:annotation>
+      <xs:documentation>Generator of spikes whose ISI is distributed according to an exponential PDF with scale: 1 / **averageRate**
+\n
+:param averageRate: The average rate at which spikes are emitted
+:type averageRate: per_time
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
         <xs:attribute name="averageRate" type="Nml2Quantity_pertime" use="required"/>
@@ -1844,6 +2632,16 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="SpikeGeneratorRefPoisson">
+    <xs:annotation>
+      <xs:documentation>Generator of spikes whose ISI distribution is the maximum entropy distribution over [ **minimumISI,**  +infinity ) with mean: 1 / **averageRate**
+\n
+:param minimumISI: The minimum interspike interval
+:type minimumISI: time
+:param averageRate: The average rate at which spikes are emitted
+:type averageRate: per_time
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="SpikeGeneratorPoisson">
         <xs:attribute name="minimumISI" type="Nml2Quantity_time" use="required"/>
@@ -1851,6 +2649,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="PoissonFiringSynapse">
+    <xs:annotation>
+      <xs:documentation>Poisson spike generator firing at **averageRate,**  which is connected to single **synapse**  that is triggered every time a spike is generated, producing an input current. See also  **transientPoissonFiringSynapse** .
+\n
+:param averageRate: The average rate at which spikes are emitted
+:type averageRate: per_time
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
         <xs:attribute name="averageRate" type="Nml2Quantity_pertime" use="required"/>
@@ -1860,6 +2666,18 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="TransientPoissonFiringSynapse">
+    <xs:annotation>
+      <xs:documentation>Poisson spike generator firing at **averageRate**  after a **delay**  and for a **duration,**  connected to single **synapse**  that is triggered every time a spike is generated, providing an input current. Similar to ComponentType  **poissonFiringSynapse** .
+\n
+:param averageRate: 
+:type averageRate: per_time
+:param delay: 
+:type delay: time
+:param duration: 
+:type duration: time
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
         <xs:attribute name="averageRate" type="Nml2Quantity_pertime" use="required"/>
@@ -1874,6 +2692,10 @@
   <!--      Networks                                         -->
   <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   <xs:complexType name="Network">
+    <xs:annotation>
+      <xs:documentation>Network containing:  **population** s ( potentially of type  **populationList** , and so specifying a list of cell  **location** s );  **projection** s ( with lists of  **connection** s ) and/or  **explicitConnection** s; and  **inputList** s ( with lists of  **input** s ) and/or  **explicitInput** s. Note: often in NeuroML this will be of type  **networkWithTemperature**  if there are temperature dependent elements ( e. g. ion channels ).
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
         <xs:sequence>
@@ -1939,6 +2761,10 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="Region">
+    <xs:annotation>
+      <xs:documentation>Initial attempt to specify 3D region for placing cells. Work in progress. . .
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
         <xs:sequence>
@@ -1950,6 +2776,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Population">
+    <xs:annotation>
+      <xs:documentation>A population of components, with just one parameter for the **size,**  i. e. number of components to create. Note: quite often this is used with type= **populationList**  which means the size is determined by the number of  **instance** s ( with  **location** s ) in the list. The **size**  attribute is still set, and there will be a validation error if this does not match the number in the list.
+\n
+:param size: Number of instances of this Component to create when the population is instantiated
+:type size: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
         <xs:choice>
@@ -1992,6 +2826,10 @@
     <!-- only use if 3D grid-->
   </xs:complexType>
   <xs:complexType name="Instance">
+    <xs:annotation>
+      <xs:documentation>Specifies a single instance of a component in a  **population**  ( placed at  **location**  ).
+</xs:documentation>
+    </xs:annotation>
     <xs:sequence>
       <xs:element name="location" type="Location"/>
     </xs:sequence>
@@ -2004,6 +2842,18 @@
     <!-- for grid -->
   </xs:complexType>
   <xs:complexType name="Location">
+    <xs:annotation>
+      <xs:documentation>Specifies the ( x, y, z ) location of a single  **instance**  of a component in a  **population**
+\n
+:param x: 
+:type x: none
+:param y: 
+:type y: none
+:param z: 
+:type z: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:attribute name="x" type="xs:float" use="required"/>
     <xs:attribute name="y" type="xs:float" use="required"/>
     <xs:attribute name="z" type="xs:float" use="required"/>
@@ -2021,8 +2871,8 @@
   </xs:complexType>
   <xs:complexType name="SynapticConnection">
     <xs:annotation>
-      <xs:documentation>Single explicit connection. Introduced to test connections in LEMS. Will probably be removed in favour of
-                connections wrapped in projection element</xs:documentation>
+      <xs:documentation>Explicit event connection between named components, which gets processed via a new instance of a **synapse**  component which is created on the target component
+</xs:documentation>
     </xs:annotation>
     <xs:attribute name="from" type="xs:string" use="required"/>
     <xs:attribute name="to" type="xs:string" use="required"/>
@@ -2042,7 +2892,8 @@
   </xs:complexType>
   <xs:complexType name="Projection">
     <xs:annotation>
-      <xs:documentation>Projection (set of synaptic connections) between two populations. Chemical/event based synaptic transmission</xs:documentation>
+      <xs:documentation>Projection from one population, **presynapticPopulation**  to another, **postsynapticPopulation,**  through **synapse.**  Contains lists of  **connection**  or  **connectionWD**  elements.
+</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseProjection">
@@ -2098,7 +2949,8 @@
   </xs:complexType>
   <xs:complexType name="Connection">
     <xs:annotation>
-      <xs:documentation>Individual chemical (event based) synaptic connection, weight==1 and no delay</xs:documentation>
+      <xs:documentation>Event connection directly between named components, which gets processed via a new instance of a **synapse**  component which is created on the target component. Normally contained inside a  **projection**  element.
+</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseConnectionOldFormat">
@@ -2107,7 +2959,14 @@
   </xs:complexType>
   <xs:complexType name="ConnectionWD">
     <xs:annotation>
-      <xs:documentation>Individual synaptic connection with weight and delay</xs:documentation>
+      <xs:documentation>Event connection between named components, which gets processed via a new instance of a synapse component which is created on the target component, includes setting of **weight**  and **delay**  for the synaptic connection
+\n
+:param weight: 
+:type weight: none
+:param delay: 
+:type delay: time
+
+</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseConnectionOldFormat">
@@ -2118,7 +2977,8 @@
   </xs:complexType>
   <xs:complexType name="ElectricalProjection">
     <xs:annotation>
-      <xs:documentation>Projection between two populations consisting of electrical connections (gap junctions)</xs:documentation>
+      <xs:documentation>A projection between **presynapticPopulation**  to another **postsynapticPopulation**  through gap junctions.
+</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseProjection">
@@ -2132,7 +2992,8 @@
   </xs:complexType>
   <xs:complexType name="ElectricalConnection">
     <xs:annotation>
-      <xs:documentation>Individual electrical synaptic connection</xs:documentation>
+      <xs:documentation>To enable connections between populations through gap junctions.
+</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseConnectionNewFormat">
@@ -2142,7 +3003,8 @@
   </xs:complexType>
   <xs:complexType name="ElectricalConnectionInstance">
     <xs:annotation>
-      <xs:documentation>Projection between two populations consisting of analog connections (e.g. graded synapses)</xs:documentation>
+      <xs:documentation>To enable connections between populations through gap junctions. Populations need to be of type  **populationList**  and contain  **instance**  and  **location**  elements.
+</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="ElectricalConnection"/>
@@ -2150,7 +3012,12 @@
   </xs:complexType>
   <xs:complexType name="ElectricalConnectionInstanceW">
     <xs:annotation>
-      <xs:documentation>Projection between two populations consisting of analog connections (e.g. graded synapses). Includes setting of weight for the connection</xs:documentation>
+      <xs:documentation>To enable connections between populations through gap junctions. Populations need to be of type  **populationList**  and contain  **instance**  and  **location**  elements. Includes setting of **weight**  for the connection
+\n
+:param weight: 
+:type weight: none
+
+</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="ElectricalConnectionInstance">
@@ -2160,7 +3027,8 @@
   </xs:complexType>
   <xs:complexType name="ContinuousProjection">
     <xs:annotation>
-      <xs:documentation>Projection between two populations consisting of analog connections (e.g. graded synapses)</xs:documentation>
+      <xs:documentation>A projection between **presynapticPopulation**  and **postsynapticPopulation**  through components **preComponent**  at the start and **postComponent**  at the end of a  **continuousConnection**  or  **continuousConnectionInstance** . Can be used for analog synapses.
+</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseProjection">
@@ -2174,7 +3042,8 @@
   </xs:complexType>
   <xs:complexType name="ContinuousConnection">
     <xs:annotation>
-      <xs:documentation>Individual continuous/analog synaptic connection</xs:documentation>
+      <xs:documentation>An instance of a connection in a  **continuousProjection**  between **presynapticPopulation**  to another **postsynapticPopulation**  through a **preComponent**  at the start and **postComponent**  at the end. Can be used for analog synapses.
+</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseConnectionNewFormat">
@@ -2185,7 +3054,8 @@
   </xs:complexType>
   <xs:complexType name="ContinuousConnectionInstance">
     <xs:annotation>
-      <xs:documentation>Individual continuous/analog synaptic connection - instance based</xs:documentation>
+      <xs:documentation>An instance of a connection in a  **continuousProjection**  between **presynapticPopulation**  to another **postsynapticPopulation**  through a **preComponent**  at the start and **postComponent**  at the end. Populations need to be of type  **populationList**  and contain  **instance**  and  **location**  elements. Can be used for analog synapses.
+</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="ContinuousConnection"/>
@@ -2193,7 +3063,12 @@
   </xs:complexType>
   <xs:complexType name="ContinuousConnectionInstanceW">
     <xs:annotation>
-      <xs:documentation>Individual continuous/analog synaptic connection - instance based. Includes setting of _weight for the connection</xs:documentation>
+      <xs:documentation>An instance of a connection in a  **continuousProjection**  between **presynapticPopulation**  to another **postsynapticPopulation**  through a **preComponent**  at the start and **postComponent**  at the end. Populations need to be of type  **populationList**  and contain  **instance**  and  **location**  elements. Can be used for analog synapses. Includes setting of **weight**  for the connection
+\n
+:param weight: 
+:type weight: none
+
+</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="ContinuousConnectionInstance">
@@ -2203,8 +3078,8 @@
   </xs:complexType>
   <xs:complexType name="ExplicitInput">
     <xs:annotation>
-      <xs:documentation>Single explicit input. Introduced to test inputs in LEMS. Will probably be removed in favour of
-                inputs wrapped in inputList element</xs:documentation>
+      <xs:documentation>An explicit input ( anything which extends  **basePointCurrent**  ) to a target cell in a population
+</xs:documentation>
     </xs:annotation>
     <xs:attribute name="target" type="xs:string" use="required"/>
     <xs:attribute name="input" type="xs:string" use="required"/>
@@ -2212,7 +3087,8 @@
   </xs:complexType>
   <xs:complexType name="InputList">
     <xs:annotation>
-      <xs:documentation>List of inputs to a population. Currents will be provided by the specified component.</xs:documentation>
+      <xs:documentation>An explicit list of  **input** s to a **population.**
+</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Base">
@@ -2227,7 +3103,8 @@
   </xs:complexType>
   <xs:complexType name="Input">
     <xs:annotation>
-      <xs:documentation>Individual input to the cell specified by target</xs:documentation>
+      <xs:documentation>Specifies a single input to a **target,**  optionally giving the **segmentId**  ( default 0 ) and **fractionAlong**  the segment ( default 0. 5 ).
+</xs:documentation>
     </xs:annotation>
     <xs:attribute name="id" type="NonNegativeInteger" use="required"/>
     <xs:attribute name="target" type="xs:string" use="required"/>
@@ -2237,7 +3114,12 @@
   </xs:complexType>
   <xs:complexType name="InputW">
     <xs:annotation>
-      <xs:documentation>Individual input to the cell specified by target. Includes setting of _weight for the connection</xs:documentation>
+      <xs:documentation>Specifies input lists. Can set **weight**  to scale individual inputs.
+\n
+:param weight: 
+:type weight: none
+
+</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Input">
@@ -2249,6 +3131,22 @@
   <!--      PyNN standard cell & synapse definitions         -->
   <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   <xs:complexType name="basePyNNCell">
+    <xs:annotation>
+      <xs:documentation>Base type of any PyNN standard cell model. Note: membrane potential **v**  has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels
+\n
+:param cm: 
+:type cm: none
+:param i_offset: 
+:type i_offset: none
+:param tau_syn_E: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type tau_syn_E: none
+:param tau_syn_I: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type tau_syn_I: none
+:param v_init: 
+:type v_init: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseCell">
         <xs:attribute name="cm" type="xs:float" use="required"/>
@@ -2260,6 +3158,32 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="basePyNNIaFCell">
+    <xs:annotation>
+      <xs:documentation>Base type of any PyNN standard integrate and fire model
+\n
+:param tau_refrac: 
+:type tau_refrac: none
+:param v_thresh: 
+:type v_thresh: none
+:param tau_m: 
+:type tau_m: none
+:param v_rest: 
+:type v_rest: none
+:param v_reset: 
+:type v_reset: none
+:param cm: 
+:type cm: none
+:param i_offset: 
+:type i_offset: none
+:param tau_syn_E: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type tau_syn_E: none
+:param tau_syn_I: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type tau_syn_I: none
+:param v_init: 
+:type v_init: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="basePyNNCell">
         <xs:attribute name="tau_m" type="xs:float" use="required"/>
@@ -2271,6 +3195,36 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="basePyNNIaFCondCell">
+    <xs:annotation>
+      <xs:documentation>Base type of conductance based PyNN IaF cell models
+\n
+:param e_rev_E: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type e_rev_E: none
+:param e_rev_I: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type e_rev_I: none
+:param tau_refrac: 
+:type tau_refrac: none
+:param v_thresh: 
+:type v_thresh: none
+:param tau_m: 
+:type tau_m: none
+:param v_rest: 
+:type v_rest: none
+:param v_reset: 
+:type v_reset: none
+:param cm: 
+:type cm: none
+:param i_offset: 
+:type i_offset: none
+:param tau_syn_E: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type tau_syn_E: none
+:param tau_syn_I: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type tau_syn_I: none
+:param v_init: 
+:type v_init: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="basePyNNIaFCell">
         <xs:attribute name="e_rev_E" type="xs:float" use="required"/>
@@ -2279,30 +3233,182 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="IF_curr_alpha">
+    <xs:annotation>
+      <xs:documentation>Leaky integrate and fire model with fixed threshold and alpha-function-shaped post-synaptic current
+\n
+:param tau_refrac: 
+:type tau_refrac: none
+:param v_thresh: 
+:type v_thresh: none
+:param tau_m: 
+:type tau_m: none
+:param v_rest: 
+:type v_rest: none
+:param v_reset: 
+:type v_reset: none
+:param cm: 
+:type cm: none
+:param i_offset: 
+:type i_offset: none
+:param tau_syn_E: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type tau_syn_E: none
+:param tau_syn_I: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type tau_syn_I: none
+:param v_init: 
+:type v_init: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="basePyNNIaFCell">
             </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="IF_curr_exp">
+    <xs:annotation>
+      <xs:documentation>Leaky integrate and fire model with fixed threshold and decaying-exponential post-synaptic current
+\n
+:param tau_refrac: 
+:type tau_refrac: none
+:param v_thresh: 
+:type v_thresh: none
+:param tau_m: 
+:type tau_m: none
+:param v_rest: 
+:type v_rest: none
+:param v_reset: 
+:type v_reset: none
+:param cm: 
+:type cm: none
+:param i_offset: 
+:type i_offset: none
+:param tau_syn_E: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type tau_syn_E: none
+:param tau_syn_I: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type tau_syn_I: none
+:param v_init: 
+:type v_init: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="basePyNNIaFCell">
             </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="IF_cond_alpha">
+    <xs:annotation>
+      <xs:documentation>Leaky integrate and fire model with fixed threshold and alpha-function-shaped post-synaptic conductance
+\n
+:param e_rev_E: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type e_rev_E: none
+:param e_rev_I: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type e_rev_I: none
+:param tau_refrac: 
+:type tau_refrac: none
+:param v_thresh: 
+:type v_thresh: none
+:param tau_m: 
+:type tau_m: none
+:param v_rest: 
+:type v_rest: none
+:param v_reset: 
+:type v_reset: none
+:param cm: 
+:type cm: none
+:param i_offset: 
+:type i_offset: none
+:param tau_syn_E: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type tau_syn_E: none
+:param tau_syn_I: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type tau_syn_I: none
+:param v_init: 
+:type v_init: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="basePyNNIaFCondCell">
             </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="IF_cond_exp">
+    <xs:annotation>
+      <xs:documentation>Leaky integrate and fire model with fixed threshold and exponentially-decaying post-synaptic conductance
+\n
+:param e_rev_E: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type e_rev_E: none
+:param e_rev_I: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type e_rev_I: none
+:param tau_refrac: 
+:type tau_refrac: none
+:param v_thresh: 
+:type v_thresh: none
+:param tau_m: 
+:type tau_m: none
+:param v_rest: 
+:type v_rest: none
+:param v_reset: 
+:type v_reset: none
+:param cm: 
+:type cm: none
+:param i_offset: 
+:type i_offset: none
+:param tau_syn_E: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type tau_syn_E: none
+:param tau_syn_I: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type tau_syn_I: none
+:param v_init: 
+:type v_init: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="basePyNNIaFCondCell">
             </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="EIF_cond_exp_isfa_ista">
+    <xs:annotation>
+      <xs:documentation>Adaptive exponential integrate and fire neuron according to Brette R and Gerstner W ( 2005 ) with exponentially-decaying post-synaptic conductance
+\n
+:param v_spike: 
+:type v_spike: none
+:param delta_T: 
+:type delta_T: none
+:param tau_w: 
+:type tau_w: none
+:param a: 
+:type a: none
+:param b: 
+:type b: none
+:param e_rev_E: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type e_rev_E: none
+:param e_rev_I: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type e_rev_I: none
+:param tau_refrac: 
+:type tau_refrac: none
+:param v_thresh: 
+:type v_thresh: none
+:param tau_m: 
+:type tau_m: none
+:param v_rest: 
+:type v_rest: none
+:param v_reset: 
+:type v_reset: none
+:param cm: 
+:type cm: none
+:param i_offset: 
+:type i_offset: none
+:param tau_syn_E: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type tau_syn_E: none
+:param tau_syn_I: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type tau_syn_I: none
+:param v_init: 
+:type v_init: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="basePyNNIaFCondCell">
         <xs:attribute name="a" type="xs:float" use="required"/>
@@ -2314,12 +3420,86 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="EIF_cond_alpha_isfa_ista">
+    <xs:annotation>
+      <xs:documentation>Adaptive exponential integrate and fire neuron according to Brette R and Gerstner W ( 2005 ) with alpha-function-shaped post-synaptic conductance
+\n
+:param v_spike: 
+:type v_spike: none
+:param delta_T: 
+:type delta_T: none
+:param tau_w: 
+:type tau_w: none
+:param a: 
+:type a: none
+:param b: 
+:type b: none
+:param e_rev_E: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type e_rev_E: none
+:param e_rev_I: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type e_rev_I: none
+:param tau_refrac: 
+:type tau_refrac: none
+:param v_thresh: 
+:type v_thresh: none
+:param tau_m: 
+:type tau_m: none
+:param v_rest: 
+:type v_rest: none
+:param v_reset: 
+:type v_reset: none
+:param cm: 
+:type cm: none
+:param i_offset: 
+:type i_offset: none
+:param tau_syn_E: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type tau_syn_E: none
+:param tau_syn_I: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type tau_syn_I: none
+:param v_init: 
+:type v_init: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="EIF_cond_exp_isfa_ista">
             </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="HH_cond_exp">
+    <xs:annotation>
+      <xs:documentation>Single-compartment Hodgkin-Huxley-type neuron with transient sodium and delayed-rectifier potassium currents using the ion channel models from Traub.
+\n
+:param gbar_K: 
+:type gbar_K: none
+:param gbar_Na: 
+:type gbar_Na: none
+:param g_leak: 
+:type g_leak: none
+:param e_rev_K: 
+:type e_rev_K: none
+:param e_rev_Na: 
+:type e_rev_Na: none
+:param e_rev_leak: 
+:type e_rev_leak: none
+:param v_offset: 
+:type v_offset: none
+:param e_rev_E: 
+:type e_rev_E: none
+:param e_rev_I: 
+:type e_rev_I: none
+:param cm: 
+:type cm: none
+:param i_offset: 
+:type i_offset: none
+:param tau_syn_E: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type tau_syn_E: none
+:param tau_syn_I: This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell
+:type tau_syn_I: none
+:param v_init: 
+:type v_init: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="basePyNNCell">
         <xs:attribute name="v_offset" type="xs:float" use="required"/>
@@ -2335,6 +3515,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="BasePynnSynapse">
+    <xs:annotation>
+      <xs:documentation>Base type for all PyNN synapses. Note, the current **I**  produced is dimensionless, but it requires a membrane potential **v**  with dimension voltage
+\n
+:param tau_syn: 
+:type tau_syn: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseSynapse">
         <xs:attribute name="tau_syn" type="xs:float" use="required"/>
@@ -2342,6 +3530,16 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ExpCondSynapse">
+    <xs:annotation>
+      <xs:documentation>Conductance based synapse with instantaneous rise and single exponential decay ( with time constant tau_syn )
+\n
+:param e_rev: 
+:type e_rev: none
+:param tau_syn: 
+:type tau_syn: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BasePynnSynapse">
         <xs:attribute name="e_rev" type="xs:float" use="required"/>
@@ -2349,6 +3547,16 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="AlphaCondSynapse">
+    <xs:annotation>
+      <xs:documentation>Alpha synapse: rise time and decay time are both tau_syn. Conductance based synapse.
+\n
+:param e_rev: 
+:type e_rev: none
+:param tau_syn: 
+:type tau_syn: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BasePynnSynapse">
         <xs:attribute name="e_rev" type="xs:float" use="required"/>
@@ -2356,6 +3564,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ExpCurrSynapse">
+    <xs:annotation>
+      <xs:documentation>Current based synapse with instantaneous rise and single exponential decay ( with time constant tau_syn )
+\n
+:param tau_syn: 
+:type tau_syn: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BasePynnSynapse">
 
@@ -2363,6 +3579,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="AlphaCurrSynapse">
+    <xs:annotation>
+      <xs:documentation>Alpha synapse: rise time and decay time are both tau_syn. Current based synapse.
+\n
+:param tau_syn: 
+:type tau_syn: none
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BasePynnSynapse">
 
@@ -2370,6 +3594,18 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="SpikeSourcePoisson">
+    <xs:annotation>
+      <xs:documentation>Spike source, generating spikes according to a Poisson process.
+\n
+:param start: 
+:type start: time
+:param duration: 
+:type duration: time
+:param rate: 
+:type rate: per_time
+
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
         <xs:attribute name="start" type="Nml2Quantity_time" use="required"/>
