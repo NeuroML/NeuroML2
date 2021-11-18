@@ -9,3 +9,4 @@ That ensures that the git diff shows the only relevant changes (without any form
 verify-schema-lems-defs.sh:
 
 Checks the XML and XSD files and generates a report of what entities are not present in both.
+Some scripts for ad-hoc tests and tweaks.
