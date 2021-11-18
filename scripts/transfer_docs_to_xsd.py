@@ -11,6 +11,8 @@ Author: NeuroML contributors
 
 import lxml.etree as ET
 import re
+from lems.model.model import Model
+from xml.sax.saxutils import escape
 
 
 xml_files = [
@@ -54,7 +56,7 @@ def format_description(text):
 
     # Remove spaces between dots and URL suffixes
     # introduced by previous tweaks
-    suffixes = ["org", "com"]
+    suffixes = ["org", "com", "htm", "html"]
     for suf in suffixes:
         text = text.replace(". " + suf, "." + suf)
 
@@ -91,36 +93,67 @@ def update_xsd():
     xsdnamespaces = xsdroot.nsmap
     xsdnsinfo = xsdnamespaces['xs']
     complex_types = xsdroot.findall(".//xs:complexType", namespaces=xsdnamespaces)
-    ct_list = []
 
     # iterate over all schema files
     # find it in the XSD, make changes
     for file in xml_files:
         xmlfile = "../NeuroML2CoreTypes/" + file
         print("Definitions: processing {}".format(xmlfile))
-        try:
-            xmltree = ET.parse(xmlfile)
-            xmlroot = xmltree.getroot()
-        except ET.XMLSyntaxError as e:
-            print(f"Could not parse file {file}: {e}")
-            continue
-        xmlnamespaces = xmlroot.nsmap
-        component_types = xmlroot.findall(".//ComponentType", namespaces=xmlnamespaces)
+        model = Model(include_includes=False)
+        model.import_from_file(xmlfile)
 
-        for ct in component_types:
-            ct_name = ct.attrib['name'].lower()
-            ct_doc = re.sub(' +', ' ', ct.attrib['description']).replace("\n", " ").rstrip().lstrip()
-            ct_doc += "\n"
+        for comp_type in model.component_types:
+            ct_name = comp_type.name
+            ct_doc = format_description(comp_type.description) if comp_type.description is not None else ""
 
-            # find this in the schema
+            # Add parameter documentation in the main complextype documentation
+            # itself so that it's formatted properly when put through
+            # generateds.
+            params = {}
+            for param in comp_type.parameters:
+                params[param] = comp_type.name
+
+            """
+            extd_comp_type = None
+            extd_comp_type_name = comp_type.extends
+            for act in model.component_types:
+                if act.name == extd_comp_type_name:
+                    extd_comp_type = act
+
+            while extd_comp_type is not None:
+                for param in extd_comp_type.parameters:
+                    pk = params.copy().keys()
+                    for pp0 in pk:
+                        if pp0.name == param.name:
+                            del params[pp0]
+                    params[param] = extd_comp_type.name
+
+                extd_comp_type_name = comp_type.extends
+                extd_comp_type = None
+                for act in model.component_types:
+                    if act.name == extd_comp_type_name:
+                        extd_comp_type = act
+            """
+
+            if len(params) > 0:
+                # this is required to get sphinx to correctly parse the
+                # parmeters. The :param: section must start after a blank line
+                # for sphinx to parse it correctly.
+                ct_doc += "\n"
+                ct_doc += "\\n"
+                ct_doc += "\n"
+                for p in params.keys():
+                    ct_doc += ":param {}: {}\n".format(p.name, format_description(p.description))
+                    ct_doc += ":type {}: {}\n".format(p.name, p.dimension)
+
+            # find this in the XSD
             for cxt in complex_types:
                 cxt_name = cxt.attrib['name'].lower()
-                doc_text = ""
-                if cxt_name == ct_name:
 
+                if cxt_name == ct_name.lower():
                     # complex type documentation
-                    doc_node = ct.find("./xs:annotation/xs:documentation",
-                                       namespaces=xsdnamespaces)
+                    doc_node = cxt.find("./xs:annotation/xs:documentation",
+                                        namespaces=xsdnamespaces)
                     # remove the existing doc node, we'll re-add a new one at
                     # the top of the complextype so that generateDS puts this
                     # documentation first in nml.py
@@ -128,50 +161,41 @@ def update_xsd():
                         if len(doc_node) > 1:
                             print("Warning: multiple doc elements found?")
                             for n in doc_node:
-                                n.getparent().remove(n)
+                                n.getparent().getparent().remove(n.getparent())
                         else:
-                            doc_node.getparent().remove(doc_node)
+                            doc_node.getparent().getparent().remove(doc_node.getparent())
+
+                    # sometimes existing documentation is in
+                    # complexcontent/annotation/documentation
+                    doc_node = cxt.find("./xs:complexContent/xs:annotation/xs:documentation",
+                                        namespaces=xsdnamespaces)
+                    if doc_node is not None:
+                        if len(doc_node) > 1:
+                            print("Warning: multiple doc elements found?")
+                            for n in doc_node:
+                                n.getparent().getparent().remove(n.getparent())
+                        else:
+                            doc_node.getparent().getparent().remove(doc_node.getparent())
 
                     # create new annotation at top of complextype
                     new_annotation = ET.Element('{' + xsdnsinfo + '}annotation')
-                    ct.insert(0, new_annotation)
+                    cxt.insert(0, new_annotation)
                     doc_node = ET.SubElement(new_annotation, '{' + xsdnsinfo + '}documentation')
-                    doc_node.text = ct_doc + format_description(doc_text) + '\n'
+                    doc_node.text = ct_doc + '\n'
 
-                    # Parameter documentation
-                    params = ct.findall("./Parameter", namespaces=xmlnamespaces)
-                    for p in params:
-                        pname = p.attrib['name']
-                        pdim = p.attrib['dimension']
-                        pdesc = None
-                        pdoc = ""
-                        if 'description' in p.attrib:
-                            pdesc = format_description(p.attrib['description'])
-                        # generateDS will say: <name> - pdoc
-                        pdoc = "(dimension: {}){}".format(
-                            pdim, ": " + pdesc if pdesc else ""
-                        )
-                        # create new document annotation for parameter
-                        p_xsd_nodes = cxt.findall(".//xs:attribute", namespaces=xsdnamespaces)
-                        for p_xsd_node in p_xsd_nodes:
-                            if p_xsd_node.attrib['name'].lower() == pname.lower():
-
-                                # remove existing doc
-                                p_doc_node = p_xsd_node.find("./xs:annotation/xs:documentation",
-                                                             namespaces=xsdnamespaces)
-                                if p_doc_node is not None:
-                                    p_doc_node.getparent().remove(p_doc_node)
-
-                                p_annotation = ET.Element('{' + xsdnsinfo + '}annotation')
-                                p_xsd_node.insert(0, p_annotation)
-                                p_doc_node = ET.SubElement(p_annotation, '{' + xsdnsinfo + '}documentation')
-                                p_doc_node.text = pdoc
+                    # Remove any parameter documentation from the XSD
+                    p_xsd_nodes = cxt.findall(".//xs:attribute", namespaces=xsdnamespaces)
+                    for p_xsd_node in p_xsd_nodes:
+                        p_doc_node = p_xsd_node.find("./xs:annotation/xs:documentation",
+                                                     namespaces=xsdnamespaces)
+                        if p_doc_node is not None:
+                            p_doc_node.getparent().remove(p_doc_node)
 
     ET.indent(xsdtree)
-    xsdtree.write(XSD_file_new, method="xml", xml_declaration=True)
+    xsdtree.write(XSD_file_new, method="xml", xml_declaration=True,
+                  pretty_print=True)
     print("New file written to {}".format(XSD_file_new))
     print("Please check the differences before replacing the main file.")
-    return ct_list
 
 
 def compare_xml_xsd():
