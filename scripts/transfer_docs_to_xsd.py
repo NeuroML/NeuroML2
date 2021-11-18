@@ -10,9 +10,7 @@ Author: NeuroML contributors
 
 
 import lxml.etree as ET
-import re
 from lems.model.model import Model
-from xml.sax.saxutils import escape
 
 
 xml_files = [
