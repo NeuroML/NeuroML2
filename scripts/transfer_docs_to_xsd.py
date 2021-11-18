@@ -113,27 +113,32 @@ def update_xsd():
             for param in comp_type.parameters:
                 params[param] = comp_type.name
 
-            """
             extd_comp_type = None
+            extd_comp_type_name = None
             extd_comp_type_name = comp_type.extends
             for act in model.component_types:
                 if act.name == extd_comp_type_name:
                     extd_comp_type = act
+                    break
 
             while extd_comp_type is not None:
-                for param in extd_comp_type.parameters:
+                current_comp_type = extd_comp_type
+                extd_comp_type = None
+                extd_comp_type_name = None
+
+                for param in current_comp_type.parameters:
                     pk = params.copy().keys()
                     for pp0 in pk:
                         if pp0.name == param.name:
                             del params[pp0]
-                    params[param] = extd_comp_type.name
+                    params[param] = current_comp_type.name
 
-                extd_comp_type_name = comp_type.extends
-                extd_comp_type = None
+                # Next parent
+                extd_comp_type_name = current_comp_type.extends
                 for act in model.component_types:
                     if act.name == extd_comp_type_name:
                         extd_comp_type = act
-            """
+                        break
 
             if len(params) > 0:
                 # this is required to get sphinx to correctly parse the
