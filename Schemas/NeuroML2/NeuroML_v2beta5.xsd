@@ -2077,7 +2077,7 @@
   </xs:complexType>
   <xs:complexType name="BaseConnectionOldFormat">
     <xs:annotation>
-      <xs:documentation>Base of all synaptic connections with preCellId, postSegmentId, etc. 
+      <xs:documentation>Base of all synaptic connections with preCellId, postSegmentId, etc.
                 Note: this is not the best name for these attributes, since Id is superfluous, hence BaseConnectionNewFormat</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -2093,7 +2093,7 @@
   </xs:complexType>
   <xs:complexType name="BaseConnectionNewFormat">
     <xs:annotation>
-      <xs:documentation>Base of all synaptic connections with preCell, postSegment, etc. 
+      <xs:documentation>Base of all synaptic connections with preCell, postSegment, etc.
                 See BaseConnectionOldFormat</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
