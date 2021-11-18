@@ -1376,9 +1376,9 @@
 
         <Parameter name="v0" dimension="voltage" description="Initial membrane potential"/>
         <Parameter name="a" dimension="none" description="Time scale of the recovery variable U"/>
-        <Parameter name="b" dimension="none" description="Sensitivity of U to the subthreshold fluctuations of the membrane potential v"/>
-        <Parameter name="c" dimension="none" description="After-spike reset value of v"/>
-        <Parameter name="d" dimension="none" description="After-spike reset of u"/>
+        <Parameter name="b" dimension="none" description="Sensitivity of U to the subthreshold fluctuations of the membrane potential V"/>
+        <Parameter name="c" dimension="none" description="After-spike reset value of V"/>
+        <Parameter name="d" dimension="none" description="After-spike increase to U"/>
         <Parameter name="thresh" dimension="voltage" description="Spike threshold"/>
 
     <!-- These are needed to ensure a, b, c, d, U & I remain dimensionless... -->
@@ -1392,7 +1392,7 @@
         <Dynamics>
 
             <StateVariable name="v" dimension="voltage" exposure="v" description="Membrane potential state variable"/>
-            <StateVariable name="U" dimension="none" exposure="U" description="..."/>
+            <StateVariable name="U" dimension="none" exposure="U" description="Membrane recovery variable"/>
 
             <DerivedVariable name="ISyn" dimension="none" select="synapses[*]/I" reduce="add" />
 
