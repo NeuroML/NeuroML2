@@ -195,8 +195,8 @@ def update_xsd():
                             p_doc_node.getparent().remove(p_doc_node)
 
     ET.indent(xsdtree)
-    xsdtree.write(XSD_file_new, method="xml", xml_declaration=True,
-                  pretty_print=True)
+    xsdtree.write(XSD_file_new, encoding="UTF-8", method="xml",
+                  xml_declaration=True, pretty_print=True)
     print("New file written to {}".format(XSD_file_new))
     print("Please check the differences before replacing the main file.")
 

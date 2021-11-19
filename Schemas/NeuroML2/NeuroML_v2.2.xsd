@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ASCII"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" targetNamespace="http://www.neuroml.org/schema/neuroml2" jxb:version="2.0" xsi:schemaLocation="http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   <!--      Core elements                                    -->
