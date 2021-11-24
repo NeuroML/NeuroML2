@@ -5,9 +5,9 @@ name: Test commits
 
 on:
   push:
-    branches: [ master, development, experimental, documentation_update ]
+    branches: [ master, development, experimental, documentation_update, osb* ]
   pull_request:
-    branches: [ master, development, experimental, documentation_update ]
+    branches: [ master, development, experimental, documentation_update, osb* ]
 
 jobs:
   build:
@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [ 8, 11.0.x, 11.0.3, 12, 13 ]
+        java: [ 8, 11.0.x, 11.0.3, 12, 13, 16, 17 ]
 
     steps:
     - uses: actions/checkout@v2
