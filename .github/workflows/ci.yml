@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [ 8, 11.0.x, 11.0.3, 12, 13, 16, 17 ]
+        java: [ 8, 11, 16, 17 ]
 
     steps:
     - uses: actions/checkout@v2
@@ -34,7 +34,7 @@ jobs:
     - name: Install jNeuroML
       run: |
         export main_repo_branch=${GITHUB_REF##*/}
-        if [[ ${main_repo_branch} != "master" && ${main_repo_branch} != "development" && ${main_repo_branch} != "experimental" ]]; then main_repo_branch=development ; fi
+        if [[ ${main_repo_branch} != "master" && ${main_repo_branch} != "development" && ${main_repo_branch} != "experimental" && ${main_repo_branch} != *"osb"* ]]; then main_repo_branch=development ; fi
         echo Using branch $main_repo_branch
         git clone https://github.com/NeuroML/jNeuroML.git
         cd jNeuroML
