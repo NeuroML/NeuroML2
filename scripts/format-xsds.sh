@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Copyright 2021 Ankur Sinha
-# Author: Ankur Sinha <sanjay DOT ankur AT gmail DOT com> 
+# Author: Ankur Sinha <sanjay DOT ankur AT gmail DOT com>
 # File : format-xsds.sh
 #
 # format XSD files with xmllint
