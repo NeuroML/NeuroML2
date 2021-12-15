@@ -15,12 +15,14 @@ the [ComponentType definitions in LEMS](https://github.com/NeuroML/NeuroML2/tree
 a number of [example files in NeuroML 2](https://github.com/NeuroML/NeuroML2/tree/master/examples) and [LEMS files for
 running simulations](https://github.com/NeuroML/NeuroML2/tree/master/LEMSexamples).
 
-For more details on LEMS and NeuroML 2 see:
+**The main documentaiton for NeuroML can be found at http://docs.neuroml.org.**
+
+For full technical details on LEMS and NeuroML 2 see:
 
 Robert C. Cannon, Padraig Gleeson, Sharon Crook, Gautham Ganapathy, Boris Marin, Eugenio Piasini and R. Angus Silver,
 **LEMS: A language for expressing complex biological models in concise and hierarchical form and its use in underpinning NeuroML 2**,
 [Frontiers in Neuroinformatics 2014](http://journal.frontiersin.org/Journal/10.3389/fninf.2014.00079/abstract), doi: 10.3389/fninf.2014.00079
 
-For information on how to contribute to the NeuroML initiative, see [here](CONTRIBUTING.md). See also http://docs.neuroml.org.
+For information on how to contribute to the NeuroML initiative, see [here](https://docs.neuroml.org/Devdocs/DevSOP.html). 
 
 This code is distributed under the terms of the GNU Lesser General Public License.
