@@ -8,6 +8,20 @@ and [LEMS](https://github.com/LEMS/LEMS), but also the Python ([libNeuroML](http
 
 **Only contributors who are not [NeuroML Editors](https://neuroml.org/editors) are specifically pointed out below.**
 
+v2.2 / 2021-12-15
+--------------------
+
+* **Renamed the main Schema from NeuroML_v2.1.xsd to [NeuroML_v2.2.xsd](https://github.com/NeuroML/NeuroML2/blob/master/Schemas/NeuroML2/NeuroML_v2.2).**
+
+* Significant updates to documentation in NeuroML LEMS XML definitions. Have been propagated to core documentation e.g. https://docs.neuroml.org/Userdocs/Schemas/Networks.html
+
+* Major changes to pyNeuroML & libNeuroML to aid usability. These updates have been reflected in the NeuroML user guides & other documentation, e.g.: https://docs.neuroml.org/Userdocs/GettingStarted.html
+
+* Updates to automated testing of Python & Java libraries: all moved to GitHub Actions (for overview see [here](https://github.com/NeuroML/.github/tree/main/testsheet)); updated to test on latest version of Python & Java and Windows/Mac.
+
+* Removed `ValueAcrossSegOrSegGroup` (https://github.com/NeuroML/NeuroML2/pull/165 that fixes https://github.com/NeuroML/NeuroML2/issues/162) and update any elements using it to directly include `Value` and `SegmentGroup` attributes. This allows their correct validation.
+
+
 v2.1 / 2021-03-22
 --------------------
 

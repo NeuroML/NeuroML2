@@ -15,7 +15,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="#">NeuroML v2.1 Component Types</a>
+      <a class="brand" href="#">NeuroML v2.2 Component Types</a>
       <div class="nav-collapse">
         <ul class="nav">
           <li><a href="Cells.html">Cells</a></li>
@@ -71,17 +71,17 @@
     </div><!--/.well -->
     </div><!--/span-->
     <div class="span7">
-   <div class="alert alert-error"><br/><p><b>  NOTE: the latest version of this documentation can be found on <a href="https://docs.neuroml.org/Userdocs/Schemas/PyNN.html">docs.neuroml.org</a>!</b></p><br/>For more information on NeuroML 2 and LEMS see <a href="http://www.neuroml.org/neuromlv2">here</a>. <br/>Note: these descriptions have been updated to the latest    <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2">NeuroML v2.1</a> definitions, using    <a href="https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS">the latest version of LEMS</a>!</div>
+   <div class="alert alert-error"><br/><p><b>  NOTE: the latest version of this documentation can be found on <a href="https://docs.neuroml.org/Userdocs/Schemas/PyNN.html">docs.neuroml.org</a>!</b></p><br/>For more information on NeuroML 2 and LEMS see <a href="http://www.neuroml.org/neuromlv2">here</a>. <br/>Note: these descriptions have been updated to the latest    <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2">NeuroML v2.2</a> definitions, using    <a href="https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS">the latest version of LEMS</a>!</div>
     <table class="table table-bordered"><tr><td ><h3>PyNN</h3></td></tr>
-    <tr><td><span  style="color:dimgrey"><i>NeuroML2 ComponentType definitions from PyNN.xml </i></span></td></tr>
-    <tr><td>Original LEMS ComponentType definitions: <a href="https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/PyNN.xml">PyNN.xml</a><br/>    Schema against which NeuroML based on these should be valid: <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2/NeuroML_v2.1.xsd">NeuroML_v2.1.xsd</a></td></tr>
+    <tr><td><span  style="color:dimgrey"><i>A number of ComponentType description of PyNN standard cells. All of the cells extend <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>, and the synapses extend <a href="PyNN.html#basePynnSynapse" title="Base type for all PyNN synapses. Note, the current I produced is dimensionless, but it requires a membrane potential v with dimension voltage "><span  style="color:#85ACE1;font-style:italic">basePynnSynapse</span></a>. </i></span></td></tr>
+    <tr><td>Original LEMS ComponentType definitions: <a href="https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/PyNN.xml">PyNN.xml</a><br/>    Schema against which NeuroML based on these should be valid: <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2/NeuroML_v2.2.xsd">NeuroML_v2.2.xsd</a></td></tr>
     </table><br/>
 <a name="basePyNNCell">&nbsp;</a>
 <table class="table table-bordered">
   <tr>
     <td colspan='3'>
        <b><span  style="color:dimgrey;font-style:italic">basePyNNCell</span></b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
@@ -98,10 +98,10 @@
     <td><b>i_offset</b></td>
     <td width="100">Dimensionless</td>
   </tr>
-    <td><b>tau_syn_E</b></td>
+    <td><b>tau_syn_E</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell</i></span></td>
     <td width="100">Dimensionless</td>
   </tr>
-    <td><b>tau_syn_I</b></td>
+    <td><b>tau_syn_I</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell</i></span></td>
     <td width="100">Dimensionless</td>
   </tr>
     <td><b>v_init</b></td>
@@ -129,7 +129,7 @@
     <td><b>iSyn</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -202,7 +202,7 @@
     <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -240,10 +240,10 @@
     <td style="color:darkgrey"><b>cm</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
     <td width="100">Dimensionless</td>
   </tr>
-    <td><b>e_rev_E</b></td>
+    <td><b>e_rev_E</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell</i></span></td>
     <td width="100">Dimensionless</td>
   </tr>
-    <td><b>e_rev_I</b></td>
+    <td><b>e_rev_I</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>This parameter is never used in the NeuroML2 description of this cell! Any synapse producing a current can be placed on this cell</i></span></td>
     <td width="100">Dimensionless</td>
   </tr>
     <td style="color:darkgrey"><b>i_offset</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
@@ -281,7 +281,7 @@
     <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -354,7 +354,7 @@
     <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -474,7 +474,7 @@
     <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -600,7 +600,7 @@
     <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -726,7 +726,7 @@
     <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -875,7 +875,7 @@
     <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
     <td><b>w</b></td>
@@ -1040,7 +1040,7 @@
     <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="PyNN.html#basePyNNCell" title="Base type of any PyNN standard cell model. Note: membrane potential v has dimensions voltage, but all other parameters are dimensionless. This is to facilitate translation to and from PyNN scripts in Python, where these parameters have implicit units, see http://neuralensemble.org/trac/PyNN/wiki/StandardModels "><span  style="color:#85ACE1;font-style:italic">basePyNNCell</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
     <td><b>w</b></td>
@@ -1197,7 +1197,7 @@
     <td><b>n</b></td>
     <td width="100">Dimensionless</td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -1623,7 +1623,7 @@
   <tr>
     <td colspan='3'>
        <b>SpikeSourcePoisson</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last. "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
@@ -1676,7 +1676,7 @@
     <td><b>tnextUsed</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td style="color:darkgrey"><b>tsince</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
+    <td style="color:darkgrey"><b>tsince</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last. "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
@@ -1687,7 +1687,7 @@
     <td><b>in</b></td>
     <td width="100">Direction: in</td>
   </tr>
-    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
+    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last. "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
     <td width="100">Direction: out</td>
   </tr>
 <tr>

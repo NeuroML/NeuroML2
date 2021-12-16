@@ -15,7 +15,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="#">NeuroML v2.1 Component Types</a>
+      <a class="brand" href="#">NeuroML v2.2 Component Types</a>
       <div class="nav-collapse">
         <ul class="nav">
           <li class="active"><a href="Cells.html">Cells</a></li>
@@ -36,11 +36,11 @@
     <div class="span3">
     <div class="well sidebar-nav">
       <b>Component Types</b><br/>
-<a href="Cells.html#baseCell" title="Base type of any cell which can be used in a population "><span  style="color:#85ACE1;font-style:italic">baseCell</span></a><br/>
+<a href="Cells.html#baseCell" title="Base type of any cell (e.g. point neuron like izhikevich2007Cell, or a morphologically detailed Cell with segments) which can be used in a population "><span  style="color:#85ACE1;font-style:italic">baseCell</span></a><br/>
   
 &nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#baseSpikingCell" title="Base type of any cell which can emit spike events. "><span  style="color:#85ACE1;font-style:italic">baseSpikingCell</span></a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#cell" title="Cell with segments specified in a morphology element along with details on its biophysicalProperties. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and v of this cell represents the membrane potential in that isopotential segment. ">cell</a><br/>
   
@@ -56,17 +56,17 @@
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>specificCapacitances <a href="Cells.html#specificCapacitance" title="Capacitance per unit area ">specificCapacitance</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>populations <a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>populations <a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of which are of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#channelPopulation" title="Population of number ohmic ion channels. These each produce a conductance channelg across a reversal potential erev, giving a total current i. ">channelPopulation</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#channelPopulation" title="Population of a number of ohmic ion channels. These each produce a conductance channelg across a reversal potential erev, giving a total current i. Note that active membrane currents are more frequently specified as a density over an area of the cell using channelDensity ">channelPopulation</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#channelPopulationNernst" title="Population of channels with a time varying reversal potential erev determined by Nernst equation. Hard coded for Ca only! ">channelPopulationNernst</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#channelPopulationNernst" title="Population of a number of channels with a time varying reversal potential erev determined by Nernst equation. Note: hard coded for Ca only! ">channelPopulationNernst</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>channelDensities <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>channelDensities <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#baseChannelDensityCond" title="Base type for distributed conductances on an area of a cell producing a (not necessarily ohmic) current "><span  style="color:#85ACE1;font-style:italic">baseChannelDensityCond</span></a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#channelDensity" title="Specifies a time varying ohmic conductance density, gDensity, which is distributed on an area of the cell with fixed reversal potential erev producing a current density iDensity ">channelDensity</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#channelDensity" title="Specifies a time varying ohmic conductance density, gDensity, which is distributed on an area of the cell (specified in membraneProperties) with fixed reversal potential erev producing a current density iDensity ">channelDensity</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#channelDensityVShift" title="Same as channelDensity, but with a vShift parameter to change voltage activation of gates. The exact usage of vShift in expressions for rates is determined by the individual gates. ">channelDensityVShift</a><br/>
   
@@ -78,9 +78,9 @@
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#channelDensityNonUniform" title="Specifies a time varying ohmic conductance density, which is distributed on a region of the cell. The conductance density of the channel is not uniform, but is set using the variableParameter. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON ">channelDensityNonUniform</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#variableParameter" title="Specifies a parameter which can vary its value across a segmentGroup ">variableParameter</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#variableParameter" title="Specifies a parameter (e.g. condDensity) which can vary its value across a segmentGroup. The value is calculated from value attribute of the inhomogeneousValue subelement. This element is normally a child of channelDensityNonUniform, channelDensityNonUniformNernst or channelDensityNonUniformGHK and is used to calculate the value of the conductance, etc. which will vary on different parts of the cell. The segmentGroup specified here needs to define an inhomogeneousParameter (referenced from inhomogeneousParameter in the inhomogeneousValue), which calculates a variable (e.g. p) varying across the cell (e.g. based on the path length from soma), which is then used in the value attribute of the inhomogeneousValue (so for example condDensity = f(p)) ">variableParameter</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#inhomogeneousValue" title="Specifies the value of a variableParameter ">inhomogeneousValue</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#inhomogeneousValue" title="Specifies the value of an inhomogeneousParameter. For usage see variableParameter ">inhomogeneousValue</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#channelDensityNonUniformNernst" title="Specifies a time varying conductance density, which is distributed on a region of the cell, and whose reversal potential is calculated from the Nernst equation. Hard coded for Ca only!. The conductance density of the channel is not uniform, but is set using the variableParameter. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON ">channelDensityNonUniformNernst</a><br/>
   
@@ -96,23 +96,23 @@
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#morphology" title="The collection of segments which specify the 3D structure of the cell, along with a number of segmentGroups ">morphology</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>segments <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent. parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>segments <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. Its id should be a nonnegative integer (usually soma/root = 0). Its end points are given by the proximal and distal points. The proximal point can be omitted, usually because it is the same as a point on the parent segment, see proximal for details. parent specifies the parent segment. The first segment of a cell (with no parent) usually represents the soma. The shape is normally a cylinder (radii of the proximal and distal equal, but positions different) or a conical frustum (radii and positions different). If the x,y,x positions of the proximal and distal are equal, the segment can be interpreted as a sphere, and in this case the radii of these points must be equal. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#parent" title="Specifies the segment which is this segment's parent ">parent</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#parent" title="Specifies the segment which is this segment's parent. The fractionAlong specifies where it is connected, usually 1 (the default value), meaning the distal point of the parent, or 0, meaning the proximal point. If it is between these, a linear interpolation between the 2 points should be used. ">parent</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#distal" title="Point furthest from the soma in a segment ">distal</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#distal" title="Point on a segment furthest from the soma. Should always be present in the description of a segment, unlike proximal ">distal</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#proximal" title="Point closest to the soma in a segment. Note, if the proximal point is equal to the distal point of the parent segment, proximal can be omitted. ">proximal</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#proximal" title="Point on a segment closest to the soma. Note, the proximal point can be omitted, and in this case is defined as being the point fractionAlong between the proximal and distal point of the parent, i.e. if fractionAlong = 1 (as it is by default) it will be the distal on the parent, or if fractionAlong = 0, it will be the proximal point. If between 0 and 1, it is the linear interpolation between the two points. ">proximal</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>segmentGroups <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology ">segmentGroup</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>segmentGroups <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology, e.g. soma_group, dendrite_group, axon_group. While a name is useful to describe the group, the neuroLexId attribute can be used to explicitly specify the meaning of the group, e.g. sao1044911821 for 'Neuronal Cell Body', sao1211023249 for 'Dendrite'. The segments in this group can be specified as: a list of individual member segments; a path, all of the segments along which should be included; a subTree of the cell to include; other segmentGroups to include (so all segments from those get included here). An inhomogeneousParameter can be defined on the region of the cell specified by this group (see variableParameter for usage). ">segmentGroup</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="NeuroMLCoreCompTypes.html#notes" title="Human readable notes on a Component ">notes</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="NeuroMLCoreCompTypes.html#notes" title="Human readable notes/description for a Component ">notes</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="NeuroMLCoreCompTypes.html#annotation" title="Annotation... ">annotation</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="NeuroMLCoreCompTypes.html#annotation" title="A structured annotation containing metadata, specifically RDF or property elements ">annotation</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>rdf:RDF <a href="NeuroMLCoreCompTypes.html#rdf_RDF" title="Work in progress... ">rdf_RDF</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>rdf:RDF <a href="NeuroMLCoreCompTypes.html#rdf_RDF" title="Structured block in an annotation based on RDF. See https://github.com/OpenSourceBrain/OSB_API/blob/master/python/examples/grancelllayer.xml ">rdf_RDF</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>rdf:Description <a href="NeuroMLCoreCompTypes.html#rdf_Description" title="Work in progress... ">rdf_Description</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>rdf:Description <a href="NeuroMLCoreCompTypes.html#rdf_Description" title="Structured block in an annotation based on RDF. ">rdf_Description</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:encodes <a href="NeuroMLCoreCompTypes.html#bqbiol_encodes" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_encodes</a><br/>
   
@@ -146,21 +146,21 @@
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqmodel:isDerivedFrom <a href="NeuroMLCoreCompTypes.html#bqmodel_isDerivedFrom" title="See http://co.mbine.org/standards/qualifiers ">bqmodel_isDerivedFrom</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span><a href="NeuroMLCoreCompTypes.html#property" title="Property in Annotation... ">property</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span><a href="NeuroMLCoreCompTypes.html#property" title="A property (a tag and value pair), which can be on any baseStandalone either as a direct child, or within an Annotation. Generally something which helps the visual display or facilitates simulation of a Component, but is not a core physiological property. Common examples include: numberInternalDivisions, equivalent of nseg in NEURON; radius, for a radius to use in graphical displays for abstract cells (i.e. without defined morphologies); color, the color to use for a Population or populationList of cells; recommended_dt_ms, the recommended timestep to use for simulating a Network, recommended_duration_ms the recommended duration to use when running a Network  ">property</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>members <a href="Cells.html#member" title="A single identified segment which is part of the segmentGroup ">member</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>paths <a href="Cells.html#path" title="Include all the segments between those specified by from and to, inclusive ">path</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#from" title="Specifies which segment distal from which to calculate the segmentGroup ">from</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#from" title="In a path or subTree, specifies which segment (inclusive) from which to calculate the segmentGroup ">from</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#to" title="Specifies which segment up to which to calculate the segmentGroup ">to</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#to" title="In a path, specifies which segment (inclusive) up to which to calculate the segmentGroup ">to</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>subTrees <a href="Cells.html#subTree" title="Include all the segments distal to that specified by from in the segmentGroup ">subTree</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>includes <a href="Cells.html#include" title="Include all members of another segmentGroup in this ">include</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>includes <a href="Cells.html#include" title="Include all members of another segmentGroup in this group ">include</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span><a href="Cells.html#inhomogeneousParameter" title="An inhomogeneous parameter specified across the segmentGroup ">inhomogeneousParameter</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span><a href="Cells.html#inhomogeneousParameter" title="An inhomogeneous parameter specified across the segmentGroup (see variableParameter for usage). ">inhomogeneousParameter</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>proximal <a href="Cells.html#proximalProperties" title="What to do at the proximal point when creating an inhomogeneous parameter ">proximalProperties</a><br/>
   
@@ -172,9 +172,9 @@
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>specificCapacitances <a href="Cells.html#specificCapacitance" title="Capacitance per unit area ">specificCapacitance</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>populations <a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>populations <a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of which are of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>channelDensities <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>channelDensities <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#intracellularProperties" title="Biophysical properties related to the intracellular space within the cell, such as the resistivity and the list of ionic species present. caConc and caConcExt are explicitly exposed here to facilitate accessing these values from other Components, even though caConcExt is clearly not an intracellular property ">intracellularProperties</a><br/>
   
@@ -182,13 +182,13 @@
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#baseCellMembPotCap" title="Any cell with a membrane potential v with voltage units and a membrane capacitance C. Also defines exposed value iSyn for current due to external synapses and iMemb for total transmembrane current (usually channel currents plus iSyn) "><span  style="color:#85ACE1;font-style:italic">baseCellMembPotCap</span></a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#pointCellCondBased" title="Simple model of a conductance based cell, with no separate morphology element, just an absolute capacitance C, and a set of channel populations ">pointCellCondBased</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#pointCellCondBased" title="Simple model of a conductance based cell, with no separate morphology element, just an absolute capacitance C, and a set of channel populations. Note: use of cell is generally preferable (and more widely supported), even for a single compartment cell. ">pointCellCondBased</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>populations <a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>populations <a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of which are of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#pointCellCondBasedCa" title="TEMPORARY: Point cell with conductances and Ca concentration  info. Not yet fully tested!!! ">pointCellCondBasedCa</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#pointCellCondBasedCa" title="TEMPORARY: Point cell with conductances and Ca concentration info. Not yet fully tested!!! TODO: Remove in favour of cell ">pointCellCondBasedCa</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>populations <a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>populations <a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of which are of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>concentrationModels <a href="Cells.html#concentrationModel" title="Base for any model of an ion concentration which changes with time. Internal (_concentration) and external (_extConcentration) values for the concentration of the ion are given. ">concentrationModel</a><br/>
   
@@ -218,7 +218,7 @@
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#pinskyRinzelCA3Cell" title="Reduced CA3 cell model from Pinsky and Rinzel 1994. See https://github.com/OpenSourceBrain/PinskyRinzelModel ">pinskyRinzelCA3Cell</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#baseCellMembPotDL" title="Any spiking cell which has a dimensioness membrane potential, V. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPotDL</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#baseCellMembPotDL" title="Any spiking cell which has a dimensioness membrane potential, V (as opposed to a membrane potential units of voltage, baseCellMembPot). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPotDL</span></a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#fitzHughNagumo1969Cell" title="The Fitzhugh Nagumo model is a two-dimensional simplification of the Hodgkin-Huxley model of spike generation in squid giant axons.  This system was suggested by FitzHugh (FitzHugh R. [1961]: Impulses and physiological states in theoretical models of nerve membrane.  Biophysical J.  1:445-466), who called it " Bonhoeffer-van der Pol model ", and the equivalent circuit by Nagumo et al.  (Nagumo J., Arimoto S., and Yoshizawa S. [1962] An active pulse transmission line simulating nerve axon. Proc IRE. 50:2061-2070.1962). This version corresponds to the one described in FitzHugh R.[1969]: Mathematical models of excitation and propagation in nerve.  Chapter 1 (pp. 1-85 in H.P. Schwan, ed. Biological Engineering, McGraw-Hill Book Co., N.Y.) ">fitzHughNagumo1969Cell</a><br/>
   
@@ -227,21 +227,21 @@
     </div><!--/.well -->
     </div><!--/span-->
     <div class="span7">
-   <div class="alert alert-error"><br/><p><b>  NOTE: the latest version of this documentation can be found on <a href="https://docs.neuroml.org/Userdocs/Schemas/Cells.html">docs.neuroml.org</a>!</b></p><br/>For more information on NeuroML 2 and LEMS see <a href="http://www.neuroml.org/neuromlv2">here</a>. <br/>Note: these descriptions have been updated to the latest    <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2">NeuroML v2.1</a> definitions, using    <a href="https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS">the latest version of LEMS</a>!</div>
+   <div class="alert alert-error"><br/><p><b>  NOTE: the latest version of this documentation can be found on <a href="https://docs.neuroml.org/Userdocs/Schemas/Cells.html">docs.neuroml.org</a>!</b></p><br/>For more information on NeuroML 2 and LEMS see <a href="http://www.neuroml.org/neuromlv2">here</a>. <br/>Note: these descriptions have been updated to the latest    <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2">NeuroML v2.2</a> definitions, using    <a href="https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS">the latest version of LEMS</a>!</div>
     <table class="table table-bordered"><tr><td ><h3>Cells</h3></td></tr>
-    <tr><td><span  style="color:dimgrey"><i>NeuroML2 ComponentType definitions from Cells.xml </i></span></td></tr>
-    <tr><td>Original LEMS ComponentType definitions: <a href="https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/Cells.xml">Cells.xml</a><br/>    Schema against which NeuroML based on these should be valid: <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2/NeuroML_v2.1.xsd">NeuroML_v2.1.xsd</a></td></tr>
+    <tr><td><span  style="color:dimgrey"><i>Defines both abstract cell models (e.g. <a href="Cells.html#izhikevichCell" title="Cell based on the 2003 model of Izhikevich, see http://izhikevich.org/publications/spikes.htm ">izhikevichCell</a>, adaptive exponential integrate and fire cell, <a href="Cells.html#adExIaFCell" title="Model based on Brette R and Gerstner W (2005) Adaptive Exponential Integrate-and-Fire Model as an Effective Description of Neuronal Activity. J Neurophysiol 94:3637-3642 ">adExIaFCell</a>), point conductance based cell models (<a href="Cells.html#pointCellCondBased" title="Simple model of a conductance based cell, with no separate morphology element, just an absolute capacitance C, and a set of channel populations. Note: use of cell is generally preferable (and more widely supported), even for a single compartment cell. ">pointCellCondBased</a>, <a href="Cells.html#pointCellCondBasedCa" title="TEMPORARY: Point cell with conductances and Ca concentration info. Not yet fully tested!!! TODO: Remove in favour of cell ">pointCellCondBasedCa</a>) and cells models (<a href="Cells.html#cell" title="Cell with segments specified in a morphology element along with details on its biophysicalProperties. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and v of this cell represents the membrane potential in that isopotential segment. ">cell</a>) which specify the <a href="Cells.html#morphology" title="The collection of segments which specify the 3D structure of the cell, along with a number of segmentGroups ">morphology</a> (containing <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. Its id should be a nonnegative integer (usually soma/root = 0). Its end points are given by the proximal and distal points. The proximal point can be omitted, usually because it is the same as a point on the parent segment, see proximal for details. parent specifies the parent segment. The first segment of a cell (with no parent) usually represents the soma. The shape is normally a cylinder (radii of the proximal and distal equal, but positions different) or a conical frustum (radii and positions different). If the x,y,x positions of the proximal and distal are equal, the segment can be interpreted as a sphere, and in this case the radii of these points must be equal. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>s) and <a href="Cells.html#biophysicalProperties" title="The biophysical properties of the cell, including the membraneProperties and the intracellularProperties ">biophysicalProperties</a> separately. </i></span></td></tr>
+    <tr><td>Original LEMS ComponentType definitions: <a href="https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/Cells.xml">Cells.xml</a><br/>    Schema against which NeuroML based on these should be valid: <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2/NeuroML_v2.2.xsd">NeuroML_v2.2.xsd</a></td></tr>
     </table><br/>
 <a name="baseCell">&nbsp;</a>
 <table class="table table-bordered">
   <tr>
     <td colspan='3'>
        <b><span  style="color:dimgrey;font-style:italic">baseCell</span></b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="NeuroMLCoreCompTypes.html#baseStandalone" title="Base type of any component which will require notes, annotation, etc. "><span  style="color:#85ACE1;font-style:italic">baseStandalone</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="NeuroMLCoreCompTypes.html#baseStandalone" title="Base type of any Component which can have Notes, Annotation, or a property list. "><span  style="color:#85ACE1;font-style:italic">baseStandalone</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Base type of any cell which can be used in a population </i></span>    </td>
+      <span  style="color:dimgrey"><i>Base type of any cell (e.g. point neuron like <a href="Cells.html#izhikevich2007Cell" title="Cell based on the modified Izhikevich model in Izhikevich 2007, Dynamical systems in neuroscience, MIT Press ">izhikevich2007Cell</a>, or a morphologically detailed ??? with <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. Its id should be a nonnegative integer (usually soma/root = 0). Its end points are given by the proximal and distal points. The proximal point can be omitted, usually because it is the same as a point on the parent segment, see proximal for details. parent specifies the parent segment. The first segment of a cell (with no parent) usually represents the soma. The shape is normally a cylinder (radii of the proximal and distal equal, but positions different) or a conical frustum (radii and positions different). If the x,y,x positions of the proximal and distal are equal, the segment can be interpreted as a sphere, and in this case the radii of these points must be equal. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>s) which can be used in a <a href="Networks.html#population" title="A population of components, with just one parameter for the size, i.e. number of components to create. Note: quite often this is used with type=populationList which means the size is determined by the number of instances (with locations) in the list. The size attribute is still set, and there will be a validation error if this does not match the number in the list. ">population</a> </i></span>    </td>
   </tr>
 </table>
 
@@ -250,7 +250,7 @@
   <tr>
     <td colspan='3'>
        <b><span  style="color:dimgrey;font-style:italic">baseSpikingCell</span></b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseCell" title="Base type of any cell which can be used in a population "><span  style="color:#85ACE1;font-style:italic">baseCell</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseCell" title="Base type of any cell (e.g. point neuron like izhikevich2007Cell, or a morphologically detailed Cell with segments) which can be used in a population "><span  style="color:#85ACE1;font-style:italic">baseCell</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
@@ -275,7 +275,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Any spiking cell which has a membrane potential <b>v</b> with voltage units. </i></span>    </td>
+      <span  style="color:dimgrey"><i>Any spiking cell which has a membrane potential <b>v</b> with units of voltage (as opposed to a dimensionless membrane potential used in <a href="Cells.html#baseCellMembPotDL" title="Any spiking cell which has a dimensioness membrane potential, V (as opposed to a membrane potential units of voltage, baseCellMembPot). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPotDL</span></a>). </i></span>    </td>
   </tr>
   <tr>
 
@@ -304,7 +304,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Any spiking cell which has a dimensioness membrane potential, <b>V.</b> </i></span>    </td>
+      <span  style="color:dimgrey"><i>Any spiking cell which has a dimensioness membrane potential, <b>V</b> (as opposed to a membrane potential units of voltage, <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>). </i></span>    </td>
   </tr>
   <tr>
 
@@ -329,11 +329,11 @@
   <tr>
     <td colspan='3'>
        <b><span  style="color:dimgrey;font-style:italic">baseChannelPopulation</span></b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a membrane potential v exposed on the parent Component "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a voltage v exposed on the parent Component, which would often be the membrane potential of a Component extending baseCellMembPot "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Base type for any current produced by a population of channels, all of type <b>ionChannel</b> </i></span>    </td>
+      <span  style="color:dimgrey"><i>Base type for any current produced by a population of channels, all of which are of type <b>ionChannel</b> </i></span>    </td>
   </tr>
   <tr>
 
@@ -356,7 +356,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
 </td>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a membrane potential v exposed on the parent Component "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a voltage v exposed on the parent Component, which would often be the membrane potential of a Component extending baseCellMembPot "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
 </table>
@@ -366,21 +366,21 @@
   <tr>
     <td colspan='3'>
        <b>channelPopulation</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of which are of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Population of <b>number</b> ohmic ion channels. These each produce a conductance <b>channelg</b> across a reversal potential <b>erev,</b> giving a total current <b>i.</b> </i></span>    </td>
+      <span  style="color:dimgrey"><i>Population of a <b>number</b> of ohmic ion channels. These each produce a conductance <b>channelg</b> across a reversal potential <b>erev,</b> giving a total current <b>i.</b> Note that active membrane currents are more frequently specified as a density over an area of the <a href="Cells.html#cell" title="Cell with segments specified in a morphology element along with details on its biophysicalProperties. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and v of this cell represents the membrane potential in that isopotential segment. ">cell</a> using <a href="Cells.html#channelDensity" title="Specifies a time varying ohmic conductance density, gDensity, which is distributed on an area of the cell (specified in membraneProperties) with fixed reversal potential erev producing a current density iDensity ">channelDensity</a> </i></span>    </td>
   </tr>
   <tr>
 
 <td width="70" rowspan="2">
     <span class="label label-success">Parameters</span>
 </td>
-    <td><b>erev</b></td>
+    <td><b>erev</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The reversal potential of the current produced</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
-    <td><b>number</b></td>
+    <td><b>number</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The number of channels present. This will be multiplied by the time varying conductance of the individual ion channel (which extends _baseIonChannel_) to produce the total conductance</i></span></td>
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
@@ -411,7 +411,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
 </td>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a membrane potential v exposed on the parent Component "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a voltage v exposed on the parent Component, which would often be the membrane potential of a Component extending baseCellMembPot "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
 <tr>
@@ -438,18 +438,18 @@
   <tr>
     <td colspan='3'>
        <b>channelPopulationNernst</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of which are of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Population of channels with a time varying reversal potential <b>erev</b> determined by Nernst equation. Hard coded for Ca only! </i></span>    </td>
+      <span  style="color:dimgrey"><i>Population of a <b>number</b> of channels with a time varying reversal potential <b>erev</b> determined by Nernst equation. Note: hard coded for Ca only! </i></span>    </td>
   </tr>
   <tr>
 
 <td width="70" rowspan="1">
     <span class="label label-success">Parameters</span>
 </td>
-    <td><b>number</b></td>
+    <td><b>number</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The number of channels present. This will be multiplied by the time varying conductance of the individual ion channel (which extends _baseIonChannel_) to produce the total conductance</i></span></td>
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
@@ -481,7 +481,7 @@
 <td width="70" rowspan="2">
     <span class="label label-info">Exposures</span>
 </td>
-    <td><b>erev</b></td>
+    <td><b>erev</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The reversal potential of the current produced, calculated from _caConcExt and _caConc</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
     <td style="color:darkgrey"><b>i</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a>)</td>
@@ -492,16 +492,16 @@
 <td width="70" rowspan="4">
     <span class="label label-info">Requirements</span>
 </td>
-    <td><b>caConc</b></td>
+    <td><b>caConc</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The internal Ca2+ concentration, as calculated/exposed by the parent Component</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#concentration">concentration</a></td>
   </tr>
-    <td><b>caConcExt</b></td>
+    <td><b>caConcExt</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The external Ca2+ concentration, as calculated/exposed by the parent Component</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#concentration">concentration</a></td>
   </tr>
-    <td><b>temperature</b></td>
+    <td><b>temperature</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The temperature to use in the calculation of _erev. Note this is generally exposed by a _networkWithTemperature_.</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#temperature">temperature</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a membrane potential v exposed on the parent Component "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a voltage v exposed on the parent Component, which would often be the membrane potential of a Component extending baseCellMembPot "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
 <tr>
@@ -534,7 +534,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Base type for current distributed on an area of a cell </i></span>    </td>
+      <span  style="color:dimgrey"><i>Base type for a current of density <b>iDensity</b> distributed on an area of a <a href="Cells.html#cell" title="Cell with segments specified in a morphology element along with details on its biophysicalProperties. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and v of this cell represents the membrane potential in that isopotential segment. ">cell</a>, flowing through the specified <b>ionChannel.</b> Instances of this (normally <a href="Cells.html#channelDensity" title="Specifies a time varying ohmic conductance density, gDensity, which is distributed on an area of the cell (specified in membraneProperties) with fixed reversal potential erev producing a current density iDensity ">channelDensity</a>) are specified in the <a href="Cells.html#membraneProperties" title="Properties specific to the membrane, such as the populations of channels, channelDensities, specificCapacitance, etc. ">membraneProperties</a> of the <a href="Cells.html#cell" title="Cell with segments specified in a morphology element along with details on its biophysicalProperties. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and v of this cell represents the membrane potential in that isopotential segment. ">cell</a>. </i></span>    </td>
   </tr>
   <tr>
 
@@ -567,7 +567,7 @@
   <tr>
     <td colspan='3'>
        <b><span  style="color:dimgrey;font-style:italic">baseChannelDensityCond</span></b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
@@ -589,7 +589,7 @@
     <td><b>gDensity</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductanceDensity">conductanceDensity</a></td>
   </tr>
-    <td style="color:darkgrey"><b>iDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
+    <td style="color:darkgrey"><b>iDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#currentDensity">currentDensity</a></td>
   </tr>
   <tr>
@@ -597,7 +597,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
 </td>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
 </table>
@@ -611,7 +611,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Specifies a parameter which can vary its value across a <b>segmentGroup</b> </i></span>    </td>
+      <span  style="color:dimgrey"><i>Specifies a <b>parameter</b> (e.g. condDensity) which can vary its value across a <b>segmentGroup.</b> The value is calculated from <b>value</b> attribute of the <a href="Cells.html#inhomogeneousValue" title="Specifies the value of an inhomogeneousParameter. For usage see variableParameter ">inhomogeneousValue</a> subelement. This element is normally a child of <a href="Cells.html#channelDensityNonUniform" title="Specifies a time varying ohmic conductance density, which is distributed on a region of the cell. The conductance density of the channel is not uniform, but is set using the variableParameter. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON ">channelDensityNonUniform</a>, <a href="Cells.html#channelDensityNonUniformNernst" title="Specifies a time varying conductance density, which is distributed on a region of the cell, and whose reversal potential is calculated from the Nernst equation. Hard coded for Ca only!. The conductance density of the channel is not uniform, but is set using the variableParameter. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON ">channelDensityNonUniformNernst</a> or <a href="Cells.html#channelDensityNonUniformGHK" title="Specifies a time varying conductance density, which is distributed on a region of the cell, and whose current is calculated from the Goldman-Hodgkin-Katz equation. Hard coded for Ca only!. The conductance density of the channel is not uniform, but is set using the variableParameter. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON ">channelDensityNonUniformGHK</a> and is used to calculate the value of the conductance, etc. which will vary on different parts of the cell. The <b>segmentGroup</b> specified here needs to define an <a href="Cells.html#inhomogeneousParameter" title="An inhomogeneous parameter specified across the segmentGroup (see variableParameter for usage). ">inhomogeneousParameter</a> (referenced from <b>inhomogeneousParameter</b> in the <a href="Cells.html#inhomogeneousValue" title="Specifies the value of an inhomogeneousParameter. For usage see variableParameter ">inhomogeneousValue</a>), which calculates a <b>variable</b> (e.g. p) varying across the cell (e.g. based on the path length from soma), which is then used in the <b>value</b> attribute of the <a href="Cells.html#inhomogeneousValue" title="Specifies the value of an inhomogeneousParameter. For usage see variableParameter ">inhomogeneousValue</a> (so for example condDensity = f(p)) </i></span>    </td>
   </tr>
   <tr>
 
@@ -628,7 +628,7 @@
     <span class="label label-success">Child elements</span>
 </td>
     <td><b>inhomogeneousValue</b></td>
-    <td width="100"><a href="Cells.html#inhomogeneousValue" title="Specifies the value of a variableParameter ">inhomogeneousValue</a></td>
+    <td width="100"><a href="Cells.html#inhomogeneousValue" title="Specifies the value of an inhomogeneousParameter. For usage see variableParameter ">inhomogeneousValue</a></td>
   </tr>
 </table>
 
@@ -641,7 +641,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Specifies the value of a <a href="Cells.html#variableParameter" title="Specifies a parameter which can vary its value across a segmentGroup ">variableParameter</a> </i></span>    </td>
+      <span  style="color:dimgrey"><i>Specifies the <b>value</b> of an <b>inhomogeneousParameter.</b> For usage see <a href="Cells.html#variableParameter" title="Specifies a parameter (e.g. condDensity) which can vary its value across a segmentGroup. The value is calculated from value attribute of the inhomogeneousValue subelement. This element is normally a child of channelDensityNonUniform, channelDensityNonUniformNernst or channelDensityNonUniformGHK and is used to calculate the value of the conductance, etc. which will vary on different parts of the cell. The segmentGroup specified here needs to define an inhomogeneousParameter (referenced from inhomogeneousParameter in the inhomogeneousValue), which calculates a variable (e.g. p) varying across the cell (e.g. based on the path length from soma), which is then used in the value attribute of the inhomogeneousValue (so for example condDensity = f(p)) ">variableParameter</a> </i></span>    </td>
   </tr>
   <tr>
 
@@ -659,18 +659,18 @@
   <tr>
     <td colspan='3'>
        <b>channelDensityNonUniform</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Specifies a time varying ohmic conductance density, which is distributed on a region of the cell. The conductance density of the channel is not uniform, but is set using the <a href="Cells.html#variableParameter" title="Specifies a parameter which can vary its value across a segmentGroup ">variableParameter</a>. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON </i></span>    </td>
+      <span  style="color:dimgrey"><i>Specifies a time varying ohmic conductance density, which is distributed on a region of the <b>cell.</b> The conductance density of the channel is not uniform, but is set using the <a href="Cells.html#variableParameter" title="Specifies a parameter (e.g. condDensity) which can vary its value across a segmentGroup. The value is calculated from value attribute of the inhomogeneousValue subelement. This element is normally a child of channelDensityNonUniform, channelDensityNonUniformNernst or channelDensityNonUniformGHK and is used to calculate the value of the conductance, etc. which will vary on different parts of the cell. The segmentGroup specified here needs to define an inhomogeneousParameter (referenced from inhomogeneousParameter in the inhomogeneousValue), which calculates a variable (e.g. p) varying across the cell (e.g. based on the path length from soma), which is then used in the value attribute of the inhomogeneousValue (so for example condDensity = f(p)) ">variableParameter</a>. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON </i></span>    </td>
   </tr>
   <tr>
 
 <td width="70" rowspan="1">
     <span class="label label-success">Parameters</span>
 </td>
-    <td><b>erev</b></td>
+    <td><b>erev</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The reversal potential of the current produced</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -688,7 +688,7 @@
     <span class="label label-success">Child elements</span>
 </td>
     <td><b>variableParameter</b></td>
-    <td width="100"><a href="Cells.html#variableParameter" title="Specifies a parameter which can vary its value across a segmentGroup ">variableParameter</a></td>
+    <td width="100"><a href="Cells.html#variableParameter" title="Specifies a parameter (e.g. condDensity) which can vary its value across a segmentGroup. The value is calculated from value attribute of the inhomogeneousValue subelement. This element is normally a child of channelDensityNonUniform, channelDensityNonUniformNernst or channelDensityNonUniformGHK and is used to calculate the value of the conductance, etc. which will vary on different parts of the cell. The segmentGroup specified here needs to define an inhomogeneousParameter (referenced from inhomogeneousParameter in the inhomogeneousValue), which calculates a variable (e.g. p) varying across the cell (e.g. based on the path length from soma), which is then used in the value attribute of the inhomogeneousValue (so for example condDensity = f(p)) ">variableParameter</a></td>
   </tr>
   <tr>
 
@@ -703,7 +703,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
 </td>
-    <td style="color:darkgrey"><b>iDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
+    <td style="color:darkgrey"><b>iDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#currentDensity">currentDensity</a></td>
   </tr>
   <tr>
@@ -711,7 +711,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
 </td>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
 <tr>
@@ -736,11 +736,11 @@
   <tr>
     <td colspan='3'>
        <b>channelDensityNonUniformNernst</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Specifies a time varying conductance density, which is distributed on a region of the cell, and whose reversal potential is calculated from the Nernst equation. Hard coded for Ca only!. The conductance density of the channel is not uniform, but is set using the <a href="Cells.html#variableParameter" title="Specifies a parameter which can vary its value across a segmentGroup ">variableParameter</a>. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON </i></span>    </td>
+      <span  style="color:dimgrey"><i>Specifies a time varying conductance density, which is distributed on a region of the <b>cell,</b> and whose reversal potential is calculated from the Nernst equation. Hard coded for Ca only!. The conductance density of the channel is not uniform, but is set using the <a href="Cells.html#variableParameter" title="Specifies a parameter (e.g. condDensity) which can vary its value across a segmentGroup. The value is calculated from value attribute of the inhomogeneousValue subelement. This element is normally a child of channelDensityNonUniform, channelDensityNonUniformNernst or channelDensityNonUniformGHK and is used to calculate the value of the conductance, etc. which will vary on different parts of the cell. The segmentGroup specified here needs to define an inhomogeneousParameter (referenced from inhomogeneousParameter in the inhomogeneousValue), which calculates a variable (e.g. p) varying across the cell (e.g. based on the path length from soma), which is then used in the value attribute of the inhomogeneousValue (so for example condDensity = f(p)) ">variableParameter</a>. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON </i></span>    </td>
   </tr>
   <tr>
 
@@ -757,7 +757,7 @@
     <span class="label label-success">Child elements</span>
 </td>
     <td><b>variableParameter</b></td>
-    <td width="100"><a href="Cells.html#variableParameter" title="Specifies a parameter which can vary its value across a segmentGroup ">variableParameter</a></td>
+    <td width="100"><a href="Cells.html#variableParameter" title="Specifies a parameter (e.g. condDensity) which can vary its value across a segmentGroup. The value is calculated from value attribute of the inhomogeneousValue subelement. This element is normally a child of channelDensityNonUniform, channelDensityNonUniformNernst or channelDensityNonUniformGHK and is used to calculate the value of the conductance, etc. which will vary on different parts of the cell. The segmentGroup specified here needs to define an inhomogeneousParameter (referenced from inhomogeneousParameter in the inhomogeneousValue), which calculates a variable (e.g. p) varying across the cell (e.g. based on the path length from soma), which is then used in the value attribute of the inhomogeneousValue (so for example condDensity = f(p)) ">variableParameter</a></td>
   </tr>
   <tr>
 
@@ -772,7 +772,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
 </td>
-    <td style="color:darkgrey"><b>iDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
+    <td style="color:darkgrey"><b>iDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#currentDensity">currentDensity</a></td>
   </tr>
   <tr>
@@ -780,7 +780,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
 </td>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
 <tr>
@@ -805,11 +805,11 @@
   <tr>
     <td colspan='3'>
        <b>channelDensityNonUniformGHK</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Specifies a time varying conductance density, which is distributed on a region of the cell, and whose current is calculated from the Goldman-Hodgkin-Katz equation. Hard coded for Ca only!. The conductance density of the channel is not uniform, but is set using the <a href="Cells.html#variableParameter" title="Specifies a parameter which can vary its value across a segmentGroup ">variableParameter</a>. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON </i></span>    </td>
+      <span  style="color:dimgrey"><i>Specifies a time varying conductance density, which is distributed on a region of the <b>cell,</b> and whose current is calculated from the Goldman-Hodgkin-Katz equation. Hard coded for Ca only!. The conductance density of the channel is not uniform, but is set using the <a href="Cells.html#variableParameter" title="Specifies a parameter (e.g. condDensity) which can vary its value across a segmentGroup. The value is calculated from value attribute of the inhomogeneousValue subelement. This element is normally a child of channelDensityNonUniform, channelDensityNonUniformNernst or channelDensityNonUniformGHK and is used to calculate the value of the conductance, etc. which will vary on different parts of the cell. The segmentGroup specified here needs to define an inhomogeneousParameter (referenced from inhomogeneousParameter in the inhomogeneousValue), which calculates a variable (e.g. p) varying across the cell (e.g. based on the path length from soma), which is then used in the value attribute of the inhomogeneousValue (so for example condDensity = f(p)) ">variableParameter</a>. Note, there is no dynamical description of this in LEMS yet, as this type only makes sense for multicompartmental cells. A ComponentType for this needs to be present to enable export of NeuroML 2 multicompartmental cells via LEMS/jNeuroML to NEURON </i></span>    </td>
   </tr>
   <tr>
 
@@ -826,7 +826,7 @@
     <span class="label label-success">Child elements</span>
 </td>
     <td><b>variableParameter</b></td>
-    <td width="100"><a href="Cells.html#variableParameter" title="Specifies a parameter which can vary its value across a segmentGroup ">variableParameter</a></td>
+    <td width="100"><a href="Cells.html#variableParameter" title="Specifies a parameter (e.g. condDensity) which can vary its value across a segmentGroup. The value is calculated from value attribute of the inhomogeneousValue subelement. This element is normally a child of channelDensityNonUniform, channelDensityNonUniformNernst or channelDensityNonUniformGHK and is used to calculate the value of the conductance, etc. which will vary on different parts of the cell. The segmentGroup specified here needs to define an inhomogeneousParameter (referenced from inhomogeneousParameter in the inhomogeneousValue), which calculates a variable (e.g. p) varying across the cell (e.g. based on the path length from soma), which is then used in the value attribute of the inhomogeneousValue (so for example condDensity = f(p)) ">variableParameter</a></td>
   </tr>
   <tr>
 
@@ -841,7 +841,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
 </td>
-    <td style="color:darkgrey"><b>iDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
+    <td style="color:darkgrey"><b>iDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#currentDensity">currentDensity</a></td>
   </tr>
   <tr>
@@ -849,7 +849,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
 </td>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
 <tr>
@@ -878,7 +878,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Specifies a time varying ohmic conductance density, <b>gDensity,</b> which is distributed on an area of the cell with fixed reversal potential <b>erev</b> producing a current density <b>iDensity</b> </i></span>    </td>
+      <span  style="color:dimgrey"><i>Specifies a time varying ohmic conductance density, <b>gDensity,</b> which is distributed on an area of the <b>cell</b> (specified in <a href="Cells.html#membraneProperties" title="Properties specific to the membrane, such as the populations of channels, channelDensities, specificCapacitance, etc. ">membraneProperties</a>) with fixed reversal potential <b>erev</b> producing a current density <b>iDensity</b> </i></span>    </td>
   </tr>
   <tr>
 
@@ -888,7 +888,7 @@
     <td style="color:darkgrey"><b>condDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensityCond" title="Base type for distributed conductances on an area of a cell producing a (not necessarily ohmic) current "><span  style="color:#85ACE1;font-style:italic">baseChannelDensityCond</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductanceDensity">conductanceDensity</a></td>
   </tr>
-    <td><b>erev</b></td>
+    <td><b>erev</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The reversal potential of the current produced</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -916,7 +916,7 @@
     <td style="color:darkgrey"><b>gDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensityCond" title="Base type for distributed conductances on an area of a cell producing a (not necessarily ohmic) current "><span  style="color:#85ACE1;font-style:italic">baseChannelDensityCond</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductanceDensity">conductanceDensity</a></td>
   </tr>
-    <td style="color:darkgrey"><b>iDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
+    <td style="color:darkgrey"><b>iDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#currentDensity">currentDensity</a></td>
   </tr>
   <tr>
@@ -924,7 +924,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
 </td>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
 <tr>
@@ -952,11 +952,11 @@
   <tr>
     <td colspan='3'>
        <b>channelDensityVShift</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#channelDensity" title="Specifies a time varying ohmic conductance density, gDensity, which is distributed on an area of the cell with fixed reversal potential erev producing a current density iDensity ">channelDensity</a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#channelDensity" title="Specifies a time varying ohmic conductance density, gDensity, which is distributed on an area of the cell (specified in membraneProperties) with fixed reversal potential erev producing a current density iDensity ">channelDensity</a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Same as <a href="Cells.html#channelDensity" title="Specifies a time varying ohmic conductance density, gDensity, which is distributed on an area of the cell with fixed reversal potential erev producing a current density iDensity ">channelDensity</a>, but with a <b>vShift</b> parameter to change voltage activation of gates. The exact usage of <b>vShift</b> in expressions for rates is determined by the individual gates. </i></span>    </td>
+      <span  style="color:dimgrey"><i>Same as <a href="Cells.html#channelDensity" title="Specifies a time varying ohmic conductance density, gDensity, which is distributed on an area of the cell (specified in membraneProperties) with fixed reversal potential erev producing a current density iDensity ">channelDensity</a>, but with a <b>vShift</b> parameter to change voltage activation of gates. The exact usage of <b>vShift</b> in expressions for rates is determined by the individual gates. </i></span>    </td>
   </tr>
   <tr>
 
@@ -966,7 +966,7 @@
     <td style="color:darkgrey"><b>condDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensityCond" title="Base type for distributed conductances on an area of a cell producing a (not necessarily ohmic) current "><span  style="color:#85ACE1;font-style:italic">baseChannelDensityCond</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductanceDensity">conductanceDensity</a></td>
   </tr>
-    <td style="color:darkgrey"><b>erev</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#channelDensity" title="Specifies a time varying ohmic conductance density, gDensity, which is distributed on an area of the cell with fixed reversal potential erev producing a current density iDensity ">channelDensity</a>)</td>
+    <td style="color:darkgrey"><b>erev</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#channelDensity" title="Specifies a time varying ohmic conductance density, gDensity, which is distributed on an area of the cell (specified in membraneProperties) with fixed reversal potential erev producing a current density iDensity ">channelDensity</a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
     <td><b>vShift</b></td>
@@ -989,7 +989,7 @@
     <td style="color:darkgrey"><b>gDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensityCond" title="Base type for distributed conductances on an area of a cell producing a (not necessarily ohmic) current "><span  style="color:#85ACE1;font-style:italic">baseChannelDensityCond</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductanceDensity">conductanceDensity</a></td>
   </tr>
-    <td style="color:darkgrey"><b>iDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
+    <td style="color:darkgrey"><b>iDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#currentDensity">currentDensity</a></td>
   </tr>
   <tr>
@@ -997,7 +997,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
 </td>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
 </table>
@@ -1011,7 +1011,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Specifies a time varying conductance density, <b>gDensity,</b> which is distributed on an area of the cell, producing a current density <b>iDensity</b> and whose reversal potential is calculated from the Nernst equation. Hard coded for Ca only! See https://github.com/OpenSourceBrain/ghk-nernst. </i></span>    </td>
+      <span  style="color:dimgrey"><i>Specifies a time varying conductance density, <b>gDensity,</b> which is distributed on an area of the <b>cell,</b> producing a current density <b>iDensity</b> and whose reversal potential is calculated from the Nernst equation. Hard coded for Ca only! See https://github.com/OpenSourceBrain/ghk-nernst. </i></span>    </td>
   </tr>
   <tr>
 
@@ -1049,13 +1049,13 @@
 <td width="70" rowspan="3">
     <span class="label label-info">Exposures</span>
 </td>
-    <td><b>erev</b></td>
+    <td><b>erev</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The reversal potential of the current produced, calculated from caConcExt and caConc</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
     <td style="color:darkgrey"><b>gDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensityCond" title="Base type for distributed conductances on an area of a cell producing a (not necessarily ohmic) current "><span  style="color:#85ACE1;font-style:italic">baseChannelDensityCond</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductanceDensity">conductanceDensity</a></td>
   </tr>
-    <td style="color:darkgrey"><b>iDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
+    <td style="color:darkgrey"><b>iDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#currentDensity">currentDensity</a></td>
   </tr>
   <tr>
@@ -1072,7 +1072,7 @@
     <td><b>temperature</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#temperature">temperature</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
 <tr>
@@ -1155,13 +1155,13 @@
 <td width="70" rowspan="3">
     <span class="label label-info">Exposures</span>
 </td>
-    <td><b>erev</b></td>
+    <td><b>erev</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The reversal potential of the current produced</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
     <td style="color:darkgrey"><b>gDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensityCond" title="Base type for distributed conductances on an area of a cell producing a (not necessarily ohmic) current "><span  style="color:#85ACE1;font-style:italic">baseChannelDensityCond</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductanceDensity">conductanceDensity</a></td>
   </tr>
-    <td style="color:darkgrey"><b>iDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
+    <td style="color:darkgrey"><b>iDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#currentDensity">currentDensity</a></td>
   </tr>
   <tr>
@@ -1178,7 +1178,7 @@
     <td><b>temperature</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#temperature">temperature</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
 <tr>
@@ -1219,7 +1219,7 @@
   <tr>
     <td colspan='3'>
        <b>channelDensityGHK</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
@@ -1261,7 +1261,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
 </td>
-    <td style="color:darkgrey"><b>iDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
+    <td style="color:darkgrey"><b>iDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#currentDensity">currentDensity</a></td>
   </tr>
   <tr>
@@ -1278,7 +1278,7 @@
     <td><b>temperature</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#temperature">temperature</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
 <tr>
@@ -1356,7 +1356,7 @@
     <td style="color:darkgrey"><b>gDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensityCond" title="Base type for distributed conductances on an area of a cell producing a (not necessarily ohmic) current "><span  style="color:#85ACE1;font-style:italic">baseChannelDensityCond</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductanceDensity">conductanceDensity</a></td>
   </tr>
-    <td style="color:darkgrey"><b>iDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
+    <td style="color:darkgrey"><b>iDensity</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#currentDensity">currentDensity</a></td>
   </tr>
   <tr>
@@ -1373,7 +1373,7 @@
     <td><b>temperature</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#temperature">temperature</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
 <tr>
@@ -1418,7 +1418,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Simple model of a conductance based cell, with no separate morphology element, just an absolute capacitance <b>C,</b> and a set of channel populations </i></span>    </td>
+      <span  style="color:dimgrey"><i>Simple model of a conductance based cell, with no separate <a href="Cells.html#morphology" title="The collection of segments which specify the 3D structure of the cell, along with a number of segmentGroups ">morphology</a> element, just an absolute capacitance <b>C,</b> and a set of channel <b>populations.</b> Note: use of <a href="Cells.html#cell" title="Cell with segments specified in a morphology element along with details on its biophysicalProperties. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and v of this cell represents the membrane potential in that isopotential segment. ">cell</a> is generally preferable (and more widely supported), even for a single compartment cell. </i></span>    </td>
   </tr>
   <tr>
 
@@ -1428,10 +1428,10 @@
     <td style="color:darkgrey"><b>C</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPotCap" title="Any cell with a membrane potential v with voltage units and a membrane capacitance C. Also defines exposed value iSyn for current due to external synapses and iMemb for total transmembrane current (usually channel currents plus iSyn) "><span  style="color:#85ACE1;font-style:italic">baseCellMembPotCap</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#capacitance">capacitance</a></td>
   </tr>
-    <td><b>thresh</b></td>
+    <td><b>thresh</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The voltage threshold above which the cell is considered to be _spiking</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
-    <td><b>v0</b></td>
+    <td><b>v0</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The initial membrane potential of the cell</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -1440,7 +1440,7 @@
     <span class="label label-success">Children elements</span>
 </td>
     <td><b>populations</b></td>
-    <td width="100"><a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></td>
+    <td width="100"><a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of which are of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></td>
   </tr>
   <tr>
 
@@ -1453,7 +1453,7 @@
     <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPotCap" title="Any cell with a membrane potential v with voltage units and a membrane capacitance C. Also defines exposed value iSyn for current due to external synapses and iMemb for total transmembrane current (usually channel currents plus iSyn) "><span  style="color:#85ACE1;font-style:italic">baseCellMembPotCap</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -1518,7 +1518,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>TEMPORARY: Point cell with conductances and Ca concentration  info. Not yet fully tested!!! </i></span>    </td>
+      <span  style="color:dimgrey"><i>TEMPORARY: Point cell with conductances and Ca concentration info. Not yet fully tested!!! TODO: Remove in favour of <a href="Cells.html#cell" title="Cell with segments specified in a morphology element along with details on its biophysicalProperties. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and v of this cell represents the membrane potential in that isopotential segment. ">cell</a> </i></span>    </td>
   </tr>
   <tr>
 
@@ -1528,10 +1528,10 @@
     <td style="color:darkgrey"><b>C</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPotCap" title="Any cell with a membrane potential v with voltage units and a membrane capacitance C. Also defines exposed value iSyn for current due to external synapses and iMemb for total transmembrane current (usually channel currents plus iSyn) "><span  style="color:#85ACE1;font-style:italic">baseCellMembPotCap</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#capacitance">capacitance</a></td>
   </tr>
-    <td><b>thresh</b></td>
+    <td><b>thresh</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The voltage threshold above which the cell is considered to be _spiking</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
-    <td><b>v0</b></td>
+    <td><b>v0</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The initial membrane potential of the cell</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -1540,7 +1540,7 @@
     <span class="label label-success">Children elements</span>
 </td>
     <td><b>populations</b></td>
-    <td width="100"><a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></td>
+    <td width="100"><a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of which are of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></td>
   </tr>
     <td><b>concentrationModels</b></td>
     <td width="100"><a href="Cells.html#concentrationModel" title="Base for any model of an ion concentration which changes with time. Internal (_concentration) and external (_extConcentration) values for the concentration of the ion are given. ">concentrationModel</a></td>
@@ -1562,7 +1562,7 @@
     <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPotCap" title="Any cell with a membrane potential v with voltage units and a membrane capacitance C. Also defines exposed value iSyn for current due to external synapses and iMemb for total transmembrane current (usually channel currents plus iSyn) "><span  style="color:#85ACE1;font-style:italic">baseCellMembPotCap</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -1631,7 +1631,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Point furthest from the soma in a segment </i></span>    </td>
+      <span  style="color:dimgrey"><i>Point on a <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. Its id should be a nonnegative integer (usually soma/root = 0). Its end points are given by the proximal and distal points. The proximal point can be omitted, usually because it is the same as a point on the parent segment, see proximal for details. parent specifies the parent segment. The first segment of a cell (with no parent) usually represents the soma. The shape is normally a cylinder (radii of the proximal and distal equal, but positions different) or a conical frustum (radii and positions different). If the x,y,x positions of the proximal and distal are equal, the segment can be interpreted as a sphere, and in this case the radii of these points must be equal. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a> furthest from the soma. Should always be present in the description of a <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. Its id should be a nonnegative integer (usually soma/root = 0). Its end points are given by the proximal and distal points. The proximal point can be omitted, usually because it is the same as a point on the parent segment, see proximal for details. parent specifies the parent segment. The first segment of a cell (with no parent) usually represents the soma. The shape is normally a cylinder (radii of the proximal and distal equal, but positions different) or a conical frustum (radii and positions different). If the x,y,x positions of the proximal and distal are equal, the segment can be interpreted as a sphere, and in this case the radii of these points must be equal. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>, unlike <a href="Cells.html#proximal" title="Point on a segment closest to the soma. Note, the proximal point can be omitted, and in this case is defined as being the point fractionAlong between the proximal and distal point of the parent, i.e. if fractionAlong = 1 (as it is by default) it will be the distal on the parent, or if fractionAlong = 0, it will be the proximal point. If between 0 and 1, it is the linear interpolation between the two points. ">proximal</a> </i></span>    </td>
   </tr>
   <tr>
 
@@ -1678,7 +1678,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Point closest to the soma in a segment. Note, if the proximal point is equal to the distal point of the parent segment, proximal can be omitted. </i></span>    </td>
+      <span  style="color:dimgrey"><i>Point on a <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. Its id should be a nonnegative integer (usually soma/root = 0). Its end points are given by the proximal and distal points. The proximal point can be omitted, usually because it is the same as a point on the parent segment, see proximal for details. parent specifies the parent segment. The first segment of a cell (with no parent) usually represents the soma. The shape is normally a cylinder (radii of the proximal and distal equal, but positions different) or a conical frustum (radii and positions different). If the x,y,x positions of the proximal and distal are equal, the segment can be interpreted as a sphere, and in this case the radii of these points must be equal. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a> closest to the soma. Note, the proximal point can be omitted, and in this case is defined as being the point <b>fractionAlong</b> between the proximal and <a href="Cells.html#distal" title="Point on a segment furthest from the soma. Should always be present in the description of a segment, unlike proximal ">distal</a> point of the <a href="Cells.html#parent" title="Specifies the segment which is this segment's parent. The fractionAlong specifies where it is connected, usually 1 (the default value), meaning the distal point of the parent, or 0, meaning the proximal point. If it is between these, a linear interpolation between the 2 points should be used. ">parent</a>, i.e. if <b>fractionAlong</b> = 1 (as it is by default) it will be the <b>distal</b> on the parent, or if <b>fractionAlong</b> = 0, it will be the proximal point. If between 0 and 1, it is the linear interpolation between the two points. </i></span>    </td>
   </tr>
   <tr>
 
@@ -1725,7 +1725,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Specifies the segment which is this segment's parent </i></span>    </td>
+      <span  style="color:dimgrey"><i>Specifies the <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. Its id should be a nonnegative integer (usually soma/root = 0). Its end points are given by the proximal and distal points. The proximal point can be omitted, usually because it is the same as a point on the parent segment, see proximal for details. parent specifies the parent segment. The first segment of a cell (with no parent) usually represents the soma. The shape is normally a cylinder (radii of the proximal and distal equal, but positions different) or a conical frustum (radii and positions different). If the x,y,x positions of the proximal and distal are equal, the segment can be interpreted as a sphere, and in this case the radii of these points must be equal. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a> which is this segment's parent. The <b>fractionAlong</b> specifies where it is connected, usually 1 (the default value), meaning the <a href="Cells.html#distal" title="Point on a segment furthest from the soma. Should always be present in the description of a segment, unlike proximal ">distal</a> point of the parent, or 0, meaning the <a href="Cells.html#proximal" title="Point on a segment closest to the soma. Note, the proximal point can be omitted, and in this case is defined as being the point fractionAlong between the proximal and distal point of the parent, i.e. if fractionAlong = 1 (as it is by default) it will be the distal on the parent, or if fractionAlong = 0, it will be the proximal point. If between 0 and 1, it is the linear interpolation between the two points. ">proximal</a> point. If it is between these, a linear interpolation between the 2 points should be used. </i></span>    </td>
   </tr>
   <tr>
 
@@ -1747,7 +1747,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>A segment defines the smallest unit within a possibly branching structure (<a href="Cells.html#morphology" title="The collection of segments which specify the 3D structure of the cell, along with a number of segmentGroups ">morphology</a>), such as a dendrite or axon. The shape is given by the <a href="Cells.html#proximal" title="Point closest to the soma in a segment. Note, if the proximal point is equal to the distal point of the parent segment, proximal can be omitted. ">proximal</a> and <a href="Cells.html#distal" title="Point furthest from the soma in a segment ">distal</a> points. If <a href="Cells.html#proximal" title="Point closest to the soma in a segment. Note, if the proximal point is equal to the distal point of the parent segment, proximal can be omitted. ">proximal</a> is missing, the proximal point is assumed to be the <a href="Cells.html#distal" title="Point furthest from the soma in a segment ">distal</a> point of the parent. <a href="Cells.html#parent" title="Specifies the segment which is this segment's parent ">parent</a> specifies the parent segment. The first segment (no <a href="Cells.html#parent" title="Specifies the segment which is this segment's parent ">parent</a>) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  </i></span>    </td>
+      <span  style="color:dimgrey"><i>A segment defines the smallest unit within a possibly branching structure (<a href="Cells.html#morphology" title="The collection of segments which specify the 3D structure of the cell, along with a number of segmentGroups ">morphology</a>), such as a dendrite or axon. Its <b>id</b> should be a nonnegative integer (usually soma/root = 0). Its end points are given by the <a href="Cells.html#proximal" title="Point on a segment closest to the soma. Note, the proximal point can be omitted, and in this case is defined as being the point fractionAlong between the proximal and distal point of the parent, i.e. if fractionAlong = 1 (as it is by default) it will be the distal on the parent, or if fractionAlong = 0, it will be the proximal point. If between 0 and 1, it is the linear interpolation between the two points. ">proximal</a> and <a href="Cells.html#distal" title="Point on a segment furthest from the soma. Should always be present in the description of a segment, unlike proximal ">distal</a> points. The <a href="Cells.html#proximal" title="Point on a segment closest to the soma. Note, the proximal point can be omitted, and in this case is defined as being the point fractionAlong between the proximal and distal point of the parent, i.e. if fractionAlong = 1 (as it is by default) it will be the distal on the parent, or if fractionAlong = 0, it will be the proximal point. If between 0 and 1, it is the linear interpolation between the two points. ">proximal</a> point can be omitted, usually because it is the same as a point on the <a href="Cells.html#parent" title="Specifies the segment which is this segment's parent. The fractionAlong specifies where it is connected, usually 1 (the default value), meaning the distal point of the parent, or 0, meaning the proximal point. If it is between these, a linear interpolation between the 2 points should be used. ">parent</a> segment, see <a href="Cells.html#proximal" title="Point on a segment closest to the soma. Note, the proximal point can be omitted, and in this case is defined as being the point fractionAlong between the proximal and distal point of the parent, i.e. if fractionAlong = 1 (as it is by default) it will be the distal on the parent, or if fractionAlong = 0, it will be the proximal point. If between 0 and 1, it is the linear interpolation between the two points. ">proximal</a> for details. <a href="Cells.html#parent" title="Specifies the segment which is this segment's parent. The fractionAlong specifies where it is connected, usually 1 (the default value), meaning the distal point of the parent, or 0, meaning the proximal point. If it is between these, a linear interpolation between the 2 points should be used. ">parent</a> specifies the parent segment. The first segment of a <a href="Cells.html#cell" title="Cell with segments specified in a morphology element along with details on its biophysicalProperties. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and v of this cell represents the membrane potential in that isopotential segment. ">cell</a> (with no <a href="Cells.html#parent" title="Specifies the segment which is this segment's parent. The fractionAlong specifies where it is connected, usually 1 (the default value), meaning the distal point of the parent, or 0, meaning the proximal point. If it is between these, a linear interpolation between the 2 points should be used. ">parent</a>) usually represents the soma. The shape is normally a cylinder (radii of the <a href="Cells.html#proximal" title="Point on a segment closest to the soma. Note, the proximal point can be omitted, and in this case is defined as being the point fractionAlong between the proximal and distal point of the parent, i.e. if fractionAlong = 1 (as it is by default) it will be the distal on the parent, or if fractionAlong = 0, it will be the proximal point. If between 0 and 1, it is the linear interpolation between the two points. ">proximal</a> and <a href="Cells.html#distal" title="Point on a segment furthest from the soma. Should always be present in the description of a segment, unlike proximal ">distal</a> equal, but positions different) or a conical frustum (radii and positions different). If the x,y,x positions of the <a href="Cells.html#proximal" title="Point on a segment closest to the soma. Note, the proximal point can be omitted, and in this case is defined as being the point fractionAlong between the proximal and distal point of the parent, i.e. if fractionAlong = 1 (as it is by default) it will be the distal on the parent, or if fractionAlong = 0, it will be the proximal point. If between 0 and 1, it is the linear interpolation between the two points. ">proximal</a> and <a href="Cells.html#distal" title="Point on a segment furthest from the soma. Should always be present in the description of a segment, unlike proximal ">distal</a> are equal, the segment can be interpreted as a sphere, and in this case the radii of these points must be equal. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  </i></span>    </td>
   </tr>
   <tr>
 
@@ -1762,13 +1762,13 @@
     <span class="label label-success">Child elements</span>
 </td>
     <td><b>parent</b></td>
-    <td width="100"><a href="Cells.html#parent" title="Specifies the segment which is this segment's parent ">parent</a></td>
+    <td width="100"><a href="Cells.html#parent" title="Specifies the segment which is this segment's parent. The fractionAlong specifies where it is connected, usually 1 (the default value), meaning the distal point of the parent, or 0, meaning the proximal point. If it is between these, a linear interpolation between the 2 points should be used. ">parent</a></td>
   </tr>
     <td><b>distal</b></td>
-    <td width="100"><a href="Cells.html#distal" title="Point furthest from the soma in a segment ">distal</a></td>
+    <td width="100"><a href="Cells.html#distal" title="Point on a segment furthest from the soma. Should always be present in the description of a segment, unlike proximal ">distal</a></td>
   </tr>
     <td><b>proximal</b></td>
-    <td width="100"><a href="Cells.html#proximal" title="Point closest to the soma in a segment. Note, if the proximal point is equal to the distal point of the parent segment, proximal can be omitted. ">proximal</a></td>
+    <td width="100"><a href="Cells.html#proximal" title="Point on a segment closest to the soma. Note, the proximal point can be omitted, and in this case is defined as being the point fractionAlong between the proximal and distal point of the parent, i.e. if fractionAlong = 1 (as it is by default) it will be the distal on the parent, or if fractionAlong = 0, it will be the proximal point. If between 0 and 1, it is the linear interpolation between the two points. ">proximal</a></td>
   </tr>
   <tr>
 
@@ -1830,7 +1830,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>A method to describe a group of <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent. parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>s in a <a href="Cells.html#morphology" title="The collection of segments which specify the 3D structure of the cell, along with a number of segmentGroups ">morphology</a> </i></span>    </td>
+      <span  style="color:dimgrey"><i>A method to describe a group of <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. Its id should be a nonnegative integer (usually soma/root = 0). Its end points are given by the proximal and distal points. The proximal point can be omitted, usually because it is the same as a point on the parent segment, see proximal for details. parent specifies the parent segment. The first segment of a cell (with no parent) usually represents the soma. The shape is normally a cylinder (radii of the proximal and distal equal, but positions different) or a conical frustum (radii and positions different). If the x,y,x positions of the proximal and distal are equal, the segment can be interpreted as a sphere, and in this case the radii of these points must be equal. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>s in a <a href="Cells.html#morphology" title="The collection of segments which specify the 3D structure of the cell, along with a number of segmentGroups ">morphology</a>, e.g. soma_group, dendrite_group, axon_group. While a name is useful to describe the group, the <b>neuroLexId</b> attribute can be used to explicitly specify the meaning of the group, e.g. sao1044911821 for 'Neuronal Cell Body', sao1211023249 for 'Dendrite'. The <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. Its id should be a nonnegative integer (usually soma/root = 0). Its end points are given by the proximal and distal points. The proximal point can be omitted, usually because it is the same as a point on the parent segment, see proximal for details. parent specifies the parent segment. The first segment of a cell (with no parent) usually represents the soma. The shape is normally a cylinder (radii of the proximal and distal equal, but positions different) or a conical frustum (radii and positions different). If the x,y,x positions of the proximal and distal are equal, the segment can be interpreted as a sphere, and in this case the radii of these points must be equal. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>s in this group can be specified as: a list of individual <a href="Cells.html#member" title="A single identified segment which is part of the segmentGroup ">member</a> segments; a <a href="Cells.html#path" title="Include all the segments between those specified by from and to, inclusive ">path</a>, all of the segments along which should be included; a <a href="Cells.html#subTree" title="Include all the segments distal to that specified by from in the segmentGroup ">subTree</a> of the <a href="Cells.html#cell" title="Cell with segments specified in a morphology element along with details on its biophysicalProperties. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and v of this cell represents the membrane potential in that isopotential segment. ">cell</a> to include; other segmentGroups to <a href="Cells.html#include" title="Include all members of another segmentGroup in this group ">include</a> (so all segments from those get included here). An <a href="Cells.html#inhomogeneousParameter" title="An inhomogeneous parameter specified across the segmentGroup (see variableParameter for usage). ">inhomogeneousParameter</a> can be defined on the region of the cell specified by this group (see <a href="Cells.html#variableParameter" title="Specifies a parameter (e.g. condDensity) which can vary its value across a segmentGroup. The value is calculated from value attribute of the inhomogeneousValue subelement. This element is normally a child of channelDensityNonUniform, channelDensityNonUniformNernst or channelDensityNonUniformGHK and is used to calculate the value of the conductance, etc. which will vary on different parts of the cell. The segmentGroup specified here needs to define an inhomogeneousParameter (referenced from inhomogeneousParameter in the inhomogeneousValue), which calculates a variable (e.g. p) varying across the cell (e.g. based on the path length from soma), which is then used in the value attribute of the inhomogeneousValue (so for example condDensity = f(p)) ">variableParameter</a> for usage). </i></span>    </td>
   </tr>
   <tr>
 
@@ -1845,17 +1845,17 @@
     <span class="label label-success">Child elements</span>
 </td>
     <td><b>notes</b></td>
-    <td width="100"><a href="NeuroMLCoreCompTypes.html#notes" title="Human readable notes on a Component ">notes</a></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#notes" title="Human readable notes/description for a Component ">notes</a></td>
   </tr>
     <td><b>annotation</b></td>
-    <td width="100"><a href="NeuroMLCoreCompTypes.html#annotation" title="Annotation... ">annotation</a></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#annotation" title="A structured annotation containing metadata, specifically RDF or property elements ">annotation</a></td>
   </tr>
 
 <td width="70" rowspan="6">
     <span class="label label-success">Children elements</span>
 </td>
     <td><b>property</b></td>
-    <td width="100"><a href="NeuroMLCoreCompTypes.html#property" title="Property in Annotation... ">property</a></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#property" title="A property (a tag and value pair), which can be on any baseStandalone either as a direct child, or within an Annotation. Generally something which helps the visual display or facilitates simulation of a Component, but is not a core physiological property. Common examples include: numberInternalDivisions, equivalent of nseg in NEURON; radius, for a radius to use in graphical displays for abstract cells (i.e. without defined morphologies); color, the color to use for a Population or populationList of cells; recommended_dt_ms, the recommended timestep to use for simulating a Network, recommended_duration_ms the recommended duration to use when running a Network  ">property</a></td>
   </tr>
     <td><b>members</b></td>
     <td width="100"><a href="Cells.html#member" title="A single identified segment which is part of the segmentGroup ">member</a></td>
@@ -1867,10 +1867,10 @@
     <td width="100"><a href="Cells.html#subTree" title="Include all the segments distal to that specified by from in the segmentGroup ">subTree</a></td>
   </tr>
     <td><b>includes</b></td>
-    <td width="100"><a href="Cells.html#include" title="Include all members of another segmentGroup in this ">include</a></td>
+    <td width="100"><a href="Cells.html#include" title="Include all members of another segmentGroup in this group ">include</a></td>
   </tr>
     <td><b>inhomogeneousParameter</b></td>
-    <td width="100"><a href="Cells.html#inhomogeneousParameter" title="An inhomogeneous parameter specified across the segmentGroup ">inhomogeneousParameter</a></td>
+    <td width="100"><a href="Cells.html#inhomogeneousParameter" title="An inhomogeneous parameter specified across the segmentGroup (see variableParameter for usage). ">inhomogeneousParameter</a></td>
   </tr>
 </table>
 
@@ -1883,7 +1883,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>A single identified <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent. parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a> which is part of the <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology ">segmentGroup</a> </i></span>    </td>
+      <span  style="color:dimgrey"><i>A single identified <b>segment</b> which is part of the <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology, e.g. soma_group, dendrite_group, axon_group. While a name is useful to describe the group, the neuroLexId attribute can be used to explicitly specify the meaning of the group, e.g. sao1044911821 for 'Neuronal Cell Body', sao1211023249 for 'Dendrite'. The segments in this group can be specified as: a list of individual member segments; a path, all of the segments along which should be included; a subTree of the cell to include; other segmentGroups to include (so all segments from those get included here). An inhomogeneousParameter can be defined on the region of the cell specified by this group (see variableParameter for usage). ">segmentGroup</a> </i></span>    </td>
   </tr>
   <tr>
 
@@ -1903,7 +1903,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Specifies which <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent. parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a> distal from which to calculate the <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology ">segmentGroup</a> </i></span>    </td>
+      <span  style="color:dimgrey"><i>In a <a href="Cells.html#path" title="Include all the segments between those specified by from and to, inclusive ">path</a> or <a href="Cells.html#subTree" title="Include all the segments distal to that specified by from in the segmentGroup ">subTree</a>, specifies which <b>segment</b> (inclusive) from which to calculate the <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology, e.g. soma_group, dendrite_group, axon_group. While a name is useful to describe the group, the neuroLexId attribute can be used to explicitly specify the meaning of the group, e.g. sao1044911821 for 'Neuronal Cell Body', sao1211023249 for 'Dendrite'. The segments in this group can be specified as: a list of individual member segments; a path, all of the segments along which should be included; a subTree of the cell to include; other segmentGroups to include (so all segments from those get included here). An inhomogeneousParameter can be defined on the region of the cell specified by this group (see variableParameter for usage). ">segmentGroup</a> </i></span>    </td>
   </tr>
   <tr>
 
@@ -1923,7 +1923,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Specifies which <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent. parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a> up to which to calculate the <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology ">segmentGroup</a> </i></span>    </td>
+      <span  style="color:dimgrey"><i>In a <a href="Cells.html#path" title="Include all the segments between those specified by from and to, inclusive ">path</a>, specifies which <b>segment</b> (inclusive) up to which to calculate the <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology, e.g. soma_group, dendrite_group, axon_group. While a name is useful to describe the group, the neuroLexId attribute can be used to explicitly specify the meaning of the group, e.g. sao1044911821 for 'Neuronal Cell Body', sao1211023249 for 'Dendrite'. The segments in this group can be specified as: a list of individual member segments; a path, all of the segments along which should be included; a subTree of the cell to include; other segmentGroups to include (so all segments from those get included here). An inhomogeneousParameter can be defined on the region of the cell specified by this group (see variableParameter for usage). ">segmentGroup</a> </i></span>    </td>
   </tr>
   <tr>
 
@@ -1943,7 +1943,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Include all members of another <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology ">segmentGroup</a> in this </i></span>    </td>
+      <span  style="color:dimgrey"><i>Include all members of another <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology, e.g. soma_group, dendrite_group, axon_group. While a name is useful to describe the group, the neuroLexId attribute can be used to explicitly specify the meaning of the group, e.g. sao1044911821 for 'Neuronal Cell Body', sao1211023249 for 'Dendrite'. The segments in this group can be specified as: a list of individual member segments; a path, all of the segments along which should be included; a subTree of the cell to include; other segmentGroups to include (so all segments from those get included here). An inhomogeneousParameter can be defined on the region of the cell specified by this group (see variableParameter for usage). ">segmentGroup</a> in this group </i></span>    </td>
   </tr>
   <tr>
 
@@ -1965,7 +1965,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Include all the segments between those specified by <a href="Cells.html#from" title="Specifies which segment distal from which to calculate the segmentGroup ">from</a> and <a href="Cells.html#to" title="Specifies which segment up to which to calculate the segmentGroup ">to</a>, inclusive </i></span>    </td>
+      <span  style="color:dimgrey"><i>Include all the <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. Its id should be a nonnegative integer (usually soma/root = 0). Its end points are given by the proximal and distal points. The proximal point can be omitted, usually because it is the same as a point on the parent segment, see proximal for details. parent specifies the parent segment. The first segment of a cell (with no parent) usually represents the soma. The shape is normally a cylinder (radii of the proximal and distal equal, but positions different) or a conical frustum (radii and positions different). If the x,y,x positions of the proximal and distal are equal, the segment can be interpreted as a sphere, and in this case the radii of these points must be equal. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>s between those specified by <a href="Cells.html#from" title="In a path or subTree, specifies which segment (inclusive) from which to calculate the segmentGroup ">from</a> and <a href="Cells.html#to" title="In a path, specifies which segment (inclusive) up to which to calculate the segmentGroup ">to</a>, inclusive </i></span>    </td>
   </tr>
   <tr>
 
@@ -1973,10 +1973,10 @@
     <span class="label label-success">Child elements</span>
 </td>
     <td><b>from</b></td>
-    <td width="100"><a href="Cells.html#from" title="Specifies which segment distal from which to calculate the segmentGroup ">from</a></td>
+    <td width="100"><a href="Cells.html#from" title="In a path or subTree, specifies which segment (inclusive) from which to calculate the segmentGroup ">from</a></td>
   </tr>
     <td><b>to</b></td>
-    <td width="100"><a href="Cells.html#to" title="Specifies which segment up to which to calculate the segmentGroup ">to</a></td>
+    <td width="100"><a href="Cells.html#to" title="In a path, specifies which segment (inclusive) up to which to calculate the segmentGroup ">to</a></td>
   </tr>
 </table>
 
@@ -1989,7 +1989,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Include all the segments distal to that specified by <a href="Cells.html#from" title="Specifies which segment distal from which to calculate the segmentGroup ">from</a> in the <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology ">segmentGroup</a> </i></span>    </td>
+      <span  style="color:dimgrey"><i>Include all the <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. Its id should be a nonnegative integer (usually soma/root = 0). Its end points are given by the proximal and distal points. The proximal point can be omitted, usually because it is the same as a point on the parent segment, see proximal for details. parent specifies the parent segment. The first segment of a cell (with no parent) usually represents the soma. The shape is normally a cylinder (radii of the proximal and distal equal, but positions different) or a conical frustum (radii and positions different). If the x,y,x positions of the proximal and distal are equal, the segment can be interpreted as a sphere, and in this case the radii of these points must be equal. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>s distal to that specified by <a href="Cells.html#from" title="In a path or subTree, specifies which segment (inclusive) from which to calculate the segmentGroup ">from</a> in the <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology, e.g. soma_group, dendrite_group, axon_group. While a name is useful to describe the group, the neuroLexId attribute can be used to explicitly specify the meaning of the group, e.g. sao1044911821 for 'Neuronal Cell Body', sao1211023249 for 'Dendrite'. The segments in this group can be specified as: a list of individual member segments; a path, all of the segments along which should be included; a subTree of the cell to include; other segmentGroups to include (so all segments from those get included here). An inhomogeneousParameter can be defined on the region of the cell specified by this group (see variableParameter for usage). ">segmentGroup</a> </i></span>    </td>
   </tr>
   <tr>
 
@@ -1997,7 +1997,7 @@
     <span class="label label-success">Child elements</span>
 </td>
     <td><b>from</b></td>
-    <td width="100"><a href="Cells.html#from" title="Specifies which segment distal from which to calculate the segmentGroup ">from</a></td>
+    <td width="100"><a href="Cells.html#from" title="In a path or subTree, specifies which segment (inclusive) from which to calculate the segmentGroup ">from</a></td>
   </tr>
 </table>
 
@@ -2010,7 +2010,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>An inhomogeneous parameter specified across the <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology ">segmentGroup</a> </i></span>    </td>
+      <span  style="color:dimgrey"><i>An inhomogeneous parameter specified across the <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology, e.g. soma_group, dendrite_group, axon_group. While a name is useful to describe the group, the neuroLexId attribute can be used to explicitly specify the meaning of the group, e.g. sao1044911821 for 'Neuronal Cell Body', sao1211023249 for 'Dendrite'. The segments in this group can be specified as: a list of individual member segments; a path, all of the segments along which should be included; a subTree of the cell to include; other segmentGroups to include (so all segments from those get included here). An inhomogeneousParameter can be defined on the region of the cell specified by this group (see variableParameter for usage). ">segmentGroup</a> (see <a href="Cells.html#variableParameter" title="Specifies a parameter (e.g. condDensity) which can vary its value across a segmentGroup. The value is calculated from value attribute of the inhomogeneousValue subelement. This element is normally a child of channelDensityNonUniform, channelDensityNonUniformNernst or channelDensityNonUniformGHK and is used to calculate the value of the conductance, etc. which will vary on different parts of the cell. The segmentGroup specified here needs to define an inhomogeneousParameter (referenced from inhomogeneousParameter in the inhomogeneousValue), which calculates a variable (e.g. p) varying across the cell (e.g. based on the path length from soma), which is then used in the value attribute of the inhomogeneousValue (so for example condDensity = f(p)) ">variableParameter</a> for usage). </i></span>    </td>
   </tr>
   <tr>
 
@@ -2083,7 +2083,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>The collection of <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent. parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>s which specify the 3D structure of the cell, along with a number of <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology ">segmentGroup</a>s </i></span>    </td>
+      <span  style="color:dimgrey"><i>The collection of <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. Its id should be a nonnegative integer (usually soma/root = 0). Its end points are given by the proximal and distal points. The proximal point can be omitted, usually because it is the same as a point on the parent segment, see proximal for details. parent specifies the parent segment. The first segment of a cell (with no parent) usually represents the soma. The shape is normally a cylinder (radii of the proximal and distal equal, but positions different) or a conical frustum (radii and positions different). If the x,y,x positions of the proximal and distal are equal, the segment can be interpreted as a sphere, and in this case the radii of these points must be equal. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>s which specify the 3D structure of the cell, along with a number of <a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology, e.g. soma_group, dendrite_group, axon_group. While a name is useful to describe the group, the neuroLexId attribute can be used to explicitly specify the meaning of the group, e.g. sao1044911821 for 'Neuronal Cell Body', sao1211023249 for 'Dendrite'. The segments in this group can be specified as: a list of individual member segments; a path, all of the segments along which should be included; a subTree of the cell to include; other segmentGroups to include (so all segments from those get included here). An inhomogeneousParameter can be defined on the region of the cell specified by this group (see variableParameter for usage). ">segmentGroup</a>s </i></span>    </td>
   </tr>
   <tr>
 
@@ -2091,10 +2091,10 @@
     <span class="label label-success">Children elements</span>
 </td>
     <td><b>segments</b></td>
-    <td width="100"><a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent. parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a></td>
+    <td width="100"><a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. Its id should be a nonnegative integer (usually soma/root = 0). Its end points are given by the proximal and distal points. The proximal point can be omitted, usually because it is the same as a point on the parent segment, see proximal for details. parent specifies the parent segment. The first segment of a cell (with no parent) usually represents the soma. The shape is normally a cylinder (radii of the proximal and distal equal, but positions different) or a conical frustum (radii and positions different). If the x,y,x positions of the proximal and distal are equal, the segment can be interpreted as a sphere, and in this case the radii of these points must be equal. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a></td>
   </tr>
     <td><b>segmentGroups</b></td>
-    <td width="100"><a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology ">segmentGroup</a></td>
+    <td width="100"><a href="Cells.html#segmentGroup" title="A method to describe a group of segments in a morphology, e.g. soma_group, dendrite_group, axon_group. While a name is useful to describe the group, the neuroLexId attribute can be used to explicitly specify the meaning of the group, e.g. sao1044911821 for 'Neuronal Cell Body', sao1211023249 for 'Dendrite'. The segments in this group can be specified as: a list of individual member segments; a path, all of the segments along which should be included; a subTree of the cell to include; other segmentGroups to include (so all segments from those get included here). An inhomogeneousParameter can be defined on the region of the cell specified by this group (see variableParameter for usage). ">segmentGroup</a></td>
   </tr>
 </table>
 
@@ -2218,10 +2218,10 @@
     <td width="100"><a href="Cells.html#specificCapacitance" title="Capacitance per unit area ">specificCapacitance</a></td>
   </tr>
     <td><b>populations</b></td>
-    <td width="100"><a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></td>
+    <td width="100"><a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of which are of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></td>
   </tr>
     <td><b>channelDensities</b></td>
-    <td width="100"><a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a></td>
+    <td width="100"><a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a></td>
   </tr>
   <tr>
 
@@ -2297,10 +2297,10 @@
     <td width="100"><a href="Cells.html#specificCapacitance" title="Capacitance per unit area ">specificCapacitance</a></td>
   </tr>
     <td><b>populations</b></td>
-    <td width="100"><a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></td>
+    <td width="100"><a href="Cells.html#baseChannelPopulation" title="Base type for any current produced by a population of channels, all of which are of type ionChannel "><span  style="color:#85ACE1;font-style:italic">baseChannelPopulation</span></a></td>
   </tr>
     <td><b>channelDensities</b></td>
-    <td width="100"><a href="Cells.html#baseChannelDensity" title="Base type for current distributed on an area of a cell "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a></td>
+    <td width="100"><a href="Cells.html#baseChannelDensity" title="Base type for a current of density iDensity distributed on an area of a cell, flowing through the specified ionChannel. Instances of this (normally channelDensity) are specified in the membraneProperties of the cell. "><span  style="color:#85ACE1;font-style:italic">baseChannelDensity</span></a></td>
   </tr>
   <tr>
 
@@ -3003,11 +3003,11 @@
   <tr>
     <td colspan='3'>
        <b>cell</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Cell with <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent. parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>s specified in a <a href="Cells.html#morphology" title="The collection of segments which specify the 3D structure of the cell, along with a number of segmentGroups ">morphology</a> element along with details on its <a href="Cells.html#biophysicalProperties" title="The biophysical properties of the cell, including the membraneProperties and the intracellularProperties ">biophysicalProperties</a>. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and <b>v</b> of this cell represents the membrane potential in that isopotential segment. </i></span>    </td>
+      <span  style="color:dimgrey"><i>Cell with <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. Its id should be a nonnegative integer (usually soma/root = 0). Its end points are given by the proximal and distal points. The proximal point can be omitted, usually because it is the same as a point on the parent segment, see proximal for details. parent specifies the parent segment. The first segment of a cell (with no parent) usually represents the soma. The shape is normally a cylinder (radii of the proximal and distal equal, but positions different) or a conical frustum (radii and positions different). If the x,y,x positions of the proximal and distal are equal, the segment can be interpreted as a sphere, and in this case the radii of these points must be equal. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>s specified in a <a href="Cells.html#morphology" title="The collection of segments which specify the 3D structure of the cell, along with a number of segmentGroups ">morphology</a> element along with details on its <a href="Cells.html#biophysicalProperties" title="The biophysical properties of the cell, including the membraneProperties and the intracellularProperties ">biophysicalProperties</a>. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and <b>v</b> of this cell represents the membrane potential in that isopotential segment. </i></span>    </td>
   </tr>
   <tr>
 
@@ -3056,7 +3056,7 @@
     <td><b>totSpecCap</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#specificCapacitance">specificCapacitance</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -3134,7 +3134,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Variant of cell with two independent Ca2+ pools. Cell with <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. The shape is given by the proximal and distal points. If proximal is missing, the proximal point is assumed to be the distal point of the parent. parent specifies the parent segment. The first segment (no parent) usually represents the soma. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>s specified in a <a href="Cells.html#morphology" title="The collection of segments which specify the 3D structure of the cell, along with a number of segmentGroups ">morphology</a> element along with details on its <a href="Cells.html#biophysicalProperties" title="The biophysical properties of the cell, including the membraneProperties and the intracellularProperties ">biophysicalProperties</a>. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and <b>v</b> of this cell represents the membrane potential in that isopotential segment. </i></span>    </td>
+      <span  style="color:dimgrey"><i>Variant of cell with two independent Ca2+ pools. Cell with <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. Its id should be a nonnegative integer (usually soma/root = 0). Its end points are given by the proximal and distal points. The proximal point can be omitted, usually because it is the same as a point on the parent segment, see proximal for details. parent specifies the parent segment. The first segment of a cell (with no parent) usually represents the soma. The shape is normally a cylinder (radii of the proximal and distal equal, but positions different) or a conical frustum (radii and positions different). If the x,y,x positions of the proximal and distal are equal, the segment can be interpreted as a sphere, and in this case the radii of these points must be equal. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>s specified in a <a href="Cells.html#morphology" title="The collection of segments which specify the 3D structure of the cell, along with a number of segmentGroups ">morphology</a> element along with details on its <a href="Cells.html#biophysicalProperties" title="The biophysical properties of the cell, including the membraneProperties and the intracellularProperties ">biophysicalProperties</a>. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and <b>v</b> of this cell represents the membrane potential in that isopotential segment. </i></span>    </td>
   </tr>
   <tr>
 
@@ -3189,7 +3189,7 @@
     <td style="color:darkgrey"><b>totSpecCap</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#cell" title="Cell with segments specified in a morphology element along with details on its biophysicalProperties. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and v of this cell represents the membrane potential in that isopotential segment. ">cell</a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#specificCapacitance">specificCapacitance</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -3269,7 +3269,7 @@
   <tr>
     <td colspan='3'>
        <b><span  style="color:dimgrey;font-style:italic">baseCellMembPotCap</span></b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
@@ -3280,7 +3280,7 @@
 <td width="70" rowspan="1">
     <span class="label label-success">Parameters</span>
 </td>
-    <td><b>C</b></td>
+    <td><b>C</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Total capacitance of the cell membrane</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#capacitance">capacitance</a></td>
   </tr>
   <tr>
@@ -3294,7 +3294,7 @@
     <td><b>iSyn</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Total current due to synaptic inputs</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -3312,7 +3312,7 @@
   <tr>
     <td colspan='3'>
        <b><span  style="color:dimgrey;font-style:italic">baseIaf</span></b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
@@ -3323,10 +3323,10 @@
 <td width="70" rowspan="2">
     <span class="label label-success">Parameters</span>
 </td>
-    <td><b>reset</b></td>
+    <td><b>reset</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The value the membrane potential is reset to on spiking</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
-    <td><b>thresh</b></td>
+    <td><b>thresh</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The membrane potential at which to emit a spiking event and reset voltage</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -3334,7 +3334,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
 </td>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -3380,7 +3380,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
 </td>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -3452,7 +3452,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
 </td>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -3536,7 +3536,7 @@
     <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPotCap" title="Any cell with a membrane potential v with voltage units and a membrane capacitance C. Also defines exposed value iSyn for current due to external synapses and iMemb for total transmembrane current (usually channel currents plus iSyn) "><span  style="color:#85ACE1;font-style:italic">baseCellMembPotCap</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -3591,7 +3591,7 @@
     <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPotCap" title="Any cell with a membrane potential v with voltage units and a membrane capacitance C. Also defines exposed value iSyn for current due to external synapses and iMemb for total transmembrane current (usually channel currents plus iSyn) "><span  style="color:#85ACE1;font-style:italic">baseCellMembPotCap</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -3686,7 +3686,7 @@
     <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPotCap" title="Any cell with a membrane potential v with voltage units and a membrane capacitance C. Also defines exposed value iSyn for current due to external synapses and iMemb for total transmembrane current (usually channel currents plus iSyn) "><span  style="color:#85ACE1;font-style:italic">baseCellMembPotCap</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -3753,7 +3753,7 @@
   <tr>
     <td colspan='3'>
        <b>izhikevichCell</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
@@ -3764,22 +3764,22 @@
 <td width="70" rowspan="6">
     <span class="label label-success">Parameters</span>
 </td>
-    <td><b>a</b></td>
+    <td><b>a</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Time scale of the recovery variable U</i></span></td>
     <td width="100">Dimensionless</td>
   </tr>
-    <td><b>b</b></td>
+    <td><b>b</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Sensitivity of U to the subthreshold fluctuations of the membrane potential V</i></span></td>
     <td width="100">Dimensionless</td>
   </tr>
-    <td><b>c</b></td>
+    <td><b>c</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>After-spike reset value of V</i></span></td>
     <td width="100">Dimensionless</td>
   </tr>
-    <td><b>d</b></td>
+    <td><b>d</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>After-spike increase to U</i></span></td>
     <td width="100">Dimensionless</td>
   </tr>
-    <td><b>thresh</b></td>
+    <td><b>thresh</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Spike threshold</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
-    <td><b>v0</b></td>
+    <td><b>v0</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Initial membrane potential</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -3801,7 +3801,7 @@
     <td><b>U</b></td>
     <td width="100">Dimensionless</td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -3818,7 +3818,7 @@
     <span class="label label-info">Attachments</span>
 </td>
     <td><b>synapses</b></td>
-    <td width="100"><a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There will eventually be dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator, sineGenerator and rampGenerator "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a></td>
+    <td width="100"><a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There are many dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator / pulseGeneratorDL, sineGenerator / sineGeneratorDL and rampGenerator / rampGeneratorDL "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a></td>
   </tr>
 <tr>
 
@@ -3913,7 +3913,7 @@
     <td><b>u</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -4028,7 +4028,7 @@
     <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPotCap" title="Any cell with a membrane potential v with voltage units and a membrane capacitance C. Also defines exposed value iSyn for current due to external synapses and iMemb for total transmembrane current (usually channel currents plus iSyn) "><span  style="color:#85ACE1;font-style:italic">baseCellMembPotCap</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
     <td><b>w</b></td>
@@ -4106,7 +4106,7 @@
   <tr>
     <td colspan='3'>
        <b>fitzHughNagumoCell</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseCellMembPotDL" title="Any spiking cell which has a dimensioness membrane potential, V. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPotDL</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseCellMembPotDL" title="Any spiking cell which has a dimensioness membrane potential, V (as opposed to a membrane potential units of voltage, baseCellMembPot). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPotDL</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
@@ -4133,7 +4133,7 @@
 <td width="70" rowspan="2">
     <span class="label label-info">Exposures</span>
 </td>
-    <td style="color:darkgrey"><b>V</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPotDL" title="Any spiking cell which has a dimensioness membrane potential, V. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPotDL</span></a>)</td>
+    <td style="color:darkgrey"><b>V</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPotDL" title="Any spiking cell which has a dimensioness membrane potential, V (as opposed to a membrane potential units of voltage, baseCellMembPot). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPotDL</span></a>)</td>
     <td width="100">Dimensionless</td>
   </tr>
     <td><b>W</b></td>
@@ -4172,7 +4172,7 @@
   <tr>
     <td colspan='3'>
        <b>pinskyRinzelCA3Cell</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
@@ -4307,7 +4307,7 @@
     <td><b>sd</b></td>
     <td width="100">Dimensionless</td>
   </tr>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with voltage units. "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>

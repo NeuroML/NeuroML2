@@ -15,7 +15,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="#">NeuroML v2.1 Component Types</a>
+      <a class="brand" href="#">NeuroML v2.2 Component Types</a>
       <div class="nav-collapse">
         <ul class="nav">
           <li><a href="Cells.html">Cells</a></li>
@@ -87,10 +87,10 @@
     </div><!--/.well -->
     </div><!--/span-->
     <div class="span7">
-   <div class="alert alert-error"><br/><p><b>  NOTE: the latest version of this documentation can be found on <a href="https://docs.neuroml.org/Userdocs/Schemas/Synapses.html">docs.neuroml.org</a>!</b></p><br/>For more information on NeuroML 2 and LEMS see <a href="http://www.neuroml.org/neuromlv2">here</a>. <br/>Note: these descriptions have been updated to the latest    <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2">NeuroML v2.1</a> definitions, using    <a href="https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS">the latest version of LEMS</a>!</div>
+   <div class="alert alert-error"><br/><p><b>  NOTE: the latest version of this documentation can be found on <a href="https://docs.neuroml.org/Userdocs/Schemas/Synapses.html">docs.neuroml.org</a>!</b></p><br/>For more information on NeuroML 2 and LEMS see <a href="http://www.neuroml.org/neuromlv2">here</a>. <br/>Note: these descriptions have been updated to the latest    <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2">NeuroML v2.2</a> definitions, using    <a href="https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS">the latest version of LEMS</a>!</div>
     <table class="table table-bordered"><tr><td ><h3>Synapses</h3></td></tr>
-    <tr><td><span  style="color:dimgrey"><i>NeuroML2 ComponentType definitions from Synapses.xml </i></span></td></tr>
-    <tr><td>Original LEMS ComponentType definitions: <a href="https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/Synapses.xml">Synapses.xml</a><br/>    Schema against which NeuroML based on these should be valid: <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2/NeuroML_v2.1.xsd">NeuroML_v2.1.xsd</a></td></tr>
+    <tr><td><span  style="color:dimgrey"><i>A number of synaptic ComponentTypes for use in NeuroML 2 documents, e.g. <a href="Synapses.html#expOneSynapse" title="Ohmic synapse model whose conductance rises instantaneously by (_gbase * weight) on receiving an event, and which decays exponentially to zero with time course tauDecay ">expOneSynapse</a>, <a href="Synapses.html#expTwoSynapse" title="Ohmic synapse model whose conductance waveform on receiving an event has a rise time of tauRise and a decay time of tauDecay. Max conductance reached during this time (assuming zero conductance before) is gbase * weight. ">expTwoSynapse</a>, <a href="Synapses.html#blockingPlasticSynapse" title="Biexponential synapse that allows for     optional block and plasticity     mechanisms, which can be expressed as     child elements. ">blockingPlasticSynapse</a>. These extend the <a href="Synapses.html#baseSynapse" title="Base type for all synapses, i.e. ComponentTypes which produce a current (dimension current) and change Dynamics in response to an incoming event. cno_0000009 "><span  style="color:#85ACE1;font-style:italic">baseSynapse</span></a> ComponentType. Also defined continuously transmitting synapses, e.g. <a href="Synapses.html#gapJunction" title="Gap junction/single electrical connection ">gapJunction</a> and <a href="Synapses.html#gradedSynapse" title="Graded/analog synapse. Based on synapse in Methods of http://www.nature.com/neuro/journal/v7/n12/abs/nn1352.html ">gradedSynapse</a>. </i></span></td></tr>
+    <tr><td>Original LEMS ComponentType definitions: <a href="https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/Synapses.xml">Synapses.xml</a><br/>    Schema against which NeuroML based on these should be valid: <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2/NeuroML_v2.2.xsd">NeuroML_v2.2.xsd</a></td></tr>
     </table><br/>
 <a name="baseSynapse">&nbsp;</a>
 <table class="table table-bordered">
@@ -145,7 +145,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
 </td>
-    <td><b>v</b></td>
+    <td><b>v</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The current may vary with the voltage exposed by the ComponentType on which this is placed</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -174,7 +174,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
 </td>
-    <td style="color:darkgrey"><b>I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There will eventually be dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator, sineGenerator and rampGenerator "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a>)</td>
+    <td style="color:darkgrey"><b>I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There are many dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator / pulseGeneratorDL, sineGenerator / sineGeneratorDL and rampGenerator / rampGeneratorDL "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a>)</td>
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
@@ -232,10 +232,10 @@
 <td width="70" rowspan="2">
     <span class="label label-success">Parameters</span>
 </td>
-    <td><b>ibase</b></td>
+    <td><b>ibase</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Baseline current increase after receiving a spike</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td><b>tau</b></td>
+    <td><b>tau</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Time course for rise and decay</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
@@ -300,10 +300,10 @@
 <td width="70" rowspan="2">
     <span class="label label-success">Parameters</span>
 </td>
-    <td><b>erev</b></td>
+    <td><b>erev</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Reversal potential of the synapse</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
-    <td><b>gbase</b></td>
+    <td><b>gbase</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Baseline conductance, generally the maximum conductance following a single spike</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductance">conductance</a></td>
   </tr>
   <tr>
@@ -351,13 +351,13 @@
 <td width="70" rowspan="3">
     <span class="label label-success">Parameters</span>
 </td>
-    <td><b>erev</b></td>
+    <td><b>erev</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Reversal potential of the synapse</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
-    <td><b>gbase1</b></td>
+    <td><b>gbase1</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Baseline conductance 1</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductance">conductance</a></td>
   </tr>
-    <td><b>gbase2</b></td>
+    <td><b>gbase2</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Baseline conductance 2</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductance">conductance</a></td>
   </tr>
   <tr>
@@ -411,7 +411,7 @@
     <td style="color:darkgrey"><b>gbase</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseConductanceBasedSynapse" title="Synapse model which exposes a conductance g in addition to producing a current. Not necessarily ohmic!! cno_0000027 "><span  style="color:#85ACE1;font-style:italic">baseConductanceBasedSynapse</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductance">conductance</a></td>
   </tr>
-    <td><b>tauDecay</b></td>
+    <td><b>tauDecay</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Time course of decay</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
@@ -491,7 +491,7 @@
     <td style="color:darkgrey"><b>gbase</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Synapses.html#baseConductanceBasedSynapse" title="Synapse model which exposes a conductance g in addition to producing a current. Not necessarily ohmic!! cno_0000027 "><span  style="color:#85ACE1;font-style:italic">baseConductanceBasedSynapse</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductance">conductance</a></td>
   </tr>
-    <td><b>tau</b></td>
+    <td><b>tau</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Time course of rise/decay</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
@@ -1574,19 +1574,19 @@
 <td width="70" rowspan="5">
     <span class="label label-success">Parameters</span>
 </td>
-    <td><b>Vth</b></td>
+    <td><b>Vth</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The half-activation voltage of the synapse</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
     <td><b>conductance</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductance">conductance</a></td>
   </tr>
-    <td><b>delta</b></td>
+    <td><b>delta</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Slope of the activation curve</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
-    <td><b>erev</b></td>
+    <td><b>erev</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The reversal potential of the synapse</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
-    <td><b>k</b></td>
+    <td><b>k</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Rate constant for transmitter-receptor dissociation rate</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#per_time">per_time</a></td>
   </tr>
   <tr>

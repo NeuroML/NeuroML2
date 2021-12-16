@@ -15,7 +15,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="#">NeuroML v2.1 Component Types</a>
+      <a class="brand" href="#">NeuroML v2.2 Component Types</a>
       <div class="nav-collapse">
         <ul class="nav">
           <li><a href="Cells.html">Cells</a></li>
@@ -140,7 +140,7 @@
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span><a href="Channels.html#subGate" title="Gate composed of subgates contributing with fractional conductance ">subGate</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="NeuroMLCoreCompTypes.html#notes" title="Human readable notes on a Component ">notes</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="NeuroMLCoreCompTypes.html#notes" title="Human readable notes/description for a Component ">notes</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>timeCourse <a href="Channels.html#baseVoltageDepTime" title="Base ComponentType for voltage dependent ComponentType producing value t with dimension time (e.g. for time course of rate variable). Note: time course would not normally be fit to exp/sigmoid etc. "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepTime</span></a><br/>
   
@@ -200,11 +200,11 @@
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>q10Settings <a href="Channels.html#baseQ10Settings" title="Base ComponentType for a scaling to apply to gating variable time course, usually temperature dependent "><span  style="color:#85ACE1;font-style:italic">baseQ10Settings</span></a><br/>
   
-&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="NeuroMLCoreCompTypes.html#annotation" title="Annotation... ">annotation</a><br/>
+&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="NeuroMLCoreCompTypes.html#annotation" title="A structured annotation containing metadata, specifically RDF or property elements ">annotation</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>rdf:RDF <a href="NeuroMLCoreCompTypes.html#rdf_RDF" title="Work in progress... ">rdf_RDF</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>rdf:RDF <a href="NeuroMLCoreCompTypes.html#rdf_RDF" title="Structured block in an annotation based on RDF. See https://github.com/OpenSourceBrain/OSB_API/blob/master/python/examples/grancelllayer.xml ">rdf_RDF</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>rdf:Description <a href="NeuroMLCoreCompTypes.html#rdf_Description" title="Work in progress... ">rdf_Description</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>rdf:Description <a href="NeuroMLCoreCompTypes.html#rdf_Description" title="Structured block in an annotation based on RDF. ">rdf_Description</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqbiol:encodes <a href="NeuroMLCoreCompTypes.html#bqbiol_encodes" title="See http://co.mbine.org/standards/qualifiers ">bqbiol_encodes</a><br/>
   
@@ -238,15 +238,15 @@
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>bqmodel:isDerivedFrom <a href="NeuroMLCoreCompTypes.html#bqmodel_isDerivedFrom" title="See http://co.mbine.org/standards/qualifiers ">bqmodel_isDerivedFrom</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span><a href="NeuroMLCoreCompTypes.html#property" title="Property in Annotation... ">property</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span><a href="NeuroMLCoreCompTypes.html#property" title="A property (a tag and value pair), which can be on any baseStandalone either as a direct child, or within an Annotation. Generally something which helps the visual display or facilitates simulation of a Component, but is not a core physiological property. Common examples include: numberInternalDivisions, equivalent of nseg in NEURON; radius, for a radius to use in graphical displays for abstract cells (i.e. without defined morphologies); color, the color to use for a Population or populationList of cells; recommended_dt_ms, the recommended timestep to use for simulating a Network, recommended_duration_ms the recommended duration to use when running a Network  ">property</a><br/>
   
     </div><!--/.well -->
     </div><!--/span-->
     <div class="span7">
-   <div class="alert alert-error"><br/><p><b>  NOTE: the latest version of this documentation can be found on <a href="https://docs.neuroml.org/Userdocs/Schemas/Channels.html">docs.neuroml.org</a>!</b></p><br/>For more information on NeuroML 2 and LEMS see <a href="http://www.neuroml.org/neuromlv2">here</a>. <br/>Note: these descriptions have been updated to the latest    <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2">NeuroML v2.1</a> definitions, using    <a href="https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS">the latest version of LEMS</a>!</div>
+   <div class="alert alert-error"><br/><p><b>  NOTE: the latest version of this documentation can be found on <a href="https://docs.neuroml.org/Userdocs/Schemas/Channels.html">docs.neuroml.org</a>!</b></p><br/>For more information on NeuroML 2 and LEMS see <a href="http://www.neuroml.org/neuromlv2">here</a>. <br/>Note: these descriptions have been updated to the latest    <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2">NeuroML v2.2</a> definitions, using    <a href="https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS">the latest version of LEMS</a>!</div>
     <table class="table table-bordered"><tr><td ><h3>Channels</h3></td></tr>
-    <tr><td><span  style="color:dimgrey"><i>NeuroML2 ComponentType definitions from Channels.xml </i></span></td></tr>
-    <tr><td>Original LEMS ComponentType definitions: <a href="https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/Channels.xml">Channels.xml</a><br/>    Schema against which NeuroML based on these should be valid: <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2/NeuroML_v2.1.xsd">NeuroML_v2.1.xsd</a></td></tr>
+    <tr><td><span  style="color:dimgrey"><i>Defines voltage (and concentration) gated ion channel models. Ion channels will generally extend <a href="Channels.html#baseIonChannel" title="Base for all ion channel ComponentTypes "><span  style="color:#85ACE1;font-style:italic">baseIonChannel</span></a>. The most commonly used voltage dependent gate will extend <a href="Channels.html#baseGate" title="Base ComponentType for a voltage and/or concentration dependent gate "><span  style="color:#85ACE1;font-style:italic">baseGate</span></a>. </i></span></td></tr>
+    <tr><td>Original LEMS ComponentType definitions: <a href="https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/Channels.xml">Channels.xml</a><br/>    Schema against which NeuroML based on these should be valid: <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2/NeuroML_v2.2.xsd">NeuroML_v2.2.xsd</a></td></tr>
     </table><br/>
 <a name="baseVoltageDepRate">&nbsp;</a>
 <table class="table table-bordered">
@@ -1187,7 +1187,7 @@
     <span class="label label-success">Child elements</span>
 </td>
     <td><b>notes</b></td>
-    <td width="100"><a href="NeuroMLCoreCompTypes.html#notes" title="Human readable notes on a Component ">notes</a></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#notes" title="Human readable notes/description for a Component ">notes</a></td>
   </tr>
   <tr>
 
@@ -1883,7 +1883,7 @@
     <span class="label label-success">Child elements</span>
 </td>
     <td><b>notes</b></td>
-    <td width="100"><a href="NeuroMLCoreCompTypes.html#notes" title="Human readable notes on a Component ">notes</a></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#notes" title="Human readable notes/description for a Component ">notes</a></td>
   </tr>
     <td><b>timeCourse</b></td>
     <td width="100"><a href="Channels.html#baseVoltageDepTime" title="Base ComponentType for voltage dependent ComponentType producing value t with dimension time (e.g. for time course of rate variable). Note: time course would not normally be fit to exp/sigmoid etc. "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepTime</span></a></td>
@@ -1977,10 +1977,10 @@
     <span class="label label-success">Child elements</span>
 </td>
     <td><b>notes</b></td>
-    <td width="100"><a href="NeuroMLCoreCompTypes.html#notes" title="Human readable notes on a Component ">notes</a></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#notes" title="Human readable notes/description for a Component ">notes</a></td>
   </tr>
     <td><b>annotation</b></td>
-    <td width="100"><a href="NeuroMLCoreCompTypes.html#annotation" title="Annotation... ">annotation</a></td>
+    <td width="100"><a href="NeuroMLCoreCompTypes.html#annotation" title="A structured annotation containing metadata, specifically RDF or property elements ">annotation</a></td>
   </tr>
   <tr>
 

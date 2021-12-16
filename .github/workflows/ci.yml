@@ -5,10 +5,9 @@ name: Test commits
 
 on:
   push:
-    branches: [ master, development, experimental ]
+    branches: [ master, development, experimental, documentation_update, osb* ]
   pull_request:
-    branches: [ master, development, experimental ]
-
+    branches: [ master, development, experimental, documentation_update, osb* ]
 
 jobs:
   build:
@@ -16,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [ 8, 11.0.x, 11.0.3, 12, 13 ]
+        java: [ 8, 11, 16, 17 ]
 
     steps:
     - uses: actions/checkout@v2
@@ -27,6 +26,38 @@ jobs:
         java-version: ${{ matrix.java }}
         java-package: jdk
 
-    - name: Test build
+    - name: Install NeuroML 2 with Maven
       run: |
+        java -version
         mvn install
+
+    - name: Install jNeuroML
+      run: |
+        export main_repo_branch=${GITHUB_REF##*/}
+        if [[ ${main_repo_branch} != "master" && ${main_repo_branch} != "development" && ${main_repo_branch} != "experimental" && ${main_repo_branch} != *"osb"* ]]; then main_repo_branch=development ; fi
+        echo Using branch $main_repo_branch
+        git clone https://github.com/NeuroML/jNeuroML.git
+        cd jNeuroML
+        git checkout $main_repo_branch
+        python getNeuroML.py $main_repo_branch  # will call mvn install on this & other repos
+        ls -alt
+        mvn dependency:tree
+        ./jnml -v
+        cd ..
+        
+    - name: Install OMV
+      run: |
+        pwd
+        echo $GITHUB_WORKSPACE
+        export PATH=$PATH:$GITHUB_WORKSPACE/jNeuroML
+        export JNML_HOME=$GITHUB_WORKSPACE/jNeuroML
+        pip install git+https://github.com/OpenSourceBrain/osb-model-validation
+        omv list -V
+        env
+        pip freeze
+        
+    - name: Test examples using OMV
+      run: |
+        cd $GITHUB_WORKSPACE/NeuroML2/LEMSexamples
+        omv all -V  --engine=jNeuroML --ignore-non-py3
+        omv list -V

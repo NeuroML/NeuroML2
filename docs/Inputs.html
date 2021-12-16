@@ -15,7 +15,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="#">NeuroML v2.1 Component Types</a>
+      <a class="brand" href="#">NeuroML v2.2 Component Types</a>
       <div class="nav-collapse">
         <ul class="nav">
           <li><a href="Cells.html">Cells</a></li>
@@ -38,15 +38,15 @@
       <b>Component Types</b><br/>
 <a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a><br/>
   
-&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a membrane potential v exposed on the parent Component "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a><br/>
+&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a voltage v exposed on the parent Component, which would often be the membrane potential of a Component extending baseCellMembPot "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#baseVoltageDepPointCurrentSpiking" title="Base type for all ComponentTypes which produce a current i, require a membrane potential v exposed on the parent and emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrentSpiking</span></a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#poissonFiringSynapse" title="Poisson spike generator connected to single synapse providing an input current ">poissonFiringSynapse</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#poissonFiringSynapse" title="Poisson spike generator firing at averageRate, which is connected to single synapse that is triggered every time a spike is generated, producing an input current. See also transientPoissonFiringSynapse. ">poissonFiringSynapse</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#transientPoissonFiringSynapse" title="Poisson spike generator with delay and duration connected to single synapse providing an input current.                        Similar to ComponentType poissonFiringSynapse. ">transientPoissonFiringSynapse</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#transientPoissonFiringSynapse" title="Poisson spike generator firing at averageRate after a delay and for a duration, connected to single synapse that is triggered every time a spike is generated, providing an input current.                       Similar to ComponentType poissonFiringSynapse. ">transientPoissonFiringSynapse</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#timedSynapticInput" title="Spike array connected to a single synapse, producing current triggered by each spike in the array ">timedSynapticInput</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#timedSynapticInput" title="Spike array connected to a single synapse, producing a current triggered by each spike in the array. ">timedSynapticInput</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>spikes <a href="Inputs.html#spike" title="Emits a single spike at the specified time ">spike</a><br/>
   
@@ -56,37 +56,37 @@
   
 &nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#pulseGenerator" title="Generates a constant current pulse of a certain amplitude for a specified duration after a delay. Scaled by weight, if set ">pulseGenerator</a><br/>
   
-&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#compoundInput" title="Generates a current which is the sum of all its child basePointCurrent elements ">compoundInput</a><br/>
+&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#compoundInput" title="Generates a current which is the sum of all its child basePointCurrent element, e.g. can be a combination of pulseGenerator, sineGenerator elements producing a single i. Scaled by weight, if set ">compoundInput</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>currents <a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#sineGenerator" title="Generates a sinusoidally varying current after a time delay, for a fixed duration. The period and maximum amplitude of the current can be set as well as the phase at which to start. ">sineGenerator</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#sineGenerator" title="Generates a sinusoidally varying current after a time delay, for a fixed duration. The period and maximum amplitude of the current can be set as well as the phase at which to start. Scaled by weight, if set ">sineGenerator</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#rampGenerator" title="Generates a ramping current after a time delay, for a fixed duration. During this time the current steadily changes from startAmplitude to finishAmplitude. ">rampGenerator</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#rampGenerator" title="Generates a ramping current after a time delay, for a fixed duration. During this time the current steadily changes from startAmplitude to finishAmplitude. Scaled by weight, if set ">rampGenerator</a><br/>
   
-<a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There will eventually be dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator, sineGenerator and rampGenerator "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a><br/>
+<a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There are many dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator / pulseGeneratorDL, sineGenerator / sineGeneratorDL and rampGenerator / rampGeneratorDL "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a><br/>
   
 &nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#baseVoltageDepPointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I and require a dimensionless membrane potential V exposed on the parent Component "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrentDL</span></a><br/>
   
-&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#compoundInputDL" title="Generates a current which is the sum of all its child basePointCurrentDL elements ">compoundInputDL</a><br/>
+&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#compoundInputDL" title="Generates a current which is the sum of all its child basePointCurrentDL elements, e.g. can be a combination of pulseGeneratorDL, sineGeneratorDL elements producing a single i. Scaled by weight, if set ">compoundInputDL</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>currents <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There will eventually be dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator, sineGenerator and rampGenerator "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span>currents <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There are many dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator / pulseGeneratorDL, sineGenerator / sineGeneratorDL and rampGenerator / rampGeneratorDL "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#pulseGeneratorDL" title="Dimensionless equivalent of pulseGenerator. Generates a constant current pulse of a certain amplitude for a specified duration after a delay ">pulseGeneratorDL</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#pulseGeneratorDL" title="Dimensionless equivalent of pulseGenerator. Generates a constant current pulse of a certain amplitude for a specified duration after a delay. Scaled by weight, if set ">pulseGeneratorDL</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#sineGeneratorDL" title="Generates a sinusoidally varying current after a time delay, for a fixed duration. The period and maximum amplitude of the current can be set as well as the phase at which to start. ">sineGeneratorDL</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#sineGeneratorDL" title="Dimensionless equivalent of sineGenerator. Generates a sinusoidally varying current after a time delay, for a fixed duration. The period and maximum amplitude of the current can be set as well as the phase at which to start. Scaled by weight, if set ">sineGeneratorDL</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#rampGeneratorDL" title="Generates a ramping current after a time delay, for a fixed duration. During this time the dimensionless current steadily changes from startAmplitude to finishAmplitude. ">rampGeneratorDL</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#rampGeneratorDL" title="Dimensionless equivalent of rampGenerator. Generates a ramping current after a time delay, for a fixed duration. During this time the dimensionless current steadily changes from startAmplitude to finishAmplitude. Scaled by weight, if set ">rampGeneratorDL</a><br/>
   
-<a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a><br/>
+<a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last. "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a><br/>
   
-&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#spikeGenerator" title="Simple generator of spikes at a regular interval set by period. ">spikeGenerator</a><br/>
+&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#spikeGenerator" title="Simple generator of spikes at a regular interval set by period ">spikeGenerator</a><br/>
   
 &nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#spikeGeneratorRandom" title="Generator of spikes with a random interspike interval of at least minISI and at most maxISI ">spikeGeneratorRandom</a><br/>
   
-&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#spikeGeneratorPoisson" title="Generator of spikes whose ISI is distributed according to an exponential pdf with scale 1/_averageRate ">spikeGeneratorPoisson</a><br/>
+&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#spikeGeneratorPoisson" title="Generator of spikes whose ISI is distributed according to an exponential PDF with scale: 1 / averageRate ">spikeGeneratorPoisson</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#spikeGeneratorRefPoisson" title="Generator of spikes whose ISI distribution is the maximum entropy distribution over [_minimumISI, +infinity) with mean 1/_averageRate ">spikeGeneratorRefPoisson</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#spikeGeneratorRefPoisson" title="Generator of spikes whose ISI distribution is the maximum entropy distribution over [ minimumISI, +infinity ) with mean: 1 / averageRate ">spikeGeneratorRefPoisson</a><br/>
   
 &nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Inputs.html#spikeArray" title="Set of spike ComponentTypes, each emitting one spike at a certain time. Can be used to feed a predetermined spike train into a cell ">spikeArray</a><br/>
   
@@ -95,17 +95,17 @@
     </div><!--/.well -->
     </div><!--/span-->
     <div class="span7">
-   <div class="alert alert-error"><br/><p><b>  NOTE: the latest version of this documentation can be found on <a href="https://docs.neuroml.org/Userdocs/Schemas/Inputs.html">docs.neuroml.org</a>!</b></p><br/>For more information on NeuroML 2 and LEMS see <a href="http://www.neuroml.org/neuromlv2">here</a>. <br/>Note: these descriptions have been updated to the latest    <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2">NeuroML v2.1</a> definitions, using    <a href="https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS">the latest version of LEMS</a>!</div>
+   <div class="alert alert-error"><br/><p><b>  NOTE: the latest version of this documentation can be found on <a href="https://docs.neuroml.org/Userdocs/Schemas/Inputs.html">docs.neuroml.org</a>!</b></p><br/>For more information on NeuroML 2 and LEMS see <a href="http://www.neuroml.org/neuromlv2">here</a>. <br/>Note: these descriptions have been updated to the latest    <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2">NeuroML v2.2</a> definitions, using    <a href="https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS">the latest version of LEMS</a>!</div>
     <table class="table table-bordered"><tr><td ><h3>Inputs</h3></td></tr>
-    <tr><td><span  style="color:dimgrey"><i>NeuroML2 ComponentType definitions from Inputs.xml </i></span></td></tr>
-    <tr><td>Original LEMS ComponentType definitions: <a href="https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/Inputs.xml">Inputs.xml</a><br/>    Schema against which NeuroML based on these should be valid: <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2/NeuroML_v2.1.xsd">NeuroML_v2.1.xsd</a></td></tr>
+    <tr><td><span  style="color:dimgrey"><i>A number of ComponentTypes for providing spiking (e.g. <a href="Inputs.html#spikeGeneratorPoisson" title="Generator of spikes whose ISI is distributed according to an exponential PDF with scale: 1 / averageRate ">spikeGeneratorPoisson</a>, <a href="Inputs.html#spikeArray" title="Set of spike ComponentTypes, each emitting one spike at a certain time. Can be used to feed a predetermined spike train into a cell ">spikeArray</a>) and current inputs (e.g. <a href="Inputs.html#pulseGenerator" title="Generates a constant current pulse of a certain amplitude for a specified duration after a delay. Scaled by weight, if set ">pulseGenerator</a>, <a href="Inputs.html#voltageClamp" title="Voltage clamp. Applies a variable current i to try to keep parent at targetVoltage. Not yet fully tested!!! Consider using voltageClampTriple!! ">voltageClamp</a>, <a href="Inputs.html#timedSynapticInput" title="Spike array connected to a single synapse, producing a current triggered by each spike in the array. ">timedSynapticInput</a>, <a href="Inputs.html#poissonFiringSynapse" title="Poisson spike generator firing at averageRate, which is connected to single synapse that is triggered every time a spike is generated, producing an input current. See also transientPoissonFiringSynapse. ">poissonFiringSynapse</a>) to other ComponentTypes </i></span></td></tr>
+    <tr><td>Original LEMS ComponentType definitions: <a href="https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/Inputs.xml">Inputs.xml</a><br/>    Schema against which NeuroML based on these should be valid: <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2/NeuroML_v2.2.xsd">NeuroML_v2.2.xsd</a></td></tr>
     </table><br/>
 <a name="basePointCurrent">&nbsp;</a>
 <table class="table table-bordered">
   <tr>
     <td colspan='3'>
        <b><span  style="color:dimgrey;font-style:italic">basePointCurrent</span></b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="NeuroMLCoreCompTypes.html#baseStandalone" title="Base type of any component which will require notes, annotation, etc. "><span  style="color:#85ACE1;font-style:italic">baseStandalone</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="NeuroMLCoreCompTypes.html#baseStandalone" title="Base type of any Component which can have Notes, Annotation, or a property list. "><span  style="color:#85ACE1;font-style:italic">baseStandalone</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
@@ -116,7 +116,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
 </td>
-    <td><b>i</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The total (time varying) current produced by this ComponentType</i></span></td>
+    <td><b>i</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The total (usually time varying) current produced by this ComponentType</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
 </table>
@@ -130,7 +130,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Base type for all ComponentTypes which produce a current <b>i</b> (with dimension current) and require a membrane potential <b>v</b> exposed on the parent Component </i></span>    </td>
+      <span  style="color:dimgrey"><i>Base type for all ComponentTypes which produce a current <b>i</b> (with dimension current) and require a voltage <b>v</b> exposed on the parent Component, which would often be the membrane potential of a Component extending <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a> </i></span>    </td>
   </tr>
   <tr>
 
@@ -145,7 +145,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
 </td>
-    <td><b>v</b></td>
+    <td><b>v</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The current may vary with the voltage exposed by the ComponentType on which this is placed</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
 </table>
@@ -155,7 +155,7 @@
   <tr>
     <td colspan='3'>
        <b><span  style="color:dimgrey;font-style:italic">baseVoltageDepPointCurrentSpiking</span></b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a membrane potential v exposed on the parent Component "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a voltage v exposed on the parent Component, which would often be the membrane potential of a Component extending baseCellMembPot "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
@@ -177,7 +177,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
 </td>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a membrane potential v exposed on the parent Component "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a voltage v exposed on the parent Component, which would often be the membrane potential of a Component extending baseCellMembPot "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -199,7 +199,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Base type for all ComponentTypes which produce a dimensionless current <b>I.</b> There will eventually be dimensionless equivalents of all the core current producing ComponentTypes such as <a href="Inputs.html#pulseGenerator" title="Generates a constant current pulse of a certain amplitude for a specified duration after a delay. Scaled by weight, if set ">pulseGenerator</a>, <a href="Inputs.html#sineGenerator" title="Generates a sinusoidally varying current after a time delay, for a fixed duration. The period and maximum amplitude of the current can be set as well as the phase at which to start. ">sineGenerator</a> and <a href="Inputs.html#rampGenerator" title="Generates a ramping current after a time delay, for a fixed duration. During this time the current steadily changes from startAmplitude to finishAmplitude. ">rampGenerator</a> </i></span>    </td>
+      <span  style="color:dimgrey"><i>Base type for all ComponentTypes which produce a dimensionless current <b>I.</b> There are many dimensionless equivalents of all the core current producing ComponentTypes such as <a href="Inputs.html#pulseGenerator" title="Generates a constant current pulse of a certain amplitude for a specified duration after a delay. Scaled by weight, if set ">pulseGenerator</a> / <a href="Inputs.html#pulseGeneratorDL" title="Dimensionless equivalent of pulseGenerator. Generates a constant current pulse of a certain amplitude for a specified duration after a delay. Scaled by weight, if set ">pulseGeneratorDL</a>, <a href="Inputs.html#sineGenerator" title="Generates a sinusoidally varying current after a time delay, for a fixed duration. The period and maximum amplitude of the current can be set as well as the phase at which to start. Scaled by weight, if set ">sineGenerator</a> / <a href="Inputs.html#sineGeneratorDL" title="Dimensionless equivalent of sineGenerator. Generates a sinusoidally varying current after a time delay, for a fixed duration. The period and maximum amplitude of the current can be set as well as the phase at which to start. Scaled by weight, if set ">sineGeneratorDL</a> and <a href="Inputs.html#rampGenerator" title="Generates a ramping current after a time delay, for a fixed duration. During this time the current steadily changes from startAmplitude to finishAmplitude. Scaled by weight, if set ">rampGenerator</a> / <a href="Inputs.html#rampGeneratorDL" title="Dimensionless equivalent of rampGenerator. Generates a ramping current after a time delay, for a fixed duration. During this time the dimensionless current steadily changes from startAmplitude to finishAmplitude. Scaled by weight, if set ">rampGeneratorDL</a> </i></span>    </td>
   </tr>
   <tr>
 
@@ -216,7 +216,7 @@
   <tr>
     <td colspan='3'>
        <b><span  style="color:dimgrey;font-style:italic">baseVoltageDepPointCurrentDL</span></b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There will eventually be dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator, sineGenerator and rampGenerator "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There are many dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator / pulseGeneratorDL, sineGenerator / sineGeneratorDL and rampGenerator / rampGeneratorDL "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
@@ -227,7 +227,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
 </td>
-    <td style="color:darkgrey"><b>I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There will eventually be dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator, sineGenerator and rampGenerator "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a>)</td>
+    <td style="color:darkgrey"><b>I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There are many dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator / pulseGeneratorDL, sineGenerator / sineGeneratorDL and rampGenerator / rampGeneratorDL "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a>)</td>
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
@@ -235,7 +235,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
 </td>
-    <td><b>V</b></td>
+    <td><b>V</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The current may vary with the dimensionless voltage exposed by the ComponentType on which this is placed</i></span></td>
     <td width="100">Dimensionless</td>
   </tr>
 </table>
@@ -249,7 +249,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Base for any ComponentType whose main purpose is to emit spikes (on a port <b>spike).</b> The exposed variable <b>tsince</b> can be used for plotting the time since the Component has spiked last </i></span>    </td>
+      <span  style="color:dimgrey"><i>Base for any ComponentType whose main purpose is to emit spikes (on a port <b>spike).</b> The exposed variable <b>tsince</b> can be used for plotting the time since the Component has spiked last. </i></span>    </td>
   </tr>
   <tr>
 
@@ -274,18 +274,18 @@
   <tr>
     <td colspan='3'>
        <b>spikeGenerator</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last. "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Simple generator of spikes at a regular interval set by <b>period.</b> </i></span>    </td>
+      <span  style="color:dimgrey"><i>Simple generator of spikes at a regular interval set by <b>period</b> </i></span>    </td>
   </tr>
   <tr>
 
 <td width="70" rowspan="1">
     <span class="label label-success">Parameters</span>
 </td>
-    <td><b>period</b></td>
+    <td><b>period</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Time between spikes. The first spike will be emitted after this time.</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
@@ -304,7 +304,7 @@
     <td><b>tnext</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>When the next spike should ideally be emitted (dt permitting)</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td style="color:darkgrey"><b>tsince</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
+    <td style="color:darkgrey"><b>tsince</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last. "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
@@ -312,7 +312,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
 </td>
-    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
+    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last. "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
     <td width="100">Direction: out</td>
   </tr>
 <tr>
@@ -332,7 +332,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<b>tnext</b> = period<br/>
 <br/>
 <span class="label">On Conditions</span><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;IF tnext-t &lt; SMALL_TIME THEN<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;IF tnext - t &lt; SMALL_TIME THEN<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>tsince</b> = 0<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>tnext</b> = tnext+period<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EVENT OUT on port <b>spike</b><br/>
@@ -350,7 +350,7 @@
   <tr>
     <td colspan='3'>
        <b>spikeGeneratorRandom</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last. "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
@@ -361,10 +361,10 @@
 <td width="70" rowspan="2">
     <span class="label label-success">Parameters</span>
 </td>
-    <td><b>maxISI</b></td>
+    <td><b>maxISI</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Maximum interspike interval</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td><b>minISI</b></td>
+    <td><b>minISI</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Minimum interspike interval</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
@@ -386,7 +386,7 @@
     <td><b>tnext</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>When the next spike should ideally be emitted (dt permitting)</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td style="color:darkgrey"><b>tsince</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
+    <td style="color:darkgrey"><b>tsince</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last. "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
@@ -394,7 +394,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
 </td>
-    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
+    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last. "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
     <td width="100">Direction: out</td>
   </tr>
 <tr>
@@ -436,18 +436,18 @@
   <tr>
     <td colspan='3'>
        <b>spikeGeneratorPoisson</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last. "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Generator of spikes whose ISI is distributed according to an exponential pdf with scale 1/_averageRate </i></span>    </td>
+      <span  style="color:dimgrey"><i>Generator of spikes whose ISI is distributed according to an exponential PDF with scale: 1 / <b>averageRate</b> </i></span>    </td>
   </tr>
   <tr>
 
 <td width="70" rowspan="1">
     <span class="label label-success">Parameters</span>
 </td>
-    <td><b>averageRate</b></td>
+    <td><b>averageRate</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The average rate at which spikes are emitted</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#per_time">per_time</a></td>
   </tr>
   <tr>
@@ -463,16 +463,16 @@
 <td width="70" rowspan="4">
     <span class="label label-info">Exposures</span>
 </td>
-    <td><b>isi</b></td>
+    <td><b>isi</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The interval until the next spike</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td><b>tnextIdeal</b></td>
+    <td><b>tnextIdeal</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>This is the ideal/perfect next spike time, based on a newly generated isi, but dt precision will mean that it's usually slightly later than this</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td><b>tnextUsed</b></td>
+    <td><b>tnextUsed</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>This is the next spike time for practical purposes, ensuring that it's later than the current time</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td style="color:darkgrey"><b>tsince</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
+    <td style="color:darkgrey"><b>tsince</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last. "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
@@ -480,7 +480,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
 </td>
-    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
+    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last. "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
     <td width="100">Direction: out</td>
   </tr>
 <tr>
@@ -527,21 +527,21 @@
   <tr>
     <td colspan='3'>
        <b>spikeGeneratorRefPoisson</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#spikeGeneratorPoisson" title="Generator of spikes whose ISI is distributed according to an exponential pdf with scale 1/_averageRate ">spikeGeneratorPoisson</a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#spikeGeneratorPoisson" title="Generator of spikes whose ISI is distributed according to an exponential PDF with scale: 1 / averageRate ">spikeGeneratorPoisson</a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Generator of spikes whose ISI distribution is the maximum entropy distribution over [_minimumISI, +infinity) with mean 1/_averageRate </i></span>    </td>
+      <span  style="color:dimgrey"><i>Generator of spikes whose ISI distribution is the maximum entropy distribution over [ <b>minimumISI,</b> +infinity ) with mean: 1 / <b>averageRate</b> </i></span>    </td>
   </tr>
   <tr>
 
 <td width="70" rowspan="2">
     <span class="label label-success">Parameters</span>
 </td>
-    <td style="color:darkgrey"><b>averageRate</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#spikeGeneratorPoisson" title="Generator of spikes whose ISI is distributed according to an exponential pdf with scale 1/_averageRate ">spikeGeneratorPoisson</a>)</td>
+    <td style="color:darkgrey"><b>averageRate</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#spikeGeneratorPoisson" title="Generator of spikes whose ISI is distributed according to an exponential PDF with scale: 1 / averageRate ">spikeGeneratorPoisson</a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#per_time">per_time</a></td>
   </tr>
-    <td><b>minimumISI</b></td>
+    <td><b>minimumISI</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The minimum interspike interval</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
@@ -557,16 +557,16 @@
 <td width="70" rowspan="4">
     <span class="label label-info">Exposures</span>
 </td>
-    <td style="color:darkgrey"><b>isi</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#spikeGeneratorPoisson" title="Generator of spikes whose ISI is distributed according to an exponential pdf with scale 1/_averageRate ">spikeGeneratorPoisson</a>)</td>
+    <td style="color:darkgrey"><b>isi</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#spikeGeneratorPoisson" title="Generator of spikes whose ISI is distributed according to an exponential PDF with scale: 1 / averageRate ">spikeGeneratorPoisson</a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td style="color:darkgrey"><b>tnextIdeal</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#spikeGeneratorPoisson" title="Generator of spikes whose ISI is distributed according to an exponential pdf with scale 1/_averageRate ">spikeGeneratorPoisson</a>)</td>
+    <td style="color:darkgrey"><b>tnextIdeal</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#spikeGeneratorPoisson" title="Generator of spikes whose ISI is distributed according to an exponential PDF with scale: 1 / averageRate ">spikeGeneratorPoisson</a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td style="color:darkgrey"><b>tnextUsed</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#spikeGeneratorPoisson" title="Generator of spikes whose ISI is distributed according to an exponential pdf with scale 1/_averageRate ">spikeGeneratorPoisson</a>)</td>
+    <td style="color:darkgrey"><b>tnextUsed</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#spikeGeneratorPoisson" title="Generator of spikes whose ISI is distributed according to an exponential PDF with scale: 1 / averageRate ">spikeGeneratorPoisson</a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td style="color:darkgrey"><b>tsince</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
+    <td style="color:darkgrey"><b>tsince</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last. "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
@@ -574,7 +574,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
 </td>
-    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
+    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last. "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
     <td width="100">Direction: out</td>
   </tr>
 <tr>
@@ -625,14 +625,14 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Poisson spike generator connected to single synapse providing an input current </i></span>    </td>
+      <span  style="color:dimgrey"><i>Poisson spike generator firing at <b>averageRate,</b> which is connected to single <b>synapse</b> that is triggered every time a spike is generated, producing an input current. See also <a href="Inputs.html#transientPoissonFiringSynapse" title="Poisson spike generator firing at averageRate after a delay and for a duration, connected to single synapse that is triggered every time a spike is generated, providing an input current.                       Similar to ComponentType poissonFiringSynapse. ">transientPoissonFiringSynapse</a>. </i></span>    </td>
   </tr>
   <tr>
 
 <td width="70" rowspan="1">
     <span class="label label-success">Parameters</span>
 </td>
-    <td><b>averageRate</b></td>
+    <td><b>averageRate</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The average rate at which spikes are emitted</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#per_time">per_time</a></td>
   </tr>
   <tr>
@@ -674,7 +674,7 @@
     <td style="color:darkgrey"><b>i</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td><b>isi</b></td>
+    <td><b>isi</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>The interval until the next spike</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
     <td><b>tnextIdeal</b></td>
@@ -691,7 +691,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
 </td>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a membrane potential v exposed on the parent Component "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a voltage v exposed on the parent Component, which would often be the membrane potential of a Component extending baseCellMembPot "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -767,7 +767,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Poisson spike generator with delay and duration connected to single synapse providing an input current.                        Similar to ComponentType poissonFiringSynapse. </i></span>    </td>
+      <span  style="color:dimgrey"><i>Poisson spike generator firing at <b>averageRate</b> after a <b>delay</b> and for a <b>duration,</b> connected to single <b>synapse</b> that is triggered every time a spike is generated, providing an input current.                       Similar to ComponentType <a href="Inputs.html#poissonFiringSynapse" title="Poisson spike generator firing at averageRate, which is connected to single synapse that is triggered every time a spike is generated, producing an input current. See also transientPoissonFiringSynapse. ">poissonFiringSynapse</a>. </i></span>    </td>
   </tr>
   <tr>
 
@@ -842,7 +842,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
 </td>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a membrane potential v exposed on the parent Component "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a voltage v exposed on the parent Component, which would often be the membrane potential of a Component extending baseCellMembPot "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -918,7 +918,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Spike array connected to a single synapse, producing current triggered by each spike in the array </i></span>    </td>
+      <span  style="color:dimgrey"><i>Spike array connected to a single <b>synapse,</b> producing a current triggered by each <a href="Inputs.html#spike" title="Emits a single spike at the specified time ">spike</a> in the array. </i></span>    </td>
   </tr>
   <tr>
 
@@ -959,7 +959,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
 </td>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a membrane potential v exposed on the parent Component "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a voltage v exposed on the parent Component, which would often be the membrane potential of a Component extending baseCellMembPot "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -1006,6 +1006,140 @@
 </tr>
 </table>
 
+<a name="spikeArray">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>spikeArray</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last. "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Set of spike ComponentTypes, each emitting one spike at a certain time. Can be used to feed a predetermined spike train into a cell </i></span>    </td>
+  </tr>
+  <tr>
+
+<td width="70" rowspan="1">
+    <span class="label label-success">Children elements</span>
+</td>
+    <td><b>spikes</b></td>
+    <td width="100"><a href="Inputs.html#spike" title="Emits a single spike at the specified time ">spike</a></td>
+  </tr>
+  <tr>
+
+<td width="70" rowspan="1">
+    <span class="label label-info">Exposures</span>
+</td>
+    <td style="color:darkgrey"><b>tsince</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last. "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
+  </tr>
+  <tr>
+
+<td width="70" rowspan="2">
+    <span class="label label-info">Event Ports</span>
+</td>
+    <td><b>in</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>This will receive events from the children</i></span></td>
+    <td width="100">Direction: in</td>
+  </tr>
+    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last. "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
+    <td width="100">Direction: out</td>
+  </tr>
+<tr>
+
+<td width="70" rowspan="1">
+    <span class="label ">Dynamics</span>
+</td>
+<td colspan='2'>
+<span class="label">State Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>tsince</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#time">time</a> (exposed as <b>tsince</b>)
+<br/>
+<br/>
+<span class="label">On Start</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>tsince</b> = 0<br/>
+<br/>
+<span class="label">On Events</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;EVENT IN on port: <b>in</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>tsince</b> = 0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EVENT OUT on port <b>spike</b><br/>
+<br/>
+<span class="label">Time Derivatives</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;d <b>tsince</b> /dt = 1<br/>
+<br/>
+</td>
+</tr>
+</table>
+
+<a name="spike">&nbsp;</a>
+<table class="table table-bordered">
+  <tr>
+    <td colspan='3'>
+       <b>spike</b>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last. "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a></p>    </td>
+  </tr>
+  <tr>
+    <td colspan='3'>
+      <span  style="color:dimgrey"><i>Emits a single spike at the specified <b>time</b> </i></span>    </td>
+  </tr>
+  <tr>
+
+<td width="70" rowspan="1">
+    <span class="label label-success">Parameters</span>
+</td>
+    <td><b>time</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Time at which to emit one spike event</i></span></td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
+  </tr>
+  <tr>
+
+<td width="70" rowspan="2">
+    <span class="label label-info">Exposures</span>
+</td>
+    <td><b>spiked</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>0 signals not yet spiked, 1 signals has spiked</i></span></td>
+    <td width="100">Dimensionless</td>
+  </tr>
+    <td style="color:darkgrey"><b>tsince</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last. "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
+    <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
+  </tr>
+  <tr>
+
+<td width="70" rowspan="1">
+    <span class="label label-info">Event Ports</span>
+</td>
+    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last. "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
+    <td width="100">Direction: out</td>
+  </tr>
+<tr>
+
+<td width="70" rowspan="1">
+    <span class="label ">Dynamics</span>
+</td>
+<td colspan='2'>
+<span class="label">Structure</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;WITH <b>this</b> AS <b>a</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;WITH <b>parent</b> AS <b>b</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;EVENT CONNECTION from <b>a</b> TO <b>b</b>, RECEIVER: <b></b>, TARGET PORT: <b></b><br/>
+<br/>
+<span class="label">State Variables</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>tsince</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#time">time</a> (exposed as <b>tsince</b>)
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>spiked</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless (exposed as <b>spiked</b>)
+<br/>
+<br/>
+<span class="label">On Start</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>tsince</b> = 0<br/>
+<br/>
+<span class="label">On Conditions</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;IF (t &gt;= time) AND (spiked = 0) THEN<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>spiked</b> = 1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>tsince</b> = 0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EVENT OUT on port <b>spike</b><br/>
+<br/>
+<span class="label">Time Derivatives</span><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;d <b>tsince</b> /dt = 1<br/>
+<br/>
+</td>
+</tr>
+</table>
+
 <a name="pulseGenerator">&nbsp;</a>
 <table class="table table-bordered">
   <tr>
@@ -1022,13 +1156,13 @@
 <td width="70" rowspan="3">
     <span class="label label-success">Parameters</span>
 </td>
-    <td><b>amplitude</b></td>
+    <td><b>amplitude</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Amplitude of current pulse</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td><b>delay</b></td>
+    <td><b>delay</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Delay before change in current. Current is zero  prior to this.</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td><b>duration</b></td>
+    <td><b>duration</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Duration for holding current at amplitude. Current is zero after delay + duration.</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
@@ -1044,7 +1178,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Event Ports</span>
 </td>
-    <td><b>in</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Note this is not used here. Will be removed in future</i></span></td>
+    <td><b>in</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Note: this is not used here. Will be removed in future</i></span></td>
     <td width="100">Direction: in</td>
   </tr>
 <tr>
@@ -1083,7 +1217,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Generates a current which is the sum of all its child <a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a> elements </i></span>    </td>
+      <span  style="color:dimgrey"><i>Generates a current which is the sum of all its child <a href="Inputs.html#basePointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) "><span  style="color:#85ACE1;font-style:italic">basePointCurrent</span></a> element, e.g. can be a combination of <a href="Inputs.html#pulseGenerator" title="Generates a constant current pulse of a certain amplitude for a specified duration after a delay. Scaled by weight, if set ">pulseGenerator</a>, <a href="Inputs.html#sineGenerator" title="Generates a sinusoidally varying current after a time delay, for a fixed duration. The period and maximum amplitude of the current can be set as well as the phase at which to start. Scaled by weight, if set ">sineGenerator</a> elements producing a single <b>i.</b> Scaled by <b>weight,</b> if set </i></span>    </td>
   </tr>
   <tr>
 
@@ -1132,11 +1266,11 @@
   <tr>
     <td colspan='3'>
        <b>compoundInputDL</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There will eventually be dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator, sineGenerator and rampGenerator "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There are many dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator / pulseGeneratorDL, sineGenerator / sineGeneratorDL and rampGenerator / rampGeneratorDL "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Generates a current which is the sum of all its child <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There will eventually be dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator, sineGenerator and rampGenerator "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a> elements </i></span>    </td>
+      <span  style="color:dimgrey"><i>Generates a current which is the sum of all its child <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There are many dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator / pulseGeneratorDL, sineGenerator / sineGeneratorDL and rampGenerator / rampGeneratorDL "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a> elements, e.g. can be a combination of <a href="Inputs.html#pulseGeneratorDL" title="Dimensionless equivalent of pulseGenerator. Generates a constant current pulse of a certain amplitude for a specified duration after a delay. Scaled by weight, if set ">pulseGeneratorDL</a>, <a href="Inputs.html#sineGeneratorDL" title="Dimensionless equivalent of sineGenerator. Generates a sinusoidally varying current after a time delay, for a fixed duration. The period and maximum amplitude of the current can be set as well as the phase at which to start. Scaled by weight, if set ">sineGeneratorDL</a> elements producing a single <b>i.</b> Scaled by <b>weight,</b> if set </i></span>    </td>
   </tr>
   <tr>
 
@@ -1144,14 +1278,14 @@
     <span class="label label-success">Children elements</span>
 </td>
     <td><b>currents</b></td>
-    <td width="100"><a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There will eventually be dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator, sineGenerator and rampGenerator "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a></td>
+    <td width="100"><a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There are many dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator / pulseGeneratorDL, sineGenerator / sineGeneratorDL and rampGenerator / rampGeneratorDL "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a></td>
   </tr>
   <tr>
 
 <td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
 </td>
-    <td style="color:darkgrey"><b>I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There will eventually be dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator, sineGenerator and rampGenerator "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a>)</td>
+    <td style="color:darkgrey"><b>I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There are many dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator / pulseGeneratorDL, sineGenerator / sineGeneratorDL and rampGenerator / rampGeneratorDL "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a>)</td>
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
@@ -1185,24 +1319,24 @@
   <tr>
     <td colspan='3'>
        <b>pulseGeneratorDL</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There will eventually be dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator, sineGenerator and rampGenerator "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There are many dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator / pulseGeneratorDL, sineGenerator / sineGeneratorDL and rampGenerator / rampGeneratorDL "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Dimensionless equivalent of <a href="Inputs.html#pulseGenerator" title="Generates a constant current pulse of a certain amplitude for a specified duration after a delay. Scaled by weight, if set ">pulseGenerator</a>. Generates a constant current pulse of a certain <b>amplitude</b> for a specified <b>duration</b> after a <b>delay</b> </i></span>    </td>
+      <span  style="color:dimgrey"><i>Dimensionless equivalent of <a href="Inputs.html#pulseGenerator" title="Generates a constant current pulse of a certain amplitude for a specified duration after a delay. Scaled by weight, if set ">pulseGenerator</a>. Generates a constant current pulse of a certain <b>amplitude</b> for a specified <b>duration</b> after a <b>delay.</b> Scaled by <b>weight,</b> if set </i></span>    </td>
   </tr>
   <tr>
 
 <td width="70" rowspan="3">
     <span class="label label-success">Parameters</span>
 </td>
-    <td><b>amplitude</b></td>
+    <td><b>amplitude</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Amplitude of current pulse</i></span></td>
     <td width="100">Dimensionless</td>
   </tr>
-    <td><b>delay</b></td>
+    <td><b>delay</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Delay before change in current. Current is zero  prior to this.</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td><b>duration</b></td>
+    <td><b>duration</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Duration for holding current at amplitude. Current is zero after delay + duration.</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
   <tr>
@@ -1210,7 +1344,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
 </td>
-    <td style="color:darkgrey"><b>I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There will eventually be dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator, sineGenerator and rampGenerator "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a>)</td>
+    <td style="color:darkgrey"><b>I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There are many dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator / pulseGeneratorDL, sineGenerator / sineGeneratorDL and rampGenerator / rampGeneratorDL "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a>)</td>
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
@@ -1257,26 +1391,26 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Generates a sinusoidally varying current after a time <b>delay,</b> for a fixed <b>duration.</b> The <b>period</b> and maximum <b>amplitude</b> of the current can be set as well as the <b>phase</b> at which to start. </i></span>    </td>
+      <span  style="color:dimgrey"><i>Generates a sinusoidally varying current after a time <b>delay,</b> for a fixed <b>duration.</b> The <b>period</b> and maximum <b>amplitude</b> of the current can be set as well as the <b>phase</b> at which to start. Scaled by <b>weight,</b> if set </i></span>    </td>
   </tr>
   <tr>
 
 <td width="70" rowspan="5">
     <span class="label label-success">Parameters</span>
 </td>
-    <td><b>amplitude</b></td>
+    <td><b>amplitude</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Maximum amplitude of current</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td><b>delay</b></td>
+    <td><b>delay</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Delay before change in current. Current is zero  prior to this.</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td><b>duration</b></td>
+    <td><b>duration</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Duration for holding current at amplitude. Current is zero after delay + duration.</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td><b>period</b></td>
+    <td><b>period</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Time period of oscillation</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td><b>phase</b></td>
+    <td><b>phase</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Phase (between 0 and 2*pi) at which to start the varying current (i.e. at time given by delay)</i></span></td>
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
@@ -1327,30 +1461,30 @@
   <tr>
     <td colspan='3'>
        <b>sineGeneratorDL</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There will eventually be dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator, sineGenerator and rampGenerator "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There are many dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator / pulseGeneratorDL, sineGenerator / sineGeneratorDL and rampGenerator / rampGeneratorDL "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Generates a sinusoidally varying current after a time <b>delay,</b> for a fixed <b>duration.</b> The <b>period</b> and maximum <b>amplitude</b> of the current can be set as well as the <b>phase</b> at which to start. </i></span>    </td>
+      <span  style="color:dimgrey"><i>Dimensionless equivalent of <a href="Inputs.html#sineGenerator" title="Generates a sinusoidally varying current after a time delay, for a fixed duration. The period and maximum amplitude of the current can be set as well as the phase at which to start. Scaled by weight, if set ">sineGenerator</a>. Generates a sinusoidally varying current after a time <b>delay,</b> for a fixed <b>duration.</b> The <b>period</b> and maximum <b>amplitude</b> of the current can be set as well as the <b>phase</b> at which to start. Scaled by <b>weight,</b> if set </i></span>    </td>
   </tr>
   <tr>
 
 <td width="70" rowspan="5">
     <span class="label label-success">Parameters</span>
 </td>
-    <td><b>amplitude</b></td>
+    <td><b>amplitude</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Maximum amplitude of current</i></span></td>
     <td width="100">Dimensionless</td>
   </tr>
-    <td><b>delay</b></td>
+    <td><b>delay</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Delay before change in current. Current is zero  prior to this.</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td><b>duration</b></td>
+    <td><b>duration</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Duration for holding current at amplitude. Current is zero after delay + duration.</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td><b>period</b></td>
+    <td><b>period</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Time period of oscillation</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td><b>phase</b></td>
+    <td><b>phase</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Phase (between 0 and 2*pi) at which to start the varying current (i.e. at time given by delay)</i></span></td>
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
@@ -1358,7 +1492,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
 </td>
-    <td style="color:darkgrey"><b>I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There will eventually be dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator, sineGenerator and rampGenerator "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a>)</td>
+    <td style="color:darkgrey"><b>I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There are many dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator / pulseGeneratorDL, sineGenerator / sineGeneratorDL and rampGenerator / rampGeneratorDL "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a>)</td>
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
@@ -1405,26 +1539,26 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Generates a ramping current after a time <b>delay,</b> for a fixed <b>duration.</b> During this time the current steadily changes from <b>startAmplitude</b> to <b>finishAmplitude.</b> </i></span>    </td>
+      <span  style="color:dimgrey"><i>Generates a ramping current after a time <b>delay,</b> for a fixed <b>duration.</b> During this time the current steadily changes from <b>startAmplitude</b> to <b>finishAmplitude.</b> Scaled by <b>weight,</b> if set </i></span>    </td>
   </tr>
   <tr>
 
 <td width="70" rowspan="5">
     <span class="label label-success">Parameters</span>
 </td>
-    <td><b>baselineAmplitude</b></td>
+    <td><b>baselineAmplitude</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Amplitude of current before time delay, and after time delay + duration</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td><b>delay</b></td>
+    <td><b>delay</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Delay before change in current. Current is baselineAmplitude prior to this.</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td><b>duration</b></td>
+    <td><b>duration</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Duration for holding current at amplitude. Current is baselineAmplitude after delay + duration.</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td><b>finishAmplitude</b></td>
+    <td><b>finishAmplitude</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Amplitude of linearly varying current at time delay + duration</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td><b>startAmplitude</b></td>
+    <td><b>startAmplitude</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Amplitude of linearly varying current at time delay</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
   <tr>
@@ -1478,30 +1612,30 @@
   <tr>
     <td colspan='3'>
        <b>rampGeneratorDL</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There will eventually be dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator, sineGenerator and rampGenerator "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There are many dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator / pulseGeneratorDL, sineGenerator / sineGeneratorDL and rampGenerator / rampGeneratorDL "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Generates a ramping current after a time <b>delay,</b> for a fixed <b>duration.</b> During this time the dimensionless current steadily changes from <b>startAmplitude</b> to <b>finishAmplitude.</b> </i></span>    </td>
+      <span  style="color:dimgrey"><i>Dimensionless equivalent of <a href="Inputs.html#rampGenerator" title="Generates a ramping current after a time delay, for a fixed duration. During this time the current steadily changes from startAmplitude to finishAmplitude. Scaled by weight, if set ">rampGenerator</a>. Generates a ramping current after a time <b>delay,</b> for a fixed <b>duration.</b> During this time the dimensionless current steadily changes from <b>startAmplitude</b> to <b>finishAmplitude.</b> Scaled by <b>weight,</b> if set </i></span>    </td>
   </tr>
   <tr>
 
 <td width="70" rowspan="5">
     <span class="label label-success">Parameters</span>
 </td>
-    <td><b>baselineAmplitude</b></td>
+    <td><b>baselineAmplitude</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Amplitude of current before time delay, and after time delay + duration</i></span></td>
     <td width="100">Dimensionless</td>
   </tr>
-    <td><b>delay</b></td>
+    <td><b>delay</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Delay before change in current. Current is baselineAmplitude prior to this.</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td><b>duration</b></td>
+    <td><b>duration</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Duration for holding current at amplitude. Current is baselineAmplitude after delay + duration.</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td><b>finishAmplitude</b></td>
+    <td><b>finishAmplitude</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Amplitude of linearly varying current at time delay + duration</i></span></td>
     <td width="100">Dimensionless</td>
   </tr>
-    <td><b>startAmplitude</b></td>
+    <td><b>startAmplitude</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Amplitude of linearly varying current at time delay</i></span></td>
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
@@ -1509,7 +1643,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Exposures</span>
 </td>
-    <td style="color:darkgrey"><b>I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There will eventually be dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator, sineGenerator and rampGenerator "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a>)</td>
+    <td style="color:darkgrey"><b>I</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#basePointCurrentDL" title="Base type for all ComponentTypes which produce a dimensionless current I. There are many dimensionless equivalents of all the core current producing ComponentTypes such as pulseGenerator / pulseGeneratorDL, sineGenerator / sineGeneratorDL and rampGenerator / rampGeneratorDL "><span  style="color:#85ACE1;font-style:italic">basePointCurrentDL</span></a>)</td>
     <td width="100">Dimensionless</td>
   </tr>
   <tr>
@@ -1555,7 +1689,7 @@
   <tr>
     <td colspan='3'>
        <b>voltageClamp</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a membrane potential v exposed on the parent Component "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a voltage v exposed on the parent Component, which would often be the membrane potential of a Component extending baseCellMembPot "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
@@ -1566,16 +1700,16 @@
 <td width="70" rowspan="4">
     <span class="label label-success">Parameters</span>
 </td>
-    <td><b>delay</b></td>
+    <td><b>delay</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Delay before change in current. Current is zero prior to this.</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td><b>duration</b></td>
+    <td><b>duration</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Duration for attempting to keep parent at targetVoltage. Current is zero after delay + duration.</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td><b>simpleSeriesResistance</b></td>
+    <td><b>simpleSeriesResistance</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Current will be calculated by the difference in voltage between the target and parent, divided by this value</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#resistance">resistance</a></td>
   </tr>
-    <td><b>targetVoltage</b></td>
+    <td><b>targetVoltage</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Current will be applied to try to get parent to this target voltage</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -1591,7 +1725,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
 </td>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a membrane potential v exposed on the parent Component "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a voltage v exposed on the parent Component, which would often be the membrane potential of a Component extending baseCellMembPot "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -1634,7 +1768,7 @@
   <tr>
     <td colspan='3'>
        <b>voltageClampTriple</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a membrane potential v exposed on the parent Component "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a></p>    </td>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a voltage v exposed on the parent Component, which would often be the membrane potential of a Component extending baseCellMembPot "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a></p>    </td>
   </tr>
   <tr>
     <td colspan='3'>
@@ -1645,25 +1779,25 @@
 <td width="70" rowspan="7">
     <span class="label label-success">Parameters</span>
 </td>
-    <td><b>active</b></td>
+    <td><b>active</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Whether the voltage clamp is active (1) or inactive (0).</i></span></td>
     <td width="100">Dimensionless</td>
   </tr>
-    <td><b>conditioningVoltage</b></td>
+    <td><b>conditioningVoltage</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Target voltage before time delay</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
-    <td><b>delay</b></td>
+    <td><b>delay</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Delay before switching from conditioningVoltage to testingVoltage.</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td><b>duration</b></td>
+    <td><b>duration</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Duration to hold at testingVoltage.</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td><b>returnVoltage</b></td>
+    <td><b>returnVoltage</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Target voltage after time duration</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
-    <td><b>simpleSeriesResistance</b></td>
+    <td><b>simpleSeriesResistance</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Current will be calculated by the difference in voltage between the target and parent, divided by this value</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#resistance">resistance</a></td>
   </tr>
-    <td><b>testingVoltage</b></td>
+    <td><b>testingVoltage</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Target voltage between times delay and delay + duration</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -1679,7 +1813,7 @@
 <td width="70" rowspan="1">
     <span class="label label-info">Requirements</span>
 </td>
-    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a membrane potential v exposed on the parent Component "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a>)</td>
+    <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseVoltageDepPointCurrent" title="Base type for all ComponentTypes which produce a current i (with dimension current) and require a voltage v exposed on the parent Component, which would often be the membrane potential of a Component extending baseCellMembPot "><span  style="color:#85ACE1;font-style:italic">baseVoltageDepPointCurrent</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -1712,140 +1846,6 @@
 <br/>
 <span class="label">On Events</span><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;EVENT IN on port: <b>in</b><br/>
-<br/>
-</td>
-</tr>
-</table>
-
-<a name="spikeArray">&nbsp;</a>
-<table class="table table-bordered">
-  <tr>
-    <td colspan='3'>
-       <b>spikeArray</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a></p>    </td>
-  </tr>
-  <tr>
-    <td colspan='3'>
-      <span  style="color:dimgrey"><i>Set of spike ComponentTypes, each emitting one spike at a certain time. Can be used to feed a predetermined spike train into a cell </i></span>    </td>
-  </tr>
-  <tr>
-
-<td width="70" rowspan="1">
-    <span class="label label-success">Children elements</span>
-</td>
-    <td><b>spikes</b></td>
-    <td width="100"><a href="Inputs.html#spike" title="Emits a single spike at the specified time ">spike</a></td>
-  </tr>
-  <tr>
-
-<td width="70" rowspan="1">
-    <span class="label label-info">Exposures</span>
-</td>
-    <td style="color:darkgrey"><b>tsince</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
-    <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
-  </tr>
-  <tr>
-
-<td width="70" rowspan="2">
-    <span class="label label-info">Event Ports</span>
-</td>
-    <td><b>in</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>This will receive events from the children</i></span></td>
-    <td width="100">Direction: in</td>
-  </tr>
-    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
-    <td width="100">Direction: out</td>
-  </tr>
-<tr>
-
-<td width="70" rowspan="1">
-    <span class="label ">Dynamics</span>
-</td>
-<td colspan='2'>
-<span class="label">State Variables</span><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<b>tsince</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#time">time</a> (exposed as <b>tsince</b>)
-<br/>
-<br/>
-<span class="label">On Start</span><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<b>tsince</b> = 0<br/>
-<br/>
-<span class="label">On Events</span><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;EVENT IN on port: <b>in</b><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>tsince</b> = 0<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EVENT OUT on port <b>spike</b><br/>
-<br/>
-<span class="label">Time Derivatives</span><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;d <b>tsince</b> /dt = 1<br/>
-<br/>
-</td>
-</tr>
-</table>
-
-<a name="spike">&nbsp;</a>
-<table class="table table-bordered">
-  <tr>
-    <td colspan='3'>
-       <b>spike</b>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a></p>    </td>
-  </tr>
-  <tr>
-    <td colspan='3'>
-      <span  style="color:dimgrey"><i>Emits a single spike at the specified time </i></span>    </td>
-  </tr>
-  <tr>
-
-<td width="70" rowspan="1">
-    <span class="label label-success">Parameters</span>
-</td>
-    <td><b>time</b></td>
-    <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
-  </tr>
-  <tr>
-
-<td width="70" rowspan="2">
-    <span class="label label-info">Exposures</span>
-</td>
-    <td><b>spiked</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>0 signals not yet spiked, 1 signals has spiked</i></span></td>
-    <td width="100">Dimensionless</td>
-  </tr>
-    <td style="color:darkgrey"><b>tsince</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
-    <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
-  </tr>
-  <tr>
-
-<td width="70" rowspan="1">
-    <span class="label label-info">Event Ports</span>
-</td>
-    <td style="color:darkgrey"><b>spike</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Inputs.html#baseSpikeSource" title="Base for any ComponentType whose main purpose is to emit spikes (on a port spike). The exposed variable tsince can be used for plotting the time since the Component has spiked last "><span  style="color:#85ACE1;font-style:italic">baseSpikeSource</span></a>)</td>
-    <td width="100">Direction: out</td>
-  </tr>
-<tr>
-
-<td width="70" rowspan="1">
-    <span class="label ">Dynamics</span>
-</td>
-<td colspan='2'>
-<span class="label">Structure</span><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;WITH <b>this</b> AS <b>a</b><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;WITH <b>parent</b> AS <b>b</b><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;EVENT CONNECTION from <b>a</b> TO <b>b</b>, RECEIVER: <b></b>, TARGET PORT: <b></b><br/>
-<br/>
-<span class="label">State Variables</span><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<b>tsince</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="NeuroMLCoreDimensions.html#time">time</a> (exposed as <b>tsince</b>)
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<b>spiked</b>&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless (exposed as <b>spiked</b>)
-<br/>
-<br/>
-<span class="label">On Start</span><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<b>tsince</b> = 0<br/>
-<br/>
-<span class="label">On Conditions</span><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;IF (t &gt;= time) AND (spiked = 0) THEN<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>spiked</b> = 1<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>tsince</b> = 0<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EVENT OUT on port <b>spike</b><br/>
-<br/>
-<span class="label">Time Derivatives</span><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;d <b>tsince</b> /dt = 1<br/>
 <br/>
 </td>
 </tr>
