@@ -1,0 +1,17 @@
+# Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
+
+target: ../LEMS_NML2_Ex1_HH.xml
+engine: jNeuroML_EDEN
+mep: .test.ex1.mep
+experiments:
+  v:
+    observables:
+      spike times:
+        file:
+          path: ../results/hh_v.dat
+          columns: [0,1]
+          scaling: [1000, 1000]
+        spike detection:
+          method: threshold
+          threshold: 0
+        tolerance: 0
