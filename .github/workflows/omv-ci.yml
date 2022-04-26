@@ -26,20 +26,21 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    
     - name: Set up Python  ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
         python-version:  ${{ matrix.python-version }}
+
     - name: Install OMV
       run: |
-        pip install .
-        pip install scipy sympy matplotlib cython pandas
-        #sudo apt install octave
-
+        pip install git+https://github.com/OpenSourceBrain/osb-model-validation
+        pip install scipy sympy matplotlib cython pandas tables
 
     - name: Run OMV tests on engine ${{ matrix.engine }}
       run: |
         omv all -V --engine=${{ matrix.engine }}
+
     - name: OMV final version info
       run: |
         omv list -V # list installed engines
