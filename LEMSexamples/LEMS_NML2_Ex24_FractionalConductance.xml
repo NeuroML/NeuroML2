@@ -1,17 +1,17 @@
 <Lems>
 
     <Target component="sim1"/>
-    
+
     <Include file="Cells.xml"/>
     <Include file="Networks.xml"/>
     <Include file="Simulation.xml"/>
 
     <!-- the slow K channel below uses the "fractional conductance / subGate" formalism -->
-    
+
     <ionChannelHH id="k_slow" conductance="10pS">
 
         <gateHHrates id="a" instances="2">
-            <q10Settings type="q10ExpTemp" q10Factor="2.3" experimentalTemp="21 degC"/> 
+            <q10Settings type="q10ExpTemp" q10Factor="2.3" experimentalTemp="21 degC"/>
             <reverseRate type="kslow_a_beta_rate"/>
             <forwardRate  type="kslow_a_alpha_rate"/>
         </gateHHrates>
@@ -114,22 +114,22 @@
     </ionChannelHH>
 
     <ionChannelPassive id="leak" conductance="10pS"/>
-    
+
     <ionChannelHH id="na" conductance="10pS">
-    
+
        <gateHHrates id="m" instances="3">
             <forwardRate type="HHExpLinearRate" rate="1per_ms" midpoint="-40mV" scale="10mV"/>
             <reverseRate type="HHExpRate" rate="4per_ms" midpoint="-65mV" scale="-18mV"/>
        </gateHHrates>
-    
+
        <gateHHrates id="h" instances="1">
            <forwardRate type="HHExpRate" rate="0.07per_ms" midpoint="-65mV" scale="-20mV"/>
            <reverseRate type="HHSigmoidRate" rate="1per_ms" midpoint="-35mV" scale="10mV"/>
        </gateHHrates>
-    
+
     </ionChannelHH>
-    
-    
+
+
     <cell id="hh">
         <morphology id="just_a_cylinder">
             <segment id="0" name="Soma">
@@ -146,7 +146,7 @@
 
         <biophysicalProperties id="biophys">
             <membraneProperties>
-                <channelDensity condDensity="0.12 S_per_cm2" id="naChans" ionChannel="na" erev="50.0 mV" ion="na"/> 
+                <channelDensity condDensity="0.12 S_per_cm2" id="naChans" ionChannel="na" erev="50.0 mV" ion="na"/>
                 <channelDensity condDensity="0.036 S_per_cm2" id="kChans" ionChannel="k" erev="-77.0 mV" ion="k"/>
                 <channelDensity condDensity="0.036 S_per_cm2" id="k_slowChans" ionChannel="k_slow" erev="-77.0 mV" ion="k"/>
                 <channelDensity condDensity="0.0003 S_per_cm2" id="leakChans" ionChannel="leak" erev="-54.3 mV" ion="non_specific"/>
@@ -174,20 +174,20 @@
         <population id="pop" component="hh" size="1"/>
         <explicitInput target="pop[0]" input="IClamp" destination="synapses"/>
     </network>
-    
+
 
     <Simulation id="sim1" length="1000ms" step="0.01ms" target="net1">
-    
+
         <Display id="d1" title="Voltage" timeScale="1ms" xmin="0" xmax="1000" ymin="-90" ymax="60">
             <Line id="v" quantity="pop[0]/v" scale="1mV"  color="#ffffff" timeScale="1ms"/>
         </Display>
-        
+
         <Display id="d2" title="K chanell: rate variables" timeScale="1ms" xmin="0" xmax="1000" ymin="-0.1" ymax="1.1">
             <Line id="k_slow_a" quantity="pop[0]/biophys/membraneProperties/k_slowChans/k_slow/a/q" scale="1"  color="#0000ff" timeScale="1ms"/>
             <Line id="k_slow_b_bb" quantity="pop[0]/biophys/membraneProperties/k_slowChans/k_slow/b/bb/q" scale="1"  color="#00bbb00" timeScale="1ms"/>
             <Line id="k_slow_b_bb1" quantity="pop[0]/biophys/membraneProperties/k_slowChans/k_slow/b/bb1/q" scale="1"  color="#bb0000" timeScale="1ms"/>
         </Display>
-    
+
         <Display id="d3" title="current" timeScale="1ms" xmin="0" xmax="1000" ymin="-0.01" ymax="1">
             <Line id="i" quantity="pop[0]/IClamp/i" scale="1nA"  color="#000000" timeScale="1ms"/>
         </Display>
@@ -196,14 +196,18 @@
             <Line id="k_slow_b_fcond" quantity="pop[0]/biophys/membraneProperties/k_slowChans/k_slow/b/fcond" scale="1"  color="#0000ff" timeScale="1ms"/>
             <Line id="k_slow_fopen" quantity="pop[0]/biophys/membraneProperties/k_slowChans/k_slow/fopen" scale="1"  color="#0000ff" timeScale="1ms"/>
         </Display>
-    
-        <OutputFile id="of0" fileName="results/hh_v.dat">
-            <OutputColumn id="v" quantity="pop[0]/v"/> 
-            <OutputColumn id="kslow_fcond" quantity="pop[0]/biophys/membraneProperties/k_slowChans/k_slow/fopen"/> 
+
+        <OutputFile id="of0" fileName="results/ex24_v.dat">
+            <OutputColumn id="v" quantity="pop[0]/v"/>
+        </OutputFile>
+
+        <OutputFile id="of1" fileName="results/ex24_k.dat">
+            <OutputColumn id="kslow_fcond" quantity="pop[0]/biophys/membraneProperties/k_slowChans/k_slow/fopen"/>
         </OutputFile>  
-    
+
+
     </Simulation>
-    
+
 
 
 

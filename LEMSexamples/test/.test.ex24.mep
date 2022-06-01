@@ -1,0 +1,9 @@
+system: Test Ex0
+
+experiments:
+    v:
+        expected:
+            spike times: [501.53000000000003, 515.86, 529.7199999999999, 543.53]
+    m:
+        expected:
+            spike times: [102.44, 118.69, 134.72, 150.75, 166.77, 182.8, 198.83]

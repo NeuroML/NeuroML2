@@ -65,3 +65,4 @@ examples/*.pov
 /LEMSexamples/report.ex*.txt
 /LEMSexamples/results/*.spikes
 /LEMSexamples/*.gen.so
+/LEMSexamples/tmp
