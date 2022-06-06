@@ -168,33 +168,37 @@
 
     </cell>
 
-    <pulseGenerator id="IClamp" delay="500ms" duration="50ms" amplitude="0.1 nA" />
+        <pulseGenerator id="IClamp1" delay="25ms" duration="50ms" amplitude="0.1 nA" />
+        <pulseGenerator id="IClamp2" delay="100ms" duration="50ms" amplitude="-0.1 nA" />
 
     <network id="net1" type="networkWithTemperature" temperature = "34 degC">
         <population id="pop" component="hh" size="1"/>
-        <explicitInput target="pop[0]" input="IClamp" destination="synapses"/>
+        <explicitInput target="pop[0]" input="IClamp1" destination="synapses"/>
+        <explicitInput target="pop[0]" input="IClamp2" destination="synapses"/>
     </network>
 
 
-    <Simulation id="sim1" length="1000ms" step="0.01ms" target="net1">
+    <Simulation id="sim1" length="200ms" step="0.01ms" target="net1">
 
-        <Display id="d1" title="Voltage" timeScale="1ms" xmin="0" xmax="1000" ymin="-90" ymax="60">
+        <Display id="d1" title="Voltage" timeScale="1ms" xmin="-10" xmax="210" ymin="-120" ymax="60">
             <Line id="v" quantity="pop[0]/v" scale="1mV"  color="#ffffff" timeScale="1ms"/>
         </Display>
 
-        <Display id="d2" title="K chanell: rate variables" timeScale="1ms" xmin="0" xmax="1000" ymin="-0.1" ymax="1.1">
-            <Line id="k_slow_a" quantity="pop[0]/biophys/membraneProperties/k_slowChans/k_slow/a/q" scale="1"  color="#0000ff" timeScale="1ms"/>
+        <Display id="d2" title="K channel: rate variables" timeScale="1ms"  xmin="-10" xmax="210" ymin="-0.1" ymax="1.1">
+            <Line id="k_slow_a" quantity="pop[0]/biophys/membraneProperties/k_slowChans/k_slow/a/q" scale="1"  color="#990000" timeScale="1ms"/>
             <Line id="k_slow_b_bb" quantity="pop[0]/biophys/membraneProperties/k_slowChans/k_slow/b/bb/q" scale="1"  color="#00bbb00" timeScale="1ms"/>
             <Line id="k_slow_b_bb1" quantity="pop[0]/biophys/membraneProperties/k_slowChans/k_slow/b/bb1/q" scale="1"  color="#bb0000" timeScale="1ms"/>
         </Display>
 
-        <Display id="d3" title="current" timeScale="1ms" xmin="0" xmax="1000" ymin="-0.01" ymax="1">
-            <Line id="i" quantity="pop[0]/IClamp/i" scale="1nA"  color="#000000" timeScale="1ms"/>
+        <Display id="d3" title="current" timeScale="1ms" xmin="-10" xmax="210" ymin="-0.2" ymax="0.2">
+            <Line id="i1" quantity="pop[0]/IClamp1/i" scale="1nA"  color="#000000" timeScale="1ms"/>
+            <Line id="i2" quantity="pop[0]/IClamp2/i" scale="1nA"  color="#005500" timeScale="1ms"/>
         </Display>
 
-        <Display id="d4" title="potassium fractional conductance: a^2(0.5*bb + 0.5*bb1)" timeScale="1ms" xmin="0" xmax="1000" ymin="-0.1" ymax="1.1">
+        <Display id="d4" title="potassium fractional conductance: a^2(0.5*bb + 0.5*bb1)" timeScale="1ms" xmin="-10" xmax="210" ymin="-0.1" ymax="1.1">
+            <Line id="k_slow_a_fcond" quantity="pop[0]/biophys/membraneProperties/k_slowChans/k_slow/a/fcond" scale="1"  color="#990000" timeScale="1ms"/>
             <Line id="k_slow_b_fcond" quantity="pop[0]/biophys/membraneProperties/k_slowChans/k_slow/b/fcond" scale="1"  color="#0000ff" timeScale="1ms"/>
-            <Line id="k_slow_fopen" quantity="pop[0]/biophys/membraneProperties/k_slowChans/k_slow/fopen" scale="1"  color="#0000ff" timeScale="1ms"/>
+            <Line id="k_slow_fopen" quantity="pop[0]/biophys/membraneProperties/k_slowChans/k_slow/fopen" scale="1"  color="#00ffff" timeScale="1ms"/>
         </Display>
 
         <OutputFile id="of0" fileName="results/ex24_v.dat">
@@ -203,7 +207,7 @@
 
         <OutputFile id="of1" fileName="results/ex24_k.dat">
             <OutputColumn id="kslow_fcond" quantity="pop[0]/biophys/membraneProperties/k_slowChans/k_slow/fopen"/>
-        </OutputFile>  
+        </OutputFile>
 
 
     </Simulation>
