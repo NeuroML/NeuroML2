@@ -8,7 +8,7 @@
 
     <!-- the slow K channel below uses the "fractional conductance / subGate" formalism -->
 
-    <ionChannelHH id="k_slow" conductance="10pS">
+    <ionChannelHH id="k_slow" conductance="10pS" species="k">
 
         <gateHHrates id="a" instances="2">
             <q10Settings type="q10ExpTemp" q10Factor="2.3" experimentalTemp="21 degC"/>
@@ -106,7 +106,7 @@
 
     <!-- just standard HH below (similar to example 1) -->
 
-    <ionChannelHH id="k" conductance="10pS">
+    <ionChannelHH id="k" conductance="10pS" species="k">
         <gateHHrates id="n" instances="4">
             <forwardRate type="HHExpLinearRate" rate="0.1per_ms" midpoint="-55mV" scale="10mV"/>
             <reverseRate type="HHExpRate" rate="0.125per_ms" midpoint="-65mV" scale="-80mV"/>
@@ -115,7 +115,7 @@
 
     <ionChannelPassive id="leak" conductance="10pS"/>
 
-    <ionChannelHH id="na" conductance="10pS">
+    <ionChannelHH id="na" conductance="10pS" species="na">
 
        <gateHHrates id="m" instances="3">
             <forwardRate type="HHExpLinearRate" rate="1per_ms" midpoint="-40mV" scale="10mV"/>
@@ -130,7 +130,7 @@
     </ionChannelHH>
 
 
-    <cell id="hh">
+    <cell id="hhtest">
         <morphology id="just_a_cylinder">
             <segment id="0" name="Soma">
                 <proximal x="0.0" y="0.0" z="0.0" diameter="10.0"/>
@@ -172,7 +172,7 @@
         <pulseGenerator id="IClamp2" delay="100ms" duration="50ms" amplitude="-0.1 nA" />
 
     <network id="net1" type="networkWithTemperature" temperature = "34 degC">
-        <population id="pop" component="hh" size="1"/>
+        <population id="pop" component="hhtest" size="1"/>
         <explicitInput target="pop[0]" input="IClamp1" destination="synapses"/>
         <explicitInput target="pop[0]" input="IClamp2" destination="synapses"/>
     </network>
