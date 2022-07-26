@@ -1885,6 +1885,7 @@
       <xs:documentation>Properties specific to the membrane, such as the **populations**  of channels, **channelDensities,**  **specificCapacitance,**  etc.
 </xs:documentation>
     </xs:annotation>
+    <xs:complexContent>
       <xs:extension base="BaseWithoutID">
         <xs:sequence>
           <xs:element name="channelPopulation" type="ChannelPopulation" minOccurs="0" maxOccurs="unbounded"/>
@@ -1903,6 +1904,7 @@
                 <xs:element name="reversalPotential" type="ReversalPotential" minOccurs="0" maxOccurs="unbounded"/>-->
         </xs:sequence>
       </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="MembraneProperties2CaPools">
     <xs:annotation>
