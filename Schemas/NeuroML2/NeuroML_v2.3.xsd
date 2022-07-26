@@ -1929,10 +1929,12 @@
 
 </xs:documentation>
     </xs:annotation>
+    <xs:complexContent>
       <xs:extension base="BaseWithoutID">
           <xs:attribute name="value" type="Nml2Quantity_voltage" use="required"/>
           <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
       </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="SpecificCapacitance">
     <xs:annotation>
