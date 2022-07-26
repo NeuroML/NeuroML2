@@ -1284,11 +1284,15 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="BlockMechanism">
-    <xs:attribute name="type" type="BlockTypes" use="required"/>
-    <xs:attribute name="species" type="NmlId" use="required"/>
-    <xs:attribute name="blockConcentration" type="Nml2Quantity_concentration" use="required"/>
-    <xs:attribute name="scalingConc" type="Nml2Quantity_concentration" use="required"/>
-    <xs:attribute name="scalingVolt" type="Nml2Quantity_voltage" use="required"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutID">
+        <xs:attribute name="type" type="BlockTypes" use="required"/>
+        <xs:attribute name="species" type="NmlId" use="required"/>
+        <xs:attribute name="blockConcentration" type="Nml2Quantity_concentration" use="required"/>
+        <xs:attribute name="scalingConc" type="Nml2Quantity_concentration" use="required"/>
+        <xs:attribute name="scalingVolt" type="Nml2Quantity_voltage" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:simpleType name="PlasticityTypes">
     <xs:restriction base="xs:string">
