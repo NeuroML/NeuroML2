@@ -1885,22 +1885,24 @@
       <xs:documentation>Properties specific to the membrane, such as the **populations**  of channels, **channelDensities,**  **specificCapacitance,**  etc.
 </xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:element name="channelPopulation" type="ChannelPopulation" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="channelDensity" type="ChannelDensity" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="channelDensityVShift" type="ChannelDensityVShift" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="channelDensityNernst" type="ChannelDensityNernst" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="channelDensityGHK" type="ChannelDensityGHK" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="channelDensityGHK2" type="ChannelDensityGHK2" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="channelDensityNonUniform" type="ChannelDensityNonUniform" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="channelDensityNonUniformNernst" type="ChannelDensityNonUniformNernst" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="channelDensityNonUniformGHK" type="ChannelDensityNonUniformGHK" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="spikeThresh" type="SpikeThresh" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="specificCapacitance" type="SpecificCapacitance" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="initMembPotential" type="InitMembPotential" minOccurs="0" maxOccurs="unbounded"/>
-      <!-- Taking this out until confirmation it's needed
-            <xs:element name="reversalPotential" type="ReversalPotential" minOccurs="0" maxOccurs="unbounded"/>-->
-    </xs:sequence>
+      <xs:extension base="BaseWithoutID">
+        <xs:sequence>
+          <xs:element name="channelPopulation" type="ChannelPopulation" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="channelDensity" type="ChannelDensity" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="channelDensityVShift" type="ChannelDensityVShift" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="channelDensityNernst" type="ChannelDensityNernst" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="channelDensityGHK" type="ChannelDensityGHK" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="channelDensityGHK2" type="ChannelDensityGHK2" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="channelDensityNonUniform" type="ChannelDensityNonUniform" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="channelDensityNonUniformNernst" type="ChannelDensityNonUniformNernst" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="channelDensityNonUniformGHK" type="ChannelDensityNonUniformGHK" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="spikeThresh" type="SpikeThresh" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="specificCapacitance" type="SpecificCapacitance" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="initMembPotential" type="InitMembPotential" minOccurs="0" maxOccurs="unbounded"/>
+          <!-- Taking this out until confirmation it's needed
+                <xs:element name="reversalPotential" type="ReversalPotential" minOccurs="0" maxOccurs="unbounded"/>-->
+        </xs:sequence>
+      </xs:extension>
   </xs:complexType>
   <xs:complexType name="MembraneProperties2CaPools">
     <xs:annotation>
