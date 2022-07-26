@@ -2894,10 +2894,14 @@
       <xs:documentation>Explicit event connection between named components, which gets processed via a new instance of a **synapse**  component which is created on the target component
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="from" type="xs:string" use="required"/>
-    <xs:attribute name="to" type="xs:string" use="required"/>
-    <xs:attribute name="synapse" type="xs:string" use="required"/>
-    <xs:attribute name="destination" type="NmlId" use="optional"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="from" type="xs:string" use="required"/>
+        <xs:attribute name="to" type="xs:string" use="required"/>
+        <xs:attribute name="synapse" type="xs:string" use="required"/>
+        <xs:attribute name="destination" type="NmlId" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="BaseProjection">
     <xs:annotation>
