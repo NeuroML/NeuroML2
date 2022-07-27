@@ -1935,8 +1935,8 @@
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseWithoutID">
-          <xs:attribute name="value" type="Nml2Quantity_voltage" use="required"/>
-          <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
+        <xs:attribute name="value" type="Nml2Quantity_voltage" use="required"/>
+        <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -1967,8 +1967,8 @@
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseWithoutID">
-          <xs:attribute name="value" type="Nml2Quantity_voltage" use="required"/>
-          <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
+        <xs:attribute name="value" type="Nml2Quantity_voltage" use="required"/>
+        <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -1982,10 +1982,10 @@
 </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-        <xs:extension base="BaseWithoutID">
-            <xs:attribute name="value" type="Nml2Quantity_resistivity" use="required"/>
-            <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
-        </xs:extension>
+      <xs:extension base="BaseWithoutID">
+        <xs:attribute name="value" type="Nml2Quantity_resistivity" use="required"/>
+        <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
+      </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ChannelPopulation">
