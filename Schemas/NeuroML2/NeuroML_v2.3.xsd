@@ -1284,11 +1284,15 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="BlockMechanism">
-    <xs:attribute name="type" type="BlockTypes" use="required"/>
-    <xs:attribute name="species" type="NmlId" use="required"/>
-    <xs:attribute name="blockConcentration" type="Nml2Quantity_concentration" use="required"/>
-    <xs:attribute name="scalingConc" type="Nml2Quantity_concentration" use="required"/>
-    <xs:attribute name="scalingVolt" type="Nml2Quantity_voltage" use="required"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutID">
+        <xs:attribute name="type" type="BlockTypes" use="required"/>
+        <xs:attribute name="species" type="NmlId" use="required"/>
+        <xs:attribute name="blockConcentration" type="Nml2Quantity_concentration" use="required"/>
+        <xs:attribute name="scalingConc" type="Nml2Quantity_concentration" use="required"/>
+        <xs:attribute name="scalingVolt" type="Nml2Quantity_voltage" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:simpleType name="PlasticityTypes">
     <xs:restriction base="xs:string">
@@ -1885,22 +1889,26 @@
       <xs:documentation>Properties specific to the membrane, such as the **populations**  of channels, **channelDensities,**  **specificCapacitance,**  etc.
 </xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:element name="channelPopulation" type="ChannelPopulation" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="channelDensity" type="ChannelDensity" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="channelDensityVShift" type="ChannelDensityVShift" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="channelDensityNernst" type="ChannelDensityNernst" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="channelDensityGHK" type="ChannelDensityGHK" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="channelDensityGHK2" type="ChannelDensityGHK2" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="channelDensityNonUniform" type="ChannelDensityNonUniform" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="channelDensityNonUniformNernst" type="ChannelDensityNonUniformNernst" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="channelDensityNonUniformGHK" type="ChannelDensityNonUniformGHK" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="spikeThresh" type="SpikeThresh" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="specificCapacitance" type="SpecificCapacitance" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="initMembPotential" type="InitMembPotential" minOccurs="0" maxOccurs="unbounded"/>
-      <!-- Taking this out until confirmation it's needed
-            <xs:element name="reversalPotential" type="ReversalPotential" minOccurs="0" maxOccurs="unbounded"/>-->
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutID">
+        <xs:sequence>
+          <xs:element name="channelPopulation" type="ChannelPopulation" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="channelDensity" type="ChannelDensity" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="channelDensityVShift" type="ChannelDensityVShift" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="channelDensityNernst" type="ChannelDensityNernst" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="channelDensityGHK" type="ChannelDensityGHK" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="channelDensityGHK2" type="ChannelDensityGHK2" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="channelDensityNonUniform" type="ChannelDensityNonUniform" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="channelDensityNonUniformNernst" type="ChannelDensityNonUniformNernst" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="channelDensityNonUniformGHK" type="ChannelDensityNonUniformGHK" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="spikeThresh" type="SpikeThresh" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="specificCapacitance" type="SpecificCapacitance" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="initMembPotential" type="InitMembPotential" minOccurs="0" maxOccurs="unbounded"/>
+          <!-- Taking this out until confirmation it's needed
+                <xs:element name="reversalPotential" type="ReversalPotential" minOccurs="0" maxOccurs="unbounded"/>-->
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="MembraneProperties2CaPools">
     <xs:annotation>
@@ -1925,8 +1933,12 @@
 
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="value" type="Nml2Quantity_voltage" use="required"/>
-    <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutID">
+        <xs:attribute name="value" type="Nml2Quantity_voltage" use="required"/>
+        <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="SpecificCapacitance">
     <xs:annotation>
@@ -1937,8 +1949,12 @@
 
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="value" type="Nml2Quantity_specificCapacitance" use="required"/>
-    <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutID">
+        <xs:attribute name="value" type="Nml2Quantity_specificCapacitance" use="required"/>
+        <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="InitMembPotential">
     <xs:annotation>
@@ -1949,8 +1965,12 @@
 
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="value" type="Nml2Quantity_voltage" use="required"/>
-    <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutID">
+        <xs:attribute name="value" type="Nml2Quantity_voltage" use="required"/>
+        <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Resistivity">
     <xs:annotation>
@@ -1961,8 +1981,12 @@
 
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="value" type="Nml2Quantity_resistivity" use="required"/>
-    <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutID">
+        <xs:attribute name="value" type="Nml2Quantity_resistivity" use="required"/>
+        <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ChannelPopulation">
     <xs:annotation>
@@ -2874,10 +2898,14 @@
       <xs:documentation>Explicit event connection between named components, which gets processed via a new instance of a **synapse**  component which is created on the target component
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="from" type="xs:string" use="required"/>
-    <xs:attribute name="to" type="xs:string" use="required"/>
-    <xs:attribute name="synapse" type="xs:string" use="required"/>
-    <xs:attribute name="destination" type="NmlId" use="optional"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="from" type="xs:string" use="required"/>
+        <xs:attribute name="to" type="xs:string" use="required"/>
+        <xs:attribute name="synapse" type="xs:string" use="required"/>
+        <xs:attribute name="destination" type="NmlId" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="BaseProjection">
     <xs:annotation>
