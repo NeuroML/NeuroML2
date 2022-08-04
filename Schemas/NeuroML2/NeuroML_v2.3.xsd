@@ -2277,10 +2277,14 @@
       <xs:documentation>Biophysical properties related to the intracellular space within the  **cell** , such as the  **resistivity**  and the list of ionic  **species**  present. **caConc**  and **caConcExt**  are explicitly exposed here to facilitate accessing these values from other Components, even though **caConcExt**  is clearly not an intracellular property
 </xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:element name="species" type="Species" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="resistivity" type="Resistivity" minOccurs="0" maxOccurs="unbounded"/>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:sequence>
+          <xs:element name="species" type="Species" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="resistivity" type="Resistivity" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="IntracellularProperties2CaPools">
     <xs:annotation>
