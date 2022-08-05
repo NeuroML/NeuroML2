@@ -1861,7 +1861,11 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="ProximalDetails">
-    <xs:attribute name="translationStart" type="xs:double" use="required"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="translationStart" type="xs:double" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="DistalDetails">
     <xs:attribute name="normalizationEnd" type="xs:double" use="required"/>
