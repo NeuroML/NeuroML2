@@ -2338,15 +2338,18 @@
 
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="id" type="NmlId" use="required"/>
-    <xs:attribute name="concentrationModel" type="NmlId" use="required"/>
-    <xs:attribute name="ion" type="NmlId" use="optional">
-      <xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="Base">
+        <xs:attribute name="concentrationModel" type="NmlId" use="required"/>
+        <xs:attribute name="ion" type="NmlId" use="optional">
+          <xs:annotation>
         </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="initialConcentration" type="Nml2Quantity_concentration" use="required"/>
-    <xs:attribute name="initialExtConcentration" type="Nml2Quantity_concentration" use="required"/>
-    <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
+        </xs:attribute>
+        <xs:attribute name="initialConcentration" type="Nml2Quantity_concentration" use="required"/>
+        <xs:attribute name="initialExtConcentration" type="Nml2Quantity_concentration" use="required"/>
+        <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <!-- TODO: remove -->
   <xs:complexType name="ConcentrationModel_D">
