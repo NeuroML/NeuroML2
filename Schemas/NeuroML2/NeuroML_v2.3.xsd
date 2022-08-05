@@ -3261,11 +3261,14 @@
       <xs:documentation>Specifies a single input to a **target,**  optionally giving the **segmentId**  ( default 0 ) and **fractionAlong**  the segment ( default 0. 5 ).
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="id" type="NonNegativeInteger" use="required"/>
-    <xs:attribute name="target" type="xs:string" use="required"/>
-    <xs:attribute name="destination" type="NmlId" use="required"/>
-    <xs:attribute name="segmentId" type="NonNegativeInteger"/>
-    <xs:attribute name="fractionAlong" type="ZeroToOne"/>
+    <xs:complexContent>
+      <xs:extension base="BaseNonNegativeIntegerId">
+        <xs:attribute name="target" type="xs:string" use="required"/>
+        <xs:attribute name="destination" type="NmlId" use="required"/>
+        <xs:attribute name="segmentId" type="NonNegativeInteger"/>
+        <xs:attribute name="fractionAlong" type="ZeroToOne"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="InputW">
     <xs:annotation>
