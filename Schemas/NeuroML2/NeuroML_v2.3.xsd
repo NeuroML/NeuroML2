@@ -3232,9 +3232,13 @@
       <xs:documentation>An explicit input ( anything which extends  **basePointCurrent**  ) to a target cell in a population
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="target" type="xs:string" use="required"/>
-    <xs:attribute name="input" type="xs:string" use="required"/>
-    <xs:attribute name="destination" type="xs:string"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="target" type="xs:string" use="required"/>
+        <xs:attribute name="input" type="xs:string" use="required"/>
+        <xs:attribute name="destination" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="InputList">
     <xs:annotation>
