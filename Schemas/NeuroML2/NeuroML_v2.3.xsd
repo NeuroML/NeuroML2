@@ -2954,11 +2954,15 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="GridLayout">
-    <xs:attribute name="xSize" type="xs:nonNegativeInteger"/>
-    <xs:attribute name="ySize" type="xs:nonNegativeInteger" use="optional"/>
-    <!-- only use if >= 2D grid-->
-    <xs:attribute name="zSize" type="xs:nonNegativeInteger" use="optional"/>
-    <!-- only use if 3D grid-->
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="xSize" type="xs:nonNegativeInteger"/>
+        <xs:attribute name="ySize" type="xs:nonNegativeInteger" use="optional"/>
+        <!-- only use if >= 2D grid-->
+        <xs:attribute name="zSize" type="xs:nonNegativeInteger" use="optional"/>
+        <!-- only use if 3D grid-->
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Instance">
     <xs:annotation>
