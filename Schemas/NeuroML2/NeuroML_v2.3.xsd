@@ -2939,7 +2939,11 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="UnstructuredLayout">
-    <xs:attribute name="number" type="xs:nonNegativeInteger"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="number" type="xs:nonNegativeInteger"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="RandomLayout">
     <xs:attribute name="number" type="xs:nonNegativeInteger"/>
