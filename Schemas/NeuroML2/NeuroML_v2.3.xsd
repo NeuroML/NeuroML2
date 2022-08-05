@@ -1890,7 +1890,11 @@
       <xs:documentation>Include all members of another  **segmentGroup**  in this group
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="segmentGroup" type="NmlId" use="required"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="segmentGroup" type="NmlId" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Path">
     <xs:annotation>
