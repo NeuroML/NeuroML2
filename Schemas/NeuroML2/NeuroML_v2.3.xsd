@@ -213,10 +213,14 @@
       <xs:documentation>A structured annotation containing metadata, specifically RDF or  **property**  elements
 </xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
-      <!-- Further elements will be specified!! -->
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:sequence>
+          <xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+          <!-- Further elements will be specified!! -->
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ComponentType">
     <xs:annotation>
