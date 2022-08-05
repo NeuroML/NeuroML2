@@ -2946,8 +2946,12 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="RandomLayout">
-    <xs:attribute name="number" type="xs:nonNegativeInteger"/>
-    <xs:attribute name="region" type="NmlId"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="number" type="xs:nonNegativeInteger"/>
+        <xs:attribute name="region" type="NmlId"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="GridLayout">
     <xs:attribute name="xSize" type="xs:nonNegativeInteger"/>
