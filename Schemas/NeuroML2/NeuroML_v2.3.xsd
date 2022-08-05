@@ -201,8 +201,12 @@
       <xs:documentation>A property ( a **tag**  and **value**  pair ), which can be on any  **baseStandalone**  either as a direct child, or within an  **Annotation** . Generally something which helps the visual display or facilitates simulation of a Component, but is not a core physiological property. Common examples include: **numberInternalDivisions,**  equivalent of nseg in NEURON; **radius,**  for a radius to use in graphical displays for abstract cells ( i. e. without defined morphologies ); **color,**  the color to use for a  **Population**  or  **populationList**  of cells; **recommended_dt_ms,**  the recommended timestep to use for simulating a  **Network** , **recommended_duration_ms**  the recommended duration to use when running a  **Network**
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="tag" type="xs:string" use="required"/>
-    <xs:attribute name="value" type="xs:string" use="required"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="tag" type="xs:string" use="required"/>
+        <xs:attribute name="value" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Annotation">
     <xs:annotation>
