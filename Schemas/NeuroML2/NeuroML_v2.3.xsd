@@ -2310,8 +2310,12 @@
       <xs:documentation>Specifies the **value**  of an **inhomogeneousParameter.**  For usage see  **variableParameter**
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="inhomogeneousParameter" type="xs:string" use="required"/>
-    <xs:attribute name="value" type="xs:string" use="required"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="inhomogeneousParameter" type="xs:string" use="required"/>
+        <xs:attribute name="value" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <!-- Taking out for now...
     <xs:complexType name="ReversalPotential">
