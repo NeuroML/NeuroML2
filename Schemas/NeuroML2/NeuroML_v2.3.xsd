@@ -2997,9 +2997,13 @@
 
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="x" type="xs:float" use="required"/>
-    <xs:attribute name="y" type="xs:float" use="required"/>
-    <xs:attribute name="z" type="xs:float" use="required"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="x" type="xs:float" use="required"/>
+        <xs:attribute name="y" type="xs:float" use="required"/>
+        <xs:attribute name="z" type="xs:float" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="CellSet">
     <xs:complexContent>
