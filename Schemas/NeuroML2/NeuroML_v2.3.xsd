@@ -965,12 +965,16 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="HHTime">
-    <xs:attribute name="type" type="NmlId" use="required"/>
-    <xs:attribute name="rate" type="Nml2Quantity_time" use="optional"/>
-    <xs:attribute name="midpoint" type="Nml2Quantity_voltage" use="optional"/>
-    <xs:attribute name="scale" type="Nml2Quantity_voltage" use="optional"/>
-    <xs:attribute name="tau" type="Nml2Quantity_time" use="optional"/>
-    <!-- TODO: make this and prev 3 attrs either/or-->
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="type" type="NmlId" use="required"/>
+        <xs:attribute name="rate" type="Nml2Quantity_time" use="optional"/>
+        <xs:attribute name="midpoint" type="Nml2Quantity_voltage" use="optional"/>
+        <xs:attribute name="scale" type="Nml2Quantity_voltage" use="optional"/>
+        <xs:attribute name="tau" type="Nml2Quantity_time" use="optional"/>
+        <!-- TODO: make this and prev 3 attrs either/or-->
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <!--<xs:complexType name="FixedTimeCourse">
             <xs:attribute name="tau" type="Nml2Quantity_time" use="required"/>
