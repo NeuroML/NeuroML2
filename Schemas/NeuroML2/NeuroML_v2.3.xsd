@@ -276,10 +276,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="NamedDimensionalVariable">
-    <xs:attribute name="name" type="xs:string" use="required"/>
-    <xs:attribute name="dimension" type="xs:string" use="required"/>
-    <xs:attribute name="description" type="xs:string" use="optional"/>
-    <xs:attribute name="exposure" type="xs:string" use="optional"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="dimension" type="xs:string" use="required"/>
+        <xs:attribute name="description" type="xs:string" use="optional"/>
+        <xs:attribute name="exposure" type="xs:string" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Parameter">
     <!-- For language binding generators, so there will be a class of this name... -->
