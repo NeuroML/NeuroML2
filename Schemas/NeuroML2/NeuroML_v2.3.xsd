@@ -1915,10 +1915,14 @@
       <xs:documentation>Include all the  **segment** s distal to that specified by  **from**  in the  **segmentGroup**
 </xs:documentation>
     </xs:annotation>
-    <xs:choice>
-      <xs:element name="from" type="SegmentEndPoint" minOccurs="0"/>
-      <xs:element name="to" type="SegmentEndPoint" minOccurs="0"/>
-    </xs:choice>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:choice>
+          <xs:element name="from" type="SegmentEndPoint" minOccurs="0"/>
+          <xs:element name="to" type="SegmentEndPoint" minOccurs="0"/>
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="SegmentEndPoint">
     <xs:attribute name="segment" type="NonNegativeInteger" use="required"/>
