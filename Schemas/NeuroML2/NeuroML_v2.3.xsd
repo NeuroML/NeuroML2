@@ -1879,7 +1879,11 @@
       <xs:documentation>A single identified **segment**  which is part of the  **segmentGroup**
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="segment" type="NonNegativeInteger" use="required"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="segment" type="NonNegativeInteger" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Include">
     <xs:annotation>
