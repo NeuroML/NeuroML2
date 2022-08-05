@@ -2969,16 +2969,20 @@
       <xs:documentation>Specifies a single instance of a component in a  **population**  ( placed at  **location**  ).
 </xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:element name="location" type="Location"/>
-    </xs:sequence>
-    <xs:attribute name="id" type="xs:nonNegativeInteger"/>
-    <xs:attribute name="i" type="xs:nonNegativeInteger"/>
-    <!-- for grid -->
-    <xs:attribute name="j" type="xs:nonNegativeInteger"/>
-    <!-- for grid -->
-    <xs:attribute name="k" type="xs:nonNegativeInteger"/>
-    <!-- for grid -->
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:sequence>
+          <xs:element name="location" type="Location"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:nonNegativeInteger"/>
+        <xs:attribute name="i" type="xs:nonNegativeInteger"/>
+        <!-- for grid -->
+        <xs:attribute name="j" type="xs:nonNegativeInteger"/>
+        <!-- for grid -->
+        <xs:attribute name="k" type="xs:nonNegativeInteger"/>
+        <!-- for grid -->
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Location">
     <xs:annotation>
