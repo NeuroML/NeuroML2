@@ -621,8 +621,12 @@
 
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="q10Factor" type="Nml2Quantity_none" use="required"/>
-    <xs:attribute name="experimentalTemp" type="Nml2Quantity_temperature" use="required"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="q10Factor" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="experimentalTemp" type="Nml2Quantity_temperature" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:simpleType name="gateTypes">
     <xs:restriction base="xs:string">
