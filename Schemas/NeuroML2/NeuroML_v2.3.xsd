@@ -1785,8 +1785,12 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="SegmentParent">
-    <xs:attribute name="segment" type="NonNegativeInteger" use="required"/>
-    <xs:attribute name="fractionAlong" type="ZeroToOne" use="optional" default="1"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="segment" type="NonNegativeInteger" use="required"/>
+        <xs:attribute name="fractionAlong" type="ZeroToOne" use="optional" default="1"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Point3DWithDiam">
     <xs:annotation>
