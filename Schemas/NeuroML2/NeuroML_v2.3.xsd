@@ -266,10 +266,14 @@
   </xs:complexType>
   <!-- for Parameter etc. -->
   <xs:complexType name="NamedDimensionalType">
-    <xs:attribute name="name" type="xs:string" use="required"/>
-    <!--See https://github.com/NeuroML/jNeuroML/issues/56, suggesting the following change: -->
-    <xs:attribute name="dimension" type="xs:string" use="required"/>
-    <xs:attribute name="description" type="xs:string" use="optional"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <!--See https://github.com/NeuroML/jNeuroML/issues/56, suggesting the following change: -->
+        <xs:attribute name="dimension" type="xs:string" use="required"/>
+        <xs:attribute name="description" type="xs:string" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="NamedDimensionalVariable">
     <xs:attribute name="name" type="xs:string" use="required"/>
