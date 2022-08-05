@@ -1901,10 +1901,14 @@
       <xs:documentation>Include all the  **segment** s between those specified by  **from**  and  **to** , inclusive
 </xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:element name="from" type="SegmentEndPoint" minOccurs="0"/>
-      <xs:element name="to" type="SegmentEndPoint" minOccurs="0"/>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:sequence>
+          <xs:element name="from" type="SegmentEndPoint" minOccurs="0"/>
+          <xs:element name="to" type="SegmentEndPoint" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="SubTree">
     <xs:annotation>
