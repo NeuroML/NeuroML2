@@ -2858,16 +2858,20 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="SpaceStructure">
-    <xs:attribute name="xSpacing" type="xs:float"/>
-    <xs:attribute name="ySpacing" type="xs:float" use="optional"/>
-    <!-- only use if >= 2D grid-->
-    <xs:attribute name="zSpacing" type="xs:float" use="optional"/>
-    <!-- only use if 3D grid-->
-    <xs:attribute name="xStart" type="xs:float" use="optional" default="0"/>
-    <xs:attribute name="yStart" type="xs:float" use="optional" default="0"/>
-    <!-- only use if >= 2D grid-->
-    <xs:attribute name="zStart" type="xs:float" use="optional" default="0"/>
-    <!-- only use if 3D grid-->
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="xSpacing" type="xs:float"/>
+        <xs:attribute name="ySpacing" type="xs:float" use="optional"/>
+        <!-- only use if >= 2D grid-->
+        <xs:attribute name="zSpacing" type="xs:float" use="optional"/>
+        <!-- only use if 3D grid-->
+        <xs:attribute name="xStart" type="xs:float" use="optional" default="0"/>
+        <xs:attribute name="yStart" type="xs:float" use="optional" default="0"/>
+        <!-- only use if >= 2D grid-->
+        <xs:attribute name="zStart" type="xs:float" use="optional" default="0"/>
+        <!-- only use if 3D grid-->
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:simpleType name="allowedSpaces">
     <xs:restriction base="xs:string">
