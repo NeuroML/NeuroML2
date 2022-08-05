@@ -945,10 +945,14 @@
     <xs:attribute name="experimentalTemp" type="Nml2Quantity_temperature" use="optional"/>
   </xs:complexType>
   <xs:complexType name="HHRate">
-    <xs:attribute name="type" type="NmlId" use="required"/>
-    <xs:attribute name="rate" type="Nml2Quantity_pertime" use="optional"/>
-    <xs:attribute name="midpoint" type="Nml2Quantity_voltage" use="optional"/>
-    <xs:attribute name="scale" type="Nml2Quantity_voltage" use="optional"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="type" type="NmlId" use="required"/>
+        <xs:attribute name="rate" type="Nml2Quantity_pertime" use="optional"/>
+        <xs:attribute name="midpoint" type="Nml2Quantity_voltage" use="optional"/>
+        <xs:attribute name="scale" type="Nml2Quantity_voltage" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="HHVariable">
     <xs:attribute name="type" type="NmlId" use="required"/>
