@@ -2927,12 +2927,16 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="Layout">
-    <xs:choice>
-      <xs:element name="random" type="RandomLayout"/>
-      <xs:element name="grid" type="GridLayout"/>
-      <xs:element name="unstructured" type="UnstructuredLayout"/>
-    </xs:choice>
-    <xs:attribute name="space" type="NmlId"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:choice>
+          <xs:element name="random" type="RandomLayout"/>
+          <xs:element name="grid" type="GridLayout"/>
+          <xs:element name="unstructured" type="UnstructuredLayout"/>
+        </xs:choice>
+        <xs:attribute name="space" type="NmlId"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="UnstructuredLayout">
     <xs:attribute name="number" type="xs:nonNegativeInteger"/>
