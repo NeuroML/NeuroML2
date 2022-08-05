@@ -2396,10 +2396,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ExtracellularPropertiesLocal">
-    <xs:sequence>
-      <xs:element name="species" type="Species" minOccurs="0" maxOccurs="unbounded"/>
-      <!-- Further elements will be specified!! -->
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="Base">
+        <xs:sequence>
+          <xs:element name="species" type="Species" minOccurs="0" maxOccurs="unbounded"/>
+          <!-- Further elements will be specified!! -->
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ReactionScheme">
     <xs:complexContent>
