@@ -1,4 +1,5 @@
-Files starting with NML2_ in this folder will be valid against ../Schemas/NeuroML2/NeuroML_v2beta.xsd
+Files starting with NML2_ in this folder will be valid against the latest
+version of the NeuroML schema (and quite possibly a few earlier ones) in ../Schemas/NeuroML2/
 
 To validate these files using `jnml`, run:
 
@@ -25,4 +26,4 @@ this directory, use:
 for i in *.nml; do pynml $i -validate; done
 ```
 
-If the validation fails, please file an issue.
+See also https://docs.neuroml.org/Userdocs/ValidatingNeuroMLModels.html. If the validation fails, please file an issue.

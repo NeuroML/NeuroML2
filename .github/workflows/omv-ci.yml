@@ -1,0 +1,48 @@
+name: Run OMV tests
+
+on:
+  push:
+    branches: [ master, development, experimental, documentation_update, osb* ]
+  pull_request:
+    branches: [ master, development, experimental, documentation_update, osb* ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ 3.9 ]
+        engine:
+          - jNeuroML
+          - jNeuroML_Brian2
+          - jNeuroML_EDEN
+          - jNeuroML_NEURON
+          - jNeuroML_NetPyNE
+          - jNeuroML_MOOSE
+          - jNeuroML_validate
+          - PyLEMS_NeuroML2
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Python  ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version:  ${{ matrix.python-version }}
+
+    - name: Install OMV
+      run: |
+        pip install git+https://github.com/OpenSourceBrain/osb-model-validation
+        pip install scipy sympy matplotlib cython pandas tables
+
+    - name: Run OMV tests on engine ${{ matrix.engine }}
+      run: |
+        omv all -V --engine=${{ matrix.engine }}
+
+    - name: OMV final version info
+      run: |
+        omv list -V # list installed engines
+        env
+        pip list

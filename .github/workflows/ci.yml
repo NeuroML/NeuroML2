@@ -11,11 +11,11 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        java: [ '8' ] # only java 8 for experimental branch...
+        java: [ '8', '11', '16', '17' ]
 
     steps:
     - uses: actions/checkout@v2
@@ -44,7 +44,7 @@ jobs:
         mvn dependency:tree
         ./jnml -v
         cd ..
-        
+
     - name: Install OMV
       run: |
         pwd
@@ -55,7 +55,7 @@ jobs:
         omv list -V
         env
         pip freeze
-        
+
     - name: Test examples using OMV
       run: |
         cd $GITHUB_WORKSPACE/NeuroML2/LEMSexamples

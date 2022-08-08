@@ -1,6 +1,6 @@
-<Lems xmlns="http://www.neuroml.org/lems/0.7.4"
+<Lems xmlns="http://www.neuroml.org/lems/0.7.6"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.4 ../../LEMS/Schemas/LEMS/LEMS_v0.7.4.xsd">
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.6 ../../LEMS/Schemas/LEMS/LEMS_v0.7.6.xsd">
 
     <!-- The core dimensional quantities as used in NeuroML version 2.0 -->
     <!-- Will be used in Type definitions, e.g. <StateVariable name="v" dimension="voltage"/> -->
@@ -25,9 +25,9 @@
     <Dimension name="charge_per_mole" i="1" t="1" n="-1"/>
 
     <Dimension name="current" i="1"/>
-    
+
     <Dimension name="currentDensity" i="1" l="-2"/>
-    
+
     <Dimension name="length" l="1"/>
     <Dimension name="area" l="2"/>
     <Dimension name="volume" l="3"/>
@@ -41,9 +41,9 @@
     <Dimension name="temperature" k="1"/>
 
     <Dimension name="idealGasConstantDims" m="1" l="2" t="-2" k="-1" n="-1"/>
-    
+
     <Dimension name="conductance_per_voltage" m="-2" l="-4" t="6" i="3"/>
-    
+
     <!-- Note: it's unlikely that this dimension/unit for rho in fixedFactorConcentrationModel will be needed anywhere else-->
     <Dimension name="rho_factor" l="-1" n="1" i="-1" t="-1"/>
 
@@ -52,11 +52,11 @@
     <!-- Note, new units can be defined in a NeuroML file based on the dimensions above -->
 
     <Unit symbol="s" dimension="time" power="0"/>
-    <Unit symbol="per_s" dimension="per_time" power="0"/>          
-    <Unit symbol="Hz" dimension="per_time" power="0"/>          
+    <Unit symbol="per_s" dimension="per_time" power="0"/>
+    <Unit symbol="Hz" dimension="per_time" power="0"/>
     <Unit symbol="ms" dimension="time" power="-3"/>                <!-- Physiological Units -->
     <Unit symbol="per_ms" dimension="per_time" power="3"/>         <!-- Physiological Units -->
-    
+
     <Unit symbol="min" dimension="time" power="0" scale="60"/>
     <Unit symbol="per_min" dimension="per_time" power="0" scale="0.01666666667"/>
     <Unit symbol="hour" dimension="time" power="0" scale="3600"/>
@@ -69,7 +69,7 @@
     <Unit symbol="m2" dimension="area" power="0"/>
     <Unit symbol="cm2" dimension="area" power="-4"/>               <!-- Physiological Units -->
     <Unit symbol="um2" dimension="area" power="-12"/>
-    
+
     <Unit symbol="m3" dimension="volume" power="0"/>
     <Unit symbol="cm3" dimension="volume" power="-6"/>             <!-- Physiological Units -->
     <Unit symbol="litre" dimension="volume" power="-3"/>
@@ -107,6 +107,7 @@
     <Unit symbol="ohm_cm" dimension="resistivity" power="-2"/>    <!-- NEURON preferred Units -->
 
     <Unit symbol="C" dimension="charge" power="0"/>
+    <Unit symbol="e" dimension="charge" power="0" scale="1.602176634e-19"/>
 
     <Unit symbol="C_per_mol" dimension="charge_per_mole" power="0"/>
     <Unit symbol="nA_ms_per_amol" dimension="charge_per_mole" power="6"/>   <!-- NEURON preferred Units -->
@@ -124,7 +125,7 @@
     <Unit symbol="mol_per_cm3" dimension="concentration" power="6"/>  <!-- Physiological Units -->
     <Unit symbol="M" dimension="concentration" power="3"/>
     <Unit symbol="mM" dimension="concentration" power="0"/>
-    
+
     <Unit symbol="mol" dimension="substance" power="0"/>
 
     <Unit symbol="m_per_s" dimension="permeability" power="0"/>
@@ -132,16 +133,16 @@
     <Unit symbol="um_per_ms" dimension="permeability" power="-3"/>
     <Unit symbol="cm_per_ms" dimension="permeability" power="1"/>
 
- 
+
     <Unit symbol="degC" dimension="temperature" offset="273.15"/>
- 
+
     <Unit symbol="K" dimension="temperature" power="0"/>
 
     <Unit symbol="J_per_K_per_mol" dimension="idealGasConstantDims" power="0"/>
-    
+
     <Unit symbol="S_per_V" dimension="conductance_per_voltage" power="0"/>
     <Unit symbol="nS_per_mV" dimension="conductance_per_voltage" power="-6"/>       <!-- NEURON preferred Units -->
- 
+
     <!-- Note: it's unlikely that this dimension/unit for rho in fixedFactorConcentrationModel will be needed anywhere else-->
     <Unit symbol="mol_per_m_per_A_per_s" dimension="rho_factor" power="0"/> <!-- SI -->
     <Unit symbol="mol_per_cm_per_uA_per_ms" dimension="rho_factor" power="11"/> <!-- SI -->

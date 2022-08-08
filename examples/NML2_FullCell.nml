@@ -2,22 +2,21 @@
 
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:xi="http://www.w3.org/2001/XInclude"
     xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 ../Schemas/NeuroML2/NeuroML_v2beta4.xsd"
     id="NML2_FullCell">
-        
+
 
 <!-- Example of a multicompartmental cell with biophysics in NeuroML 2 -->
 
-<!-- This is a "pure" NeuroML 2 file. It cannot currently used for simulations with 
-     jLEMS/jNeuroML however, as jLEMS does not yet support multicompartmental cells -->    
+<!-- This is a "pure" NeuroML 2 file. It cannot currently used for simulations with
+     jLEMS/jNeuroML however, as jLEMS does not yet support multicompartmental cells -->
 
     <include href="NML2_SimpleIonChannel.nml"/> <!-- Contains ionChannel NaConductance -->
-    
+
     <ionChannelHH id="pas" conductance="10pS"/> <!--For use in example cell below-->
 
     <!-- Note, no <cells> element...  -->
-    
+
     <cell id="SpikingCell" metaid="HippoCA1Cell">
 
         <notes>A Simple Spiking cell for testing purposes</notes>
@@ -54,7 +53,7 @@
                 <parent segment="1"/>
                 <distal x="30" y="0" z="0" diameter="1"/>
             </segment>
-            
+
             <segment id ="3" name="Spine1">
                 <parent segment="2" fractionAlong="0.5"/>
                 <proximal x="25" y="0" z="0" diameter="0.1"/>
@@ -63,7 +62,7 @@
 
             <!-- segmentGroups follow -->
 
-            <segmentGroup id="soma_group" neuroLexId="sao1044911821">     <!-- Points to category "Neuronal Cell Body" in NeuroLex -->   
+            <segmentGroup id="soma_group" neuroLexId="sao1044911821">     <!-- Points to category "Neuronal Cell Body" in NeuroLex -->
                 <member segment="0"/>
             </segmentGroup>
 
@@ -81,7 +80,7 @@
 
         <biophysicalProperties id="bio_cell">
 
-            <membraneProperties> 
+            <membraneProperties>
 
                 <channelPopulation id="naChansDend" ionChannel="NaConductance" segment="2" number="120000" erev="50mV" ion="na"/>   <!-- Use population instead of density -->
 

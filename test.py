@@ -18,7 +18,7 @@
 import os
 import sys
 from lxml import etree
-from urllib import urlopen
+
 
 import subprocess
 import filecmp
@@ -36,8 +36,8 @@ lems_def_list=os.listdir(lems_def_dir)
 lems_exs_dir="LEMSexamples"
 lems_exs_list=os.listdir(lems_exs_dir)
 
-lems_schema = "../LEMS/Schemas/LEMS/LEMS_v0.7.4.xsd"
-lems_schema_file = urlopen(lems_schema)
+lems_schema = "../LEMS/Schemas/LEMS/LEMS_v0.7.6.xsd"
+lems_schema_file = open(lems_schema)
 
 lems_xmlschema_doc = etree.parse(lems_schema_file)
 lems_xmlschema = etree.XMLSchema(lems_xmlschema_doc)
@@ -45,9 +45,9 @@ lems_xmlschema = etree.XMLSchema(lems_xmlschema_doc)
 lems_master_ex_dir="../LEMS/examples"
 lems_master_ex_list=os.listdir(lems_master_ex_dir)
 
-nml2_schema_name = "NeuroML_v2.1.xsd"
+nml2_schema_name = "NeuroML_v2.3.xsd"
 nml2_schema = "Schemas/NeuroML2/%s"%nml2_schema_name
-nml2_schema_file = urlopen(nml2_schema)
+nml2_schema_file = open(nml2_schema)
 
 nml2_xmlschema_doc = etree.parse(nml2_schema_file)
 nml2_xmlschema = etree.XMLSchema(nml2_xmlschema_doc)
@@ -64,8 +64,8 @@ template_list=['cvode/cvode.vm', 'cvode/Makefile', 'matlab/matlab_ode.vm', 'mode
 def check_same_file(fileA, fileB):
 
     same = filecmp.cmp(fileA, fileB)
-    if vverbose: print " -- Comparing files {} and {}...".format(fileA, fileB)
-    if not same and verbose: print " -- Files {} and {} are different!".format(fileA, fileB)
+    if vverbose: print(" -- Comparing files {} and {}...".format(fileA, fileB))
+    if not same and verbose: print(" -- Files {} and {} are different!".format(fileA, fileB))
     return same
 
 def check_valid_lems(schema, document):
@@ -96,8 +96,8 @@ def test_validate_neuroml_files():
 
 if __name__ == '__main__':
     import nose
-    print "--------------------------------------------------"
-    print "    Checking local copies of NeuroML schemas"
+    print("--------------------------------------------------")
+    print("    Checking local copies of NeuroML schemas")
 
     if not check_same_file('Schemas/NeuroML2/%s'%nml2_schema_name,  '../libNeuroML/neuroml/nml/%s'%nml2_schema_name):
         print("FAIL: NeuroML schemas in libNeuroML not in sync!")
@@ -109,20 +109,20 @@ if __name__ == '__main__':
         print("FAIL: NeuroML alpha schemas in neuroConstruct not in sync!")
     else:
         print("NeuroML alpha schemas in neuroConstruct are in sync.")
-        
+
     if os.path.isdir('../neuroConstruct') and not check_same_file('Schemas/NeuroML2/%s'%nml2_schema_name,  '../neuroConstruct/NeuroML2/Schemas/NeuroML2/%s'%nml2_schema_name):
         print("FAIL: NeuroML schemas in neuroConstruct not in sync!")
     else:
         print("NeuroML schemas in neuroConstruct are in sync.")
-        
+
     if os.path.isdir('../git/NeuroMLWebsite') and not check_same_file('Schemas/NeuroML2/%s'%nml2_schema_name,  '../git/NeuroMLWebsite/public/schema/neuroml2/%s'%nml2_schema_name):
         print("FAIL: NeuroML schemas in NeuroMLWebsite not in sync!")
     else:
         print("NeuroML schemas in NeuroMLWebsite are in sync.")
 
-    print "--------------------------------------------------"
-    print "    Checking local copies of examples"
-    
+    print("--------------------------------------------------")
+    print("    Checking local copies of examples")
+
     are_files_identical_list = []
     for filename in lems_master_ex_list:
         if filename.endswith("xml"):
@@ -144,7 +144,7 @@ if __name__ == '__main__':
         print("FAIL: LEMS examples in pylems are not in sync!")
     else:
         print("LEMS examples in pylems are in sync.")
-        
+
 
     are_files_identical_list = []
     for filename in template_list:
@@ -170,8 +170,8 @@ if __name__ == '__main__':
 
     if '-r' in sys.argv:
 
-        print "--------------------------------------------------"
-        print "    Testing execution of LEMS files using jLEMS"
+        print("--------------------------------------------------")
+        print("    Testing execution of LEMS files using jLEMS")
 
         import subprocess
         import os
@@ -183,7 +183,7 @@ if __name__ == '__main__':
             if file.endswith("xml") and file.startswith("LEMS") and not file in to_ignore:
 
                 lems_file = '%s/%s'%(lems_exs_dir,file)
-                print "Testing %s..." %(lems_file)
+                print("Testing %s..." %(lems_file))
 
                 #subprocess.call(['lems %s'%(lems_file)])
                 #os.system('~/jLEMS/lems %s'%(lems_file))
