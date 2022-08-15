@@ -201,18 +201,26 @@
       <xs:documentation>A property ( a **tag**  and **value**  pair ), which can be on any  **baseStandalone**  either as a direct child, or within an  **Annotation** . Generally something which helps the visual display or facilitates simulation of a Component, but is not a core physiological property. Common examples include: **numberInternalDivisions,**  equivalent of nseg in NEURON; **radius,**  for a radius to use in graphical displays for abstract cells ( i. e. without defined morphologies ); **color,**  the color to use for a  **Population**  or  **populationList**  of cells; **recommended_dt_ms,**  the recommended timestep to use for simulating a  **Network** , **recommended_duration_ms**  the recommended duration to use when running a  **Network**
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="tag" type="xs:string" use="required"/>
-    <xs:attribute name="value" type="xs:string" use="required"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="tag" type="xs:string" use="required"/>
+        <xs:attribute name="value" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Annotation">
     <xs:annotation>
       <xs:documentation>A structured annotation containing metadata, specifically RDF or  **property**  elements
 </xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
-      <!-- Further elements will be specified!! -->
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:sequence>
+          <xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+          <!-- Further elements will be specified!! -->
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ComponentType">
     <xs:annotation>
@@ -235,31 +243,47 @@
     <xs:annotation>
       <xs:documentation>LEMS ComponentType for Constant.</xs:documentation>
     </xs:annotation>
-    <xs:attribute name="name" type="xs:string" use="required"/>
-    <xs:attribute name="dimension" type="xs:string" use="required"/>
-    <xs:attribute name="value" type="Nml2Quantity" use="required"/>
-    <xs:attribute name="description" type="xs:string" use="optional"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="dimension" type="xs:string" use="required"/>
+        <xs:attribute name="value" type="Nml2Quantity" use="required"/>
+        <xs:attribute name="description" type="xs:string" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Exposure">
     <xs:annotation>
       <xs:documentation>LEMS Exposure (ComponentType property) </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="name" type="xs:string" use="required"/>
-    <xs:attribute name="dimension" type="xs:string" use="required"/>
-    <xs:attribute name="description" type="xs:string" use="optional"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="dimension" type="xs:string" use="required"/>
+        <xs:attribute name="description" type="xs:string" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <!-- for Parameter etc. -->
   <xs:complexType name="NamedDimensionalType">
-    <xs:attribute name="name" type="xs:string" use="required"/>
-    <!--See https://github.com/NeuroML/jNeuroML/issues/56, suggesting the following change: -->
-    <xs:attribute name="dimension" type="xs:string" use="required"/>
-    <xs:attribute name="description" type="xs:string" use="optional"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <!--See https://github.com/NeuroML/jNeuroML/issues/56, suggesting the following change: -->
+        <xs:attribute name="dimension" type="xs:string" use="required"/>
+        <xs:attribute name="description" type="xs:string" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="NamedDimensionalVariable">
-    <xs:attribute name="name" type="xs:string" use="required"/>
-    <xs:attribute name="dimension" type="xs:string" use="required"/>
-    <xs:attribute name="description" type="xs:string" use="optional"/>
-    <xs:attribute name="exposure" type="xs:string" use="optional"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="dimension" type="xs:string" use="required"/>
+        <xs:attribute name="description" type="xs:string" use="optional"/>
+        <xs:attribute name="exposure" type="xs:string" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Parameter">
     <!-- For language binding generators, so there will be a class of this name... -->
@@ -597,8 +621,12 @@
 
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="q10Factor" type="Nml2Quantity_none" use="required"/>
-    <xs:attribute name="experimentalTemp" type="Nml2Quantity_temperature" use="required"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="q10Factor" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="experimentalTemp" type="Nml2Quantity_temperature" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:simpleType name="gateTypes">
     <xs:restriction base="xs:string">
@@ -917,24 +945,36 @@
     <xs:attribute name="experimentalTemp" type="Nml2Quantity_temperature" use="optional"/>
   </xs:complexType>
   <xs:complexType name="HHRate">
-    <xs:attribute name="type" type="NmlId" use="required"/>
-    <xs:attribute name="rate" type="Nml2Quantity_pertime" use="optional"/>
-    <xs:attribute name="midpoint" type="Nml2Quantity_voltage" use="optional"/>
-    <xs:attribute name="scale" type="Nml2Quantity_voltage" use="optional"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="type" type="NmlId" use="required"/>
+        <xs:attribute name="rate" type="Nml2Quantity_pertime" use="optional"/>
+        <xs:attribute name="midpoint" type="Nml2Quantity_voltage" use="optional"/>
+        <xs:attribute name="scale" type="Nml2Quantity_voltage" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="HHVariable">
-    <xs:attribute name="type" type="NmlId" use="required"/>
-    <xs:attribute name="rate" type="xs:float" use="optional"/>
-    <xs:attribute name="midpoint" type="Nml2Quantity_voltage" use="optional"/>
-    <xs:attribute name="scale" type="Nml2Quantity_voltage" use="optional"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="type" type="NmlId" use="required"/>
+        <xs:attribute name="rate" type="xs:float" use="optional"/>
+        <xs:attribute name="midpoint" type="Nml2Quantity_voltage" use="optional"/>
+        <xs:attribute name="scale" type="Nml2Quantity_voltage" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="HHTime">
-    <xs:attribute name="type" type="NmlId" use="required"/>
-    <xs:attribute name="rate" type="Nml2Quantity_time" use="optional"/>
-    <xs:attribute name="midpoint" type="Nml2Quantity_voltage" use="optional"/>
-    <xs:attribute name="scale" type="Nml2Quantity_voltage" use="optional"/>
-    <xs:attribute name="tau" type="Nml2Quantity_time" use="optional"/>
-    <!-- TODO: make this and prev 3 attrs either/or-->
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="type" type="NmlId" use="required"/>
+        <xs:attribute name="rate" type="Nml2Quantity_time" use="optional"/>
+        <xs:attribute name="midpoint" type="Nml2Quantity_voltage" use="optional"/>
+        <xs:attribute name="scale" type="Nml2Quantity_voltage" use="optional"/>
+        <xs:attribute name="tau" type="Nml2Quantity_time" use="optional"/>
+        <!-- TODO: make this and prev 3 attrs either/or-->
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <!--<xs:complexType name="FixedTimeCourse">
             <xs:attribute name="tau" type="Nml2Quantity_time" use="required"/>
@@ -1301,10 +1341,14 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="PlasticityMechanism">
-    <xs:attribute name="type" type="PlasticityTypes" use="required"/>
-    <xs:attribute name="initReleaseProb" type="ZeroToOne" use="required"/>
-    <xs:attribute name="tauRec" type="Nml2Quantity_time" use="required"/>
-    <xs:attribute name="tauFac" type="Nml2Quantity_time" use="optional"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="type" type="PlasticityTypes" use="required"/>
+        <xs:attribute name="initReleaseProb" type="ZeroToOne" use="required"/>
+        <xs:attribute name="tauRec" type="Nml2Quantity_time" use="required"/>
+        <xs:attribute name="tauFac" type="Nml2Quantity_time" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   <!--      Cell element                                     -->
@@ -1741,8 +1785,12 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="SegmentParent">
-    <xs:attribute name="segment" type="NonNegativeInteger" use="required"/>
-    <xs:attribute name="fractionAlong" type="ZeroToOne" use="optional" default="1"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="segment" type="NonNegativeInteger" use="required"/>
+        <xs:attribute name="fractionAlong" type="ZeroToOne" use="optional" default="1"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Point3DWithDiam">
     <xs:annotation>
@@ -1759,10 +1807,14 @@
 
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="x" type="xs:double" use="required"/>
-    <xs:attribute name="y" type="xs:double" use="required"/>
-    <xs:attribute name="z" type="xs:double" use="required"/>
-    <xs:attribute name="diameter" type="DoubleGreaterThanZero" use="required"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="x" type="xs:double" use="required"/>
+        <xs:attribute name="y" type="xs:double" use="required"/>
+        <xs:attribute name="z" type="xs:double" use="required"/>
+        <xs:attribute name="diameter" type="DoubleGreaterThanZero" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="SegmentGroup">
     <xs:annotation>
@@ -1809,47 +1861,75 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="ProximalDetails">
-    <xs:attribute name="translationStart" type="xs:double" use="required"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="translationStart" type="xs:double" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="DistalDetails">
-    <xs:attribute name="normalizationEnd" type="xs:double" use="required"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="normalizationEnd" type="xs:double" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Member">
     <xs:annotation>
       <xs:documentation>A single identified **segment**  which is part of the  **segmentGroup**
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="segment" type="NonNegativeInteger" use="required"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="segment" type="NonNegativeInteger" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Include">
     <xs:annotation>
       <xs:documentation>Include all members of another  **segmentGroup**  in this group
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="segmentGroup" type="NmlId" use="required"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="segmentGroup" type="NmlId" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Path">
     <xs:annotation>
       <xs:documentation>Include all the  **segment** s between those specified by  **from**  and  **to** , inclusive
 </xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:element name="from" type="SegmentEndPoint" minOccurs="0"/>
-      <xs:element name="to" type="SegmentEndPoint" minOccurs="0"/>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:sequence>
+          <xs:element name="from" type="SegmentEndPoint" minOccurs="0"/>
+          <xs:element name="to" type="SegmentEndPoint" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="SubTree">
     <xs:annotation>
       <xs:documentation>Include all the  **segment** s distal to that specified by  **from**  in the  **segmentGroup**
 </xs:documentation>
     </xs:annotation>
-    <xs:choice>
-      <xs:element name="from" type="SegmentEndPoint" minOccurs="0"/>
-      <xs:element name="to" type="SegmentEndPoint" minOccurs="0"/>
-    </xs:choice>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:choice>
+          <xs:element name="from" type="SegmentEndPoint" minOccurs="0"/>
+          <xs:element name="to" type="SegmentEndPoint" minOccurs="0"/>
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="SegmentEndPoint">
-    <xs:attribute name="segment" type="NonNegativeInteger" use="required"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="segment" type="NonNegativeInteger" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   <!--      Biophysical properties                           -->
@@ -2230,8 +2310,12 @@
       <xs:documentation>Specifies the **value**  of an **inhomogeneousParameter.**  For usage see  **variableParameter**
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="inhomogeneousParameter" type="xs:string" use="required"/>
-    <xs:attribute name="value" type="xs:string" use="required"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="inhomogeneousParameter" type="xs:string" use="required"/>
+        <xs:attribute name="value" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <!-- Taking out for now...
     <xs:complexType name="ReversalPotential">
@@ -2254,15 +2338,18 @@
 
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="id" type="NmlId" use="required"/>
-    <xs:attribute name="concentrationModel" type="NmlId" use="required"/>
-    <xs:attribute name="ion" type="NmlId" use="optional">
-      <xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="Base">
+        <xs:attribute name="concentrationModel" type="NmlId" use="required"/>
+        <xs:attribute name="ion" type="NmlId" use="optional">
+          <xs:annotation>
         </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="initialConcentration" type="Nml2Quantity_concentration" use="required"/>
-    <xs:attribute name="initialExtConcentration" type="Nml2Quantity_concentration" use="required"/>
-    <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
+        </xs:attribute>
+        <xs:attribute name="initialConcentration" type="Nml2Quantity_concentration" use="required"/>
+        <xs:attribute name="initialExtConcentration" type="Nml2Quantity_concentration" use="required"/>
+        <xs:attribute name="segmentGroup" type="NmlId" use="optional" default="all"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <!-- TODO: remove -->
   <xs:complexType name="ConcentrationModel_D">
@@ -2277,10 +2364,14 @@
       <xs:documentation>Biophysical properties related to the intracellular space within the  **cell** , such as the  **resistivity**  and the list of ionic  **species**  present. **caConc**  and **caConcExt**  are explicitly exposed here to facilitate accessing these values from other Components, even though **caConcExt**  is clearly not an intracellular property
 </xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:element name="species" type="Species" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="resistivity" type="Resistivity" minOccurs="0" maxOccurs="unbounded"/>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:sequence>
+          <xs:element name="species" type="Species" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="resistivity" type="Resistivity" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="IntracellularProperties2CaPools">
     <xs:annotation>
@@ -2305,10 +2396,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ExtracellularPropertiesLocal">
-    <xs:sequence>
-      <xs:element name="species" type="Species" minOccurs="0" maxOccurs="unbounded"/>
-      <!-- Further elements will be specified!! -->
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="Base">
+        <xs:sequence>
+          <xs:element name="species" type="Species" minOccurs="0" maxOccurs="unbounded"/>
+          <!-- Further elements will be specified!! -->
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="ReactionScheme">
     <xs:complexContent>
@@ -2763,16 +2858,20 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="SpaceStructure">
-    <xs:attribute name="xSpacing" type="xs:float"/>
-    <xs:attribute name="ySpacing" type="xs:float" use="optional"/>
-    <!-- only use if >= 2D grid-->
-    <xs:attribute name="zSpacing" type="xs:float" use="optional"/>
-    <!-- only use if 3D grid-->
-    <xs:attribute name="xStart" type="xs:float" use="optional" default="0"/>
-    <xs:attribute name="yStart" type="xs:float" use="optional" default="0"/>
-    <!-- only use if >= 2D grid-->
-    <xs:attribute name="zStart" type="xs:float" use="optional" default="0"/>
-    <!-- only use if 3D grid-->
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="xSpacing" type="xs:float"/>
+        <xs:attribute name="ySpacing" type="xs:float" use="optional"/>
+        <!-- only use if >= 2D grid-->
+        <xs:attribute name="zSpacing" type="xs:float" use="optional"/>
+        <!-- only use if 3D grid-->
+        <xs:attribute name="xStart" type="xs:float" use="optional" default="0"/>
+        <xs:attribute name="yStart" type="xs:float" use="optional" default="0"/>
+        <!-- only use if >= 2D grid-->
+        <xs:attribute name="zStart" type="xs:float" use="optional" default="0"/>
+        <!-- only use if 3D grid-->
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:simpleType name="allowedSpaces">
     <xs:restriction base="xs:string">
@@ -2828,42 +2927,62 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="Layout">
-    <xs:choice>
-      <xs:element name="random" type="RandomLayout"/>
-      <xs:element name="grid" type="GridLayout"/>
-      <xs:element name="unstructured" type="UnstructuredLayout"/>
-    </xs:choice>
-    <xs:attribute name="space" type="NmlId"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:choice>
+          <xs:element name="random" type="RandomLayout"/>
+          <xs:element name="grid" type="GridLayout"/>
+          <xs:element name="unstructured" type="UnstructuredLayout"/>
+        </xs:choice>
+        <xs:attribute name="space" type="NmlId"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="UnstructuredLayout">
-    <xs:attribute name="number" type="xs:nonNegativeInteger"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="number" type="xs:nonNegativeInteger"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="RandomLayout">
-    <xs:attribute name="number" type="xs:nonNegativeInteger"/>
-    <xs:attribute name="region" type="NmlId"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="number" type="xs:nonNegativeInteger"/>
+        <xs:attribute name="region" type="NmlId"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="GridLayout">
-    <xs:attribute name="xSize" type="xs:nonNegativeInteger"/>
-    <xs:attribute name="ySize" type="xs:nonNegativeInteger" use="optional"/>
-    <!-- only use if >= 2D grid-->
-    <xs:attribute name="zSize" type="xs:nonNegativeInteger" use="optional"/>
-    <!-- only use if 3D grid-->
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="xSize" type="xs:nonNegativeInteger"/>
+        <xs:attribute name="ySize" type="xs:nonNegativeInteger" use="optional"/>
+        <!-- only use if >= 2D grid-->
+        <xs:attribute name="zSize" type="xs:nonNegativeInteger" use="optional"/>
+        <!-- only use if 3D grid-->
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Instance">
     <xs:annotation>
       <xs:documentation>Specifies a single instance of a component in a  **population**  ( placed at  **location**  ).
 </xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:element name="location" type="Location"/>
-    </xs:sequence>
-    <xs:attribute name="id" type="xs:nonNegativeInteger"/>
-    <xs:attribute name="i" type="xs:nonNegativeInteger"/>
-    <!-- for grid -->
-    <xs:attribute name="j" type="xs:nonNegativeInteger"/>
-    <!-- for grid -->
-    <xs:attribute name="k" type="xs:nonNegativeInteger"/>
-    <!-- for grid -->
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:sequence>
+          <xs:element name="location" type="Location"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:nonNegativeInteger"/>
+        <xs:attribute name="i" type="xs:nonNegativeInteger"/>
+        <!-- for grid -->
+        <xs:attribute name="j" type="xs:nonNegativeInteger"/>
+        <!-- for grid -->
+        <xs:attribute name="k" type="xs:nonNegativeInteger"/>
+        <!-- for grid -->
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Location">
     <xs:annotation>
@@ -2878,9 +2997,13 @@
 
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="x" type="xs:float" use="required"/>
-    <xs:attribute name="y" type="xs:float" use="required"/>
-    <xs:attribute name="z" type="xs:float" use="required"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="x" type="xs:float" use="required"/>
+        <xs:attribute name="y" type="xs:float" use="required"/>
+        <xs:attribute name="z" type="xs:float" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="CellSet">
     <xs:complexContent>
@@ -3109,9 +3232,13 @@
       <xs:documentation>An explicit input ( anything which extends  **basePointCurrent**  ) to a target cell in a population
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="target" type="xs:string" use="required"/>
-    <xs:attribute name="input" type="xs:string" use="required"/>
-    <xs:attribute name="destination" type="xs:string"/>
+    <xs:complexContent>
+      <xs:extension base="BaseWithoutId">
+        <xs:attribute name="target" type="xs:string" use="required"/>
+        <xs:attribute name="input" type="xs:string" use="required"/>
+        <xs:attribute name="destination" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="InputList">
     <xs:annotation>
@@ -3134,11 +3261,14 @@
       <xs:documentation>Specifies a single input to a **target,**  optionally giving the **segmentId**  ( default 0 ) and **fractionAlong**  the segment ( default 0. 5 ).
 </xs:documentation>
     </xs:annotation>
-    <xs:attribute name="id" type="NonNegativeInteger" use="required"/>
-    <xs:attribute name="target" type="xs:string" use="required"/>
-    <xs:attribute name="destination" type="NmlId" use="required"/>
-    <xs:attribute name="segmentId" type="NonNegativeInteger"/>
-    <xs:attribute name="fractionAlong" type="ZeroToOne"/>
+    <xs:complexContent>
+      <xs:extension base="BaseNonNegativeIntegerId">
+        <xs:attribute name="target" type="xs:string" use="required"/>
+        <xs:attribute name="destination" type="NmlId" use="required"/>
+        <xs:attribute name="segmentId" type="NonNegativeInteger"/>
+        <xs:attribute name="fractionAlong" type="ZeroToOne"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="InputW">
     <xs:annotation>
