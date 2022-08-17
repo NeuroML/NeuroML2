@@ -2841,6 +2841,7 @@
         </xs:sequence>
         <xs:attribute name="type" type="networkTypes" use="optional"/>
         <xs:attribute name="temperature" type="Nml2Quantity_temperature" use="optional"/>
+        <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
         <!-- TODO: put check that type=networkWithTemperature -->
       </xs:extension>
     </xs:complexContent>
