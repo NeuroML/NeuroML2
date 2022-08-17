@@ -3030,6 +3030,7 @@
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseWithoutId">
+        <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
         <xs:attribute name="from" type="xs:string" use="required"/>
         <xs:attribute name="to" type="xs:string" use="required"/>
         <xs:attribute name="synapse" type="xs:string" use="required"/>
