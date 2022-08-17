@@ -524,6 +524,7 @@
         <xs:sequence>
           <xs:element name="q10ConductanceScaling" type="Q10ConductanceScaling" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
+        <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
