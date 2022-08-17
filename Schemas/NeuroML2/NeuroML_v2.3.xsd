@@ -1044,8 +1044,8 @@
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
-
-            </xs:extension>
+        <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
+      </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="BaseVoltageDepSynapse">
