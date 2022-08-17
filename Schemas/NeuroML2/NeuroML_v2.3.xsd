@@ -3781,7 +3781,6 @@
     <xs:annotation>
       <xs:documentation>Base element without ID specified *yet*, e.g. for an element with a particular requirement on its id which does not comply with NmlId (e.g. Segment needs nonNegativeInteger).</xs:documentation>
     </xs:annotation>
-    <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
   </xs:complexType>
   <xs:complexType name="BaseNonNegativeIntegerId">
     <xs:annotation>
