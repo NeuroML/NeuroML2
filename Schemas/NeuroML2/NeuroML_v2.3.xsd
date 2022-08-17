@@ -1784,6 +1784,7 @@
           <xs:element name="distal" type="Point3DWithDiam" minOccurs="1"/>
         </xs:sequence>
         <xs:attribute name="name" type="xs:string" use="optional"/>
+        <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
