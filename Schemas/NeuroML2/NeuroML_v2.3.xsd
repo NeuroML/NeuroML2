@@ -524,6 +524,7 @@
         <xs:sequence>
           <xs:element name="q10ConductanceScaling" type="Q10ConductanceScaling" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
+        <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -543,6 +544,7 @@
         </xs:sequence>
         <xs:attribute name="species" type="NmlId" use="optional"/>
         <xs:attribute name="conductance" type="Nml2Quantity_conductance" use="optional"/>
+        <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -1042,8 +1044,8 @@
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
-
-            </xs:extension>
+        <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
+      </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="BaseVoltageDepSynapse">
@@ -1360,7 +1362,8 @@
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="Standalone">
-            </xs:extension>
+        <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
+      </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="IafTauCell">
@@ -1781,6 +1784,7 @@
           <xs:element name="distal" type="Point3DWithDiam" minOccurs="1"/>
         </xs:sequence>
         <xs:attribute name="name" type="xs:string" use="optional"/>
+        <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -1833,6 +1837,7 @@
           <xs:element name="subTree" type="SubTree" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="inhomogeneousParameter" type="InhomogeneousParameter" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
+        <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -2836,6 +2841,7 @@
         </xs:sequence>
         <xs:attribute name="type" type="networkTypes" use="optional"/>
         <xs:attribute name="temperature" type="Nml2Quantity_temperature" use="optional"/>
+        <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
         <!-- TODO: put check that type=networkWithTemperature -->
       </xs:extension>
     </xs:complexContent>
@@ -2917,6 +2923,7 @@
         <xs:attribute name="size" type="NonNegativeInteger" use="optional"/>
         <xs:attribute name="type" type="populationTypes" use="optional"/>
         <xs:attribute name="extracellularProperties" type="NmlId" use="optional"/>
+        <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -3023,6 +3030,7 @@
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseWithoutId">
+        <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
         <xs:attribute name="from" type="xs:string" use="required"/>
         <xs:attribute name="to" type="xs:string" use="required"/>
         <xs:attribute name="synapse" type="xs:string" use="required"/>
@@ -3063,6 +3071,7 @@
     <xs:complexContent>
       <xs:extension base="BaseNonNegativeIntegerId">
         <!-- Nothing else for now...-->
+        <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -3781,7 +3790,6 @@
     <xs:annotation>
       <xs:documentation>Base element without ID specified *yet*, e.g. for an element with a particular requirement on its id which does not comply with NmlId (e.g. Segment needs nonNegativeInteger).</xs:documentation>
     </xs:annotation>
-    <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
   </xs:complexType>
   <xs:complexType name="BaseNonNegativeIntegerId">
     <xs:annotation>
