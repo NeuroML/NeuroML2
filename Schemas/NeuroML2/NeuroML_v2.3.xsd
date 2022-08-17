@@ -2923,6 +2923,7 @@
         <xs:attribute name="size" type="NonNegativeInteger" use="optional"/>
         <xs:attribute name="type" type="populationTypes" use="optional"/>
         <xs:attribute name="extracellularProperties" type="NmlId" use="optional"/>
+        <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
