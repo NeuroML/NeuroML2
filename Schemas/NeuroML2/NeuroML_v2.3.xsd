@@ -544,6 +544,7 @@
         </xs:sequence>
         <xs:attribute name="species" type="NmlId" use="optional"/>
         <xs:attribute name="conductance" type="Nml2Quantity_conductance" use="optional"/>
+        <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
