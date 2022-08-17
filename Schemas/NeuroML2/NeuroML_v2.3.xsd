@@ -3071,6 +3071,7 @@
     <xs:complexContent>
       <xs:extension base="BaseNonNegativeIntegerId">
         <!-- Nothing else for now...-->
+        <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
