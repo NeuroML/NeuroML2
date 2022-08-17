@@ -1837,6 +1837,7 @@
           <xs:element name="subTree" type="SubTree" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="inhomogeneousParameter" type="InhomogeneousParameter" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
+        <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
