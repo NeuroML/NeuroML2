@@ -44,7 +44,7 @@ jobs:
         mvn dependency:tree
         ./jnml -v
         cd ..
-        
+
     - name: Install OMV
       run: |
         pwd
@@ -55,7 +55,7 @@ jobs:
         omv list -V
         env
         pip freeze
-        
+
     - name: Test examples using OMV
       run: |
         cd $GITHUB_WORKSPACE/NeuroML2/LEMSexamples
