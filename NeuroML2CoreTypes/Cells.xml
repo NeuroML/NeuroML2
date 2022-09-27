@@ -1387,7 +1387,7 @@
 
         <Attachments name="synapses" type="basePointCurrentDL"/>
 
-        <Exposure name="U" dimension="none"/>
+        <Exposure name="U" dimension="none" description="Membrane recovery variable"/>
 
         <Dynamics>
 
@@ -1418,7 +1418,7 @@
         extends="baseCellMembPotCap"
         description="Cell based on the modified Izhikevich model in Izhikevich 2007, Dynamical systems in neuroscience, MIT Press">
 
-        <Parameter name="v0" dimension="voltage"/>
+        <Parameter name="v0" dimension="voltage" description="Initial membrane potential"/>
 
         <!--
         Defined in baseCellMembPotCap:
@@ -1426,18 +1426,18 @@
         -->
         <Parameter name="k" dimension="conductance_per_voltage"/>
 
-        <Parameter name="vr" dimension="voltage"/>
-        <Parameter name="vt" dimension="voltage"/>
-        <Parameter name="vpeak" dimension="voltage"/>
+        <Parameter name="vr" dimension="voltage" description="Resting membrane potential"/>
+        <Parameter name="vt" dimension="voltage" description="Spike threshold"/>
+        <Parameter name="vpeak" dimension="voltage" description="Peak action potential value"/>
 
-        <Parameter name="a" dimension="per_time"/>
-        <Parameter name="b" dimension="conductance"/>
-        <Parameter name="c" dimension="voltage"/>
-        <Parameter name="d" dimension="current"/>
+        <Parameter name="a" dimension="per_time" description="Time scale of recovery variable u"/>
+        <Parameter name="b" dimension="conductance" description="Sensitivity of recovery variable u to subthreshold fluctuations of membrane potential v"/>
+        <Parameter name="c" dimension="voltage" description="After-spike reset value of v"/>
+        <Parameter name="d" dimension="current" description="After-spike increase to u"/>
 
         <Attachments name="synapses" type="basePointCurrent"/>
 
-        <Exposure name="u" dimension="current"/>
+        <Exposure name="u" dimension="current" description="Membrane recovery variable"/>
 
         <Dynamics>
 
