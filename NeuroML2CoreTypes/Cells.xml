@@ -1387,7 +1387,7 @@
 
         <Attachments name="synapses" type="basePointCurrentDL"/>
 
-        <Exposure name="U" dimension="none"/>
+        <Exposure name="U" dimension="none" description="Membrane recovery variable"/>
 
         <Dynamics>
 
@@ -1418,7 +1418,7 @@
         extends="baseCellMembPotCap"
         description="Cell based on the modified Izhikevich model in Izhikevich 2007, Dynamical systems in neuroscience, MIT Press">
 
-        <Parameter name="v0" dimension="voltage"/>
+        <Parameter name="v0" dimension="voltage" description="Initial membrane potential"/>
 
         <!--
         Defined in baseCellMembPotCap:
@@ -1426,18 +1426,18 @@
         -->
         <Parameter name="k" dimension="conductance_per_voltage"/>
 
-        <Parameter name="vr" dimension="voltage"/>
-        <Parameter name="vt" dimension="voltage"/>
-        <Parameter name="vpeak" dimension="voltage"/>
+        <Parameter name="vr" dimension="voltage" description="Resting membrane potential"/>
+        <Parameter name="vt" dimension="voltage" description="Spike threshold"/>
+        <Parameter name="vpeak" dimension="voltage" description="Peak action potential value"/>
 
-        <Parameter name="a" dimension="per_time"/>
-        <Parameter name="b" dimension="conductance"/>
-        <Parameter name="c" dimension="voltage"/>
-        <Parameter name="d" dimension="current"/>
+        <Parameter name="a" dimension="per_time" description="Time scale of recovery variable u"/>
+        <Parameter name="b" dimension="conductance" description="Sensitivity of recovery variable u to subthreshold fluctuations of membrane potential v"/>
+        <Parameter name="c" dimension="voltage" description="After-spike reset value of v"/>
+        <Parameter name="d" dimension="current" description="After-spike increase to u"/>
 
         <Attachments name="synapses" type="basePointCurrent"/>
 
-        <Exposure name="u" dimension="current"/>
+        <Exposure name="u" dimension="current" description="Membrane recovery variable"/>
 
         <Dynamics>
 
@@ -1471,22 +1471,22 @@
         extends="baseCellMembPotCap"
         description="Model based on Brette R and Gerstner W (2005) Adaptive Exponential Integrate-and-Fire Model as an Effective Description of Neuronal Activity. J Neurophysiol 94:3637-3642">
 
-        <Parameter name="gL" dimension="conductance"/>
-        <Parameter name="EL" dimension="voltage"/>
-        <Parameter name="VT" dimension="voltage"/>
-        <Parameter name="thresh" dimension="voltage"/>
-        <Parameter name="reset" dimension="voltage"/>
-        <Parameter name="delT" dimension="voltage"/>
-        <Parameter name="tauw" dimension="time"/>
+        <Parameter name="gL" dimension="conductance" description="Leak conductance"/>
+        <Parameter name="EL" dimension="voltage" description="Leak reversal potential"/>
+        <Parameter name="VT" dimension="voltage" description="Spike threshold"/>
+        <Parameter name="thresh" dimension="voltage" description="Spike detection threshold"/>
+        <Parameter name="reset" dimension="voltage" description="Reset potential"/>
+        <Parameter name="delT" dimension="voltage" description="Slope factor"/>
+        <Parameter name="tauw" dimension="time" description="Adaptation time constant"/>
 
-        <Parameter name="refract" dimension="time"/>
+        <Parameter name="refract" dimension="time" description="Refractory period"/>
 
-        <Parameter name="a" dimension="conductance"/>
-        <Parameter name="b" dimension="current"/>
+        <Parameter name="a" dimension="conductance" description="Sub-threshold adaptation variable"/>
+        <Parameter name="b" dimension="current" description="Spike-triggered adaptation variable"/>
 
         <Attachments name="synapses" type="basePointCurrent"/>
 
-        <Exposure name="w" dimension="current"/>
+        <Exposure name="w" dimension="current" description="Adaptation current"/>
 
         <Dynamics>
 
@@ -1600,7 +1600,7 @@
 
     <ComponentType name="pinskyRinzelCA3Cell"
                extends="baseCellMembPot"
-               description="Reduced CA3 cell model from Pinsky and Rinzel 1994. See https://github.com/OpenSourceBrain/PinskyRinzelModel">
+               description="Reduced CA3 cell model from Pinsky, P.F., Rinzel, J. Intrinsic and network rhythmogenesis in a reduced traub model for CA3 neurons. J Comput Neurosci 1, 39-60 (1994). See https://github.com/OpenSourceBrain/PinskyRinzelModel">
 
         <Parameter name="iSoma" dimension="currentDensity"/>
         <Parameter name="iDend" dimension="currentDensity"/>
@@ -1638,8 +1638,8 @@
         <Constant name="Vsyn" dimension="voltage" value="60.0 mV"/>
         <Constant name="betaqd" dimension="none" value="0.001"/>
 
-        <Exposure name="Vs" dimension="voltage"/>
-        <Exposure name="Vd" dimension="voltage"/>
+        <Exposure name="Vs" dimension="voltage" description="Somatic membrane potential"/>
+        <Exposure name="Vd" dimension="voltage" description="Dendritic membrane potential"/>
         <Exposure name="ICad" dimension="currentDensity"/>
         <Exposure name="Cad" dimension="none"/>
         <Exposure name="hs" dimension="none"/>
