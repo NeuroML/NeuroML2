@@ -1600,7 +1600,7 @@
 
     <ComponentType name="pinskyRinzelCA3Cell"
                extends="baseCellMembPot"
-               description="Reduced CA3 cell model from Pinsky and Rinzel 1994. See https://github.com/OpenSourceBrain/PinskyRinzelModel">
+               description="Reduced CA3 cell model from Pinsky, P.F., Rinzel, J. Intrinsic and network rhythmogenesis in a reduced traub model for CA3 neurons. J Comput Neurosci 1, 39-60 (1994). See https://github.com/OpenSourceBrain/PinskyRinzelModel">
 
         <Parameter name="iSoma" dimension="currentDensity"/>
         <Parameter name="iDend" dimension="currentDensity"/>
@@ -1638,8 +1638,8 @@
         <Constant name="Vsyn" dimension="voltage" value="60.0 mV"/>
         <Constant name="betaqd" dimension="none" value="0.001"/>
 
-        <Exposure name="Vs" dimension="voltage"/>
-        <Exposure name="Vd" dimension="voltage"/>
+        <Exposure name="Vs" dimension="voltage" description="Somatic membrane potential"/>
+        <Exposure name="Vd" dimension="voltage" description="Dendritic membrane potential"/>
         <Exposure name="ICad" dimension="currentDensity"/>
         <Exposure name="Cad" dimension="none"/>
         <Exposure name="hs" dimension="none"/>
