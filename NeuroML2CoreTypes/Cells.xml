@@ -1471,22 +1471,22 @@
         extends="baseCellMembPotCap"
         description="Model based on Brette R and Gerstner W (2005) Adaptive Exponential Integrate-and-Fire Model as an Effective Description of Neuronal Activity. J Neurophysiol 94:3637-3642">
 
-        <Parameter name="gL" dimension="conductance"/>
-        <Parameter name="EL" dimension="voltage"/>
-        <Parameter name="VT" dimension="voltage"/>
-        <Parameter name="thresh" dimension="voltage"/>
-        <Parameter name="reset" dimension="voltage"/>
-        <Parameter name="delT" dimension="voltage"/>
-        <Parameter name="tauw" dimension="time"/>
+        <Parameter name="gL" dimension="conductance" description="Leak conductance"/>
+        <Parameter name="EL" dimension="voltage" description="Leak reversal potential"/>
+        <Parameter name="VT" dimension="voltage" description="Spike threshold"/>
+        <Parameter name="thresh" dimension="voltage" description="Spike detection threshold"/>
+        <Parameter name="reset" dimension="voltage" description="Reset potential"/>
+        <Parameter name="delT" dimension="voltage" description="Slope factor"/>
+        <Parameter name="tauw" dimension="time" description="Adaptation time constant"/>
 
-        <Parameter name="refract" dimension="time"/>
+        <Parameter name="refract" dimension="time" description="Refractory period"/>
 
-        <Parameter name="a" dimension="conductance"/>
-        <Parameter name="b" dimension="current"/>
+        <Parameter name="a" dimension="conductance" description="Sub-threshold adaptation variable"/>
+        <Parameter name="b" dimension="current" description="Spike-triggered adaptation variable"/>
 
         <Attachments name="synapses" type="basePointCurrent"/>
 
-        <Exposure name="w" dimension="current"/>
+        <Exposure name="w" dimension="current" description="Adaptation current"/>
 
         <Dynamics>
 
