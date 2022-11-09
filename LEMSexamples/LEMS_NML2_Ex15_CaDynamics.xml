@@ -402,6 +402,14 @@
             <OutputColumn id="ikca" quantity="hhpop[0]/biophys/membraneProperties/Gran_KCa_98_all/iDensity"/>
         </OutputFile>
 
+        <OutputFile id="of2" fileName="results/ex15_cond_dens.dat">
+            <OutputColumn id="gna" quantity="hhpop[0]/biophys/membraneProperties/Gran_NaF_98_all/gDensity"/>
+            <OutputColumn id="gca" quantity="hhpop[0]/biophys/membraneProperties/Gran_CaHVA_98_all/gDensity"/>
+            <OutputColumn id="gkdr" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/gDensity"/>
+            <OutputColumn id="gka" quantity="hhpop[0]/biophys/membraneProperties/Gran_KA_98_all/gDensity"/>
+            <OutputColumn id="gkca" quantity="hhpop[0]/biophys/membraneProperties/Gran_KCa_98_all/gDensity"/>
+        </OutputFile>
+
         <!--<OutputFile id="of2" fileName="results/ex15_hb.dat">
             <OutputColumn id="v" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/Gran_KDr_98/h/beta"/>
         </OutputFile>-->
