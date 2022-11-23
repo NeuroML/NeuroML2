@@ -13,7 +13,7 @@
   <!-- Membrane mechanisms -->
 
   <ionChannelPassive id="leak" conductance="10pS" species="non_specific"/>
-  
+
 
   <ionChannelHH id="na_chan" conductance="10pS" species="na">
 
@@ -22,7 +22,7 @@
       <forwardRate type="HHExpLinearRate" rate="1per_ms" midpoint="-40mV" scale="10mV"/>
       <reverseRate type="HHExpRate" rate="4per_ms" midpoint="-65mV" scale="-18mV"/>
     </gateHHrates>
-    
+
     <gateHHrates id="h" instances="1">
       <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="6.3 degC"/>
       <forwardRate type="HHExpRate" rate="0.07per_ms" midpoint="-65mV" scale="-20mV"/>
@@ -53,7 +53,7 @@
     </gateHHrates>
 
   </ionChannelHH>
-  
+
   <!-- Intracellular Calcium dynamics -->
   <concentrationModel id="simple_decay" type="fixedFactorConcentrationModel"
                       ion="ca"
@@ -157,7 +157,7 @@
       <OutputColumn id="ica" quantity="pop/0/na_k_ca/biophys/membraneProperties/ca_all/iDensity"/>
       <OutputColumn id="ca" quantity="pop/0/na_k_ca/caConc"/>
     </OutputFile>
-    
+
   </Simulation>
 
 
