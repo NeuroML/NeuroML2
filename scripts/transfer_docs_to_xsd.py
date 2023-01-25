@@ -4,8 +4,7 @@ Copy over documentation from XML schema files to the XSD.
 
 File: transfer_docs_to_xsd.py
 
-Copyright 2021 Ankur Sinha
-Author: NeuroML contributors
+Copyright 2023 NeuroML contributors
 """
 
 

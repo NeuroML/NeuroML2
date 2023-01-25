@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Copyright 2021 Ankur Sinha
-# Author: Ankur Sinha <sanjay DOT ankur AT gmail DOT com>
+# Copyright 2023 NeuroML contributors
 # File : format-xsd.sh
 #
 # format XSD file with xmllint
