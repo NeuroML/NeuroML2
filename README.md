@@ -1,7 +1,8 @@
 NeuroML 2
 =========
 
-[![GitHub CI](https://github.com/NeuroML/NeuroML2/actions/workflows/ci.yml/badge.svg)](https://github.com/NeuroML/NeuroML2/actions/workflows/ci.yml)
+[![GitHub CI](https://github.com/NeuroML/NeuroML2/actions/workflows/ci.yml/badge.svg)](https://github.com/NeuroML/NeuroML2/actions/workflows/ci.yml) [![Run OMV tests](https://github.com/NeuroML/NeuroML2/actions/workflows/omv-ci.yml/badge.svg)](https://github.com/NeuroML/NeuroML2/actions/workflows/omv-ci.yml)
+
 [![GitHub](https://img.shields.io/github/license/NeuroML/NeuroML2)](https://github.com/NeuroML/NeuroML2/blob/master/LICENSE.lesser)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/NeuroML/NeuroML2)](https://github.com/NeuroML/NeuroML2/pulls)
 [![GitHub issues](https://img.shields.io/github/issues/NeuroML/NeuroML2)](https://github.com/NeuroML/NeuroML2/issues)
