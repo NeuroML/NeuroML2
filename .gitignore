@@ -66,3 +66,4 @@ examples/*.pov
 /LEMSexamples/results/*.spikes
 /LEMSexamples/*.gen.so
 /LEMSexamples/tmp
+arm64
