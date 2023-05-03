@@ -319,6 +319,7 @@
       <xs:element name="ConditionalDerivedVariable" type="ConditionalDerivedVariable" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="TimeDerivative" type="TimeDerivative" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="OnStart" type="OnStart" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="OnEvent" type="OnEvent" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="DerivedVariable">
@@ -366,6 +367,16 @@
   <xs:complexType name="StateAssignment">
       <xs:attribute name="variable" type="xs:string" use="required"/>
       <xs:attribute name="value" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="OnEvent">
+      <xs:sequence>
+          <xs:element name="StateAssignment" type="StateAssignment" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="EventOut" type="EventOut" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="port" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="EventOut">
+      <xs:attribute name="port" type="xs:string" use="required"/>
   </xs:complexType>
   <xs:simpleType name="ZeroToOne">
     <xs:annotation>
