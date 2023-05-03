@@ -291,6 +291,17 @@
       <xs:extension base="NamedDimensionalType"/>
     </xs:complexContent>
   </xs:complexType>
+  <xs:complexType name="DerivedParameter">
+    <xs:annotation>
+      <xs:documentation>LEMS DerivedParamter element</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+    <xs:complexContent>
+      <xs:extension base="NamedDimensionalType">
+        <xs:attribute name="value" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
   <xs:complexType name="LEMS_Property">
     <xs:complexContent>
       <xs:extension base="NamedDimensionalType">
