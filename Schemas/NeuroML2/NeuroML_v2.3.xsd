@@ -363,28 +363,29 @@
   </xs:complexType>
   <xs:complexType name="OnStart">
     <xs:sequence>
-       <xs:element name="StateAssignment" type="StateAssignment" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="StateAssignment" type="StateAssignment" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="StateAssignment">
-      <xs:attribute name="variable" type="xs:string" use="required"/>
-      <xs:attribute name="value" type="xs:string" use="required"/>
+    <xs:attribute name="variable" type="xs:string" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
   </xs:complexType>
   <xs:complexType name="OnEvent">
-      <xs:sequence>
-          <xs:element name="StateAssignment" type="StateAssignment" minOccurs="0" maxOccurs="unbounded"/>
-          <xs:element name="EventOut" type="EventOut" minOccurs="0" maxOccurs="unbounded"/>
-      </xs:sequence>
-      <xs:attribute name="port" type="xs:string" use="required"/>
+    <xs:sequence>
+      <xs:element name="StateAssignment" type="StateAssignment" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="EventOut" type="EventOut" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="port" type="xs:string" use="required"/>
   </xs:complexType>
   <xs:complexType name="EventOut">
-      <xs:attribute name="port" type="xs:string" use="required"/>
+    <xs:attribute name="port" type="xs:string" use="required"/>
   </xs:complexType>
   <xs:complexType name="OnCondition">
     <xs:sequence>
       <xs:element name="StateAssignment" type="StateAssignment" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="EventOut" type="EventOut" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="Transition" type="Transition" minOccurs="0" maxOccurs="1"/>   <!-- only on OnCondition inside Regime... -->
+      <xs:element name="Transition" type="Transition" minOccurs="0" maxOccurs="1"/>
+      <!-- only on OnCondition inside Regime... -->
     </xs:sequence>
     <xs:attribute name="test" type="xs:string" use="required"/>
   </xs:complexType>
@@ -393,22 +394,22 @@
   </xs:complexType>
   <xs:complexType name="Regime">
     <xs:sequence>
-        <xs:element name="TimeDerivative" type="TimeDerivative" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element name="OnEntry" type="OnEntry" minOccurs="0" maxOccurs="1"/>
-        <xs:element name="OnCondition" type="OnCondition" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="TimeDerivative" type="TimeDerivative" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="OnEntry" type="OnEntry" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="OnCondition" type="OnCondition" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="initial" type="TrueOrFalse" use="optional"/>
   </xs:complexType>
   <xs:complexType name="OnEntry">
     <xs:sequence>
-        <xs:element name="StateAssignment" type="StateAssignment" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="StateAssignment" type="StateAssignment" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
   <xs:simpleType name="TrueOrFalse">
     <xs:restriction base="xs:string">
-        <xs:enumeration value="true"/>
-        <xs:enumeration value="false"/>
+      <xs:enumeration value="true"/>
+      <xs:enumeration value="false"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="ZeroToOne">
