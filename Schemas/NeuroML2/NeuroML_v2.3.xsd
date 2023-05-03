@@ -320,6 +320,7 @@
       <xs:element name="TimeDerivative" type="TimeDerivative" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="OnStart" type="OnStart" minOccurs="0" maxOccurs="1"/>
       <xs:element name="OnEvent" type="OnEvent" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="OnCondition" type="OnCondition" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="DerivedVariable">
@@ -377,6 +378,17 @@
   </xs:complexType>
   <xs:complexType name="EventOut">
       <xs:attribute name="port" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="OnCondition">
+    <xs:sequence>
+      <xs:element name="StateAssignment" type="StateAssignment" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="EventOut" type="EventOut" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Transition" type="Transition" minOccurs="0" maxOccurs="1"/>   <!-- only on OnCondition inside Regime... -->
+    </xs:sequence>
+    <xs:attribute name="test" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="Transition">
+    <xs:attribute name="regime" type="xs:string" use="required"/>
   </xs:complexType>
   <xs:simpleType name="ZeroToOne">
     <xs:annotation>
