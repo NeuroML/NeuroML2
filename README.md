@@ -27,3 +27,4 @@ Robert C. Cannon, Padraig Gleeson, Sharon Crook, Gautham Ganapathy, Boris Marin,
 For information on how to contribute to the NeuroML initiative, see [here](https://docs.neuroml.org/Devdocs/DevSOP.html).
 
 This code is distributed under the terms of the GNU Lesser General Public License.
+
