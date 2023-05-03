@@ -321,6 +321,7 @@
       <xs:element name="OnStart" type="OnStart" minOccurs="0" maxOccurs="1"/>
       <xs:element name="OnEvent" type="OnEvent" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="OnCondition" type="OnCondition" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Regime" type="Regime" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="DerivedVariable">
@@ -390,6 +391,26 @@
   <xs:complexType name="Transition">
     <xs:attribute name="regime" type="xs:string" use="required"/>
   </xs:complexType>
+  <xs:complexType name="Regime">
+    <xs:sequence>
+        <xs:element name="TimeDerivative" type="TimeDerivative" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="OnEntry" type="OnEntry" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="OnCondition" type="OnCondition" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="initial" type="TrueOrFalse" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="OnEntry">
+    <xs:sequence>
+        <xs:element name="StateAssignment" type="StateAssignment" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="TrueOrFalse">
+    <xs:restriction base="xs:string">
+        <xs:enumeration value="true"/>
+        <xs:enumeration value="false"/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name="ZeroToOne">
     <xs:annotation>
       <xs:documentation>Float value restricted to between 1 and 0</xs:documentation>
