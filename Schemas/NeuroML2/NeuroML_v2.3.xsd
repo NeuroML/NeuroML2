@@ -229,6 +229,7 @@
     <xs:sequence>
       <xs:element name="Property" type="LEMS_Property" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="Parameter" type="Parameter" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="DerivedParameter" type="DerivedParameter" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="Constant" type="Constant" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="Exposure" type="Exposure" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="Requirement" type="Requirement" minOccurs="0" maxOccurs="unbounded"/>
