@@ -296,7 +296,6 @@
       <xs:documentation>LEMS DerivedParamter element</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-    <xs:complexContent>
       <xs:extension base="NamedDimensionalType">
         <xs:attribute name="value" type="xs:string" use="required"/>
       </xs:extension>
