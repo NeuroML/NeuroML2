@@ -667,19 +667,19 @@
 
 
     <ComponentType name="inhomogeneousParameter" description="An inhomogeneous parameter specified across the _segmentGroup_ (see _variableParameter_ for usage).">
-        <Child name="proximal" type="proximalProperties"/>
-        <Child name="distal" type="distalProperties"/>
+        <Child name="proximal" type="proximalDetails"/>
+        <Child name="distal" type="distalDetails"/>
         <Text name="variable"/>
         <Text name="metric"/>
     </ComponentType>
 
 
-    <ComponentType name="proximalProperties" description="What to do at the proximal point when creating an inhomogeneous parameter">
+    <ComponentType name="proximalDetails" description="What to do at the proximal point when creating an inhomogeneous parameter">
         <Text name="translationStart"/>
     </ComponentType>
 
 
-    <ComponentType name="distalProperties" description="What to do at the distal point when creating an inhomogeneous parameter">
+    <ComponentType name="distalDetails" description="What to do at the distal point when creating an inhomogeneous parameter">
         <Text name="normalizationEnd"/>
     </ComponentType>
 

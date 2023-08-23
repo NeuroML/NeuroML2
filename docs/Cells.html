@@ -15,7 +15,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="#">NeuroML v2.2 Component Types</a>
+      <a class="brand" href="#">NeuroML v2.3 Component Types</a>
       <div class="nav-collapse">
         <ul class="nav">
           <li class="active"><a href="Cells.html">Cells</a></li>
@@ -162,9 +162,9 @@
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>++</b> </span><a href="Cells.html#inhomogeneousParameter" title="An inhomogeneous parameter specified across the segmentGroup (see variableParameter for usage). ">inhomogeneousParameter</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>proximal <a href="Cells.html#proximalProperties" title="What to do at the proximal point when creating an inhomogeneous parameter ">proximalProperties</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>proximal <a href="Cells.html#proximalDetails" title="What to do at the proximal point when creating an inhomogeneous parameter ">proximalDetails</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>distal <a href="Cells.html#distalProperties" title="What to do at the distal point when creating an inhomogeneous parameter ">distalProperties</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span>distal <a href="Cells.html#distalDetails" title="What to do at the distal point when creating an inhomogeneous parameter ">distalDetails</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>+</b> </span><a href="Cells.html#biophysicalProperties" title="The biophysical properties of the cell, including the membraneProperties and the intracellularProperties ">biophysicalProperties</a><br/>
   
@@ -216,7 +216,7 @@
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#izhikevichCell" title="Cell based on the 2003 model of Izhikevich, see http://izhikevich.org/publications/spikes.htm ">izhikevichCell</a><br/>
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#pinskyRinzelCA3Cell" title="Reduced CA3 cell model from Pinsky and Rinzel 1994. See https://github.com/OpenSourceBrain/PinskyRinzelModel ">pinskyRinzelCA3Cell</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#pinskyRinzelCA3Cell" title="Reduced CA3 cell model from Pinsky, P.F., Rinzel, J. Intrinsic and network rhythmogenesis in a reduced traub model for CA3 neurons. J Comput Neurosci 1, 39-60 (1994). See https://github.com/OpenSourceBrain/PinskyRinzelModel ">pinskyRinzelCA3Cell</a><br/>
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:darkgrey"><b>></b> </span><a href="Cells.html#baseCellMembPotDL" title="Any spiking cell which has a dimensioness membrane potential, V (as opposed to a membrane potential units of voltage, baseCellMembPot). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPotDL</span></a><br/>
   
@@ -227,10 +227,10 @@
     </div><!--/.well -->
     </div><!--/span-->
     <div class="span7">
-   <div class="alert alert-error"><br/><p><b>  NOTE: the latest version of this documentation can be found on <a href="https://docs.neuroml.org/Userdocs/Schemas/Cells.html">docs.neuroml.org</a>!</b></p><br/>For more information on NeuroML 2 and LEMS see <a href="http://www.neuroml.org/neuromlv2">here</a>. <br/>Note: these descriptions have been updated to the latest    <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2">NeuroML v2.2</a> definitions, using    <a href="https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS">the latest version of LEMS</a>!</div>
+   <div class="alert alert-error"><br/><p><b>  NOTE: the latest version of this documentation can be found on <a href="https://docs.neuroml.org/Userdocs/Schemas/Cells.html">docs.neuroml.org</a>!</b></p><br/>For more information on NeuroML 2 and LEMS see <a href="http://www.neuroml.org/neuromlv2">here</a>. <br/>Note: these descriptions have been updated to the latest    <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2">NeuroML v2.3</a> definitions, using    <a href="https://github.com/LEMS/LEMS/tree/master/Schemas/LEMS">the latest version of LEMS</a>!</div>
     <table class="table table-bordered"><tr><td ><h3>Cells</h3></td></tr>
     <tr><td><span  style="color:dimgrey"><i>Defines both abstract cell models (e.g. <a href="Cells.html#izhikevichCell" title="Cell based on the 2003 model of Izhikevich, see http://izhikevich.org/publications/spikes.htm ">izhikevichCell</a>, adaptive exponential integrate and fire cell, <a href="Cells.html#adExIaFCell" title="Model based on Brette R and Gerstner W (2005) Adaptive Exponential Integrate-and-Fire Model as an Effective Description of Neuronal Activity. J Neurophysiol 94:3637-3642 ">adExIaFCell</a>), point conductance based cell models (<a href="Cells.html#pointCellCondBased" title="Simple model of a conductance based cell, with no separate morphology element, just an absolute capacitance C, and a set of channel populations. Note: use of cell is generally preferable (and more widely supported), even for a single compartment cell. ">pointCellCondBased</a>, <a href="Cells.html#pointCellCondBasedCa" title="TEMPORARY: Point cell with conductances and Ca concentration info. Not yet fully tested!!! TODO: Remove in favour of cell ">pointCellCondBasedCa</a>) and cells models (<a href="Cells.html#cell" title="Cell with segments specified in a morphology element along with details on its biophysicalProperties. NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and v of this cell represents the membrane potential in that isopotential segment. ">cell</a>) which specify the <a href="Cells.html#morphology" title="The collection of segments which specify the 3D structure of the cell, along with a number of segmentGroups ">morphology</a> (containing <a href="Cells.html#segment" title="A segment defines the smallest unit within a possibly branching structure (morphology), such as a dendrite or axon. Its id should be a nonnegative integer (usually soma/root = 0). Its end points are given by the proximal and distal points. The proximal point can be omitted, usually because it is the same as a point on the parent segment, see proximal for details. parent specifies the parent segment. The first segment of a cell (with no parent) usually represents the soma. The shape is normally a cylinder (radii of the proximal and distal equal, but positions different) or a conical frustum (radii and positions different). If the x,y,x positions of the proximal and distal are equal, the segment can be interpreted as a sphere, and in this case the radii of these points must be equal. NOTE: LEMS does not yet support multicompartmental modelling, so the Dynamics here is only appropriate for single compartment modelling.  ">segment</a>s) and <a href="Cells.html#biophysicalProperties" title="The biophysical properties of the cell, including the membraneProperties and the intracellularProperties ">biophysicalProperties</a> separately. </i></span></td></tr>
-    <tr><td>Original LEMS ComponentType definitions: <a href="https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/Cells.xml">Cells.xml</a><br/>    Schema against which NeuroML based on these should be valid: <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2/NeuroML_v2.2.xsd">NeuroML_v2.2.xsd</a></td></tr>
+    <tr><td>Original LEMS ComponentType definitions: <a href="https://github.com/NeuroML/NeuroML2/blob/master/NeuroML2CoreTypes/Cells.xml">Cells.xml</a><br/>    Schema against which NeuroML based on these should be valid: <a href="https://github.com/NeuroML/NeuroML2/tree/master/Schemas/NeuroML2/NeuroML_v2.3.xsd">NeuroML_v2.3.xsd</a></td></tr>
     </table><br/>
 <a name="baseCell">&nbsp;</a>
 <table class="table table-bordered">
@@ -2027,18 +2027,18 @@
     <span class="label label-success">Child elements</span>
 </td>
     <td><b>proximal</b></td>
-    <td width="100"><a href="Cells.html#proximalProperties" title="What to do at the proximal point when creating an inhomogeneous parameter ">proximalProperties</a></td>
+    <td width="100"><a href="Cells.html#proximalDetails" title="What to do at the proximal point when creating an inhomogeneous parameter ">proximalDetails</a></td>
   </tr>
     <td><b>distal</b></td>
-    <td width="100"><a href="Cells.html#distalProperties" title="What to do at the distal point when creating an inhomogeneous parameter ">distalProperties</a></td>
+    <td width="100"><a href="Cells.html#distalDetails" title="What to do at the distal point when creating an inhomogeneous parameter ">distalDetails</a></td>
   </tr>
 </table>
 
-<a name="proximalProperties">&nbsp;</a>
+<a name="proximalDetails">&nbsp;</a>
 <table class="table table-bordered">
   <tr>
     <td colspan='3'>
-       <b>proximalProperties</b>
+       <b>proximalDetails</b>
     </td>
   </tr>
   <tr>
@@ -2054,11 +2054,11 @@
   </tr>
 </table>
 
-<a name="distalProperties">&nbsp;</a>
+<a name="distalDetails">&nbsp;</a>
 <table class="table table-bordered">
   <tr>
     <td colspan='3'>
-       <b>distalProperties</b>
+       <b>distalDetails</b>
     </td>
   </tr>
   <tr>
@@ -3798,7 +3798,7 @@
 <td width="70" rowspan="2">
     <span class="label label-info">Exposures</span>
 </td>
-    <td><b>U</b></td>
+    <td><b>U</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Membrane recovery variable</i></span></td>
     <td width="100">Dimensionless</td>
   </tr>
     <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
@@ -3872,31 +3872,31 @@
     <td style="color:darkgrey"><b>C</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPotCap" title="Any cell with a membrane potential v with voltage units and a membrane capacitance C. Also defines exposed value iSyn for current due to external synapses and iMemb for total transmembrane current (usually channel currents plus iSyn) "><span  style="color:#85ACE1;font-style:italic">baseCellMembPotCap</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#capacitance">capacitance</a></td>
   </tr>
-    <td><b>a</b></td>
+    <td><b>a</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Time scale of recovery variable u</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#per_time">per_time</a></td>
   </tr>
-    <td><b>b</b></td>
+    <td><b>b</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Sensitivity of recovery variable u to subthreshold fluctuations of membrane potential v</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductance">conductance</a></td>
   </tr>
-    <td><b>c</b></td>
+    <td><b>c</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>After-spike reset value of v</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
-    <td><b>d</b></td>
+    <td><b>d</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>After-spike increase to u</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
     <td><b>k</b></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductance_per_voltage">conductance_per_voltage</a></td>
   </tr>
-    <td><b>v0</b></td>
+    <td><b>v0</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Initial membrane potential</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
-    <td><b>vpeak</b></td>
+    <td><b>vpeak</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Peak action potential value</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
-    <td><b>vr</b></td>
+    <td><b>vr</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Resting membrane potential</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
-    <td><b>vt</b></td>
+    <td><b>vt</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Spike threshold</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -3910,7 +3910,7 @@
     <td style="color:darkgrey"><b>iSyn</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPotCap" title="Any cell with a membrane potential v with voltage units and a membrane capacitance C. Also defines exposed value iSyn for current due to external synapses and iMemb for total transmembrane current (usually channel currents plus iSyn) "><span  style="color:#85ACE1;font-style:italic">baseCellMembPotCap</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td><b>u</b></td>
+    <td><b>u</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Membrane recovery variable</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
     <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
@@ -3987,34 +3987,34 @@
     <td style="color:darkgrey"><b>C</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPotCap" title="Any cell with a membrane potential v with voltage units and a membrane capacitance C. Also defines exposed value iSyn for current due to external synapses and iMemb for total transmembrane current (usually channel currents plus iSyn) "><span  style="color:#85ACE1;font-style:italic">baseCellMembPotCap</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#capacitance">capacitance</a></td>
   </tr>
-    <td><b>EL</b></td>
+    <td><b>EL</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Leak reversal potential</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
-    <td><b>VT</b></td>
+    <td><b>VT</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Spike threshold</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
-    <td><b>a</b></td>
+    <td><b>a</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Sub-threshold adaptation variable</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductance">conductance</a></td>
   </tr>
-    <td><b>b</b></td>
+    <td><b>b</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Spike-triggered adaptation variable</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
-    <td><b>delT</b></td>
+    <td><b>delT</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Slope factor</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
-    <td><b>gL</b></td>
+    <td><b>gL</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Leak conductance</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#conductance">conductance</a></td>
   </tr>
-    <td><b>refract</b></td>
+    <td><b>refract</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Refractory period</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td><b>reset</b></td>
+    <td><b>reset</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Reset potential</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
-    <td><b>tauw</b></td>
+    <td><b>tauw</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Adaptation time constant</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#time">time</a></td>
   </tr>
-    <td><b>thresh</b></td>
+    <td><b>thresh</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Spike detection threshold</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
   <tr>
@@ -4031,7 +4031,7 @@
     <td style="color:darkgrey"><b>v</b>&nbsp;&nbsp;&nbsp;&nbsp;(from <a href="Cells.html#baseCellMembPot" title="Any spiking cell which has a membrane potential v with units of voltage (as opposed to a dimensionless membrane potential used in baseCellMembPotDL). "><span  style="color:#85ACE1;font-style:italic">baseCellMembPot</span></a>)</td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
-    <td><b>w</b></td>
+    <td><b>w</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Adaptation current</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#current">current</a></td>
   </tr>
   <tr>
@@ -4176,7 +4176,7 @@
   </tr>
   <tr>
     <td colspan='3'>
-      <span  style="color:dimgrey"><i>Reduced CA3 cell model from Pinsky and Rinzel 1994. See https://github.com/OpenSourceBrain/PinskyRinzelModel </i></span>    </td>
+      <span  style="color:dimgrey"><i>Reduced CA3 cell model from Pinsky, P.F., Rinzel, J. Intrinsic and network rhythmogenesis in a reduced traub model for CA3 neurons. J Comput Neurosci 1, 39-60 (1994). See https://github.com/OpenSourceBrain/PinskyRinzelModel </i></span>    </td>
   </tr>
   <tr>
 
@@ -4283,10 +4283,10 @@
     <td><b>Si</b></td>
     <td width="100">Dimensionless</td>
   </tr>
-    <td><b>Vd</b></td>
+    <td><b>Vd</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Dendritic membrane potential</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
-    <td><b>Vs</b></td>
+    <td><b>Vs</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span  style="color:dimgrey;font-size:12px"><i>Somatic membrane potential</i></span></td>
     <td width="100"><a href="NeuroMLCoreDimensions.html#voltage">voltage</a></td>
   </tr>
     <td><b>Wi</b></td>
