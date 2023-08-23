@@ -14,7 +14,7 @@ experiments:
         spike detection: 
           method: threshold
           threshold: -69.5
-        tolerance: 2.04398659145e-05  # Slight difference since Netpyne uses Parallel Neuron...
+        tolerance: 2.043986591446101e-05  # Slight difference since Netpyne uses Parallel Neuron...
   cell1:
     observables:
       spike times:
@@ -25,5 +25,5 @@ experiments:
         spike detection: 
           method: threshold
           threshold: -69.5
-        tolerance: 0.00011576  # Slight difference since Netpyne uses Parallel Neuron...
+        tolerance: 0.00011575413821050024  # Slight difference since Netpyne uses Parallel Neuron...
   
