@@ -13,6 +13,7 @@
         <Parameter name="length" dimension="time" description="Duration of the simulation run"/>
         <Parameter name="step" dimension="time" description="Time step (dt) to use in the simulation"/>
 
+        <Children name="metas" type="Meta"/>
         <Children name="displays" type="Display"/>
         <Children name="outputs" type="OutputFile"/>
         <Children name="events" type="EventOutputFile"/>
@@ -100,6 +101,13 @@
         <Simulation>
             <EventRecord quantity="select" eventPort="eventPort"/>
         </Simulation>
+    </ComponentType>
+
+    <ComponentType name="Meta" description="Metadata to add to simulation">
+        <Text name="for" description="Simulator name"/>
+        <Text name="method" description="Integration method to use"/>
+        <Text name="abs_tolerance" description="Absolute tolerance for NEURON's cvode method"/>
+        <Text name="rel_tolerance" description="Relative tolerance for NEURON's cvode method"/>
     </ComponentType>
 
 </Lems>
