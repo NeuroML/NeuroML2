@@ -54,7 +54,7 @@
     <Unit symbol="s" dimension="time" power="0"/>
     <Unit symbol="per_s" dimension="per_time" power="0"/>
     <Unit symbol="Hz" dimension="per_time" power="0"/>
-    <Unit symbol="ms" dimension="time" power="-3"/>                <!-- Physiological Units -->
+    <Unit symbol="ms" dimension="time" power="-3"/>                <!-- Physiological Units --> <!-- NEURON preferred Units -->
     <Unit symbol="per_ms" dimension="per_time" power="3"/>         <!-- Physiological Units -->
 
     <Unit symbol="min" dimension="time" power="0" scale="60"/>
@@ -76,7 +76,7 @@
     <Unit symbol="um3" dimension="volume" power="-18"/>
 
     <Unit symbol="V" dimension="voltage" power="0"/>
-    <Unit symbol="mV" dimension="voltage" power="-3"/>             <!-- Physiological Units -->
+    <Unit symbol="mV" dimension="voltage" power="-3"/>             <!-- Physiological Units --> <!-- NEURON preferred Units -->
     <Unit symbol="per_V" dimension="per_voltage" power="0"/>
     <Unit symbol="per_mV" dimension="per_voltage" power="3"/>
 
@@ -86,14 +86,14 @@
 
     <Unit symbol="S" dimension="conductance" power="0"/>
     <Unit symbol="mS" dimension="conductance" power="-3"/>         <!-- Physiological Units -->
-    <Unit symbol="uS" dimension="conductance" power="-6"/>
+    <Unit symbol="uS" dimension="conductance" power="-6"/>         <!-- NEURON preferred Units -->
     <Unit symbol="nS" dimension="conductance" power="-9"/>
     <Unit symbol="pS" dimension="conductance" power="-12"/>
 
     <Unit symbol="S_per_m2" dimension="conductanceDensity" power="0"/>
     <Unit symbol="mS_per_cm2" dimension="conductanceDensity" power="1"/>   <!-- Physiological Units -->
-    <Unit symbol="S_per_cm2" dimension="conductanceDensity" power="4"/>   <!-- NEURON preferred Units -->
-    <Unit symbol="uS_per_cm2" dimension="conductanceDensity" power="-2"/>   <!-- NEURON preferred Units 2 -->
+    <Unit symbol="S_per_cm2" dimension="conductanceDensity" power="4"/>   <!-- NEURON preferred Units in hoc -->
+    <Unit symbol="uS_per_cm2" dimension="conductanceDensity" power="-2"/>   <!-- NEURON preferred Units in mod -->
 
     <Unit symbol="F" dimension="capacitance" power="0"/>
     <Unit symbol="uF" dimension="capacitance" power="-6"/>         <!-- Physiological Units -->
@@ -111,11 +111,12 @@
     <Unit symbol="e" dimension="charge" power="0" scale="1.602176634e-19"/>
 
     <Unit symbol="C_per_mol" dimension="charge_per_mole" power="0"/>
-    <Unit symbol="nA_ms_per_amol" dimension="charge_per_mole" power="6"/>   <!-- NEURON preferred Units -->
+    <Unit symbol="nA_ms_per_amol" dimension="charge_per_mole" power="6"/>  
+    <Unit symbol="pC_per_umol" dimension="charge_per_mole" power="-6"/>   <!-- NEURON preferred Units -->
 
     <Unit symbol="A" dimension="current" power="0"/>
     <Unit symbol="uA" dimension="current" power="-6"/>             <!-- Physiological Units -->
-    <Unit symbol="nA" dimension="current" power="-9"/>
+    <Unit symbol="nA" dimension="current" power="-9"/>             <!-- NEURON preferred Units -->
     <Unit symbol="pA" dimension="current" power="-12"/>
 
     <Unit symbol="A_per_m2" dimension="currentDensity" power="0"/>
@@ -147,5 +148,6 @@
     <!-- Note: it's unlikely that this dimension/unit for rho in fixedFactorConcentrationModel will be needed anywhere else-->
     <Unit symbol="mol_per_m_per_A_per_s" dimension="rho_factor" power="0"/> <!-- SI -->
     <Unit symbol="mol_per_cm_per_uA_per_ms" dimension="rho_factor" power="11"/> <!-- SI -->
+    <Unit symbol="umol_per_cm_per_nA_per_ms" dimension="rho_factor" power="8"/>  <!-- NEURON preferred Units -->
 
 </Lems>
