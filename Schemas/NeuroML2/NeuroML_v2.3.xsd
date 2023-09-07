@@ -144,6 +144,15 @@
       <xs:pattern value="[a-zA-Z0-9_:]*"/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name="Nml2ComponentPath">
+    <xs:annotation>
+      <xs:documentation>A path referring to another component.
+            </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+        <xs:pattern value="/?(((\.\./)|(\./)|(\[[0-9]*\])|([a-zA-Z0-9][a-zA-Z0-9_]*))/?)*"/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name="NonNegativeInteger">
     <xs:annotation>
       <xs:documentation>An attribute useful as id of segments, connections, etc: integer &gt;=0 only!</xs:documentation>
@@ -1357,8 +1366,8 @@
       <xs:extension base="BaseVoltageDepSynapse">
         <xs:attribute name="synapse1" type="NmlId" use="required"/>
         <xs:attribute name="synapse2" type="NmlId" use="required"/>
-        <xs:attribute name="synapse1Path" type="xs:string" use="required"/>
-        <xs:attribute name="synapse2Path" type="xs:string" use="required"/>
+        <xs:attribute name="synapse1Path" type="Nml2ComponentPath" use="required"/>
+        <xs:attribute name="synapse2Path" type="Nml2ComponentPath" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -2769,7 +2778,7 @@
           <xs:element name="spike" type="Spike" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute name="synapse" type="NmlId" use="required"/>
-        <xs:attribute name="spikeTarget" type="xs:string" use="required"/>
+        <xs:attribute name="spikeTarget" type="Nml2ComponentPath" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -2851,7 +2860,7 @@
       <xs:extension base="Standalone">
         <xs:attribute name="averageRate" type="Nml2Quantity_pertime" use="required"/>
         <xs:attribute name="synapse" type="xs:string" use="required"/>
-        <xs:attribute name="spikeTarget" type="xs:string" use="required"/>
+        <xs:attribute name="spikeTarget" type="Nml2ComponentPath" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -2874,7 +2883,7 @@
         <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
         <xs:attribute name="duration" type="Nml2Quantity_time" use="required"/>
         <xs:attribute name="synapse" type="xs:string" use="required"/>
-        <xs:attribute name="spikeTarget" type="xs:string" use="required"/>
+        <xs:attribute name="spikeTarget" type="Nml2ComponentPath" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -3097,9 +3106,9 @@
     <xs:complexContent>
       <xs:extension base="BaseWithoutId">
         <xs:attribute name="neuroLexId" type="NeuroLexId" use="optional"/>
-        <xs:attribute name="from" type="xs:string" use="required"/>
-        <xs:attribute name="to" type="xs:string" use="required"/>
-        <xs:attribute name="synapse" type="xs:string" use="required"/>
+        <xs:attribute name="from" type="Nml2ComponentPath" use="required"/>
+        <xs:attribute name="to" type="Nml2ComponentPath" use="required"/>
+        <xs:attribute name="synapse" type="NmlId" use="required"/>
         <xs:attribute name="destination" type="NmlId" use="optional"/>
       </xs:extension>
     </xs:complexContent>
@@ -3148,10 +3157,10 @@
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseConnection">
-        <xs:attribute name="preCellId" type="xs:string" use="required"/>
+        <xs:attribute name="preCellId" type="Nml2ComponentPath" use="required"/>
         <xs:attribute name="preSegmentId" type="NonNegativeInteger" default="0"/>
         <xs:attribute name="preFractionAlong" type="ZeroToOne" default="0.5"/>
-        <xs:attribute name="postCellId" type="xs:string" use="required"/>
+        <xs:attribute name="postCellId" type="Nml2ComponentPath" use="required"/>
         <xs:attribute name="postSegmentId" type="NonNegativeInteger" default="0"/>
         <xs:attribute name="postFractionAlong" type="ZeroToOne" default="0.5"/>
       </xs:extension>
@@ -3164,10 +3173,10 @@
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseConnection">
-        <xs:attribute name="preCell" type="xs:string" use="required"/>
+        <xs:attribute name="preCell" type="Nml2ComponentPath" use="required"/>
         <xs:attribute name="preSegment" type="NonNegativeInteger" default="0"/>
         <xs:attribute name="preFractionAlong" type="ZeroToOne" default="0.5"/>
-        <xs:attribute name="postCell" type="xs:string" use="required"/>
+        <xs:attribute name="postCell" type="Nml2ComponentPath" use="required"/>
         <xs:attribute name="postSegment" type="NonNegativeInteger" default="0"/>
         <xs:attribute name="postFractionAlong" type="ZeroToOne" default="0.5"/>
       </xs:extension>
@@ -3309,9 +3318,9 @@
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseWithoutId">
-        <xs:attribute name="target" type="xs:string" use="required"/>
-        <xs:attribute name="input" type="xs:string" use="required"/>
-        <xs:attribute name="destination" type="xs:string"/>
+        <xs:attribute name="target" type="Nml2ComponentPath" use="required"/>
+        <xs:attribute name="input" type="Nml2ComponentPath" use="required"/>
+        <xs:attribute name="destination" type="Nml2ComponentPath"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -3338,7 +3347,7 @@
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseNonNegativeIntegerId">
-        <xs:attribute name="target" type="xs:string" use="required"/>
+        <xs:attribute name="target" type="Nml2ComponentPath" use="required"/>
         <xs:attribute name="destination" type="NmlId" use="required"/>
         <xs:attribute name="segmentId" type="NonNegativeInteger"/>
         <xs:attribute name="fractionAlong" type="ZeroToOne"/>
