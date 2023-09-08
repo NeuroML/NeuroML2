@@ -63,8 +63,8 @@
     <Unit symbol="per_hour" dimension="per_time" power="0" scale="0.00027777777778"/>
 
     <Unit symbol="m" dimension="length" power="0"/>
-    <Unit symbol="cm" dimension="length" power="-2"/>              <!-- Physiological Units -->
-    <Unit symbol="um" dimension="length" power="-6"/>
+    <Unit symbol="cm" dimension="length" power="-2"/>              <!-- Physiological Units --> <!-- NEURON preferred Units inside mod -->
+    <Unit symbol="um" dimension="length" power="-6"/>              <!-- NEURON preferred Units for dendrites etc. -->
 
     <Unit symbol="m2" dimension="area" power="0"/>
     <Unit symbol="cm2" dimension="area" power="-4"/>               <!-- Physiological Units -->
@@ -141,6 +141,7 @@
     <Unit symbol="K" dimension="temperature" power="0"/>
 
     <Unit symbol="J_per_K_per_mol" dimension="idealGasConstantDims" power="0"/>
+    <Unit symbol="fJ_per_K_per_umol" dimension="idealGasConstantDims" power="-9"/>     <!-- NEURON preferred Units -->
 
     <Unit symbol="S_per_V" dimension="conductance_per_voltage" power="0"/>
     <Unit symbol="nS_per_mV" dimension="conductance_per_voltage" power="-6"/>       <!-- NEURON preferred Units -->
