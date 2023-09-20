@@ -8,14 +8,29 @@ and [LEMS](https://github.com/LEMS/LEMS), but also the Python ([libNeuroML](http
 
 **Only contributors who are not [NeuroML Editors](https://neuroml.org/editors) are specifically pointed out below.**
 
-v2.3 / 2022-??-??
+v2.3 / 2023-09-20
 --------------------
 
 * **Renamed the main Schema from NeuroML_v2.2.xsd to [NeuroML_v2.3.xsd](https://github.com/NeuroML/NeuroML2/blob/master/Schemas/NeuroML2/NeuroML_v2.3).**
 
 * Added new cell type `<hindmarshRose1984Cell>`
 
+* jLEMS adds features including option for reportFile in [LEMS Simulation files](https://docs.neuroml.org/Userdocs/LEMSSimulation.html) to use `__SIMULATOR__` and `__TIMESTAMP__` placeholders, and `<Meta>` for simulator specific info, e.g. variable time step in NEURON, see [example](https://github.com/OpenSourceBrain/NEURONShowcase/blob/master/HH/LEMS_NML2_Ex5_DetCell_cvode.xml).
 
+* Tested Java libraries up to Java 19 & Python libraries up to Python v3.11
+
+* Update to how units are generated in NEURON mod file for greater consistency, and validity with `modlunit` checks. See [here](https://github.com/NeuroML/org.neuroml.export/pull/107/files).
+
+* Support for generation of EDEN Python scripts with `jnml MyLEMS.xml -eden` in jNeuroML and pyNeuroML, and many more tests with EDEN simulator
+
+* See individual package change logs/released versions:
+   - jLEMS: https://github.com/LEMS/jLEMS/releases/tag/v0.10.8
+   - org.neuroml.model.injectingplugin: https://github.com/NeuroML/org.neuroml.model.injectingplugin/releases/tag/v1.9.1
+   - org.neuroml1.model: https://github.com/NeuroML/org.neuroml1.model/releases/tag/v1.9.1
+   - org.neuroml.model: https://github.com/NeuroML/org.neuroml.model/releases/tag/v1.9.1
+   - org.neuroml.export: https://github.com/NeuroML/org.neuroml.export/releases/tag/v1.9.1
+   - org.neuroml.import: https://github.com/NeuroML/org.neuroml.import/releases/tag/v1.9.1
+   - jNeuroML: https://github.com/NeuroML/jNeuroML/releases/tag/v0.12.4
 
 ...
 
