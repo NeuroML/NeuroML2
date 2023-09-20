@@ -536,6 +536,8 @@
 
         <Property name="weight" dimension="none" defaultValue="1"/> <!-- Not used...-->
 
+        <Constant name="AMP" dimension="current" value="1A"/>
+
         <Exposure name="i" dimension="current"/>
 
         <Requirement name="v" dimension="voltage"/>
@@ -544,7 +546,7 @@
 
         <Dynamics>
             <DerivedVariable name="vpeer" dimension="voltage" select="peer/v"/>
-            <DerivedVariable name="i" exposure="i"  value="0"/>
+            <DerivedVariable name="i" dimension="current" exposure="i" value="0 * AMP"/>  <!-- to ensure correct units-->
         </Dynamics>
 
     </ComponentType>

@@ -24,7 +24,7 @@ import math
 # https://docs.python.org/3/library/decimal.html#module-decimal
 getcontext().prec = 7
 
-nml2_version = "2.2"
+nml2_version = "2.3"
 nml2_branch = "master"
 
 col_width_left = "70"

@@ -4,8 +4,7 @@ Copy over documentation from XML schema files to the XSD.
 
 File: transfer_docs_to_xsd.py
 
-Copyright 2021 Ankur Sinha
-Author: NeuroML contributors
+Copyright 2023 NeuroML contributors
 """
 
 
@@ -80,8 +79,8 @@ def update_xsd():
     This takes whatever is in the XML files and puts in the XSD, replacing
     anything that may be in the XSD already.
     """
-    XSD_file = "../Schemas/NeuroML2/NeuroML_v2.2.xsd"
-    XSD_file_new = "../Schemas/NeuroML2/NeuroML_v2.2_docs.xsd"
+    XSD_file = "../Schemas/NeuroML2/NeuroML_v2.3.xsd"
+    XSD_file_new = "../Schemas/NeuroML2/NeuroML_v2.3.xsd"
     try:
         xsdtree = ET.parse(XSD_file)
         xsdroot = xsdtree.getroot()

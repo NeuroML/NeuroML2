@@ -1,0 +1,6 @@
+system: Test Ex24
+
+experiments:
+    v:
+        expected:
+            spike times: [26.49, 40.739999999999995, 54.519999999999996, 68.24, 157.23000000000002]

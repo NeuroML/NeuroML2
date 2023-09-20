@@ -1,50 +1,50 @@
 # Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
- 
-target: ../LEMS_NML2_Ex0_IaF.xml 
-engine: jNeuroML
+
+target: ../LEMS_NML2_Ex0_IaF.xml
+engine: jNeuroML_EDEN
 mep: .test.ex0.mep
 experiments:
   iafTauPop0:
     observables:
       spike times:
-        file: 
+        file:
           path: ../results/iaf_v.dat
           columns: [0,1]
           scaling: [1000, 1000]
-        spike detection: 
+        spike detection:
           method: threshold
           threshold: -55.1
-        tolerance: 0.00010324534535558631
+        tolerance: 4.016467506678352e-08
   iafTauRefPop0:
     observables:
       spike times:
-        file: 
+        file:
           path: ../results/iaf_v.dat
           columns: [0,2]
           scaling: [1000, 1000]
-        spike detection: 
+        spike detection:
           method: threshold
           threshold: -55.1
-        tolerance: 0.0002173913043479373
+        tolerance: 0.00010867391304343428
   iafPop0:
     observables:
       spike times:
-        file: 
+        file:
           path: ../results/iaf_v.dat
           columns: [0,3]
           scaling: [1000, 1000]
-        spike detection: 
+        spike detection:
           method: threshold
           threshold: -55.1
-        tolerance: 0.00027450406266
+        tolerance: 0.00014932775619959672
   iafRefPop0:
     observables:
       spike times:
-        file: 
+        file:
           path: ../results/iaf_v.dat
           columns: [0,4]
           scaling: [1000, 1000]
-        spike detection: 
+        spike detection:
           method: threshold
           threshold: -55.1
-        tolerance: 0.00029197080291964994
+        tolerance: 0.0002189781021897893

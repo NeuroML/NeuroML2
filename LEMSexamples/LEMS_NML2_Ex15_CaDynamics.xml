@@ -253,7 +253,7 @@
     </ComponentType>
 
 
-    <decayingPoolConcentrationModel id="Gran_CaPool" 
+    <decayingPoolConcentrationModel id="Gran_CaPool"
                          ion="ca"
                          restingConc="7.55E-11 mol_per_cm3"
                          decayConstant="10.0 ms"
@@ -273,7 +273,7 @@
 
             <segmentGroup id="Soma" neuroLexId="sao864921383">    <!--
                 This group contains an unbranched set of segments, and all of the segmentGroups marked with
-                neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+                neuroLexId = sao864921383 form a non-overlapping set of all of the segments.
                 These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
                 <member segment="0"/>
             </segmentGroup>
@@ -286,7 +286,7 @@
                 <include segmentGroup="Soma"/>
             </segmentGroup>
 
-            
+
         </morphology>
 
             <!--Adding the biophysical parameters-->
@@ -315,8 +315,8 @@
 
                 <species id="ca"
                          ion="ca"
-                         concentrationModel="Gran_CaPool" 
-                         initialConcentration="7.55E-11 mol_per_cm3" 
+                         concentrationModel="Gran_CaPool"
+                         initialConcentration="7.55E-11 mol_per_cm3"
                          initialExtConcentration="2.4E-6 mol_per_cm3"/>
 
                 <resistivity value="0.1 kohm_cm"/>
@@ -353,20 +353,21 @@
             <Line id="Gran_NaF_98/m" quantity="hhpop[0]/biophys/membraneProperties/Gran_NaF_98_all/Gran_NaF_98/m/q" scale="1"  color="#000000" timeScale="1ms"/>
             <Line id="Gran_NaF_98/h" quantity="hhpop[0]/biophys/membraneProperties/Gran_NaF_98_all/Gran_NaF_98/h/q" scale="1"  color="#0000ff" timeScale="1ms"/>
             <Line id="Gran_H_98/n" quantity="hhpop[0]/biophys/membraneProperties/Gran_H_98_all/Gran_H_98/n/q" scale="1"  color="#ff0000" timeScale="1ms"/>
-            
+
             <Line id="Gran_CaHVA_98/m" quantity="hhpop[0]/biophys/membraneProperties/Gran_CaHVA_98_all/Gran_CaHVA_98/m/q" scale="1"  color="#770fff" timeScale="1ms"/>
             <Line id="Gran_CaHVA_98/h" quantity="hhpop[0]/biophys/membraneProperties/Gran_CaHVA_98_all/Gran_CaHVA_98/h/q" scale="1"  color="#55f00f" timeScale="1ms"/>
-            
+
             <Line id="Gran_KA_98/m" quantity="hhpop[0]/biophys/membraneProperties/Gran_KA_98_all/Gran_KA_98/m/q" scale="1"  color="#ffff00" timeScale="1ms"/>
             <Line id="Gran_KA_98/h" quantity="hhpop[0]/biophys/membraneProperties/Gran_KA_98_all/Gran_KA_98/h/q" scale="1"  color="#ffffff" timeScale="1ms"/>
 
         </Display>
- 
+
         <Display id="d3" title="Ex15: Ca Dynamics: NaF, KDr, CaHVA, KA current densities (uA_per_cm2)" timeScale="1ms" xmin="0" xmax="700" ymin="-650" ymax="650">
             <Line id="NaF iDensity" quantity="hhpop[0]/biophys/membraneProperties/Gran_NaF_98_all/iDensity" scale="1uA_per_cm2"  color="#000000" timeScale="1ms"/>
-           <Line id="KDr iDensity" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/iDensity" scale="1uA_per_cm2"  color="#0000ff" timeScale="1ms"/>
             <Line id="CaHVA iDensity" quantity="hhpop[0]/biophys/membraneProperties/Gran_CaHVA_98_all/iDensity" scale="1uA_per_cm2"  color="#00ff00" timeScale="1ms"/>
+            <Line id="KDr iDensity" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/iDensity" scale="1uA_per_cm2"  color="#0000ff" timeScale="1ms"/>
             <Line id="KA iDensity" quantity="hhpop[0]/biophys/membraneProperties/Gran_KA_98_all/iDensity" scale="1uA_per_cm2"  color="#ff0000" timeScale="1ms"/>
+            <Line id="KCa iDensity" quantity="hhpop[0]/biophys/membraneProperties/Gran_KCa_98_all/iDensity" scale="1uA_per_cm2"  color="#ffff00" timeScale="1ms"/>
         </Display>
 
         <Display id="d4" title="Ex15: Ca Dynamics: Ca concentration (mM)" timeScale="1ms" xmin="0" xmax="700" ymin="-0.0005" ymax="0.003">
@@ -392,11 +393,24 @@
         <OutputFile id="of0" fileName="results/ex15_v.dat">
             <OutputColumn id="v" quantity="hhpop[0]/v"/>
         </OutputFile>
-        
-        <!--<OutputFile id="of1" fileName="results/ex15_ha.dat">
-            <OutputColumn id="v" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/Gran_KDr_98/h/alpha"/>
+
+        <OutputFile id="of1" fileName="results/ex15_curr_dens.dat">
+            <OutputColumn id="ina" quantity="hhpop[0]/biophys/membraneProperties/Gran_NaF_98_all/iDensity"/>
+            <OutputColumn id="ica" quantity="hhpop[0]/biophys/membraneProperties/Gran_CaHVA_98_all/iDensity"/>
+            <OutputColumn id="ikdr" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/iDensity"/>
+            <OutputColumn id="ika" quantity="hhpop[0]/biophys/membraneProperties/Gran_KA_98_all/iDensity"/>
+            <OutputColumn id="ikca" quantity="hhpop[0]/biophys/membraneProperties/Gran_KCa_98_all/iDensity"/>
         </OutputFile>
-        <OutputFile id="of2" fileName="results/ex15_hb.dat">
+
+        <OutputFile id="of2" fileName="results/ex15_cond_dens.dat">
+            <OutputColumn id="gna" quantity="hhpop[0]/biophys/membraneProperties/Gran_NaF_98_all/gDensity"/>
+            <OutputColumn id="gca" quantity="hhpop[0]/biophys/membraneProperties/Gran_CaHVA_98_all/gDensity"/>
+            <OutputColumn id="gkdr" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/gDensity"/>
+            <OutputColumn id="gka" quantity="hhpop[0]/biophys/membraneProperties/Gran_KA_98_all/gDensity"/>
+            <OutputColumn id="gkca" quantity="hhpop[0]/biophys/membraneProperties/Gran_KCa_98_all/gDensity"/>
+        </OutputFile>
+
+        <!--<OutputFile id="of2" fileName="results/ex15_hb.dat">
             <OutputColumn id="v" quantity="hhpop[0]/biophys/membraneProperties/Gran_KDr_98_all/Gran_KDr_98/h/beta"/>
         </OutputFile>-->
 

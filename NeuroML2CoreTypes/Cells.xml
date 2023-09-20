@@ -667,19 +667,19 @@
 
 
     <ComponentType name="inhomogeneousParameter" description="An inhomogeneous parameter specified across the _segmentGroup_ (see _variableParameter_ for usage).">
-        <Child name="proximal" type="proximalProperties"/>
-        <Child name="distal" type="distalProperties"/>
+        <Child name="proximal" type="proximalDetails"/>
+        <Child name="distal" type="distalDetails"/>
         <Text name="variable"/>
         <Text name="metric"/>
     </ComponentType>
 
 
-    <ComponentType name="proximalProperties" description="What to do at the proximal point when creating an inhomogeneous parameter">
+    <ComponentType name="proximalDetails" description="What to do at the proximal point when creating an inhomogeneous parameter">
         <Text name="translationStart"/>
     </ComponentType>
 
 
-    <ComponentType name="distalProperties" description="What to do at the distal point when creating an inhomogeneous parameter">
+    <ComponentType name="distalDetails" description="What to do at the distal point when creating an inhomogeneous parameter">
         <Text name="normalizationEnd"/>
     </ComponentType>
 
@@ -1387,7 +1387,7 @@
 
         <Attachments name="synapses" type="basePointCurrentDL"/>
 
-        <Exposure name="U" dimension="none"/>
+        <Exposure name="U" dimension="none" description="Membrane recovery variable"/>
 
         <Dynamics>
 
@@ -1418,7 +1418,7 @@
         extends="baseCellMembPotCap"
         description="Cell based on the modified Izhikevich model in Izhikevich 2007, Dynamical systems in neuroscience, MIT Press">
 
-        <Parameter name="v0" dimension="voltage"/>
+        <Parameter name="v0" dimension="voltage" description="Initial membrane potential"/>
 
         <!--
         Defined in baseCellMembPotCap:
@@ -1426,18 +1426,18 @@
         -->
         <Parameter name="k" dimension="conductance_per_voltage"/>
 
-        <Parameter name="vr" dimension="voltage"/>
-        <Parameter name="vt" dimension="voltage"/>
-        <Parameter name="vpeak" dimension="voltage"/>
+        <Parameter name="vr" dimension="voltage" description="Resting membrane potential"/>
+        <Parameter name="vt" dimension="voltage" description="Spike threshold"/>
+        <Parameter name="vpeak" dimension="voltage" description="Peak action potential value"/>
 
-        <Parameter name="a" dimension="per_time"/>
-        <Parameter name="b" dimension="conductance"/>
-        <Parameter name="c" dimension="voltage"/>
-        <Parameter name="d" dimension="current"/>
+        <Parameter name="a" dimension="per_time" description="Time scale of recovery variable u"/>
+        <Parameter name="b" dimension="conductance" description="Sensitivity of recovery variable u to subthreshold fluctuations of membrane potential v"/>
+        <Parameter name="c" dimension="voltage" description="After-spike reset value of v"/>
+        <Parameter name="d" dimension="current" description="After-spike increase to u"/>
 
         <Attachments name="synapses" type="basePointCurrent"/>
 
-        <Exposure name="u" dimension="current"/>
+        <Exposure name="u" dimension="current" description="Membrane recovery variable"/>
 
         <Dynamics>
 
@@ -1471,22 +1471,22 @@
         extends="baseCellMembPotCap"
         description="Model based on Brette R and Gerstner W (2005) Adaptive Exponential Integrate-and-Fire Model as an Effective Description of Neuronal Activity. J Neurophysiol 94:3637-3642">
 
-        <Parameter name="gL" dimension="conductance"/>
-        <Parameter name="EL" dimension="voltage"/>
-        <Parameter name="VT" dimension="voltage"/>
-        <Parameter name="thresh" dimension="voltage"/>
-        <Parameter name="reset" dimension="voltage"/>
-        <Parameter name="delT" dimension="voltage"/>
-        <Parameter name="tauw" dimension="time"/>
+        <Parameter name="gL" dimension="conductance" description="Leak conductance"/>
+        <Parameter name="EL" dimension="voltage" description="Leak reversal potential"/>
+        <Parameter name="VT" dimension="voltage" description="Spike threshold"/>
+        <Parameter name="thresh" dimension="voltage" description="Spike detection threshold"/>
+        <Parameter name="reset" dimension="voltage" description="Reset potential"/>
+        <Parameter name="delT" dimension="voltage" description="Slope factor"/>
+        <Parameter name="tauw" dimension="time" description="Adaptation time constant"/>
 
-        <Parameter name="refract" dimension="time"/>
+        <Parameter name="refract" dimension="time" description="Refractory period"/>
 
-        <Parameter name="a" dimension="conductance"/>
-        <Parameter name="b" dimension="current"/>
+        <Parameter name="a" dimension="conductance" description="Sub-threshold adaptation variable"/>
+        <Parameter name="b" dimension="current" description="Spike-triggered adaptation variable"/>
 
         <Attachments name="synapses" type="basePointCurrent"/>
 
-        <Exposure name="w" dimension="current"/>
+        <Exposure name="w" dimension="current" description="Adaptation current"/>
 
         <Dynamics>
 
@@ -1600,7 +1600,7 @@
 
     <ComponentType name="pinskyRinzelCA3Cell"
                extends="baseCellMembPot"
-               description="Reduced CA3 cell model from Pinsky and Rinzel 1994. See https://github.com/OpenSourceBrain/PinskyRinzelModel">
+               description="Reduced CA3 cell model from Pinsky, P.F., Rinzel, J. Intrinsic and network rhythmogenesis in a reduced traub model for CA3 neurons. J Comput Neurosci 1, 39-60 (1994). See https://github.com/OpenSourceBrain/PinskyRinzelModel">
 
         <Parameter name="iSoma" dimension="currentDensity"/>
         <Parameter name="iDend" dimension="currentDensity"/>
@@ -1638,8 +1638,8 @@
         <Constant name="Vsyn" dimension="voltage" value="60.0 mV"/>
         <Constant name="betaqd" dimension="none" value="0.001"/>
 
-        <Exposure name="Vs" dimension="voltage"/>
-        <Exposure name="Vd" dimension="voltage"/>
+        <Exposure name="Vs" dimension="voltage" description="Somatic membrane potential"/>
+        <Exposure name="Vd" dimension="voltage" description="Dendritic membrane potential"/>
         <Exposure name="ICad" dimension="currentDensity"/>
         <Exposure name="Cad" dimension="none"/>
         <Exposure name="hs" dimension="none"/>
@@ -1747,5 +1747,90 @@
     </ComponentType>
 
 
+    <ComponentType name="hindmarshRose1984Cell"
+        extends="baseCellMembPotCap"
+        description="
+        The Hindmarsh Rose model is a simplified point cell model which
+        captures complex firing patterns of single neurons, such as
+        periodic and chaotic bursting. It has a fast spiking subsystem,
+        which is a generalization of the FitzHugh-Nagumo system, coupled
+        to a slower subsystem which allows the model to fire bursts. The
+        dynamical variables x,y,z correspond to the membrane potential, a
+        recovery variable, and a slower adaptation current, respectively. 
+        See Hindmarsh J. L., and Rose R. M. (1984) A model of neuronal
+        bursting using three coupled first order differential equations.
+        Proc. R. Soc. London, Ser. B 221:87–102.
+        ">
+        
+        <Parameter name="a" dimension="none" description="cubic term in x nullcline"/>
+        <Parameter name="b" dimension="none" description="quadratic term in x nullcline"/>
+        <Parameter name="c" dimension="none" description="constant term in y nullcline"/>
+        <Parameter name="d" dimension="none" description="quadratic term in y nullcline"/>
+        <Parameter name="r" dimension="none" description="timescale separation between slow and fast subsystem (r greater than 0; r much less than 1)"/>
+        <Parameter name="s" dimension="none" description="related to adaptation"/>
+        <Parameter name="x1" dimension="none" description="related to the system's resting potential"/>
+
+        <Parameter name="v_scaling" dimension="voltage" description="scaling of x for physiological membrane potential"/>
+
+        <!-- Initial Conditions -->
+        <Parameter name="x0" dimension="none"/>
+        <Parameter name="y0" dimension="none"/>
+        <Parameter name="z0" dimension="none"/>
+
+        <Constant name="MSEC" dimension="time" value="1ms"/>
+
+        <Attachments name="synapses" type="basePointCurrent"/>
+
+        <Exposure name="x" dimension="none"/>
+        <Exposure name="y" dimension="none"/>
+        <Exposure name="z" dimension="none"/>
+        <Exposure name="phi" dimension="none"/>
+        <Exposure name="chi" dimension="none"/>
+        <Exposure name="rho" dimension="none"/>
+        <!-- <Exposure name="v" dimension="voltage"/> --> <!-- Already exposed from baseCellMembPot -->
+        <!--<Exposure name="iSyn" dimension="none"/>-->
+        <Exposure name="spiking" dimension="none"/>
+        
+        <Dynamics>
+            
+            <!--<StateVariable name="x" dimension="none" exposure="x"/>-->
+            <StateVariable name="v" dimension="voltage" exposure="v"/>
+            <StateVariable name="y" dimension="none" exposure="y"/>
+            <StateVariable name="z" dimension="none" exposure="z"/>
+            <StateVariable name="spiking" dimension="none" exposure="spiking"/>
+            
+            <DerivedVariable name="iSyn" dimension="current" exposure="iSyn" select="synapses[*]/i" reduce="add" />
+
+            <DerivedVariable name="x" dimension="none" exposure="x" value="v / v_scaling"/>
+
+            <DerivedVariable name="phi" dimension="none" exposure="phi" value="y - a * x^3 + b * x^2"/>
+            <DerivedVariable name="chi" dimension="none" exposure="chi" value="c - d * x^2 - y"/>
+            <DerivedVariable name="rho" dimension="none" exposure="rho" value="s * ( x - x1 ) - z"/>
+
+            <DerivedVariable name="iMemb" dimension="current" exposure="iMemb" value="(C * (v_scaling * (phi - z) / MSEC)) + iSyn"/>
+
+            <TimeDerivative variable="v" value="iMemb/C"/>
+
+            <TimeDerivative variable="y" value="chi / MSEC"/>
+            <TimeDerivative variable="z" value="r * rho / MSEC"/>
+            
+            <OnStart>
+                <StateAssignment variable="v" value="x0 * v_scaling"/>
+                <StateAssignment variable="y" value="y0"/>
+                <StateAssignment variable="z" value="z0"/>
+            </OnStart>
+
+            <OnCondition test="v .gt. 0 .and. spiking .lt. 0.5">
+                <StateAssignment variable="spiking" value="1"/>
+                <EventOut port="spike"/>
+            </OnCondition>
+
+            <OnCondition test="v .lt. 0">
+                <StateAssignment variable="spiking" value="0"/>
+            </OnCondition>
+            
+        </Dynamics>
+        
+    </ComponentType>
 
 </Lems>

@@ -3,8 +3,8 @@
     <!-- Example with Simple cell specifying segment details-->
 
     <!-- This is a file which can be read and executed by the LEMS Interpreter.
-         It imports the LEMS definitions of the core NeuroML 2 Components, 
-         imports in "pure" NeuroML 2 and contains some LEMS elements for running 
+         It imports the LEMS definitions of the core NeuroML 2 Components,
+         imports in "pure" NeuroML 2 and contains some LEMS elements for running
          a simulation -->
 
 
@@ -20,7 +20,7 @@
 
 
     <Simulation id="sim1" length="300ms" step="0.01ms" target="net1">
-    
+
         <Display id="d1" title="Ex5: HH cell with simple morphology: voltage" timeScale="1ms" xmin="0" xmax="300" ymin="-90" ymax="50">
                 <Line id="v" quantity="hhpop[0]/v" scale="1mV" color="#cccccc" timeScale="1ms"/>
                 <Line id="spiking" quantity="hhpop[0]/spiking" scale="0.1V"  color="#004040" timeScale="1ms"/>
@@ -39,19 +39,25 @@
                 <Line id="gna" quantity="hhpop[0]/bioPhys1/membraneProperties/naChans/gDensity" scale="1"  color="#000000" timeScale="1ms"/>
                 <Line id="gk" quantity="hhpop[0]/bioPhys1/membraneProperties/kChans/gDensity" scale="1"  color="#ff0000" timeScale="1ms"/>
         </Display>
-    
-    
+
+
         <OutputFile id="of0" fileName="results/ex5_v.dat">
-            <OutputColumn id="v" quantity="hhpop[0]/v"/> 
-        </OutputFile>  
-        
+            <OutputColumn id="v" quantity="hhpop[0]/v"/>
+        </OutputFile>
+
         <OutputFile id="of1" fileName="results/ex5_vars.dat">
-            <OutputColumn id="m" quantity="hhpop[0]/bioPhys1/membraneProperties/naChans/naChan/m/q"/> 
-            <OutputColumn id="h" quantity="hhpop[0]/bioPhys1/membraneProperties/naChans/naChan/h/q"/> 
-            <OutputColumn id="n" quantity="hhpop[0]/bioPhys1/membraneProperties/kChans/kChan/n/q"/> 
-        </OutputFile>  
-    
-        
+            <OutputColumn id="m" quantity="hhpop[0]/bioPhys1/membraneProperties/naChans/naChan/m/q"/>
+            <OutputColumn id="h" quantity="hhpop[0]/bioPhys1/membraneProperties/naChans/naChan/h/q"/>
+            <OutputColumn id="n" quantity="hhpop[0]/bioPhys1/membraneProperties/kChans/kChan/n/q"/>
+        </OutputFile>
+
+        <!-- Not supported by EDEN...
+        <OutputFile id="of2" fileName="results/ex5_curr_dens.dat">
+            <OutputColumn id="ina" quantity="hhpop[0]/bioPhys1/membraneProperties/naChans/iDensity"/>
+            <OutputColumn id="ik" quantity="hhpop[0]/bioPhys1/membraneProperties/kChans/iDensity"/>
+        </OutputFile>-->
+
+
     </Simulation>
 
 

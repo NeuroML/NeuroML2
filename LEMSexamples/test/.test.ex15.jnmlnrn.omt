@@ -1,5 +1,5 @@
 # Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
- 
+
 target: ../LEMS_NML2_Ex15_CaDynamics.xml
 engine: jNeuroML_NEURON
 mep: .test.ex15.mep
@@ -7,11 +7,33 @@ experiments:
   v:
     observables:
       spike times:
-        file: 
+        file:
           path: ../results/ex15_v.dat
           columns: [0,1]
           scaling: [1000, 1000]
-        spike detection: 
+        spike detection:
           method: threshold
           threshold: 0
+        tolerance: 0
+  cond dens naf:
+    observables:
+      spike times:
+        file:
+          path: ../results/ex15_cond_dens.dat
+          columns: [0,1]
+          scaling: [1000, 1]
+        spike detection:
+          method: threshold
+          threshold: 0.55
+        tolerance: 0
+  cond dens ca:
+    observables:
+      spike times:
+        file:
+          path: ../results/ex15_cond_dens.dat
+          columns: [0,2]
+          scaling: [1000, 1]
+        spike detection:
+          method: threshold
+          threshold: 0.55
         tolerance: 0
