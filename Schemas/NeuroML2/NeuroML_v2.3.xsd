@@ -503,6 +503,7 @@
       <xs:element name="fitzHughNagumoCell" type="FitzHughNagumoCell" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="fitzHughNagumo1969Cell" type="FitzHughNagumo1969Cell" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="pinskyRinzelCA3Cell" type="PinskyRinzelCA3Cell" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="hindmarshRose1984Cell" type="HindmarshRose1984Cell" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:group>
   <xs:group name="PyNNCellTypes">
@@ -1796,6 +1797,31 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+
+<xs:complexType name="HindmarshRose1984Cell">
+    <xs:annotation>
+      <xs:documentation>....
+
+</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BaseCellMembPotCap">
+        <xs:attribute name="a" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="b" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="c" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="d" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="s" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="x1" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="r" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="x0" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="y0" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="z0" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="v_scaling" type="Nml2Quantity_voltage" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+
   <xs:complexType name="Cell">
     <xs:annotation>
       <xs:documentation>Cell with  **segment** s specified in a  **morphology**  element along with details on its  **biophysicalProperties** . NOTE: this can only be correctly simulated using jLEMS when there is a single segment in the cell, and **v**  of this cell represents the membrane potential in that isopotential segment.
