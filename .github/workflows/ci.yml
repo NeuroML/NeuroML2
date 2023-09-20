@@ -23,6 +23,7 @@ jobs:
       with:
         java-version: ${{ matrix.java }}
         java-package: jdk
+        distribution: 'adopt'
 
     - name: Install NeuroML 2 with Maven
       run: |
