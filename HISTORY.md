@@ -19,9 +19,17 @@ v2.3 / 2023-09-20
 
 * Tested Java libraries up to Java 19 & Python libraries up to Python v3.11
 
+* Significant usability updates to libNeuroML & pyNeuroML - see individual releases.
+
 * Update to how units are generated in NEURON mod file for greater consistency, and validity with `modlunit` checks. See [here](https://github.com/NeuroML/org.neuroml.export/pull/107/files).
 
-* Support for generation of EDEN Python scripts with `jnml MyLEMS.xml -eden` in jNeuroML and pyNeuroML, and many more tests with EDEN simulator
+* Toolchain and models on OSB all tested against NEURON v8.1, NEST v3.3 and PyNN v0.10.1
+
+* Support for generation of EDEN Python scripts with `jnml MyLEMS.xml -eden` in jNeuroML and pyNeuroML, and many more tests with EDEN simulator (v0.2.2)
+
+* NeuroMLlite updated to work with Arbor v0.8.1
+
+* Significant updates in NeuroMLlite to work with MDF: https://github.com/ModECI/MDF/tree/main/examples/NeuroML
 
 * See individual package change logs/released versions:
    - jLEMS: https://github.com/LEMS/jLEMS/releases/tag/v0.10.8
@@ -31,6 +39,11 @@ v2.3 / 2023-09-20
    - org.neuroml.export: https://github.com/NeuroML/org.neuroml.export/releases/tag/v1.9.1
    - org.neuroml.import: https://github.com/NeuroML/org.neuroml.import/releases/tag/v1.9.1
    - jNeuroML: https://github.com/NeuroML/jNeuroML/releases/tag/v0.12.4
+
+   - pylems: https://github.com/LEMS/pylems/releases/tag/v0.6.4
+   - libNeuroML: https://github.com/NeuralEnsemble/libNeuroML/releases/tag/v0.5.5
+   - NeuroMLlite: https://github.com/NeuroML/NeuroMLlite/releases/tag/v0.5.7
+   - 
 
 ...
 
