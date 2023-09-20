@@ -13,6 +13,10 @@ v2.3 / 2022-??-??
 
 * **Renamed the main Schema from NeuroML_v2.2.xsd to [NeuroML_v2.3.xsd](https://github.com/NeuroML/NeuroML2/blob/master/Schemas/NeuroML2/NeuroML_v2.3).**
 
+* Added new cell type `<hindmarshRose1984Cell>`
+
+
+
 ...
 
 v2.2 / 2021-12-15
