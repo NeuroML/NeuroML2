@@ -1747,5 +1747,90 @@
     </ComponentType>
 
 
+    <ComponentType name="hindmarshRose1984Cell"
+        extends="baseCellMembPotCap"
+        description="
+        The Hindmarsh Rose model is a simplified point cell model which
+        captures complex firing patterns of single neurons, such as
+        periodic and chaotic bursting. It has a fast spiking subsystem,
+        which is a generalization of the FitzHugh-Nagumo system, coupled
+        to a slower subsystem which allows the model to fire bursts. The
+        dynamical variables x,y,z correspond to the membrane potential, a
+        recovery variable, and a slower adaptation current, respectively. 
+        See Hindmarsh J. L., and Rose R. M. (1984) A model of neuronal
+        bursting using three coupled first order differential equations.
+        Proc. R. Soc. London, Ser. B 221:87–102.
+        ">
+        
+        <Parameter name="a" dimension="none" description="cubic term in x nullcline"/>
+        <Parameter name="b" dimension="none" description="quadratic term in x nullcline"/>
+        <Parameter name="c" dimension="none" description="constant term in y nullcline"/>
+        <Parameter name="d" dimension="none" description="quadratic term in y nullcline"/>
+        <Parameter name="r" dimension="none" description="timescale separation between slow and fast subsystem (r greater than 0; r much less than 1)"/>
+        <Parameter name="s" dimension="none" description="related to adaptation"/>
+        <Parameter name="x1" dimension="none" description="related to the system's resting potential"/>
+
+        <Parameter name="v_scaling" dimension="voltage" description="scaling of x for physiological membrane potential"/>
+
+        <!-- Initial Conditions -->
+        <Parameter name="x0" dimension="none"/>
+        <Parameter name="y0" dimension="none"/>
+        <Parameter name="z0" dimension="none"/>
+
+        <Constant name="MSEC" dimension="time" value="1ms"/>
+
+        <Attachments name="synapses" type="basePointCurrent"/>
+
+        <Exposure name="x" dimension="none"/>
+        <Exposure name="y" dimension="none"/>
+        <Exposure name="z" dimension="none"/>
+        <Exposure name="phi" dimension="none"/>
+        <Exposure name="chi" dimension="none"/>
+        <Exposure name="rho" dimension="none"/>
+        <!-- <Exposure name="v" dimension="voltage"/> --> <!-- Already exposed from baseCellMembPot -->
+        <!--<Exposure name="iSyn" dimension="none"/>-->
+        <Exposure name="spiking" dimension="none"/>
+        
+        <Dynamics>
+            
+            <!--<StateVariable name="x" dimension="none" exposure="x"/>-->
+            <StateVariable name="v" dimension="voltage" exposure="v"/>
+            <StateVariable name="y" dimension="none" exposure="y"/>
+            <StateVariable name="z" dimension="none" exposure="z"/>
+            <StateVariable name="spiking" dimension="none" exposure="spiking"/>
+            
+            <DerivedVariable name="iSyn" dimension="current" exposure="iSyn" select="synapses[*]/i" reduce="add" />
+
+            <DerivedVariable name="x" dimension="none" exposure="x" value="v / v_scaling"/>
+
+            <DerivedVariable name="phi" dimension="none" exposure="phi" value="y - a * x^3 + b * x^2"/>
+            <DerivedVariable name="chi" dimension="none" exposure="chi" value="c - d * x^2 - y"/>
+            <DerivedVariable name="rho" dimension="none" exposure="rho" value="s * ( x - x1 ) - z"/>
+
+            <DerivedVariable name="iMemb" dimension="current" exposure="iMemb" value="(C * (v_scaling * (phi - z) / MSEC)) + iSyn"/>
+
+            <TimeDerivative variable="v" value="iMemb/C"/>
+
+            <TimeDerivative variable="y" value="chi / MSEC"/>
+            <TimeDerivative variable="z" value="r * rho / MSEC"/>
+            
+            <OnStart>
+                <StateAssignment variable="v" value="x0 * v_scaling"/>
+                <StateAssignment variable="y" value="y0"/>
+                <StateAssignment variable="z" value="z0"/>
+            </OnStart>
+
+            <OnCondition test="v .gt. 0 .and. spiking .lt. 0.5">
+                <StateAssignment variable="spiking" value="1"/>
+                <EventOut port="spike"/>
+            </OnCondition>
+
+            <OnCondition test="v .lt. 0">
+                <StateAssignment variable="spiking" value="0"/>
+            </OnCondition>
+            
+        </Dynamics>
+        
+    </ComponentType>
 
 </Lems>

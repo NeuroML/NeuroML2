@@ -536,9 +536,9 @@
 
         <Property name="weight" dimension="none" defaultValue="1"/> <!-- Not used...-->
 
-        <Exposure name="i" dimension="current"/>
-
         <Constant name="AMP" dimension="current" value="1A"/>
+
+        <Exposure name="i" dimension="current"/>
 
         <Requirement name="v" dimension="voltage"/>
 

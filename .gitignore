@@ -67,3 +67,4 @@ examples/*.pov
 /LEMSexamples/*.gen.so
 /LEMSexamples/tmp
 arm64
+/examples/NML2_SingleCompHHCell.nml__flattened.xml

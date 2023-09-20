@@ -150,7 +150,7 @@
             </xs:documentation>
     </xs:annotation>
     <xs:restriction base="xs:string">
-        <xs:pattern value="(\.\./)?([a-zA-Z_][a-zA-Z0-9_]*)((\[[0-9]+\])|(/[0-9]+)+((/[a-zA-Z_][a-zA-Z0-9_]*)?)/?)"/>
+      <xs:pattern value="(\.\./)?([a-zA-Z_][a-zA-Z0-9_]*)((\[[0-9]+\])|(/[0-9]+)+((/[a-zA-Z_][a-zA-Z0-9_]*)?)/?)"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="NonNegativeInteger">
@@ -503,6 +503,7 @@
       <xs:element name="fitzHughNagumoCell" type="FitzHughNagumoCell" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="fitzHughNagumo1969Cell" type="FitzHughNagumo1969Cell" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="pinskyRinzelCA3Cell" type="PinskyRinzelCA3Cell" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="hindmarshRose1984Cell" type="HindmarshRose1984Cell" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:group>
   <xs:group name="PyNNCellTypes">
@@ -1595,23 +1596,23 @@
     <xs:annotation>
       <xs:documentation>Cell based on the modified Izhikevich model in Izhikevich 2007, Dynamical systems in neuroscience, MIT Press
 \n
-:param v0: 
+:param v0: Initial membrane potential
 :type v0: voltage
 :param k: 
 :type k: conductance_per_voltage
-:param vr: 
+:param vr: Resting membrane potential
 :type vr: voltage
-:param vt: 
+:param vt: Spike threshold
 :type vt: voltage
-:param vpeak: 
+:param vpeak: Peak action potential value
 :type vpeak: voltage
-:param a: 
+:param a: Time scale of recovery variable u
 :type a: per_time
-:param b: 
+:param b: Sensitivity of recovery variable u to subthreshold fluctuations of membrane potential v
 :type b: conductance
-:param c: 
+:param c: After-spike reset value of v
 :type c: voltage
-:param d: 
+:param d: After-spike increase to u
 :type d: current
 :param C: Total capacitance of the cell membrane
 :type C: capacitance
@@ -1636,25 +1637,25 @@
     <xs:annotation>
       <xs:documentation>Model based on Brette R and Gerstner W ( 2005 ) Adaptive Exponential Integrate-and-Fire Model as an Effective Description of Neuronal Activity. J Neurophysiol 94:3637-3642
 \n
-:param gL: 
+:param gL: Leak conductance
 :type gL: conductance
-:param EL: 
+:param EL: Leak reversal potential
 :type EL: voltage
-:param VT: 
+:param VT: Spike threshold
 :type VT: voltage
-:param thresh: 
+:param thresh: Spike detection threshold
 :type thresh: voltage
-:param reset: 
+:param reset: Reset potential
 :type reset: voltage
-:param delT: 
+:param delT: Slope factor
 :type delT: voltage
-:param tauw: 
+:param tauw: Adaptation time constant
 :type tauw: time
-:param refract: 
+:param refract: Refractory period
 :type refract: time
-:param a: 
+:param a: Sub-threshold adaptation variable
 :type a: conductance
-:param b: 
+:param b: Spike-triggered adaptation variable
 :type b: current
 :param C: Total capacitance of the cell membrane
 :type C: capacitance
@@ -1723,7 +1724,7 @@
   </xs:complexType>
   <xs:complexType name="PinskyRinzelCA3Cell">
     <xs:annotation>
-      <xs:documentation>Reduced CA3 cell model from Pinsky and Rinzel 1994. See https://github.com/OpenSourceBrain/PinskyRinzelModel
+      <xs:documentation>Reduced CA3 cell model from Pinsky, P. F. , Rinzel, J. Intrinsic and network rhythmogenesis in a reduced traub model for CA3 neurons. J Comput Neurosci 1, 39-60 ( 1994 ). See https://github.com/OpenSourceBrain/PinskyRinzelModel
 \n
 :param iSoma: 
 :type iSoma: currentDensity
@@ -1793,6 +1794,53 @@
         <xs:attribute name="alphac" type="Nml2Quantity_none" use="required"/>
         <xs:attribute name="betac" type="Nml2Quantity_none" use="required"/>
         <xs:attribute name="cm" type="Nml2Quantity_specificCapacitance" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="HindmarshRose1984Cell">
+    <xs:annotation>
+      <xs:documentation>The Hindmarsh Rose model is a simplified point cell model which captures complex firing patterns of single neurons, such as periodic and chaotic bursting. It has a fast spiking subsystem, which is a generalization of the FitzHugh-Nagumo system, coupled to a slower subsystem which allows the model to fire bursts. The dynamical variables x, y, z correspond to the membrane potential, a recovery variable, and a slower adaptation current, respectively. See Hindmarsh J. L. , and Rose R. M. ( 1984 ) A model of neuronal bursting using three coupled first order differential equations. Proc. R. Soc. London, Ser. B 221:87–102.
+\n
+:param a: cubic term in x nullcline
+:type a: none
+:param b: quadratic term in x nullcline
+:type b: none
+:param c: constant term in y nullcline
+:type c: none
+:param d: quadratic term in y nullcline
+:type d: none
+:param r: timescale separation between slow and fast subsystem ( r greater than 0; r much less than 1 )
+:type r: none
+:param s: related to adaptation
+:type s: none
+:param x1: related to the system's resting potential
+:type x1: none
+:param v_scaling: scaling of x for physiological membrane potential
+:type v_scaling: voltage
+:param x0: 
+:type x0: none
+:param y0: 
+:type y0: none
+:param z0: 
+:type z0: none
+:param C: Total capacitance of the cell membrane
+:type C: capacitance
+
+</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BaseCellMembPotCap">
+        <xs:attribute name="a" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="b" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="c" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="d" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="s" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="x1" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="r" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="x0" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="y0" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="z0" type="Nml2Quantity_none" use="required"/>
+        <xs:attribute name="v_scaling" type="Nml2Quantity_voltage" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -1941,6 +1989,10 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="ProximalDetails">
+    <xs:annotation>
+      <xs:documentation>What to do at the proximal point when creating an inhomogeneous parameter
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseWithoutId">
         <xs:attribute name="translationStart" type="xs:double" use="required"/>
@@ -1948,6 +2000,10 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="DistalDetails">
+    <xs:annotation>
+      <xs:documentation>What to do at the distal point when creating an inhomogeneous parameter
+</xs:documentation>
+    </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BaseWithoutId">
         <xs:attribute name="normalizationEnd" type="xs:double" use="required"/>
