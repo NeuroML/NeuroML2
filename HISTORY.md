@@ -32,6 +32,7 @@ v2.3 / 2023-09-20
 * Significant updates in NeuroMLlite to work with MDF: https://github.com/ModECI/MDF/tree/main/examples/NeuroML
 
 * See individual package change logs/released versions:
+   - NeuroML2: https://github.com/NeuroML/NeuroML2/releases/tag/v1.9.1
    - jLEMS: https://github.com/LEMS/jLEMS/releases/tag/v0.10.8
    - org.neuroml.model.injectingplugin: https://github.com/NeuroML/org.neuroml.model.injectingplugin/releases/tag/v1.9.1
    - org.neuroml1.model: https://github.com/NeuroML/org.neuroml1.model/releases/tag/v1.9.1
@@ -43,7 +44,7 @@ v2.3 / 2023-09-20
    - pylems: https://github.com/LEMS/pylems/releases/tag/v0.6.4
    - libNeuroML: https://github.com/NeuralEnsemble/libNeuroML/releases/tag/v0.5.5
    - NeuroMLlite: https://github.com/NeuroML/NeuroMLlite/releases/tag/v0.5.7
-   - 
+   - pyNeuroML: https://github.com/NeuroML/pyNeuroML/releases/tag/v1.1.1
 
 ...
 
