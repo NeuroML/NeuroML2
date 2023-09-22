@@ -8,7 +8,7 @@
 
   <artifactId>neuroml2-base-definitions</artifactId>
   <groupId>org.neuroml.core</groupId>
-  <version>1.9.1</version>
+  <version>1.10.0</version>
 
 	<properties>
     	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
