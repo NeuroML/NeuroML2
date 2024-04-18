@@ -88,6 +88,8 @@
 
                 <channelDensity id="naChansSoma" ionChannel="NaConductance" segmentGroup="soma_group" condDensity="120.0 mS_per_cm2" erev="50mV" ion="na"/>
 
+                <spikeThresh value="0mV"/>
+
                 <specificCapacitance segmentGroup="soma_group" value="1.0 uF_per_cm2"/>
 
                 <specificCapacitance segmentGroup="dendrite_group" value="2.0 uF_per_cm2"/>
