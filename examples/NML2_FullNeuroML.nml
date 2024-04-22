@@ -68,6 +68,7 @@
             <reversalPotential species="k" value="-77mV"/>-->
 
             <!-- more needed -->
+            <spikeThresh value="-10mV" />
         </membraneProperties>
 
         <intracellularProperties>  <!-- used for bioelectrical properties inside a cell -->
