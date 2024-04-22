@@ -71,6 +71,7 @@
                     </variableParameter>
                 </channelDensityNonUniform>
 
+                <spikeThresh value="-10mV" />
                 <specificCapacitance segmentGroup="soma_group" value="1.0 uF_per_cm2"/>
             </membraneProperties>
 
