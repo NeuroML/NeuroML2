@@ -25,7 +25,7 @@ experiments:
         spike detection:
           method: threshold
           threshold: -55.1
-        tolerance: 0.000108696
+        tolerance: 0.00010867391304343428
   iafPop0:
     observables:
       spike times:
@@ -36,7 +36,7 @@ experiments:
         spike detection:
           method: threshold
           threshold: -55.1
-        tolerance: 0.00014939
+        tolerance: 0.00014932775619959672
   iafRefPop0:
     observables:
       spike times:
