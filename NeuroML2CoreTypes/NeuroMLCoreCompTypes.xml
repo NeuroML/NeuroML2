@@ -162,7 +162,7 @@
         <Child name="rdf:Description" type="rdf_Description"/>
     </ComponentType>
 
-    <ComponentType name="prism_keyword" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" />
+    <ComponentType name="prism_keyword" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseBqbiol"/>
 
     <ComponentType name="collex_thumbnail" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseBqbiol"/>
 
