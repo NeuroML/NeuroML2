@@ -106,45 +106,45 @@
     </ComponentType>
 
 
-    <ComponentType name="bqbiol_encodes" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_encodes" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
 
-    <ComponentType name="bqbiol_hasPart" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_hasPart" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
 
-    <ComponentType name="bqbiol_hasProperty" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_hasProperty" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
 
-    <ComponentType name="bqbiol_hasVersion" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_hasVersion" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
 
-    <ComponentType name="bqbiol_is" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_is" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
 
-    <ComponentType name="bqbiol_isDescribedBy" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_isDescribedBy" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
 
-    <ComponentType name="bqbiol_isEncodedBy" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_isEncodedBy" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
 
-    <ComponentType name="bqbiol_isHomologTo" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_isHomologTo" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
 
-    <ComponentType name="bqbiol_isPartOf" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_isPartOf" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
 
-    <ComponentType name="bqbiol_isPropertyOf" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_isPropertyOf" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
 
-    <ComponentType name="bqbiol_isVersionOf" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol">
+    <ComponentType name="bqbiol_isVersionOf" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol">
         <Text name="xmlns:bqbiol"/>
     </ComponentType>
 
-    <ComponentType name="bqbiol_occursIn" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_occursIn" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
 
-    <ComponentType name="bqbiol_hasTaxon" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqbiol_hasTaxon" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
 
-    <ComponentType name="bqmodel_is" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqmodel_is" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
 
-    <ComponentType name="bqmodel_isDescribedBy" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol">
+    <ComponentType name="bqmodel_isDescribedBy" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol">
         <Text name="xmlns:bqmodel"/>
     </ComponentType>
 
-    <ComponentType name="bqmodel_isDerivedFrom" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqmodel_isDerivedFrom" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
 
-    <ComponentType name="bqmodel_isInstanceOf" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqmodel_isInstanceOf" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
 
-    <ComponentType name="bqmodel_hasInstance" description="See http://co.mbine.org/standards/qualifiers" extends="baseBqbiol"/>
+    <ComponentType name="bqmodel_hasInstance" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
 
     <ComponentType name="dc_title" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" />
 
