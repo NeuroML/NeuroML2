@@ -55,6 +55,18 @@
         <Child name="dcterms:abstract" type="dcterms_abstract"/>
         <Child name="dcterms:license" type="dcterms_license"/>
         <Child name="dcterms:created" type="dcterms_created"/>
+
+        <!-- for people info from FOAF: not complete -->
+        <Child name="foaf:name" type="foaf_name"/>
+        <Child name="foaf:homepage" type="foaf_homepage"/>
+        <Child name="foaf:account" type="foaf_account"/>
+        <Child name="foaf:fundedBy" type="foaf_fundedBy"/>
+        <Child name="foaf:mbox" type="foaf_mbox"/>
+        <Child name="foaf:weblog" type="foaf_weblog"/>
+        <Child name="foaf:thumbnail" type="foaf_thumbnail"/>
+        <Child name="foaf:publications" type="foaf_publications"/>
+        <Child name="orcid:id" type="orcid_id"/>
+
         <Children name="bqbiol:encodes" type="bqbiol_encodes"/>
         <Children name="bqbiol:hasPart" type="bqbiol_hasPart"/>
         <Children name="bqbiol:hasProperty" type="bqbiol_hasProperty"/>
@@ -80,11 +92,10 @@
         <Children name="dcterms:references" type="dcterms_references"/>
         <Children name="dc:creator" type="dc_creator"/>
         <Children name="dc:contributor" type="dc_contributor"/>
+        <Children name="dc:source" type="dc_source"/>
         <Children name="scoro:funder" type="scoro_funder"/>
         <Children name="dcterms:modified" type="dcterms_modified"/>
         <Text name="rdf:about"/>
-        <!-- for dates -->
-        <Text name="dcterms:W3CDTF"/>
         <Dynamics/>
     </ComponentType>
 
@@ -126,9 +137,7 @@
 
     <ComponentType name="bqbiol_isPropertyOf" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
 
-    <ComponentType name="bqbiol_isVersionOf" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol">
-        <Text name="xmlns:bqbiol"/>
-    </ComponentType>
+    <ComponentType name="bqbiol_isVersionOf" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol" />
 
     <ComponentType name="bqbiol_occursIn" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
 
@@ -136,9 +145,7 @@
 
     <ComponentType name="bqmodel_is" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
 
-    <ComponentType name="bqmodel_isDescribedBy" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol">
-        <Text name="xmlns:bqmodel"/>
-    </ComponentType>
+    <ComponentType name="bqmodel_isDescribedBy" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol" />
 
     <ComponentType name="bqmodel_isDerivedFrom" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
 
@@ -155,12 +162,25 @@
     <ComponentType name="dcterms_license" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/"/>
 
     <ComponentType name="dcterms_created" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/">
-        <Child name="rdf:Description" type="rdf_Description"/>
+        <Child name="rdf:Description" type="dcterms_created_description"/>
     </ComponentType>
 
-    <ComponentType name="dcterms_modified" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/">
-        <Child name="rdf:Description" type="rdf_Description"/>
+    <ComponentType name="dcterms_created_description" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/">
+        <Child name="dcterms:W3CDTF" type="dcterms_date" />
     </ComponentType>
+
+    <ComponentType name="dcterms_date" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" />
+
+    <ComponentType name="dcterms_modified" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/">
+        <Child name="rdf:Description" type="dcterms_modified_description"/>
+    </ComponentType>
+
+    <ComponentType name="dcterms_modified_description" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/">
+        <Child name="dcterms:W3CDTF" type="dcterms_date_list" />
+    </ComponentType>
+
+    <ComponentType name="dcterms_date_list" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseBqbiol"/>
+    <ComponentType name="dc_source" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseBqbiol"/>
 
     <ComponentType name="prism_keyword" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseBqbiol"/>
 
@@ -177,6 +197,33 @@
 
     <ComponentType name="scoro_funder" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseBqbiol"/>
 
+    <ComponentType name="foaf_name" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" >
+        <Text name="rdf:resource"/>
+    </ComponentType>
+    <ComponentType name="foaf_homepage" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" >
+        <Text name="rdf:resource"/>
+    </ComponentType>
+    <ComponentType name="foaf_account" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" >
+        <Text name="rdf:resource"/>
+    </ComponentType>
+    <ComponentType name="foaf_fundedBy" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" >
+        <Text name="rdf:resource"/>
+    </ComponentType>
+    <ComponentType name="foaf_mbox" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" >
+        <Text name="rdf:resource"/>
+    </ComponentType>
+    <ComponentType name="foaf_weblog" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" >
+        <Text name="rdf:resource"/>
+    </ComponentType>
+    <ComponentType name="foaf_thumbnail" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" >
+        <Text name="rdf:resource"/>
+    </ComponentType>
+    <ComponentType name="foaf_publications" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" >
+        <Text name="rdf:resource"/>
+    </ComponentType>
+    <ComponentType name="orcid_id" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" >
+        <Text name="rdf:resource"/>
+    </ComponentType>
 
     <ComponentType name="point3DWithDiam"
                    description="Base type for ComponentTypes which specify an ( _x, _y, _z ) coordinate along with a _diameter. Note: no dimension used in the attributes for these coordinates! These are assumed to have dimension micrometer (10^-6 m). This is due to micrometers being the default option for the majority of neuronal morphology formats, and dimensions are omitted here to facilitate reading and writing of morphologies in NeuroML.">
