@@ -67,51 +67,61 @@
         <Child name="foaf:publications" type="foaf_publications"/>
         <Child name="orcid:id" type="orcid_id"/>
 
-        <Children name="bqbiol:encodes" type="bqbiol_encodes"/>
-        <Children name="bqbiol:hasPart" type="bqbiol_hasPart"/>
-        <Children name="bqbiol:hasProperty" type="bqbiol_hasProperty"/>
-        <Children name="bqbiol:hasVersion" type="bqbiol_hasVersion"/>
-        <Children name="bqbiol:is" type="bqbiol_is"/>
-        <Children name="bqbiol:isDescribedBy" type="bqbiol_isDescribedBy"/>
-        <Children name="bqbiol:isEncodedBy" type="bqbiol_isEncodedBy"/>
-        <Children name="bqbiol:isHomologTo" type="bqbiol_isHomologTo"/>
-        <Children name="bqbiol:isPartOf" type="bqbiol_isPartOf"/>
-        <Children name="bqbiol:isPropertyOf" type="bqbiol_isPropertyOf"/>
-        <Children name="bqbiol:isVersionOf" type="bqbiol_isVersionOf"/>
-        <Children name="bqbiol:occursIn" type="bqbiol_occursIn"/>
-        <Children name="bqbiol:hasTaxon" type="bqbiol_hasTaxon"/>
-        <Children name="bqmodel:is" type="bqmodel_is"/>
-        <Children name="bqmodel:isDescribedBy" type="bqmodel_isDescribedBy"/>
-        <Children name="bqmodel:isDerivedFrom" type="bqmodel_isDerivedFrom"/>
-        <Children name="bqmodel:isIntanceOf" type="bqmodel_isInstanceOf"/>
-        <Children name="bqmodel:hasInstance" type="bqmodel_hasInstance"/>
-        <Children name="prism:keyword" type="prism_keyword"/>
-        <Children name="collex:thumbnail" type="collex_thumbnail"/>
-        <Children name="scoro:successor" type="scoro_successor"/>
-        <Children name="rdfs:seeAlso" type="rdfs_seeAlso"/>
-        <Children name="dcterms:references" type="dcterms_references"/>
-        <Children name="dc:creator" type="dc_creator"/>
-        <Children name="dc:contributor" type="dc_contributor"/>
-        <Children name="dc:source" type="dc_source"/>
-        <Children name="scoro:funder" type="scoro_funder"/>
-        <Children name="dcterms:modified" type="dcterms_modified"/>
+        <Child name="bqbiol:encodes" type="bqbiol_encodes"/>
+        <Child name="bqbiol:hasPart" type="bqbiol_hasPart"/>
+        <Child name="bqbiol:hasProperty" type="bqbiol_hasProperty"/>
+        <Child name="bqbiol:hasVersion" type="bqbiol_hasVersion"/>
+        <Child name="bqbiol:is" type="bqbiol_is"/>
+        <Child name="bqbiol:isDescribedBy" type="bqbiol_isDescribedBy"/>
+        <Child name="bqbiol:isEncodedBy" type="bqbiol_isEncodedBy"/>
+        <Child name="bqbiol:isHomologTo" type="bqbiol_isHomologTo"/>
+        <Child name="bqbiol:isPartOf" type="bqbiol_isPartOf"/>
+        <Child name="bqbiol:isPropertyOf" type="bqbiol_isPropertyOf"/>
+        <Child name="bqbiol:isVersionOf" type="bqbiol_isVersionOf"/>
+        <Child name="bqbiol:occursIn" type="bqbiol_occursIn"/>
+        <Child name="bqbiol:hasTaxon" type="bqbiol_hasTaxon"/>
+        <Child name="bqmodel:is" type="bqmodel_is"/>
+        <Child name="bqmodel:isDescribedBy" type="bqmodel_isDescribedBy"/>
+        <Child name="bqmodel:isDerivedFrom" type="bqmodel_isDerivedFrom"/>
+        <Child name="bqmodel:isIntanceOf" type="bqmodel_isInstanceOf"/>
+        <Child name="bqmodel:hasInstance" type="bqmodel_hasInstance"/>
+        <Child name="prism:keyword" type="prism_keyword"/>
+        <Child name="collex:thumbnail" type="collex_thumbnail"/>
+        <Child name="scoro:successor" type="scoro_successor"/>
+        <Child name="rdfs:seeAlso" type="rdfs_seeAlso"/>
+        <Child name="dcterms:references" type="dcterms_references"/>
+        <Child name="dc:creator" type="dc_creator"/>
+        <Child name="dc:contributor" type="dc_contributor"/>
+        <Child name="dc:source" type="dc_source"/>
+        <Child name="scoro:funder" type="scoro_funder"/>
+        <Child name="dcterms:modified" type="dcterms_modified"/>
         <Text name="rdf:about"/>
         <Dynamics/>
     </ComponentType>
 
 
     <!-- base RDF types -->
-    <ComponentType name="baseBqbiol" description="Structured block in an _annotation_ based on RDF.">
+    <ComponentType name="baseAnnotation_without_ns" description="Structured block in an _annotation_ based on RDF.">
         <Child name="rdf:Bag" type="rdf_Bag"/>
         <Dynamics/>
     </ComponentType>
 
-    <ComponentType name="rdf_Bag" description="Structured block in an _annotation_ based on RDF.">
-        <Children name="rdf:li" type="rdf:li"/>
+    <ComponentType name="baseBqbiol" description="Structured block in an _annotation_ based on RDF." extends="baseAnnotation_without_ns">
+        <Text name="xmlns:bqbiol"/>
         <Dynamics/>
     </ComponentType>
 
-    <ComponentType name="rdf:li" description="Structured block in an _annotation_ based on RDF.">
+    <ComponentType name="baseBqmodel" description="Structured block in an _annotation_ based on RDF." extends="baseAnnotation_without_ns">
+        <Text name="xmlns:bqmodel"/>
+        <Dynamics/>
+    </ComponentType>
+
+    <ComponentType name="rdf_Bag" description="Structured block in an _annotation_ based on RDF.">
+        <Child name="rdf:li" type="rdf_li"/>
+        <Dynamics/>
+    </ComponentType>
+
+    <ComponentType name="rdf_li" description="Structured block in an _annotation_ based on RDF.">
         <Text name="rdf:resource"/>
         <Dynamics/>
     </ComponentType>
@@ -143,15 +153,15 @@
 
     <ComponentType name="bqbiol_hasTaxon" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
 
-    <ComponentType name="bqmodel_is" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
+    <ComponentType name="bqmodel_is" description="See https://github.com/combine-org/combine-specifications" extends="baseBqmodel"/>
 
-    <ComponentType name="bqmodel_isDescribedBy" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol" />
+    <ComponentType name="bqmodel_isDescribedBy" description="See https://github.com/combine-org/combine-specifications" extends="baseBqmodel" />
 
-    <ComponentType name="bqmodel_isDerivedFrom" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
+    <ComponentType name="bqmodel_isDerivedFrom" description="See https://github.com/combine-org/combine-specifications" extends="baseBqmodel"/>
 
-    <ComponentType name="bqmodel_isInstanceOf" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
+    <ComponentType name="bqmodel_isInstanceOf" description="See https://github.com/combine-org/combine-specifications" extends="baseBqmodel"/>
 
-    <ComponentType name="bqmodel_hasInstance" description="See https://github.com/combine-org/combine-specifications" extends="baseBqbiol"/>
+    <ComponentType name="bqmodel_hasInstance" description="See https://github.com/combine-org/combine-specifications" extends="baseBqmodel"/>
 
     <ComponentType name="dc_title" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" />
 
@@ -179,23 +189,23 @@
         <Child name="dcterms:W3CDTF" type="dcterms_date_list" />
     </ComponentType>
 
-    <ComponentType name="dcterms_date_list" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseBqbiol"/>
-    <ComponentType name="dc_source" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseBqbiol"/>
+    <ComponentType name="dcterms_date_list" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseAnnotation_without_ns"/>
+    <ComponentType name="dc_source" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseAnnotation_without_ns"/>
 
-    <ComponentType name="prism_keyword" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseBqbiol"/>
+    <ComponentType name="prism_keyword" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseAnnotation_without_ns"/>
 
-    <ComponentType name="collex_thumbnail" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseBqbiol"/>
+    <ComponentType name="collex_thumbnail" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseAnnotation_without_ns"/>
 
-    <ComponentType name="scoro_successor" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseBqbiol"/>
+    <ComponentType name="scoro_successor" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseAnnotation_without_ns"/>
 
-    <ComponentType name="rdfs_seeAlso" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseBqbiol"/>
+    <ComponentType name="rdfs_seeAlso" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseAnnotation_without_ns"/>
 
-    <ComponentType name="dcterms_references" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseBqbiol"/>
-    <ComponentType name="dc_creator" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseBqbiol"/>
+    <ComponentType name="dcterms_references" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseAnnotation_without_ns"/>
+    <ComponentType name="dc_creator" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseAnnotation_without_ns"/>
 
-    <ComponentType name="dc_contributor" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseBqbiol"/>
+    <ComponentType name="dc_contributor" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseAnnotation_without_ns"/>
 
-    <ComponentType name="scoro_funder" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseBqbiol"/>
+    <ComponentType name="scoro_funder" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" extends="baseAnnotation_without_ns"/>
 
     <ComponentType name="foaf_name" description="https://docs.biosimulations.org/concepts/conventions/simulation-project-metadata/" >
         <Text name="rdf:resource"/>
