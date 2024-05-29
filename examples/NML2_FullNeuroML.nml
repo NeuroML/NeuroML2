@@ -20,6 +20,10 @@
             <distal x="10" y="0" z="0" diameter="10"/>
         </segment>
 
+        <segmentGroup id="soma_group">   
+            <member segment="0"/>
+        </segmentGroup>
+
         <!-- more needed -->
 
     </morphology>
