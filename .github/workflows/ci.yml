@@ -3,9 +3,9 @@ name: Build all NML Java
 
 on:
   push:
-    branches: [ master, development, experimental, documentation_update, osb* ]
+    branches: [ master, development, experimental, documentation_update, osb*, update* ]
   pull_request:
-    branches: [ master, development, experimental, documentation_update, osb* ]
+    branches: [ master, development, experimental, documentation_update, osb*, update* ]
 
 jobs:
   build:
