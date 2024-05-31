@@ -67,6 +67,8 @@
                             erev="50mV"/>  <!-- Temporarily specifying erev in the channelDensity element-->
 
             <spikeThresh value="0mV"/>
+            <specificCapacitance segmentGroup="soma_group" value="1.0 uF_per_cm2"/>
+            <initMembPotential value="-65mV"/>
 
         </membraneProperties>
 

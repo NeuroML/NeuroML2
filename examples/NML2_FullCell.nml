@@ -94,6 +94,8 @@
 
                 <specificCapacitance segmentGroup="dendrite_group" value="2.0 uF_per_cm2"/>
 
+                <initMembPotential value="-65mV"/>
+
             </membraneProperties>
 
             <intracellularProperties>
