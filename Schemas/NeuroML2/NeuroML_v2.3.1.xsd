@@ -2118,8 +2118,8 @@
           <xs:element name="channelDensityNonUniformNernst" type="ChannelDensityNonUniformNernst" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="channelDensityNonUniformGHK" type="ChannelDensityNonUniformGHK" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="spikeThresh" type="SpikeThresh" minOccurs="1" maxOccurs="unbounded"/>
-          <xs:element name="specificCapacitance" type="SpecificCapacitance" minOccurs="0" maxOccurs="unbounded"/>
-          <xs:element name="initMembPotential" type="InitMembPotential" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="specificCapacitance" type="SpecificCapacitance" minOccurs="1" maxOccurs="unbounded"/>
+          <xs:element name="initMembPotential" type="InitMembPotential" minOccurs="1" maxOccurs="unbounded"/>
           <!-- Taking this out until confirmation it's needed
                 <xs:element name="reversalPotential" type="ReversalPotential" minOccurs="0" maxOccurs="unbounded"/>-->
         </xs:sequence>
