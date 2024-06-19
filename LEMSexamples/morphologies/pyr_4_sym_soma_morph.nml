@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  https://raw.githubusercontent.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.1.xsd" id="pyr_4_sym_soma">
+
+
+
+    <morphology id="morphology_pyr_soma">
+
+        <segment id="0" name="soma">
+            <proximal x="0.0" y="0.0" z="0.0" diameter="23.0"/>
+            <distal x="0.0" y="17.0" z="0.0" diameter="23.0"/>
+        </segment>
+
+        <segmentGroup id="soma" neuroLexId="sao864921383">    <!--
+            This group contains an unbranched set of segments, and all of the segmentGroups marked with
+            neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+            These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
+
+            <member segment="0"/>
+        </segmentGroup>
+
+        <segmentGroup id="all">
+            <include segmentGroup="soma"/>
+        </segmentGroup>
+
+        <segmentGroup id="soma_group" neuroLexId="GO:0043025">    <!--Soma group-->
+
+            <include segmentGroup="soma"/>
+        </segmentGroup>
+
+    </morphology>
+
+
+</neuroml>

@@ -1,0 +1,6 @@
+system: Testing a cell
+
+experiments:
+  Current clamp pyramidal:
+    expected:
+        spike times: [134.24, 401.25]

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  https://raw.githubusercontent.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.1.xsd" id="pyr_4_sym_soma">
+
+    <include href="Ca_conc.nml"/>
+
+    <include href="Ca_pyr.channel.nml"/>
+
+    <include href="Kahp_pyr.channel.nml"/>
+
+    <include href="Kdr_pyr.channel.nml"/>
+
+    <include href="LeakConductance_pyr.channel.nml"/>
+
+    <include href="Na_pyr.channel.nml"/>
+
+        <biophysicalProperties id="biophys">
+
+            <membraneProperties>
+                
+                <channelDensity condDensity="10.0 mS_per_cm2" id="Ca_pyr_soma_group" ionChannel="Ca_pyr" segmentGroup="soma_group" ion="ca" erev="80.0 mV"/>
+                
+                <channelDensity condDensity="2.5 mS_per_cm2" id="Kahp_pyr_soma_group" ionChannel="Kahp_pyr" segmentGroup="soma_group" ion="k" erev="-75.0 mV"/>
+                
+                <channelDensity condDensity="80.0 mS_per_cm2" id="Kdr_pyr_soma_group" ionChannel="Kdr_pyr" segmentGroup="soma_group" ion="k" erev="-75.0 mV"/>
+                
+                <channelDensity condDensity="0.1420051 mS_per_cm2" id="LeakConductance_pyr_all" ionChannel="LeakConductance_pyr" erev="-66.0 mV" ion="non_specific"/>
+                
+                <channelDensity condDensity="120.0 mS_per_cm2" id="Na_pyr_soma_group" ionChannel="Na_pyr" segmentGroup="soma_group" ion="na" erev="55.0 mV"/>
+                
+
+                <spikeThresh value="0.0 mV"/>
+
+                <specificCapacitance value="2.84 uF_per_cm2"/>
+
+                <initMembPotential value="-65.0 mV"/>
+
+            </membraneProperties>
+
+            <intracellularProperties>
+
+                <species id="ca" ion="ca" concentrationModel="Ca_conc" initialConcentration="5.0E-11 mol_per_cm3" initialExtConcentration="3.0E-6 mol_per_cm3"/>
+
+                <resistivity value="0.2 kohm_cm"/>
+
+            </intracellularProperties>
+
+        </biophysicalProperties>
+
+    
+</neuroml>
