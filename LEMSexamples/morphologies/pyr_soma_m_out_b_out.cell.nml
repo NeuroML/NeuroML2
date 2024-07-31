@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  https://raw.githubusercontent.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.1.xsd" id="pyr_4_sym_soma">
+
+    <include href="pyr_4_sym_soma_morph.nml"/>
+    <include href="pyr_biophysics.nml"/>
+
+    <cell id="pyr_soma_m_out_b_out" morphology="morphology_pyr_soma" biophysicalProperties="biophys">
+
+        <notes>A single segment/compartment cell</notes>
+
+    </cell>
+    
+</neuroml>

@@ -68,3 +68,15 @@ examples/*.pov
 /LEMSexamples/tmp
 arm64
 /examples/NML2_SingleCompHHCell.nml__flattened.xml
+/LEMSexamples/morphologies/*.mod
+/LEMSexamples/morphologies/*.c
+/LEMSexamples/morphologies/*.so
+*eden.py
+*netpyne.py
+*nrn.py
+/LEMSexamples/morphologies/*.dat
+/LEMSexamples/morphologies/*.hoc
+/LEMSexamples/morphologies/NET_m_in_b_in.net.nml
+/LEMSexamples/morphologies/simulator.props
+/LEMSexamples/morphologies/NET_m_in_b_out.net.nml
+/LEMSexamples/morphologies/NET_m_out_b_in.net.nml

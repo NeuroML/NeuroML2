@@ -1,0 +1,67 @@
+<Lems xmlns="http://www.neuroml.org/lems/0.7.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/lems/0.7.2  https://raw.github.com/LEMS/LEMS/development/Schemas/LEMS/LEMS_v0.7.2.xsd">
+
+    <Target component="sim1" reportFile="simulator.props" timesFile="time.dat"/>
+
+        <!--Include standard NeuroML 2 ComponentType definitions-->
+
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+
+    <Include file="Ca_pyr.channel.nml"/>
+    <Include file="Ca_conc.nml"/>
+    <Include file="Kahp_pyr.channel.nml"/>
+    <Include file="Kdr_pyr.channel.nml"/>
+    <Include file="LeakConductance_pyr.channel.nml"/>
+    <Include file="Na_pyr.channel.nml"/>
+
+    
+        <!--   Cell files-->
+    <Include file="pyr_soma_m_in_b_in.cell.nml"/>
+
+    <pulseGenerator id="Input_3" delay="100.0ms" duration="500.0ms" amplitude="2.0E-4uA"/>
+
+    <network id="network" type="networkWithTemperature" temperature="6.3 degC">
+
+        <population id="pyramidal_soma" component="pyr_soma_m_in_b_in" type="populationList" size="1">
+           <annotation>
+                <property tag="color" value="0.7421875 0.07421875 0.95703125"/>
+            </annotation>
+            <instance id="0">
+                <location x="400.0" y="0.0" z="0.0"/>
+            </instance>
+        </population>
+
+        <inputList id="Input_3" component="Input_3" population="pyramidal_soma">
+            <input id="0" target="../pyramidal_soma/0/pyr_soma_m_in_b_in" destination="synapses"/>
+        </inputList>
+
+
+    </network>
+    
+
+        <!--Note: this could be: Simulation id="sim1" ... , but Component type="Simulation" ... 
+        is used to allow validation of this file according to the LEMS schema specified above...-->
+    <Component type="Simulation" id="sim1" length="700.0ms" step="0.0025ms" target="network">
+        
+    
+        <Display id="pyramidal_soma_v" title="ACnet2: TestSoma, pyramidal_soma, VOLTAGE" xmin="-70.0" xmax="770.0" ymin="-104.0" ymax="64.0" timeScale="1ms">
+            <Line id="VOLTAGE-pyramidal_soma_0" timeScale="1ms" quantity="pyramidal_soma/0/pyr_soma_m_in_b_in/v" scale="1 mV" color="#000000"/>
+        </Display>
+    
+        <Display id="GraphWin_12" title="ACnet2: TestSoma, pyramidal_soma, Ca_conc:CONC:ca" xmin="-70.0" xmax="770.0" ymin="-1E-5" ymax="9E-5" timeScale="1ms">
+            <Line id="Ca_conc_CONC_ca-pyramidal_soma_0" timeScale="1ms" quantity="pyramidal_soma/0/pyr_soma_m_in_b_in/caConc" scale="1 mol_per_cm3" color="#000000"/>
+        </Display>
+    
+    
+        <OutputFile id="pyramidal_soma_v_OF" fileName="pyramidal_soma_0.dat">
+            <OutputColumn id="v" quantity="pyramidal_soma/0/pyr_soma_m_in_b_in/v"/>
+        </OutputFile>
+    
+        <OutputFile id="pyramidals_ca_2_OF" fileName="pyramidal_soma_0.Ca_conc_CONC_ca.dat">
+            <OutputColumn id="caConc" quantity="pyramidal_soma/0/pyr_soma_m_in_b_in/caConc"/>
+        </OutputFile>
+    </Component>
+
+
+</Lems>

@@ -1,0 +1,20 @@
+# Script for running automated tests on OSB, see https://github.com/OpenSourceBrain/osb-model-validation 
+
+target: LEMS_m_out_b_out.xml
+engine: jNeuroML_NetPyNE
+mep: .test.mep
+experiments:
+  Current clamp pyramidal:
+    observables:
+      spike times:
+        file:
+          path: pyramidal_soma_0.dat
+          columns: [0,1]
+          scaling: [1000, 1000]
+        spike detection:
+          method: threshold
+          threshold: 0
+        tolerance: 0
+
+
+        

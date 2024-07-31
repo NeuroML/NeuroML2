@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  https://raw.githubusercontent.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" id="pyr_4_sym">
+
+    <include href="pyr_full_morph_biophys.nml"/>
+
+
+    <cell id="pyr_full_out"  morphology="morphology_pyr_4_sym" biophysicalProperties="biophys">
+
+        <notes>A simplified pyramidal cell model with 9 compartments</notes>
+        
+    </cell>
+    
+</neuroml>
