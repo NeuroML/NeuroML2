@@ -8,8 +8,12 @@ and [LEMS](https://github.com/LEMS/LEMS), but also the Python ([libNeuroML](http
 
 **Only contributors who are not [NeuroML Editors](https://docs.neuroml.org/NeuroMLOrg/Board.html) are specifically pointed out below.**
 
-v2.3.1 / 2023-XX-XX
+v2.3.1 / 2024-08-25
 --------------------
+
+* **Renamed the main Schema from NeuroML_v2.3.xsd to [NeuroML_v2.3.1.xsd](https://github.com/NeuroML/NeuroML2/blob/master/Schemas/NeuroML2/NeuroML_v2.3.1).**
+
+* Adds support for external <morphology>/<biophysicalProperties> in cell element. Also simulator mappings for NEURON/NetPyNE support this. See [here](https://docs.neuroml.org/Userdocs/ImportingMorphologyFiles.html#neuroml2) for more details. Multiple examples of NeuroML2/LEMS files using this feature can be found [here](https://github.com/NeuroML/NeuroML2/tree/development/LEMSexamples/morphologies). 
 
 
 
