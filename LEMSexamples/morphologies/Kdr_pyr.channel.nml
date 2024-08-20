@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" id="Kdr_pyr">
+        
+    <notes>NeuroML file containing a single Potassium Channel description, from the Hippocampal CA3 neuron model presented in Traub et al., 1991.</notes>
+        
+    <ionChannel id="Kdr_pyr" conductance="10pS" type="ionChannelHH" species="k">
+                
+        <notes>NeuroML file containing a single Potassium Channel description, from the Hippocampal CA3 neuron model presented in Traub et al., 1991.</notes>
+                        
+        
+        <annotation>
+                        
+            <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                                
+                <rdf:Description rdf:about="Kdr_pyr">
+                                        
+                    
+                    <bqmodel:isDescribedBy xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+                                                
+                        <rdf:Bag>
+                                                        
+                            <rdf:li>Traub, R. D., Wong, R. K., Miles, R., and Michelson, H. (1991). A model of a CA3 hippocampal pyramidal neuron incorporating voltage-clamp data on intrinsic conductances. Journal of neurophysiology, 66(2), 635-50.</rdf:li>
+                                                        
+                            <rdf:li rdf:resource="http://www.ncbi.nlm.nih.gov/pubmed/1663538"/>
+                                                    
+                        </rdf:Bag>
+                                            
+                    </bqmodel:isDescribedBy>
+                                    
+                    
+                    <bqbiol:isVersionOf xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+                                                
+                        <rdf:Bag>
+                                                        
+                            <rdf:li>K channels</rdf:li>
+                                                        
+                            <rdf:li rdf:resource="http://senselab.med.yale.edu/neurondb/NeuronProp.aspx?id=259&amp;mo=1&amp;re=&amp;pr=C"/>
+                                                    
+                        </rdf:Bag>
+                                            
+                    </bqbiol:isVersionOf>
+                                    
+                </rdf:Description>
+                            
+            </rdf:RDF>
+                    
+        </annotation>
+                
+        <gate id="n" type="gateHHrates" instances="1">
+                        
+            <forwardRate type="HHExpLinearRate" rate="40per_s" scale="0.005V" midpoint="-2.49e-2V"/>
+                        
+            <reverseRate type="HHExpRate" rate="125per_s" scale="-0.04V" midpoint="-4e-2V"/>
+                    
+        </gate>
+                                    
+    
+    </ionChannel>
+    
+</neuroml>

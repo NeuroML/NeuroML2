@@ -1,0 +1,92 @@
+<Lems xmlns="http://www.neuroml.org/lems/0.7.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/lems/0.7.2  https://raw.githubusercontent.com/LEMS/LEMS/development/Schemas/LEMS/LEMS_v0.7.2.xsd">
+
+    <Target component="sim1" reportFile="simulator.props" timesFile="time.dat"/>
+
+        <!--Include standard NeuroML 2 ComponentType definitions-->
+
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+
+    
+
+        <!--Include the generated NeuroML 2 files-->
+
+
+    <Include file="pyr_4_sym.cell.nml"/>
+    <Include file="pyrfull_in.net.nml"/>
+
+    
+
+        <!--Note: this could be: Simulation id="sim1" ... , but Component type="Simulation" ... 
+        is used to allow validation of this file according to the LEMS schema specified above...-->
+    <Component type="Simulation" id="sim1" length="700.0ms" step="0.01ms" target="network">
+        
+    
+        <Display id="GraphWin_12" title="ACnet2: Default Simulation Configuration, pyramidals, Ca_conc:CONC:ca" xmin="-0.07" xmax="0.77000004" ymin="-12.000001" ymax="132.0" timeScale="1s">
+            <Line id="pyramidals_0 Ca_conc_CONC_ca" timeScale="1s" quantity="pyramidals/0/pyr_4_sym/0/caConc" scale="1 mol_per_m3" color="#000000"/>
+        </Display>
+    
+        <Display id="pyramidals_v" title="ACnet2: Default Simulation Configuration, pyramidals, VOLTAGE, VOLTAGE, VOLTAGE, VOLTAGE, VOLTAGE, VOLTAGE, VOLTAGE, VOLTAGE, VOLTAGE" xmin="-0.07" xmax="0.77000004" ymin="-0.104" ymax="0.064" timeScale="1s">
+            <Line id="pyramidals_0_0 v" timeScale="1s" quantity="pyramidals/0/pyr_4_sym/0/v" scale="1 V" color="#000000"/>
+        
+            <Line id="pyramidals_0_1 v" timeScale="1s" quantity="pyramidals/0/pyr_4_sym/1/v" scale="1 V" color="#ff0000"/>
+        
+            <Line id="pyramidals_0_2 v" timeScale="1s" quantity="pyramidals/0/pyr_4_sym/2/v" scale="1 V" color="#0000ff"/>
+        
+            <Line id="pyramidals_0_3 v" timeScale="1s" quantity="pyramidals/0/pyr_4_sym/3/v" scale="1 V" color="#009b00"/>
+        
+            <Line id="pyramidals_0_4 v" timeScale="1s" quantity="pyramidals/0/pyr_4_sym/4/v" scale="1 V" color="#ffc800"/>
+        
+            <Line id="pyramidals_0_5 v" timeScale="1s" quantity="pyramidals/0/pyr_4_sym/5/v" scale="1 V" color="#8c6400"/>
+        
+            <Line id="pyramidals_0_6 v" timeScale="1s" quantity="pyramidals/0/pyr_4_sym/6/v" scale="1 V" color="#ff00ff"/>
+        
+            <Line id="pyramidals_0_7 v" timeScale="1s" quantity="pyramidals/0/pyr_4_sym/7/v" scale="1 V" color="#ffff00"/>
+        
+            <Line id="pyramidals_0_8 v" timeScale="1s" quantity="pyramidals/0/pyr_4_sym/8/v" scale="1 V" color="#808080"/>
+        </Display>
+    
+        <OutputFile id="pyramidals_ca_0_0_OF" fileName="pyramidals_0.0.Ca_conc_CONC_ca.dat">
+            <OutputColumn id="caConc" quantity="pyramidals/0/pyr_4_sym/0/caConc"/>
+        </OutputFile>
+    
+        <OutputFile id="pyramidals_v_0_0_OF" fileName="pyramidals_0.0.dat">
+            <OutputColumn id="v" quantity="pyramidals/0/pyr_4_sym/0/v"/>
+        </OutputFile>
+    
+        <OutputFile id="pyramidals_v_0_1_OF" fileName="pyramidals_0.1.dat">
+            <OutputColumn id="v" quantity="pyramidals/0/pyr_4_sym/1/v"/>
+        </OutputFile>
+    
+        <OutputFile id="pyramidals_v_0_2_OF" fileName="pyramidals_0.2.dat">
+            <OutputColumn id="v" quantity="pyramidals/0/pyr_4_sym/2/v"/>
+        </OutputFile>
+    
+        <OutputFile id="pyramidals_v_0_3_OF" fileName="pyramidals_0.3.dat">
+            <OutputColumn id="v" quantity="pyramidals/0/pyr_4_sym/3/v"/>
+        </OutputFile>
+    
+        <OutputFile id="pyramidals_v_0_4_OF" fileName="pyramidals_0.4.dat">
+            <OutputColumn id="v" quantity="pyramidals/0/pyr_4_sym/4/v"/>
+        </OutputFile>
+    
+        <OutputFile id="pyramidals_v_0_5_OF" fileName="pyramidals_0.5.dat">
+            <OutputColumn id="v" quantity="pyramidals/0/pyr_4_sym/5/v"/>
+        </OutputFile>
+    
+        <OutputFile id="pyramidals_v_0_6_OF" fileName="pyramidals_0.6.dat">
+            <OutputColumn id="v" quantity="pyramidals/0/pyr_4_sym/6/v"/>
+        </OutputFile>
+    
+        <OutputFile id="pyramidals_v_0_7_OF" fileName="pyramidals_0.7.dat">
+            <OutputColumn id="v" quantity="pyramidals/0/pyr_4_sym/7/v"/>
+        </OutputFile>
+    
+        <OutputFile id="pyramidals_v_0_8_OF" fileName="pyramidals_0.8.dat">
+            <OutputColumn id="v" quantity="pyramidals/0/pyr_4_sym/8/v"/>
+        </OutputFile>
+    </Component>
+
+
+</Lems>

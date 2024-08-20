@@ -2,9 +2,9 @@ name: Run OMV tests
 
 on:
   push:
-    branches: [ master, development, experimental, documentation_update, osb* ]
+    branches: [ master, development, experimental, documentation_update, osb*, update* ]
   pull_request:
-    branches: [ master, development, experimental, documentation_update, osb* ]
+    branches: [ master, development, experimental, documentation_update, osb*, update* ]
 
 jobs:
   build:
@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ 3.9 ]
+        python-version: [ "3.9" ]
         engine:
           - jNeuroML
           - jNeuroML_Brian2
@@ -25,10 +25,10 @@ jobs:
           - PyLEMS_NeuroML2
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Set up Python  ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version:  ${{ matrix.python-version }}
 

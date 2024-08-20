@@ -9,9 +9,8 @@
 <!-- Example containing a range of different elements from NeuroML 2 -->
 
 
-
 <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-<!-- Strucure of cell neurites -->
+<!-- Structure of cell neurites -->
 
     <morphology id="NeuroMorpho_PyrCell123">  <!-- see FullCell.xml for more details -->
 
@@ -20,6 +19,10 @@
             <proximal x="0" y="0" z="0" diameter="10"/>
             <distal x="10" y="0" z="0" diameter="10"/>
         </segment>
+
+        <segmentGroup id="soma_group">   
+            <member segment="0"/>
+        </segmentGroup>
 
         <!-- more needed -->
 
@@ -63,19 +66,15 @@
                             ion="na"
                             erev="50mV"/>  <!-- Temporarily specifying erev in the channelDensity element-->
 
-            <!-- Ions present inside the cell. Note: a fixed reversal potential is specified here  
-            <reversalPotential species="na" value="50mV"/>
-            <reversalPotential species="k" value="-77mV"/>-->
+            <spikeThresh value="0mV"/>
+            <specificCapacitance segmentGroup="soma_group" value="1.0 uF_per_cm2"/>
+            <initMembPotential value="-65mV"/>
 
-            <!-- more needed -->
         </membraneProperties>
 
         <intracellularProperties>  <!-- used for bioelectrical properties inside a cell -->
 
             <resistivity value="0.1 kohm_cm"/>  <!-- Used for specific axial resistance -->
-
-            <!-- REMOVED UNTIL WE CHECK HOW THE USAGE OF LEMS IMPACTS THIS...
-            <biochemistry reactionScheme="InternalCaDynamics"/>  Ref to earlier pathway -->
 
         </intracellularProperties>
 

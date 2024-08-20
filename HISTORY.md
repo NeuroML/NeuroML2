@@ -8,6 +8,32 @@ and [LEMS](https://github.com/LEMS/LEMS), but also the Python ([libNeuroML](http
 
 **Only contributors who are not [NeuroML Editors](https://docs.neuroml.org/NeuroMLOrg/Board.html) are specifically pointed out below.**
 
+v2.3.1 / 2024-08-25
+--------------------
+
+* **Renamed the main Schema from NeuroML_v2.3.xsd to [NeuroML_v2.3.1.xsd](https://github.com/NeuroML/NeuroML2/blob/master/Schemas/NeuroML2/NeuroML_v2.3.1).**
+
+* Adds support for external <morphology>/<biophysicalProperties> in cell element. Also simulator mappings for NEURON/NetPyNE support this. See [here](https://docs.neuroml.org/Userdocs/ImportingMorphologyFiles.html#neuroml2) for more details. Multiple examples of NeuroML2/LEMS files using this feature can be found [here](https://github.com/NeuroML/NeuroML2/tree/development/LEMSexamples/morphologies). 
+
+* pyNeuroML analysis feature updates: better support for analysing kinetic scheme based channels in `pynml-channelanalysis`; better support for plotting generated spike trains with `pynml-plotspikes`.
+
+* Improved testing of Java based libraries on latest versions of Java and recent Mac OS versions. 
+
+* Improved support for adding RDF annotations to NeuroML files.
+
+* Added ability to load (a subset of) XPPAUT files with `pynml-xpp` and export the model to LEMS or back to XPPAUT.
+
+* Improvements to handling of SBML and SED-ML files - added to pynml ability to validate both formats, or run SED-ML files which refer to SBML models using simulator tellurium.
+
+* Added option to archive NeuroML models as COMBINE Archives with `pynml-archive`.
+
+* Initial support for sending archived NeuroML models to Biosimulations.org for simulation.
+
+* Improved ability for pynml and related tools to detect the correct file type (NeuroML or LEMS) for the appropriate export/simulation option, and give advice when an incorrect file is provided. 
+
+* Updates to `pynml-plotmorph` for plotting morphologies in 2D, and in 3D with VisPy.
+
+
 v2.3 / 2023-09-20
 --------------------
 

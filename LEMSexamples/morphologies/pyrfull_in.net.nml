@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  https://raw.githubusercontent.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.1.xsd" id="pyr_4_sym_soma">
+
+    <include href="pyr_4_sym.cell.nml"/>
+
+    <pulseGenerator id="Input_3" delay="100.0ms" duration="500.0ms" amplitude="2.0E-4uA"/>
+
+    <network id="network" type="networkWithTemperature" temperature="6.3 degC">
+
+        <population id="pyramidals" component="pyr_4_sym" type="populationList" size="1">
+           <annotation>
+                <property tag="color" value="0.7421875 0.07421875 0.95703125"/>
+            </annotation>
+            <instance id="0">
+                <location x="400.0" y="0.0" z="0.0"/>
+            </instance>
+        </population>
+
+        <inputList id="Input_3" component="Input_3" population="pyramidals">
+            <input id="0" target="../pyramidals/0/pyr_4_sym" destination="synapses"/>
+        </inputList>
+
+
+    </network>
+    
+</neuroml>

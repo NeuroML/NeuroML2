@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  https://raw.githubusercontent.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" id="pyr_4_sym">
+
+    <include href="Ca_conc.nml"/>
+
+    <include href="Ca_pyr.channel.nml"/>
+
+    <include href="Kahp_pyr.channel.nml"/>
+
+    <include href="Kdr_pyr.channel.nml"/>
+
+    <include href="LeakConductance_pyr.channel.nml"/>
+
+    <include href="Na_pyr.channel.nml"/>
+
+    <cell id="pyr_4_sym">
+
+        <notes>A simplified pyramidal cell model with 9 compartments</notes>
+
+        <morphology id="morphology_pyr_4_sym">
+
+            <segment id="0" name="soma">
+                <proximal x="0.0" y="0.0" z="0.0" diameter="23.0"/>
+                <distal x="0.0" y="17.0" z="0.0" diameter="23.0"/>
+            </segment>
+
+            <segment id="1" name="apical0">
+                <parent segment="0"/>
+                <proximal x="0.0" y="17.0" z="0.0" diameter="6.0"/>
+                <distal x="0.0" y="77.0" z="0.0" diameter="6.0"/>
+            </segment>
+
+            <segment id="2" name="apical2">
+                <parent segment="1"/>
+                <proximal x="0.0" y="77.0" z="0.0" diameter="4.4"/>
+                <distal x="0.0" y="477.0" z="0.0" diameter="4.4"/>
+            </segment>
+
+            <segment id="3" name="apical3">
+                <parent segment="2"/>
+                <proximal x="0.0" y="477.0" z="0.0" diameter="2.9"/>
+                <distal x="0.0" y="877.0" z="0.0" diameter="2.9"/>
+            </segment>
+
+            <segment id="4" name="apical4">
+                <parent segment="3"/>
+                <proximal x="0.0" y="877.0" z="0.0" diameter="2.0"/>
+                <distal x="0.0" y="1127.0" z="0.0" diameter="2.0"/>
+            </segment>
+
+            <segment id="5" name="apical1">
+                <parent segment="1"/>
+                <proximal x="0.0" y="77.0" z="0.0" diameter="3.0"/>
+                <distal x="-150.0" y="77.0" z="0.0" diameter="3.0"/>
+            </segment>
+
+            <segment id="6" name="basal0">
+                <parent segment="0" fractionAlong="0.0"/>
+                <proximal x="0.0" y="0.0" z="0.0" diameter="4.0"/>
+                <distal x="0.0" y="-50.0" z="0.0" diameter="4.0"/>
+            </segment>
+
+            <segment id="7" name="basal1">
+                <parent segment="6"/>
+                <proximal x="0.0" y="-50.0" z="0.0" diameter="5.0"/>
+                <distal x="106.07" y="-156.07" z="0.0" diameter="5.0"/>
+            </segment>
+
+            <segment id="8" name="basal2">
+                <parent segment="6"/>
+                <proximal x="0.0" y="-50.0" z="0.0" diameter="5.0"/>
+                <distal x="-106.07" y="-156.07" z="0.0" diameter="5.0"/>
+            </segment>
+
+            <segmentGroup id="soma" neuroLexId="sao864921383">    <!--
+                This group contains an unbranched set of segments, and all of the segmentGroups marked with
+                neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+                These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
+
+                <member segment="0"/>
+            </segmentGroup>
+
+            <segmentGroup id="apical0" neuroLexId="sao864921383">    <!--
+                This group contains an unbranched set of segments, and all of the segmentGroups marked with
+                neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+                These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
+
+                <member segment="1"/>
+            </segmentGroup>
+
+            <segmentGroup id="apical2" neuroLexId="sao864921383">    <!--
+                This group contains an unbranched set of segments, and all of the segmentGroups marked with
+                neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+                These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
+
+                <member segment="2"/>
+            </segmentGroup>
+
+            <segmentGroup id="apical3" neuroLexId="sao864921383">    <!--
+                This group contains an unbranched set of segments, and all of the segmentGroups marked with
+                neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+                These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
+
+                <member segment="3"/>
+            </segmentGroup>
+
+            <segmentGroup id="apical4" neuroLexId="sao864921383">    <!--
+                This group contains an unbranched set of segments, and all of the segmentGroups marked with
+                neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+                These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
+
+                <member segment="4"/>
+            </segmentGroup>
+
+            <segmentGroup id="apical1" neuroLexId="sao864921383">    <!--
+                This group contains an unbranched set of segments, and all of the segmentGroups marked with
+                neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+                These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
+
+                <member segment="5"/>
+            </segmentGroup>
+
+            <segmentGroup id="basal0" neuroLexId="sao864921383">    <!--
+                This group contains an unbranched set of segments, and all of the segmentGroups marked with
+                neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+                These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
+
+                <member segment="6"/>
+            </segmentGroup>
+
+            <segmentGroup id="basal1" neuroLexId="sao864921383">    <!--
+                This group contains an unbranched set of segments, and all of the segmentGroups marked with
+                neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+                These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
+
+                <member segment="7"/>
+            </segmentGroup>
+
+            <segmentGroup id="basal2" neuroLexId="sao864921383">    <!--
+                This group contains an unbranched set of segments, and all of the segmentGroups marked with
+                neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+                These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
+
+                <member segment="8"/>
+            </segmentGroup>
+
+            <segmentGroup id="all">
+                <include segmentGroup="soma"/>
+                <include segmentGroup="apical0"/>
+                <include segmentGroup="apical2"/>
+                <include segmentGroup="apical3"/>
+                <include segmentGroup="apical4"/>
+                <include segmentGroup="apical1"/>
+                <include segmentGroup="basal0"/>
+                <include segmentGroup="basal1"/>
+                <include segmentGroup="basal2"/>
+            </segmentGroup>
+
+            <segmentGroup id="soma_group" neuroLexId="GO:0043025">    <!--Soma group-->
+
+                <include segmentGroup="soma"/>
+            </segmentGroup>
+
+            <segmentGroup id="dendrite_group" neuroLexId="GO:0030425">    <!--Dendrite group-->
+
+                <include segmentGroup="apical0"/>
+                <include segmentGroup="apical2"/>
+                <include segmentGroup="apical3"/>
+                <include segmentGroup="apical4"/>
+                <include segmentGroup="apical1"/>
+                <include segmentGroup="basal0"/>
+                <include segmentGroup="basal1"/>
+                <include segmentGroup="basal2"/>
+            </segmentGroup>
+
+            <segmentGroup id="apical_dends">
+                <include segmentGroup="apical0"/>
+                <include segmentGroup="apical2"/>
+                <include segmentGroup="apical3"/>
+                <include segmentGroup="apical4"/>
+                <include segmentGroup="apical1"/>
+            </segmentGroup>
+
+            <segmentGroup id="middle_apical_dendrite">
+                <include segmentGroup="apical3"/>
+            </segmentGroup>
+
+            <segmentGroup id="thalamic_input">
+                <include segmentGroup="apical1"/>
+            </segmentGroup>
+
+            <segmentGroup id="basal_dends">
+                <include segmentGroup="basal0"/>
+                <include segmentGroup="basal1"/>
+                <include segmentGroup="basal2"/>
+            </segmentGroup>
+
+            <segmentGroup id="basal_gaba_input">
+                <include segmentGroup="basal0"/>
+            </segmentGroup>
+
+            <segmentGroup id="background_input">
+                <include segmentGroup="basal1"/>
+            </segmentGroup>
+
+            
+        </morphology>
+
+            <!--Adding the biophysical parameters-->
+
+        <biophysicalProperties id="biophys">
+
+            <membraneProperties>
+                
+                <channelDensity condDensity="10.0 mS_per_cm2" id="Ca_pyr_soma_group" ionChannel="Ca_pyr" segmentGroup="soma_group" ion="ca" erev="80.0 mV"/>
+                
+                <channelDensity condDensity="2.5 mS_per_cm2" id="Kahp_pyr_soma_group" ionChannel="Kahp_pyr" segmentGroup="soma_group" ion="k" erev="-75.0 mV"/>
+                
+                <channelDensity condDensity="80.0 mS_per_cm2" id="Kdr_pyr_soma_group" ionChannel="Kdr_pyr" segmentGroup="soma_group" ion="k" erev="-75.0 mV"/>
+                
+                <channelDensity condDensity="0.1420051 mS_per_cm2" id="LeakConductance_pyr_all" ionChannel="LeakConductance_pyr" erev="-66.0 mV" ion="non_specific"/>
+                
+                <channelDensity condDensity="120.0 mS_per_cm2" id="Na_pyr_soma_group" ionChannel="Na_pyr" segmentGroup="soma_group" ion="na" erev="55.0 mV"/>
+                
+
+                <spikeThresh value="0 mV"/>
+
+                <specificCapacitance value="2.84 uF_per_cm2"/>
+
+                <initMembPotential value="-65.0 mV"/>
+
+            </membraneProperties>
+
+            <intracellularProperties>
+
+                <species segmentGroup="soma_group" id="ca" ion="ca" concentrationModel="Ca_conc" initialConcentration="5.0E-11 mol_per_cm3" initialExtConcentration="3.0E-6 mol_per_cm3"/>
+
+                <resistivity value="0.2 kohm_cm"/>
+
+            </intracellularProperties>
+
+        </biophysicalProperties>
+
+    </cell>
+    
+</neuroml>
