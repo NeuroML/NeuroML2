@@ -8,6 +8,10 @@ and [LEMS](https://github.com/LEMS/LEMS), but also the Python ([libNeuroML](http
 
 **Only contributors who are not [NeuroML Editors](https://docs.neuroml.org/NeuroMLOrg/Board.html) are specifically pointed out below.**
 
+v2.3.2 / 2025-x-x
+--------------------
+
+
 v2.3.1 / 2024-08-25
 --------------------
 
