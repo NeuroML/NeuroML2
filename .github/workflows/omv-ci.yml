@@ -1,6 +1,8 @@
 name: Run OMV tests
 
 on:
+  schedule:
+    - cron: "1 1 27 * *"
   push:
     branches: [ master, development, experimental, documentation_update, osb*, update* ]
   pull_request:
@@ -13,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ "3.9" ]
+        python-version: [ "3.10", "3.12" ]
         engine:
           - jNeuroML
           - jNeuroML_Brian2
@@ -23,6 +25,9 @@ jobs:
           - jNeuroML_MOOSE
           - jNeuroML_validate
           - PyLEMS_NeuroML2
+        exclude:
+          - python-version: "3.12"
+            engine: jNeuroML_MOOSE  # MOOSE not yet working on py 3.12...
 
     steps:
     - uses: actions/checkout@v4
@@ -32,12 +37,17 @@ jobs:
       with:
         python-version:  ${{ matrix.python-version }}
 
+    - name: Install numpy < 2 if necessary...
+      run: |
+        if [[  ${{ matrix.engine }} == *"MOOSE"* ]] || [[  ${{ matrix.engine }} == *"Moose"* ]]; then pip install "numpy<2" ; fi ;
+        pip list
+
     - name: Install OMV
       run: |
         pip install git+https://github.com/OpenSourceBrain/osb-model-validation
         pip install scipy sympy matplotlib cython pandas tables
+        pip install setuptools --upgrade # needed for Eden on py 3.12
                 
-        pip install 'numpy<=1.23.0' # see https://github.com/OpenSourceBrain/osb-model-validation/issues/91
 
 
     - name: Run OMV tests on engine ${{ matrix.engine }}
