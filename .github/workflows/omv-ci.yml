@@ -1,6 +1,8 @@
 name: Run OMV tests
 
 on:
+  schedule:
+    - cron: "1 1 27 * *"
   push:
     branches: [ master, development, experimental, documentation_update, osb*, update* ]
   pull_request:
@@ -31,6 +33,11 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version:  ${{ matrix.python-version }}
+
+    - name: Install numpy < 2 if necessary...
+      run: |
+        if [[  ${{ matrix.engine }} == *"MOOSE"* ]] || [[  ${{ matrix.engine }} == *"Moose"* ]]; then pip install "numpy<2" ; fi ;
+        pip list
 
     - name: Install OMV
       run: |
