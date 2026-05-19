@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        java: [ '8', '11', '16', '17', '19', '21', '25' ]
+        java: [ '8', '11', '17', '19', '21', '25' ]
 
     steps:
     - uses: actions/checkout@v6
@@ -32,7 +32,8 @@ jobs:
 
     - name: Install jNeuroML
       run: |
-        export main_repo_branch=${GITHUB_REF##*/}
+        export main_repo_branch=${GITHUB_REF##*/}        
+        if [[ ${main_repo_branch} == "osb_test_master" ]]; then main_repo_branch=master ; fi
         if [[ ${main_repo_branch} != "master" && ${main_repo_branch} != "development" && ${main_repo_branch} != "experimental" && ${main_repo_branch} != *"osb"* ]]; then main_repo_branch=development ; fi
         echo Using branch $main_repo_branch
         git clone https://github.com/NeuroML/jNeuroML.git
