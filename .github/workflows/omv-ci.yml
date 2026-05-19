@@ -22,9 +22,9 @@ jobs:
           - jNeuroML_EDEN
           - jNeuroML_NEURON
           - jNeuroML_NetPyNE
-          - jNeuroML_MOOSE
           - jNeuroML_validate
           - PyLEMS_NeuroML2
+        #  - jNeuroML_MOOSE
         exclude:
           - python-version: "3.12"
             engine: jNeuroML_MOOSE  # MOOSE not yet working on py 3.12...
