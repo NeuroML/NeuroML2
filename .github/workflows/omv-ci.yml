@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ "3.10", "3.12" ]
+        python-version: [ "3.12", "3.13" ]
         engine:
           - jNeuroML
           - jNeuroML_Brian2
@@ -30,10 +30,10 @@ jobs:
             engine: jNeuroML_MOOSE  # MOOSE not yet working on py 3.12...
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     
     - name: Set up Python  ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version:  ${{ matrix.python-version }}
 
@@ -46,7 +46,7 @@ jobs:
       run: |
         pip install git+https://github.com/OpenSourceBrain/osb-model-validation
         pip install scipy sympy matplotlib cython pandas tables
-        pip install setuptools --upgrade # needed for Eden on py 3.12
+        pip install setuptools==80 # needed for Eden on py >=3.12
                 
 
 
