@@ -24,7 +24,7 @@ jobs:
           - jNeuroML_NetPyNE
           - jNeuroML_validate
           - PyLEMS_NeuroML2
-        #  - jNeuroML_MOOSE
+        #  - jNeuroML_MOOSE # MOOSE disabled, due to latest version not supporting recording/plotting of channel variables, as used in ex5
         exclude:
           - python-version: "3.12"
             engine: jNeuroML_MOOSE  # MOOSE not yet working on py 3.12...
