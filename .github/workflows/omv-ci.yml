@@ -32,7 +32,7 @@ jobs:
             engine: jNeuroML_Brian2  # Brian latest no longer working on py <3.12...
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     
     - name: Set up Python  ${{ matrix.python-version }}
       uses: actions/setup-python@v6
